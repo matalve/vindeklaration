@@ -101,7 +101,7 @@ def main() -> None:
     fuzzy_counter: Counter[str] = Counter()
     examples: dict[str, str] = {}
     for wine in declared:
-        parsed = parse_ingredients(wine["raw_ingredients"])
+        parsed = parse_ingredients(wine["raw_ingredients"], wine.get("grapes"))
         for token in parsed.unknown_tokens:
             token_counter[token] += 1
             examples.setdefault(token, wine["source_url"])

@@ -1,0 +1,235 @@
+{
+ "unknown_tokens": [
+  {
+   "token": "gummi",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-2015601/"
+  },
+  {
+   "token": "druvorkonserverings",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-2014901/"
+  },
+  {
+   "token": "558gaser",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-2014901/"
+  },
+  {
+   "token": "arabicumoch",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-2015601/"
+  },
+  {
+   "token": "muscat",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-2030541/"
+  },
+  {
+   "token": "vegetabiliskt",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-206207/"
+  },
+  {
+   "token": "sockerarter",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-206301/"
+  },
+  {
+   "token": "konservativa",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-206301/"
+  },
+  {
+   "token": "liquor",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-206301/"
+  },
+  {
+   "token": "tirage",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-206301/"
+  },
+  {
+   "token": "metyletylcellulosa",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-217707/"
+  },
+  {
+   "token": "malinsyra",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-220301/"
+  },
+  {
+   "token": "stabiliserande",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-220301/"
+  },
+  {
+   "token": "metakarsyra",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-220301/"
+  },
+  {
+   "token": "svavlastoxid",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-234701/"
+  },
+  {
+   "token": "bio",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-235201/"
+  },
+  {
+   "token": "tappat",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-235708/"
+  },
+  {
+   "token": "skyddande",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-235708/"
+  },
+  {
+   "token": "atmodfär",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-235708/"
+  },
+  {
+   "token": "arabica",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-237801/"
+  },
+  {
+   "token": "mosto",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-237821/"
+  },
+  {
+   "token": "concentrato",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-237821/"
+  },
+  {
+   "token": "biologico",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-237821/"
+  },
+  {
+   "token": "metabisulfit",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-237821/"
+  },
+  {
+   "token": "kalium",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-237821/"
+  },
+  {
+   "token": "dikarbonat",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-242124/"
+  },
+  {
+   "token": "dimetyl",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-242124/"
+  },
+  {
+   "token": "arabiska",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-246001/"
+  },
+  {
+   "token": "tillsatser",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-246901/"
+  }
+ ],
+ "fuzzy_matches": [
+  {
+   "match": "karboxymetylcellulos -> karboxymetylcellulosa",
+   "wines": 3
+  },
+  {
+   "match": "socke -> socker",
+   "wines": 2
+  },
+  {
+   "match": "metatvinsyra -> metavinsyra",
+   "wines": 1
+  },
+  {
+   "match": "kaliumpyrosulfiter -> kaliumpyrosulfit",
+   "wines": 1
+  },
+  {
+   "match": "surhetsreglerandemedel -> surhetsreglerande medel",
+   "wines": 1
+  },
+  {
+   "match": "vindruvor¹ -> vindruvor",
+   "wines": 1
+  },
+  {
+   "match": "socker¹ -> socker",
+   "wines": 1
+  },
+  {
+   "match": "kaliumbisulfiter -> kaliumbisulfit",
+   "wines": 1
+  },
+  {
+   "match": "konsergerings -> konserverings",
+   "wines": 1
+  },
+  {
+   "match": "corboxymetylcellulosa -> carboximetylcellulosa",
+   "wines": 1
+  },
+  {
+   "match": "statbilisatorer -> stabilisatorer",
+   "wines": 1
+  },
+  {
+   "match": "antioxidationsmdel -> antioxidationsmedel",
+   "wines": 1
+  },
+  {
+   "match": "jästmannoprotein -> jästmannoproteiner",
+   "wines": 1
+  },
+  {
+   "match": "stabilieringsmedel -> stabiliseringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "konservingsmedel -> konserveringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "vindruvor1 -> vindruvor",
+   "wines": 1
+  },
+  {
+   "match": "antixodanter -> antioxidanter",
+   "wines": 1
+  },
+  {
+   "match": "mannoprotiener -> mannoproteiner",
+   "wines": 1
+  },
+  {
+   "match": "konserveringsmedek -> konserveringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "konserveringsmede -> konserveringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "organiska -> organisk",
+   "wines": 1
+  }
+ ]
+}

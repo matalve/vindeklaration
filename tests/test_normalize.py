@@ -82,6 +82,15 @@ def test_misspelling_is_matched_by_fuzz() -> None:
     assert parsed.fuzzy_matches
 
 
+def test_named_grape_variety_is_not_unknown_text() -> None:
+    text = "Muscat (druvor), socker, konserveringsmedel (SULFITER)"
+    assert parse_ingredients(text).unknown_tokens == ["muscat"]
+    # Given the variety list Systembolaget publishes for the wine, it reads.
+    parsed = parse_ingredients(text, ["Muscat"])
+    assert parsed.unknown_tokens == []
+    assert ids_of(parsed.additives) == ["sulfites"]
+
+
 def test_empty_declaration() -> None:
     parsed = parse_ingredients("")
     assert parsed.additive_count == 0

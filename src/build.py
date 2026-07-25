@@ -64,7 +64,7 @@ def build_records() -> list[dict]:
         }
 
         if raw:
-            record.update(parse_ingredients(raw).as_output())
+            record.update(parse_ingredients(raw, record["grapes"]).as_output())
         else:
             record.update(
                 {
