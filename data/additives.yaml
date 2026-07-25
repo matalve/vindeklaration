@@ -56,6 +56,10 @@
     - potassium metabisulfite
   regexes:
     - '\b(meta\s?)?kalium\s?(meta\s?bi|meta|pyro|di)\s?sulfit\b'
+    - '\b(meta\s?bi|meta|pyro|di)\s?sulfit\s+av\s+kalium\b'
+    # Sodium metabisulfite is not permitted in EU wine, so a bare
+    # "metabisulfit" is the potassium salt.
+    - '\bmetabisulfit\b'
 
 - id: potassium_bisulfite
   e_number: E228
@@ -131,14 +135,14 @@
   note:
     sv: Hindrar vinstenskristaller från att bildas i flaskan.
     en: Prevents tartrate crystals forming in the bottle.
-  aliases: [metavinsyra, metatartronsyra, metatartarsyra, metatartaric acid]
+  aliases: [metavinsyra, metatartronsyra, metatartarsyra, metakarsyra, metavinsyre, metatartaric acid]
 
 - id: malic_acid
   e_number: E296
   bucket: additive
   category: acidity_regulator
   name: { sv: Äppelsyra, en: Malic acid }
-  aliases: [äppelsyra, applesyra, malic acid]
+  aliases: [äppelsyra, applesyra, malinsyra, malsyra, malic acid]
 
 - id: citric_acid
   e_number: E330
@@ -227,6 +231,10 @@
     - goma arábica
     - goma arabica
     - arabin
+    - arabica gummi
+    - gumi arabicum
+    - arabiskt gumi
+    - gummi arabica
 
 - id: potassium_polyaspartate
   e_number: E456
@@ -244,7 +252,13 @@
   note:
     sv: Utvinns ur jästceller och stabiliserar vinet mot utfällningar.
     en: Extracted from yeast cells; stabilises the wine against deposits.
-  aliases: [mannoproteiner från jäst, mannoproteiner, mannoprotein, jästmannoproteiner]
+  aliases:
+    - mannoproteiner från jäst
+    - jäst mannoproteiner
+    - jästmannoproteiner
+    - mannoproteiner
+    - mannoprotein
+    - yeast mannoproteins
 
 - id: tannins
   bucket: additive
@@ -310,6 +324,7 @@
     - '\b(naturlig\w*\s+)?\w*aromer\b'
     - '\b(naturlig\w*\s+)?\w*arom\b'
     - '\b(naturlig\w*\s+)?\w*smak\b'
+    - '\b\w+extrakt\b'
 
 - id: caramel_colour
   e_number: E150a
@@ -360,7 +375,16 @@
   note:
     sv: Klarningsmedel ur mjölk. Rester kan finnas kvar, därför allergenmärkning.
     en: Milk-derived fining agent. Traces may remain, hence the allergen declaration.
-  aliases: [mjölkkassein, mjölkkasein, kassein, kasein, mjölkprotein, casein, kaliumkaseinat]
+  aliases:
+    - mjölkkassein
+    - mjölkkasein
+    - mjölkprotein
+    - kaliumkaseinat
+    - kassein
+    - kasein
+    - casein
+    - mjölk
+    - milk
 
 - id: isinglass
   bucket: additive
@@ -552,7 +576,7 @@
     - apple
     - pear
   regexes:
-    - '\b(svartvinbär|vinbär|hallon|blåbär|körsbär|fläder|lingon|aronia|jordgubb)\w*\b'
+    - '\b(svartvinbär|vinbär|hallon|blåbär|körsbär|fläder|lingon|aronia|jordgubb|plommon|katrinplommon)\w*\b'
 
 - id: spices
   bucket: base

@@ -76,7 +76,36 @@ category_labels:
   - fining agents
   - huvudingredienser
   - syrakorrigeringsmedel
+  - reglering av surhetsgrad
+  - reglering av surhet
+  - surhetsgrad
+  - antioxidantmedel
+  - antioxidantmedlet
+  - konservativa  # machine translation of "preservatives"
+  - antioxideringsmedel
+  - antioxideringsmedlet
+  - berikning/ sötning
+  - berikning / sötning
+  - berikning
+  - sötning
+  - sötningsmedel
+  - stabiliserande
+  - kurator  # machine translation of "conservador"/preservative
+  - konservering
   - surhetsregulator
+  - reglering av surhetsgrad
+  - reglering av surhet
+  - surhetsgrad
+  - antioxideringsmedel
+  - antioxideringsmedlet
+  - berikning/ sötning
+  - berikning / sötning
+  - berikning
+  - sötning
+  - sötningsmedel
+  - stabiliserande
+  - kurator  # machine translation of "conservador"/preservative
+  - konservering
   - surhetsregulatorer
   - syrakorrigering
   - klargörande medel
@@ -102,8 +131,8 @@ processing_notes:
     # Every supplier words this differently, so it is matched by shape:
     # a bottling verb, optional filler, then the atmosphere.
     regexes:
-      - '\b(tappa\w*|tappn\w*|buteljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|fyll\w*)\b[\w\s]{0,24}?\b(skyddande|skyddad|modifierad|protective|inert)\s+(atmosfär\w*|atmosphere|miljö\w*)'
-      - '\b(skyddande|skyddad|modifierad|protective)\s+(atmosfär\w*|atmosphere|miljö\w*)\b'
+      - '\b(tappa\w*|tappn\w*|buteljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|fyll\w*)\b[\w\s]{0,24}?\b(skyddande|skyddad|modifierad|protective|inert)\s+(atmosf\w*|atmosphere|miljö\w*)'
+      - '\b(skyddande|skyddad|modifierad|protective)\s+(atmosf\w*|atmosphere|miljö\w*)\b'
   - id: organic
     name: { sv: Ekologisk odling, en: Organic farming }
     aliases:
@@ -183,6 +212,24 @@ stopwords:
   - tillsatta
   - använd
   - använts
+  - näringsvärde
+  - näringsdeklaration
+  - energi
+  - kcal
+  - kj
+  - fett
+  - mättat
+  - kolhydrat
+  - kolhydrater
+  - sockerarter
+  - protein
+  - salt
+  - per
+  - 100ml
+  - 100 ml
+  - kontrollerat
+  - kontrollerad
+  - ursprung
   - produkter
   - produkt
   - vinframställning
