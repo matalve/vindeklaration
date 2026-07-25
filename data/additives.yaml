@@ -54,6 +54,8 @@
     - kaliummetabisulfat
     - potassium metabisulphite
     - potassium metabisulfite
+  regexes:
+    - '\b(meta\s?)?kalium\s?(meta\s?bi|meta|pyro|di)\s?sulfit\b'
 
 - id: potassium_bisulfite
   e_number: E228
@@ -63,6 +65,8 @@
   allergen: sulfites
   name: { sv: Kaliumbisulfit, en: Potassium bisulfite }
   aliases: [kaliumbisulfit, kaliumvätesulfit, kaliumbisulf]
+  regexes:
+    - '\b(meta\s?)?kalium\s?bisulfit\b'
 
 - id: potassium_sorbate
   e_number: E202
@@ -107,7 +111,7 @@
   note:
     sv: C-vitamin. Används som antioxidationsmedel, ofta tillsammans med sulfiter.
     en: Vitamin C. Used as an antioxidant, usually alongside sulfites.
-  aliases: [askorbinsyra, l-askorbinsyra, l askorbinsyra, ascorbic acid, askorbinsyre]
+  aliases: [askorbinsyra, l-askorbinsyra, l askorbinsyra, ascorbic acid, askorbinsyre, vitamin c, c-vitamin]
 
 - id: tartaric_acid
   e_number: E334
@@ -141,7 +145,17 @@
   bucket: additive
   category: acidity_regulator
   name: { sv: Citronsyra, en: Citric acid }
-  aliases: [citronsyra, citric acid]
+  aliases: [citronsyra, citronsyramonohydrat, citric acid, citric acid monohydrate]
+
+- id: fumaric_acid
+  e_number: E297
+  bucket: additive
+  category: stabiliser
+  name: { sv: Fumarsyra, en: Fumaric acid }
+  note:
+    sv: Hindrar att den malolaktiska jäsningen startar om i flaskan.
+    en: Stops malolactic fermentation restarting in the bottle.
+  aliases: [fumarsyra, fumarat, fumaric acid]
 
 - id: lactic_acid
   e_number: E270
@@ -169,7 +183,11 @@
   bucket: additive
   category: acidity_regulator
   name: { sv: Kaliumkarbonat, en: Potassium carbonate }
-  aliases: [kaliumkarbonat, kaliumbikarbonat, potassium carbonate]
+  aliases:
+    - kaliumbikarbonat
+    - kaliumkarbonat
+    - potassium bicarbonate
+    - potassium carbonate
 
 - id: carboxymethylcellulose
   e_number: E466
@@ -203,7 +221,12 @@
     - arabiskt tuggummi  # mistranslation of "gum arabic" seen in the wild
     - akaciegummi
     - gum arabic
+    - arabic gum
+    - acacia gum
     - akacia gummi
+    - goma arábica
+    - goma arabica
+    - arabin
 
 - id: potassium_polyaspartate
   e_number: E456
@@ -211,6 +234,8 @@
   category: stabiliser
   name: { sv: Kaliumpolyaspartat, en: Potassium polyaspartate }
   aliases: [kaliumpolyaspartat, potassium polyaspartate]
+  regexes:
+    - '\bkalium\s?polyaspartat\b'
 
 - id: mannoproteins
   bucket: additive
@@ -241,7 +266,81 @@
   bucket: additive
   category: other
   name: { sv: Jäst, en: Yeast }
-  aliases: [jäst, jästsvamp, saccharomyces cerevisiae, vinjäst]
+  note:
+    sv: Tillsatt jäst, ofta inaktiverad, som startar eller stödjer jäsningen.
+    en: Added yeast, often inactivated, that starts or supports fermentation.
+  aliases:
+    - inaktiverad jäst
+    - inaktiverade jästceller
+    - jästsvamp
+    - vinjäst
+    - saccharomyces cerevisiae
+    - jäst för vinframställning
+    - inaktiverade jästcellväggar
+    - jästcellväggar
+    - jästextrakt
+    - inactivated yeast
+    - jäst
+
+- id: pine_resin
+  bucket: additive
+  category: other
+  name: { sv: Tallharts, en: Pine resin }
+  note:
+    sv: Kåda från alepptall. Ger retsina sin karaktär och är tillåten bara i grekiskt retsinavin.
+    en: Aleppo pine resin. Gives retsina its character; permitted only in Greek retsina.
+  aliases: [aleppo tallharts, tallharts, tallkåda, aleppotallkåda, pine resin]
+
+- id: flavourings
+  bucket: additive
+  category: flavouring
+  name: { sv: Aromer, en: Flavourings }
+  note:
+    sv: Smaksättning i aromatiserade viner som glögg och vermouth.
+    en: Flavouring in aromatised wines such as mulled wine and vermouth.
+  aliases:
+    - ört- och kryddextrakt
+    - naturliga smakämnen
+    - kryddextrakt
+    - örtextrakt
+    - natural flavourings
+    - natural flavors
+  # Any compound ending in -arom, with or without a "naturlig" prefix.
+  regexes:
+    - '\b(naturlig\w*\s+)?\w*aromer\b'
+    - '\b(naturlig\w*\s+)?\w*arom\b'
+    - '\b(naturlig\w*\s+)?\w*smak\b'
+
+- id: caramel_colour
+  e_number: E150a
+  bucket: additive
+  category: colour
+  name: { sv: Sockerkulör, en: Caramel colour }
+  aliases: [sockerkulör, karamellfärg, caramel colour, caramel color]
+
+- id: anthocyanins
+  e_number: E163
+  bucket: additive
+  category: colour
+  name: { sv: Antocyaniner, en: Anthocyanins }
+  aliases: [antocyaniner, antocyanin, anthocyanins]
+
+- id: carmine
+  e_number: E120
+  bucket: additive
+  category: colour
+  name: { sv: Karmin, en: Carmine }
+  aliases: [karmin, karminsyra, cochenill, carmine, cochineal]
+
+- id: wheat_protein
+  bucket: additive
+  category: other
+  allergen: gluten
+  name: { sv: Veteprotein, en: Wheat protein }
+  note:
+    sv: Klarningsmedel ur vete. Rester kan finnas kvar, därför allergenmärkning.
+    en: Wheat-derived fining agent. Traces may remain, hence the allergen declaration.
+  aliases: [veteprotein, vetegluten, wheat protein, wheat gluten]
 
 - id: egg_protein
   bucket: additive
@@ -274,7 +373,15 @@
   bucket: additive
   category: other
   name: { sv: Ärtprotein, en: Pea protein }
-  aliases: [ärtprotein, ärtprotein från gula ärtor, pea protein]
+  aliases:
+    - ärtprotein
+    - ärtfytoprotein
+    - ärtprotein från gula ärtor
+    - vegetabiliskt protein
+    - växtprotein
+    - pea protein
+    - pea phytoprotein
+    - vegetable protein
 
 - id: gelatin
   bucket: additive
@@ -319,14 +426,18 @@
   bucket: base
   name: { sv: Druvor, en: Grapes }
   aliases:
+    - ekologiska druvor
+    - organiska druvor
     - vindruvor
     - vinduvor  # typo seen in the wild
     - druvor
     - druva
     - druvar
-    - ekologiska druvor
-    - organiska druvor
     - grapes
+    - grape
+  regexes:
+    - '\bdruv(a|an|ar|or|orna)\b'
+    - '\bvindruv(a|an|ar|or|orna)\b'
 
 - id: grape_must
   bucket: base
@@ -334,11 +445,46 @@
   aliases:
     - rektifierad koncentrerad druvmust
     - rektifierad koncentrerad must
+    - druvjuice från koncentrat
+    - druvsaftkoncentrat
+    - druvjuicekoncentrat
+    - druv juice koncentrat
+    - druvjuice koncentrat
     - koncentrerad druvmust
+    - koncentrerad druvsaft
     - koncentrerad must
+    - druvmust/koncentrerad
+    - grape juice concentrate
+    - grapes concentrate
+    - grape concentrate
+    - koncentrerad
+    - druvjuice
+    - druvsaft
     - druvmust
     - must
     - grape must
+    - grape juice
+  regexes:
+    - '\brektifierat?\s+\w*must\w*'
+    - '\b\w*mustkoncentrat\b'
+
+- id: expedition_liqueur
+  bucket: base
+  name: { sv: Expeditionslikör, en: Dosage liqueur }
+  note:
+    sv: Sötningen som tillsätts mousserande vin efter degorgering.
+    en: The sweetening added to sparkling wine after disgorgement.
+  aliases:
+    - licor de expedição
+    - licor de expedicao
+    - licorde tiragem
+    - licor de tiragem
+    - expeditionslikör
+    - tiragelikör
+    - dosagelikör
+    - expedition liqueur
+    - tirage liqueur
+    - dosage
 
 - id: sugar
   bucket: base
@@ -346,19 +492,94 @@
   note:
     sv: Sackaros eller druvsocker, tillsatt före eller efter jäsningen.
     en: Sucrose or grape sugar, added before or after fermentation.
-  aliases: [sackaros, socker, rörsocker, sukros, sucrose]
+  aliases:
+    - doseringssirap
+    - sockersirap
+    - sackaros
+    - sacarose
+    - socker
+    - rörsocker
+    - sukros
+    - sucrose
+    - sugar
+    - cane sugar
 
 - id: wine_alcohol
   bucket: base
   name: { sv: Vinalkohol, en: Wine alcohol }
-  aliases: [neutral vinalkohol, vinalkohol, alkohol, vinsprit]
+  aliases:
+    - alkohol framställd av vinprodukter
+    - alkohol av vinprodukter
+    - neutral vinalkohol
+    - vinalkohol
+    - vinsprit
+    - vinprodukter
+    - jordbruksalkohol
+    - alkohol av jordbruksursprung
+    - agricultural alcohol
+    - alkohol
+    - alcohol
 
 - id: water
   bucket: base
   name: { sv: Vatten, en: Water }
   aliases: [vatten, water]
 
+- id: rice
+  bucket: base
+  name: { sv: Ris, en: Rice }
+  note:
+    sv: Sake säljs i vinkategorin och deklarerar ris i stället för druvor.
+    en: Sake is sold under the wine category and declares rice rather than grapes.
+  aliases: [kojiris, mältat ris, koji, ris, rice, rice koji]
+
+- id: fruit
+  bucket: base
+  name: { sv: Frukt och bär, en: Fruit and berries }
+  note:
+    sv: Fruktviner deklarerar sin råvara i stället för druvor.
+    en: Fruit wines declare their raw material rather than grapes.
+  aliases:
+    - äppeljuice
+    - äpplen
+    - äpple
+    - päron
+    - körsbär
+    - fläder
+    - hallon
+    - blåbär
+    - svarta vinbär
+    - apple
+    - pear
+  regexes:
+    - '\b(svartvinbär|vinbär|hallon|blåbär|körsbär|fläder|lingon|aronia|jordgubb)\w*\b'
+
+- id: spices
+  bucket: base
+  name: { sv: Kryddor, en: Spices }
+  note:
+    sv: Kryddor i aromatiserade viner som glögg.
+    en: Spices in aromatised wines such as mulled wine.
+  aliases:
+    - kryddnejlika
+    - kardemumma
+    - ingefära
+    - pomerans
+    - apelsin
+    - citron
+    - kanel
+    - nejlika
+    - vanilj
+    - anis
+    - malörtsextrakt
+    - malört
+    - kryddor
+    - spices
+
 - id: wine
   bucket: base
   name: { sv: Vin, en: Wine }
-  aliases: [vin, rödvin, vitt vin]
+  aliases: [rödvin, vitt vin, vin, wine]
+  regexes:
+    - '\bav[\s-]?alkoholiserat\s+vin\b'
+    - '\balkoholiserat\b'

@@ -32,8 +32,10 @@ PUNCTUATION = ",;:()[]{}/\\*.!?\"'`+|&\n\t\r–—-"
 TRANSLATION = {ord(character): " " for character in PUNCTUATION}
 
 E_NUMBER_RE = re.compile(r"\be\s?(\d{2,4})\s?([a-z])?\b")
-FUZZY_MIN_LENGTH = 6
+FUZZY_MIN_LENGTH = 5
 FUZZY_THRESHOLD = 88
+# Regex entries win over literal aliases regardless of length.
+REGEX_PRIORITY = 10_000
 
 
 def normalize_text(text: str) -> str:
@@ -91,6 +93,7 @@ def load_lexicon() -> Lexicon:
 
     substances: dict[str, Substance] = {}
     entries: list[tuple[str, str, str]] = []  # alias, kind, key
+    substance_regexes: list[tuple[re.Pattern[str], str, str]] = []
     by_e_number: dict[str, Substance] = {}
 
     for item in raw_substances:
@@ -108,15 +111,28 @@ def load_lexicon() -> Lexicon:
         substances[substance.id] = substance
         for alias in item.get("aliases", []):
             entries.append((alias, "substance", substance.id))
+        # Swedish compounds are open-ended — svartvinbärskoncentrat,
+        # druvmustkoncentrat, svartvinbärsarom — so some substances are matched
+        # by shape rather than by an ever-growing alias list.
+        for expression in item.get("regexes", []):
+            substance_regexes.append(
+                (re.compile(expression), "substance", substance.id)
+            )
         number = substance.e_number
         if number and "-" not in number:
             by_e_number[number.lstrip("Ee")] = substance
 
     processing_names: dict[str, dict] = {}
+    regexes: list[tuple[re.Pattern[str], str, str]] = list(substance_regexes)
     for note in lexicon_data.get("processing_notes", []):
         processing_names[note["id"]] = note["name"]
-        for alias in note["aliases"]:
+        for alias in note.get("aliases", []):
             entries.append((alias, "processing", note["id"]))
+        # Some phrases have too many wordings to enumerate — "tappat i en
+        # skyddande atmosfär", "kan buteljeras i skyddad atmosfär", "flaskas
+        # under en skyddande atmosfär", "bottled in a protective atmosphere".
+        for expression in note.get("regexes", []):
+            regexes.append((re.compile(expression), "processing", note["id"]))
 
     for label in lexicon_data.get("category_labels", []):
         entries.append((label, "label", label))
@@ -124,7 +140,9 @@ def load_lexicon() -> Lexicon:
     # Longest alias first: "metavinsyra" must win over "vinsyra", and
     # "koncentrerad druvmust" over "druvmust".
     entries.sort(key=lambda entry: len(entry[0]), reverse=True)
-    patterns = [(alias_pattern(alias), kind, key) for alias, kind, key in entries]
+    patterns = regexes + [
+        (alias_pattern(alias), kind, key) for alias, kind, key in entries
+    ]
 
     alias_index: dict[str, tuple[str, str]] = {}
     alias_conflicts: list[tuple[str, str, str]] = []
@@ -190,10 +208,23 @@ class Parsed:
         }
 
 
-def parse_ingredients(text: str) -> Parsed:
+def parse_ingredients(text: str, grapes: list[str] | None = None) -> Parsed:
+    """Parse one declaration.
+
+    `grapes` is the variety list Systembolaget already publishes for the wine.
+    Declarations sometimes name the variety instead of "druvor" ("Muscat
+    (druvor)"), and no dictionary can hold every grape name, so the wine's own
+    varieties are treated as known words for that wine only.
+    """
     lexicon = load_lexicon()
     normalized = normalize_text(text)
     spans = [False] * len(normalized)
+
+    # Varieties are struck out first: they are already reported in the product
+    # data, so they carry no information here.
+    for grape in sorted(grapes or [], key=len, reverse=True):
+        for match in alias_pattern(grape).finditer(normalized):
+            _claim(spans, match.start(), match.end())
 
     found_substances: dict[str, Substance] = {}
     found_processing: dict[str, dict] = {}

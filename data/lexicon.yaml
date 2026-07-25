@@ -39,6 +39,59 @@ category_labels:
   - råvaror
   - näringsämnen för jäst
   - surhetsreglerande medel och stabilisatorer
+  - aktivatorer för alkoholjäsning och malolaktisk jäsning
+  - aktivatorer för alkoholjäsning
+  - aktivatorer
+  - alkoholjäsning
+  - malolaktisk jäsning
+  - malolaktisk
+  - jäsning
+  - konserveringsmedel/antioxidanter
+  - konserverings   # truncated header seen in the wild
+  - surhetsreglerande meldel  # typo seen in the wild
+  - meldel
+  - processhjälpmedel
+  - processhjälpmedlet
+  - övriga ingredienser
+  - övriga
+  - råmaterial
+  - stabiliserande medel
+  - konsistensmedel
+  # English headers: some suppliers enter the declaration in English.
+  - preservative and antioxidants
+  - preservatives and antioxidants
+  - preservatives
+  - preservative
+  - antioxidants
+  - antioxidant
+  - acidity regulators
+  - acidity regulator
+  - stabilisers
+  - stabilizers
+  - stabiliser
+  - packaging gases
+  - gases and packaging gases
+  - ingredients
+  - raw materials
+  - fining agents
+  - huvudingredienser
+  - syrakorrigeringsmedel
+  - surhetsregulator
+  - surhetsregulatorer
+  - syrakorrigering
+  - klargörande medel
+  - klargörande
+  - färgämnen
+  - färgämne
+  - anrikningar
+  - anrikning
+  - andra
+  - andra ingredienser
+  - outros
+  - colouring agents
+  - colours
+  - jäsmedel
+  - jäsningsmedel
 
 # Statements about handling rather than content.
 processing_notes:
@@ -46,27 +99,32 @@ processing_notes:
     name:
       sv: Tappad i skyddande atmosfär
       en: Bottled in a protective atmosphere
-    aliases:
-      - tappning kan ske i en skyddande atmosfär
-      - kan buteljeras under en skyddande atmosfär
-      - buteljerad under skyddande atmosfär
-      - buteljerat i en skyddande atmosfär
-      - buteljerad i skyddande atmosfär
-      - tappat i en skyddande atmosfär
-      - tappad i en skyddande atmosfär
-      - tappat i skyddande atmosfär
-      - tappad i skyddande atmosfär
-      - skyddande atmosfär
+    # Every supplier words this differently, so it is matched by shape:
+    # a bottling verb, optional filler, then the atmosphere.
+    regexes:
+      - '\b(tappa\w*|tappn\w*|buteljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|fyll\w*)\b[\w\s]{0,24}?\b(skyddande|skyddad|modifierad|protective|inert)\s+(atmosfär\w*|atmosphere|miljö\w*)'
+      - '\b(skyddande|skyddad|modifierad|protective)\s+(atmosfär\w*|atmosphere|miljö\w*)\b'
   - id: organic
     name: { sv: Ekologisk odling, en: Organic farming }
     aliases:
+      - produkter från ekologiskt jordbruk
+      - produkt från ekologiskt jordbruk
       - från ekologiskt jordbruk
+      - från ekologisk jordbruk
       - från ekologisk odling
       - ekologiskt jordbruk
+      - ekologisk jordbruk
       - ekologisk odling
+      - ekologisk ingrediens
+      - organic farming
       - ekologiska
       - ekologisk
+      - ekologiskt
+      - biologisk
+      - biodynamisk
       - organisk
+      - organic
+      - eko
   - id: vegan
     name: { sv: Vegansk, en: Vegan }
     aliases: [vegansk, veganskt, vegan]
@@ -110,3 +168,35 @@ stopwords:
   - gaser
   - medel
   - livsmedelsklassad
+  - tillräcklig mängd  # "quantum satis"
+  - tillräcklig
+  - mängd
+  - ppm
+  - mg/l
+  - mg
+  - max
+  - minst
+  - halt
+  - framställd
+  - framställt
+  - tillsatt
+  - tillsatta
+  - använd
+  - använts
+  - produkter
+  - produkt
+  - vinframställning
+  - vinproduktion
+  # English filler, for declarations entered in English.
+  - and
+  - and/or
+  - or
+  - contains
+  - from
+  - with
+  - the
+  - of
+  - in
+  - a
+  - may
+  - be
