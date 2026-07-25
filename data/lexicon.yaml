@@ -1,0 +1,112 @@
+# Everything in a declaration that is not a substance.
+#
+# These phrases are recognised so that they can be removed before the leftover
+# text is judged. Whatever is still standing after substances and this lexicon
+# have been stripped is genuinely unknown, and the wine is marked `partial`.
+
+# Functional class headers: "Konserveringsmedel (SULFITER)". They describe the
+# substance that follows, so they must never be counted as one themselves.
+category_labels:
+  - konserverings- och antioxidationsmedel
+  - konservering-och antioxidationsmedel
+  - konserverings och antioxidationsmedel
+  - konserveringsmedel och antioxidanter
+  - konserveringsmedel & antioxidanter
+  - antioxidationsmedel
+  - konserveringsmedel
+  - konserveringsmeddel  # typo seen in the wild
+  - antioxidanter
+  - antioxidant
+  - stabiliseringsmedel
+  - stabilisatorer
+  - stabilisator
+  - surhetsreglerande medel
+  - surhetsreglerande
+  - syror
+  - syra
+  - gaser och förpackningsgaser
+  - förpackningsgaser
+  - förpackningsgas
+  - klarningsmedel
+  - klarningsmedlet
+  - enzymer
+  - enzym
+  - ingrediensförteckning
+  - ingredienser
+  - ingrediens
+  - råvaror/råingredienser
+  - råingredienser
+  - råvaror
+  - näringsämnen för jäst
+  - surhetsreglerande medel och stabilisatorer
+
+# Statements about handling rather than content.
+processing_notes:
+  - id: protective_atmosphere
+    name:
+      sv: Tappad i skyddande atmosfär
+      en: Bottled in a protective atmosphere
+    aliases:
+      - tappning kan ske i en skyddande atmosfär
+      - kan buteljeras under en skyddande atmosfär
+      - buteljerad under skyddande atmosfär
+      - buteljerat i en skyddande atmosfär
+      - buteljerad i skyddande atmosfär
+      - tappat i en skyddande atmosfär
+      - tappad i en skyddande atmosfär
+      - tappat i skyddande atmosfär
+      - tappad i skyddande atmosfär
+      - skyddande atmosfär
+  - id: organic
+    name: { sv: Ekologisk odling, en: Organic farming }
+    aliases:
+      - från ekologiskt jordbruk
+      - från ekologisk odling
+      - ekologiskt jordbruk
+      - ekologisk odling
+      - ekologiska
+      - ekologisk
+      - organisk
+  - id: vegan
+    name: { sv: Vegansk, en: Vegan }
+    aliases: [vegansk, veganskt, vegan]
+  - id: contains_allergen_notice
+    name: { sv: Allergenupplysning, en: Allergen notice }
+    aliases: [innehåller allergener, allergener]
+
+# Connectives and filler. Removed before judging the residue.
+stopwords:
+  - och/eller
+  - och
+  - eller
+  - innehåller
+  - innehåller inte
+  - inte
+  - från
+  - av
+  - med
+  - samt
+  - kan
+  - ske
+  - i
+  - en
+  - ett
+  - den
+  - det
+  - som
+  - till
+  - vid
+  - för
+  - är
+  - varav
+  - samtliga
+  - resp
+  - ca
+  - cirka
+  - eventuellt
+  - eventuella
+  - spår
+  - gas
+  - gaser
+  - medel
+  - livsmedelsklassad

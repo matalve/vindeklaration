@@ -1,0 +1,364 @@
+# Substance dictionary for Swedish wine ingredient declarations.
+#
+# Every entry is one substance. `aliases` are the spellings actually seen in
+# supplier-entered text, including their misspellings and mistranslations —
+# add to this list rather than loosening the matcher.
+#
+# bucket:
+#   additive   counted in additive_count
+#   gas        bottling/packaging gases: shown, not counted (see README)
+#   base       raw materials: grapes, must, sugar — never counted
+#
+# group: substances sharing a group suppress the group's generic entry, so
+# "kaliumpyrosulfit (SULFITER)" counts as one additive, not two.
+
+- id: sulfites
+  e_number: E220-E228
+  bucket: additive
+  category: preservative
+  group: sulfites
+  generic: true
+  allergen: sulfites
+  name: { sv: Sulfiter, en: Sulfites }
+  note:
+    sv: Samlingsnamn för svavelföreningar som konserverar vinet och skyddar det mot oxidation. Måste alltid deklareras som allergen.
+    en: Umbrella term for the sulfur compounds that preserve wine and protect it against oxidation. Always declared as an allergen.
+  aliases: [sulfiter, sulfit, sulfites, sulphites, svavel]
+
+- id: sulfur_dioxide
+  e_number: E220
+  bucket: additive
+  category: preservative
+  group: sulfites
+  allergen: sulfites
+  name: { sv: Svaveldioxid, en: Sulfur dioxide }
+  note:
+    sv: Den vanligaste konserveringsmedlet i vin. Hämmar bakterier och oxidation.
+    en: The most common wine preservative. Inhibits bacteria and oxidation.
+  aliases: [svaveldioxid, svavaldioxid, sulfur dioxide, so2]
+
+- id: potassium_metabisulfite
+  e_number: E224
+  bucket: additive
+  category: preservative
+  group: sulfites
+  allergen: sulfites
+  name: { sv: Kaliumdisulfit, en: Potassium metabisulfite }
+  note:
+    sv: Fast form av svaveldioxid, tillsätts som pulver vid tappning.
+    en: Solid form of sulfur dioxide, added as a powder at bottling.
+  aliases:
+    - kaliummetabisulfit
+    - kaliumpyrosulfit
+    - kaliumdisulfit
+    - kaliummetabisulfat
+    - potassium metabisulphite
+    - potassium metabisulfite
+
+- id: potassium_bisulfite
+  e_number: E228
+  bucket: additive
+  category: preservative
+  group: sulfites
+  allergen: sulfites
+  name: { sv: Kaliumbisulfit, en: Potassium bisulfite }
+  aliases: [kaliumbisulfit, kaliumvätesulfit, kaliumbisulf]
+
+- id: potassium_sorbate
+  e_number: E202
+  bucket: additive
+  category: preservative
+  name: { sv: Kaliumsorbat, en: Potassium sorbate }
+  note:
+    sv: Hindrar jäst från att starta om jäsningen i flaskan. Vanligt i söta viner.
+    en: Stops yeast restarting fermentation in the bottle. Common in sweet wines.
+  aliases: [kaliumsorbat, potassium sorbate]
+
+- id: sorbic_acid
+  e_number: E200
+  bucket: additive
+  category: preservative
+  name: { sv: Sorbinsyra, en: Sorbic acid }
+  aliases: [sorbinsyra, sorbic acid]
+
+- id: dimethyl_dicarbonate
+  e_number: E242
+  bucket: additive
+  category: preservative
+  name: { sv: Dimetyldikarbonat, en: Dimethyl dicarbonate }
+  note:
+    sv: Steriliserar vinet vid tappning och bryts sedan ned. Kallas ofta DMDC.
+    en: Sterilises the wine at bottling and then breaks down. Often called DMDC.
+  aliases: [dimetyldikarbonat, dimethyl dicarbonate, dmdc, velcorin]
+
+- id: lysozyme
+  e_number: E1105
+  bucket: additive
+  category: preservative
+  allergen: egg
+  name: { sv: Lysozym, en: Lysozyme }
+  aliases: [lysozym, lysozyme]
+
+- id: ascorbic_acid
+  e_number: E300
+  bucket: additive
+  category: antioxidant
+  name: { sv: Askorbinsyra, en: Ascorbic acid }
+  note:
+    sv: C-vitamin. Används som antioxidationsmedel, ofta tillsammans med sulfiter.
+    en: Vitamin C. Used as an antioxidant, usually alongside sulfites.
+  aliases: [askorbinsyra, l-askorbinsyra, l askorbinsyra, ascorbic acid, askorbinsyre]
+
+- id: tartaric_acid
+  e_number: E334
+  bucket: additive
+  category: acidity_regulator
+  name: { sv: Vinsyra, en: Tartaric acid }
+  note:
+    sv: Vinets egen syra. Tillsätts för att höja syran i varma årgångar.
+    en: Wine's own acid. Added to raise acidity in warm vintages.
+  aliases: [vinsyra, tartaric acid, l(+)-vinsyra]
+
+- id: metatartaric_acid
+  e_number: E353
+  bucket: additive
+  category: stabiliser
+  name: { sv: Metavinsyra, en: Metatartaric acid }
+  note:
+    sv: Hindrar vinstenskristaller från att bildas i flaskan.
+    en: Prevents tartrate crystals forming in the bottle.
+  aliases: [metavinsyra, metatartronsyra, metatartarsyra, metatartaric acid]
+
+- id: malic_acid
+  e_number: E296
+  bucket: additive
+  category: acidity_regulator
+  name: { sv: Äppelsyra, en: Malic acid }
+  aliases: [äppelsyra, applesyra, malic acid]
+
+- id: citric_acid
+  e_number: E330
+  bucket: additive
+  category: acidity_regulator
+  name: { sv: Citronsyra, en: Citric acid }
+  aliases: [citronsyra, citric acid]
+
+- id: lactic_acid
+  e_number: E270
+  bucket: additive
+  category: acidity_regulator
+  name: { sv: Mjölksyra, en: Lactic acid }
+  aliases: [mjölksyra, lactic acid]
+
+- id: potassium_bitartrate
+  e_number: E336
+  bucket: additive
+  category: acidity_regulator
+  name: { sv: Kaliumbitartrat, en: Potassium bitartrate }
+  aliases: [kaliumbitartrat, kaliumvätetartrat, kaliumtartrat, potassium bitartrate]
+
+- id: calcium_carbonate
+  e_number: E170
+  bucket: additive
+  category: acidity_regulator
+  name: { sv: Kalciumkarbonat, en: Calcium carbonate }
+  aliases: [kalciumkarbonat, calcium carbonate]
+
+- id: potassium_carbonate
+  e_number: E501
+  bucket: additive
+  category: acidity_regulator
+  name: { sv: Kaliumkarbonat, en: Potassium carbonate }
+  aliases: [kaliumkarbonat, kaliumbikarbonat, potassium carbonate]
+
+- id: carboxymethylcellulose
+  e_number: E466
+  bucket: additive
+  category: stabiliser
+  name: { sv: Karboximetylcellulosa, en: Carboxymethylcellulose }
+  note:
+    sv: Cellulosagummi som håller vinet klart genom att hindra kristaller.
+    en: Cellulose gum that keeps the wine clear by preventing crystals.
+  aliases:
+    - karboximetylcellulosa
+    - karboksimetylcellulosa
+    - carboximetylcellulosa
+    - karboxymetylcellulosa
+    - cellulosagummi
+    - carboxymethylcellulose
+    - cmc
+
+- id: gum_arabic
+  e_number: E414
+  bucket: additive
+  category: stabiliser
+  name: { sv: Gummi arabicum, en: Gum arabic }
+  note:
+    sv: Trädharts från akacia. Stabiliserar färg och ger en rundare munkänsla.
+    en: Acacia tree resin. Stabilises colour and rounds out the mouthfeel.
+  aliases:
+    - gummi arabicum
+    - arabiskt gummi
+    - arabisk gummi
+    - arabiskt tuggummi  # mistranslation of "gum arabic" seen in the wild
+    - akaciegummi
+    - gum arabic
+    - akacia gummi
+
+- id: potassium_polyaspartate
+  e_number: E456
+  bucket: additive
+  category: stabiliser
+  name: { sv: Kaliumpolyaspartat, en: Potassium polyaspartate }
+  aliases: [kaliumpolyaspartat, potassium polyaspartate]
+
+- id: mannoproteins
+  bucket: additive
+  category: stabiliser
+  name: { sv: Mannoproteiner från jäst, en: Yeast mannoproteins }
+  note:
+    sv: Utvinns ur jästceller och stabiliserar vinet mot utfällningar.
+    en: Extracted from yeast cells; stabilises the wine against deposits.
+  aliases: [mannoproteiner från jäst, mannoproteiner, mannoprotein, jästmannoproteiner]
+
+- id: tannins
+  bucket: additive
+  category: stabiliser
+  name: { sv: Tanniner, en: Tannins }
+  note:
+    sv: Tillsatta tanniner, oftast ur ek eller druvkärnor, för struktur och färgstabilitet.
+    en: Added tannins, usually from oak or grape seeds, for structure and colour stability.
+  aliases: [tanniner, tannin, tannins, ektanniner]
+
+- id: pvpp
+  e_number: E1202
+  bucket: additive
+  category: stabiliser
+  name: { sv: Polyvinylpolypyrrolidon, en: Polyvinylpolypyrrolidone }
+  aliases: [polyvinylpolypyrrolidon, pvpp]
+
+- id: yeast
+  bucket: additive
+  category: other
+  name: { sv: Jäst, en: Yeast }
+  aliases: [jäst, jästsvamp, saccharomyces cerevisiae, vinjäst]
+
+- id: egg_protein
+  bucket: additive
+  category: other
+  allergen: egg
+  name: { sv: Äggprotein, en: Egg protein }
+  note:
+    sv: Klarningsmedel. Rester kan finnas kvar, därför allergenmärkning.
+    en: Fining agent. Traces may remain, hence the allergen declaration.
+  aliases: [äggprotein, äggalbumin, ovalbumin, ägg, äggvita, egg protein]
+
+- id: milk_casein
+  bucket: additive
+  category: other
+  allergen: milk
+  name: { sv: Mjölkkasein, en: Milk casein }
+  note:
+    sv: Klarningsmedel ur mjölk. Rester kan finnas kvar, därför allergenmärkning.
+    en: Milk-derived fining agent. Traces may remain, hence the allergen declaration.
+  aliases: [mjölkkassein, mjölkkasein, kassein, kasein, mjölkprotein, casein, kaliumkaseinat]
+
+- id: isinglass
+  bucket: additive
+  category: other
+  allergen: fish
+  name: { sv: Husbloss, en: Isinglass }
+  aliases: [husbloss, husblås, isinglass, fiskgelatin]
+
+- id: pea_protein
+  bucket: additive
+  category: other
+  name: { sv: Ärtprotein, en: Pea protein }
+  aliases: [ärtprotein, ärtprotein från gula ärtor, pea protein]
+
+- id: gelatin
+  bucket: additive
+  category: other
+  name: { sv: Gelatin, en: Gelatin }
+  aliases: [gelatin, gelatine]
+
+- id: bentonite
+  bucket: additive
+  category: other
+  name: { sv: Bentonit, en: Bentonite }
+  aliases: [bentonit, bentonite]
+
+- id: nitrogen
+  e_number: E941
+  bucket: gas
+  category: gas
+  name: { sv: Kväve, en: Nitrogen }
+  note:
+    sv: Skyddsgas vid tappning. Ersätter syret i flaskhalsen.
+    en: Bottling gas. Displaces the oxygen in the bottle neck.
+  aliases: [kväve, kvävgas, nitrogen gas, nitrogen, kvävgas (nitrogen)]
+
+- id: carbon_dioxide
+  e_number: E290
+  bucket: gas
+  category: gas
+  name: { sv: Koldioxid, en: Carbon dioxide }
+  note:
+    sv: Används som skyddsgas och för att ge en lätt kolsyra.
+    en: Used as a bottling gas and to give a light spritz.
+  aliases: [koldioxid, kolsyra, carbon dioxide, co2]
+
+- id: argon
+  e_number: E938
+  bucket: gas
+  category: gas
+  name: { sv: Argon, en: Argon }
+  aliases: [argon]
+
+- id: grapes
+  bucket: base
+  name: { sv: Druvor, en: Grapes }
+  aliases:
+    - vindruvor
+    - vinduvor  # typo seen in the wild
+    - druvor
+    - druva
+    - druvar
+    - ekologiska druvor
+    - organiska druvor
+    - grapes
+
+- id: grape_must
+  bucket: base
+  name: { sv: Druvmust, en: Grape must }
+  aliases:
+    - rektifierad koncentrerad druvmust
+    - rektifierad koncentrerad must
+    - koncentrerad druvmust
+    - koncentrerad must
+    - druvmust
+    - must
+    - grape must
+
+- id: sugar
+  bucket: base
+  name: { sv: Socker, en: Sugar }
+  note:
+    sv: Sackaros eller druvsocker, tillsatt före eller efter jäsningen.
+    en: Sucrose or grape sugar, added before or after fermentation.
+  aliases: [sackaros, socker, rörsocker, sukros, sucrose]
+
+- id: wine_alcohol
+  bucket: base
+  name: { sv: Vinalkohol, en: Wine alcohol }
+  aliases: [neutral vinalkohol, vinalkohol, alkohol, vinsprit]
+
+- id: water
+  bucket: base
+  name: { sv: Vatten, en: Water }
+  aliases: [vatten, water]
+
+- id: wine
+  bucket: base
+  name: { sv: Vin, en: Wine }
+  aliases: [vin, rödvin, vitt vin]

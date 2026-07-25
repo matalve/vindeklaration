@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Raw upstream responses: large, regenerable, not part of the published dataset.
+data/cache/

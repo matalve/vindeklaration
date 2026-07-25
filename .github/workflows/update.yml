@@ -1,0 +1,71 @@
+name: Update dataset
+
+on:
+  schedule:
+    # Nightly incremental refresh; Sunday's run re-fetches everything.
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+    inputs:
+      full:
+        description: "Re-fetch every wine, ignoring the cache"
+        type: boolean
+        default: false
+
+concurrency:
+  group: update-dataset
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Restore fetched declarations
+        uses: actions/cache/restore@v4
+        with:
+          path: data/cache
+          key: declarations-${{ github.run_id }}
+          restore-keys: declarations-
+
+      - name: Fetch catalog
+        run: uv run python -m src.catalog
+
+      - name: Fetch declarations
+        run: |
+          if [ "${{ github.event.inputs.full }}" = "true" ] || [ "$(date +%u)" = "7" ]; then
+            uv run python -m src.details --refresh
+          else
+            uv run python -m src.details
+          fi
+
+      - name: Build dataset
+        run: uv run python -m src.build
+
+      - name: Tests
+        run: uv run pytest -q
+
+      - name: Report
+        run: uv run python -m src.report
+
+      - name: Save fetched declarations
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/cache
+          key: declarations-${{ github.run_id }}
+
+      - name: Commit dataset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/wines.json data/wines.sqlite data/catalog.json data/unknown.json
+          git diff --staged --quiet || git commit -m "Update dataset $(date -u +%Y-%m-%d)"
+          git push
