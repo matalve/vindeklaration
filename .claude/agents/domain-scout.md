@@ -99,11 +99,18 @@ markup, which is why it is the intended registrar here. Two catches:
   - **Not supported:** `.se`, and no Nordic ccTLD at all (`.nu` `.dk` `.no`
     `.fi`), nor `.eu` `.de` `.fr`.
 
-- **Cloudflare support outranks TLD preference.** `.se` would suit a Swedish
-  audience, but the decision has been made: if a name is only obtainable outside
-  Cloudflare, it is a fallback, not a recommendation. Mention `.se` options only
-  as an explicit aside, noting they would need another registrar (Loopia, Binero
-  or Glesys).
+- **`.se` is the preferred TLD, and it outranks the registrar.** The audience is
+  Swedish and so is the source data, so a `.se` domain is the target. Cloudflare
+  is the preferred registrar where it can be used, but it carries no Nordic
+  ccTLD, so a `.se` name means a Swedish registrar instead — Loopia, Binero,
+  Glesys and Inleed all sell them, and `.se` has no residency requirement. Say
+  which registrar each candidate implies, and treat the extra registrar as an
+  accepted cost rather than a mark against the name.
+- Report two ranked lists, not one: the best `.se` candidates first, then the
+  best candidates on Cloudflare-supported TLDs (`.wine` and `.vin` suit this
+  project, alongside `.com`, `.org` and `.dev`). Someone may want both — the
+  Swedish domain for the audience, a Cloudflare one to redirect from — so note
+  where a name is free in both places.
 - Flag anything likely to be sold as a premium name. A technically available
   domain at four figures is not a real option, and the registry's premium tier
   is not visible in whois or RDAP.

@@ -208,22 +208,23 @@ class Parsed:
         }
 
 
-def parse_ingredients(text: str, grapes: list[str] | None = None) -> Parsed:
+def parse_ingredients(text: str, known_names: list[str] | None = None) -> Parsed:
     """Parse one declaration.
 
-    `grapes` is the variety list Systembolaget already publishes for the wine.
-    Declarations sometimes name the variety instead of "druvor" ("Muscat
-    (druvor)"), and no dictionary can hold every grape name, so the wine's own
-    varieties are treated as known words for that wine only.
+    `known_names` are words already published for this wine — its grape
+    varieties and its producer. Declarations sometimes name the variety instead
+    of "druvor" ("Muscat (druvor)") or lead with the producer ("Prodi-druvor"),
+    and no dictionary can hold every grape or winery name, so these are treated
+    as known words for that wine only.
     """
     lexicon = load_lexicon()
     normalized = normalize_text(text)
     spans = [False] * len(normalized)
 
-    # Varieties are struck out first: they are already reported in the product
-    # data, so they carry no information here.
-    for grape in sorted(grapes or [], key=len, reverse=True):
-        for match in alias_pattern(grape).finditer(normalized):
+    # Struck out first: these are already reported in the product data, so
+    # they carry no information here.
+    for name in sorted(known_names or [], key=len, reverse=True):
+        for match in alias_pattern(name).finditer(normalized):
             _claim(spans, match.start(), match.end())
 
     found_substances: dict[str, Substance] = {}

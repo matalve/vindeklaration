@@ -22,6 +22,18 @@ SQLITE_PATH = DATA_DIR / "wines.sqlite"
 SITE_URL = "https://www.systembolaget.se"
 
 
+def known_names(record: dict) -> list[str]:
+    """Words already published for this wine, so they carry no information here.
+
+    The producer is split as well as kept whole: declarations mention a single
+    word of it ("Prodi-druvor") as often as the full name. Short fragments are
+    dropped — "AB", "di", "de" would strike out real text.
+    """
+    producer = record.get("producer") or ""
+    parts = [word for word in producer.split() if len(word) >= 4]
+    return [*record["grapes"], producer, *parts]
+
+
 def wine_name(product: dict) -> str:
     parts = [product.get("productNameBold"), product.get("productNameThin")]
     return " ".join(part for part in parts if part).strip()
@@ -64,7 +76,7 @@ def build_records() -> list[dict]:
         }
 
         if raw:
-            record.update(parse_ingredients(raw, record["grapes"]).as_output())
+            record.update(parse_ingredients(raw, known_names(record)).as_output())
         else:
             record.update(
                 {
