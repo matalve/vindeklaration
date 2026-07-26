@@ -1,69 +1,9 @@
 {
  "unknown_tokens": [
   {
-   "token": "destillerad",
-   "wines": 24,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5254502/"
-  },
-  {
-   "token": "produktion",
-   "wines": 15,
-   "example": "https://www.systembolaget.se/produkt/vin/x-296102/"
-  },
-  {
-   "token": "extrakt",
-   "wines": 15,
-   "example": "https://www.systembolaget.se/produkt/vin/x-400001/"
-  },
-  {
-   "token": "rött",
-   "wines": 9,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3287901/"
-  },
-  {
-   "token": "mängder",
-   "wines": 9,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3513201/"
-  },
-  {
    "token": "koncentrat",
-   "wines": 9,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3801601/"
-  },
-  {
-   "token": "försumbara",
-   "wines": 8,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5775001/"
-  },
-  {
-   "token": "lagringslikör",
    "wines": 7,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5404101/"
-  },
-  {
-   "token": "expeditionslagring",
-   "wines": 7,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5404101/"
-  },
-  {
-   "token": "atmosfär",
-   "wines": 7,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5806515/"
-  },
-  {
-   "token": "innehålla",
-   "wines": 7,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7101601/"
-  },
-  {
-   "token": "tappat",
-   "wines": 6,
-   "example": "https://www.systembolaget.se/produkt/vin/x-235708/"
-  },
-  {
-   "token": "skyddande",
-   "wines": 6,
-   "example": "https://www.systembolaget.se/produkt/vin/x-235708/"
+   "example": "https://www.systembolaget.se/produkt/vin/x-557801/"
   },
   {
    "token": "under",
@@ -71,29 +11,14 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-5185601/"
   },
   {
-   "token": "råvara",
-   "wines": 6,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7043901/"
-  },
-  {
-   "token": "neutral",
-   "wines": 6,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7402102/"
-  },
-  {
    "token": "gummi",
    "wines": 5,
    "example": "https://www.systembolaget.se/produkt/vin/x-2015601/"
   },
   {
-   "token": "bio",
+   "token": "atmosfär",
    "wines": 5,
-   "example": "https://www.systembolaget.se/produkt/vin/x-235201/"
-  },
-  {
-   "token": "uve",
-   "wines": 5,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5031210/"
+   "example": "https://www.systembolaget.se/produkt/vin/x-601808/"
   },
   {
    "token": "buteljerad",
@@ -101,104 +26,19 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7253001/"
   },
   {
-   "token": "mosto",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-237821/"
-  },
-  {
-   "token": "concentrato",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-237821/"
-  },
-  {
-   "token": "örter",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3090202/"
-  },
-  {
-   "token": "etanol",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3801601/"
-  },
-  {
-   "token": "buteljerat",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5185601/"
-  },
-  {
-   "token": "förteckning",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5590401/"
-  },
-  {
-   "token": "över",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5590401/"
-  },
-  {
-   "token": "russin",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5632601/"
-  },
-  {
-   "token": "liqueur",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7398701/"
-  },
-  {
    "token": "prodi",
    "wines": 4,
    "example": "https://www.systembolaget.se/produkt/vin/x-7502501/"
   },
   {
-   "token": "infusion",
+   "token": "neutral",
    "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7615801/"
-  },
-  {
-   "token": "destillat",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7833602/"
-  },
-  {
-   "token": "tirage",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-206301/"
-  },
-  {
-   "token": "tillsatser",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-246901/"
+   "example": "https://www.systembolaget.se/produkt/vin/x-7609501/"
   },
   {
    "token": "conditioned",
    "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-281608/"
-  },
-  {
-   "token": "svart",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-296641/"
-  },
-  {
-   "token": "sirap",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3287901/"
-  },
-  {
-   "token": "obetydlig",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3363101/"
-  },
-  {
-   "token": "morot",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3801601/"
-  },
-  {
-   "token": "atomsfär",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-437601/"
   },
   {
    "token": "vita",
@@ -221,7 +61,7 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-5176601/"
   },
   {
-   "token": "skyddsatmosfär",
+   "token": "buteljerat",
    "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-5185601/"
   },
@@ -366,6 +206,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-9222301/"
   },
   {
+   "token": "tirage",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-206301/"
+  },
+  {
    "token": "arabiska",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-246001/"
@@ -401,16 +246,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-3287901/"
   },
   {
-   "token": "proteiner",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3513201/"
-  },
-  {
-   "token": "juice",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3801601/"
-  },
-  {
    "token": "bränt",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-3801601/"
@@ -421,16 +256,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-458701/"
   },
   {
-   "token": "agricoltura",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5031210/"
-  },
-  {
-   "token": "biologica",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5031210/"
-  },
-  {
    "token": "mcr",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-5031210/"
@@ -439,11 +264,6 @@
    "token": "grenache",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-5046901/"
-  },
-  {
-   "token": "uva",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5142701/"
   },
   {
    "token": "sockerlag",
@@ -489,6 +309,11 @@
    "token": "metoder",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-5911401/"
+  },
+  {
+   "token": "tappat",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-601808/"
   },
   {
    "token": "brandy",
@@ -541,11 +366,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7052701/"
   },
   {
-   "token": "rabicum",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7185001/"
-  },
-  {
    "token": "enbär",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7219001/"
@@ -566,11 +386,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7236501/"
   },
   {
-   "token": "skyddsgas",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7253001/"
-  },
-  {
    "token": "apelsinjuice",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7258101/"
@@ -581,9 +396,14 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7362201/"
   },
   {
-   "token": "sprit",
+   "token": "liqueur",
    "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7402102/"
+   "example": "https://www.systembolaget.se/produkt/vin/x-741002/"
+  },
+  {
+   "token": "skyddande",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7411101/"
   },
   {
    "token": "oenologiskt",
@@ -604,11 +424,6 @@
    "token": "rektifierat",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7608201/"
-  },
-  {
-   "token": "fruktinfusioner",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7615801/"
   },
   {
    "token": "pektinlyas",
@@ -706,11 +521,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-2030541/"
   },
   {
-   "token": "ört",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-2030541/"
-  },
-  {
    "token": "vegetabiliskt",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-206207/"
@@ -729,11 +539,6 @@
    "token": "svavlastoxid",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-234701/"
-  },
-  {
-   "token": "atmodfär",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-235708/"
   },
   {
    "token": "biologico",
@@ -826,6 +631,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-295501/"
   },
   {
+   "token": "svart",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-296641/"
+  },
+  {
    "token": "morotsjuicekoncentrat",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-296641/"
@@ -866,24 +676,9 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-3451201/"
   },
   {
-   "token": "obetydliga",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3513201/"
-  },
-  {
    "token": "syttegulatorer",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
-  },
-  {
-   "token": "anidride",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5031210/"
-  },
-  {
-   "token": "solforosa",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5031210/"
   },
   {
    "token": "blanca",
@@ -1034,11 +829,6 @@
    "token": "konserveringsämnen",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-5666301/"
-  },
-  {
-   "token": "skyddanade",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5806515/"
   },
   {
    "token": "italienskt",
@@ -1201,11 +991,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7219201/"
   },
   {
-   "token": "biologique",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7219201/"
-  },
-  {
    "token": "cas9000",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7236101/"
@@ -1331,17 +1116,7 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7384401/"
   },
   {
-   "token": "glukos",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7402102/"
-  },
-  {
    "token": "chocklad",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7402102/"
-  },
-  {
-   "token": "kakaoessens",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7402102/"
   },
@@ -1359,11 +1134,6 @@
    "token": "saffran",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7416501/"
-  },
-  {
-   "token": "buteljeras",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7427101/"
   },
   {
    "token": "jästproteiner",
@@ -1439,16 +1209,6 @@
    "token": "monohydrat",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7615301/"
-  },
-  {
-   "token": "sockerlösning",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7615801/"
-  },
-  {
-   "token": "kinabark",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7615801/"
   },
   {
    "token": "färgande",
@@ -1569,11 +1329,6 @@
    "token": "metatartarico",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7862801/"
-  },
-  {
-   "token": "skyddade",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7870601/"
   },
   {
    "token": "zuri",
@@ -2016,10 +1771,6 @@
    "wines": 6
   },
   {
-   "match": "arabicum -> arabic gum",
-   "wines": 6
-  },
-  {
    "match": "jästmannoprotein -> jästmannoproteiner",
    "wines": 5
   },
@@ -2037,14 +1788,6 @@
   },
   {
    "match": "karboxymetylcellulos -> karboxymetylcellulosa",
-   "wines": 4
-  },
-  {
-   "match": "akaciagummi -> akacia gummi",
-   "wines": 4
-  },
-  {
-   "match": "gummiarabicum -> gummi arabicum",
    "wines": 4
   },
   {
@@ -2137,6 +1880,10 @@
   },
   {
    "match": "svaveloxid -> svaveldioxid",
+   "wines": 2
+  },
+  {
+   "match": "rabicum -> arabicum",
    "wines": 2
   },
   {

@@ -63,7 +63,6 @@ category_labels:
   - preservatives
   - preservative
   - antioxidants
-  - antioxidant
   - acidity regulators
   - acidity regulator
   - stabilisers
@@ -74,6 +73,12 @@ category_labels:
   - ingredients
   - raw materials
   - fining agents
+  - förteckning över
+  - förteckning
+  - råvara
+  - ingredienser i vin
+  - tillsatser
+  - tillsats
   - huvudingredienser
   - syrakorrigeringsmedel
   - reglering av surhetsgrad
@@ -93,19 +98,6 @@ category_labels:
   - kurator  # machine translation of "conservador"/preservative
   - konservering
   - surhetsregulator
-  - reglering av surhetsgrad
-  - reglering av surhet
-  - surhetsgrad
-  - antioxideringsmedel
-  - antioxideringsmedlet
-  - berikning/ sötning
-  - berikning / sötning
-  - berikning
-  - sötning
-  - sötningsmedel
-  - stabiliserande
-  - kurator  # machine translation of "conservador"/preservative
-  - konservering
   - surhetsregulatorer
   - syrakorrigering
   - klargörande medel
@@ -131,8 +123,11 @@ processing_notes:
     # Every supplier words this differently, so it is matched by shape:
     # a bottling verb, optional filler, then the atmosphere.
     regexes:
-      - '\b(tappa\w*|tappn\w*|buteljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|fyll\w*)\b[\w\s]{0,24}?\b(skyddande|skyddad|modifierad|protective|inert)\s+(atmosf\w*|atmosphere|miljö\w*)'
-      - '\b(skyddande|skyddad|modifierad|protective)\s+(atmosf\w*|atmosphere|miljö\w*)\b'
+      - '\b(tappa\w*|tappn\w*|buteljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|fyll\w*)\b[\w\s]{0,24}?\b(skydda\w*|modifierad|protective|inert)\s+(atmo\w*|atom\w*|atmosphere|miljö\w*)'
+      - '\b(skydda\w*|modifierad|protective|inert)\s+(atmo\w*|atom\w*|atmosphere|miljö\w*)\b'
+      - '\bskydds\w*(atmo\w*|atom\w*|gas\w*)\b'
+      - '\bskyddsgas\w*\b'
+      - '\bbottle\s+conditioned\b'
   - id: organic
     name: { sv: Ekologisk odling, en: Organic farming }
     aliases:
@@ -149,7 +144,13 @@ processing_notes:
       - ekologiska
       - ekologisk
       - ekologiskt
+      - ekologisk produktion
+      - ekologisk odling / ekologisk produktion
+      - agricoltura biologica
+      - da agricoltura biologica
       - biologisk
+      - biologique
+      - bio
       - biodynamisk
       - organisk
       - organic
@@ -168,6 +169,8 @@ stopwords:
   - eller
   - innehåller
   - innehåller inte
+  - innehålla
+  - obetydlig
   - inte
   - från
   - av
@@ -212,6 +215,12 @@ stopwords:
   - tillsatta
   - använd
   - använts
+  - obetydliga mängder
+  - försumbara mängder
+  - obetydliga
+  - försumbara
+  - mängder
+  - proteiner
   - näringsvärde
   - näringsdeklaration
   - energi

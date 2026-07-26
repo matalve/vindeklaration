@@ -13,6 +13,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
+from .build import known_names
 from .normalize import parse_ingredients
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -101,7 +102,7 @@ def main() -> None:
     fuzzy_counter: Counter[str] = Counter()
     examples: dict[str, str] = {}
     for wine in declared:
-        parsed = parse_ingredients(wine["raw_ingredients"], wine.get("grapes"))
+        parsed = parse_ingredients(wine["raw_ingredients"], known_names(wine))
         for token in parsed.unknown_tokens:
             token_counter[token] += 1
             examples.setdefault(token, wine["source_url"])
