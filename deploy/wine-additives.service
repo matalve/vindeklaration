@@ -1,0 +1,18 @@
+[Unit]
+Description=Update the wine additives dataset from Systembolaget
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=__REPO__
+Environment=UV=__UV__
+ExecStart=__REPO__/deploy/update.sh
+# A full pass is roughly three and a half hours of deliberately slow, sequential
+# requests. This ceiling only catches a genuinely stuck run.
+TimeoutStartSec=8h
+Nice=10
+IOSchedulingClass=idle
+
+[Install]
+WantedBy=default.target

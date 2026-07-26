@@ -1,0 +1,13 @@
+[Unit]
+Description=Nightly wine additives dataset update
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+# Don't be the thing that hits Systembolaget at exactly 03:00 every night.
+RandomizedDelaySec=30m
+# If the Pi was off at 03:00, run once it comes back rather than skipping a day.
+Persistent=true
+Unit=wine-additives.service
+
+[Install]
+WantedBy=timers.target

@@ -103,6 +103,38 @@ uv run pytest
 picks up where it stopped. Use `--limit N` for a quick sample and `--refresh` to
 re-fetch wines that are already cached.
 
+## Running it unattended
+
+A full pass takes hours of deliberately slow requests, which a laptop will
+interrupt every time it sleeps. `deploy/` sets the pipeline up on a machine that
+stays awake — a Raspberry Pi 4 running 64-bit Debian bookworm is plenty, and its
+system Python 3.11 is enough.
+
+```sh
+./deploy/push-to-pi.sh            # from the Mac: copies the tree, cache included
+ssh pi@raspberrypi
+cd wine-additives && ./deploy/bootstrap.sh
+```
+
+`bootstrap.sh` installs uv, syncs dependencies, runs the tests and installs a
+systemd user timer that updates the dataset nightly at 03:00 with a random delay.
+It finishes by printing the one privileged command needed — `loginctl
+enable-linger` — without which user services stop when you log out.
+
+`deploy/update.sh` is the cycle itself: catalog, declarations, build, tests,
+report. Sundays re-fetch everything, but only once the first full pass has
+completed — there is no point refreshing what has never been fetched.
+
+```sh
+systemctl --user start wine-additives.service      # run one cycle now
+journalctl --user -u wine-additives -f             # watch it
+systemctl --user list-timers wine-additives.timer  # when is the next run
+```
+
+The GitHub Actions workflow in `.github/workflows/` does the same job in the
+cloud. Use one or the other, not both — two crawlers is twice the load on
+Systembolaget for the same data.
+
 ## Improving the parser
 
 Run the report, look at the top of `data/unknown.json`, and add the spellings to
