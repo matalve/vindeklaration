@@ -81,6 +81,11 @@ category_labels:
   - tillsats
   - huvudingredienser
   - syrakorrigeringsmedel
+  - syrregulatorer  # typo seen in the wild ("syra" + "regulatorer")
+  - syreregulatorer  # typo seen in the wild
+  - syrakorrigerare
+  - syrakorrectorer  # typo seen in the wild
+  - regulator
   - reglering av surhetsgrad
   - reglering av surhet
   - surhetsgrad
@@ -104,6 +109,8 @@ category_labels:
   - klargörande
   - färgämnen
   - färgämne
+  - färgande livsmedel  # "colouring foodstuff" (EU 1333/2008), legally food not an additive
+  - färgande
   - anrikningar
   - anrikning
   - andra
@@ -113,6 +120,36 @@ category_labels:
   - colours
   - jäsmedel
   - jäsningsmedel
+  - surhetsreglerandemedel  # header merged with the following word, no space
+  - konserveringsmede  # truncated header seen in the wild
+  - konsveringsmedel  # typo seen in the wild
+  - perservative  # typo seen in the wild
+  - smaksättare  # "flavourer", generic Swedish header for a flavouring
+  # Italian headers.
+  - correttore di acidità
+  - conservanti
+  - conservante
+  - conservant
+  - conservateurs  # French
+  - antioxidante
+  - stabilizzanti
+  - antioxidantkonserveringsmedel  # header merged with the following word
+  - antioxidationer
+  - ingrédient  # French
+  # Portuguese headers.
+  - regulador de acidez
+  - agentes estabilizadores
+  - gás de embalagem
+  - gás
+  # Alternate wording of the fermentation-activator header seen in the wild.
+  - aktivatorer av alkoholisk och malolaktisk jäsning
+  - andra metoder
+  - vinbaserad smaksatt dryck  # "wine-based flavoured beverage", a product-type header
+  - kristallstabilisering  # explains what the stabiliser (e.g. kaliumpolyaspartat) is for
+  - syrereglerande  # alternate wording of "surhetsreglerande"
+  - övrigt
+  - konserveringsämnen
+  - konserveringsämne
 
 # Statements about handling rather than content.
 processing_notes:
@@ -120,13 +157,29 @@ processing_notes:
     name:
       sv: Tappad i skyddande atmosfär
       en: Bottled in a protective atmosphere
-    # Every supplier words this differently, so it is matched by shape:
-    # a bottling verb, optional filler, then the atmosphere.
+    # Every occurrence of these bottling verbs in the corpus co-occurs with a
+    # protective-atmosphere/gas phrase (checked against the full dataset), so
+    # they are recognised on their own rather than only through the regexes
+    # below, which struggle with the wildest typos and word orders.
+    aliases:
+      - syddande atmosfär  # typo for "skyddande atmosfär", missing the k
+      - buteljerad
+      - buteljerat
+      - buteljering
+      - butljerad  # typo seen in the wild
+      - tappat
+      - tappas
+      - tappad
+    # Every supplier words this differently, so it is matched by shape: a
+    # bottling verb, optional filler, then the atmosphere — in either order,
+    # since "under skyddsatmosfär buteljerat" puts the verb last. "skydd" is
+    # given a wildcard prefix/suffix and a small gap before "atmo"/"gas" to
+    # absorb merges ("enskyddande"), typos ("atmsfär", "afmosfär") and stray
+    # inserted words ("skyddan de atmosfär").
     regexes:
-      - '\b(tappa\w*|tappn\w*|buteljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|fyll\w*)\b[\w\s]{0,24}?\b(skydda\w*|modifierad|protective|inert)\s+(atmo\w*|atom\w*|atmosphere|miljö\w*)'
-      - '\b(skydda\w*|modifierad|protective|inert)\s+(atmo\w*|atom\w*|atmosphere|miljö\w*)\b'
-      - '\bskydds\w*(atmo\w*|atom\w*|gas\w*)\b'
-      - '\bskyddsgas\w*\b'
+      - '\b(tappa\w*|tappn\w*|buteljer\w*|butljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|fyll\w*|producera\w*|condition\w*|ekologisktappa\w*)\b[\w\s]{0,24}?\b(\w*s?kydd\w*|modifierad|protective|inert).{0,4}?(atmo\w*|atom\w*|afmo\w*|atmsf\w*|atmosphere|miljö\w*|gas\w*)\b'
+      - '\b(\w*s?kydd\w*|modifierad|protective|inert).{0,4}?(atmo\w*|atom\w*|afmo\w*|atmsf\w*|atmosphere|miljö\w*|gas\w*)\b[\w\s]{0,24}?\b(tappa\w*|tappn\w*|buteljer\w*|butljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|fyll\w*)\b'
+      - '\b(\w*s?kydd\w*|modifierad|protective|inert).{0,4}?(atmo\w*|atom\w*|afmo\w*|atmsf\w*|atmosphere|miljö\w*|gas\w*)\b'
       - '\bbottle\s+conditioned\b'
   - id: organic
     name: { sv: Ekologisk odling, en: Organic farming }
@@ -153,8 +206,11 @@ processing_notes:
       - bio
       - biodynamisk
       - organisk
+      - organiska
       - organic
       - eko
+      - aus kontrolliert ökologischer landwirtschaft  # German, "from certified organic farming"
+      - ¹från ekologiskt jordbruk  # footnote marker attached
   - id: vegan
     name: { sv: Vegansk, en: Vegan }
     aliases: [vegansk, veganskt, vegan]
@@ -243,6 +299,28 @@ stopwords:
   - produkt
   - vinframställning
   - vinproduktion
+  - under
+  - dess
+  - naturliga
+  - vol
+  - inklusive
+  - totalt
+  - spanien
+  - eco
+  - ccpae
+  - certifierad
+  - koncentrat  # "färgämne (från koncentrat av äpple ...)" — the sources are named beside it
+  - aromatiska  # "infusion av aromatiska örter och kryddor"
+  - odlade  # "ekologiskt odlade druvor"
+  - fransk  # "SULFITER och Fransk Ek" — describes the oak barrel, not an ingredient
+  - mörkbrun  # "mörkbrun sirap" — describes the syrup's colour
+  - bränt  # "bränt socker" — describes the sugar, not a separate substance
+  - jordbruk  # "från ekoligiskt jordbruk" (typo already resolved by fuzzy match)
+  - contient  # French "contains"
+  - oenologiskt  # "oenologiskt tannin" — describes the tannin, not a separate substance
+  - gjort  # "vin gjort på 100% ... druvor"
+  - energivärde  # nutrition declaration header
+  - cas  # "CAS 7773-03-07" — a registry number for the substance named just before it
   # English filler, for declarations entered in English.
   - and
   - and/or
@@ -256,3 +334,15 @@ stopwords:
   - a
   - may
   - be
+  - potassium  # "Potassium MetabiSULFIT" — always paired with a compound name resolved separately
+  - contais  # typo for "contains"
+  - innhåller  # typo for "innehåller"
+  - italienskt  # "Italian" — provenance, not a substance
+  - ringa  # "en ringa mängd av" — "a small amount of", nutrition declaration wording
+  - mättade  # "mättade fettsyror" — nutrition declaration wording
+  - fettsyror  # "mättade fettsyror" — nutrition declaration wording
+  - förpackning
+  - förpackningen
+  - förpackat
+  - får  # "Förpackningen får ske under en skyddande atmosfär"
+  - vegetabiliskt  # "vegetabiliskt klarningsmedel" — describes the (already-stripped) fining agent header
