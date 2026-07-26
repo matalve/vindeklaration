@@ -1,9 +1,10 @@
 name: Update dataset
 
+# Manual only. The Raspberry Pi in deploy/ is the crawler, on a nightly timer;
+# a schedule here as well would mean two clients fetching the same wines from
+# Systembolaget on the same night, under the same User-Agent. Keep this as the
+# standby for when the Pi is unavailable, and start it by hand.
 on:
-  schedule:
-    # Nightly incremental refresh; Sunday's run re-fetches everything.
-    - cron: "0 3 * * *"
   workflow_dispatch:
     inputs:
       full:
