@@ -43,8 +43,8 @@ if git rev-parse --git-dir >/dev/null 2>&1; then
   if git diff --staged --quiet; then
     echo "=== dataset unchanged"
   else
-    git -c user.name="wine-additives-bot" \
-        -c user.email="wine-additives-bot@localhost" \
+    git -c user.name="vindeklaration-bot" \
+        -c user.email="vindeklaration-bot@localhost" \
         commit -q -m "Update dataset $(date -u +%Y-%m-%d)"
     echo "=== committed $(git rev-parse --short HEAD)"
   fi

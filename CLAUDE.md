@@ -53,7 +53,7 @@ uv run python -m src.report       # coverage, unknown tokens, quality gate
 
 ## The Pi runs the pipeline, not this laptop
 
-`pi@raspberrypi:~/wine-additives`, on a systemd user timer at 03:00 nightly.
+`pi@raspberrypi:~/vindeklaration`, on a systemd user timer at 03:00 nightly.
 A full pass is hours long and a laptop sleeps through it.
 
 **The Pi's `data/cache` is authoritative and must never be reconciled
