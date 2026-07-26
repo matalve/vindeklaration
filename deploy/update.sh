@@ -10,6 +10,19 @@ UV="${UV:-$(command -v uv)}"
 
 echo "=== $(date -Is) starting update"
 
+# Code arrives from GitHub, data leaves for it. Pull before crawling: a machine
+# left behind on an old additives.yaml spends the whole night producing
+# declarations it cannot read, which is exactly what happened on 2026-07-26.
+if git rev-parse --git-dir >/dev/null 2>&1; then
+  if git pull --ff-only --quiet 2>/dev/null; then
+    echo "=== pulled, now at $(git rev-parse --short HEAD)"
+  elif git pull --rebase --autostash --quiet 2>/dev/null; then
+    echo "=== pulled and rebased local commits, now at $(git rev-parse --short HEAD)"
+  else
+    echo "=== pull failed — running with the code that is already here"
+  fi
+fi
+
 "$UV" run python -m src.catalog
 
 # How much of the catalog has ever been fetched? A full refresh is pointless
@@ -39,7 +52,9 @@ else
 fi
 
 if git rev-parse --git-dir >/dev/null 2>&1; then
-  git add data/wines.json data/wines.sqlite data/catalog.json data/unknown.json
+  # wines.sqlite is deliberately absent: it is a binary that git cannot delta,
+  # and src/build.py regenerates it from wines.json in seconds.
+  git add data/wines.json data/catalog.json data/unknown.json
   if git diff --staged --quiet; then
     echo "=== dataset unchanged"
   else
@@ -47,6 +62,17 @@ if git rev-parse --git-dir >/dev/null 2>&1; then
         -c user.email="vindeklaration-bot@localhost" \
         commit -q -m "Update dataset $(date -u +%Y-%m-%d)"
     echo "=== committed $(git rev-parse --short HEAD)"
+
+    # A rejected push means code was pushed while we were fetching. Rebase this
+    # commit on top and try once more. Never force: the remote is shared, and a
+    # commit that stays here is picked up by the next run anyway.
+    if git push --quiet origin HEAD:main 2>/dev/null; then
+      echo "=== pushed to origin"
+    elif git pull --rebase --quiet && git push --quiet origin HEAD:main 2>/dev/null; then
+      echo "=== pushed to origin after rebase"
+    else
+      echo "=== push failed — the commit is safe here and goes with the next run"
+    fi
   fi
 fi
 

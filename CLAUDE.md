@@ -58,9 +58,21 @@ A full pass is hours long and a laptop sleeps through it.
 
 **The Pi's `data/cache` is authoritative and must never be reconciled
 downward.** A single `rsync --delete` of the whole tree once destroyed 11 148
-fetched declarations. `deploy/push-to-pi.sh` is deliberately two passes: code
-with `--delete`, data without. If the cache is ever lost again,
+fetched declarations. If the cache is ever lost again,
 `deploy/rebuild-cache.py` re-derives it from `wines.json` instead of refetching.
+
+**Everything but the cache travels through GitHub, and each direction has one
+owner.** Code and the dictionaries go laptop → GitHub → Pi: `update.sh` pulls
+before it crawls, so the Pi never spends a night on a stale `additives.yaml`.
+The dataset goes Pi → GitHub → laptop: **only the Pi commits `data/wines.json`,
+`data/catalog.json` and `data/unknown.json`.** Rebuild them here to check
+something by all means, then throw the result away —
+`git checkout -- data/wines.json` — because committing it from two machines is
+what turns a fast-forward into a merge conflict in a 16 MB file. `wines.sqlite`
+is gitignored; it is regenerated from `wines.json`.
+
+`deploy/push-to-pi.sh` is for the first install only, when there is no clone on
+the far end yet. After that, use git.
 
 Requests are sequential, 0.4 s apart, identified by User-Agent, and inside what
 `robots.txt` allows. Do not parallelise, and do not speed up to catch up after

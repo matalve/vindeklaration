@@ -5,3 +5,8 @@ __pycache__/
 
 # Raw upstream responses: large, regenerable, not part of the published dataset.
 data/cache/
+
+# Rebuilt from wines.json by src/build.py in seconds. Committing it costs its
+# full 4 MB every night, because git cannot delta a binary the way it deltas
+# the JSON. It is published as a release asset instead.
+data/wines.sqlite
