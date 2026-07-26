@@ -117,5 +117,55 @@
   "additives": ["sulfur_dioxide"],
   "gases": [],
   "base": ["grapes", "wine_alcohol"]
+ },
+ {
+  "why": "gummi arabicum runs into the next word through a missing space",
+  "text": "Druvor, koncentrerad druvmust, surhetsreglerande medel: vinsyra; konserveringsmedel: sulfiter; stabiliseringsmedel: innehåller gummi arabicumoch/eller mannoproteiner från jäst.",
+  "additives": ["gum_arabic", "mannoproteins", "sulfites", "tartaric_acid"],
+  "gases": [],
+  "base": ["grape_must", "grapes"],
+  "allergens": ["sulfites"]
+ },
+ {
+  "why": "protective-atmosphere phrasing with the bottling verb after the noun, not before it",
+  "text": "Druvor, sackaros, under skyddsatmosfär buteljerat, konserveringsmedel: SULFITER",
+  "additives": ["sulfites"],
+  "gases": [],
+  "base": ["grapes", "sugar"],
+  "processing": ["protective_atmosphere"],
+  "allergens": ["sulfites"]
+ },
+ {
+  "why": "neutral alcohol must not be swallowed whole by the longer alkohol-framställd-av-vinprodukter alias, leaving \"neutral\" stranded",
+  "text": "Druvor, neutral alkohol framställd av vinprodukter, rektifierad koncentrerad druvmust, stabiliseringsmedel: gummi arabicum; konserveringsmedel: SULFITER.",
+  "additives": ["gum_arabic", "sulfites"],
+  "gases": [],
+  "base": ["grape_must", "grapes", "wine_alcohol"],
+  "allergens": ["sulfites"]
+ },
+ {
+  "why": "tartaric acid or its neutral potassium salt, phrased without ever naming potassium bitartrate",
+  "text": "Druva, Stabilisatorer: vinsyra (d, l-) eller dess neutrala kaliumsalt, Konserverings- och antioxidationsmedel SULFITER (e220), rektifierad koncentrerad druvmust, gaser och förpackningsgader: kväve (e941).",
+  "additives": ["potassium_bitartrate", "sulfur_dioxide", "tartaric_acid"],
+  "gases": ["nitrogen"],
+  "base": ["grape_must", "grapes"],
+  "allergens": ["sulfites"]
+ },
+ {
+  "why": "colouring foodstuffs from fruit/vegetable concentrate are food (EU 1333/2008), not a counted additive",
+  "text": "Ekologiskt vitt vin (50%, ursprung: EU, innehåller SULFITER), vatten, ekologiskt socker, färgämne (från koncentrat av äpple, safflor, sötpotatis), naturliga aromer, syra (citronsyra).",
+  "additives": ["citric_acid", "flavourings", "sulfites"],
+  "gases": [],
+  "base": ["fruit", "sugar", "water", "wine"],
+  "processing": ["organic"],
+  "allergens": ["sulfites"]
+ },
+ {
+  "why": "French \"raisin\" means grape, not the English dried fruit \"raisin\"",
+  "text": "raisin, conservateurs (contient sulfites : e 220)",
+  "additives": ["sulfur_dioxide"],
+  "gases": [],
+  "base": ["grapes"],
+  "allergens": ["sulfites"]
  }
 ]

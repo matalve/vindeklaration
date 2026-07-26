@@ -23,7 +23,7 @@
   note:
     sv: Samlingsnamn för svavelföreningar som konserverar vinet och skyddar det mot oxidation. Måste alltid deklareras som allergen.
     en: Umbrella term for the sulfur compounds that preserve wine and protect it against oxidation. Always declared as an allergen.
-  aliases: [sulfiter, sulfit, sulfites, sulphites, svavel]
+  aliases: [sulfiter, sulfit, sulfites, sulphites, svavel, solfiti]
 
 - id: sulfur_dioxide
   e_number: E220
@@ -35,7 +35,7 @@
   note:
     sv: Den vanligaste konserveringsmedlet i vin. Hämmar bakterier och oxidation.
     en: The most common wine preservative. Inhibits bacteria and oxidation.
-  aliases: [svaveldioxid, svavaldioxid, anidride solforosa, sulfur dioxide, so2]
+  aliases: [svaveldioxid, svavaldioxid, anidride solforosa, sulfur dioxide, so2, svavlastoxid, sulphur dioxide]
 
 - id: potassium_metabisulfite
   e_number: E224
@@ -54,6 +54,10 @@
     - kaliummetabisulfat
     - potassium metabisulphite
     - potassium metabisulfite
+    - potassium metabisulfit  # missing the English "-ite" ending
+    - metabissulfito de potássio  # Portuguese
+    - metabisolfito di potassio  # Italian
+    - kaliummetabiolsofyt  # typo seen in the wild
   regexes:
     - '\b(meta\s?)?kalium\s?(meta\s?bi|meta|pyro|di)\s?sulfit\b'
     - '\b(meta\s?bi|meta|pyro|di)\s?sulfit\s+av\s+kalium\b'
@@ -68,7 +72,7 @@
   group: sulfites
   allergen: sulfites
   name: { sv: Kaliumbisulfit, en: Potassium bisulfite }
-  aliases: [kaliumbisulfit, kaliumvätesulfit, kaliumbisulf]
+  aliases: [kaliumbisulfit, kaliumvätesulfit, kaliumbisulf, potassium bisulfite, potassium bisulfate]
   regexes:
     - '\b(meta\s?)?kalium\s?bisulfit\b'
 
@@ -97,7 +101,13 @@
   note:
     sv: Steriliserar vinet vid tappning och bryts sedan ned. Kallas ofta DMDC.
     en: Sterilises the wine at bottling and then breaks down. Often called DMDC.
-  aliases: [dimetyldikarbonat, dimethyl dicarbonate, dmdc, velcorin]
+  aliases:
+    - dimetyldikarbonat
+    - dimethyl dicarbonate
+    - dmdc
+    - velcorin
+    - dcdm  # typo: letters transposed from dmdc
+    - dikarbonat av dimetyl  # word order reversed in the wild
 
 - id: lysozyme
   e_number: E1105
@@ -125,7 +135,16 @@
   note:
     sv: Vinets egen syra. Tillsätts för att höja syran i varma årgångar.
     en: Wine's own acid. Added to raise acidity in warm vintages.
-  aliases: [vinsyra, tartaric acid, l(+)-vinsyra]
+  aliases:
+    - vinsyra
+    - tartaric acid
+    - l(+)-vinsyra
+    - medelvinsyra  # typo: "medel vinsyra" (surhetsreglerande medel: vinsyra) merged
+    - tartarico  # Italian, seen abbreviated as "Ac.Tartarico"
+    - acido tartarico
+    - ácido tartárico
+    - ácido l tartárico  # Portuguese, "Ácido L(+) tartárico"
+    - tartic acid  # typo seen in the wild, "L-(+)-tartic acid"
 
 - id: metatartaric_acid
   e_number: E353
@@ -135,21 +154,37 @@
   note:
     sv: Hindrar vinstenskristaller från att bildas i flaskan.
     en: Prevents tartrate crystals forming in the bottle.
-  aliases: [metavinsyra, metatartronsyra, metatartarsyra, metakarsyra, metavinsyre, metatartaric acid]
+  aliases:
+    - metavinsyra
+    - metatartronsyra
+    - metatartarsyra
+    - metakarsyra
+    - metavinsyre
+    - metatartaric acid
+    - metvinsyra  # typo seen in the wild
+    - metatvinsyra  # typo seen in the wild
+    - metatartarinsyra  # typo seen in the wild
+    - metatarinsyra  # typo seen in the wild
+    - metatartarico  # Italian
 
 - id: malic_acid
   e_number: E296
   bucket: additive
   category: acidity_regulator
   name: { sv: Äppelsyra, en: Malic acid }
-  aliases: [äppelsyra, applesyra, malinsyra, malsyra, malic acid]
+  aliases: [äppelsyra, äppelsyror, applesyra, malinsyra, malsyra, malic acid, malico, acido malico]
 
 - id: citric_acid
   e_number: E330
   bucket: additive
   category: acidity_regulator
   name: { sv: Citronsyra, en: Citric acid }
-  aliases: [citronsyra, citronsyramonohydrat, citric acid, citric acid monohydrate]
+  aliases:
+    - citronsyra
+    - citronsyramonohydrat
+    - citric acid
+    - citric acid monohydrate
+    - citronsyra monohydrat  # split by a stray comma, "citronsyra, monohydrat"
 
 - id: fumaric_acid
   e_number: E297
@@ -159,21 +194,30 @@
   note:
     sv: Hindrar att den malolaktiska jäsningen startar om i flaskan.
     en: Stops malolactic fermentation restarting in the bottle.
-  aliases: [fumarsyra, fumarat, fumaric acid]
+  aliases: [fumarsyra, fumarat, fumaric acid, furmarsyra]
 
 - id: lactic_acid
   e_number: E270
   bucket: additive
   category: acidity_regulator
   name: { sv: Mjölksyra, en: Lactic acid }
-  aliases: [mjölksyra, lactic acid]
+  aliases: [mjölksyra, mjölksyror, lactic acid]
 
 - id: potassium_bitartrate
   e_number: E336
   bucket: additive
   category: acidity_regulator
   name: { sv: Kaliumbitartrat, en: Potassium bitartrate }
-  aliases: [kaliumbitartrat, kaliumvätetartrat, kaliumtartrat, potassium bitartrate]
+  note:
+    sv: "Vinsyrans kaliumsalt. Kallas ibland \"dess neutrala kaliumsalt\" i stället för att namnges."
+    en: The potassium salt of tartaric acid. Sometimes described as "its neutral potassium salt" instead of being named directly.
+  aliases:
+    - kaliumbitartrat
+    - kaliumvätetartrat
+    - kaliumtartrat
+    - potassium bitartrate
+    - neutrala kaliumsalt  # "vinsyra ... eller dess neutrala kaliumsalt"
+    - kht  # oenological abbreviation for potassium hydrogen tartrate
 
 - id: calcium_carbonate
   e_number: E170
@@ -192,6 +236,105 @@
     - kaliumkarbonat
     - potassium bicarbonate
     - potassium carbonate
+    - khc03  # oenological abbreviation for potassium bicarbonate, KHCO3
+
+- id: calcium_sulfate
+  e_number: E516
+  bucket: additive
+  category: acidity_regulator
+  name: { sv: Kalciumsulfat, en: Calcium sulfate }
+  note:
+    sv: Används för att justera surheten i musten, framför allt i traditionell sherrytillverkning ("plastring").
+    en: Used to adjust the acidity of the must, chiefly in traditional sherry production ("plastering").
+  aliases: [kalciumsulfat, calcium sulfate]
+
+- id: diammonium_phosphate
+  e_number: E342
+  bucket: additive
+  category: other
+  name: { sv: Diammoniumvätefosfat, en: Diammonium phosphate }
+  note:
+    sv: Jästnäring som tillsätts under jäsningen för att undvika en trög jäsning.
+    en: Yeast nutrient added during fermentation to prevent a sluggish fermentation.
+  aliases:
+    - diammoniumvätefosfat
+    - diammoniumfosfat
+    - diammonium phosphate
+    - dap
+
+- id: ammonium_sulfate
+  e_number: E517
+  bucket: additive
+  category: other
+  name: { sv: Diammoniumsulfat, en: Ammonium sulphate }
+  note:
+    sv: Kvävekälla för jästen, tillsatt som jästnäring under jäsningen.
+    en: A nitrogen source for the yeast, added as a nutrient during fermentation.
+  aliases:
+    - diammoniumsulfat
+    - diammonium sulphate
+    - diammonium sulfate
+    - ammoniumsulfat
+    - ammonium sulphate
+    - ammonium sulfate
+
+- id: copper_sulfate
+  bucket: additive
+  category: other
+  name: { sv: Kopparsulfat, en: Copper sulfate }
+  note:
+    sv: Avlägsnar svavelväte-lukt (rutet ägg) under vinframställningen. Spårrester kan finnas kvar.
+    en: Removes hydrogen sulfide (rotten egg) odours during winemaking. Trace residues may remain.
+  aliases:
+    - kopparsulfat
+    - copper sulphate
+    - copper sulfate
+    - kopparsulfat pentahydrat
+    - cus04  # chemical formula CuSO4 written by the supplier
+
+- id: pectinase
+  bucket: additive
+  category: other
+  name: { sv: Pektinas (pektinlyas), en: Pectinase (pectin lyase) }
+  note:
+    sv: Enzym som bryter ner pektin och gör att vinet klarnar snabbare.
+    en: Enzyme that breaks down pectin so the wine clarifies faster.
+  aliases:
+    - pektinlyas
+    - pektinlyaser
+    - pektinas
+    - pectinase
+    - pectin lyase
+    - pektoliska enzymer  # typo for "pektolytiska enzymer"
+    - pektolytiska enzymer
+
+- id: commercial_yeast_nutrient
+  bucket: additive
+  category: other
+  name: { sv: "Kommersiell jästnäring (t.ex. Fermaid, Go-Ferm)", en: "Commercial yeast nutrient (e.g. Fermaid, Go-Ferm)" }
+  note:
+    sv: Branschnamn för färdigblandade jästnäringar (aminosyror, vitaminer, mineraler) tillsatta under jäsningen.
+    en: Trade names for pre-mixed yeast nutrients (amino acids, vitamins, minerals) added during fermentation.
+  aliases: [fermaid, goferm, go-ferm]
+
+- id: thiamine
+  bucket: additive
+  category: other
+  name: { sv: Tiaminhydroklorid (vitamin B1), en: Thiamine hydrochloride (vitamin B1) }
+  note:
+    sv: Jästnäring som tillsätts under jäsningen.
+    en: Yeast nutrient added during fermentation.
+  aliases: [tiaminhydroklorid, thiamine hydrochloride, tiaminvitaminer, tiamin]
+
+- id: gold
+  e_number: E175
+  bucket: additive
+  category: colour
+  name: { sv: Guld (guldglitter), en: Gold (gold leaf) }
+  note:
+    sv: Ätbart bladguld eller guldglitter, tillåtet som dekoration i vissa likörer och mousserande drycker.
+    en: Edible gold leaf or glitter, permitted as a decoration in certain liqueurs and sparkling drinks.
+  aliases: [guldglitter]
 
 - id: carboxymethylcellulose
   e_number: E466
@@ -209,6 +352,12 @@
     - cellulosagummi
     - carboxymethylcellulose
     - cmc
+    - carboximetilcelulose  # Portuguese spelling
+    - karboxymetylcellulos  # typo seen in the wild
+    - karboxymetilcellulosa  # typo seen in the wild
+    - karboxmetylcellulosa  # typo seen in the wild
+    - karboximetilcellulosa  # typo seen in the wild
+    - natriumkarboximetylcellulosa  # sodium CMC
 
 - id: gum_arabic
   e_number: E414
@@ -238,6 +387,10 @@
     - gumi arabicum
     - arabiskt gumi
     - gummi arabica
+  # "gummi" and "arabicum" run together with the next word ("arabicumoch"),
+  # spelled "arabiska"/"rabicum", or reordered, in the wild.
+  regexes:
+    - '\bgummi\s*a?rabi\w*\b'
 
 - id: potassium_polyaspartate
   e_number: E456
@@ -259,6 +412,7 @@
     - mannoproteiner från jäst
     - jäst mannoproteiner
     - jästmannoproteiner
+    - jästmannoprotein  # typo seen in the wild
     - mannoproteiner
     - mannoprotein
     - yeast mannoproteins
@@ -298,6 +452,21 @@
     - jästextrakt
     - inactivated yeast
     - jäst
+    - jäster  # plural of jäst seen in the wild
+    - jästproteiner  # yeast proteins
+    - inaktiva  # "inaktiva jästsvampar"
+    - cx9  # commercial yeast strain code
+    - dv10  # commercial yeast strain code
+    - yeast
+
+- id: malolactic_bacteria
+  bucket: additive
+  category: other
+  name: { sv: Malolaktiska bakterier, en: Malolactic bacteria }
+  note:
+    sv: Bakteriekultur (oftast Oenococcus oeni) som omvandlar äppelsyra till den mjukare mjölksyran.
+    en: A bacterial culture (usually Oenococcus oeni) that converts malic acid into the softer lactic acid.
+  aliases: [malolaktiska bakterier, malolactic bacteria]
 
 - id: pine_resin
   bucket: additive
@@ -306,7 +475,7 @@
   note:
     sv: Kåda från alepptall. Ger retsina sin karaktär och är tillåten bara i grekiskt retsinavin.
     en: Aleppo pine resin. Gives retsina its character; permitted only in Greek retsina.
-  aliases: [aleppo tallharts, tallharts, tallkåda, aleppotallkåda, pine resin]
+  aliases: [aleppo tallharts, tallharts, tallkåda, aleppotallkåda, pine resin, kåda från aleppotall]
 
 - id: flavourings
   bucket: additive
@@ -329,6 +498,8 @@
     - extrakt
     - natural flavourings
     - natural flavors
+    - chocklad  # misspelling of choklad seen in the wild
+    - choklad
   # Any compound ending in -arom, with or without a "naturlig" prefix.
   regexes:
     - '\b(naturlig\w*\s+)?\w*aromer\b'
@@ -423,7 +594,17 @@
   name: { sv: Gelatin, en: Gelatin }
   aliases: [gelatin, gelatine]
 
+- id: chitosan
+  bucket: additive
+  category: other
+  name: { sv: Kitosan, en: Chitosan }
+  note:
+    sv: Klarningsmedel, ofta utvunnet ur svamp. Binder oönskade metaller och mikroorganismer.
+    en: A fining agent, often derived from fungi. Binds unwanted metals and micro-organisms.
+  aliases: [chitosan, kitosan]
+
 - id: bentonite
+  e_number: E558
   bucket: additive
   category: other
   name: { sv: Bentonit, en: Bentonite }
@@ -437,7 +618,7 @@
   note:
     sv: Skyddsgas vid tappning. Ersätter syret i flaskhalsen.
     en: Bottling gas. Displaces the oxygen in the bottle neck.
-  aliases: [kväve, kvävgas, nitrogen gas, nitrogen, kvävgas (nitrogen)]
+  aliases: [kväve, kvävgas, nitrogen gas, nitrogen, kvävgas (nitrogen), azoto]
 
 - id: carbon_dioxide
   e_number: E290
@@ -459,6 +640,10 @@
 - id: grapes
   bucket: base
   name: { sv: Druvor, en: Grapes }
+  # Grape variety names are deliberately NOT enumerated here. They only read
+  # when they match the wine's own published grape list, via `known_names` in
+  # normalize.py — a fixed list here would happily match a variety name that
+  # is wrong for a given wine. See test_named_grape_variety_is_not_unknown_text.
   aliases:
     - ekologiska druvor
     - organiska druvor
@@ -467,12 +652,18 @@
     - druvor
     - druva
     - druvar
+    - druver  # typo seen in the wild
     - grapes
     - grape
     - uve
     - uva
+    - uvas  # Portuguese plural
+    - raisin  # French for grape, not the dried fruit
+    - raisins  # French for grapes, not the dried fruit
+    - vindruvor¹  # footnote marker attached, "Druvor¹ ... ¹från ekologiskt jordbruk"
+    - druvor¹  # footnote marker attached
   regexes:
-    - '\bdruv(a|an|ar|or|orna)\b'
+    - '\b(vit|vita|röd|röda|svart|svarta|blå|blåa)?\s*druv(a|an|ar|or|orna)\b'
     - '\bvindruv(a|an|ar|or|orna)\b'
 
 - id: grape_must
@@ -491,6 +682,7 @@
     - koncentrerad must
     - druvmust/koncentrerad
     - mosto di uve concentrato
+    - mosto di uve concentrato rettificato
     - mosto concentrato rettificato
     - mosto concentrato
     - grape juice concentrate
@@ -503,8 +695,11 @@
     - must
     - grape must
     - grape juice
+    - concentrated grape must
+    - mcr  # abbreviation of "mosto concentrato rettificato"
+    - rektifierat koncentrat av druvmust
   regexes:
-    - '\brektifierat?\s+\w*must\w*'
+    - '\brektifiera[dt]?\s+\w*must\w*'
     - '\b\w*mustkoncentrat\b'
 
 - id: expedition_liqueur
@@ -529,6 +724,14 @@
     - expedition liqueur
     - tirage liqueur
     - dosage
+    - flasklikör  # "bottle liqueur", used alongside expeditionslikör
+    - expeditionslokör  # typo seen in the wild
+    - tirage likör  # English/Swedish mix
+    - licor de tiraje  # Spanish
+    - licor de expedición  # Spanish
+    - liqueur d'expédition
+    - liqueur d'expêdition  # typo seen in the wild
+    - liquor de tirage  # "liquor" for "liqueur", seen in the wild
 
 - id: sugar
   bucket: base
@@ -551,6 +754,9 @@
     - rörsocker
     - sukros
     - sucrose
+    - socke  # truncated mid-word, "socker" cut short
+    - sackaros¹
+    - sockerlag  # sugar solution/syrup
     - sugar
     - cane sugar
 
@@ -558,8 +764,10 @@
   bucket: base
   name: { sv: Vinalkohol, en: Wine alcohol }
   aliases:
+    - neutral alkohol framställd av vinprodukter
     - alkohol framställd av vinprodukter
     - alkohol av vinprodukter
+    - jordbruks alkohol  # space-separated variant of jordbruksalkohol
     - neutral vinalkohol
     - vinalkohol
     - vinsprit
@@ -615,8 +823,23 @@
     - saft
     - apple
     - pear
+    - fikon
+    - frukt
+    - frukter
+    - apelsinjuice
+    - koncentrerad apelsinjuice
+    # "Colouring foodstuffs" (EU 1333/2008): fruit/vegetable concentrates used
+    # for their colour are legally food, not additives, so they are exempt
+    # from an E-number and belong here rather than in the colour category.
+    - safflor
+    - sötpotatis
+    - safflower
+    - sweet potato
   regexes:
-    - '\b(svartvinbär|vinbär|hallon|blåbär|körsbär|fläder|lingon|aronia|jordgubb|plommon|katrinplommon)\w*\b'
+    # An optional colour adjective ("svarta vinbär", "svart morot") is part of
+    # the same base ingredient, not a separate leftover word.
+    - '\b(svarta?|röda?|vita?)?\s*(svartvinbär|vinbär|hallon|blåbär|körsbär|fläder|lingon|aronia|jordgubb|plommon|katrinplommon)\w*\b'
+    - '\b(svart\s?)?morot\w*\b'
 
 - id: spices
   bucket: base
@@ -642,11 +865,42 @@
     - ört
     - kryddor
     - spices
+    - pomeransskal
+    - citronskal
+    - apelsinskal
+    - kassiakanel
+    - saffran
+    - enbär
+    - korianderfrö
+    - kvannerot
 
 - id: wine
   bucket: base
   name: { sv: Vin, en: Wine }
-  aliases: [rött vin, rödvin, vitt vin, vin, wine]
+  aliases: [rött vin, rödvin, vitt vin, vin, wine, vino, druvvin]
   regexes:
     - '\bav[\s-]?alkoholiserat\s+vin\b'
     - '\balkoholiserat\b'
+
+- id: spirits
+  bucket: base
+  name: { sv: Sprit (t.ex. konjak, brandy, whisky, rom, gin), en: Spirit (e.g. cognac, brandy, whisky, rum, gin) }
+  note:
+    sv: Destillerad sprit tillsatt som bas eller smaksättning i glögg och aromatiserade viner.
+    en: Distilled spirit added as a base or flavouring in mulled wine and aromatised wines.
+  aliases:
+    - cognac
+    - konjak
+    - vinkonjak
+    - brandy
+    - grape brandy
+    - whisky
+    - whiskey
+    - gin
+    - calvados
+    - rom
+    - rum
+    - mistelle
+    - licor
+    - likör
+    - liqueur

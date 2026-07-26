@@ -100,3 +100,23 @@ def test_empty_declaration() -> None:
 def test_every_alias_is_unique() -> None:
     """Two entries claiming the same alias would make counting arbitrary."""
     assert load_lexicon().alias_conflicts == []
+
+
+def test_abbreviation_and_full_name_do_not_double_count() -> None:
+    """An oenological abbreviation (KHT) next to the spelled-out name of the
+    same substance must resolve to one additive, not two — real declaration
+    from a wine that also names a fining agent by an unverifiable trade name
+    ("Gecoll Supra"), which is why it stays partial rather than complete.
+    """
+    text = (
+        "Vindruvor, Mjölkkasein, Isinglass, Gecoll Supra, Konserveringsmedel och "
+        "antioxidanter (L askorbinsyra, CUS04 - Kopparsulfat), Stabiliseringsmedel "
+        "(KHT - Kaliumbitartrat, KHC03 - Kaliumbikarbonat), Jästmedel (CX9 & DV10 - Jäst)"
+    )
+    parsed = parse_ingredients(text)
+    ids = [additive["id"] for additive in parsed.additives]
+    assert ids.count("potassium_bitartrate") == 1
+    assert ids.count("potassium_carbonate") == 1
+    assert ids.count("copper_sulfate") == 1
+    assert set(parsed.unknown_tokens) == {"gecoll", "supra"}
+    assert parsed.status == "partial"
