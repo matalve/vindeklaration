@@ -13,7 +13,7 @@ free text into structured data, and publishes the result.
 | File | Contents |
 |---|---|
 | `data/wines.json` | The dataset: one record per wine, with parsed additives |
-| `data/wines.sqlite` | The same rows, for querying |
+| `data/wines.sqlite` | The same rows, for querying — built by `src.build`, not committed |
 | `data/additives.yaml` | The substance dictionary — names, E-numbers, aliases |
 | `data/unknown.json` | Text the parser could not identify, ranked by impact |
 
@@ -111,7 +111,7 @@ stays awake — a Raspberry Pi 4 running 64-bit Debian bookworm is plenty, and i
 system Python 3.11 is enough.
 
 ```sh
-./deploy/push-to-pi.sh            # from the Mac: copies the tree, cache included
+./deploy/push-to-pi.sh            # first install only: copies the tree, cache included
 ssh pi@raspberrypi
 cd vindeklaration && ./deploy/bootstrap.sh
 ```
@@ -121,9 +121,20 @@ systemd user timer that updates the dataset nightly at 03:00 with a random delay
 It finishes by printing the one privileged command needed — `loginctl
 enable-linger` — without which user services stop when you log out.
 
-`deploy/update.sh` is the cycle itself: catalog, declarations, build, tests,
-report. Sundays re-fetch everything, but only once the first full pass has
-completed — there is no point refreshing what has never been fetched.
+`deploy/update.sh` is the cycle itself: pull, catalog, declarations, build,
+tests, report, commit, push. Sundays re-fetch everything, but only once the
+first full pass has completed — there is no point refreshing what has never
+been fetched.
+
+After that first install, the two machines talk through GitHub rather than
+rsync, and each direction has one owner. Code and dictionaries travel out from
+your working copy, and `update.sh` pulls them before it crawls, so the runner
+never spends a night on a stale `additives.yaml`. The dataset travels back:
+the runner is the only machine that commits `wines.json`, `catalog.json` and
+`unknown.json`, which keeps its push a fast-forward instead of a merge conflict
+in a 16 MB file. Its git identity is `vindeklaration-bot`, and it never force
+pushes — a rejected push is retried once after a rebase, then left for the next
+run. The fetched declarations under `data/cache/` never travel at all.
 
 ```sh
 systemctl --user start vindeklaration.service      # run one cycle now
