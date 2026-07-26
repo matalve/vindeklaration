@@ -1,5 +1,5 @@
 [project]
-name = "wine-additives"
+name = "vindeklaration"
 version = "0.1.0"
 description = "Open dataset of declared additives in wines sold by Systembolaget"
 readme = "README.md"

@@ -275,7 +275,7 @@ wheels = [
 ]
 
 [[package]]
-name = "wine-additives"
+name = "vindeklaration"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

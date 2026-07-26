@@ -12,8 +12,8 @@ import time
 import httpx
 
 USER_AGENT = (
-    "wine-additives/0.1 (open dataset of declared wine additives; "
-    "+https://github.com/matalve/wine-additives)"
+    "vindeklaration/0.1 (open dataset of declared wine additives; "
+    "+https://github.com/matalve/vindeklaration)"
 )
 
 # Public key used by systembolaget.se itself; the search API rejects requests

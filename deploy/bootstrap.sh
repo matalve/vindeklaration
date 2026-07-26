@@ -49,14 +49,14 @@ uv run pytest -q
 echo
 echo "== Timer"
 mkdir -p "$HOME/.config/systemd/user"
-for unit in wine-additives.service wine-additives.timer; do
+for unit in vindeklaration.service vindeklaration.timer; do
   sed "s|__REPO__|$REPO|g; s|__UV__|$(command -v uv)|g" "deploy/$unit" \
     > "$HOME/.config/systemd/user/$unit"
   echo "installed ~/.config/systemd/user/$unit"
 done
 systemctl --user daemon-reload
-systemctl --user enable --now wine-additives.timer
-systemctl --user list-timers wine-additives.timer --no-pager || true
+systemctl --user enable --now vindeklaration.timer
+systemctl --user list-timers vindeklaration.timer --no-pager || true
 
 echo
 if [ "$(loginctl show-user "$USER" -p Linger --value 2>/dev/null || echo no)" != "yes" ]; then
@@ -75,5 +75,5 @@ else
 fi
 
 echo
-echo "Done. Run one update by hand with:  systemctl --user start wine-additives.service"
-echo "Follow it with:                     journalctl --user -u wine-additives -f"
+echo "Done. Run one update by hand with:  systemctl --user start vindeklaration.service"
+echo "Follow it with:                     journalctl --user -u vindeklaration -f"

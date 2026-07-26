@@ -1,4 +1,4 @@
-# wine-additives
+# vindeklaration
 
 An open dataset of the additives declared in wines sold by Systembolaget.
 
@@ -113,7 +113,7 @@ system Python 3.11 is enough.
 ```sh
 ./deploy/push-to-pi.sh            # from the Mac: copies the tree, cache included
 ssh pi@raspberrypi
-cd wine-additives && ./deploy/bootstrap.sh
+cd vindeklaration && ./deploy/bootstrap.sh
 ```
 
 `bootstrap.sh` installs uv, syncs dependencies, runs the tests and installs a
@@ -126,9 +126,9 @@ report. Sundays re-fetch everything, but only once the first full pass has
 completed — there is no point refreshing what has never been fetched.
 
 ```sh
-systemctl --user start wine-additives.service      # run one cycle now
-journalctl --user -u wine-additives -f             # watch it
-systemctl --user list-timers wine-additives.timer  # when is the next run
+systemctl --user start vindeklaration.service      # run one cycle now
+journalctl --user -u vindeklaration -f             # watch it
+systemctl --user list-timers vindeklaration.timer  # when is the next run
 ```
 
 The GitHub Actions workflow in `.github/workflows/` does the same job in the

@@ -10,7 +10,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 TARGET="${1:-pi@raspberrypi}"
-REMOTE="${2:-wine-additives}"
+REMOTE="${2:-vindeklaration}"
 
 echo "== Sending $(ls data/cache 2>/dev/null | wc -l | tr -d ' ') cached declarations to $TARGET:$REMOTE"
 
