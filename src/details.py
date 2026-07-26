@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -29,6 +30,8 @@ CACHE_DIR = DATA_DIR / "cache"
 CATALOG_PATH = DATA_DIR / "catalog.json"
 
 BUILD_ID_RE = re.compile(r'"buildId":"([0-9a-zA-Z_-]+)"')
+
+TTY = sys.stdout.isatty()
 
 # Swedish nutrient labels as they appear in the upstream table.
 NUTRIENT_KEYS = {
@@ -191,12 +194,17 @@ def main() -> None:
                 fetched += 1
                 if record.get("ingredients"):
                     declared += 1
-            if index % 25 == 0 or index == len(todo):
+            # On a terminal, overwrite one line often. Under systemd, stdout is
+            # the journal, so report rarely and on its own line — otherwise a
+            # full pass writes six hundred entries nobody will read.
+            every = 25 if TTY else 500
+            if index % every == 0 or index == len(todo):
                 share = declared / fetched * 100 if fetched else 0
                 print(
                     f"  {index}/{len(todo)} fetched={fetched} "
                     f"declared={declared} ({share:.0f}%) missing={missing}",
-                    end="\r",
+                    end="\r" if TTY else "\n",
+                    flush=True,
                 )
             time.sleep(REQUEST_DELAY)
     print()

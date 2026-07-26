@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 import urllib.parse
 from pathlib import Path
@@ -33,6 +34,8 @@ WINDOW_LIMIT = 9900
 # Re-sweeping the whole assortment costs ten minutes, so only do it when enough
 # wines are missing to be worth it.
 SWEEP_THRESHOLD = 25
+
+TTY = sys.stdout.isatty()
 
 # Fields worth keeping. The search response has ~70 more that either duplicate
 # the product page or describe stock levels that change hourly.
@@ -115,7 +118,8 @@ def fetch_catalog(category: str = "Vin") -> list[dict]:
             print(
                 f"  [{index}/{len(countries)}] {country}: {expected} "
                 f"— {len(products)} unique so far",
-                end="\r",
+                end="\r" if TTY else "\n",
+                flush=True,
             )
             time.sleep(REQUEST_DELAY)
         print()

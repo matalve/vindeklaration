@@ -7,6 +7,9 @@ Wants=network-online.target
 Type=oneshot
 WorkingDirectory=__REPO__
 Environment=UV=__UV__
+# Without this, progress sits in Python's stdout buffer and the journal stays
+# silent for hours.
+Environment=PYTHONUNBUFFERED=1
 ExecStart=__REPO__/deploy/update.sh
 # A full pass is roughly three and a half hours of deliberately slow, sequential
 # requests. This ceiling only catches a genuinely stuck run.
