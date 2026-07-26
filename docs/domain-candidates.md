@@ -1,5 +1,11 @@
 # Domain candidates
 
+> **Decided 2026-07-26: `vindeklaration.se` is registered and is the site's
+> domain.** It names the EU document this dataset is parsed from. The lists
+> below are kept as the record of what was checked and what was rejected —
+> useful if a second domain is ever wanted to redirect from, since
+> `vindeklaration` was also free on `.com`, `.wine` and `.vin` on that date.
+
 Checked 2026-07-26. Site: an open, bilingual (Swedish/English) dataset and
 lookup of the additives declared in wines sold by Systembolaget — consumer
 transparency, not a shop, not a review site.
