@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-26T09:02:43+00:00",
+ "generated_at": "2026-07-26T20:00:58+00:00",
  "source": "Systembolaget",
  "wine_count": 15017,
  "declared_count": 2899,
@@ -21081,6 +21081,13 @@
       "sv": "Vatten",
       "en": "Water"
      }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
+     }
     }
    ],
    "processing_notes": [],
@@ -21088,8 +21095,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "muscat",
-    "ört"
+    "muscat"
    ]
   },
   {
@@ -43547,7 +43553,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-235201/",
    "fetched_at": "2026-07-25T21:15:05+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfur_dioxide",
@@ -43570,13 +43576,19 @@
      }
     }
    ],
-   "processing_notes": [],
+   "processing_notes": [
+    {
+     "id": "organic",
+     "name": {
+      "sv": "Ekologisk odling",
+      "en": "Organic farming"
+     }
+    }
+   ],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "bio"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "235308",
@@ -43889,7 +43901,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-235708/",
    "fetched_at": "2026-07-25T21:15:09+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -43930,6 +43942,13 @@
    ],
    "processing_notes": [
     {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    },
+    {
      "id": "organic",
      "name": {
       "sv": "Ekologisk odling",
@@ -43940,11 +43959,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "tappat",
-    "skyddande",
-    "atmodfär"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "235801",
@@ -45140,6 +45155,13 @@
       "sv": "Druvor",
       "en": "Grapes"
      }
+    },
+    {
+     "id": "grape_must",
+     "name": {
+      "sv": "Druvmust",
+      "en": "Grape must"
+     }
     }
    ],
    "processing_notes": [
@@ -45162,8 +45184,6 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "mosto",
-    "concentrato",
     "biologico"
    ]
   },
@@ -49834,7 +49854,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-246901/",
    "fetched_at": "2026-07-25T21:16:14+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfur_dioxide",
@@ -49861,9 +49881,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "tillsatser"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "246921",
@@ -52516,7 +52534,7 @@
    "declaration_status": "declared",
    "raw_ingredients": "Druvor*, koldioxid, konserveringsmedel (SULFITER), surhetsreglerande medel (vinsyra [L(+)-)], Buteljerad i skyddande atmosfär. (*) Ekologisk Tappat i en skyddande atmosfär",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-253108/",
-   "fetched_at": "2026-07-25T20:59:41+00:00",
+   "fetched_at": "2026-07-26T06:41:58+00:00",
    "additive_count": 2,
    "parse_status": "complete",
    "additives": [
@@ -70331,7 +70349,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-296102/",
    "fetched_at": "2026-07-25T21:20:06+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -70391,9 +70409,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "296201",
@@ -73590,7 +73606,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-3090202/",
    "fetched_at": "2026-07-25T21:21:01+00:00",
    "additive_count": 0,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [],
    "gases": [],
    "base_ingredients": [
@@ -73607,13 +73623,18 @@
       "sv": "Frukt och bär",
       "en": "Fruit and berries"
      }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
+     }
     }
    ],
    "processing_notes": [],
    "allergens": [],
-   "unknown_tokens": [
-    "örter"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "3096301",
@@ -78796,6 +78817,13 @@
      }
     },
     {
+     "id": "wine",
+     "name": {
+      "sv": "Vin",
+      "en": "Wine"
+     }
+    },
+    {
      "id": "sugar",
      "name": {
       "sv": "Socker",
@@ -78808,13 +78836,6 @@
       "sv": "Vatten",
       "en": "Water"
      }
-    },
-    {
-     "id": "wine",
-     "name": {
-      "sv": "Vin",
-      "en": "Wine"
-     }
     }
    ],
    "processing_notes": [],
@@ -78822,9 +78843,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "rött",
-    "mörkbrun",
-    "sirap"
+    "mörkbrun"
    ]
   },
   {
@@ -79991,8 +80010,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "endast",
-    "obetydlig"
+    "endast"
    ]
   },
   {
@@ -82119,7 +82137,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-3513201/",
    "fetched_at": "2026-07-25T21:23:25+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -82153,11 +82171,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "obetydliga",
-    "mängder",
-    "proteiner"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "3514301",
@@ -84171,17 +84185,10 @@
    "gases": [],
    "base_ingredients": [
     {
-     "id": "sugar",
+     "id": "fruit",
      "name": {
-      "sv": "Socker",
-      "en": "Sugar"
-     }
-    },
-    {
-     "id": "water",
-     "name": {
-      "sv": "Vatten",
-      "en": "Water"
+      "sv": "Frukt och bär",
+      "en": "Fruit and berries"
      }
     },
     {
@@ -84189,6 +84196,27 @@
      "name": {
       "sv": "Vin",
       "en": "Wine"
+     }
+    },
+    {
+     "id": "sugar",
+     "name": {
+      "sv": "Socker",
+      "en": "Sugar"
+     }
+    },
+    {
+     "id": "wine_alcohol",
+     "name": {
+      "sv": "Vinalkohol",
+      "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "water",
+     "name": {
+      "sv": "Vatten",
+      "en": "Water"
      }
     }
    ],
@@ -84203,12 +84231,6 @@
    ],
    "allergens": [],
    "unknown_tokens": [
-    "rött",
-    "juice",
-    "koncentrat",
-    "svart",
-    "morot",
-    "etanol",
     "bränt"
    ]
   },
@@ -86015,8 +86037,8 @@
    "raw_ingredients": "Vin 76% (Surhetsreglerande medel (innehåller, E330, och/eller, E334), Konserveringsmedel (E300, E220 SVAVELDIOXID, E 202)), Socker, Vatten, Extrakt (Kryddnejlika, Ingefära, Kardemumma), Konserveringsmedel (E224 KALIUMDISULFIT), Tappat i en skyddande atmosfär",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-400001/",
    "fetched_at": "2026-07-25T21:24:37+00:00",
-   "additive_count": 6,
-   "parse_status": "partial",
+   "additive_count": 7,
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -86073,6 +86095,14 @@
      },
      "e_number": "E334",
      "category": "acidity_regulator"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -86118,9 +86148,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "extrakt"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "4000802",
@@ -87401,7 +87429,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-437601/",
    "fetched_at": "2026-07-25T21:24:52+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -87433,15 +87461,19 @@
      }
     }
    ],
-   "processing_notes": [],
+   "processing_notes": [
+    {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    }
+   ],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "tappat",
-    "skyddande",
-    "atomsfär"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "450001",
@@ -95556,7 +95588,15 @@
     }
    ],
    "gases": [],
-   "base_ingredients": [],
+   "base_ingredients": [
+    {
+     "id": "grapes",
+     "name": {
+      "sv": "Druvor",
+      "en": "Grapes"
+     }
+    }
+   ],
    "processing_notes": [
     {
      "id": "protective_atmosphere",
@@ -95564,20 +95604,20 @@
       "sv": "Tappad i skyddande atmosfär",
       "en": "Bottled in a protective atmosphere"
      }
+    },
+    {
+     "id": "organic",
+     "name": {
+      "sv": "Ekologisk odling",
+      "en": "Organic farming"
+     }
     }
    ],
    "allergens": [
     "sulfites"
    ],
    "unknown_tokens": [
-    "uve",
-    "agricoltura",
-    "biologica",
-    "mcr",
-    "agricoltura",
-    "biologica",
-    "anidride",
-    "solforosa"
+    "mcr"
    ]
   },
   {
@@ -109077,13 +109117,20 @@
     }
    ],
    "gases": [],
-   "base_ingredients": [],
+   "base_ingredients": [
+    {
+     "id": "grapes",
+     "name": {
+      "sv": "Druvor",
+      "en": "Grapes"
+     }
+    }
+   ],
    "processing_notes": [],
    "allergens": [
     "sulfites"
    ],
    "unknown_tokens": [
-    "uva",
     "syrakorrigerare"
    ]
   },
@@ -114035,13 +114082,20 @@
      }
     }
    ],
-   "processing_notes": [],
+   "processing_notes": [
+    {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    }
+   ],
    "allergens": [
     "sulfites"
    ],
    "unknown_tokens": [
     "under",
-    "skyddsatmosfär",
     "buteljerat"
    ]
   },
@@ -120934,7 +120988,7 @@
    "raw_ingredients": "Vin 80% (Druvor, Koncentrerad druvmust, Destillerad alkohol (Vin), Surhetsreglerande medel (innehåller, E330, och/eller, E334), Stabiliseringsmedel (E353), Konserveringsmedel (E300, innehåller, SULFITER)), Whisky 13%, Socker, Vatten, Destillerad alkohol (Vin), Extrakt (Kryddnejlika, Kardemumma, Ingefära)",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-5254502/",
    "fetched_at": "2026-07-25T21:35:41+00:00",
-   "additive_count": 5,
+   "additive_count": 6,
    "parse_status": "partial",
    "additives": [
     {
@@ -120982,6 +121036,14 @@
      },
      "e_number": "E353",
      "category": "stabiliser"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -121001,17 +121063,17 @@
      }
     },
     {
-     "id": "spices",
-     "name": {
-      "sv": "Kryddor",
-      "en": "Spices"
-     }
-    },
-    {
      "id": "wine_alcohol",
      "name": {
       "sv": "Vinalkohol",
       "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
      }
     },
     {
@@ -121041,10 +121103,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "destillerad",
-    "whisky",
-    "destillerad",
-    "extrakt"
+    "whisky"
    ]
   },
   {
@@ -130774,9 +130833,6 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "mosto",
-    "uve",
-    "concentrato",
     "rettificato"
    ]
   },
@@ -136913,7 +136969,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-5404101/",
    "fetched_at": "2026-07-25T21:41:04+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -136954,6 +137010,13 @@
      }
     },
     {
+     "id": "expedition_liqueur",
+     "name": {
+      "sv": "Expeditionslikör",
+      "en": "Dosage liqueur"
+     }
+    },
+    {
      "id": "sugar",
      "name": {
       "sv": "Socker",
@@ -136973,10 +137036,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "lagringslikör",
-    "expeditionslagring"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "5404501",
@@ -141755,17 +141815,17 @@
      }
     },
     {
-     "id": "spices",
-     "name": {
-      "sv": "Kryddor",
-      "en": "Spices"
-     }
-    },
-    {
      "id": "wine_alcohol",
      "name": {
       "sv": "Vinalkohol",
       "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
      }
     },
     {
@@ -141802,10 +141862,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "destillerad",
-    "calvados",
-    "extrakt",
-    "destillerad"
+    "calvados"
    ]
   },
   {
@@ -152658,6 +152715,13 @@
    "gases": [],
    "base_ingredients": [
     {
+     "id": "grape_must",
+     "name": {
+      "sv": "Druvmust",
+      "en": "Grape must"
+     }
+    },
+    {
      "id": "sugar",
      "name": {
       "sv": "Socker",
@@ -152669,6 +152733,13 @@
      "name": {
       "sv": "Vatten",
       "en": "Water"
+     }
+    },
+    {
+     "id": "grapes",
+     "name": {
+      "sv": "Druvor",
+      "en": "Grapes"
      }
     }
    ],
@@ -152686,10 +152757,6 @@
    ],
    "unknown_tokens": [
     "vino",
-    "uva",
-    "mosto",
-    "uve",
-    "concentrato",
     "correttore",
     "acidità",
     "malico",
@@ -157088,7 +157155,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-5590401/",
    "fetched_at": "2026-07-26T03:23:22+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -157158,10 +157225,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "förteckning",
-    "över"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "5590701",
@@ -162193,7 +162257,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-5632601/",
    "fetched_at": "2026-07-26T06:16:37+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -162207,14 +162271,20 @@
     }
    ],
    "gases": [],
-   "base_ingredients": [],
+   "base_ingredients": [
+    {
+     "id": "fruit",
+     "name": {
+      "sv": "Frukt och bär",
+      "en": "Fruit and berries"
+     }
+    }
+   ],
    "processing_notes": [],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "russin"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "5633101",
@@ -177746,7 +177816,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-5775001/",
    "fetched_at": "2026-07-26T06:22:01+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -177790,10 +177860,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "försumbara",
-    "mängder"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "5775101",
@@ -181276,7 +181343,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-5806515/",
    "fetched_at": "2026-07-26T06:23:36+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -181324,15 +181391,19 @@
      }
     }
    ],
-   "processing_notes": [],
+   "processing_notes": [
+    {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    }
+   ],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "tappat",
-    "skyddanade",
-    "atmosfär"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "5807101",
@@ -183014,7 +183085,7 @@
    "raw_ingredients": "Italienskt vitt vin (vita druvor, antioxidantkonserveringsmedel: KALIUMMETABISULFIT (E224)*), alkohol av jordbruksursprung, socker, naturliga extrakt av örter, kryddor och frukter; stabiliseringsmedel: citronsyra (E330); antioxidantkonserveringsmedel: L askorbinsyra (E300), KALIUMMETABISULFIT (E224)*. *INNEHÅLLER SULFITER .",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-5824601/",
    "fetched_at": "2026-07-26T06:24:09+00:00",
-   "additive_count": 3,
+   "additive_count": 4,
    "parse_status": "partial",
    "additives": [
     {
@@ -183044,6 +183115,14 @@
      },
      "e_number": "E330",
      "category": "acidity_regulator"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -183093,8 +183172,6 @@
     "vita",
     "antioxidantkonserveringsmedel",
     "naturliga",
-    "extrakt",
-    "örter",
     "frukter",
     "antioxidantkonserveringsmedel"
    ]
@@ -191318,11 +191395,9 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "produktion",
     "alkoholisk",
     "tiaminhydroklorid",
-    "metoder",
-    "sirap"
+    "metoder"
    ]
   },
   {
@@ -225895,7 +225970,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7043901/",
    "fetched_at": "2026-07-26T06:55:01+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -225950,9 +226025,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "råvara"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7044001",
@@ -226293,7 +226366,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7045101/",
    "fetched_at": "2026-07-26T06:55:08+00:00",
    "additive_count": 5,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -226358,6 +226431,13 @@
      }
     },
     {
+     "id": "expedition_liqueur",
+     "name": {
+      "sv": "Expeditionslikör",
+      "en": "Dosage liqueur"
+     }
+    },
+    {
      "id": "sugar",
      "name": {
       "sv": "Socker",
@@ -226377,10 +226457,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "lagringslikör",
-    "expeditionslagring"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7045106",
@@ -226971,7 +227048,6 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "råvara",
     "antioxidationer"
    ]
   },
@@ -237052,7 +237128,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7076501/",
    "fetched_at": "2026-07-26T06:58:18+00:00",
    "additive_count": 7,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -237155,16 +237231,20 @@
       "sv": "Druvor",
       "en": "Grapes"
      }
+    },
+    {
+     "id": "expedition_liqueur",
+     "name": {
+      "sv": "Expeditionslikör",
+      "en": "Dosage liqueur"
+     }
     }
    ],
    "processing_notes": [],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "lagringslikör",
-    "expeditionslagring"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7076504",
@@ -245139,7 +245219,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7101601/",
    "fetched_at": "2026-07-26T07:00:46+00:00",
    "additive_count": 13,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "dimethyl_dicarbonate",
@@ -245289,17 +245369,17 @@
      }
     },
     {
-     "id": "water",
-     "name": {
-      "sv": "Vatten",
-      "en": "Water"
-     }
-    },
-    {
      "id": "wine",
      "name": {
       "sv": "Vin",
       "en": "Wine"
+     }
+    },
+    {
+     "id": "water",
+     "name": {
+      "sv": "Vatten",
+      "en": "Water"
      }
     }
    ],
@@ -245307,10 +245387,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "rött",
-    "innehålla"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7101701",
@@ -251036,7 +251113,6 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "råvara",
     "antioxidationer"
    ]
   },
@@ -252303,7 +252379,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7125201/",
    "fetched_at": "2026-07-26T07:02:59+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -252348,10 +252424,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "förteckning",
-    "över"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7125301",
@@ -259226,7 +259299,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7149301/",
    "fetched_at": "2026-07-26T07:05:05+00:00",
    "additive_count": 4,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -259287,9 +259360,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "innehålla"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7149501",
@@ -269961,7 +270032,7 @@
    "raw_ingredients": "Ekologiska druvor, koncentrerad ekologisk must, Stabiliseringsmedel ( Gummi rabicum, metatartarinsyra), Konserveringsmedel och antioxidanter (SULFITER) Tappas på flaska i en skyddande atmosfär",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7185001/",
    "fetched_at": "2026-07-26T07:08:27+00:00",
-   "additive_count": 2,
+   "additive_count": 3,
    "parse_status": "partial",
    "additives": [
     {
@@ -269973,6 +270044,15 @@
      "e_number": "E220-E228",
      "category": "preservative",
      "allergen": "sulfites"
+    },
+    {
+     "id": "gum_arabic",
+     "name": {
+      "sv": "Gummi arabicum",
+      "en": "Gum arabic"
+     },
+     "e_number": "E414",
+     "category": "stabiliser"
     },
     {
      "id": "metatartaric_acid",
@@ -270021,8 +270101,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "gummi",
-    "rabicum"
+    "gummi"
    ]
   },
   {
@@ -277123,7 +277202,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7206901/",
    "fetched_at": "2026-07-26T07:10:41+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -277182,9 +277261,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "bio"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7207001",
@@ -280436,6 +280513,13 @@
      }
     },
     {
+     "id": "wine",
+     "name": {
+      "sv": "Vin",
+      "en": "Wine"
+     }
+    },
+    {
      "id": "sugar",
      "name": {
       "sv": "Socker",
@@ -280450,10 +280534,10 @@
      }
     },
     {
-     "id": "wine",
+     "id": "fruit",
      "name": {
-      "sv": "Vin",
-      "en": "Wine"
+      "sv": "Frukt och bär",
+      "en": "Fruit and berries"
      }
     }
    ],
@@ -280462,8 +280546,6 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "rött",
-    "russin",
     "fikon",
     "cognac"
    ]
@@ -281426,7 +281508,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7218901/",
    "fetched_at": "2026-07-26T07:11:46+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -281458,15 +281540,19 @@
      }
     }
    ],
-   "processing_notes": [],
+   "processing_notes": [
+    {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    }
+   ],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "tappat",
-    "skyddande",
-    "atomsfär"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7219001",
@@ -281500,7 +281586,7 @@
    "raw_ingredients": "Vin 80% (Druvor, Koncentrerad druvmust, Destillerad alkohol (Vin), Surhetsreglerande medel (innehåller, E330, och/eller, E334), Stabiliseringsmedel (E353), Konserveringsmedel (E300, E224 KALIUMDISULFIT)), Socker, Vatten, Extrakt (Granskott, Kryddnejlika, Citronskal, Pomeransskal, Enbär, Ingefära, Kardemumma), Destillerad alkohol",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7219001/",
    "fetched_at": "2026-07-26T07:11:46+00:00",
-   "additive_count": 5,
+   "additive_count": 6,
    "parse_status": "partial",
    "additives": [
     {
@@ -281548,6 +281634,14 @@
      },
      "e_number": "E353",
      "category": "stabiliser"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -281567,17 +281661,17 @@
      }
     },
     {
-     "id": "spices",
-     "name": {
-      "sv": "Kryddor",
-      "en": "Spices"
-     }
-    },
-    {
      "id": "wine_alcohol",
      "name": {
       "sv": "Vinalkohol",
       "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
      }
     },
     {
@@ -281607,13 +281701,10 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "destillerad",
-    "extrakt",
     "granskott",
     "citronskal",
     "pomeransskal",
-    "enbär",
-    "destillerad"
+    "enbär"
    ]
   },
   {
@@ -281696,7 +281787,15 @@
    ],
    "gases": [],
    "base_ingredients": [],
-   "processing_notes": [],
+   "processing_notes": [
+    {
+     "id": "organic",
+     "name": {
+      "sv": "Ekologisk odling",
+      "en": "Organic farming"
+     }
+    }
+   ],
    "allergens": [
     "sulfites"
    ],
@@ -281704,8 +281803,7 @@
     "raisin",
     "conservateurs",
     "contient",
-    "ingrédient",
-    "biologique"
+    "ingrédient"
    ]
   },
   {
@@ -283967,7 +284065,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7226401/",
    "fetched_at": "2026-07-26T07:12:31+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -284009,10 +284107,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "förteckning",
-    "över"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7226501",
@@ -292962,7 +293057,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7252001/",
    "fetched_at": "2026-07-26T07:15:04+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -293006,10 +293101,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "försumbara",
-    "mängder"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7252101",
@@ -293439,6 +293531,13 @@
    ],
    "processing_notes": [
     {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    },
+    {
      "id": "organic",
      "name": {
       "sv": "Ekologisk odling",
@@ -293451,8 +293550,7 @@
    ],
    "unknown_tokens": [
     "buteljerad",
-    "under",
-    "skyddsgas"
+    "under"
    ]
   },
   {
@@ -295253,7 +295351,6 @@
     "koncentrat",
     "safflor",
     "sötpotatis",
-    "morot",
     "svarta"
    ]
   },
@@ -295794,7 +295891,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7260001/",
    "fetched_at": "2026-07-26T07:15:50+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -295839,9 +295936,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7260101",
@@ -301925,7 +302020,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7278201/",
    "fetched_at": "2026-07-26T07:17:39+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -301967,9 +302062,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7278301",
@@ -311784,14 +311877,21 @@
      }
     }
    ],
-   "processing_notes": [],
+   "processing_notes": [
+    {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    }
+   ],
    "allergens": [
     "sulfites"
    ],
    "unknown_tokens": [
     "tappas",
-    "flaska",
-    "skyddsatmosfär"
+    "flaska"
    ]
   },
   {
@@ -316656,7 +316756,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7319901/",
    "fetched_at": "2026-07-26T07:21:45+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -316700,10 +316800,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "försumbara",
-    "mängder"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7320001",
@@ -322165,7 +322262,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7335206/",
    "fetched_at": "2026-07-26T07:23:17+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -322224,9 +322321,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7335401",
@@ -323815,6 +323910,13 @@
    ],
    "processing_notes": [
     {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    },
+    {
      "id": "organic",
      "name": {
       "sv": "Ekologisk odling",
@@ -323827,8 +323929,7 @@
    ],
    "unknown_tokens": [
     "buteljerad",
-    "under",
-    "skyddsgas"
+    "under"
    ]
   },
   {
@@ -332496,7 +332597,22 @@
     }
    ],
    "gases": [],
-   "base_ingredients": [],
+   "base_ingredients": [
+    {
+     "id": "grape_must",
+     "name": {
+      "sv": "Druvmust",
+      "en": "Grape must"
+     }
+    },
+    {
+     "id": "grapes",
+     "name": {
+      "sv": "Druvor",
+      "en": "Grapes"
+     }
+    }
+   ],
    "processing_notes": [
     {
      "id": "protective_atmosphere",
@@ -332511,12 +332627,8 @@
    ],
    "unknown_tokens": [
     "principali",
-    "uve",
     "sostanze",
     "arricchimento",
-    "mosto",
-    "uve",
-    "concentrato",
     "rettificato"
    ]
   },
@@ -343784,7 +343896,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7398701/",
    "fetched_at": "2026-07-26T07:29:47+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -343835,9 +343947,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "liqueur"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7398801",
@@ -345068,6 +345178,20 @@
       "sv": "Druvor",
       "en": "Grapes"
      }
+    },
+    {
+     "id": "wine_alcohol",
+     "name": {
+      "sv": "Vinalkohol",
+      "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "sugar",
+     "name": {
+      "sv": "Socker",
+      "en": "Sugar"
+     }
     }
    ],
    "processing_notes": [],
@@ -345075,11 +345199,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "glukos",
-    "chocklad",
-    "kakaoessens",
-    "neutral",
-    "sprit"
+    "chocklad"
    ]
   },
   {
@@ -350525,7 +350645,7 @@
    "raw_ingredients": "Vin 78% (Druvor, Surhetsreglerande medel (E334, E330), Konserveringsmedel (E220 SVAVELDIOXID)), Vatten, Socker, Extrakt (Kryddnejlika, Ingefära, Kardemumma, Apelsin, Saffran), Konserveringsmedel (E224 KALIUMDISULFIT)",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7416501/",
    "fetched_at": "2026-07-26T07:31:46+00:00",
-   "additive_count": 4,
+   "additive_count": 5,
    "parse_status": "partial",
    "additives": [
     {
@@ -350565,6 +350685,14 @@
      },
      "e_number": "E334",
      "category": "acidity_regulator"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -350610,7 +350738,6 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "extrakt",
     "saffran"
    ]
   },
@@ -353299,7 +353426,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7423401/",
    "fetched_at": "2026-07-26T07:32:34+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -353343,9 +353470,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7423501",
@@ -354747,7 +354872,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7427101/",
    "fetched_at": "2026-07-26T07:33:01+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfur_dioxide",
@@ -354788,15 +354913,19 @@
      }
     }
    ],
-   "processing_notes": [],
+   "processing_notes": [
+    {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    }
+   ],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "buteljeras",
-    "skyddande",
-    "atomsfär"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7427201",
@@ -357858,9 +357987,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "oenologiskt",
-    "försumbara",
-    "mängder"
+    "oenologiskt"
    ]
   },
   {
@@ -367693,7 +367820,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7465506/",
    "fetched_at": "2026-07-26T07:36:49+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -367737,9 +367864,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7465601",
@@ -401313,15 +401438,13 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7560601/",
    "fetched_at": "2026-07-26T07:46:13+00:00",
    "additive_count": 0,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [],
    "gases": [],
    "base_ingredients": [],
    "processing_notes": [],
    "allergens": [],
-   "unknown_tokens": [
-    "obetydlig"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7560701",
@@ -410362,7 +410485,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7586701/",
    "fetched_at": "2026-07-26T07:48:50+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfur_dioxide",
@@ -410406,10 +410529,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "försumbara",
-    "mängder"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7586801",
@@ -415281,7 +415401,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7601601/",
    "fetched_at": "2026-07-26T07:50:16+00:00",
    "additive_count": 0,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [],
    "gases": [
     {
@@ -415305,9 +415425,7 @@
    ],
    "processing_notes": [],
    "allergens": [],
-   "unknown_tokens": [
-    "råvara"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7601701",
@@ -416788,7 +416906,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7606001/",
    "fetched_at": "2026-07-26T07:50:47+00:00",
    "additive_count": 7,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -416863,16 +416981,20 @@
       "sv": "Druvor",
       "en": "Grapes"
      }
+    },
+    {
+     "id": "expedition_liqueur",
+     "name": {
+      "sv": "Expeditionslikör",
+      "en": "Dosage liqueur"
+     }
     }
    ],
    "processing_notes": [],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "lagringslikör",
-    "expeditionslagring"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7606004",
@@ -416907,7 +417029,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7606004/",
    "fetched_at": "2026-07-26T07:50:48+00:00",
    "additive_count": 7,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -417010,16 +417132,20 @@
       "sv": "Druvor",
       "en": "Grapes"
      }
+    },
+    {
+     "id": "expedition_liqueur",
+     "name": {
+      "sv": "Expeditionslikör",
+      "en": "Dosage liqueur"
+     }
     }
    ],
    "processing_notes": [],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "lagringslikör",
-    "expeditionslagring"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7606006",
@@ -420039,8 +420165,8 @@
    "raw_ingredients": "Vin (druvor, socker, konserveringsmedel (SULFITER)); Sockerlösning; Fruktinfusioner; Alkohol; Infusion av kinabark; Konserveringsmedel (SULFITER); Antioxidant (askorbinsyra)",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7615801/",
    "fetched_at": "2026-07-26T07:51:41+00:00",
-   "additive_count": 2,
-   "parse_status": "partial",
+   "additive_count": 3,
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -420060,6 +420186,14 @@
      },
      "e_number": "E300",
      "category": "antioxidant"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -420072,17 +420206,24 @@
      }
     },
     {
-     "id": "wine_alcohol",
-     "name": {
-      "sv": "Vinalkohol",
-      "en": "Wine alcohol"
-     }
-    },
-    {
      "id": "sugar",
      "name": {
       "sv": "Socker",
       "en": "Sugar"
+     }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
+     }
+    },
+    {
+     "id": "wine_alcohol",
+     "name": {
+      "sv": "Vinalkohol",
+      "en": "Wine alcohol"
      }
     },
     {
@@ -420097,12 +420238,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "sockerlösning",
-    "fruktinfusioner",
-    "infusion",
-    "kinabark"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7615901",
@@ -420952,7 +421088,6 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "produktion",
     "pektinlyas"
    ]
   },
@@ -422917,7 +423052,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7625601/",
    "fetched_at": "2026-07-26T07:52:33+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "tartaric_acid",
@@ -422969,9 +423104,7 @@
    ],
    "processing_notes": [],
    "allergens": [],
-   "unknown_tokens": [
-    "råvara"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7625701",
@@ -427607,7 +427740,7 @@
    "raw_ingredients": "Sprit (vatten, etylalkohol), socker, infusion av aromatiska örter och kryddor, E110, E124",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7643501/",
    "fetched_at": "2026-07-26T07:54:01+00:00",
-   "additive_count": 2,
+   "additive_count": 3,
    "parse_status": "partial",
    "additives": [
     {
@@ -427627,6 +427760,14 @@
      },
      "e_number": "E124",
      "category": "unclassified"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -427651,16 +427792,20 @@
       "sv": "Vatten",
       "en": "Water"
      }
+    },
+    {
+     "id": "wine_alcohol",
+     "name": {
+      "sv": "Vinalkohol",
+      "en": "Wine alcohol"
+     }
     }
    ],
    "processing_notes": [],
    "allergens": [],
    "unknown_tokens": [
-    "sprit",
     "etylalkohol",
-    "infusion",
-    "aromatiska",
-    "örter"
+    "aromatiska"
    ]
   },
   {
@@ -432320,7 +432465,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7657001/",
    "fetched_at": "2026-07-26T07:55:26+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -432380,9 +432525,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7657201",
@@ -441411,7 +441554,7 @@
    "raw_ingredients": "Vin; Socker; Fruktinfusioner; Alkohol; Cinchona infusion; Konserveringsmedel (SULFITER); Antioxidant (askorbinsyra)",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7685401/",
    "fetched_at": "2026-07-26T07:58:02+00:00",
-   "additive_count": 2,
+   "additive_count": 3,
    "parse_status": "partial",
    "additives": [
     {
@@ -441432,6 +441575,14 @@
      },
      "e_number": "E300",
      "category": "antioxidant"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -441463,9 +441614,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "fruktinfusioner",
-    "cinchona",
-    "infusion"
+    "cinchona"
    ]
   },
   {
@@ -441677,7 +441826,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-768606/",
    "fetched_at": "2026-07-26T07:58:05+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -441720,9 +441869,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "innehålla"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7686401",
@@ -445500,9 +445647,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "oenologiskt",
-    "försumbara",
-    "mängder"
+    "oenologiskt"
    ]
   },
   {
@@ -452325,7 +452470,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7718901/",
    "fetched_at": "2026-07-26T08:02:37+00:00",
    "additive_count": 5,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -452410,16 +452555,20 @@
       "sv": "Druvor",
       "en": "Grapes"
      }
+    },
+    {
+     "id": "expedition_liqueur",
+     "name": {
+      "sv": "Expeditionslikör",
+      "en": "Dosage liqueur"
+     }
     }
    ],
    "processing_notes": [],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "lagringslikör",
-    "expeditionslagring"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7719009",
@@ -459628,8 +459777,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "kassiakanel",
-    "russin"
+    "kassiakanel"
    ]
   },
   {
@@ -459748,8 +459896,6 @@
    ],
    "unknown_tokens": [
     "mousserande",
-    "liqueur",
-    "tirage",
     "liquer",
     "likör",
     "guldglitter"
@@ -476264,9 +476410,7 @@
    ],
    "unknown_tokens": [
     "energivärde",
-    "totalt",
-    "försumbara",
-    "mängder"
+    "totalt"
    ]
   },
   {
@@ -483991,7 +484135,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7825501/",
    "fetched_at": "2026-07-26T08:14:03+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -484044,9 +484188,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "innehålla"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7825601",
@@ -486308,7 +486450,7 @@
    "raw_ingredients": "Vin ( (Druvor, Koncentrerad druvmust, Destillerad alkohol ( (Druvor)), Surhetsreglerande medel ( (innehåller, E330, och/eller, E334)), Stabiliseringsmedel ( (E353)), Konserveringsmedel ( (E300, innehåller, SULFITER)))), Destillerad alkohol ( (Spannmål)), Vatten, Socker, Gin ( (Destillat ( (Enbär, Korianderfrö, Kvannerot, Citronskal)), Vatten)), Extrakt ( (Kryddnejlika, Ingefära, Kardemumma))",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7833602/",
    "fetched_at": "2026-07-26T08:14:41+00:00",
-   "additive_count": 5,
+   "additive_count": 6,
    "parse_status": "partial",
    "additives": [
     {
@@ -486356,6 +486498,14 @@
      },
      "e_number": "E353",
      "category": "stabiliser"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -486375,17 +486525,17 @@
      }
     },
     {
-     "id": "spices",
-     "name": {
-      "sv": "Kryddor",
-      "en": "Spices"
-     }
-    },
-    {
      "id": "wine_alcohol",
      "name": {
       "sv": "Vinalkohol",
       "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
      }
     },
     {
@@ -486415,16 +486565,12 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "destillerad",
-    "destillerad",
     "spannmål",
     "gin",
-    "destillat",
     "enbär",
     "korianderfrö",
     "kvannerot",
-    "citronskal",
-    "extrakt"
+    "citronskal"
    ]
   },
   {
@@ -490519,7 +490665,7 @@
    "raw_ingredients": "Druvor, sackaros: konserveringsmedel; SULFITER: stabilisatorer: gummi; rabicum.",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7849601/",
    "fetched_at": "2026-07-26T08:15:53+00:00",
-   "additive_count": 1,
+   "additive_count": 2,
    "parse_status": "partial",
    "additives": [
     {
@@ -490531,6 +490677,15 @@
      "e_number": "E220-E228",
      "category": "preservative",
      "allergen": "sulfites"
+    },
+    {
+     "id": "gum_arabic",
+     "name": {
+      "sv": "Gummi arabicum",
+      "en": "Gum arabic"
+     },
+     "e_number": "E414",
+     "category": "stabiliser"
     }
    ],
    "gases": [],
@@ -490555,8 +490710,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "gummi",
-    "rabicum"
+    "gummi"
    ]
   },
   {
@@ -496686,7 +496840,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7870601/",
    "fetched_at": "2026-07-26T08:17:39+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -496718,15 +496872,19 @@
      }
     }
    ],
-   "processing_notes": [],
+   "processing_notes": [
+    {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    }
+   ],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "buteljerat",
-    "skyddade",
-    "atmosfär"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7870801",
@@ -497140,7 +497298,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7872101/",
    "fetched_at": "2026-07-26T08:17:46+00:00",
    "additive_count": 6,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -497212,9 +497370,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "innehålla"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7872401",
@@ -497917,8 +498073,7 @@
    "unknown_tokens": [
     "dess",
     "neutrala",
-    "kaliumsalt",
-    "innehålla"
+    "kaliumsalt"
    ]
   },
   {
@@ -500137,7 +500292,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-788201/",
    "fetched_at": "2026-07-26T08:18:38+00:00",
    "additive_count": 4,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -500194,6 +500349,13 @@
      }
     },
     {
+     "id": "wine_alcohol",
+     "name": {
+      "sv": "Vinalkohol",
+      "en": "Wine alcohol"
+     }
+    },
+    {
      "id": "wine",
      "name": {
       "sv": "Vin",
@@ -500205,9 +500367,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillat"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "788202",
@@ -500242,7 +500402,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-788202/",
    "fetched_at": "2026-07-26T08:18:39+00:00",
    "additive_count": 4,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -500299,6 +500459,13 @@
      }
     },
     {
+     "id": "wine_alcohol",
+     "name": {
+      "sv": "Vinalkohol",
+      "en": "Wine alcohol"
+     }
+    },
+    {
      "id": "wine",
      "name": {
       "sv": "Vin",
@@ -500310,9 +500477,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillat"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7882201",
@@ -504557,9 +504722,7 @@
    ],
    "unknown_tokens": [
     "energivärde",
-    "totalt",
-    "försumbara",
-    "mängder"
+    "totalt"
    ]
   },
   {
@@ -508145,8 +508308,7 @@
    ],
    "unknown_tokens": [
     "fermaid",
-    "goferm",
-    "obetydlig"
+    "goferm"
    ]
   },
   {
@@ -508998,7 +509160,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7910501/",
    "fetched_at": "2026-07-26T08:21:10+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -509062,9 +509224,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "råvara"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7910601",
@@ -514651,7 +514811,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7926401/",
    "fetched_at": "2026-07-26T08:23:04+00:00",
    "additive_count": 4,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -514708,6 +514868,13 @@
      }
     },
     {
+     "id": "expedition_liqueur",
+     "name": {
+      "sv": "Expeditionslikör",
+      "en": "Dosage liqueur"
+     }
+    },
+    {
      "id": "sugar",
      "name": {
       "sv": "Socker",
@@ -514727,10 +514894,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "lagringslikör",
-    "expeditionslagring"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7926501",
@@ -533515,6 +533679,13 @@
       "sv": "Socker",
       "en": "Sugar"
      }
+    },
+    {
+     "id": "fruit",
+     "name": {
+      "sv": "Frukt och bär",
+      "en": "Fruit and berries"
+     }
     }
    ],
    "processing_notes": [],
@@ -533522,7 +533693,6 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "russin",
     "skal",
     "kärnor"
    ]
@@ -533596,7 +533766,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-7979901/",
    "fetched_at": "2026-07-26T08:28:31+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -533639,10 +533809,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "förteckning",
-    "över"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "7980001",
@@ -540825,7 +540992,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-808701/",
    "fetched_at": "2026-07-26T08:30:45+00:00",
    "additive_count": 4,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfur_dioxide",
@@ -540893,9 +541060,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillerad"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "808702",
@@ -540930,7 +541095,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-808702/",
    "fetched_at": "2026-07-26T08:30:46+00:00",
    "additive_count": 4,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfur_dioxide",
@@ -540998,9 +541163,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillerad"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "808901",
@@ -541243,7 +541406,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-8110901/",
    "fetched_at": "2026-07-26T08:30:51+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -541278,9 +541441,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "811702",
@@ -543980,7 +544141,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-824701/",
    "fetched_at": "2026-07-26T08:31:59+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -544028,6 +544189,13 @@
      }
     },
     {
+     "id": "wine_alcohol",
+     "name": {
+      "sv": "Vinalkohol",
+      "en": "Wine alcohol"
+     }
+    },
+    {
      "id": "wine",
      "name": {
       "sv": "Vin",
@@ -544039,9 +544207,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillat"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "824702",
@@ -544076,7 +544242,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-824702/",
    "fetched_at": "2026-07-26T08:31:59+00:00",
    "additive_count": 4,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -544151,9 +544317,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillerad"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "8248401",
@@ -545366,7 +545530,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-8279801/",
    "fetched_at": "2026-07-26T08:32:21+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -545425,9 +545589,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "bio"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "8281702",
@@ -545494,7 +545656,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-828201/",
    "fetched_at": "2026-07-26T08:32:23+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -545560,9 +545722,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillerad"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "8282301",
@@ -545661,7 +545821,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-829101/",
    "fetched_at": "2026-07-26T08:32:25+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -545727,9 +545887,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillerad"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "8291801",
@@ -546656,7 +546814,6 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "neutral",
     "aromatiska"
    ]
   },
@@ -548553,7 +548710,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-847601/",
    "fetched_at": "2026-07-26T08:33:21+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfur_dioxide",
@@ -548610,9 +548767,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillerad"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "8477802",
@@ -548678,8 +548833,8 @@
    "raw_ingredients": "Vin 78% (Druvor, Koncentrerad druvmust, Destillerad alkohol (Vin), Surhetsreglerande medel (innehåller, E330, och/eller, E334), Stabiliseringsmedel (E353), Konserveringsmedel (E300, E 202, E220 SVAVELDIOXID)), Socker, Vatten, Destillerad alkohol (Vin), Extrakt (Kryddnejlika, Ingefära, Kardemumma)",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-850501/",
    "fetched_at": "2026-07-26T08:33:23+00:00",
-   "additive_count": 6,
-   "parse_status": "partial",
+   "additive_count": 7,
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_sorbate",
@@ -548735,6 +548890,14 @@
      },
      "e_number": "E353",
      "category": "stabiliser"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -548754,17 +548917,17 @@
      }
     },
     {
-     "id": "spices",
-     "name": {
-      "sv": "Kryddor",
-      "en": "Spices"
-     }
-    },
-    {
      "id": "wine_alcohol",
      "name": {
       "sv": "Vinalkohol",
       "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
      }
     },
     {
@@ -548793,11 +548956,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillerad",
-    "destillerad",
-    "extrakt"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "8511201",
@@ -550906,7 +551065,7 @@
    "raw_ingredients": "Vin (druvor), druvmust, infusion av aromatiska örter, jordbruksalkohol, konserveringsmedel (kaliumsorbat, SULFITER)",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-870342/",
    "fetched_at": "2026-07-26T08:33:59+00:00",
-   "additive_count": 2,
+   "additive_count": 3,
    "parse_status": "partial",
    "additives": [
     {
@@ -550927,6 +551086,14 @@
      "e_number": "E220-E228",
      "category": "preservative",
      "allergen": "sulfites"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -550953,6 +551120,13 @@
      }
     },
     {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
+     }
+    },
+    {
      "id": "wine",
      "name": {
       "sv": "Vin",
@@ -550965,9 +551139,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "infusion",
-    "aromatiska",
-    "örter"
+    "aromatiska"
    ]
   },
   {
@@ -555859,7 +556031,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9007601/",
    "fetched_at": "2026-07-26T08:35:20+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -555918,9 +556090,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9007701",
@@ -557733,7 +557903,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9014601/",
    "fetched_at": "2026-07-26T08:35:49+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -557760,9 +557930,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "innehålla"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9014901",
@@ -558373,8 +558541,8 @@
    "raw_ingredients": "Vin* 78% (Druvor*, Surhetsreglerande medel (E334, E330), Konserveringsmedel (E220 Svaveldioxid, E224 Kaliumdisulfit)), Vatten, Socker*, Koncentrerad druvmust*, Extrakt* (Kryddnejlika*, Kardemumma*, Ingefära*)",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9016801/",
    "fetched_at": "2026-07-26T08:36:00+00:00",
-   "additive_count": 4,
-   "parse_status": "partial",
+   "additive_count": 5,
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -558413,6 +558581,14 @@
      },
      "e_number": "E334",
      "category": "acidity_regulator"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -558464,9 +558640,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "extrakt"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9016802",
@@ -558500,8 +558674,8 @@
    "raw_ingredients": "Vin ( (Druvor, Surhetsreglerande medel ( (E334, E330)), Konserveringsmedel ( (E220 SVAVELDIOXID, E224 KALIUMDISULFIT)))), Vatten, Socker, Koncentrerad druvmust, Extrakt ( (Kryddnejlika, Kardemumma, Ingefära))",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9016802/",
    "fetched_at": "2026-07-26T08:36:01+00:00",
-   "additive_count": 4,
-   "parse_status": "partial",
+   "additive_count": 5,
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -558540,6 +558714,14 @@
      },
      "e_number": "E334",
      "category": "acidity_regulator"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -558591,9 +558773,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "extrakt"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9017101",
@@ -559770,7 +559950,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9022011/",
    "fetched_at": "2026-07-26T08:36:21+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -559794,6 +559974,13 @@
    "gases": [],
    "base_ingredients": [
     {
+     "id": "wine",
+     "name": {
+      "sv": "Vin",
+      "en": "Wine"
+     }
+    },
+    {
      "id": "sugar",
      "name": {
       "sv": "Socker",
@@ -559806,22 +559993,13 @@
       "sv": "Vatten",
       "en": "Water"
      }
-    },
-    {
-     "id": "wine",
-     "name": {
-      "sv": "Vin",
-      "en": "Wine"
-     }
     }
    ],
    "processing_notes": [],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "rött"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9022201",
@@ -562131,7 +562309,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9030741/",
    "fetched_at": "2026-07-26T08:36:59+00:00",
    "additive_count": 3,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_sorbate",
@@ -562171,10 +562349,24 @@
      }
     },
     {
+     "id": "wine",
+     "name": {
+      "sv": "Vin",
+      "en": "Wine"
+     }
+    },
+    {
      "id": "sugar",
      "name": {
       "sv": "Socker",
       "en": "Sugar"
+     }
+    },
+    {
+     "id": "wine_alcohol",
+     "name": {
+      "sv": "Vinalkohol",
+      "en": "Wine alcohol"
      }
     },
     {
@@ -562183,23 +562375,13 @@
       "sv": "Vatten",
       "en": "Water"
      }
-    },
-    {
-     "id": "wine",
-     "name": {
-      "sv": "Vin",
-      "en": "Wine"
-     }
     }
    ],
    "processing_notes": [],
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "rött",
-    "etanol"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9030801",
@@ -575463,7 +575645,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9207501/",
    "fetched_at": "2026-07-26T08:41:00+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -575498,9 +575680,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9207701",
@@ -584853,8 +585033,8 @@
    "raw_ingredients": "Vin 92%(Druvor, Koncentrerad druvmust, Destillerad alkohol(Vin), Surhetsreglerande medel(E330, E334), Konserveringsmedel(E202, E300, innehåller SULFITER)), Socker, Destillerad alkohol, Vatten,Extrakt(Kryddnejlika, Kardemumma, Ingefära)",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9249702/",
    "fetched_at": "2026-07-26T08:43:20+00:00",
-   "additive_count": 5,
-   "parse_status": "partial",
+   "additive_count": 6,
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_sorbate",
@@ -584901,6 +585081,14 @@
      },
      "e_number": "E334",
      "category": "acidity_regulator"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -584920,17 +585108,17 @@
      }
     },
     {
-     "id": "spices",
-     "name": {
-      "sv": "Kryddor",
-      "en": "Spices"
-     }
-    },
-    {
      "id": "wine_alcohol",
      "name": {
       "sv": "Vinalkohol",
       "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
      }
     },
     {
@@ -584959,11 +585147,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillerad",
-    "destillerad",
-    "extrakt"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9249801",
@@ -609747,8 +609931,7 @@
     "tiaminvitaminer",
     "pektolytiska",
     "diammoniumsulfat",
-    "vegetabisliska",
-    "proteiner"
+    "vegetabisliska"
    ]
   },
   {
@@ -611563,14 +611746,21 @@
      }
     }
    ],
-   "processing_notes": [],
+   "processing_notes": [
+    {
+     "id": "protective_atmosphere",
+     "name": {
+      "sv": "Tappad i skyddande atmosfär",
+      "en": "Bottled in a protective atmosphere"
+     }
+    }
+   ],
    "allergens": [
     "sulfites"
    ],
    "unknown_tokens": [
     "buteljerad",
-    "under",
-    "skyddsatmosfär"
+    "under"
    ]
   },
   {
@@ -612067,17 +612257,10 @@
    "gases": [],
    "base_ingredients": [
     {
-     "id": "sugar",
+     "id": "fruit",
      "name": {
-      "sv": "Socker",
-      "en": "Sugar"
-     }
-    },
-    {
-     "id": "water",
-     "name": {
-      "sv": "Vatten",
-      "en": "Water"
+      "sv": "Frukt och bär",
+      "en": "Fruit and berries"
      }
     },
     {
@@ -612085,6 +612268,27 @@
      "name": {
       "sv": "Vin",
       "en": "Wine"
+     }
+    },
+    {
+     "id": "sugar",
+     "name": {
+      "sv": "Socker",
+      "en": "Sugar"
+     }
+    },
+    {
+     "id": "wine_alcohol",
+     "name": {
+      "sv": "Vinalkohol",
+      "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "water",
+     "name": {
+      "sv": "Vatten",
+      "en": "Water"
      }
     }
    ],
@@ -612099,12 +612303,6 @@
    ],
    "allergens": [],
    "unknown_tokens": [
-    "rött",
-    "juice",
-    "koncentrat",
-    "svart",
-    "morot",
-    "etanol",
     "bränt"
    ]
   },
@@ -617306,8 +617504,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "producerad",
-    "produktion"
+    "producerad"
    ]
   },
   {
@@ -619506,8 +619703,7 @@
    "unknown_tokens": [
     "lösning",
     "används",
-    "sulfat",
-    "tillsatser"
+    "sulfat"
    ]
   },
   {
@@ -628707,7 +628903,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9459901/",
    "fetched_at": "2026-07-26T08:55:42+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfur_dioxide",
@@ -628742,9 +628938,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9460201",
@@ -634957,7 +635151,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9498301/",
    "fetched_at": "2026-07-26T08:57:33+00:00",
    "additive_count": 1,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -634984,9 +635178,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "tillsatser"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9498501",
@@ -635616,9 +635808,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "jäster",
-    "bio",
-    "bio"
+    "jäster"
    ]
   },
   {
@@ -636396,7 +636586,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9503901/",
    "fetched_at": "2026-07-26T08:57:55+00:00",
    "additive_count": 2,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -636440,9 +636630,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "produktion"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9504101",
@@ -644014,6 +644202,13 @@
    "gases": [],
    "base_ingredients": [
     {
+     "id": "wine",
+     "name": {
+      "sv": "Vin",
+      "en": "Wine"
+     }
+    },
+    {
      "id": "wine_alcohol",
      "name": {
       "sv": "Vinalkohol",
@@ -644033,13 +644228,6 @@
       "sv": "Vatten",
       "en": "Water"
      }
-    },
-    {
-     "id": "wine",
-     "name": {
-      "sv": "Vin",
-      "en": "Wine"
-     }
     }
    ],
    "processing_notes": [
@@ -644055,10 +644243,8 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "rött",
     "sherry",
     "mörkbrun",
-    "sirap",
     "krav"
    ]
   },
@@ -651118,7 +651304,7 @@
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9600201/",
    "fetched_at": "2026-07-26T09:02:00+00:00",
    "additive_count": 4,
-   "parse_status": "partial",
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfites",
@@ -651174,6 +651360,13 @@
      }
     },
     {
+     "id": "wine_alcohol",
+     "name": {
+      "sv": "Vinalkohol",
+      "en": "Wine alcohol"
+     }
+    },
+    {
      "id": "water",
      "name": {
       "sv": "Vatten",
@@ -651200,9 +651393,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "etanol"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9600301",
@@ -651517,6 +651708,13 @@
      }
     },
     {
+     "id": "wine",
+     "name": {
+      "sv": "Vin",
+      "en": "Wine"
+     }
+    },
+    {
      "id": "sugar",
      "name": {
       "sv": "Socker",
@@ -651529,13 +651727,6 @@
       "sv": "Vatten",
       "en": "Water"
      }
-    },
-    {
-     "id": "wine",
-     "name": {
-      "sv": "Vin",
-      "en": "Wine"
-     }
     }
    ],
    "processing_notes": [],
@@ -651543,7 +651734,6 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "rött",
     "brandy",
     "cognac"
    ]
@@ -652717,7 +652907,7 @@
    "raw_ingredients": "Vin 78% (Druvor, Koncentrerad druvmust, Destillerad alkohol (Vin), Surhetsreglerande medel (innehåller, E330, och/eller, E334), Stabiliseringsmedel (E353), Konserveringsmedel (E 202, E300, innehåller, Sulfiter)), Socker, Cognac 7%, Destillerad alkohol, Vatten, Extrakt (Kryddnejlika, Kardemumma, Ingefära)",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9651702/",
    "fetched_at": "2026-07-26T09:02:23+00:00",
-   "additive_count": 6,
+   "additive_count": 7,
    "parse_status": "partial",
    "additives": [
     {
@@ -652774,6 +652964,14 @@
      },
      "e_number": "E353",
      "category": "stabiliser"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -652793,17 +652991,17 @@
      }
     },
     {
-     "id": "spices",
-     "name": {
-      "sv": "Kryddor",
-      "en": "Spices"
-     }
-    },
-    {
      "id": "wine_alcohol",
      "name": {
       "sv": "Vinalkohol",
       "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
      }
     },
     {
@@ -652833,10 +653031,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "destillerad",
-    "cognac",
-    "destillerad",
-    "extrakt"
+    "cognac"
    ]
   },
   {
@@ -652871,7 +653066,7 @@
    "raw_ingredients": "Vin 82% (Druvor, Koncentrerad druvmust, Destillerad alkohol (Vin), Surhetsreglerande medel (innehåller, E330, och/eller, E334), Stabiliseringsmedel (E353), Konserveringsmedel (E300, innehåller, SULFITER)), Socker, Rom 9%, Vatten, Destillerad alkohol, Extrakt (Kryddnejlika, Kardemumma, Ingefära)",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9651802/",
    "fetched_at": "2026-07-26T09:02:23+00:00",
-   "additive_count": 5,
+   "additive_count": 6,
    "parse_status": "partial",
    "additives": [
     {
@@ -652919,6 +653114,14 @@
      },
      "e_number": "E353",
      "category": "stabiliser"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -652938,17 +653141,17 @@
      }
     },
     {
-     "id": "spices",
-     "name": {
-      "sv": "Kryddor",
-      "en": "Spices"
-     }
-    },
-    {
      "id": "wine_alcohol",
      "name": {
       "sv": "Vinalkohol",
       "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
      }
     },
     {
@@ -652978,10 +653181,7 @@
     "sulfites"
    ],
    "unknown_tokens": [
-    "destillerad",
-    "rom",
-    "destillerad",
-    "extrakt"
+    "rom"
    ]
   },
   {
@@ -653016,8 +653216,8 @@
    "raw_ingredients": "Vin ( (Druvor, Koncentrerad druvmust, Destillerad alkohol ( (Vin)), Surhetsreglerande medel ( (E330, E334)), Konserveringsmedel ( (E300, E220 SVAVELDIOXID)))), Socker, Vatten, Destillerad alkohol ( (Vin)), Extrakt ( (Kryddnejlika, Kardemumma, Ingefära))",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9651901/",
    "fetched_at": "2026-07-26T09:02:24+00:00",
-   "additive_count": 4,
-   "parse_status": "partial",
+   "additive_count": 5,
+   "parse_status": "complete",
    "additives": [
     {
      "id": "sulfur_dioxide",
@@ -653055,6 +653255,14 @@
      },
      "e_number": "E334",
      "category": "acidity_regulator"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -653074,17 +653282,17 @@
      }
     },
     {
-     "id": "spices",
-     "name": {
-      "sv": "Kryddor",
-      "en": "Spices"
-     }
-    },
-    {
      "id": "wine_alcohol",
      "name": {
       "sv": "Vinalkohol",
       "en": "Wine alcohol"
+     }
+    },
+    {
+     "id": "spices",
+     "name": {
+      "sv": "Kryddor",
+      "en": "Spices"
      }
     },
     {
@@ -653113,11 +653321,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "destillerad",
-    "destillerad",
-    "extrakt"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9652008",
@@ -653151,8 +653355,8 @@
    "raw_ingredients": "Vin 76% (Surhetsreglerande medel (innehåller, E330, och/eller, E334), Konserveringsmedel (E300, E220 SVAVELDIOXID, E 202)), Socker, Vatten, Extrakt (Kryddnejlika, Ingefära, Kardemumma), Konserveringsmedel (E224 KALIUMDISULFIT), Tappat i en skyddande atmosfär",
    "source_url": "https://www.systembolaget.se/produkt/vin/x-9652008/",
    "fetched_at": "2026-07-26T09:02:25+00:00",
-   "additive_count": 6,
-   "parse_status": "partial",
+   "additive_count": 7,
+   "parse_status": "complete",
    "additives": [
     {
      "id": "potassium_metabisulfite",
@@ -653209,6 +653413,14 @@
      },
      "e_number": "E334",
      "category": "acidity_regulator"
+    },
+    {
+     "id": "flavourings",
+     "name": {
+      "sv": "Aromer",
+      "en": "Flavourings"
+     },
+     "category": "flavouring"
     }
    ],
    "gases": [],
@@ -653254,9 +653466,7 @@
    "allergens": [
     "sulfites"
    ],
-   "unknown_tokens": [
-    "extrakt"
-   ]
+   "unknown_tokens": []
   },
   {
    "product_number": "9701201",
