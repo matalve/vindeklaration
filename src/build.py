@@ -124,7 +124,7 @@ def write_sqlite(records: list[dict]) -> None:
         """
         CREATE TABLE wines (
             product_number TEXT PRIMARY KEY,
-            name TEXT, producer TEXT, vintage TEXT, country TEXT,
+            name TEXT, producer TEXT, supplier TEXT, vintage TEXT, country TEXT,
             category TEXT, assortment TEXT,
             price REAL, volume_ml REAL, alcohol_percentage REAL,
             organic INTEGER, declaration_status TEXT, parse_status TEXT,
@@ -148,13 +148,18 @@ def write_sqlite(records: list[dict]) -> None:
         CREATE INDEX idx_count ON wines (additive_count);
         CREATE INDEX idx_grape ON wine_grapes (grape);
         CREATE INDEX idx_pairing ON wine_pairings (pairing);
+        -- The supplier is the importer, and the importer answers for the
+        -- declaration on the Swedish market. Indexed because the coverage
+        -- table groups by it.
+        CREATE INDEX idx_supplier ON wines (supplier);
         """
     )
     connection.executemany(
-        "INSERT INTO wines VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO wines VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [
             (
-                r["product_number"], r["name"], r["producer"], r["vintage"],
+                r["product_number"], r["name"], r["producer"], r["supplier"],
+                r["vintage"],
                 r["country"], r["category"], r["assortment"], r["price"],
                 r["volume_ml"], r["alcohol_percentage"], int(r["organic"]),
                 r["declaration_status"], r["parse_status"], r["additive_count"],

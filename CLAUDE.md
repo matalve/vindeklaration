@@ -80,11 +80,14 @@ an outage.
 
 ## Open decisions
 
-- **The quality gate is 2%; the real figure is 9.0%.** The gate was set on a
-  guess before anyone had seen the corpus. 360 unknown words remain and 252 of
-  them block exactly one wine each, so reaching 2% means grinding through
-  source-text typos. Recalibrating the gate is the owner's call — do not change
-  `QUALITY_GATE` without being asked.
+- ~~The quality gate is 2%.~~ Settled 2026-07-27: the gate watches drift, not a
+  level. `DRIFT_LIMIT` in `src/report.py` fails the run when the `partial`
+  share rises more than one percentage point since the previous recorded run.
+  The baseline lives in `data/quality-history.json`, which the Pi commits with
+  the rest of the dataset — **lose that file and the next run has no baseline
+  and silently passes.** Only `update.sh` passes `--record`; a manual
+  `src.report` compares but never writes. Do not reintroduce an absolute
+  threshold without being asked.
 - Declaration coverage is 19.3% today and rises on its own as stock rotates to
   2024-and-later vintages. Expect the numbers in `README.md` to age.
 
