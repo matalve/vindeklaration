@@ -91,7 +91,7 @@ dataset actually carries. Coverage on 2026-07-27, over 15 085 wines:
 | Food pairing | catalog `tasteSymbols` | **~60%** | 15 values — a closed vocabulary, ideal for a facet |
 | Additives | the declaration | **19.3%** | The scarce one, and the point of the site |
 | Sugar and energy | detail `nutrition` | ≈ declared | Arrives with the declaration |
-| Vegan, organic | `isVeganFriendly`, `isOrganic` | 100% | Supplier's own flag, not derived from the declaration |
+| Vegan, organic, gluten-free | `isVeganFriendly`, `isOrganic`, `isGlutenFree` | 100% | Supplier's own flag, not derived from the declaration — and unset means unmarked, not disqualified |
 
 Two of these are new. Grape and price were always collected; **food pairing was
 not, and is collected from 2026-07-27** — `tasteSymbols` and `usage` come free
@@ -139,6 +139,18 @@ finds wines that *declare* the substance, and a wine that declares nothing may
 well contain it too. So "wines with sulphites" is really "wines that admit to
 sulphites" — the include filter says so on the results page, in those words.
 Excluding is a consumer tool; including is mostly a research one.
+
+**The supplier flags tilt the same way, and harder.** `isVeganFriendly`,
+`isOrganic` and `isGlutenFree` are set or unset, never absent — checked across
+all 15 148 cached declarations and 15 085 catalog rows, where not one is null.
+That makes them look like clean booleans, and they are not: an unset flag means
+*nobody marked this wine*, not *this wine is not vegan*. 822 wines carry the
+vegan flag and 2 788 the organic one, so the 14 263 without are overwhelmingly
+unmarked rather than disqualified. "Only vegan" is therefore a sound filter and
+"not vegan" is not a category the site may offer, in the same way that excluding
+a substance is sound and including it is weak. `gluten_free` is the exception
+that proves the rule: it is carried as null until a wine's declaration has been
+refetched, because a wine we have not asked again has told us nothing.
 
 **C. Sugar and energy.** Nutrition figures come with nearly every declaration
 (kcal, sugar per 100 ml). Useful, factual, and the one axis where a lower number
