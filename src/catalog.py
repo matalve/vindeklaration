@@ -65,6 +65,10 @@ KEEP = [
     "isEthical",
     "isDiscontinued",
     "productLaunchDate",
+    # The bottle photograph, kept as the API states it rather than rebuilt from
+    # productId: a pattern we invent is a pattern we have to maintain. Note that
+    # the URL is a template — it needs "_{size}.{ext}" appended to resolve.
+    "images",
 ]
 
 
