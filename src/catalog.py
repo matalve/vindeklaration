@@ -58,6 +58,8 @@ KEEP = [
     "categoryLevel2",
     "categoryLevel3",
     "assortmentText",
+    "tasteSymbols",
+    "usage",
     "isOrganic",
     "isSustainableChoice",
     "isEthical",
