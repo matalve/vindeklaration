@@ -244,6 +244,58 @@ from it or to justify it.
   real declarations. Someone searching the exact string from a label should
   land on the right page.
 
+## Bottle photographs
+
+Link them from Systembolaget's CDN. Do not copy them onto our own host.
+
+That is the opposite of the usual instinct, and it follows from how EU
+copyright law treats the two acts. A photograph is protected in its own right —
+in Sweden even a plain snapshot gets 50 years under 49a § URL — and the rights
+sit with Systembolaget or the supplier, not with us. Embedding an image that
+the rightsholder has already made freely available is not a new communication
+to the public (*Svensson* C-466/12, *BestWater* C-348/13), whereas saving a copy
+and serving it from another site is (*Renckhoff* C-161/17). Hotlinking is
+therefore the conservative choice here, not the cheeky one. The exception to
+watch is *VG Bild-Kunst* C-392/19: if the rightsholder ever puts a technical
+measure in the way, working around it is infringement. In practice that means
+if hotlink protection appears, the images go away — they do not get proxied.
+
+What the source offers, verified 2026-07-27 against the live CDN:
+
+- The search API returns `images[].imageUrl`, e.g.
+  `https://product-cdn.systembolaget.se/productimages/{productId}/{productId}`.
+  That bare URL is a template and 404s on its own; `_{size}.{ext}` completes it.
+- `imageModules` lists the available `sizes` (20 to 800 px) and `extensions`
+  (avif, webp, jpg, png), and carries a base64 WebP thumbnail of about 150
+  bytes — a ready-made placeholder that costs no request at all.
+- A 100 px PNG is ~10 kB, a 400 px WebP ~28 kB.
+- No hotlink protection today: a request carrying a foreign `Referer` is served
+  normally. No `Cache-Control` either, so the browser is left to guess.
+- `catalog.py` currently drops both fields, but keeps `productId`.
+
+How to use that:
+
+- **No photographs in lists or shortlists.** Forty bottle shots on a comparison
+  page is forty third-party requests to answer a question about text.
+- **One image on the wine page**, small, `loading="lazy"`, with explicit width
+  and height and the base64 thumbnail behind it so nothing shifts. `alt` is the
+  wine's name. Credit reads "Bild: Systembolaget" and links to the product page.
+- **Store the URL the API gives us** rather than reconstructing the pattern —
+  add `images` to `catalog.py`'s `KEEP`. A pattern we invented is a pattern we
+  have to maintain; their own answer is the source of truth.
+- **Design for the image not being there.** A missing photograph must leave a
+  tidy text card, because one redesign upstream is all it takes.
+- **Sample them.** A weekly check of a handful of image URLs, reported like any
+  other upstream change, catches a silent 404 sweep before users do.
+- **Say so on `/metod`.** The image is the site's only third-party request, and
+  it hands the visitor's IP to Systembolaget's CDN. The browser default
+  (`strict-origin-when-cross-origin`) sends our origin but not the path, so
+  they learn that vindeklaration.se asked, not which wine was being read. That
+  is the right balance for a site that otherwise sets no cookies.
+
+None of this is needed for phase 1. Text is what the site is for, and images
+can be added later without changing a single page's structure.
+
 ## Bilingual
 
 Swedish is the default; the audience and the source text are Swedish. English
