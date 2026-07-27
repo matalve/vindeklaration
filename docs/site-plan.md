@@ -43,15 +43,18 @@ in the bottle. A wine that declares three additives is not worse than one that
 declares nothing; it is more honest, and it is the only one we know anything
 about.
 
-**And about one declaration in ten cannot be read in full** (9.0% on
-2026-07-26, falling as the dictionary grows). Those wines are excluded from
-every ranking, on purpose.
+**And some declarations cannot be read in full** (9.0% on 2026-07-26, 4.1% on
+2026-07-27 after the dictionary took in the words the corpus actually uses;
+falling further as it grows). Those wines are excluded from every ranking, on
+purpose.
 
 Three consequences that shape every page:
 
-- **The denominator is always visible.** A shortlist says "12 wines shown of
-  340 in this price band — 297 declare nothing, 31 declare something we could
-  not fully read." Never a bare top ten.
+- **The denominator is always visible, and it is browsable.** A shortlist says
+  "12 wines ranked of 340 in this price band — 297 declare nothing, 31 declare
+  something we could not fully read", and those 297 and 31 are listed below the
+  ranking, not merely counted. Never a bare top ten. See *Undeclared wines stay
+  in the results* below.
 - **The three states are rendered as three states**, never collapsed:
   *declares and we read it*, *declares and we could not read all of it*,
   *declares nothing*. The third is the most common answer on the site and must
@@ -73,6 +76,43 @@ Three consequences that shape every page:
 The bottle in the user's hand is newer than the dataset. Every wine page carries
 that sentence and a link to the source page.
 
+## What the shelf can be filtered on
+
+The filter is the second reason people come, and it can only offer facets the
+dataset actually carries. Coverage on 2026-07-27, over 15 085 wines:
+
+| Facet | Source | Coverage | Note |
+|---|---|---|---|
+| Price | catalog `price` | 100% | Ordinary price incl. VAT, excl. recycle fee |
+| Country | catalog `country` | 100% | 52 values, Systembolaget's own spelling |
+| Category and style | `categoryLevel2/3` | 100% | The comparison set, see below |
+| Assortment | `assortmentText` | 100% | 71% of the fixed range declares, 10% of order-only |
+| Grape | catalog `grapes` | **57.5%** | 433 distinct, already normalised upstream |
+| Food pairing | catalog `tasteSymbols` | **~60%** | 15 values — a closed vocabulary, ideal for a facet |
+| Additives | the declaration | **19.3%** | The scarce one, and the point of the site |
+| Sugar and energy | detail `nutrition` | ≈ declared | Arrives with the declaration |
+| Vegan, organic | `isVeganFriendly`, `isOrganic` | 100% | Supplier's own flag, not derived from the declaration |
+
+Two of these are new. Grape and price were always collected; **food pairing was
+not, and is collected from 2026-07-27** — `tasteSymbols` and `usage` come free
+in the same search response the catalog step already reads, so it costs no
+extra request and no re-crawl. `tasteSymbols` is a controlled list (Fisk,
+Skaldjur, Lamm, Nöt, Fläsk, Fågel, Vilt, Grönsaker, Ost, Dessert, Asiatiskt,
+Buffémat, Aperitif, Sällskapsdryck, Avec/digestif); `usage` is the prose
+sentence with the serving temperature, quoted, never parsed.
+
+**Grape and pairing are about 60% covered, and that is not the same kind of gap
+as the declaration gap.** A missing declaration is a supplier saying nothing; a
+missing grape is Systembolaget not filling a field for a blend. Both hide wines
+from a filtered list, so both are counted in the "not shown" line, and each
+gets its own reason — the user must never read "no wines match" when the truth
+is "the grape field is empty for 6 416 wines."
+
+Grapes cannot be recovered from elsewhere: `rawMaterial` on the product page
+fills only 303 of the 6 416 blanks, and it is free text ("Corvina, rondinella
+och molinara samt övriga druvsorter"). Not worth parsing, and parsing it would
+be guessing.
+
 ## What a recommendation can honestly be
 
 Three axes, each with a rule the user can read and a limit that is stated, not
@@ -84,12 +124,21 @@ the wines in that slice that declare least. The comparison is only meaningful
 inside a slice: a sparkling wine declares dosage sugar and a fortified wine
 declares added alcohol, so ranking them against a still red is a category error.
 
-**B. Exclusions.** Vegan; no milk-, egg- or fish-derived fining agents; no
-declared colours or flavourings. These are the strongest recommendations the
-data supports, because the user's question is factual — "does this contain
-something I avoid" — and the declaration answers it directly. A few dozen wines
-declare animal-derived fining agents outright, and the catalog's own `vegan`
-flag covers many more.
+**B. Exclusions and inclusions, substance by substance.** Vegan; no milk-, egg-
+or fish-derived fining agents; no declared colours or flavourings; and beyond
+the presets, any substance in `additives.yaml` chosen by name. These are the
+strongest recommendations the data supports, because the user's question is
+factual — "does this contain something I avoid" — and the declaration answers
+it directly. A few dozen wines declare animal-derived fining agents outright,
+and the catalog's own `vegan` flag covers many more.
+
+*Exclude* and *include* are not mirror images, and the interface must not
+pretend they are. **Exclude is sound**: a wine that declares fully and does not
+list the substance genuinely does not contain it. **Include is weaker**: it
+finds wines that *declare* the substance, and a wine that declares nothing may
+well contain it too. So "wines with sulphites" is really "wines that admit to
+sulphites" — the include filter says so on the results page, in those words.
+Excluding is a consumer tool; including is mostly a research one.
 
 **C. Sugar and energy.** Nutrition figures come with nearly every declaration
 (kcal, sugar per 100 ml). Useful, factual, and the one axis where a lower number
@@ -105,10 +154,17 @@ A shortlist is reproducible or it is opinion. The spec:
 
 - **Comparison set**: category (red / white / sparkling / rosé / fortified /
   flavoured), price band, and assortment — default to what can actually be
-  ordered rather than the whole catalog.
-- **Eligible**: `declaration_status = declared` and `parse_status = complete`.
-  Partial declarations are never ranked, and never silently dropped either —
-  they are counted in the "not shown" line with their reason.
+  ordered rather than the whole catalog. Narrowed further, at the user's
+  choice, by country, grape, food pairing, and substances to exclude or
+  include.
+- **Facets that are not fully covered narrow the denominator, not the truth.**
+  Selecting a grape or a pairing restricts the set to wines where that field is
+  filled; the "not shown" line then carries a fourth reason alongside the three
+  declaration states. Country, price, category and assortment are complete and
+  need no such caveat.
+- **Eligible for the ranking**: `declaration_status = declared` and
+  `parse_status = complete`. Partial declarations are never ranked, and never
+  silently dropped either — they are listed below it with their reason.
 - **Rank by** `additive_count` ascending. Ties broken by number of distinct
   additive categories, then by price ascending. Never by anything the site
   earns from, because it earns nothing.
@@ -121,14 +177,52 @@ Written this way, the recommendation is auditable — `declaration-auditor` can
 sample a published list and check it against the live product pages, which is
 exactly how the dataset itself is checked.
 
+### Undeclared wines stay in the results
+
+Decided by the owner, 2026-07-27. A filtered search returns **every wine in the
+slice**, undeclared ones included. Someone looking for a Riesling without
+additives is shopping for a Riesling; a list that hides four bottles in five
+because their supplier wrote nothing is not a better answer, it is a shorter
+one, and it quietly punishes the user for a gap that is not theirs.
+
+So a result page is one slice in three blocks, in this order:
+
+1. **Ranked** — declares, and we read it all. `additive_count` ascending. This
+   is the only block that is ordered by anything, because it is the only one
+   where a count exists.
+2. **Declares, partly unread** — the fragment we could not read is shown next
+   to the full original text. Unordered; there is no honest key to sort on.
+3. **Declares nothing** — listed, visually quieter, each carrying the same
+   sentence: *deklarerar inga ingredienser*. Sorted by price, since that is the
+   only fact we have that the user asked about.
+
+Each block carries its own count and its own one-line reason, so the shape of
+the answer is legible before a single bottle is read.
+
+The rule this must not break is unchanged: **block 3 is never presented as
+wines without additives.** An additive filter — include or exclude — applies to
+blocks 1 and 2 and cannot apply to block 3, because there is nothing there to
+match against. A wine that declares nothing is not evidence of an empty bottle;
+it is an absence of evidence, and the site says which of the two it is on every
+row. In practice that means the exclusion filter never removes block 3, it
+labels it: the user chose *utan tillsatser* and gets a ranked list of wines
+that declare none, followed by the wines nobody can answer for.
+
+The same holds for the facets. A grape filter drops wines whose grape field is
+empty, and says so as its own line — that gap is Systembolaget's missing
+metadata, not a supplier's silence, and conflating the two would misattribute
+both.
+
 ## Pages
 
 | Path | Purpose |
 |---|---|
 | `/` | Search by name or product number, and the coverage headline |
 | `/vin/{product_number}-{slug}` | One wine: declaration, substances, nutrition, raw text, source link |
-| `/hitta` | Shortlist builder: category, price, exclusions, sugar — the recommendation |
+| `/hitta` | Shortlist builder: category, price, country, grape, food pairing, substances in or out, sugar — the recommendation |
 | `/lista/{slug}` | Saved slices worth linking to, e.g. "red under 150 kr, fewest additives" |
+| `/druva/{slug}` | One grape: how much of it declares, and which of those declare least |
+| `/passar-till/{slug}` | One pairing: the same, for "till fisk", "till lamm", … |
 | `/tillsats/{id}` | One substance: what it is, why it is used, which wines declare it |
 | `/tackning` | How much of the shelf declares — by category, country, vintage, supplier |
 | `/metod` | Method, caveats, licence, and what the site refuses to claim |
@@ -162,8 +256,12 @@ never translated — they are quoted, in the language the supplier wrote them.
 Static site generated from `wines.json` at build time. No server, no database,
 no runtime dependency on Systembolaget. 15 000 wine pages is unremarkable for a
 static generator, and a compact search index (name, product number, category,
-price, counts) can be shipped as one gzipped JSON — `wines.json` itself is
-16 MB but gzips to 1.3 MB, and the index is a fraction of that.
+price, country, grape ids, pairing ids, additive ids, counts) can be shipped as
+one gzipped JSON — `wines.json` itself is 16 MB but gzips to 1.3 MB, and the
+index is a fraction of that. Filtering happens in the browser against that
+index, which is why the facets have to be ids and not free text: 433 grapes and
+15 pairings cost almost nothing to encode, and `usage` prose stays on the wine
+page where it belongs.
 
 The flow already exists: the Pi crawls nightly, commits the dataset, pushes to
 GitHub. A build on push to `main` deploys the site. That is a build, not a
@@ -179,8 +277,12 @@ open, not that the site is nice.
 
 1. **Lookup.** Search, wine pages, method page. Serves journey 1 and makes
    every later page linkable. Nothing here needs a ranking decision.
-2. **Shortlists.** `/hitta` with category, price, exclusions. This is the
-   recommendation, and it is where the honesty rules earn their keep.
+2. **Shortlists.** `/hitta` with category, price, country, grape, food pairing,
+   and substances in or out; plus the ranked lists at `/lista/{slug}`. This is
+   the recommendation, and it is where the honesty rules earn their keep. The
+   ranking is always inside a stated slice — there is no single global "fewest
+   additives in Sweden" table, because a sparkling wine and a still red are not
+   comparable and a leaderboard would say they were.
 3. **Substances and coverage.** Substance pages and the transparency dashboard.
    The coverage page is the one most likely to be quoted by someone else.
 4. **Trends.** The nightly commits are a time series: coverage by month,
@@ -190,10 +292,9 @@ open, not that the site is nice.
 
 ## Open questions for the owner
 
-- **Are undeclared wines listed at all?** Hiding them makes lists cleaner and
-  the dataset look bigger than it is. Showing them is the honest choice and
-  makes the site's real finding — how few declare — impossible to miss. The
-  plan above assumes they are shown, greyed, with the reason.
+- ~~**Are undeclared wines listed at all?**~~ Settled 2026-07-27: they are
+  shown, in their own block, with the reason. See *Undeclared wines stay in the
+  results*.
 - **Are suppliers named on the coverage page?** The data supports a ranking of
   who declares and who does not, per importer. It is public information and it
   is the most newsworthy thing here. It is also a naming decision with

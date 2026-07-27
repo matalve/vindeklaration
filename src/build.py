@@ -65,6 +65,8 @@ def build_records() -> list[dict]:
             "volume_ml": product.get("volume"),
             "alcohol_percentage": product.get("alcoholPercentage"),
             "grapes": product.get("grapes") or [],
+            "food_pairings": product.get("tasteSymbols") or [],
+            "serving_note": product.get("usage"),
             "organic": bool(product.get("isOrganic")),
             "natural_wine": bool(detail.get("isNaturalWine")),
             "vegan": bool(detail.get("isVeganFriendly")),
