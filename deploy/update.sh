@@ -42,19 +42,23 @@ fi
 "$UV" run python -m src.build
 "$UV" run pytest -q
 
-# The report exits non-zero when too many declarations went unread. That is
-# information, not a reason to throw away the dataset we just built, so the
-# exit code is recorded rather than propagated.
-if "$UV" run python -m src.report; then
+# The report exits non-zero when the share of unread declarations jumped since
+# the last run. That is information, not a reason to throw away the dataset we
+# just built, so the exit code is recorded rather than propagated. --record is
+# passed here and nowhere else: this is the run the baseline should come from.
+if "$UV" run python -m src.report --record; then
   echo "=== quality gate passed"
 else
-  echo "=== quality gate FAILED — see the unknown tokens above and data/unknown.json"
+  echo "=== quality gate FAILED — the unread share rose; see data/unknown.json"
 fi
 
 if git rev-parse --git-dir >/dev/null 2>&1; then
   # wines.sqlite is deliberately absent: it is a binary that git cannot delta,
   # and src/build.py regenerates it from wines.json in seconds.
-  git add data/wines.json data/catalog.json data/unknown.json
+  # quality-history.json is here because the gate compares against it: lose it
+  # and the next run has no baseline and silently passes.
+  git add data/wines.json data/catalog.json data/unknown.json \
+          data/quality-history.json
   if git diff --staged --quiet; then
     echo "=== dataset unchanged"
   else

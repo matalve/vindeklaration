@@ -1,0 +1,12 @@
+{
+ "runs": [
+  {
+   "date": "2026-07-27",
+   "wines": 15085,
+   "declared": 2910,
+   "partial": 120,
+   "partial_rate": 0.0412,
+   "unknown_tokens": 149
+  }
+ ]
+}

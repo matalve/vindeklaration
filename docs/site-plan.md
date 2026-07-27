@@ -225,6 +225,58 @@ empty, and says so as its own line — that gap is Systembolaget's missing
 metadata, not a supplier's silence, and conflating the two would misattribute
 both.
 
+### Naming importers
+
+Decided by the owner, 2026-07-27. The coverage page carries a table of
+importers ranked by how much of their range declares — but only over the wines
+where the requirement applies, and that qualifier is the whole design.
+
+**Why the importer and not the producer.** `supplier` in the dataset is
+Systembolaget's `supplierName`: the company that placed the wine on the Swedish
+market. The producer made the wine; the importer answers for what the label
+says here. Both are in the data and both are shown on a wine page, but only the
+importer is ranked, because only the importer is accountable for the gap.
+
+*Unverified, and it must be verified before launch:* the exact allocation of
+labelling responsibility between an EU producer and a Swedish importer is taken
+here from how the market plainly works, not from the regulation's text. A page
+that names companies has to have that right. Check it, cite it on `/metod`.
+
+**The ranking is over the 2024 vintage onwards, and nothing else.** The
+requirement covers the 2024 harvest forward, so an importer holding older stock
+looks negligent while having done nothing wrong. The correction is not
+cosmetic — it reverses the table. Measured 2026-07-27:
+
+| Importer | All vintages | 2024 onwards |
+|---|---|---|
+| Johan Lidby Vinhandel | 28.8% | **97.4%** |
+| The WineAgency Sweden | 21.2% | 93.4% |
+| Giertz Vinimport | 82.1% | 97.3% |
+| Lively Wines Sweden | 13.2% | 40.7% |
+| Tryffelsvinet | 2.2% | 20.0% |
+
+Published raw, that table would accuse Johan Lidby — who declares on 97 of
+every 100 bottles the rule touches — of being among the worst. **The raw column
+is never the ranking.** It may appear beside the corrected one, labelled as
+what it is (a function of stock age), or not at all.
+
+The rest of the rule:
+
+- **Minimum sample.** No importer is ranked on fewer than 40 wines in the
+  qualifying vintages, so nobody tops or bottoms the table on four bottles.
+  Those below the threshold are aggregated into one row, counted, not named.
+- **The mean is on the page.** 66% of wines from 2024 onwards declare. A number
+  without its baseline is an insinuation.
+- **Every row is traceable.** An importer's row links to their qualifying
+  wines, each with its own product page link, so the claim can be checked
+  bottle by bottle — by them first of all.
+- **It reports, it does not characterise.** A percentage and a count. No
+  "worst offenders", no leaderboard styling, no commentary on intent. An
+  importer may have reasons we cannot see.
+- **Dated, and corrigible.** The table carries the date it was generated and a
+  way to report an error. Coverage rises as stock rotates, so today's laggard
+  is next quarter's ordinary — the page must not read as a permanent verdict.
+
 ## Pages
 
 | Path | Purpose |
@@ -236,7 +288,8 @@ both.
 | `/druva/{slug}` | One grape: how much of it declares, and which of those declare least |
 | `/passar-till/{slug}` | One pairing: the same, for "till fisk", "till lamm", … |
 | `/tillsats/{id}` | One substance: what it is, why it is used, which wines declare it |
-| `/tackning` | How much of the shelf declares — by category, country, vintage, supplier |
+| `/tackning` | How much of the shelf declares — by category, country, vintage, and importer |
+| `/importor/{slug}` | One importer: their qualifying wines and what each declares |
 | `/metod` | Method, caveats, licence, and what the site refuses to claim |
 
 The wine page is the product. Everything else exists to lead somewhere useful
@@ -359,14 +412,17 @@ open, not that the site is nice.
 - ~~**Are undeclared wines listed at all?**~~ Settled 2026-07-27: they are
   shown, in their own block, with the reason. See *Undeclared wines stay in the
   results*.
-- **Are suppliers named on the coverage page?** The data supports a ranking of
-  who declares and who does not, per importer. It is public information and it
-  is the most newsworthy thing here. It is also a naming decision with
-  consequences, and it is yours.
-- **Public or private dataset?** The site implies a public dataset; the
-  repository is private today.
-- **The quality gate** at 2% against a real figure near 9% still blocks a clean
-  build, and the site's credibility rests on that number being deliberate.
+- ~~**Are suppliers named on the coverage page?**~~ Settled 2026-07-27: yes,
+  importers are named, under the rules in *Naming importers*.
+- ~~**Public or private dataset?**~~ Settled 2026-07-27: private for now, but
+  written throughout as if already public, since making it public exposes the
+  whole history and not just the current tree.
+- ~~**The quality gate.**~~ Settled 2026-07-27: it watches drift rather than an
+  absolute level, so the figure the site publishes is the measured share of
+  unread declarations, not a target anyone is grinding towards. `/metod` states
+  it plainly and dates it.
+- **Verify who carries labelling responsibility** — importer or producer —
+  before the importer table goes live. See *Naming importers*.
 - **Wording review before launch.** The line between "declares fewer additives"
   and an implied health claim is the project's main legal and ethical exposure.
   Worth a careful read by someone who has not been staring at it.
