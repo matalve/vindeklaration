@@ -74,6 +74,15 @@ def build_records() -> list[dict]:
             "category": product.get("categoryLevel2"),
             "style": product.get("categoryLevel3"),
             "assortment": product.get("assortmentText"),
+            # Can it be bought? The two flags come from the nightly catalog and
+            # are never null there. store_count comes from the product page, so
+            # it is a week old at worst and null until the wine is refetched —
+            # acceptable, because how widely a wine is stocked moves slowly
+            # while being out of stock does not.
+            "out_of_stock": bool(product.get("isCompletelyOutOfStock")),
+            "temporarily_out_of_stock": bool(product.get("isTemporaryOutOfStock")),
+            "discontinued": bool(product.get("isDiscontinued")),
+            "store_count": detail.get("availableNumberOfStores"),
             "price": product.get("price"),
             "volume_ml": product.get("volume"),
             "alcohol_percentage": product.get("alcoholPercentage"),
