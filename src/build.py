@@ -39,6 +39,19 @@ def wine_name(product: dict) -> str:
     return " ".join(part for part in parts if part).strip()
 
 
+def image_base_url(product: dict) -> str | None:
+    """The first bottle photograph the catalog lists, or None if it lists none.
+
+    Kept verbatim. The images belong to Systembolaget and its suppliers, so the
+    site links to them where they are and never serves a copy of its own.
+    """
+    for image in product.get("images") or []:
+        url = (image.get("imageUrl") or "").strip()
+        if url:
+            return url
+    return None
+
+
 def build_records() -> list[dict]:
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     records = []
@@ -74,6 +87,10 @@ def build_records() -> list[dict]:
             "declaration_status": "declared" if raw else "not_declared",
             "raw_ingredients": raw or None,
             "source_url": f"{SITE_URL}/produkt/vin/x-{number}/",
+            # A template, not a fetchable URL: append "_{size}.{ext}", where the
+            # sizes run 20-800 px and the formats are avif, webp, jpg and png.
+            # None until the catalog has been fetched with `images` in KEEP.
+            "image_base_url": image_base_url(product),
             "fetched_at": detail.get("fetched_at"),
         }
 
