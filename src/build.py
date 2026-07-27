@@ -113,8 +113,20 @@ def write_sqlite(records: list[dict]) -> None:
             product_number TEXT, additive_id TEXT, e_number TEXT,
             category TEXT, bucket TEXT
         );
+        -- Grapes and pairings are the same shape as additives: several per
+        -- wine. Kept as rows rather than a delimited string because the names
+        -- nest — 69 grape names contain another one, and 'Garnacha' matched by
+        -- substring drags in 'Garnacha blanca', a white grape.
+        CREATE TABLE wine_grapes (
+            product_number TEXT, grape TEXT
+        );
+        CREATE TABLE wine_pairings (
+            product_number TEXT, pairing TEXT
+        );
         CREATE INDEX idx_additive ON wine_additives (additive_id);
         CREATE INDEX idx_count ON wines (additive_count);
+        CREATE INDEX idx_grape ON wine_grapes (grape);
+        CREATE INDEX idx_pairing ON wine_pairings (pairing);
         """
     )
     connection.executemany(
@@ -139,6 +151,11 @@ def write_sqlite(records: list[dict]) -> None:
             for a in items
         ],
     )
+    for table, field in (("wine_grapes", "grapes"), ("wine_pairings", "food_pairings")):
+        connection.executemany(
+            f"INSERT INTO {table} VALUES (?,?)",
+            [(r["product_number"], value) for r in records for value in r[field]],
+        )
     connection.commit()
     connection.close()
 
