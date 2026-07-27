@@ -53,6 +53,7 @@ DETAIL_FIELDS = [
     "isOrganic",
     "isNaturalWine",
     "isVeganFriendly",
+    "isGlutenFree",
     "isKosher",
     "sugarContentGramPer100ml",
     "producerName",

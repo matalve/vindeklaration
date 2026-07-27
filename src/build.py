@@ -83,6 +83,10 @@ def build_records() -> list[dict]:
             "organic": bool(product.get("isOrganic")),
             "natural_wine": bool(detail.get("isNaturalWine")),
             "vegan": bool(detail.get("isVeganFriendly")),
+            # Not coerced to a bool like the flags above: this field arrives
+            # only with a refetched declaration, and a wine we have not asked
+            # again yet is not the same thing as a wine that is not gluten free.
+            "gluten_free": detail.get("isGlutenFree"),
             "nutrition": detail.get("nutrition") or {},
             "declaration_status": "declared" if raw else "not_declared",
             "raw_ingredients": raw or None,
