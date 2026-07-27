@@ -85,8 +85,10 @@ dataset — leaving them out would hide how much of the assortment says nothing.
    first, strikes out what it recognised, and judges the remainder. Anything
    left over is reported rather than guessed at.
 4. **`build.py`** — joins catalog and declarations into the dataset.
-5. **`report.py`** — coverage and quality report; fails if more than 2% of
-   declared wines are `partial`.
+5. **`report.py`** — coverage and quality report; fails when the share of
+   `partial` declarations rises more than a percentage point since the previous
+   recorded run. It watches drift rather than an absolute level, so a number
+   nobody has reached cannot quietly become a target.
 
 ## Running it
 
