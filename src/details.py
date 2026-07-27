@@ -58,6 +58,7 @@ DETAIL_FIELDS = [
     "sugarContentGramPer100ml",
     "producerName",
     "supplierName",
+    "availableNumberOfStores",
     "rawMaterial",
     "production",
     "standardDrinks",

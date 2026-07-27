@@ -64,6 +64,11 @@ KEEP = [
     "isSustainableChoice",
     "isEthical",
     "isDiscontinued",
+    # Whether the wine can be bought at all. Both are always present here and
+    # refresh with the nightly catalog sweep, which is the only reason they are
+    # trustworthy: stock is the one fact that goes stale in hours.
+    "isCompletelyOutOfStock",
+    "isTemporaryOutOfStock",
     "productLaunchDate",
     # The bottle photograph, kept as the API states it rather than rebuilt from
     # productId: a pattern we invent is a pattern we have to maintain. Note that

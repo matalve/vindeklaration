@@ -14,6 +14,18 @@ they were going to buy in anyway.
 
 It is not a shop, not a review site, and not a health service.
 
+**One use case carries the site, decided 2026-07-27: helping someone choose and
+buy a wine whose contents they know.** Everything else in this plan — the
+substance pages, the coverage dashboard, the trends — is a by-product of doing
+that well, and none of it may be built at its expense.
+
+The consequence is that **availability is part of the answer, not a footnote**.
+A recommendation that sends someone to Systembolaget for a bottle that turns out
+to be an order-only item with a week's wait, or one that is out of stock
+entirely, has not answered the question — it has wasted a trip and taught the
+user not to trust the next list. What a wine declares and whether it can be
+bought are the same question here, asked one after the other.
+
 ## Who arrives, and what they came for
 
 1. **Standing in the shop, bottle in hand.** Wants one screen: what this wine
@@ -79,7 +91,10 @@ that sentence and a link to the source page.
 ## What the shelf can be filtered on
 
 The filter is the second reason people come, and it can only offer facets the
-dataset actually carries. Coverage on 2026-07-27, over 15 085 wines:
+dataset actually carries. Coverage on 2026-07-27, over 15 085 wines — the count
+differs from the 15 017 above because the catalog turns over daily as products
+are launched and discontinued, and the fetched cache holds 63 wines that have
+since left it:
 
 | Facet | Source | Coverage | Note |
 |---|---|---|---|
@@ -91,7 +106,9 @@ dataset actually carries. Coverage on 2026-07-27, over 15 085 wines:
 | Food pairing | catalog `tasteSymbols` | **~60%** | 15 values — a closed vocabulary, ideal for a facet |
 | Additives | the declaration | **19.3%** | The scarce one, and the point of the site |
 | Sugar and energy | detail `nutrition` | ≈ declared | Arrives with the declaration |
-| Vegan, organic, gluten-free | `isVeganFriendly`, `isOrganic`, `isGlutenFree` | 100% | Supplier's own flag, not derived from the declaration — and unset means unmarked, not disqualified |
+| Vegan, organic | `isVeganFriendly`, `isOrganic` | 100% | Supplier's own flag, not derived from the declaration — and unset means unmarked, not disqualified |
+| Gluten-free | `isGlutenFree` | **0% until 2026-08-02** | Same kind of flag, but it lives on the product page, so it arrives with the Sunday refresh and is null until then |
+| Buyability | catalog stock flags, detail `availableNumberOfStores` | 100% / from 2026-08-02 | See *Can you actually buy it* |
 
 Two of these are new. Grape and price were always collected; **food pairing was
 not, and is collected from 2026-07-27** — `tasteSymbols` and `usage` come free
@@ -112,6 +129,58 @@ Grapes cannot be recovered from elsewhere: `rawMaterial` on the product page
 fills only 303 of the 6 416 blanks, and it is free text ("Corvina, rondinella
 och molinara samt övriga druvsorter"). Not worth parsing, and parsing it would
 be guessing.
+
+## Can you actually buy it
+
+Probed against the live API on 2026-07-27, because the answer decides how much
+of this is possible at all.
+
+**What we can have, and how fresh it is:**
+
+| Fact | Field | Source | Freshness |
+|---|---|---|---|
+| Sold out entirely | `isCompletelyOutOfStock` | search | nightly |
+| Temporarily sold out | `isTemporaryOutOfStock` | search | nightly |
+| Being delisted | `isDiscontinued` | search | nightly |
+| How many stores shelve it | `availableNumberOfStores` | product page | weekly |
+| Which range it belongs to | `assortmentText` | search | nightly |
+
+`availableNumberOfStores` is the field that turns an abstract "order-only" label
+into something a shopper understands. Sampled across the ranges: fixed-range
+wines sit at 452, 179 and 136 stores; temporary-range wines at 2 to 7; local and
+small-scale at 3 to 4; **order-only wines at 1**. That single number separates
+"on a shelf near you" from "exists in a warehouse" better than the assortment
+name does. It lives only on the product page, so it is at worst a week old —
+acceptable, because how widely a wine is stocked moves slowly, while being out
+of stock does not, and the out-of-stock flags refresh every night.
+
+**What we cannot have: stock in a named store.** There is no store endpoint on
+the API — `/site`, `/stores` and `/site/search` all 404 — and the search API
+ignores every store parameter tried (`siteId`, `storeId`, `stockSiteId`: the
+result count does not move). A filter called `OnlineAvailability` exists but its
+vocabulary is not published, and every guessed value returns zero rows.
+Systembolaget's own store-availability page is `Disallow`ed in `robots.txt`.
+Even if a way were found, per-store stock for 15 000 wines across some 450
+stores is not something a nightly crawler should be doing to a host it is a
+guest of.
+
+So the site does not promise store-level stock, and does not pretend to:
+
+- **The shortlist defaults to what can be bought without waiting** — in stock,
+  not discontinued, and shelved in more than a handful of stores. Order-only
+  wines are not hidden; they sit in their own labelled group with the wait
+  stated, because *they can be bought*, just not today. Both `isStoreOrderApplicable`
+  and `isHomeOrderApplicable` are true even for the 1-store wines: order-only
+  means a delay, not a dead end. That distinction, made plainly, is the whole
+  fix for the annoyance this section exists to prevent.
+- **Every wine says how findable it is**, in words rather than a flag:
+  *finns i 179 butiker*, *beställningsvara — finns i 1 butik, tar några dagar*.
+- **The final check belongs upstream.** The wine page links to Systembolaget's
+  own store-availability view for that product. They own the truth about their
+  shelves; we own the truth about what is declared, and we say which is which.
+- **Nothing about stock is stated without its timestamp.** The dataset is built
+  at 03:00; a page that says "in stock" means "in stock when we asked", and
+  that sentence is on the page, not in a footnote.
 
 ## What a recommendation can honestly be
 
@@ -165,10 +234,10 @@ other two.
 A shortlist is reproducible or it is opinion. The spec:
 
 - **Comparison set**: category (red / white / sparkling / rosé / fortified /
-  flavoured), price band, and assortment — default to what can actually be
-  ordered rather than the whole catalog. Narrowed further, at the user's
-  choice, by country, grape, food pairing, and substances to exclude or
-  include.
+  flavoured), price band, and buyability — default to wines in stock and on a
+  shelf, with order-only shown as its own group rather than mixed in. Narrowed
+  further, at the user's choice, by country, grape, food pairing, and
+  substances to exclude or include.
 - **Facets that are not fully covered narrow the denominator, not the truth.**
   Selecting a grape or a pairing restricts the set to wines where that field is
   filled; the "not shown" line then carries a fourth reason alongside the three
@@ -336,7 +405,9 @@ What the source offers, verified 2026-07-27 against the live CDN:
 - A 100 px PNG is ~10 kB, a 400 px WebP ~28 kB.
 - No hotlink protection today: a request carrying a foreign `Referer` is served
   normally. No `Cache-Control` either, so the browser is left to guess.
-- `catalog.py` currently drops both fields, but keeps `productId`.
+- `catalog.py` keeps `images` as of 2026-07-27, so every record carries
+  `image_base_url`. `imageModules` is still dropped: the 150-byte placeholder
+  is charming but would add some 2 MB to a 16 MB dataset.
 
 How to use that:
 
@@ -345,9 +416,9 @@ How to use that:
 - **One image on the wine page**, small, `loading="lazy"`, with explicit width
   and height and the base64 thumbnail behind it so nothing shifts. `alt` is the
   wine's name. Credit reads "Bild: Systembolaget" and links to the product page.
-- **Store the URL the API gives us** rather than reconstructing the pattern —
-  add `images` to `catalog.py`'s `KEEP`. A pattern we invented is a pattern we
-  have to maintain; their own answer is the source of truth.
+- **Store the URL the API gives us** rather than reconstructing the pattern, as
+  `KEEP` now does. A pattern we invented is a pattern we have to maintain;
+  their own answer is the source of truth.
 - **Design for the image not being there.** A missing photograph must leave a
   tidy text card, because one redesign upstream is all it takes.
 - **Sample them.** A weekly check of a handful of image URLs, reported like any
@@ -394,9 +465,11 @@ open, not that the site is nice.
 
 1. **Lookup.** Search, wine pages, method page. Serves journey 1 and makes
    every later page linkable. Nothing here needs a ranking decision.
-2. **Shortlists.** `/hitta` with category, price, country, grape, food pairing,
-   and substances in or out; plus the ranked lists at `/lista/{slug}`. This is
-   the recommendation, and it is where the honesty rules earn their keep. The
+2. **Shortlists.** `/hitta` with buyability first, then category, price,
+   country, grape, food pairing, and substances in or out; plus the ranked
+   lists at `/lista/{slug}`. This is the recommendation and the reason the site
+   exists, so it carries the buyability rules from its first day rather than
+   gaining them later. It is where the honesty rules earn their keep. The
    ranking is always inside a stated slice — there is no single global "fewest
    additives in Sweden" table, because a sparkling wine and a still red are not
    comparable and a leaderboard would say they were.
