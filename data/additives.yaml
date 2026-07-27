@@ -23,7 +23,19 @@
   note:
     sv: Samlingsnamn för svavelföreningar som konserverar vinet och skyddar det mot oxidation. Måste alltid deklareras som allergen.
     en: Umbrella term for the sulfur compounds that preserve wine and protect it against oxidation. Always declared as an allergen.
-  aliases: [sulfiter, sulfit, sulfites, sulphites, svavel, solfiti]
+  aliases:
+    - sulfiter
+    - sulfit
+    - sulfite  # English singular
+    - sulfites
+    - sulphites
+    - svavel
+    - svav  # truncated mid-word, seen in the wild alongside other named sulfites
+    - solfiti
+    - sulfiterr  # typo seen in the wild
+    - ssulfiter  # typo seen in the wild
+    - sulfilter  # typo seen in the wild
+    - sufiter  # typo seen in the wild
 
 - id: sulfur_dioxide
   e_number: E220
@@ -35,7 +47,18 @@
   note:
     sv: Den vanligaste konserveringsmedlet i vin. Hämmar bakterier och oxidation.
     en: The most common wine preservative. Inhibits bacteria and oxidation.
-  aliases: [svaveldioxid, svavaldioxid, anidride solforosa, sulfur dioxide, so2, svavlastoxid, sulphur dioxide]
+  aliases:
+    - svaveldioxid
+    - svavaldioxid
+    - anidride solforosa
+    - sulfur dioxide
+    - so2
+    - svavlastoxid
+    - sulphur dioxide
+    - svaveloxid  # typo seen in the wild, missing "di"
+    - svaveldoxid  # typo seen in the wild, missing "i"
+    - svaveldixoid  # typo seen in the wild, transposed letters
+    - svaveldioxis  # typo seen in the wild
 
 - id: potassium_metabisulfite
   e_number: E224
@@ -58,6 +81,18 @@
     - metabissulfito de potássio  # Portuguese
     - metabisolfito di potassio  # Italian
     - kaliummetabiolsofyt  # typo seen in the wild
+    - kaliumpyrosufit  # typo seen in the wild
+    - kaliummetallbisulfit  # typo seen in the wild, "metall" for "meta"
+    - kaliumpyrosulfiter  # plural, seen in the wild
+    - kaliumdislufit  # typo seen in the wild, letters transposed
+    - kaliumoyrosulfit  # typo seen in the wild, o for p
+    - kaliumpyrosulfitoch  # merged with "och" (and), no space in the source
+    - kaliummetallsulfit  # typo seen in the wild, "metall" for "meta"
+    - kalimpyrosulfit  # typo seen in the wild, missing u
+    - kaliumpurosulfit  # typo seen in the wild, u for y
+    - kalliummetabisulfit  # typo seen in the wild, doubled l
+    - kaliumdisulfiter  # plural, seen in the wild
+    - kaliummetabisulft  # typo seen in the wild, missing i
   regexes:
     - '\b(meta\s?)?kalium\s?(meta\s?bi|meta|pyro|di)\s?sulfit\b'
     - '\b(meta\s?bi|meta|pyro|di)\s?sulfit\s+av\s+kalium\b'
@@ -72,9 +107,31 @@
   group: sulfites
   allergen: sulfites
   name: { sv: Kaliumbisulfit, en: Potassium bisulfite }
-  aliases: [kaliumbisulfit, kaliumvätesulfit, kaliumbisulf, potassium bisulfite, potassium bisulfate]
+  aliases:
+    - kaliumbisulfit
+    - kaliumvätesulfit
+    - kaliumbisulf
+    - potassium bisulfite
+    - potassium bisulfate
+    - kaliumbisulfiter  # plural, seen in the wild
+    - kalimbisulfit  # typo seen in the wild, missing u
+    # "Kaliumsulfit" reads as potassium bisulfite rather than potassium
+    # metabisulfite: one wine's declaration pairs the word with "(E228)",
+    # which is potassium bisulfite's own number, not E224's.
+    - kaliumsulfit
   regexes:
     - '\b(meta\s?)?kalium\s?bisulfit\b'
+
+- id: sodium_bisulfite
+  e_number: E222
+  bucket: additive
+  category: preservative
+  group: sulfites
+  allergen: sulfites
+  name: { sv: Natriumbisulfit, en: Sodium bisulfite }
+  # Named explicitly (not the usual bare "metabisulfit", which reads as the
+  # potassium salt) in a non-EU import, so taken at face value.
+  aliases: [natriumbisulfit, sodium bisulfite]
 
 - id: potassium_sorbate
   e_number: E202
@@ -108,6 +165,9 @@
     - velcorin
     - dcdm  # typo: letters transposed from dmdc
     - dikarbonat av dimetyl  # word order reversed in the wild
+    - dimentyldikarbonat  # typo seen in the wild
+    - dimetydikarbonat  # typo seen in the wild
+    - dimetylkarbonat  # typo seen in the wild, missing "di"; seen alongside "(DMDC)"
 
 - id: lysozyme
   e_number: E1105
@@ -115,7 +175,7 @@
   category: preservative
   allergen: egg
   name: { sv: Lysozym, en: Lysozyme }
-  aliases: [lysozym, lysozyme]
+  aliases: [lysozym, lysozyme, ägglysozym]
 
 - id: ascorbic_acid
   e_number: E300
@@ -125,7 +185,17 @@
   note:
     sv: C-vitamin. Används som antioxidationsmedel, ofta tillsammans med sulfiter.
     en: Vitamin C. Used as an antioxidant, usually alongside sulfites.
-  aliases: [askorbinsyra, l-askorbinsyra, l askorbinsyra, ascorbic acid, askorbinsyre, vitamin c, c-vitamin]
+  aliases:
+    - askorbinsyra
+    - l-askorbinsyra
+    - l askorbinsyra
+    - ascorbic acid
+    - askorbinsyre
+    - vitamin c
+    - c-vitamin
+    - _laskorbinsyra  # stray leading character seen in the wild
+    - askorbunsyra  # typo seen in the wild
+    - ascorbico  # Italian, "Acido L-ascorbico"
 
 - id: tartaric_acid
   e_number: E334
@@ -145,6 +215,9 @@
     - ácido tartárico
     - ácido l tartárico  # Portuguese, "Ácido L(+) tartárico"
     - tartic acid  # typo seen in the wild, "L-(+)-tartic acid"
+    - vinsya  # typo seen in the wild
+    - tartarsyra  # calque of "tartaric acid", alternate Swedish name seen in the wild
+    - vinsyraxr  # typo seen in the wild, stray trailing characters
 
 - id: metatartaric_acid
   e_number: E353
@@ -160,6 +233,7 @@
     - metatartarsyra
     - metakarsyra
     - metavinsyre
+    - meta vinsyra  # space-separated variant, "Stabilisator (Meta-Vinsyra)"
     - metatartaric acid
     - metvinsyra  # typo seen in the wild
     - metatvinsyra  # typo seen in the wild
@@ -185,6 +259,10 @@
     - citric acid
     - citric acid monohydrate
     - citronsyra monohydrat  # split by a stray comma, "citronsyra, monohydrat"
+    - citroncyra  # typo seen in the wild
+    - cintronsyra  # typo seen in the wild
+    - citrosyra  # typo seen in the wild
+    - citronsyraoch  # merged with "och" (and), no space in the source
 
 - id: fumaric_acid
   e_number: E297
@@ -194,14 +272,16 @@
   note:
     sv: Hindrar att den malolaktiska jäsningen startar om i flaskan.
     en: Stops malolactic fermentation restarting in the bottle.
-  aliases: [fumarsyra, fumarat, fumaric acid, furmarsyra]
+  aliases: [fumarsyra, fumarat, fumaric acid, furmarsyra, fumarsyraoch]
+  # "fumarsyraoch": merged with "och" (and), no space in the source.
 
 - id: lactic_acid
   e_number: E270
   bucket: additive
   category: acidity_regulator
   name: { sv: Mjölksyra, en: Lactic acid }
-  aliases: [mjölksyra, mjölksyror, lactic acid]
+  aliases: [mjölksyra, mjölksyror, lactic acid, mjölksyraoch]
+  # "mjölksyraoch": merged with "och" (and), no space in the source.
 
 - id: potassium_bitartrate
   e_number: E336
@@ -247,6 +327,13 @@
     sv: Används för att justera surheten i musten, framför allt i traditionell sherrytillverkning ("plastring").
     en: Used to adjust the acidity of the must, chiefly in traditional sherry production ("plastering").
   aliases: [kalciumsulfat, calcium sulfate]
+
+- id: potassium_citrate
+  e_number: E332
+  bucket: additive
+  category: acidity_regulator
+  name: { sv: Kaliumcitrat, en: Potassium citrate }
+  aliases: [kaliumcitrat, potassium citrate]
 
 - id: diammonium_phosphate
   e_number: E342
@@ -358,6 +445,31 @@
     - karboxmetylcellulosa  # typo seen in the wild
     - karboximetilcellulosa  # typo seen in the wild
     - natriumkarboximetylcellulosa  # sodium CMC
+    - karboximetylcelluosa  # typo seen in the wild, missing l
+    - corboxymetylcellulosa  # typo seen in the wild
+    - karkboksimetylcellulosa  # typo seen in the wild, letters swapped
+    - kaboximetylcellulosa  # typo seen in the wild, missing r
+    - karboximtylcellulosa  # typo seen in the wild, missing e
+    - karboximetylcelluolsa  # typo seen in the wild, letters transposed
+    - karbomiximetylcellulosa  # typo seen in the wild
+    - karboximetylcellulosastabilisator  # merged with "stabilisator", no space in the source
+
+- id: cellulose
+  e_number: E460
+  bucket: additive
+  category: stabiliser
+  name: { sv: Cellulosa, en: Cellulose }
+  note:
+    sv: Ett annat cellulosaderivat än karboximetylcellulosa (E466), en distinkt tillsats.
+    en: A different cellulose derivative from carboxymethylcellulose (E466), a distinct additive.
+  aliases: [cellulosa, cellulose]
+
+- id: ethyl_methyl_cellulose
+  e_number: E465
+  bucket: additive
+  category: stabiliser
+  name: { sv: Metyletylcellulosa, en: Ethyl methyl cellulose }
+  aliases: [metyletylcellulosa]
 
 - id: gum_arabic
   e_number: E414
@@ -387,6 +499,8 @@
     - gumi arabicum
     - arabiskt gumi
     - gummi arabica
+    - gomma arabica  # Italian
+    - gummu arabicum  # typo seen in the wild, u for i
   # "gummi" and "arabicum" run together with the next word ("arabicumoch"),
   # spelled "arabiska"/"rabicum", or reordered, in the wild.
   regexes:
@@ -397,7 +511,20 @@
   bucket: additive
   category: stabiliser
   name: { sv: Kaliumpolyaspartat, en: Potassium polyaspartate }
-  aliases: [kaliumpolyaspartat, potassium polyaspartate]
+  aliases:
+    - kaliumpolyaspartat
+    - potassium polyaspartate
+    - polyaspartate  # bare English form, seen without the "potassium" prefix
+    - kaliumpolyasoartat  # typo seen in the wild
+    - kaliumpolypartat  # typo seen in the wild
+    - kaluimpolyaspartat  # typo seen in the wild
+    - kaliumplyaspartat  # typo seen in the wild
+    - kaliumpolyasperat  # typo seen in the wild
+    - kaliumpolyasparat  # typo seen in the wild
+    - kaliumpolyasprtat  # typo seen in the wild
+    # "gummi" (from the following "gummi arabicum") merged onto this word with
+    # no space, and its own spelling slipped too ("aspartat" -> "asparpat").
+    - kaliumpolyasparpatgummi
   regexes:
     - '\bkalium\s?polyaspartat\b'
 
@@ -416,6 +543,7 @@
     - mannoproteiner
     - mannoprotein
     - yeast mannoproteins
+    - mannoprotiener  # typo seen in the wild, letters transposed
 
 - id: tannins
   bucket: additive
@@ -424,7 +552,7 @@
   note:
     sv: Tillsatta tanniner, oftast ur ek eller druvkärnor, för struktur och färgstabilitet.
     en: Added tannins, usually from oak or grape seeds, for structure and colour stability.
-  aliases: [tanniner, tannin, tannins, ektanniner]
+  aliases: [tanniner, tannin, tannins, ektanniner, tannini]
 
 - id: pvpp
   e_number: E1202
@@ -458,6 +586,7 @@
     - cx9  # commercial yeast strain code
     - dv10  # commercial yeast strain code
     - yeast
+    - jästsvampar  # plural of jästsvamp seen in the wild
 
 - id: malolactic_bacteria
   bucket: additive
@@ -500,6 +629,7 @@
     - natural flavors
     - chocklad  # misspelling of choklad seen in the wild
     - choklad
+    - flavouring  # bare singular English form
   # Any compound ending in -arom, with or without a "naturlig" prefix.
   regexes:
     - '\b(naturlig\w*\s+)?\w*aromer\b'
@@ -507,12 +637,38 @@
     - '\b(naturlig\w*\s+)?\w*smak\b'
     - '\b\w+extrakt\b'
 
+# Caramel colour comes in four manufacturing variants (E150a-d) that differ
+# chemically; only "karamell"/"sockerkulör" without a variant is generic. See
+# the sulfites group above for the same generic/specific pattern.
 - id: caramel_colour
-  e_number: E150a
   bucket: additive
   category: colour
+  group: caramel_colour
+  generic: true
   name: { sv: Sockerkulör, en: Caramel colour }
-  aliases: [sockerkulör, karamellfärg, caramel colour, caramel color]
+  aliases: [sockerkulör, karamellfärg, caramel colour, caramel color, karamell]
+
+- id: caustic_sulphite_caramel
+  e_number: E150b
+  bucket: additive
+  category: colour
+  group: caramel_colour
+  name: { sv: Kaustisk sulfitkaramell, en: Caustic sulphite caramel }
+  note:
+    sv: En av de fyra tillverkningsvarianterna av sockerkulör (E150).
+    en: One of the four manufacturing variants of caramel colour (E150).
+  aliases: [kaustisk sulfitkaramell, caustic sulphite caramel, caustic sulfite caramel]
+
+- id: sulphite_ammonia_caramel
+  e_number: E150d
+  bucket: additive
+  category: colour
+  group: caramel_colour
+  name: { sv: Sulfitammoniak-sockerkulör, en: Sulphite ammonia caramel }
+  note:
+    sv: En av de fyra tillverkningsvarianterna av sockerkulör (E150).
+    en: One of the four manufacturing variants of caramel colour (E150).
+  aliases: []
 
 - id: anthocyanins
   e_number: E163
@@ -527,6 +683,20 @@
   category: colour
   name: { sv: Karmin, en: Carmine }
   aliases: [karmin, karminsyra, cochenill, carmine, cochineal]
+
+- id: sunset_yellow
+  e_number: E110
+  bucket: additive
+  category: colour
+  name: { sv: Para-orange (Sunset Yellow FCF), en: Sunset Yellow FCF }
+  aliases: []
+
+- id: ponceau_4r
+  e_number: E124
+  bucket: additive
+  category: colour
+  name: { sv: Ponceau 4R (Cochenillrött A), en: Ponceau 4R (Cochineal Red A) }
+  aliases: []
 
 - id: wheat_protein
   bucket: additive
@@ -588,6 +758,12 @@
     - pea phytoprotein
     - vegetable protein
 
+- id: potato_protein
+  bucket: additive
+  category: other
+  name: { sv: Potatisprotein, en: Potato protein }
+  aliases: [potatisprotein, potato protein]
+
 - id: gelatin
   bucket: additive
   category: other
@@ -608,7 +784,12 @@
   bucket: additive
   category: other
   name: { sv: Bentonit, en: Bentonite }
-  aliases: [bentonit, bentonite]
+  aliases:
+    - bentonit
+    - bentonite
+    - bentonita  # typo seen in the wild
+    - bentoniter  # plural, seen in the wild
+    - natriumbentonit  # sodium-activated bentonite, still E558
 
 - id: nitrogen
   e_number: E941
@@ -618,7 +799,15 @@
   note:
     sv: Skyddsgas vid tappning. Ersätter syret i flaskhalsen.
     en: Bottling gas. Displaces the oxygen in the bottle neck.
-  aliases: [kväve, kvävgas, nitrogen gas, nitrogen, kvävgas (nitrogen), azoto]
+  aliases:
+    - kväve
+    - kvävgas
+    - nitrogen gas
+    - nitrogen
+    - kvävgas (nitrogen)
+    - azoto
+    - nitrogengas  # merged, no space
+    - nirtogengas  # typo seen in the wild, letters transposed
 
 - id: carbon_dioxide
   e_number: E290
@@ -628,7 +817,8 @@
   note:
     sv: Används som skyddsgas och för att ge en lätt kolsyra.
     en: Used as a bottling gas and to give a light spritz.
-  aliases: [koldioxid, kolsyra, carbon dioxide, co2]
+  aliases: [koldioxid, kolsyra, carbon dioxide, co2, kodioxid]
+  # "kodioxid": typo seen in the wild, missing l.
 
 - id: argon
   e_number: E938
@@ -636,6 +826,13 @@
   category: gas
   name: { sv: Argon, en: Argon }
   aliases: [argon]
+
+- id: oxygen
+  e_number: E948
+  bucket: gas
+  category: gas
+  name: { sv: Syrgas, en: Oxygen }
+  aliases: [syrgas, oxygen]
 
 - id: grapes
   bucket: base
@@ -662,6 +859,9 @@
     - raisins  # French for grapes, not the dried fruit
     - vindruvor¹  # footnote marker attached, "Druvor¹ ... ¹från ekologiskt jordbruk"
     - druvor¹  # footnote marker attached
+    - vindruvor1  # footnote marker as a plain digit, seen in the wild
+    - druvor1  # footnote marker as a plain digit, seen in the wild
+    - druvoer  # typo seen in the wild
   regexes:
     - '\b(vit|vita|röd|röda|svart|svarta|blå|blåa)?\s*druv(a|an|ar|or|orna)\b'
     - '\bvindruv(a|an|ar|or|orna)\b'
@@ -698,6 +898,13 @@
     - concentrated grape must
     - mcr  # abbreviation of "mosto concentrato rettificato"
     - rektifierat koncentrat av druvmust
+    - koncentrerat  # inflection of "koncentrerad" seen in the wild
+    - konsentrerad  # typo seen in the wild
+    - koncentrerade  # inflection of "koncentrerad" seen in the wild
+    - kncentrerad  # typo seen in the wild, missing o
+    - druvmustkoncentrerad  # merged, no space in the source
+    - rektifiera  # bare infinitive, not followed directly by a must-word
+    - rektifierat  # inflection not followed directly by a must-word
   regexes:
     - '\brektifiera[dt]?\s+\w*must\w*'
     - '\b\w*mustkoncentrat\b'
@@ -732,6 +939,17 @@
     - liqueur d'expédition
     - liqueur d'expêdition  # typo seen in the wild
     - liquor de tirage  # "liquor" for "liqueur", seen in the wild
+    - triagelikör  # typo seen in the wild, letters transposed
+    - tiraglikör  # typo seen in the wild
+    - tirageliqueur  # merged, no space in the source
+    - expeditionsliqueur  # merged, no space in the source
+    - expeditionliqueur  # merged, no space in the source
+    - expedisionslikör  # typo seen in the wild
+    # Word-for-word machine mistranslation of "liqueur de tirage": tirage (a
+    # drawing-off) -> utkast (a draft/sketch), de -> till, liqueur -> vätska
+    # (liquid), reordered to match Swedish word order. Seen verbatim across
+    # unrelated Champagne producers.
+    - utkast till vätska
 
 - id: sugar
   bucket: base
@@ -759,6 +977,13 @@
     - sockerlag  # sugar solution/syrup
     - sugar
     - cane sugar
+    - sockertsirap  # typo seen in the wild
+    - sacaros  # typo seen in the wild, missing k
+    - socker¹  # footnote marker attached
+    - sockar  # typo seen in the wild
+    - sackarod  # typo seen in the wild, d for s
+    - biosackaroser  # "bio" (organic) + plural "sackaroser", merged
+    - sciroppo zuccherino  # Italian, "sugar syrup"
 
 - id: wine_alcohol
   bucket: base
@@ -784,6 +1009,8 @@
     - agricultural alcohol
     - alkohol
     - alcohol
+    - etylalkohol  # alternate Swedish name for ethanol
+    - sultanasalkohol  # alcohol distilled from sultana grapes, merged
 
 - id: water
   bucket: base
@@ -797,6 +1024,24 @@
     sv: Sake säljs i vinkategorin och deklarerar ris i stället för druvor.
     en: Sake is sold under the wine category and declares rice rather than grapes.
   aliases: [kojiris, mältat ris, koji, ris, rice, rice koji]
+
+- id: honey
+  bucket: base
+  name: { sv: Honung, en: Honey }
+  aliases: [honung, lindhonung, honey]
+
+- id: grain
+  bucket: base
+  name: { sv: Spannmål, en: Grain }
+  note:
+    sv: Basen för destillerad alkohol i vissa aromatiserade drycker, t.ex. gin.
+    en: The base for distilled alcohol in some aromatised drinks, e.g. gin.
+  aliases: [spannmål, grain]
+
+- id: coffee
+  bucket: base
+  name: { sv: Kaffe, en: Coffee }
+  aliases: [kaffe, coffee]
 
 - id: fruit
   bucket: base
@@ -835,6 +1080,8 @@
     - sötpotatis
     - safflower
     - sweet potato
+    - fruktte  # fruit tea
+    - granatäpple  # pomegranate
   regexes:
     # An optional colour adjective ("svarta vinbär", "svart morot") is part of
     # the same base ingredient, not a separate leftover word.
@@ -852,6 +1099,7 @@
     - kardemumma
     - ingefära
     - pomerans
+    - pommerans  # typo seen in the wild, doubled m
     - apelsin
     - citron
     - kanel
@@ -873,11 +1121,22 @@
     - enbär
     - korianderfrö
     - kvannerot
+    - granskott  # spruce shoots, a Nordic glögg ingredient
+    - cinchona  # cinchona bark, English for "kinabark" above
 
 - id: wine
   bucket: base
   name: { sv: Vin, en: Wine }
-  aliases: [rött vin, rödvin, vitt vin, vin, wine, vino, druvvin]
+  aliases:
+    - rött vin
+    - rödvin
+    - vitt vin
+    - vin
+    - wine
+    - vino
+    - druvvin
+    - sherry  # a wine style used as a component in this blend
+    - bärvin  # berry wine, "bär" (berry) + "vin" (wine) merged
   regexes:
     - '\bav[\s-]?alkoholiserat\s+vin\b'
     - '\balkoholiserat\b'
@@ -904,3 +1163,4 @@
     - licor
     - likör
     - liqueur
+    - liquer  # typo seen in the wild, missing u

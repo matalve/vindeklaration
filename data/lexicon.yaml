@@ -102,6 +102,7 @@ category_labels:
   - stabiliserande
   - kurator  # machine translation of "conservador"/preservative
   - konservering
+  - konserververing  # typo seen in the wild, doubled "ver"
   - surhetsregulator
   - surhetsregulatorer
   - syrakorrigering
@@ -120,6 +121,7 @@ category_labels:
   - colours
   - jäsmedel
   - jäsningsmedel
+  - jästmedel  # typo of "jäsmedel" seen in the wild
   - surhetsreglerandemedel  # header merged with the following word, no space
   - konserveringsmede  # truncated header seen in the wild
   - konsveringsmedel  # typo seen in the wild
@@ -135,7 +137,9 @@ category_labels:
   - stabilizzanti
   - antioxidantkonserveringsmedel  # header merged with the following word
   - antioxidationer
+  - antioxidations  # typo of "antioxidationer" seen in the wild
   - ingrédient  # French
+  - mousserande  # "sparkling", describes the wine, not a substance
   # Portuguese headers.
   - regulador de acidez
   - agentes estabilizadores
@@ -150,6 +154,94 @@ category_labels:
   - övrigt
   - konserveringsämnen
   - konserveringsämne
+  - stabilising agents  # English, "stabilising agents (ascorbic acid)"
+  - acid  # English generic header, mirrors "syra"/"syror"
+  - konservativ  # singular of "konservativa", machine translation of "preservative"
+  - agenti  # Italian, "agents"
+  - antiossidanti  # Italian, "antioxidants"
+  - acido  # Italian generic header, mirrors "syra"/"syror"
+  - principali  # Italian, "main" ("Ingredienti principali")
+  - sostanze  # Italian, "substances" ("sostanze per l'arricchimento")
+  - arricchimento  # Italian, "enrichment"
+  - kuratos  # variant of "kurator" seen in the wild
+  - syrareguleringsmedel  # alternate wording of "surhetsreglerande medel"
+  - sörning  # typo for "sötning" seen in the wild
+  - livsmedeltillsatser  # merged compound, "food additives", no space in the source
+  - livsmedelstillsats  # merged compound, singular
+  # Typos of "antioxidanter"/"antioxidationsmedel"/"antioxidant" seen in the wild.
+  - antioxidater
+  - antixodanter
+  - antioxidaanter
+  - antioxitanter
+  - antioxianter
+  - antixidanter
+  - antioxaidanter
+  - antidioxanter
+  - antidioxant
+  - antioxidationsmede
+  - antioxidationsmdel
+  - antiooxidationsmedel
+  - antioxisantionsmedel
+  - antioxisdationsmedel
+  - anitoxidationsmedel
+  - antiocidationsmedel
+  - anioxidationsmedel
+  - antioxidantionsmedel
+  - antioxidationsmedle
+  - anitoxidant
+  # Typos of "konserverings" (the truncated header stem) seen in the wild.
+  - konservings
+  - konsergerings
+  - konserverins
+  - konerverings
+  - konsreverings
+  - sonserverings
+  # Typos of "konserveringsmedel" seen in the wild.
+  - konservieringsmedel
+  - konserveringmedel
+  - konservingsmedel
+  - konservringsmedel
+  - konserveringsmeldel
+  - konsaerveringsmedel
+  - konsrveringsmedel
+  - konservineringsmedel
+  - lpnserveringsmedel
+  - konsververingsmedel
+  - konserversingsmedel
+  - koncerveringsmedel
+  - konserveringamedel
+  - konserveringsmadel
+  - konserveringsmdedel
+  - konserveringsmedek  # typo of the already-truncated "konserveringsmede"
+  # Typos of "surhetsreglerande" seen in the wild.
+  - surhetsreglerare
+  - surhetreglerande
+  - surhetsreglerade
+  - surhetsreglernade
+  - surhetsreglerane
+  - surhetsreglerarnde
+  - surhetsrelerande
+  - surhetsreglarande
+  # Typos of "stabilisatorer" seen in the wild.
+  - statbilisatorer
+  - stabilsatorer
+  - stabilisatorrer
+  - stabilasatorer
+  - stablisatorer
+  # Typos of "stabiliseringsmedel" seen in the wild.
+  - stabilieringsmedel
+  - stabiliseringsmedek
+  - stabiliersingsmedel
+  - stabiliveringsmedel
+  - stablisieringsmedel
+  - satbiliserande  # typo of "stabiliserande"
+  # Typos of "förpackningsgas(er)" seen in the wild.
+  - förpckaningsgas
+  - förpackningsgader
+  - rpackningsgaser
+  - förpackningsgarser
+  - förpackninsgaser
+  - ingredienti  # Italian plural of "ingrediente", mirrors "ingredients"
 
 # Statements about handling rather than content.
 processing_notes:
@@ -170,16 +262,18 @@ processing_notes:
       - tappat
       - tappas
       - tappad
+      - instoppad  # bottling verb variant, "Instoppad i skyddande atmosfär"
     # Every supplier words this differently, so it is matched by shape: a
     # bottling verb, optional filler, then the atmosphere — in either order,
     # since "under skyddsatmosfär buteljerat" puts the verb last. "skydd" is
     # given a wildcard prefix/suffix and a small gap before "atmo"/"gas" to
     # absorb merges ("enskyddande"), typos ("atmsfär", "afmosfär") and stray
-    # inserted words ("skyddan de atmosfär").
+    # inserted words ("skyddan de atmosfär"). "kontrollerad" alongside skydd/
+    # modifierad/protective/inert covers "förvarat i en kontrollerad atmosfär".
     regexes:
-      - '\b(tappa\w*|tappn\w*|buteljer\w*|butljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|fyll\w*|producera\w*|condition\w*|ekologisktappa\w*)\b[\w\s]{0,24}?\b(\w*s?kydd\w*|modifierad|protective|inert).{0,4}?(atmo\w*|atom\w*|afmo\w*|atmsf\w*|atmosphere|miljö\w*|gas\w*)\b'
-      - '\b(\w*s?kydd\w*|modifierad|protective|inert).{0,4}?(atmo\w*|atom\w*|afmo\w*|atmsf\w*|atmosphere|miljö\w*|gas\w*)\b[\w\s]{0,24}?\b(tappa\w*|tappn\w*|buteljer\w*|butljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|fyll\w*)\b'
-      - '\b(\w*s?kydd\w*|modifierad|protective|inert).{0,4}?(atmo\w*|atom\w*|afmo\w*|atmsf\w*|atmosphere|miljö\w*|gas\w*)\b'
+      - '\b(tappa\w*|tappn\w*|buteljer\w*|butljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|förvara\w*|fyll\w*|producera\w*|condition\w*|ekologisktappa\w*)\b[\w\s]{0,24}?\b(\w*s?kydd\w*|modifierad|kontrollerad|protective|inert).{0,4}?(atmo\w*|atom\w*|afmo\w*|atmsf\w*|atmosphere|miljö\w*|gas\w*)\b'
+      - '\b(\w*s?kydd\w*|modifierad|kontrollerad|protective|inert).{0,4}?(atmo\w*|atom\w*|afmo\w*|atmsf\w*|atmosphere|miljö\w*|gas\w*)\b[\w\s]{0,24}?\b(tappa\w*|tappn\w*|buteljer\w*|butljer\w*|flaska\w*|flaskas|bottl\w*|packa\w*|förpacka\w*|förvara\w*|fyll\w*)\b'
+      - '\b(\w*s?kydd\w*|modifierad|kontrollerad|protective|inert).{0,4}?(atmo\w*|atom\w*|afmo\w*|atmsf\w*|atmosphere|miljö\w*|gas\w*)\b'
       - '\bbottle\s+conditioned\b'
   - id: organic
     name: { sv: Ekologisk odling, en: Organic farming }
@@ -211,12 +305,27 @@ processing_notes:
       - eko
       - aus kontrolliert ökologischer landwirtschaft  # German, "from certified organic farming"
       - ¹från ekologiskt jordbruk  # footnote marker attached
+      - 1från ekologiskt jordbruk  # footnote marker as a plain digit, seen in the wild
+      - biologico  # Italian, "mosto concentrato biologico"
+      - ekoligiskt  # typo seen in the wild
+      - organiskt  # inflection of "organisk" seen in the wild
   - id: vegan
     name: { sv: Vegansk, en: Vegan }
     aliases: [vegansk, veganskt, vegan]
   - id: contains_allergen_notice
     name: { sv: Allergenupplysning, en: Allergen notice }
-    aliases: [innehåller allergener, allergener]
+    aliases: [innehåller allergener, allergener, allergen]
+  - id: integrated_production
+    name:
+      sv: Integrerad produktion (PRODI)
+      en: Integrated production (PRODI)
+    note:
+      sv: Portugisisk/brasiliansk certifiering för hållbart odlade druvor, en lättare regim än ekologisk odling.
+      en: A Portuguese/Brazilian certification for sustainably farmed grapes, a lighter regime than organic farming.
+    aliases:
+      - prodi-druvor
+      - prodi druvor
+      - prodi
 
 # Connectives and filler. Removed before judging the residue.
 stopwords:
@@ -346,3 +455,72 @@ stopwords:
   - förpackat
   - får  # "Förpackningen får ske under en skyddande atmosfär"
   - vegetabiliskt  # "vegetabiliskt klarningsmedel" — describes the (already-stripped) fining agent header
+  - vegetabisliska  # typo of "vegetabiliskt" seen in the wild
+  # Grape variety names. Unlike data/additives.yaml's `grapes` entry (see the
+  # comment there), these carry zero information either way — they are never
+  # counted and never distinguish one wine from another — so a fixed list here
+  # does not risk misattributing a variety. They only leak into `unknown_tokens`
+  # when the catalog's own grape list is empty, spells the variety differently
+  # (Catalan/Basque/Spanish forms, accents), or names a second grape in a blend
+  # that Systembolaget's catalog does not list.
+  - grenache
+  - grenach  # typo seen in the wild
+  - sauvignon
+  - cabernet
+  - macabeu  # Catalan spelling of Macabeo
+  - garnacha
+  - carignan
+  - ondarrabi  # Basque, "Ondarrabi Zuri"/"Ondarrabi Beltza" (Txakoli)
+  - zuri
+  - beltza
+  - blanca
+  - blanc
+  - viognier
+  - merlot
+  - syrah
+  - touriga
+  - nacional
+  - alibernet
+  - samsó  # Catalan synonym for Carignan
+  - negra  # "Grenache Negra", the black/red variant
+  - telti  # Georgian grape "Telti-Kuruk"
+  - kuruk
+  - mencia
+  - palomino
+  - fino  # "Palomino Fino", the sherry clone
+  - chardonnay
+  - semillon  # unaccented spelling of "Sémillon"
+  - gewurztraminer
+  - xarel·lo  # middle-dot character does not match the hyphenated catalog spelling
+  - rieslingdruvor  # "Riesling grapes", merged compound
+  # Colour adjectives describing grapes, not a separate ingredient.
+  - vit
+  - vita
+  - röd
+  - färsk
+  - färska
+  - torkade
+  - naturlig
+  - kommersiell
+  - hållbart
+  - livsmedelsgodkänd
+  - krav  # Swedish organic/ethical certification mark, like "eco"/"ccpae"
+  - flytande  # "Flytande svaveldioxid" — describes the physical form
+  - single  # "Whisky, single malt" — describes the whisky style
+  - malt  # "Whisky, single malt" — describes the whisky style
+  - skal  # "peel", describing an adjacent named spice ("pommerans skal")
+  - kärnor  # "seeds/pods", describing an adjacent named spice ("kardemumma kärnor")
+  - endast  # "Endast obetydlig mängd" — "Only an insignificant amount"
+  - lösning  # "SO2 6% lösning" — describes the delivery form, not a separate substance
+  - används  # "som används för" — "which is used for"
+  - sulfat  # bare "sulfat-tillsatser" — a generic reference, not a specific compound
+  - 60mg  # merged dosage figure and unit, like the existing "100ml"
+  - natural  # English, mirrors "naturlig"/"naturliga"
+  - span>  # stray HTML tag fragment leaked into a declaration
+  # Typos of "innehåller"/"innehålle" (contains) seen in the wild.
+  - innehålle
+  - innehller
+  - innheåller
+  - innehäller
+  - uínnehåller
+  - ellrt  # typo of "eller" (or)

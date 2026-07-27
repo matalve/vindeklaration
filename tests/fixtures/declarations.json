@@ -167,5 +167,71 @@
   "gases": [],
   "base": ["grapes"],
   "allergens": ["sulfites"]
+ },
+ {
+  "why": "bare kaliumsulfit is potassium bisulfite (E228), not potassium metabisulfite (E224) -- the fuzzy matcher's closest string is the wrong chemical",
+  "text": "Rött vin, vatten, koncentrerad druvmust, naturliga aromer, gaser och förpackningsgaser: koldioxid (e290), surhetsreglerande medel: vinsyra (l(+)-) (e334), stabilisatorer: kaliumpolyaspartat (e456), gummi arabicum (e414), konserverings- och antioxidationsmedel: dimetyldikarbonat (dmdc) (e242), SULFITER (e220), gaser och förpackningsgaser: kväve (e941).\nKan innehålla Stabilisatorrer: citronsyra (e330), surhetsreglerade medel: äppelsyra (d, l;l-) (e296), mjölksyra (e270), konserverings- och antioxidationsmedel: kaliumsulfit (e228), stabilisatorer: mannoproteiner från jäst (e455)",
+  "additives": ["citric_acid", "dimethyl_dicarbonate", "e455", "flavourings", "gum_arabic", "lactic_acid", "malic_acid", "mannoproteins", "potassium_bisulfite", "potassium_polyaspartate", "sulfur_dioxide", "tartaric_acid"],
+  "gases": ["carbon_dioxide", "nitrogen"],
+  "base": ["grape_must", "water", "wine"]
+ },
+ {
+  "why": "utkast till vätska is a word-for-word machine mistranslation of \"liqueur de tirage\" (tirage->utkast, de->till, liqueur->vätska), seen verbatim across unrelated Champagne producers",
+  "text": "druvor, antioxidationsmedel, Sulfiter, surhetsreglerande medel, utkast till vätska, expeditionslikör, stabiliserande",
+  "additives": ["sulfites"],
+  "gases": [],
+  "base": ["expedition_liqueur", "grapes"]
+ },
+ {
+  "why": "caramel colour's four manufacturing variants (E150a-d) are chemically distinct, so a specific one names itself rather than falling back to generic karamell/sockerkulör",
+  "text": "Vin (Druvor, Koncentrerad druvmust, Surhetsreglerande medel: Vinsyra (E334), Konserveringsmedel: SULFITER), Socker, Vatten, Alkohol, Färgämne: Kaustisk sulfitkaramell (E150b), Naturliga aromer, Syra: citronsyra (E330), Konserveringsmedel: SULFITER",
+  "additives": ["caustic_sulphite_caramel", "citric_acid", "flavourings", "sulfites", "tartaric_acid"],
+  "gases": [],
+  "base": ["grape_must", "grapes", "sugar", "water", "wine", "wine_alcohol"]
+ },
+ {
+  "why": "bare karamell next to an E150d number reads as the specific sulphite ammonia caramel, not double-counted against the generic caramel colour",
+  "text": "Druva, vinalkohol, koncentrerad druvmust, surhetsreglerande medel (vinsyra E-334 och kalciumsulfat E-516), karamell E-150d, konserverings- och antioxidationsmedel ( kaliummetabisulfit E-224 (sulfiter) , kaliumsorbat E-202), stabilisator (kaliumbitartrat E-336)",
+  "additives": ["calcium_sulfate", "potassium_bitartrate", "potassium_metabisulfite", "potassium_sorbate", "sulphite_ammonia_caramel", "tartaric_acid"],
+  "gases": [],
+  "base": ["grape_must", "grapes", "wine_alcohol"]
+ },
+ {
+  "why": "PRODI is a Portuguese/Brazilian integrated-production farming certification, not a substance, and is not the wine's producer name",
+  "text": "PRODI-druvor, konserveringsmedel (sulfiter), stabiliseringsmedel (kaliumpolyaspartat), rektifierad koncentrerad druvmust. Buteljeras i skyddad atmosfär.",
+  "additives": ["potassium_polyaspartate", "sulfites"],
+  "gases": [],
+  "base": ["grape_must", "grapes"],
+  "processing": ["integrated_production", "protective_atmosphere"]
+ },
+ {
+  "why": "kaliumpolyaspartat and gummi arabicum run together with no space, and the source also drops a letter from \"aspartat\"",
+  "text": "Druva, konserveringsmedel (sulfiter), stabiliseringsmedel (kaliumpolyasparpatgummi arabicum)",
+  "additives": ["gum_arabic", "potassium_polyaspartate", "sulfites"],
+  "gases": [],
+  "base": ["grapes"]
+ },
+ {
+  "why": "gomma arabica is Italian for gum arabic, not a separate substance from the Swedish gummi arabicum",
+  "text": "Druvor*, rektifierad koncentrerad druvmust*, konserveringsmedel (METABISOLFITO DI POTASSIO (E224)), stabilisatorer (Gomma arabica (E414)) (*) Ekologisk\nTappning kan ske i en skyddande atmosfär",
+  "additives": ["gum_arabic", "potassium_metabisulfite"],
+  "gases": [],
+  "base": ["grape_must", "grapes"],
+  "processing": ["organic", "protective_atmosphere"]
+ },
+ {
+  "why": "grape variety names (Garnacha, Cabernet Sauvignon, Merlot, Carignan) and the \"röd\" colour adjective carry no additive information and must not surface as unknown text",
+  "text": "14,5% vol. 35% röd Garnacha, 25% Cabernet Sauvignon, 25% Merlot, 15% Carignan. Innehåller SULFITER. Från EU-jordbruk. Ekologiskt certifierad av CCPAE - ES-ECO-019-CT.",
+  "additives": ["sulfites"],
+  "gases": [],
+  "base": [],
+  "processing": ["organic"]
+ },
+ {
+  "why": "Syrah must read as a grape variety, not fuzzy-match the unrelated \"syra\" (acid) header just because the strings are similar",
+  "text": "14,5% vol. 60% Carignan, 35% röd Garnacha, 5% Syrah. Innehåller SULFITER.",
+  "additives": ["sulfites"],
+  "gases": [],
+  "base": []
  }
 ]
