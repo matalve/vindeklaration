@@ -112,18 +112,74 @@ Three consequences that shape every page:
 - That a named importer is legally responsible for a declaration, is accountable
   for its absence, or has broken a rule. The table reports what
   systembolaget.se published on a stated date. See *Naming importers*.
-- No advertising, no affiliate links, no sponsorship, no paid placement, no
-  commercial income of any kind. This was a preference on privacy grounds; it is
-  now a rule with a legal reason. Swedish marketing law reaches measures taken
-  *i näringsverksamhet* that are *ägnade att främja avsättningen*
+- **Today: no advertising, no affiliate links, no sponsorship, no paid
+  placement, no commercial income of any kind.** This began as a preference on
+  privacy grounds and acquired a legal reason. Swedish marketing law reaches
+  measures taken *i näringsverksamhet* that are *ägnade att främja avsättningen*
   (marknadsföringslagen 2008:486, 3 §), and alkohollagen 7 kap. bites only on
   marknadsföring. Having no commercial interest is the fact that keeps the site
-  outside that definition. Taking income would supply the missing element — and
-  research on 2026-07-28 found that the same element gates **five** regimes, not
-  one: alkohollagen 7 kap., Regulation (EC) No 1924/2006, marknadsföringslagen
-  18 § on comparative advertising, varumärkeslagen 1 kap. 10 §, and clause 4 of
-  Systembolaget's own user terms. One affiliate link would open all five at once.
-  See `docs/legal-notes.md` §4d and §3e.
+  outside that definition.
+  **The owner intends to introduce advertising later** — sponsored links,
+  placements or banners — and stated so on 2026-07-28. That is a legitimate
+  plan and this document does not argue against it. It is recorded here because
+  it is the single change that alters the most: see *When the site takes
+  income*. Until it happens, the sentence above is the current state of the
+  site and holds.
+
+## When the site takes income
+
+The owner expects to run wine advertising eventually — sponsored links or
+placements, banners, some small revenue. Decided in principle 2026-07-28, not
+current. Nothing here is an argument against it; it is the list of what changes
+on the day, written while nobody is under time pressure.
+
+**The change is not one of degree.** Every regime researched so far turns on a
+single unanswered question — is the site acting *i näringsverksamhet* — and
+today the honest answer is that it plainly is not, because there is no income
+and no commercial interest. Advertising revenue does not make that question
+harder to answer. It answers it, the other way, and it does so for **five
+regimes at once** (`docs/legal-notes.md` §4d, §3e):
+
+| Regime | What engages |
+|---|---|
+| Alkohollagen 7 kap. | *särskild måttfullhet* in all alcohol marketing; format and content rules |
+| Regulation (EC) 1924/2006 | Art. 4(3) bars **all** health claims on >1.2% abv drinks, without exception |
+| Marknadsföringslagen 18 § | rules on comparative advertising — which is what the importer table becomes |
+| Varumärkeslagen 1 kap. 10 § | use of others' marks in a commercial context |
+| Systembolaget's user terms, clause 4 | the commercial limb of their linking permission |
+
+The rankings are the exposure. A "fewest declared additives" list is a
+defensible piece of consumer information published by someone with nothing to
+gain. The same list, on a page carrying paid wine advertising, is a promotional
+comparison of alcoholic beverages by a party with a commercial interest — and
+*Deutsches Weintor* (C-544/10) holds that a health claim covers any implication
+of reduced harm, proscribed without exception. The list would not have changed.
+Its legal character would.
+
+Consequences worth deciding before, not after:
+
+- **Take it to a Swedish lawyer first.** This is the point where the accumulated
+  "needs a lawyer" findings stop being theoretical. Doing it before the first
+  revenue is cheap; doing it after is a remediation.
+- **Separate the money from the ranking, visibly and structurally.** No
+  advertiser may appear in, above, adjacent to, or be excluded from a ranked
+  list. If an importer can pay to affect what a list shows or how it reads, the
+  dataset's whole claim collapses — and that claim is the only asset here.
+- **The wording review becomes mandatory rather than advisable.** Under 1924/2006
+  the margin for an implied health claim goes to zero.
+- **The importer table needs re-examining.** A named comparison of companies
+  published by a commercial actor is a different act from the same table
+  published by a non-commercial one.
+- **Privacy need not follow the money.** No accounts, no cookies, no analytics
+  is an independent commitment and advertising does not require breaking it —
+  but the ad formats that respect it are a smaller set, and that is a choice to
+  make deliberately.
+- **Say so on the page.** Whatever is decided, `/metod` states plainly how the
+  site is funded and what the funding may and may not influence.
+
+The cheapest version of all this: keep the rankings on pages that carry no
+advertising at all, and put the revenue somewhere it cannot touch them. Whether
+that is workable is a business question, not a legal one, and it is the owner's.
 
 The bottle in the user's hand is newer than the dataset. Every wine page carries
 that sentence and a link to the source page.
@@ -757,8 +813,18 @@ open, not that the site is nice.
   browsewrap term binds a client that never created an account, and what would
   follow if it does, was not established. **`robots.txt` is not the whole
   permission set and this plan, `README.md` and `CLAUDE.md` have all been treating
-  it as if it were.** Needs a Swedish lawyer, and it is larger than any page in
-  this plan.
+  it as if it were.**
+  **Decided by the owner 2026-07-28: the crawl continues.** The reasoning is
+  that Systembolaget publishes a product API for use and a `robots.txt` reading
+  `Allow: /`, and that a clause forbidding what those two invite is internally
+  contradictory. That is a judgement about the site owner's evident intent, not
+  a resolution of the clause — the wording stands unchanged and the browsewrap
+  question is still unanswered. It remains worth putting to a lawyer, and it
+  becomes materially more pressing if the site takes income, since clause 4 of
+  the same terms engages then. The crawling discipline in `CLAUDE.md` —
+  sequential, 0.4 s apart, self-identifying, never accelerating after an
+  outage — is what makes the decision defensible in practice and is not
+  negotiable.
 - **Is the dataset itself someone else's database?** Not resolved;
   `docs/legal-notes.md` §2i. Upphovsrättslagen 49 § protects a compilation "i
   vilket ett stort antal uppgifter har sammanställts **eller** vilket är resultatet
@@ -777,10 +843,17 @@ open, not that the site is nice.
   varumärkeslagen 1 kap. 10 §, and clause 4 of Systembolaget's user terms. See the
   table in `docs/legal-notes.md` §3e. **It is the single highest-value question to
   put to a lawyer** — one answer closes five exposures.
-- **Are supplier names that are personal names personal data?**
-  `data/wines.json` carries values such as *Jessica Mihai* and *Staffan Ottosson*
-  in `supplier`. If those are sole traders, publishing a compliance statistic
-  about them is processing personal data about a named individual, which collides
-  with `CLAUDE.md`'s absolute rule that the project holds none. **No GDPR analysis
-  has been done**, and Bolagsverket has not been queried to confirm what those
-  entries are. See `docs/legal-notes.md` §3c.
+- **Are supplier names that are personal names personal data?** Partly settled
+  2026-07-28. The collision with `CLAUDE.md` was a misreading of that rule: it
+  protects the **owner's** data, not third parties'. Carrying sole traders'
+  names in `supplier` is approved — the values are public business information,
+  quoted verbatim from the source, and stripping them would misattribute the
+  wines. `CLAUDE.md` now says so, so no future session re-opens it.
+  **What is not settled is publishing a compliance statistic about them.**
+  Naming a company in the importer table and naming a natural person are
+  different acts: förtal reaches the second and not the first, and truth alone
+  does not acquit under BrB 5:1. **No GDPR analysis has been done**, and
+  Bolagsverket has not been queried to confirm which entries are enskilda
+  firmor. Today the 40-wine threshold keeps all of them out of the table, but
+  that is this quarter's catalogue rather than a safeguard. See
+  `docs/legal-notes.md` §3c and the natural-person rule in *Naming importers*.

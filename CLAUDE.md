@@ -10,12 +10,21 @@ counted. This file is about how to work here.
 - **Everything in the repository is in English.** Code, comments, commits,
   README, docs. The owner writes in Swedish and expects Swedish replies in
   chat — the repo is the exception, not the conversation.
-- **No personal data, ever.** The only approved identifier is the GitHub
-  username `matalve`. Not the owner's real name, not even the first name, and
-  not an email address. The repo is configured to commit as
+- **None of the owner's personal data, ever.** The only approved identifier is
+  the GitHub username `matalve`. Not the owner's real name, not even the first
+  name, and not an email address. The repo is configured to commit as
   `matalve <71018760+matalve@users.noreply.github.com>`; do not override it
   with `git -c user.email=...`. History has been rewritten once already to
   remove a personal address that got in this way.
+  **This rule is about the owner, not about third parties** — clarified
+  2026-07-28. Systembolaget publishes some suppliers under a sole trader's own
+  name, so `data/wines.json` carries about eight values that are personal names
+  (`Jessica Mihai`, `Staffan Ottosson`, `Ludvig Sääf` and a handful more, on
+  some 24 wines). That is approved: it is public business information, taken
+  verbatim from the source, and stripping it would misattribute the wines. It
+  does have a separate consequence for the importer table, since förtal reaches
+  a natural person where it does not reach a company — see *Naming importers*
+  in `docs/site-plan.md`.
 - **Never guess at a declaration.** Text the parser cannot read makes the wine
   `partial`, which keeps it out of the rankings. That is the correct outcome.
   Inventing an alias to make a number look better corrupts the dataset
@@ -77,6 +86,20 @@ the far end yet. After that, use git.
 Requests are sequential, 0.4 s apart, identified by User-Agent, and inside what
 `robots.txt` allows. Do not parallelise, and do not speed up to catch up after
 an outage.
+
+**`robots.txt` is not the whole permission set.** Systembolaget's Allmänna
+användarvillkor (version 2026-04-21) clause 1.7 prohibits crawlers used to
+collect information for services providing *information om alkoholdrycker*,
+with no commercial qualifier — which describes this project. Their `robots.txt`
+says `Allow: /` and blocks only the cart and account pages, so the two do not
+agree. **The owner read the finding on 2026-07-28 and decided to keep
+crawling**, on the view that a public product API published for use, alongside
+a permissive `robots.txt`, contradicts the clause. That is a documented
+decision, not an oversight: do not quietly reverse it, and do not restate the
+clause as though it were news. Whether a browsewrap term binds a party that
+never opened an account is unresolved and is a lawyer's question —
+`docs/legal-notes.md` §2k. The crawling discipline above is what makes the
+decision defensible in practice, so it is not negotiable.
 
 ## Open decisions
 
