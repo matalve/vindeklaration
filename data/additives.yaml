@@ -306,17 +306,34 @@
   name: { sv: Kalciumkarbonat, en: Calcium carbonate }
   aliases: [kalciumkarbonat, calcium carbonate]
 
+# E501 covers two distinct salts, and declarations name whichever one they used.
+# Three wines declare both in the same list, so they cannot share an entry: that
+# reads two substances as one and undercounts. The sub-designations are the
+# regulation's own, and keeping them apart also avoids a bare "E501" token
+# resolving to whichever entry happened to be loaded last — no declaration in
+# the corpus writes one today, and if any ever does it should surface as unread
+# rather than be attributed to a guess.
 - id: potassium_carbonate
-  e_number: E501
+  e_number: E501 (i)
   bucket: additive
   category: acidity_regulator
   name: { sv: Kaliumkarbonat, en: Potassium carbonate }
   aliases:
-    - kaliumbikarbonat
     - kaliumkarbonat
-    - potassium bicarbonate
     - potassium carbonate
-    - khc03  # oenological abbreviation for potassium bicarbonate, KHCO3
+
+- id: potassium_bicarbonate
+  e_number: E501 (ii)
+  bucket: additive
+  category: acidity_regulator
+  name: { sv: Kaliumbikarbonat, en: Potassium bicarbonate }
+  aliases:
+    - kaliumbikarbonat
+    - kaliumvätekarbonat
+    - potassium bicarbonate
+    - potassium hydrogen carbonate
+    - khco3  # oenological abbreviation, KHCO3
+    - khc03  # the same abbreviation with a zero for the O, seen in the wild
 
 - id: calcium_sulfate
   e_number: E516

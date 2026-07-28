@@ -2,262 +2,578 @@
  {
   "why": "shortest possible declaration",
   "text": "Druvor, SULFITER",
-  "additives": ["sulfites"],
+  "additives": [
+   "sulfites"
+  ],
   "gases": [],
-  "base": ["grapes"]
+  "base": [
+   "grapes"
+  ]
  },
  {
   "why": "no separators at all",
   "text": "DRUVA SULFITER TAPPAT I EN SKYDDANDE ATMOSFÄR",
-  "additives": ["sulfites"],
+  "additives": [
+   "sulfites"
+  ],
   "gases": [],
-  "base": ["grapes"],
-  "processing": ["protective_atmosphere"]
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ]
  },
  {
   "why": "bare E-numbers, spaced and unspaced, alongside their written names",
   "text": "Druvor, Surhetsreglerande medel (E334), Stabiliseringsmedel (Tanniner), Konserveringsmedel (E 202, E220 SVAVELDIOXID, E224 KALIUMDISULFIT), Tappat i en skyddande atmosfär",
-  "additives": ["potassium_metabisulfite", "potassium_sorbate", "sulfur_dioxide", "tannins", "tartaric_acid"],
+  "additives": [
+   "potassium_metabisulfite",
+   "potassium_sorbate",
+   "sulfur_dioxide",
+   "tannins",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grapes"],
-  "processing": ["protective_atmosphere"]
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ]
  },
  {
   "why": "a specific sulfite species makes the generic term redundant",
   "text": "Druvor*, konserveringsmedel (kaliumpyrosulfit (SULFITER)), stabilisatorer (karboximetylcellulosa), koldioxid",
-  "additives": ["carboxymethylcellulose", "potassium_metabisulfite"],
-  "gases": ["carbon_dioxide"],
-  "base": ["grapes"]
+  "additives": [
+   "carboxymethylcellulose",
+   "potassium_metabisulfite"
+  ],
+  "gases": [
+   "carbon_dioxide"
+  ],
+  "base": [
+   "grapes"
+  ]
  },
  {
   "why": "two sulfite species named together stay two additives",
   "text": "Druvor, Konserverings- och antioxidationsmedel (KALIUMPYROSULFIT, SVAVELDIOXID), Syror (Vinsyra (L(+)-))",
-  "additives": ["potassium_metabisulfite", "sulfur_dioxide", "tartaric_acid"],
+  "additives": [
+   "potassium_metabisulfite",
+   "sulfur_dioxide",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grapes"]
+  "base": [
+   "grapes"
+  ]
  },
  {
   "why": "metavinsyra must not be read as vinsyra",
   "text": "vinduvor, Konserveringsmedel: SULFITER, Stabiliseringsmedel: metavinsyra.",
-  "additives": ["metatartaric_acid", "sulfites"],
+  "additives": [
+   "metatartaric_acid",
+   "sulfites"
+  ],
   "gases": [],
-  "base": ["grapes"]
+  "base": [
+   "grapes"
+  ]
  },
  {
   "why": "concentrated must must not be read as plain must plus something else",
   "text": "Druvor, koncentrerad must, konserveringsmedel och antioxidanter (kaliumsorbat, SULFITER), stabiliseringsmedel (kaliumpolyaspartat)",
-  "additives": ["potassium_polyaspartate", "potassium_sorbate", "sulfites"],
+  "additives": [
+   "potassium_polyaspartate",
+   "potassium_sorbate",
+   "sulfites"
+  ],
   "gases": [],
-  "base": ["grape_must", "grapes"]
+  "base": [
+   "grape_must",
+   "grapes"
+  ]
  },
  {
   "why": "run-on text, mistranslated gum arabic, leading INGREDIENSER header",
   "text": "INGREDIENSER Druva Konserveringsmedel och Antioxidanter KALIUMMETABISULFIT Stabiliseringsmedel Arabiskt tuggummi Gaser och Förpackningsgaser Buteljerat i en skyddande atmosfär",
-  "additives": ["gum_arabic", "potassium_metabisulfite"],
+  "additives": [
+   "gum_arabic",
+   "potassium_metabisulfite"
+  ],
   "gases": [],
-  "base": ["grapes"],
-  "processing": ["protective_atmosphere"]
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ]
  },
  {
   "why": "misspelled konserveringsmeddel, DMDC, CO2 as a gas",
   "text": "druvor, KONSERVERINGSMEDEL (SULFITER), koldioxid, druvmust, konserveringsmeddel (dimetyldikarbonat)",
-  "additives": ["dimethyl_dicarbonate", "sulfites"],
-  "gases": ["carbon_dioxide"],
-  "base": ["grape_must", "grapes"]
+  "additives": [
+   "dimethyl_dicarbonate",
+   "sulfites"
+  ],
+  "gases": [
+   "carbon_dioxide"
+  ],
+  "base": [
+   "grape_must",
+   "grapes"
+  ]
  },
  {
   "why": "four acids and a sulfite in one nested clause",
   "text": "Druvor, rektifierad koncentrerad druvmust, syror (vinsyra (L(+)-), äppelsyra (D,L-; L-), citronsyra), konserverings- och antioxidationsmedel (kaliumpyrosulfit (SULFITER), L-askorbinsyra)",
-  "additives": ["ascorbic_acid", "citric_acid", "malic_acid", "potassium_metabisulfite", "tartaric_acid"],
+  "additives": [
+   "ascorbic_acid",
+   "citric_acid",
+   "malic_acid",
+   "potassium_metabisulfite",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grape_must", "grapes"]
+  "base": [
+   "grape_must",
+   "grapes"
+  ]
  },
  {
   "why": "allergenic fining agents count as additives",
   "text": "Druvor, Konserverings- och antioxidationsmedel: SULFITER, Tappat i en skyddande atmosfär, Surhetsreglerande medel: Vinsyra, Stabilisatorer: Gummi arabicum, ÄGGPROTEIN",
-  "additives": ["egg_protein", "gum_arabic", "sulfites", "tartaric_acid"],
+  "additives": [
+   "egg_protein",
+   "gum_arabic",
+   "sulfites",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grapes"],
-  "processing": ["protective_atmosphere"],
-  "allergens": ["egg", "sulfites"]
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "egg",
+   "sulfites"
+  ]
  },
  {
   "why": "milk casein",
   "text": "Druvor, Antioxidationsmedel (L-askorbinsyra), Konserveringsmedel (SULFITER), MJÖLKKASSEIN, Surhetsreglerande medel (Vinsyra (L(+)-))",
-  "additives": ["ascorbic_acid", "milk_casein", "sulfites", "tartaric_acid"],
+  "additives": [
+   "ascorbic_acid",
+   "milk_casein",
+   "sulfites",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grapes"],
-  "allergens": ["milk", "sulfites"]
+  "base": [
+   "grapes"
+  ],
+  "allergens": [
+   "milk",
+   "sulfites"
+  ]
  },
  {
   "why": "packaging gas written as an English loanword",
   "text": "Druvor, konserveringsmedel (Sulfiter), förpackningsgas  (Nitrogen gas)",
-  "additives": ["sulfites"],
-  "gases": ["nitrogen"],
-  "base": ["grapes"]
+  "additives": [
+   "sulfites"
+  ],
+  "gases": [
+   "nitrogen"
+  ],
+  "base": [
+   "grapes"
+  ]
  },
  {
   "why": "och/eller lists every stabiliser that might be present",
   "text": "Druvor, Sackaros, Konserveringsmedel: SULFITER, Surhetsreglerande medel: VInsyra, Stabiliseringsmedel innehåller: Metatartronsyra och/eller Arabiskt gummi och/eller Mannoproteiner från jäst, Tappning kan ske i en skyddande atmosfär.",
-  "additives": ["gum_arabic", "mannoproteins", "metatartaric_acid", "sulfites", "tartaric_acid"],
+  "additives": [
+   "gum_arabic",
+   "mannoproteins",
+   "metatartaric_acid",
+   "sulfites",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grapes", "sugar"],
-  "processing": ["protective_atmosphere"]
+  "base": [
+   "grapes",
+   "sugar"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ]
  },
  {
   "why": "truncated mid-word by the supplier",
   "text": "Druva, surhetsreglerande medel (vinsyra [L(+)-]), antioxidant (Askorbinsyra, kaliumbisulf).",
-  "additives": ["ascorbic_acid", "potassium_bisulfite", "tartaric_acid"],
+  "additives": [
+   "ascorbic_acid",
+   "potassium_bisulfite",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grapes"]
+  "base": [
+   "grapes"
+  ]
  },
  {
   "why": "fortified wine: added alcohol is a raw material, not an additive",
   "text": "Druvor, alkohol (neutral vinalkohol) SVAVELDIOXID",
-  "additives": ["sulfur_dioxide"],
+  "additives": [
+   "sulfur_dioxide"
+  ],
   "gases": [],
-  "base": ["grapes", "wine_alcohol"]
+  "base": [
+   "grapes",
+   "wine_alcohol"
+  ]
  },
  {
   "why": "gummi arabicum runs into the next word through a missing space",
   "text": "Druvor, koncentrerad druvmust, surhetsreglerande medel: vinsyra; konserveringsmedel: sulfiter; stabiliseringsmedel: innehåller gummi arabicumoch/eller mannoproteiner från jäst.",
-  "additives": ["gum_arabic", "mannoproteins", "sulfites", "tartaric_acid"],
+  "additives": [
+   "gum_arabic",
+   "mannoproteins",
+   "sulfites",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grape_must", "grapes"],
-  "allergens": ["sulfites"]
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  },
  {
   "why": "protective-atmosphere phrasing with the bottling verb after the noun, not before it",
   "text": "Druvor, sackaros, under skyddsatmosfär buteljerat, konserveringsmedel: SULFITER",
-  "additives": ["sulfites"],
+  "additives": [
+   "sulfites"
+  ],
   "gases": [],
-  "base": ["grapes", "sugar"],
-  "processing": ["protective_atmosphere"],
-  "allergens": ["sulfites"]
+  "base": [
+   "grapes",
+   "sugar"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  },
  {
   "why": "neutral alcohol must not be swallowed whole by the longer alkohol-framställd-av-vinprodukter alias, leaving \"neutral\" stranded",
   "text": "Druvor, neutral alkohol framställd av vinprodukter, rektifierad koncentrerad druvmust, stabiliseringsmedel: gummi arabicum; konserveringsmedel: SULFITER.",
-  "additives": ["gum_arabic", "sulfites"],
+  "additives": [
+   "gum_arabic",
+   "sulfites"
+  ],
   "gases": [],
-  "base": ["grape_must", "grapes", "wine_alcohol"],
-  "allergens": ["sulfites"]
+  "base": [
+   "grape_must",
+   "grapes",
+   "wine_alcohol"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  },
  {
   "why": "tartaric acid or its neutral potassium salt, phrased without ever naming potassium bitartrate",
   "text": "Druva, Stabilisatorer: vinsyra (d, l-) eller dess neutrala kaliumsalt, Konserverings- och antioxidationsmedel SULFITER (e220), rektifierad koncentrerad druvmust, gaser och förpackningsgader: kväve (e941).",
-  "additives": ["potassium_bitartrate", "sulfur_dioxide", "tartaric_acid"],
-  "gases": ["nitrogen"],
-  "base": ["grape_must", "grapes"],
-  "allergens": ["sulfites"]
+  "additives": [
+   "potassium_bitartrate",
+   "sulfur_dioxide",
+   "tartaric_acid"
+  ],
+  "gases": [
+   "nitrogen"
+  ],
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  },
  {
   "why": "colouring foodstuffs from fruit/vegetable concentrate are food (EU 1333/2008), not a counted additive",
   "text": "Ekologiskt vitt vin (50%, ursprung: EU, innehåller SULFITER), vatten, ekologiskt socker, färgämne (från koncentrat av äpple, safflor, sötpotatis), naturliga aromer, syra (citronsyra).",
-  "additives": ["citric_acid", "flavourings", "sulfites"],
+  "additives": [
+   "citric_acid",
+   "flavourings",
+   "sulfites"
+  ],
   "gases": [],
-  "base": ["fruit", "sugar", "water", "wine"],
-  "processing": ["organic"],
-  "allergens": ["sulfites"]
+  "base": [
+   "fruit",
+   "sugar",
+   "water",
+   "wine"
+  ],
+  "processing": [
+   "organic"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  },
  {
   "why": "French \"raisin\" means grape, not the English dried fruit \"raisin\"",
   "text": "raisin, conservateurs (contient sulfites : e 220)",
-  "additives": ["sulfur_dioxide"],
+  "additives": [
+   "sulfur_dioxide"
+  ],
   "gases": [],
-  "base": ["grapes"],
-  "allergens": ["sulfites"]
+  "base": [
+   "grapes"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  },
  {
   "why": "bare kaliumsulfit is potassium bisulfite (E228), not potassium metabisulfite (E224) -- the fuzzy matcher's closest string is the wrong chemical; also, the trailing (e455) after mannoproteiner from jast belongs to that same ingredient and must not surface as a separate e455 substance",
   "text": "Rött vin, vatten, koncentrerad druvmust, naturliga aromer, gaser och förpackningsgaser: koldioxid (e290), surhetsreglerande medel: vinsyra (l(+)-) (e334), stabilisatorer: kaliumpolyaspartat (e456), gummi arabicum (e414), konserverings- och antioxidationsmedel: dimetyldikarbonat (dmdc) (e242), SULFITER (e220), gaser och förpackningsgaser: kväve (e941).\nKan innehålla Stabilisatorrer: citronsyra (e330), surhetsreglerade medel: äppelsyra (d, l;l-) (e296), mjölksyra (e270), konserverings- och antioxidationsmedel: kaliumsulfit (e228), stabilisatorer: mannoproteiner från jäst (e455)",
-  "additives": ["citric_acid", "dimethyl_dicarbonate", "flavourings", "gum_arabic", "lactic_acid", "malic_acid", "mannoproteins", "potassium_bisulfite", "potassium_polyaspartate", "sulfur_dioxide", "tartaric_acid"],
-  "gases": ["carbon_dioxide", "nitrogen"],
-  "base": ["grape_must", "water", "wine"]
+  "additives": [
+   "citric_acid",
+   "dimethyl_dicarbonate",
+   "flavourings",
+   "gum_arabic",
+   "lactic_acid",
+   "malic_acid",
+   "mannoproteins",
+   "potassium_bisulfite",
+   "potassium_polyaspartate",
+   "sulfur_dioxide",
+   "tartaric_acid"
+  ],
+  "gases": [
+   "carbon_dioxide",
+   "nitrogen"
+  ],
+  "base": [
+   "grape_must",
+   "water",
+   "wine"
+  ]
  },
  {
   "why": "utkast till vätska is a word-for-word machine mistranslation of \"liqueur de tirage\" (tirage->utkast, de->till, liqueur->vätska), seen verbatim across unrelated Champagne producers",
   "text": "druvor, antioxidationsmedel, Sulfiter, surhetsreglerande medel, utkast till vätska, expeditionslikör, stabiliserande",
-  "additives": ["sulfites"],
+  "additives": [
+   "sulfites"
+  ],
   "gases": [],
-  "base": ["expedition_liqueur", "grapes"]
+  "base": [
+   "expedition_liqueur",
+   "grapes"
+  ]
  },
  {
   "why": "caramel colour's four manufacturing variants (E150a-d) are chemically distinct, so a specific one names itself rather than falling back to generic karamell/sockerkulör",
   "text": "Vin (Druvor, Koncentrerad druvmust, Surhetsreglerande medel: Vinsyra (E334), Konserveringsmedel: SULFITER), Socker, Vatten, Alkohol, Färgämne: Kaustisk sulfitkaramell (E150b), Naturliga aromer, Syra: citronsyra (E330), Konserveringsmedel: SULFITER",
-  "additives": ["caustic_sulphite_caramel", "citric_acid", "flavourings", "sulfites", "tartaric_acid"],
+  "additives": [
+   "caustic_sulphite_caramel",
+   "citric_acid",
+   "flavourings",
+   "sulfites",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grape_must", "grapes", "sugar", "water", "wine", "wine_alcohol"]
+  "base": [
+   "grape_must",
+   "grapes",
+   "sugar",
+   "water",
+   "wine",
+   "wine_alcohol"
+  ]
  },
  {
   "why": "bare karamell next to an E150d number reads as the specific sulphite ammonia caramel, not double-counted against the generic caramel colour",
   "text": "Druva, vinalkohol, koncentrerad druvmust, surhetsreglerande medel (vinsyra E-334 och kalciumsulfat E-516), karamell E-150d, konserverings- och antioxidationsmedel ( kaliummetabisulfit E-224 (sulfiter) , kaliumsorbat E-202), stabilisator (kaliumbitartrat E-336)",
-  "additives": ["calcium_sulfate", "potassium_bitartrate", "potassium_metabisulfite", "potassium_sorbate", "sulphite_ammonia_caramel", "tartaric_acid"],
+  "additives": [
+   "calcium_sulfate",
+   "potassium_bitartrate",
+   "potassium_metabisulfite",
+   "potassium_sorbate",
+   "sulphite_ammonia_caramel",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grape_must", "grapes", "wine_alcohol"]
+  "base": [
+   "grape_must",
+   "grapes",
+   "wine_alcohol"
+  ]
  },
  {
   "why": "PRODI is a Portuguese/Brazilian integrated-production farming certification, not a substance, and is not the wine's producer name",
   "text": "PRODI-druvor, konserveringsmedel (sulfiter), stabiliseringsmedel (kaliumpolyaspartat), rektifierad koncentrerad druvmust. Buteljeras i skyddad atmosfär.",
-  "additives": ["potassium_polyaspartate", "sulfites"],
+  "additives": [
+   "potassium_polyaspartate",
+   "sulfites"
+  ],
   "gases": [],
-  "base": ["grape_must", "grapes"],
-  "processing": ["integrated_production", "protective_atmosphere"]
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "processing": [
+   "integrated_production",
+   "protective_atmosphere"
+  ]
  },
  {
   "why": "kaliumpolyaspartat and gummi arabicum run together with no space, and the source also drops a letter from \"aspartat\"",
   "text": "Druva, konserveringsmedel (sulfiter), stabiliseringsmedel (kaliumpolyasparpatgummi arabicum)",
-  "additives": ["gum_arabic", "potassium_polyaspartate", "sulfites"],
+  "additives": [
+   "gum_arabic",
+   "potassium_polyaspartate",
+   "sulfites"
+  ],
   "gases": [],
-  "base": ["grapes"]
+  "base": [
+   "grapes"
+  ]
  },
  {
   "why": "gomma arabica is Italian for gum arabic, not a separate substance from the Swedish gummi arabicum",
   "text": "Druvor*, rektifierad koncentrerad druvmust*, konserveringsmedel (METABISOLFITO DI POTASSIO (E224)), stabilisatorer (Gomma arabica (E414)) (*) Ekologisk\nTappning kan ske i en skyddande atmosfär",
-  "additives": ["gum_arabic", "potassium_metabisulfite"],
+  "additives": [
+   "gum_arabic",
+   "potassium_metabisulfite"
+  ],
   "gases": [],
-  "base": ["grape_must", "grapes"],
-  "processing": ["organic", "protective_atmosphere"]
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "processing": [
+   "organic",
+   "protective_atmosphere"
+  ]
  },
  {
   "why": "grape variety names (Garnacha, Cabernet Sauvignon, Merlot, Carignan) and the \"röd\" colour adjective carry no additive information and must not surface as unknown text",
   "text": "14,5% vol. 35% röd Garnacha, 25% Cabernet Sauvignon, 25% Merlot, 15% Carignan. Innehåller SULFITER. Från EU-jordbruk. Ekologiskt certifierad av CCPAE - ES-ECO-019-CT.",
-  "additives": ["sulfites"],
+  "additives": [
+   "sulfites"
+  ],
   "gases": [],
   "base": [],
-  "processing": ["organic"]
+  "processing": [
+   "organic"
+  ]
  },
  {
   "why": "Syrah must read as a grape variety, not fuzzy-match the unrelated \"syra\" (acid) header just because the strings are similar",
   "text": "14,5% vol. 60% Carignan, 35% röd Garnacha, 5% Syrah. Innehåller SULFITER.",
-  "additives": ["sulfites"],
+  "additives": [
+   "sulfites"
+  ],
   "gases": [],
   "base": []
  },
  {
   "why": "mannoprotiener fran jast (letters transposed) must still be read as one mannoproteins ingredient, not split so the trailing jast is separately claimed as the yeast additive",
   "text": "Råmaterial: druvor, koncentrerad druvmust; Konserveringsmedel/Antixodanter: SVAVELDIOXID, Kaliumpyrosulfit, L-askorbinsyra; Surhetsreglerande medel: innehåller Vinsyra (L(+)-) och/eller Äppelsyra (D,L-;L-) och/eller Mjölksyra; Stabilisatorer: Kaliumpolyaspartat, Mannoprotiener från jäst, Gummi Arabicum, Citronsyra. Tappat i en skyddande atmosfär.",
-  "additives": ["ascorbic_acid", "citric_acid", "gum_arabic", "lactic_acid", "malic_acid", "mannoproteins", "potassium_metabisulfite", "potassium_polyaspartate", "sulfur_dioxide", "tartaric_acid"],
+  "additives": [
+   "ascorbic_acid",
+   "citric_acid",
+   "gum_arabic",
+   "lactic_acid",
+   "malic_acid",
+   "mannoproteins",
+   "potassium_metabisulfite",
+   "potassium_polyaspartate",
+   "sulfur_dioxide",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grape_must", "grapes"],
-  "processing": ["protective_atmosphere"],
-  "allergens": ["sulfites"]
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  },
  {
   "why": "singular mannoprotein fran jast must be read as one mannoproteins ingredient, not split so jast is separately claimed as the yeast additive",
   "text": "Druvor, sackaros, Surhetsreglerande medel: innehåller Vinsyra (L+) och/eller citronsyra och/eller mjölksyra; Antioxidant: SULFITER; Stabiliseringsmedel: innehåller metavinsyra och/eller Gummi arabicum och/eller mannoprotein från jäst. Tappning kan ske i en skyddad atmosfär",
-  "additives": ["citric_acid", "gum_arabic", "lactic_acid", "mannoproteins", "metatartaric_acid", "sulfites", "tartaric_acid"],
+  "additives": [
+   "citric_acid",
+   "gum_arabic",
+   "lactic_acid",
+   "mannoproteins",
+   "metatartaric_acid",
+   "sulfites",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grapes", "sugar"],
-  "processing": ["protective_atmosphere"],
-  "allergens": ["sulfites"]
+  "base": [
+   "grapes",
+   "sugar"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  },
  {
   "why": "mannoprotein fran jastsvampar (jast as fungi, not the bare word) is the same ingredient as mannoprotein fran jast and must not also surface a separate yeast additive",
   "text": "Vita vindruvor, tartarsyra, mannoprotein från jästsvampar, KALLIUMMETABISULFIT.",
-  "additives": ["mannoproteins", "potassium_metabisulfite", "tartaric_acid"],
+  "additives": [
+   "mannoproteins",
+   "potassium_metabisulfite",
+   "tartaric_acid"
+  ],
   "gases": [],
-  "base": ["grapes"],
-  "allergens": ["sulfites"]
+  "base": [
+   "grapes"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "E501 names two distinct salts and this declaration lists both; they must count as two additives, each under the name the label printed",
+  "text": "druvor, surhetsreglerande medel(vinsyra (L(+)-), citronsyra), konserveringsmedel(SULFITER, Potassium Bicarbonate, Potassium Carbonate), stabilisatorer(gummi arabicum, Potassium Bitartrate)",
+  "additives": [
+   "citric_acid",
+   "gum_arabic",
+   "potassium_bicarbonate",
+   "potassium_bitartrate",
+   "potassium_carbonate",
+   "sulfites",
+   "tartaric_acid"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  }
 ]
