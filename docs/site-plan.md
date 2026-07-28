@@ -4,6 +4,11 @@ How people are meant to use the site, and what it may and may not tell them.
 Written 2026-07-26, before any site code exists. Figures are a snapshot of that
 day and will age; the shape of the argument will not.
 
+Where this plan makes a claim about what the law requires, the evidence is in
+`docs/legal-notes.md`, with the source fetched and quoted. That file is not legal
+advice and neither is this one; two of its findings end in "needs a Swedish
+lawyer" and both of those block something in this plan.
+
 ## What the site is for
 
 Systembolaget publishes every wine's ingredient declaration, one product page at
@@ -48,11 +53,11 @@ bought are the same question here, asked one after the other.
 ## The problem at the centre of the design
 
 **Four wines in five declare nothing.** On 2026-07-26: 15 017 wines, 2 899 with
-a declaration (19.3%). The requirement covers the 2024 harvest onwards, so
-coverage rises on its own — 81% of 2025 vintages already declare — but for now
-any "fewest additives" list is a ranking of *what got disclosed*, not of what is
-in the bottle. A wine that declares three additives is not worse than one that
-declares nothing; it is more honest, and it is the only one we know anything
+a declaration (19.3%). The requirement covers wine produced after 8 December
+2023, so coverage rises on its own — 81% of 2025 vintages already declare — but
+for now any "fewest additives" list is a ranking of *what got disclosed*, not of
+what is in the bottle. A wine that declares three additives is not worse than one
+that declares nothing; it is more honest, and it is the only one we know anything
 about.
 
 **And some declarations cannot be read in full** (9.0% on 2026-07-26, 4.1% on
@@ -78,12 +83,32 @@ Three consequences that shape every page:
 
 - That fewer additives is healthier, safer, or better for you. Wine is alcohol;
   that is the health risk, and it is the same in every bottle on the list.
+  **This is a rule about implication, not only about sentences.** It binds page
+  titles, `<title>` and meta description, URL slugs, list headings, sort-order
+  labels, icons and share text — the places where a claim is made without a
+  sentence, and the places most likely to be quoted without their context.
+  A disclaimer under a ranking does not cancel the ranking.
 - That a wine "contains no additives" when it declares nothing. It says
-  *the wine does not declare any*, and the site says exactly that.
+  *the wine does not declare any*, and the site says exactly that. No statement
+  about a wine's contents may be derived from the absence of a declaration.
 - Anything about a named wine that cannot be traced to that wine's own declared
   text, shown verbatim on the page next to the interpretation.
 - Anything that reads as advice on what to drink. It ranks disclosure, and it
-  says so.
+  says so. *(This rule is in tension with the plan's own "helping someone choose
+  and buy a wine" and with calling `/hitta` "the recommendation". The tension is
+  deliberate and unresolved — see the open question on wording below.)*
+- That the wines it counts are the wines the requirement covers. The requirement
+  turns on when a wine was **produced**, and the dataset has no production date.
+  Vintage is a stand-in and every page that uses it says so. See *Naming
+  importers*.
+- No advertising, no affiliate links, no sponsorship, no paid placement, no
+  commercial income of any kind. This was a preference on privacy grounds; it is
+  now a rule with a legal reason. Swedish marketing law reaches measures taken
+  *i näringsverksamhet* that are *ägnade att främja avsättningen*
+  (marknadsföringslagen 2008:486, 3 §), and alkohollagen 7 kap. bites only on
+  marknadsföring. Having no commercial interest is the fact that keeps the site
+  outside that definition. Taking income would supply the missing element.
+  See `docs/legal-notes.md` §4d.
 
 The bottle in the user's hand is newer than the dataset. Every wine page carries
 that sentence and a link to the source page.
@@ -207,6 +232,11 @@ the wines in that slice that declare least. The comparison is only meaningful
 inside a slice: a sparkling wine declares dosage sugar and a fortified wine
 declares added alcohol, so ranking them against a still red is a category error.
 
+**"Fewest declared additives" is the only permitted wording, everywhere.** Not
+"fewest additives", not "least additives", not "utan tillsatser" — in headings,
+in slugs, in titles, in share text. The word *declared* is what makes the
+sentence true, so it does not get dropped for brevity.
+
 **B. Exclusions and inclusions, substance by substance.** Vegan; no milk-, egg-
 or fish-derived fining agents; no declared colours or flavourings; and beyond
 the presets, any substance in `additives.yaml` chosen by name. These are the
@@ -300,8 +330,14 @@ blocks 1 and 2 and cannot apply to block 3, because there is nothing there to
 match against. A wine that declares nothing is not evidence of an empty bottle;
 it is an absence of evidence, and the site says which of the two it is on every
 row. In practice that means the exclusion filter never removes block 3, it
-labels it: the user chose *utan tillsatser* and gets a ranked list of wines
-that declare none, followed by the wines nobody can answer for.
+labels it: the user chose *deklarerar inga tillsatser* and gets a ranked list of
+wines that declare none, followed by the wines nobody can answer for.
+
+**The filter is named for what it does.** *Deklarerar inga tillsatser*, never
+*utan tillsatser*. The short form is a statement about the contents of the
+bottle, which the site cannot make and does not know; and it goes into the URL,
+the selected-state chip and anything shared from the page, which are the four
+places least likely to carry the caveat. See `docs/legal-notes.md` §4f.
 
 The same holds for the facets. A grape filter drops wines whose grape field is
 empty, and says so as its own line — that gap is Systembolaget's missing
@@ -312,23 +348,59 @@ both.
 
 Decided by the owner, 2026-07-27. The coverage page carries a table of
 importers ranked by how much of their range declares — but only over the wines
-where the requirement applies, and that qualifier is the whole design.
+where the requirement plausibly applies, and that qualifier is the whole design.
 
-**Why the importer and not the producer.** `supplier` in the dataset is
-Systembolaget's `supplierName`: the company that placed the wine on the Swedish
-market. The producer made the wine; the importer answers for what the label
-says here. Both are in the data and both are shown on a wine page, but only the
-importer is ranked, because only the importer is accountable for the gap.
+**Why the importer and not the producer — and what that does and does not
+mean.** `supplier` in the dataset is Systembolaget's `supplierName`: the company
+that placed the wine on the Swedish market and supplied the product text
+Systembolaget publishes. That is a fact about the dataset, and it is the only
+claim the table makes. Both producer and importer are in the data and both are
+shown on a wine page; only the importer is ranked, because the importer is the
+company whose range this is.
 
-*Unverified, and it must be verified before launch:* the exact allocation of
-labelling responsibility between an EU producer and a Swedish importer is taken
-here from how the market plainly works, not from the regulation's text. A page
-that names companies has to have that right. Check it, cite it on `/metod`.
+**It is not a claim about legal responsibility, and researching it in 2026-07-28
+is why that sentence changed.** Article 8(1) of Regulation (EU) No 1169/2011
+makes the responsible food business operator "the operator under whose name or
+business name the food is marketed or, if that operator is not established in
+the Union, the importer into the Union market". For an EU-origin wine sold under
+the producer's own label — about 82% of this catalogue — that is the producer or
+bottler, not the Swedish importer. The importer limb only fires for third-country
+wines, and even then the dataset cannot show whether the Swedish company was the
+one that brought the wine into the Union. So:
 
-**The ranking is over the 2024 vintage onwards, and nothing else.** The
-requirement covers the 2024 harvest forward, so an importer holding older stock
-looks negligent while having done nothing wrong. The correction is not
-cosmetic — it reverses the table. Measured 2026-07-27:
+- The table may say: *this company supplies these wines to Systembolaget, and
+  this share of them carries a declaration on their product pages.*
+- The table may **not** say, or imply, that the named company is legally
+  responsible for the declaration, is accountable for its absence, or has broken
+  a rule. `/metod` states the Article 8(1) two-step rule and says which limb the
+  dataset cannot resolve.
+
+Full sourcing in `docs/legal-notes.md` §1. Who is *liable* under Swedish law when
+a declaration is wrong was not established and needs a Swedish lawyer.
+
+**The ranking is over vintage 2024 onwards — as a stand-in, not as the rule.**
+The requirement applies to wine **produced** after 8 December 2023; wine produced
+before that date may be sold under the old rules until stocks are exhausted
+(Commission Notice C/2023/1190, Q3 and Q4; Livsmedelsverket says the same). It is
+not a harvest criterion, and "the 2024 harvest onwards" is the Commission's own
+shorthand for the practical consequence, not the text.
+
+The dataset has no production, bottling or disgorgement date, and Systembolaget
+does not publish one, so the criterion cannot be evaluated. Vintage 2024-onwards
+is the proxy, and its error is one-sided:
+
+- **Conservative in the right direction.** Every wine of the 2024 harvest or
+  later was necessarily produced after 8 December 2023, so no importer is ever
+  marked down for stock the rule does not reach.
+- **Materially incomplete.** On 2026-07-28, 2 217 wines carry vintage 2023 and
+  2 854 carry no vintage at all — 5 071 wines, 33.5% of the catalogue — and an
+  unknown share of those is legally in scope. A non-vintage sparkling wine whose
+  second fermentation happened in 2025 is covered and is invisible to a vintage
+  filter.
+
+Every page using this proxy says so in its body text, with the count, not in a
+footnote. Without an importer's older stock, the correction is still the thing
+that reverses the table. Measured 2026-07-27:
 
 | Importer | All vintages | 2024 onwards |
 |---|---|---|
@@ -339,7 +411,7 @@ cosmetic — it reverses the table. Measured 2026-07-27:
 | Tryffelsvinet | 2.2% | 20.0% |
 
 Published raw, that table would accuse Johan Lidby — who declares on 97 of
-every 100 bottles the rule touches — of being among the worst. **The raw column
+every 100 bottles the proxy touches — of being among the worst. **The raw column
 is never the ranking.** It may appear beside the corrected one, labelled as
 what it is (a function of stock age), or not at all.
 
@@ -367,7 +439,7 @@ The rest of the rule:
 | `/` | Search by name or product number, and the coverage headline |
 | `/vin/{product_number}-{slug}` | One wine: declaration, substances, nutrition, raw text, source link |
 | `/hitta` | Shortlist builder: category, price, country, grape, food pairing, substances in or out, sugar — the recommendation |
-| `/lista/{slug}` | Saved slices worth linking to, e.g. "red under 150 kr, fewest additives" |
+| `/lista/{slug}` | Saved slices worth linking to, e.g. "red under 150 kr, fewest declared additives" |
 | `/druva/{slug}` | One grape: how much of it declares, and which of those declare least |
 | `/passar-till/{slug}` | One pairing: the same, for "till fisk", "till lamm", … |
 | `/tillsats/{id}` | One substance: what it is, why it is used, which wines declare it |
@@ -387,7 +459,8 @@ from it or to justify it.
   decision being made in the aisle.
 - **No accounts, no cookies, no analytics, no affiliate links.** The project
   holds no personal data and should not start now. It also means no cookie
-  banner, which on a phone in a shop is a feature.
+  banner, which on a phone in a shop is a feature. The affiliate half of that
+  rule now has a second reason; see *What the site must never say*.
 - **Substance pages carry the aliases** — including the misspellings found in
   real declarations. Someone searching the exact string from a label should
   land on the right page.
@@ -407,6 +480,14 @@ therefore the conservative choice here, not the cheeky one. The exception to
 watch is *VG Bild-Kunst* C-392/19: if the rightsholder ever puts a technical
 measure in the way, working around it is infringement. In practice that means
 if hotlink protection appears, the images go away — they do not get proxied.
+
+**None of that paragraph has been verified against the judgments themselves.**
+It remains an open question; see below. One adjacent provision was noted while
+researching something else and is recorded so it is not missed: alkohollagen
+7 kap. 5 § restricts images in *kommersiella annonser* for alcohol to a
+reproduction of the product, its raw materials, single packages, or a trademark.
+It bears on the bottle photographs only if the site is marketing at all, which is
+itself unsettled.
 
 What the source offers, verified 2026-07-27 against the live CDN:
 
@@ -485,8 +566,8 @@ open, not that the site is nice.
    exists, so it carries the buyability rules from its first day rather than
    gaining them later. It is where the honesty rules earn their keep. The
    ranking is always inside a stated slice — there is no single global "fewest
-   additives in Sweden" table, because a sparkling wine and a still red are not
-   comparable and a leaderboard would say they were.
+   declared additives in Sweden" table, because a sparkling wine and a still red
+   are not comparable and a leaderboard would say they were.
 3. **Substances and coverage.** Substance pages and the transparency dashboard.
    The coverage page is the one most likely to be quoted by someone else.
 4. **Trends.** The nightly commits are a time series: coverage by month,
@@ -508,8 +589,48 @@ open, not that the site is nice.
   absolute level, so the figure the site publishes is the measured share of
   unread declarations, not a target anyone is grinding towards. `/metod` states
   it plainly and dates it.
-- **Verify who carries labelling responsibility** — importer or producer —
-  before the importer table goes live. See *Naming importers*.
-- **Wording review before launch.** The line between "declares fewer additives"
-  and an implied health claim is the project's main legal and ethical exposure.
-  Worth a careful read by someone who has not been staring at it.
+- ~~**Verify who carries labelling responsibility** — importer or producer —
+  before the importer table goes live.~~ Researched 2026-07-28,
+  `docs/legal-notes.md` §1. **The answer moved the plan**: under Article 8(1) of
+  Regulation (EU) No 1169/2011 it is the producer/bottler for EU-origin wine and
+  the EU importer only for third-country wine, so the table's justification was
+  rewritten to a factual one. Two things remain open and are the owner's to take
+  further: **who is liable in Sweden when a declaration is wrong** (not
+  established, needs a Swedish lawyer), and whether naming importers is
+  defensible at all under förtal and marknadsföringslagen (not researched — that
+  is a separate question below).
+- ~~**The requirement covers the 2024 harvest onwards.**~~ Corrected 2026-07-28:
+  it covers wine **produced** after 8 December 2023. Vintage is a proxy the
+  dataset is stuck with, it is conservative but leaves a third of the catalogue
+  uncounted, and every page that uses it must say so. See *Naming importers* and
+  `docs/legal-notes.md` §1f–1g. **`README.md` still states the harvest version
+  and needs the same correction.**
+- **Is the site marketing at all?** Researched 2026-07-28 and **not resolved**.
+  Alkohollagen 7 kap. bites only on *marknadsföring*, which marknadsföringslagen
+  3 § defines as measures *i näringsverksamhet* that are *ägnade att främja
+  avsättningen*. A site with no income fails the first element on its face, and
+  Regulation (EC) No 1924/2006 likewise applies only to "commercial
+  communications". But no fetched case or guidance draws the line for an
+  independent information site, and the one decided alcohol case found
+  (Mackmyra ./. KO) concerned a producer promoting its own goods. **Needs a
+  Swedish lawyer before launch.** See `docs/legal-notes.md` §4d.
+- **Wording review before launch.** Still open, and now narrower. The health
+  claims regime bars *health claims* on beverages over 1.2% abv without
+  exception, and the CJEU reads "health claim" to include any implication of
+  reduced harm (*Deutsches Weintor* C-544/10) — but only in commercial
+  communications, which loops back to the question above. What research settled:
+  the phrase *utan tillsatser* is out, *fewest declared additives* is the only
+  permitted form, and the never-say rules now cover implication by layout and by
+  URL, not just by sentence. What it did not settle: whether a ranked list is
+  itself an implied claim regardless of its wording. See
+  `docs/legal-notes.md` §4c and §4f.
+- **May the site hotlink Systembolaget's bottle photographs?** Not researched.
+  The *Bottle photographs* section above states a position from memory of the
+  CJEU cases, which is exactly the kind of thing that is wrong when recalled
+  rather than read. Nothing should be built on it until the judgments and
+  Systembolaget's own terms have been fetched.
+- **Is naming importers defensible?** Not researched. Förtal (brottsbalken
+  5 kap.) as it applies to statements about companies, and whether a comparison
+  of named companies could be read as comparative advertising under
+  marknadsföringslagen (2008:486), are both untouched. The *Naming importers*
+  rules were written to be careful; nobody has checked whether careful is enough.
