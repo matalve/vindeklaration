@@ -169,9 +169,9 @@
   "allergens": ["sulfites"]
  },
  {
-  "why": "bare kaliumsulfit is potassium bisulfite (E228), not potassium metabisulfite (E224) -- the fuzzy matcher's closest string is the wrong chemical",
+  "why": "bare kaliumsulfit is potassium bisulfite (E228), not potassium metabisulfite (E224) -- the fuzzy matcher's closest string is the wrong chemical; also, the trailing (e455) after mannoproteiner from jast belongs to that same ingredient and must not surface as a separate e455 substance",
   "text": "Rött vin, vatten, koncentrerad druvmust, naturliga aromer, gaser och förpackningsgaser: koldioxid (e290), surhetsreglerande medel: vinsyra (l(+)-) (e334), stabilisatorer: kaliumpolyaspartat (e456), gummi arabicum (e414), konserverings- och antioxidationsmedel: dimetyldikarbonat (dmdc) (e242), SULFITER (e220), gaser och förpackningsgaser: kväve (e941).\nKan innehålla Stabilisatorrer: citronsyra (e330), surhetsreglerade medel: äppelsyra (d, l;l-) (e296), mjölksyra (e270), konserverings- och antioxidationsmedel: kaliumsulfit (e228), stabilisatorer: mannoproteiner från jäst (e455)",
-  "additives": ["citric_acid", "dimethyl_dicarbonate", "e455", "flavourings", "gum_arabic", "lactic_acid", "malic_acid", "mannoproteins", "potassium_bisulfite", "potassium_polyaspartate", "sulfur_dioxide", "tartaric_acid"],
+  "additives": ["citric_acid", "dimethyl_dicarbonate", "flavourings", "gum_arabic", "lactic_acid", "malic_acid", "mannoproteins", "potassium_bisulfite", "potassium_polyaspartate", "sulfur_dioxide", "tartaric_acid"],
   "gases": ["carbon_dioxide", "nitrogen"],
   "base": ["grape_must", "water", "wine"]
  },
@@ -233,5 +233,31 @@
   "additives": ["sulfites"],
   "gases": [],
   "base": []
+ },
+ {
+  "why": "mannoprotiener fran jast (letters transposed) must still be read as one mannoproteins ingredient, not split so the trailing jast is separately claimed as the yeast additive",
+  "text": "Råmaterial: druvor, koncentrerad druvmust; Konserveringsmedel/Antixodanter: SVAVELDIOXID, Kaliumpyrosulfit, L-askorbinsyra; Surhetsreglerande medel: innehåller Vinsyra (L(+)-) och/eller Äppelsyra (D,L-;L-) och/eller Mjölksyra; Stabilisatorer: Kaliumpolyaspartat, Mannoprotiener från jäst, Gummi Arabicum, Citronsyra. Tappat i en skyddande atmosfär.",
+  "additives": ["ascorbic_acid", "citric_acid", "gum_arabic", "lactic_acid", "malic_acid", "mannoproteins", "potassium_metabisulfite", "potassium_polyaspartate", "sulfur_dioxide", "tartaric_acid"],
+  "gases": [],
+  "base": ["grape_must", "grapes"],
+  "processing": ["protective_atmosphere"],
+  "allergens": ["sulfites"]
+ },
+ {
+  "why": "singular mannoprotein fran jast must be read as one mannoproteins ingredient, not split so jast is separately claimed as the yeast additive",
+  "text": "Druvor, sackaros, Surhetsreglerande medel: innehåller Vinsyra (L+) och/eller citronsyra och/eller mjölksyra; Antioxidant: SULFITER; Stabiliseringsmedel: innehåller metavinsyra och/eller Gummi arabicum och/eller mannoprotein från jäst. Tappning kan ske i en skyddad atmosfär",
+  "additives": ["citric_acid", "gum_arabic", "lactic_acid", "mannoproteins", "metatartaric_acid", "sulfites", "tartaric_acid"],
+  "gases": [],
+  "base": ["grapes", "sugar"],
+  "processing": ["protective_atmosphere"],
+  "allergens": ["sulfites"]
+ },
+ {
+  "why": "mannoprotein fran jastsvampar (jast as fungi, not the bare word) is the same ingredient as mannoprotein fran jast and must not also surface a separate yeast additive",
+  "text": "Vita vindruvor, tartarsyra, mannoprotein från jästsvampar, KALLIUMMETABISULFIT.",
+  "additives": ["mannoproteins", "potassium_metabisulfite", "tartaric_acid"],
+  "gases": [],
+  "base": ["grapes"],
+  "allergens": ["sulfites"]
  }
 ]
