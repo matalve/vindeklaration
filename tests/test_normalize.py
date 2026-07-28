@@ -116,7 +116,10 @@ def test_abbreviation_and_full_name_do_not_double_count() -> None:
     parsed = parse_ingredients(text)
     ids = [additive["id"] for additive in parsed.additives]
     assert ids.count("potassium_bitartrate") == 1
-    assert ids.count("potassium_carbonate") == 1
+    # The label says bikarbonat, so the dataset must say bikarbonat: E501 (ii),
+    # not the E501 (i) carbonate it used to be folded into.
+    assert ids.count("potassium_bicarbonate") == 1
+    assert ids.count("potassium_carbonate") == 0
     assert ids.count("copper_sulfate") == 1
     assert set(parsed.unknown_tokens) == {"gecoll", "supra"}
     assert parsed.status == "partial"
