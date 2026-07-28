@@ -125,11 +125,22 @@ Quote `raw_ingredients` exactly as written, in the source language. Do not
 translate it, do not tidy it, do not normalise it — that is `src/normalize.py`'s
 job, and it needs the original to do it.
 
-**Nothing you write is read by the pipeline.** `src/build.py` does not open your
-file and must not be changed to, unless the owner decides otherwise. If these
-declarations are ever shown on the site they need their own visual treatment
-and their own provenance line — that is a product decision, not yours to make
-by writing into a field the ranking already reads.
+**The pipeline does not read your file yet, and you do not change that.**
+`src/build.py` does not open it. Wiring it in is a build task with its own
+design, not something to accomplish by writing into a field the ranking already
+reads.
+
+What the owner decided on 2026-07-28, so you know what your records are for:
+**a producer's declaration ranks above Systembolaget's**, because the producer
+is nearer the source. Both are shown; where they conflict the producer's text
+is used, unless it is obviously wrong or misleading, in which case neither is
+and the wine is flagged. See *Two sources, and which one wins* in
+`docs/site-plan.md`.
+
+That raises the stakes on your matching rather than relaxing it. Your records
+now outrank the primary dataset, so a wrong match does not sit harmlessly in a
+side file — it overrides a correct declaration. The vintage rule is the one
+that matters most, because it is the one most often wrong.
 
 ## Choosing what to work on
 
