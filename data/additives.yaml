@@ -529,6 +529,11 @@
     - '\bkalium\s?polyaspartat\b'
 
 - id: mannoproteins
+  # E455 is not the EU-assigned number for mannoproteins (they have none), but
+  # some suppliers print it after the name anyway -- recorded here so the bare
+  # E-number fallback sees it as already claimed instead of manufacturing a
+  # separate "e455" substance out of the trailing parenthetical.
+  e_number: E455
   bucket: additive
   category: stabiliser
   name: { sv: Mannoproteiner från jäst, en: Yeast mannoproteins }
@@ -544,6 +549,12 @@
     - mannoprotein
     - yeast mannoproteins
     - mannoprotiener  # typo seen in the wild, letters transposed
+    # combined forms: without these, the trailing "jäst"/"jästsvampar" is left
+    # unclaimed and picked up separately by the "yeast" alias, double-counting
+    # one declared ingredient as two.
+    - mannoprotein från jäst  # singular
+    - mannoprotiener från jäst  # typo seen in the wild, letters transposed
+    - mannoprotein från jästsvampar
 
 - id: tannins
   bucket: additive
