@@ -6,8 +6,10 @@ day and will age; the shape of the argument will not.
 
 Where this plan makes a claim about what the law requires, the evidence is in
 `docs/legal-notes.md`, with the source fetched and quoted. That file is not legal
-advice and neither is this one; two of its findings end in "needs a Swedish
-lawyer" and both of those block something in this plan.
+advice and neither is this one. Several of its findings end in "needs a Swedish
+lawyer", and two of those reach past this plan entirely: whether the crawl the
+dataset is built from is permitted by Systembolaget's terms of use, and whether
+the catalogue is a protected database. See *Open questions* at the end.
 
 ## What the site is for
 
@@ -101,14 +103,27 @@ Three consequences that shape every page:
   turns on when a wine was **produced**, and the dataset has no production date.
   Vintage is a stand-in and every page that uses it says so. See *Naming
   importers*.
+- Anything that could make Systembolaget look like the sender of, or a party
+  behind, what this site says. Their linking guidelines make this their central
+  condition and repeat it twice, and it binds whether or not the site is
+  commercial. Every page that links to them says plainly that it is independent of
+  them and that ordering, purchase and collection happen at Systembolaget. See
+  *Bottle photographs* and `docs/legal-notes.md` §2e.
+- That a named importer is legally responsible for a declaration, is accountable
+  for its absence, or has broken a rule. The table reports what
+  systembolaget.se published on a stated date. See *Naming importers*.
 - No advertising, no affiliate links, no sponsorship, no paid placement, no
   commercial income of any kind. This was a preference on privacy grounds; it is
   now a rule with a legal reason. Swedish marketing law reaches measures taken
   *i näringsverksamhet* that are *ägnade att främja avsättningen*
   (marknadsföringslagen 2008:486, 3 §), and alkohollagen 7 kap. bites only on
   marknadsföring. Having no commercial interest is the fact that keeps the site
-  outside that definition. Taking income would supply the missing element.
-  See `docs/legal-notes.md` §4d.
+  outside that definition. Taking income would supply the missing element — and
+  research on 2026-07-28 found that the same element gates **five** regimes, not
+  one: alkohollagen 7 kap., Regulation (EC) No 1924/2006, marknadsföringslagen
+  18 § on comparative advertising, varumärkeslagen 1 kap. 10 §, and clause 4 of
+  Systembolaget's own user terms. One affiliate link would open all five at once.
+  See `docs/legal-notes.md` §4d and §3e.
 
 The bottle in the user's hand is newer than the dataset. Every wine page carries
 that sentence and a link to the source page.
@@ -217,6 +232,10 @@ So the site does not promise store-level stock, and does not pretend to:
 - **The final check belongs upstream.** The wine page links to Systembolaget's
   own store-availability view for that product. They own the truth about their
   shelves; we own the truth about what is declared, and we say which is which.
+  **Re-check that link before building it.** `/hamta-i-butik/` is `Disallow`ed in
+  their `robots.txt`, and their linking guidelines forbid linking to material that
+  sits behind an account. A link to the ordinary product page is not in doubt; a
+  link into the store-availability view is. See `docs/legal-notes.md` §2j.
 - **Nothing about stock is stated without its timestamp.** The dataset is built
   at 03:00; a page that says "in stock" means "in stock when we asked", and
   that sentence is on the page, not in a footnote.
@@ -415,22 +434,48 @@ every 100 bottles the proxy touches — of being among the worst. **The raw colu
 is never the ranking.** It may appear beside the corrected one, labelled as
 what it is (a function of stock age), or not at all.
 
+**Naming a company is not the same act as naming a person, and the law treats
+them completely differently.** Researched 2026-07-28, `docs/legal-notes.md` §3.
+Förtal under brottsbalken 5 kap. does not reach a statement about an aktiebolag —
+SOU 2016:7 p. 410: *"Förtal kan inte riktas mot juridiska personer, utan endast
+fysiska personer kan vara målsägande."* For the companies in the table there is no
+defamation exposure to manage. But NJA 1950 s. 250, reported on the same page,
+held a man personally identified because his name was part of the company's firma,
+and **this dataset contains supplier names that are personal names** — Jessica
+Mihai, Josefin Lagerhorn, Staffan Ottosson and others. For those, förtal is
+available and truth alone is not a defence: 5 kap. 1 § requires both that it was
+*försvarligt* to publish and that the statement was true or had *skälig grund*.
+
 The rest of the rule:
 
+- **A supplier who is or may be a natural person is never named in a ranking, at
+  any sample size.** Today's 40-wine threshold happens to exclude every one of
+  them — of the 19 suppliers reaching 40 qualifying wines on 2026-07-28, all are
+  registered companies — but that is an accident of the current catalogue, not a
+  safeguard. This is a separate rule and does not depend on the threshold.
 - **Minimum sample.** No importer is ranked on fewer than 40 wines in the
   qualifying vintages, so nobody tops or bottoms the table on four bottles.
   Those below the threshold are aggregated into one row, counted, not named.
+  This is a statistical honesty rule, not a legal shield; no source requires it.
 - **The mean is on the page.** 66% of wines from 2024 onwards declare. A number
   without its baseline is an insinuation.
 - **Every row is traceable.** An importer's row links to their qualifying
   wines, each with its own product page link, so the claim can be checked
   bottle by bottle — by them first of all.
+- **Every row says what was measured.** Not what the company did: what
+  systembolaget.se published on a stated date. That is the §1 correction and it is
+  also the strongest form of the claim, because it is a fact the project measured,
+  cached and can reproduce.
 - **It reports, it does not characterise.** A percentage and a count. No
   "worst offenders", no leaderboard styling, no commentary on intent. An
-  importer may have reasons we cannot see.
+  importer may have reasons we cannot see. This one is load-bearing: förtal is
+  committed by pointing someone out as *klandervärd* or giving information *ägnad
+  att utsätta denne för andras missaktning*. A bare percentage is not that;
+  "worst offenders" would be.
 - **Dated, and corrigible.** The table carries the date it was generated and a
-  way to report an error. Coverage rises as stock rotates, so today's laggard
-  is next quarter's ordinary — the page must not read as a permanent verdict.
+  way to report an error, with a stated response time. Coverage rises as stock
+  rotates, so today's laggard is next quarter's ordinary — the page must not read
+  as a permanent verdict.
 
 ## Pages
 
@@ -470,24 +515,84 @@ from it or to justify it.
 Link them from Systembolaget's CDN. Do not copy them onto our own host.
 
 That is the opposite of the usual instinct, and it follows from how EU
-copyright law treats the two acts. A photograph is protected in its own right —
-in Sweden even a plain snapshot gets 50 years under 49a § URL — and the rights
-sit with Systembolaget or the supplier, not with us. Embedding an image that
-the rightsholder has already made freely available is not a new communication
-to the public (*Svensson* C-466/12, *BestWater* C-348/13), whereas saving a copy
-and serving it from another site is (*Renckhoff* C-161/17). Hotlinking is
-therefore the conservative choice here, not the cheeky one. The exception to
-watch is *VG Bild-Kunst* C-392/19: if the rightsholder ever puts a technical
-measure in the way, working around it is infringement. In practice that means
-if hotlink protection appears, the images go away — they do not get proxied.
+copyright law treats the two acts. **Researched and verified 2026-07-28 against
+the judgments themselves; full quotation in `docs/legal-notes.md` §2b–§2d.**
 
-**None of that paragraph has been verified against the judgments themselves.**
-It remains an open question; see below. One adjacent provision was noted while
-researching something else and is recorded so it is not missed: alkohollagen
-7 kap. 5 § restricts images in *kommersiella annonser* for alcohol to a
-reproduction of the product, its raw materials, single packages, or a trademark.
-It bears on the bottle photographs only if the site is marketing at all, which is
-itself unsettled.
+A photograph is protected in its own right — in Sweden even a plain snapshot gets
+50 years under 49 a § URL — and the rights sit with Systembolaget or a third
+party, not with us. Embedding an image the rightsholder has made freely
+available, with no technological restriction on it, is not a communication to the
+public requiring authorisation: *Svensson* (C-466/12) ruling 1, and *BestWater*
+(C-348/13), which decides framing specifically. Framing it so the image looks like
+part of our page changes nothing (*Svensson* §29). Copying it to our own host and
+serving it from there **is** a new communication to the public (*Renckhoff*
+C-161/17, operative part) — and *Renckhoff* §36 adds that it makes no difference
+that the rightsholder placed no restriction on downloading. Hotlinking is
+therefore the conservative choice here, not the cheeky one.
+
+The line falls at a **technological measure**, and only there. *VG Bild-Kunst*
+(C-392/19) holds that embedding which circumvents measures adopted or imposed
+against framing is a communication to the public — and §46 holds that a
+rightsholder "cannot be allowed to limit his or her consent by means other than
+effective technological measures". So if hotlink protection appears, the images go
+away. They do not get proxied, and they do not get cached "just this once".
+
+**Two things this research did not settle, recorded so they are not lost.** The
+CJEU cases interpret Article 3(1) of Directive 2001/29, which covers *works*;
+whether they carry across to the purely Swedish neighbouring right in 49 a § URL
+for a photograph that is not a work is unestablished. And nobody knows which
+images belong to Systembolaget and which to a supplier. One adjacent provision
+also stands: alkohollagen 7 kap. 5 § restricts images in *kommersiella annonser*
+for alcohol to a reproduction of the product, its raw materials, single packages,
+or a trademark. It bears on the bottle photographs only if the site is marketing
+at all, which is still unsettled.
+
+**Systembolaget has published its own position, and it is close to a permission.**
+<https://www.systembolaget.se/om-lankning/>, fetched 2026-07-28:
+
+> "Enligt EU-domstolens praxis kan Systembolaget på upphovsrättslig grund inte
+> hindra att någon länkar (genom s.k. hypertextlänkar eller inbäddade länkar) till
+> upphovsrättsligt skyddat material vilket med Systembolagets tillstånd ligger
+> fritt tillgängligt på Webbplatsen."
+
+*Inbäddade länkar* — embedded links, in terms. But the same page attaches
+conditions, and they are the price of relying on it.
+
+### The conditions, and they are requirements rather than preferences
+
+Each is sourced in `docs/legal-notes.md` §2j.
+
+- **Never copy, proxy, re-host or server-side resize.** Render from
+  `product-cdn.systembolaget.se` or show no image.
+- **If any technological measure appears, the images go the same day.** A referrer
+  check, a token in the URL, a 403 on a foreign origin — any of these. Do not work
+  around it. **The weekly image sample below is what enforces this**, not merely a
+  404 check, and it is the mechanism that keeps the legal premise true.
+- **Never link to or embed anything behind a login.** Systembolaget's guidelines
+  forbid linking that lets a user "kringgå begränsningar", and say expressly that
+  linking to lists on their site is not allowed because those sit behind an
+  account. See the caveat added to *Can you actually buy it*.
+- **Every page carrying an image links to that wine's product page.** Their
+  guidelines permit "extern länkning … till produktsidor" in those terms.
+- **Every page that links to Systembolaget says Systembolaget is not the sender of
+  and does not stand behind anything on this site.** In the body, in both
+  languages, not only on `/metod`. Their guidelines say this twice, and it is the
+  risk they are most explicit about.
+- **Every page that links to Systembolaget says that ordering, purchase and
+  collection happen at Systembolaget.** This is a literal requirement — "ska …
+  tydligt framgå … att beställning, köp och utlämning sker från/av/hos
+  Systembolaget" — it applies to *any* link and not only to image links, and this
+  plan previously had no such sentence anywhere.
+- **The credit is not "Bild: Systembolaget" without further thought.** Their
+  guidelines say that when linking "får du inte använda dig av Systembolagets
+  immateriella rättigheter, t.ex. Systembolagets firma, varumärken…". Identify the
+  source in plain words; never reproduce their logo, wordmark or any Systembolaget
+  symbol.
+- **No image on any ranked, filtered or comparison page.** Already the rule below
+  for performance reasons. It has a second reason now: a bottle photograph beside
+  a ranking is where the endorsement risk and the implied-claim risk are sharpest.
+- **`/metod` records these conditions and the date the CDN was last checked**, so
+  the premise of the whole analysis is visible and falsifiable.
 
 What the source offers, verified 2026-07-27 against the live CDN:
 
@@ -624,13 +729,58 @@ open, not that the site is nice.
   URL, not just by sentence. What it did not settle: whether a ranked list is
   itself an implied claim regardless of its wording. See
   `docs/legal-notes.md` §4c and §4f.
-- **May the site hotlink Systembolaget's bottle photographs?** Not researched.
-  The *Bottle photographs* section above states a position from memory of the
-  CJEU cases, which is exactly the kind of thing that is wrong when recalled
-  rather than read. Nothing should be built on it until the judgments and
-  Systembolaget's own terms have been fetched.
-- **Is naming importers defensible?** Not researched. Förtal (brottsbalken
-  5 kap.) as it applies to statements about companies, and whether a comparison
-  of named companies could be read as comparative advertising under
-  marknadsföringslagen (2008:486), are both untouched. The *Naming importers*
-  rules were written to be careful; nobody has checked whether careful is enough.
+- ~~**May the site hotlink Systembolaget's bottle photographs?**~~ Researched
+  2026-07-28, `docs/legal-notes.md` §2. The five judgments were fetched and read.
+  **Embedding is not copying and the line falls at a technological measure**
+  (*Svensson*, *BestWater*, *VG Bild-Kunst* §46); copying to our host would be
+  infringement (*Renckhoff*). Systembolaget's own linking page concedes embedding
+  in terms. The *Bottle photographs* section above is rewritten with the
+  conditions that come attached. Two residues remain open and are the owner's:
+  whether the CJEU's Article 3(1) case law reaches the purely Swedish
+  neighbouring right in 49 a § URL, and who actually owns the photographs.
+- ~~**Is naming importers defensible?**~~ Researched 2026-07-28,
+  `docs/legal-notes.md` §3. **Förtal does not reach a company at all** (SOU 2016:7
+  p. 410), so for the aktiebolag in the table there is no defamation exposure.
+  Marknadsföringslagen 18 § binds "en näringsidkare … i sin reklam" and so hangs
+  on the same unresolved threshold as everything else. **The answer moved the
+  plan**: the dataset contains suppliers whose names are personal names, förtal
+  *is* available to them, and a new rule now excludes them from any ranking
+  independently of the 40-wine threshold.
+- **Does the project's own crawl breach Systembolaget's terms of use?** Found
+  2026-07-28 while researching the images; `docs/legal-notes.md` §2f. Clause 1.7
+  of their Allmänna användarvillkor (version 2026-04-21) prohibits using
+  "crawlers eller spindlar … för att samla in information från eller om
+  Webbplatsen … i syfte att tillhandhålla funktioner eller tjänster relaterat till
+  marknadsföring av, eller **information om** alkoholdrycker". That describes this
+  project, and unlike their intellectual-property clause it carries **no
+  commercial qualifier**, so being non-commercial does not sidestep it. Whether a
+  browsewrap term binds a client that never created an account, and what would
+  follow if it does, was not established. **`robots.txt` is not the whole
+  permission set and this plan, `README.md` and `CLAUDE.md` have all been treating
+  it as if it were.** Needs a Swedish lawyer, and it is larger than any page in
+  this plan.
+- **Is the dataset itself someone else's database?** Not resolved;
+  `docs/legal-notes.md` §2i. Upphovsrättslagen 49 § protects a compilation "i
+  vilket ett stort antal uppgifter har sammanställts **eller** vilket är resultatet
+  av en väsentlig investering" — alternatives, not cumulative — for fifteen years.
+  *British Horseracing Board* (C-203/02) holds that public accessibility is no
+  defence, and that repeated small extractions whose cumulative effect
+  reconstitutes the database are caught. The text-and-data-mining exception in
+  15 a § URL does not obviously help, because it forbids keeping the copies longer
+  than the mining needs and forbids using them for another purpose, and this
+  project does both. Needs a Swedish lawyer.
+- **Is the site acting *i näringsverksamhet*?** This was already open under
+  *Is the site marketing at all?* above. It is recorded again here because
+  research has now shown it gates **five** separate regimes rather than one:
+  alkohollagen 7 kap. (via marknadsföringslagen 3 §), Regulation (EC) No 1924/2006
+  Article 1(2), marknadsföringslagen 18 § on comparative advertising,
+  varumärkeslagen 1 kap. 10 §, and clause 4 of Systembolaget's user terms. See the
+  table in `docs/legal-notes.md` §3e. **It is the single highest-value question to
+  put to a lawyer** — one answer closes five exposures.
+- **Are supplier names that are personal names personal data?**
+  `data/wines.json` carries values such as *Jessica Mihai* and *Staffan Ottosson*
+  in `supplier`. If those are sole traders, publishing a compliance statistic
+  about them is processing personal data about a named individual, which collides
+  with `CLAUDE.md`'s absolute rule that the project holds none. **No GDPR analysis
+  has been done**, and Bolagsverket has not been queried to confirm what those
+  entries are. See `docs/legal-notes.md` §3c.
