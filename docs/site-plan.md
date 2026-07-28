@@ -102,8 +102,8 @@ since left it:
 | Country | catalog `country` | 100% | 52 values, Systembolaget's own spelling |
 | Category and style | `categoryLevel2/3` | 100% | The comparison set, see below |
 | Assortment | `assortmentText` | 100% | 71% of the fixed range declares, 10% of order-only |
-| Grape | catalog `grapes` | **57.5%** | 433 distinct, already normalised upstream |
-| Food pairing | catalog `tasteSymbols` | **~60%** | 15 values — a closed vocabulary, ideal for a facet |
+| Grape | catalog `grapes` | **57.4%** | 433 distinct, already normalised upstream |
+| Food pairing | catalog `tasteSymbols` | **26.6%** | 16 values — a closed vocabulary, ideal for a facet, but thin |
 | Additives | the declaration | **19.3%** | The scarce one, and the point of the site |
 | Sugar and energy | detail `nutrition` | ≈ declared | Arrives with the declaration |
 | Vegan, organic | `isVeganFriendly`, `isOrganic` | 100% | Supplier's own flag, not derived from the declaration — and unset means unmarked, not disqualified |
@@ -113,20 +113,34 @@ since left it:
 Two of these are new. Grape and price were always collected; **food pairing was
 not, and is collected from 2026-07-27** — `tasteSymbols` and `usage` come free
 in the same search response the catalog step already reads, so it costs no
-extra request and no re-crawl. `tasteSymbols` is a controlled list (Fisk,
-Skaldjur, Lamm, Nöt, Fläsk, Fågel, Vilt, Grönsaker, Ost, Dessert, Asiatiskt,
-Buffémat, Aperitif, Sällskapsdryck, Avec/digestif); `usage` is the prose
-sentence with the serving temperature, quoted, never parsed.
+extra request and no re-crawl. `tasteSymbols` is a controlled list of 16 values
+(Fisk, Skaldjur, Lamm, Nöt, Fläsk, Fågel, Vilt, Grönsaker, Ost, Dessert,
+Asiatiskt, Kryddstarkt, Buffémat, Aperitif, Sällskapsdryck, Avec/digestif);
+`usage` is the prose sentence with the serving temperature, quoted, never
+parsed.
 
-**Grape and pairing are about 60% covered, and that is not the same kind of gap
-as the declaration gap.** A missing declaration is a supplier saying nothing; a
-missing grape is Systembolaget not filling a field for a blend. Both hide wines
-from a filtered list, so both are counted in the "not shown" line, and each
-gets its own reason — the user must never read "no wines match" when the truth
-is "the grape field is empty for 6 416 wines."
+**Pairing is thinner than it first looked: 26.6%, not the ~60% a sample of the
+search's first pages suggested.** Those pages skew towards the fixed range,
+which is tasted and described; the order-only long tail mostly is not. The
+lesson generalises — every coverage figure in this table must be measured over
+the whole catalog after a crawl, never sampled from the API, because the API's
+default ordering is not a random sample of the shelf.
+
+**That still leaves grape and pairing far better covered than the declaration,
+and their gaps are not the same kind.** A missing declaration is a supplier
+saying nothing; a missing grape or pairing is Systembolaget not filling a field.
+Both hide wines from a filtered list, so both are counted in the "not shown"
+line, and each gets its own reason — the user must never read "no wines match"
+when the truth is "the grape field is empty for 6 454 wines."
+
+A practical consequence of 26.6%: **pairing is a facet, not a primary
+navigation.** Filtering on "till lamm" alone discards three wines in four
+before the additive question is even asked. It earns its place combined with
+grape, colour or price, and the results page has to say plainly how many wines
+the pairing filter itself removed.
 
 Grapes cannot be recovered from elsewhere: `rawMaterial` on the product page
-fills only 303 of the 6 416 blanks, and it is free text ("Corvina, rondinella
+fills only 303 of the 6 454 blanks, and it is free text ("Corvina, rondinella
 och molinara samt övriga druvsorter"). Not worth parsing, and parsing it would
 be guessing.
 
