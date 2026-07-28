@@ -30,7 +30,7 @@ counted. This file is about how to work here.
 | `data/lexicon.yaml` | labels, processing notes, stopwords |
 | `data/unknown.json` | what the parser could not read, ranked by wines blocked |
 | `deploy/` | running it unattended on the Raspberry Pi |
-| `.claude/agents/` | lexicon-curator, declaration-auditor, upstream-scout, domain-scout, legal-scout |
+| `.claude/agents/` | lexicon-curator, declaration-auditor, upstream-scout, domain-scout, legal-scout, declaration-finder |
 
 ```sh
 uv run pytest -q                  # fast, run it after any dictionary change
