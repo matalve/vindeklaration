@@ -19,10 +19,24 @@ free text into structured data, and publishes the result.
 
 ## Caveats worth reading before using this
 
-**Most wines declare nothing yet.** The requirement applies to wine made from
-the 2024 harvest onwards; older stock may be sold until it runs out. Around 30%
-of the assortment currently carries a declaration, rising to roughly 75% among
-2024 and 2025 vintages. Coverage improves on its own as stock rotates.
+**Most wines declare nothing yet.** The requirement turns on when the wine was
+**produced**: wine produced before 8 December 2023 may be sold under the old
+rules until stocks run out. "The 2024 harvest onwards" is the Commission's own
+shorthand for this, and it is not the criterion — a wine produced in, say,
+January 2024, or a non-vintage sparkling wine whose second fermentation
+happened later, is covered without carrying a 2024 vintage.
+
+**The dataset has no production date, and Systembolaget publishes none**, so
+vintage is used as a stand-in throughout. The error runs one way: every wine of
+vintage 2024 or later was necessarily produced after the cutoff, so nothing is
+counted as covered when it is not. But 33.5% of the catalogue carries vintage
+2023 or none at all, and an unknown share of that sits inside the requirement
+while a vintage filter cannot see it. Any figure here computed "over the wines
+the requirement covers" means *the wines it certainly covers*.
+
+**19.2% of the assortment currently carries a declaration**, rising to 66%
+among wines of vintage 2024 or later. Coverage improves on its own as stock
+rotates. See `docs/legal-notes.md` §1f for the sources.
 
 **The text is supplier-entered.** Each importer types the declaration by hand,
 so spelling, terminology and completeness vary. `raw_ingredients` is kept on
@@ -161,3 +175,16 @@ Requests are sequential, spaced 0.4 s apart, and identify themselves. Nothing
 here is behind a login or disallowed by `robots.txt`. Data belongs to
 Systembolaget and the suppliers who entered it; this repository is a derived
 work published for consumer transparency.
+
+**`robots.txt` is not the whole picture, and saying so is part of being a good
+guest.** Systembolaget's Allmänna användarvillkor (version 2026-04-21) clause
+1.7 prohibits crawlers used to gather information for a service providing
+*information om alkoholdrycker*, with no exception for non-commercial use —
+while their `robots.txt` reads `Allow: /` and blocks only the cart and account
+pages. The two do not agree. This project crawls, on the view that a public
+product API published for use and a permissive `robots.txt` contradict a clause
+forbidding what they invite. That is a judgement about evident intent, not a
+resolution of the clause, and it is recorded openly rather than left for
+someone to discover. See `docs/legal-notes.md` §2f. If Systembolaget would
+rather this stopped, the contact is the repository's issue tracker and the
+crawl will stop.

@@ -419,6 +419,51 @@ empty, and says so as its own line — that gap is Systembolaget's missing
 metadata, not a supplier's silence, and conflating the two would misattribute
 both.
 
+### Two sources, and which one wins
+
+Decided by the owner 2026-07-28. Systembolaget's product page is not the only
+place a declaration lives. Regulation (EU) 2021/2117 lets the obligation be met
+through an **e-label** behind a QR code, so a wine showing nothing on
+systembolaget.se may be fully declared at its producer. `declaration-finder`
+looks for those; they land in `data/producer-declarations.json`.
+
+**The producer's declaration ranks above Systembolaget's**, because the producer
+is nearer the source. Systembolaget transcribes what a supplier sent them; the
+producer wrote it. Where the two disagree, the producer's text is the one the
+site uses — unless it is obviously wrong or misleading, in which case neither is
+used and the wine is flagged rather than resolved.
+
+**Both are always shown.** This is not a replacement, it is a precedence order,
+and the reader has to be able to see both and where each came from. A wine page
+carries the declaration in use, the other one beneath it, and a source line for
+each. Never merge two texts into one list.
+
+Conditions, because precedence without them would be a licence to guess:
+
+- **The vintage must match exactly.** This is not a formality. The first batch
+  found vintage mismatch to be the single largest rejection cause: producer
+  sites show the current release while Systembolaget's stock runs a year
+  behind. A producer's 2025 text has no authority over a 2024 bottle.
+- **"Obviously wrong or misleading" is a narrow escape hatch, not a judgement
+  seat.** It covers a declaration that contradicts itself, one that is plainly
+  for a different product, or one that omits a substance the Systembolaget text
+  names outright. It does **not** cover a difference we merely find surprising.
+  When it fires, the wine is shown with both texts and no parsed count — the
+  same treatment as `partial`. Deciding between two plausible declarations by
+  judgement is the guessing the project forbids.
+- **A conflict is a finding, not an inconvenience.** Two sources disagreeing
+  about what is in a bottle is exactly the kind of thing this dataset exists to
+  surface. Count them, and put the number on the coverage page.
+- **Provenance survives into the data.** A record says which source its parsed
+  additives came from. Any figure the site publishes can be recomputed for
+  either source alone.
+
+Rankings may use producer-sourced declarations, since under this rule they are
+the better evidence — but a list must be able to say how many of its entries
+rest on each source, and the coverage page reports the two separately. The
+dataset's claim is no longer "everything traces to systembolaget.se"; it is
+"everything traces to a named source, shown on the page".
+
 ### Naming importers
 
 Decided by the owner, 2026-07-27. The coverage page carries a table of
@@ -766,6 +811,18 @@ open, not that the site is nice.
   uncounted, and every page that uses it must say so. See *Naming importers* and
   `docs/legal-notes.md` §1f–1g. **`README.md` still states the harvest version
   and needs the same correction.**
+- **Is the site acting *i näringsverksamhet*?** **Answered for now by the owner,
+  2026-07-28: no — build and operate it as pure consumer information.** The site
+  takes no income, carries no advertising and has nothing to gain from what its
+  lists say, so every regime that gates on this question is out of scope while
+  that stays true. The owner has decided not to consult a lawyer at this stage.
+  The site *will* become näringsverksamhet if and when the features are in place
+  and there is appetite to run it as a business; the data collection would move
+  to a different footing then. That is a future problem and may never arrive.
+  **What this settles is the present, not the transition** — see *When the site
+  takes income*, which stays written for the day it is needed.
+  Below is what the research established, kept because it is what makes the
+  above a decision rather than an assumption.
 - **Is the site marketing at all?** Researched 2026-07-28 and **not resolved**.
   Alkohollagen 7 kap. bites only on *marknadsföring*, which marknadsföringslagen
   3 § defines as measures *i näringsverksamhet* that are *ägnade att främja
@@ -802,6 +859,14 @@ open, not that the site is nice.
   plan**: the dataset contains suppliers whose names are personal names, förtal
   *is* available to them, and a new rule now excludes them from any ranking
   independently of the 40-wine threshold.
+  **And the table ships. Decided by the owner 2026-07-28**, after being told the
+  claim it rests on is weaker than the one originally commissioned: it can say
+  the company placed the wine on the Swedish market and supplied the text
+  Systembolaget publishes, not that it is accountable for the declaration. The
+  owner accepts that basis for European wines and applies the same reasoning to
+  the rest of the world, so **the table is built on one uniform claim regardless
+  of a wine's origin** — no split between EU and non-EU rows, and no assertion
+  of responsibility anywhere in it.
 - **Does the project's own crawl breach Systembolaget's terms of use?** Found
   2026-07-28 while researching the images; `docs/legal-notes.md` §2f. Clause 1.7
   of their Allmänna användarvillkor (version 2026-04-21) prohibits using
