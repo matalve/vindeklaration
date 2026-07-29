@@ -20,6 +20,9 @@ gör om fritexten till strukturerad data och visar resultatet. Datamängden är
 hålls utanför varje rangordning. {{ stats.silent }} viner har ingen förteckning
 alls.</p>
 
+<h2>Vad antalet räknar</h2>
+<p>{{ s.counting_rule }}</p>
+
 <h2>Tre tillstånd, aldrig två</h2>
 <ul>
   <li><strong>{{ s.state_declared }}</strong> — leverantören har lämnat en
@@ -51,12 +54,12 @@ deklarerar något.</p>
 <p>Produktbilderna visas direkt från Systembolagets webbplats och kopieras
 aldrig hit. Bilder visas bara på enskilda vinsidor, aldrig i listor.
 {{ s.sb_disclaimer }} {{ s.sb_purchase }}</p>
+<p>{{ s.cdn_checked_label }}: {{ cdn_checked }}.</p>
 
 <h2>Finansiering</h2>
 <p>Sajten har inga annonser, inga affiliatelänkar, ingen sponsring och inga
-intäkter. Den använder inga kakor, ingen besöksmätning och hämtar inget från
-tredje part. Det finns inget att logga och ingen som tjänar på vad listorna
-visar.</p>
+intäkter. Det finns inget att logga och ingen som tjänar på vad sidorna visar.</p>
+<p>{{ s.third_party }}</p>
 
 <h2>Fel</h2>
 <p>Varje vinsida visar deklarationen i original bredvid tolkningen, så att
@@ -77,6 +80,9 @@ open and lives on <a href="https://github.com/matalve/vindeklaration">GitHub</a>
 ({{ '%.1f'|format(stats.partial_share) }}% of the declared ones), and those
 wines are kept out of every ranking. {{ stats.silent }} wines have no
 declaration at all.</p>
+
+<h2>What the count counts</h2>
+<p>{{ s.counting_rule }}</p>
 
 <h2>Three states, never two</h2>
 <ul>
@@ -109,12 +115,13 @@ declare nothing.</p>
 <p>Product photographs are shown directly from Systembolaget's website and are
 never copied here. Images appear only on individual wine pages, never in lists.
 {{ s.sb_disclaimer }} {{ s.sb_purchase }}</p>
+<p>{{ s.cdn_checked_label }}: {{ cdn_checked }}.</p>
 
 <h2>Funding</h2>
 <p>The site carries no advertising, no affiliate links, no sponsorship and
-earns nothing. It sets no cookies, runs no analytics and fetches nothing from
-third parties. There is nothing to log and nobody who profits from what the
-lists show.</p>
+earns nothing. There is nothing to log and nobody who profits from what the
+pages show.</p>
+<p>{{ s.third_party }}</p>
 
 <h2>Errors</h2>
 <p>Every wine page shows the declaration as written alongside the

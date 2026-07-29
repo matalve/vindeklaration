@@ -6,7 +6,7 @@
    say", which binds implication and not only sentences. #}
 {% block title %}{{ wine.name }}{% if wine.vintage %} {{ wine.vintage }}{% endif %} — {{ s.site_name }}{% endblock %}
 {% block description %}
-{%- if state == 'declared' %}{{ s.state_declared }} {{ wine.additive_count }}{% if wine.additive_count == 0 %} — {{ s.state_declared_zero }}{% endif %}.
+{%- if state == 'declared' %}{% if wine.additive_count == 0 %}{{ s.state_declared_zero }}{% else %}{{ s.state_declared }} {{ wine.additive_count }} {{ s.additives|lower }}{% endif %}.
 {%- elif state == 'partial' %}{{ s.state_partial }}.
 {%- else %}{{ s.state_silent }}.
 {%- endif %} {{ s.tagline }}
@@ -28,7 +28,8 @@
   {% if image %}
   <figure class="bottle">
     <a href="{{ source_url }}" rel="nofollow noopener">
-      <img src="{{ image }}" alt="{{ wine.name }}" width="200" loading="lazy">
+      <img src="{{ image }}" alt="{{ wine.name }}"
+           width="{{ image_width }}" height="{{ image_height }}" loading="lazy">
     </a>
     <figcaption>{{ s.image_credit }}</figcaption>
   </figure>

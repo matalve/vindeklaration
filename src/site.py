@@ -35,9 +35,16 @@ OUTPUT_DIR = ROOT / "site"
 
 SITE_URL = "https://www.systembolaget.se"
 # The catalog gives a template, not a fetchable URL: it needs a size and a
-# format appended. 400 px is the largest that still loads on a shop's mobile
-# signal. Rendered straight from their CDN, never copied — condition 1.
-IMAGE_SUFFIX = "_400.png"
+# format appended. webp rather than png: the same image is 77 kB instead of
+# 255 kB, and 400 px stays sharp at the 200 px the stylesheet displays, on a
+# phone in a shop. Rendered straight from their CDN, never copied — §2j
+# condition 1.
+IMAGE_SUFFIX = "_400.webp"
+IMAGE_WIDTH, IMAGE_HEIGHT = 400, 400
+# Condition 9 wants the premise of the image analysis visible and falsifiable,
+# so the date the CDN was last confirmed to serve cross-origin without a
+# technological measure is published on /metod rather than kept in a commit.
+CDN_CHECKED = "2026-07-29"
 
 LANGUAGES = ("sv", "en")
 
@@ -109,6 +116,7 @@ def coverage(wines: list[dict]) -> dict:
     return {
         "wines": len(wines),
         "declared": len(declared),
+        "read": len(declared) - len(partial),
         "partial": len(partial),
         "silent": len(wines) - len(declared),
         "declared_share": len(declared) / len(wines) * 100 if wines else 0,
@@ -155,6 +163,7 @@ def build(output: Path, limit: int | None = None) -> None:
     wine_template = env.get_template("wine.html")
     index_template = env.get_template("index.html")
     method_template = env.get_template("method.html")
+    notfound_template = env.get_template("notfound.html")
 
     for lang in LANGUAGES:
         s = strings(lang)
@@ -174,6 +183,8 @@ def build(output: Path, limit: int | None = None) -> None:
                         wine=wine,
                         state=state_of(wine),
                         image=image_url(wine),
+                        image_width=IMAGE_WIDTH,
+                        image_height=IMAGE_HEIGHT,
                         source_url=wine["source_url"],
                         lang=lang,
                         s=s,
@@ -187,8 +198,8 @@ def build(output: Path, limit: int | None = None) -> None:
         prefix.mkdir(parents=True, exist_ok=True)
         (prefix / "index.html").write_text(
             index_template.render(
-                stats=stats, lang=lang, s=s, base=base,
-                lang_root=lang_root, generated=generated,
+                stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
+                generated=generated, cdn_checked=CDN_CHECKED,
             ),
             encoding="utf-8",
         )
@@ -196,11 +207,21 @@ def build(output: Path, limit: int | None = None) -> None:
         method.mkdir(parents=True, exist_ok=True)
         (method / "index.html").write_text(
             method_template.render(
-                stats=stats, lang=lang, s=s, base=base,
-                lang_root=lang_root, generated=generated,
+                stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
+                generated=generated, cdn_checked=CDN_CHECKED,
             ),
             encoding="utf-8",
         )
+
+    # A stale link to a wine that left the assortment is the most likely 404
+    # this site will serve, so it says so and offers a way back in.
+    (output / "404.html").write_text(
+        notfound_template.render(
+            lang="sv", s=strings("sv"), base="", lang_root="",
+            generated=generated, cdn_checked=CDN_CHECKED,
+        ),
+        encoding="utf-8",
+    )
 
     print(f"wrote {len(wines)} wines x {len(LANGUAGES)} languages to {output}")
     print(f"search index: {(output / 'sok-index.json').stat().st_size / 1e6:.1f} MB")

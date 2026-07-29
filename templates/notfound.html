@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}{{ s.not_found }} — {{ s.site_name }}{% endblock %}
+
+{% block content %}
+<h1>{{ s.not_found }}</h1>
+<p>{{ s.not_found_body }}</p>
+<p><a href="{{ lang_root }}/">{{ s.back_home }}</a></p>
+{% endblock %}
