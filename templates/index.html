@@ -23,8 +23,9 @@
   </p>
   <p>{{ s.coverage_rest }}</p>
   <table class="counts">
+    <caption>{{ s.counts_caption }} — {{ stats.wines }} {{ s.wines_word }}</caption>
     <tbody>
-      <tr><td>{{ stats.declared }}</td><td>{{ s.state_declared|lower }}</td></tr>
+      <tr><td>{{ stats.read }}</td><td>{{ s.state_read }}</td></tr>
       <tr><td>{{ stats.partial }}</td><td>{{ s.state_partial|lower }}</td></tr>
       <tr><td>{{ stats.silent }}</td><td>{{ s.state_silent|lower }}</td></tr>
     </tbody>
@@ -38,6 +39,8 @@
     noResults: {{ s.no_results|tojson }},
     resultsCount: {{ s.results_count|tojson }},
     hint: {{ s.search_hint|tojson }},
+    showing: {{ s.showing|tojson }},
+    of: {{ s.of|tojson }},
     stateDeclared: {{ s.state_declared|tojson }},
     stateDeclaredZero: {{ s.state_declared_zero|tojson }},
     statePartial: {{ s.state_partial|tojson }},

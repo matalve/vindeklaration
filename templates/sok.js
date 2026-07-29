@@ -33,7 +33,12 @@
       hint.textContent = window.SITE.noResults;
       return;
     }
-    hint.textContent = total + " " + window.SITE.resultsCount;
+    hint.textContent =
+      rows.length < total
+        ? window.SITE.showing +
+          " " + rows.length + " " + window.SITE.of + " " +
+          total + " " + window.SITE.resultsCount
+        : total + " " + window.SITE.resultsCount;
     var frag = document.createDocumentFragment();
     rows.forEach(function (row) {
       var li = document.createElement("li");
@@ -73,7 +78,6 @@
         ? row.n.indexOf(q) === 0
         : row._t.indexOf(q) !== -1 || row._p.indexOf(q) !== -1;
       if (match) hits.push(row);
-      if (hits.length > 400) break;
     }
     render(hits.slice(0, 50), hits.length);
   }
@@ -97,7 +101,8 @@
       });
   }
 
-  // The index is a megabyte, so it is fetched on the first keystroke rather
+  // The index is a few megabytes uncompressed, so it is fetched on the first
+  // keystroke rather
   // than on load — the front page has to be readable on a shop's signal.
   input.addEventListener("focus", load, { once: true });
   input.addEventListener("input", function () {

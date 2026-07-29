@@ -38,7 +38,19 @@
   "image_credit": "Produktbilden visas direkt från Systembolagets webbplats.",
   "other_lang": "In English",
   "other_lang_url": "/en/",
-  "wine_pages_note": ""
+  "wine_pages_note": "",
+  "wines_word": "viner",
+  "of_total": "av",
+  "state_read": "deklarerar, och all text kunde tolkas",
+  "counts_caption": "Så fördelar sig hyllan",
+  "showing": "visar",
+  "counting_rule": "Antalet räknar deklarerade tillsatser, sulfiter inräknade. Druvor, druvmust och tillsatt socker är råvaror och räknas inte. Förpackningsgaser (kväve, koldioxid, argon) redovisas separat och räknas inte, eftersom de är ett tappningssteg snarare än något som stannar i vinet. Ett vin kan därför stå som „deklarerar inga tillsatser” och ändå ha en deklaration som nämner en gas eller socker — originaltexten står alltid på sidan så att du kan se skillnaden.",
+  "third_party": "Sajten hämtar en sak från tredje part: produktbilden, direkt från Systembolagets bildserver. Det innebär att din webbläsare kontaktar Systembolaget när du öppnar en vinsida, och att de kan se din IP-adress. Bilden kopieras aldrig hit. Inget annat externt hämtas — inga typsnitt, ingen besöksmätning, inga kakor.",
+  "cdn_checked_label": "Bildservern kontrollerades senast",
+  "not_found": "Sidan finns inte",
+  "not_found_body": "Adressen leder ingenstans. Vinet kan ha utgått ur sortimentet sedan länken skapades.",
+  "back_home": "Till söksidan",
+  "of": "av"
  },
  "en": {
   "site_name": "vindeklaration",
@@ -79,6 +91,18 @@
   "image_credit": "The product photograph is shown directly from Systembolaget's website.",
   "other_lang": "På svenska",
   "other_lang_url": "/",
-  "wine_pages_note": "Individual wine pages are in Swedish for now. Search results below link to them. The declaration itself is never translated in either language — it is quoted as the supplier wrote it."
+  "wine_pages_note": "Individual wine pages are in Swedish for now. Search results below link to them. The declaration itself is never translated in either language — it is quoted as the supplier wrote it.",
+  "wines_word": "wines",
+  "of_total": "of",
+  "state_read": "declare, and all of the text could be read",
+  "counts_caption": "How the shelf divides",
+  "showing": "showing",
+  "counting_rule": "The count counts declared additives, sulfites included. Grapes, grape must and added sugar are raw materials and are not counted. Packaging gases (nitrogen, carbon dioxide, argon) are recorded separately and not counted, because they are a bottling step rather than something that stays in the wine. A wine can therefore read “declares no additives” and still have a declaration that mentions a gas or sugar — the original text is always on the page so you can see the difference.",
+  "third_party": "The site fetches one thing from a third party: the product photograph, directly from Systembolaget's image server. That means your browser contacts Systembolaget when you open a wine page, and they can see your IP address. The image is never copied here. Nothing else external is fetched — no fonts, no analytics, no cookies.",
+  "cdn_checked_label": "The image server was last checked",
+  "not_found": "Page not found",
+  "not_found_body": "That address leads nowhere. The wine may have left the assortment since the link was made.",
+  "back_home": "To search",
+  "of": "of"
  }
 }
