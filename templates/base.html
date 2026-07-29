@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}{{ s.site_name }}{% endblock %}</title>
 <meta name="description" content="{% block description %}{{ s.tagline }}{% endblock %}">
-{# No analytics, no fonts, no third-party requests of any kind. The absence of
-   commercial interest is load-bearing, not decorative — docs/site-plan.md. #}
+{# No fonts, no third-party requests beyond two named on /metod: the bottle
+   photograph and the beacon below. The absence of commercial interest is
+   load-bearing, not decorative — docs/site-plan.md. #}
 <link rel="stylesheet" href="/site.css">
 </head>
 <body>
@@ -31,5 +32,12 @@
   <p class="disclaimer">{{ s.not_health }}</p>
   <p class="meta">{{ s.site_name }} · {{ generated }} · <a href="{{ lang_root }}/{{ s.method_url }}/">{{ s.method }}</a></p>
 </footer>
+{% if analytics %}
+{# Cloudflare Web Analytics. Cookieless, and no new party — Cloudflare serves
+   this site, so they already see every request. /metod says it is here and
+   what it sends; if this block changes, that sentence changes with it. #}
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "{{ analytics }}"}'></script>
+{% endif %}
 </body>
 </html>

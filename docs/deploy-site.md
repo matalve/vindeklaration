@@ -6,7 +6,7 @@ where something is a guess it says so.
 
 The build itself is done: `.github/workflows/deploy.yml` builds and publishes
 on every push to `main`. What is missing is a Cloudflare account, two GitHub
-secrets, and the domain pointing at it. Those need a human, and the order below
+secrets, a beacon token, and the domain pointing at it. Those need a human, and the order below
 matters — **deploy first, move DNS last**, so the site is known to work before
 the domain depends on it.
 
@@ -68,6 +68,7 @@ Copy the token when it is shown. It is not shown again.
 |---|---|
 | `CLOUDFLARE_API_TOKEN` | the token from step 2 |
 | `CLOUDFLARE_ACCOUNT_ID` | the Account ID from step 1 |
+| `CF_ANALYTICS_TOKEN` | the Web Analytics beacon token — see step 6b. Add it after the domain is attached; until then leave it unset and no beacon is rendered. |
 
 The names are what `deploy.yml` reads; changing one means changing the other.
 
@@ -127,6 +128,21 @@ shorter thing to say out loud, and the site's audience is people reading a
 phone in a shop — a **Redirect Rule** from `www` to the apex costs nothing and
 avoids the same page existing at two addresses.
 
+## 6b. Turn on Web Analytics
+
+Decided 2026-07-29. **Workers & Pages → your project → Metrics**, or
+**Analytics & Logs → Web Analytics → Add a site** for the hostname. Cloudflare
+gives a beacon token; put it in the `CF_ANALYTICS_TOKEN` secret and re-run the
+workflow.
+
+Two things worth keeping straight. Cloudflare Pages already reports requests
+and bandwidth without any beacon — that is server-side and needs no consent
+discussion. The beacon adds page-level detail from the browser, and it is a
+second third-party request. It sets no cookie and builds no cross-site profile,
+so there is still no cookie banner, but `/metod` names it and says what it
+sends. **If the beacon is ever removed or replaced, that paragraph changes with
+it** — `third_party` in `templates/strings.json`.
+
 ## 7. After it is live
 
 - **Set `CDN_CHECKED` in `src/site.py` whenever the image premise is
@@ -143,13 +159,10 @@ avoids the same page existing at two addresses.
 
 ## What is not set up, and is worth knowing
 
-- **No analytics, deliberately.** Cloudflare Web Analytics is cookieless and
-  would be tempting; it is still a third-party request and `/metod` now states
-  that the product photograph is the only one. Adding it means changing that
-  sentence, and the sentence is load-bearing.
 - **No preview deployments.** The workflow deploys `--branch=main` only.
   Branch previews would give every pull request a public URL, which is a
   reasonable thing to want later and a needless surface today.
-- **No `_headers` file.** Worth adding a `Content-Security-Policy` that permits
-  only `product-cdn.systembolaget.se` as an image source — it would turn "no
-  third-party requests" from a promise into something the browser enforces.
+- **No `_headers` file.** Worth adding a `Content-Security-Policy` naming
+  `product-cdn.systembolaget.se` as the only image source and
+  `static.cloudflareinsights.com` as the only script source — it would turn the
+  `/metod` paragraph from a promise into something the browser enforces.

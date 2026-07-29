@@ -32,6 +32,9 @@ jobs:
           enable-cache: true
 
       - name: Build the site
+        # Unset in a fork or a local run, which renders no beacon at all.
+        env:
+          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
         run: uv run python -m src.site
 
       # Cloudflare Pages rejects a deployment over 20 000 files, and the build
