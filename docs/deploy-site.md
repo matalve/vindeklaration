@@ -1,8 +1,15 @@
 # Publishing the site
 
 How vindeklaration.se gets from `data/wines.json` to a browser. Rewritten
-2026-07-29 for the Git integration; the steps are untested end to end, so where
-something is a guess it says so.
+2026-07-29 for **Workers**, after a first deploy proved the Pages flow this
+guide originally described no longer exists. Steps marked *confirmed* were
+observed working; the rest are still untested end to end.
+
+**It is a Worker with static assets, not a Cloudflare Pages project.**
+Cloudflare has absorbed Pages into Workers: Pages is not formally deprecated
+and existing projects keep working, but the dashboard steers new projects to
+Workers, and "Connect to Git" creates a Worker. The practical differences that
+matter here are the hostname (step 1a) and 404 handling (step 2a).
 
 Cloudflare builds the site itself from this repository. Nothing needs to run on
 the Pi or in GitHub Actions for a deploy to happen — pushing to `main` is the
@@ -26,14 +33,34 @@ This is a build and not a crawler. It reads the dataset out of the repository
 and makes no request to Systembolaget, so it does not touch the one-crawler
 rule in `CLAUDE.md`.
 
+## 1a. Set the account subdomain first
+
+**Do this before the first deploy.** A Worker is served at
+`<worker-name>.<account-subdomain>.workers.dev`, and **Cloudflare derives the
+account subdomain from the account name at signup** — which, if the account was
+opened in a person's own name, puts that name in the URL. Pages did not behave
+this way, which is why it is easy to be caught by it.
+
+**Workers & Pages → Overview → *Change* beside "Your subdomain".** Use
+`matalve`, the project's approved public identifier. It is account-wide rather
+than per-project, so it should not be a project name: every future Worker
+inherits it. Several Cloudflare community threads suggest the change may only
+be possible once, so choose the durable answer rather than the convenient one.
+
+Once a custom domain is attached (step 6), the workers.dev route can be
+disabled entirely and the hostname stops answering at all.
+
 ## 1. Connect the repository
 
 1. Create a Cloudflare account if there is none. The free plan is enough:
-   unlimited bandwidth and requests, 500 builds a month against roughly 30 used.
-2. **Workers & Pages → Create → Pages → Connect to Git.** Authorise the
-   Cloudflare GitHub App and give it access to `matalve/vindeklaration`. A
-   private repository works; the App is how it reads it.
-3. Project name `vindeklaration`, production branch `main`.
+   unlimited bandwidth and requests, and static-asset limits well above what
+   this site needs.
+2. **Workers & Pages → Create → Connect to Git** (Workers, not Pages — see the
+   note at the top). Authorise the Cloudflare GitHub App and give it access to
+   `matalve/vindeklaration`. A private repository works; the App is how it
+   reads it.
+3. Worker name `vindeklaration`, production branch `main`. The name becomes the
+   first label of the hostname, so it is the half of the URL you control.
 
 ## 2. Build settings
 
@@ -44,8 +71,9 @@ rule in `CLAUDE.md`.
 | Build output directory | `site` |
 | Root directory | *(leave empty)* |
 
-The `test` at the end is not decoration. **Cloudflare Pages rejects a
-deployment over 20 000 files**, and the build grows with the assortment — it is
+The `test` at the end is not decoration. **A Worker rejects more than 20 000
+static assets on the free plan** (100 000 on paid), and the build grows with
+the assortment — it is
 at 15 055 today. Failing the build with the count visible is much easier to
 diagnose than a rejected upload with a generic message. When it trips, read
 *Bilingual* in `docs/site-plan.md`, where the cap and the ways past it are
@@ -74,6 +102,16 @@ pip install --user uv && export PATH="$HOME/.local/bin:$PATH" && \
 A Python version below 3.11 in the log means `PYTHON_VERSION` is unset; see
 step 3.
 
+## 2a. 404 handling
+
+`wrangler.jsonc` in the repository root sets `not_found_handling: "404-page"`,
+so a stale `/vin/…` URL gets the project's own 404 rather than an empty body.
+Pages did this automatically; a Worker does not.
+
+Nothing to configure — the file is committed. If a build ever fails right after
+that file changes, it is the first suspect: the dashboard's build settings and
+a wrangler config can disagree about the output directory.
+
 ## 3. Environment variables
 
 **Settings → Environment variables → Production.**
@@ -91,10 +129,14 @@ not before.
 
 ## 4. First deploy
 
-Saving the build settings starts one. Three or four minutes, most of it
-installing dependencies. It lands on `https://vindeklaration.pages.dev`.
+Saving the build settings starts one. *Confirmed 2026-07-29: it takes several
+minutes, most of it installing dependencies, and the dashboard is quiet for
+long enough to look stuck.* It lands on
+`https://vindeklaration.<your-subdomain>.workers.dev`, and the exact URL is at
+the top of the deployment page.
 
-Check before going further:
+Check before going further — all of these were confirmed passing on the first
+deploy:
 
 - The front page loads, and the three counts add up to the total in the
   caption above them.
@@ -104,7 +146,8 @@ Check before going further:
 - A wine page renders, its bottle photograph appears, and the footer carries
   both Systembolaget sentences.
 - `/en/` and `/en/method/` load, and a made-up URL under `/vin/` gets the
-  project's own 404 page rather than Cloudflare's.
+  project's own 404 page rather than an empty body. *This one failed on the
+  first deploy and is what `wrangler.jsonc` fixes.*
 
 Every branch that is not `main` now gets its own preview URL automatically.
 That is the main thing this arrangement buys, and it is what makes running
@@ -138,12 +181,17 @@ dig NS vindeklaration.se +short
 
 ## 6. Attach the domain, then turn on Web Analytics
 
-Once the zone is active: **Workers & Pages → vindeklaration → Custom domains →
-Set up a domain** → `vindeklaration.se`. Cloudflare creates the records and
+Once the zone is active: **Workers & Pages → vindeklaration → Settings →
+Domains & Routes → Add → Custom domain** → `vindeklaration.se`. Cloudflare creates the records and
 issues the certificate itself, usually within minutes. Add `www` the same way
 if you want it, then send it to the apex with a **Redirect Rule** — the same
 page existing at two addresses helps nobody, and `vindeklaration.se` is the
 shorter thing to say out loud.
+
+**Then disable the workers.dev route**, in the same Domains & Routes panel. The
+custom domain is the address; leaving the workers.dev one answering means the
+site exists at two addresses, one of which contains whatever the account
+subdomain happens to be.
 
 Then **Analytics & Logs → Web Analytics → Add a site** for the hostname. Put
 the beacon token in `CF_ANALYTICS_TOKEN` (step 3) and redeploy.
