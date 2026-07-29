@@ -119,13 +119,8 @@ a wrangler config can disagree about the output directory.
 | Name | Value | When |
 |---|---|---|
 | `PYTHON_VERSION` | `3.11.5` | now — cheap insurance against the build image changing its default under you |
-| `CF_ANALYTICS_TOKEN` | the beacon token | **do not create it yet** — add it in step 6, once there is a token to put in it |
-
-**Cloudflare will not save a variable with an empty value, and it does not need
-to.** `src/site.py` reads the variable with a default of empty string, so a
-variable that does not exist and one that is blank are the same thing to it:
-no beacon is rendered. Local builds work the same way. Create it in step 6 and
-not before.
+There is **no analytics variable**. Cloudflare injects its own beacon with its
+own token; nothing in this repository renders one. See step 6.
 
 ## 4. First deploy
 
@@ -193,8 +188,22 @@ custom domain is the address; leaving the workers.dev one answering means the
 site exists at two addresses, one of which contains whatever the account
 subdomain happens to be.
 
-Then **Analytics & Logs → Web Analytics → Add a site** for the hostname. Put
-the beacon token in `CF_ANALYTICS_TOKEN` (step 3) and redeploy.
+Then **Analytics & Logs → Web Analytics → Add a site** for the hostname and
+enable **automatic injection**. *Confirmed 2026-07-29.* There is no token to
+copy and nothing to redeploy — for a proxied domain Cloudflare generates the
+token and injects the snippet at the edge. The manual snippet with a token
+exists only for sites that are not behind Cloudflare, which is why hunting for
+one here finds nothing.
+
+Two things worth knowing, both confirmed by reading a served page rather than
+from documentation:
+
+- **The beacon is only injected for browser-like requests.** `curl` gets a page
+  with no beacon in it, which looks exactly like injection being switched off.
+  Send a normal browser `User-Agent` before concluding anything.
+- **The script comes from `static.cloudflareinsights.com`**, a third-party host.
+  Automatic injection does not make the measurement first-party. `/metod` names
+  it as one of two third-party requests, and that is accurate.
 
 Two things worth keeping straight. Cloudflare already reports requests and
 bandwidth for the site without any beacon — that is server-side, and it is why
@@ -204,6 +213,28 @@ no cookie banner, but `/metod` names it and says what it sends. **Remove or
 replace the beacon and that paragraph is wrong** — it is `third_party` in
 `templates/strings.json`, and the template block that renders the beacon says
 so next to itself.
+
+## 6b. www, and HTTPS
+
+**`www` needs a DNS record before any redirect rule can fire.** A rule cannot
+act on a request that never reaches Cloudflare. *DNS → Records → Add record*:
+`CNAME`, name `www`, target `vindeklaration.se`, **Proxied** — the orange cloud
+is the part that matters.
+
+Then *Rules → Redirect Rules → Create*, matching hostname
+`www.vindeklaration.se`. **Target URL takes an expression, not a URL**, which is
+the confusing part: a static `https://vindeklaration.se` sends every visitor to
+the front page, including one who followed a link to a wine. Choose **Dynamic**
+and use
+
+```
+concat("https://vindeklaration.se", http.request.uri.path)
+```
+
+with status **301** and *Preserve query string* on.
+
+Also **SSL/TLS → Edge Certificates → Always Use HTTPS**. Without it
+`http://vindeklaration.se/` is served in the clear rather than redirected.
 
 ## 7. Optional, once it is working
 
