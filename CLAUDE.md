@@ -39,6 +39,8 @@ counted. This file is about how to work here.
 | `data/lexicon.yaml` | labels, processing notes, stopwords |
 | `data/unknown.json` | what the parser could not read, ranked by wines blocked |
 | `deploy/` | running it unattended on the Raspberry Pi |
+| `src/site.py`, `templates/` | the static site — `uv run python -m src.site` |
+| `docs/deploy-site.md` | Cloudflare Pages and the DNS move, step by step |
 | `.claude/agents/` | lexicon-curator, declaration-auditor, upstream-scout, domain-scout, legal-scout, declaration-finder, site-auditor |
 
 ```sh
