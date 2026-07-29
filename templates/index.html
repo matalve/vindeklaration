@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="search">
+  <h1>{{ s.tagline }}</h1>
+  <label class="visually-hidden" for="q">{{ s.search }}</label>
+  <input type="search" id="q" placeholder="{{ s.search }}" autocomplete="off"
+         autocapitalize="off" spellcheck="false" enterkeyhint="search">
+  <p id="hint" class="hint">{{ s.search_hint }}</p>
+  <ol id="results" class="results"></ol>
+</section>
+
+{# The denominator, on the front page, before anything is ranked. Four wines in
+   five declare nothing, and that is the site's largest finding rather than a
+   footnote to it. #}
+<section class="coverage">
+  <p class="headline">
+    <strong>{{ '%.1f'|format(stats.declared_share) }}%</strong>
+    {{ s.coverage_lead }}
+  </p>
+  <p>{{ s.coverage_rest }}</p>
+  <table class="counts">
+    <tbody>
+      <tr><td>{{ stats.declared }}</td><td>{{ s.state_declared|lower }}</td></tr>
+      <tr><td>{{ stats.partial }}</td><td>{{ s.state_partial|lower }}</td></tr>
+      <tr><td>{{ stats.silent }}</td><td>{{ s.state_silent|lower }}</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<script>
+  window.SITE = {
+    index: "/sok-index.json",
+    base: "{{ base }}",
+    noResults: {{ s.no_results|tojson }},
+    resultsCount: {{ s.results_count|tojson }},
+    hint: {{ s.search_hint|tojson }},
+    stateDeclared: {{ s.state_declared|tojson }},
+    stateDeclaredZero: {{ s.state_declared_zero|tojson }},
+    statePartial: {{ s.state_partial|tojson }},
+    stateSilent: {{ s.state_silent|tojson }}
+  };
+</script>
+<script src="/sok.js" defer></script>
+{% endblock %}
