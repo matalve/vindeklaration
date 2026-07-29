@@ -51,9 +51,19 @@ diagnose than a rejected upload with a generic message. When it trips, read
 *Bilingual* in `docs/site-plan.md`, where the cap and the ways past it are
 written up.
 
-`uv` is not in the build image, so the command installs it first. Use the
-`--user` form: newer build images run Python as an externally managed
-environment where a bare `pip install` is refused.
+`uv` is not in the build image, so the command installs it first. This form is
+confirmed working on Cloudflare's image as of 2026-07-29:
+
+```sh
+pip install uv && uv run python -m src.site && \
+  test $(find site -type f | wc -l) -le 19000
+```
+
+Paste it as one line into the build command field. `uv` reads `pyproject.toml`
+and `uv.lock` and installs the rest itself.
+
+**If a future build image refuses it** with `externally-managed-environment` or
+`uv: command not found`, install into the user site instead:
 
 ```sh
 pip install --user uv && export PATH="$HOME/.local/bin:$PATH" && \
@@ -61,12 +71,8 @@ pip install --user uv && export PATH="$HOME/.local/bin:$PATH" && \
   test $(find site -type f | wc -l) -le 19000
 ```
 
-Paste it as one line into the build command field. `uv` reads `pyproject.toml`
-and `uv.lock` and installs the rest itself.
-
-If the log shows `externally-managed-environment` or `uv: command not found`,
-that is this step and the `--user` plus `PATH` form is the fix. If it shows a
-Python version below 3.11, set `PYTHON_VERSION` as in step 3.
+A Python version below 3.11 in the log means `PYTHON_VERSION` is unset; see
+step 3.
 
 ## 3. Environment variables
 
