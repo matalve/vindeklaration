@@ -221,20 +221,47 @@ act on a request that never reaches Cloudflare. *DNS → Records → Add record*
 `CNAME`, name `www`, target `vindeklaration.se`, **Proxied** — the orange cloud
 is the part that matters.
 
-Then *Rules → Redirect Rules → Create*, matching hostname
-`www.vindeklaration.se`. **Target URL takes an expression, not a URL**, which is
-the confusing part: a static `https://vindeklaration.se` sends every visitor to
-the front page, including one who followed a link to a wine. Choose **Dynamic**
-and use
+Then *Rules → Redirect Rules → Create*. The editor defaults to **wildcard
+pattern** matching, where `${1}` in the target is whatever `*` captured — there
+is no "Dynamic" toggle to look for unless you switch to the expression editor.
 
-```
-concat("https://vindeklaration.se", http.request.uri.path)
-```
+| Field | Value |
+|---|---|
+| Request URL | `https://www.vindeklaration.se/*` |
+| Target URL | `https://vindeklaration.se/${1}` |
+| Status code | `301` |
+| Preserve query string | on |
 
-with status **301** and *Preserve query string* on.
+The `${1}` is the point. A target of plain `https://vindeklaration.se` sends
+every visitor to the front page, including whoever followed a link to a wine.
 
-Also **SSL/TLS → Edge Certificates → Always Use HTTPS**. Without it
-`http://vindeklaration.se/` is served in the clear rather than redirected.
+Also **SSL/TLS → Edge Certificates → Always Use HTTPS**. *Confirmed working
+2026-07-29* — without it `http://vindeklaration.se/` is served in the clear
+rather than redirected.
+
+### Free plan settings worth a decision
+
+Not an inventory of the dashboard; the four that matter for a public,
+cookie-free, static site that wants to be indexed.
+
+- **Bot Fight Mode: off.** It puts a JS challenge in front of suspect traffic
+  and turns away legitimate crawlers, search engines included. Journey 3 —
+  arriving from a search engine on a substance name — depends on being indexed.
+  There is also something off about a project that is itself a polite crawler
+  of someone else's site shutting the door on everyone else's.
+- **Rocket Loader: off.** It rearranges when scripts run. `sok.js` is 3 kB and
+  already deferred, so there is nothing to win and a known way to lose.
+- **Crawler Hints: on.** The site rebuilds nightly; this tells search engines
+  when it actually changed instead of having them guess.
+- **HSTS: considered, not automatic.** Right in principle since the site should
+  never answer over HTTP. Start at six months and **leave preload alone** — a
+  preloaded domain is painful to walk back, and that is not something to
+  discover afterwards.
+
+Leave caching alone. The response carries `max-age=0, must-revalidate`, which
+is the Workers default for HTML and is what lets the nightly rebuild reach
+people the same morning. A longer Browser Cache TTL delays the data for no
+real gain.
 
 ## 7. Optional, once it is working
 
