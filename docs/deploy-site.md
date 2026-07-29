@@ -1,14 +1,16 @@
 # Publishing the site
 
-How vindeklaration.se gets from `data/wines.json` to a browser. Written
-2026-07-29, before the first deploy, so the steps are untested end to end —
-where something is a guess it says so.
+How vindeklaration.se gets from `data/wines.json` to a browser. Rewritten
+2026-07-29 for the Git integration; the steps are untested end to end, so where
+something is a guess it says so.
 
-The build itself is done: `.github/workflows/deploy.yml` builds and publishes
-on every push to `main`. What is missing is a Cloudflare account, two GitHub
-secrets, a beacon token, and the domain pointing at it. Those need a human, and the order below
-matters — **deploy first, move DNS last**, so the site is known to work before
-the domain depends on it.
+Cloudflare builds the site itself from this repository. Nothing needs to run on
+the Pi or in GitHub Actions for a deploy to happen — pushing to `main` is the
+whole trigger, and **the Pi's nightly dataset commit around 03:20 is a push**,
+so the site follows the data without anyone doing anything.
+
+Order matters: **deploy first, move DNS last**, so the site is known to work
+before the domain depends on it.
 
 ## What is being deployed
 
@@ -16,98 +18,94 @@ the domain depends on it.
 uv run python -m src.site        # ~24 s on the Pi
 ```
 
-15 055 files, 36 MB, output in `site/`. Nothing in it is committed —
-`site/` is gitignored and rebuilt in CI, so the repository never carries two
+15 055 files, 36 MB, output in `site/`. Nothing in it is committed — `site/`
+is gitignored and rebuilt on Cloudflare, so the repository never carries two
 copies of the same data.
 
-The workflow runs on push to `main`, which includes **the Pi's nightly dataset
-commit around 03:20**. That is intentional: the site should follow the data
-without anyone doing anything. Pushes that only touch `docs/`, `deploy/`,
-`.claude/` or a Markdown file are skipped.
-
-It is a build and not a crawler. It reads the dataset out of the repository and
-makes no request to Systembolaget, so it does not conflict with the one-crawler
+This is a build and not a crawler. It reads the dataset out of the repository
+and makes no request to Systembolaget, so it does not touch the one-crawler
 rule in `CLAUDE.md`.
 
-## 1. Cloudflare account and Pages project
+## 1. Connect the repository
 
 1. Create a Cloudflare account if there is none. The free plan is enough:
-   unlimited bandwidth, unlimited requests, 500 builds a month, and we build
-   about 30.
-2. **Workers & Pages → Create → Pages → Upload assets**, name the project
-   `vindeklaration`, and upload anything at all — a single `index.html` will
-   do. This exists only to create the project so the API token can target it;
-   the first real deploy replaces it.
+   unlimited bandwidth and requests, 500 builds a month against roughly 30 used.
+2. **Workers & Pages → Create → Pages → Connect to Git.** Authorise the
+   Cloudflare GitHub App and give it access to `matalve/vindeklaration`. A
+   private repository works; the App is how it reads it.
+3. Project name `vindeklaration`, production branch `main`.
 
-   Do **not** use "Connect to Git". That path makes Cloudflare run the build,
-   which means giving it repository access and reproducing the uv setup in
-   their environment. The workflow already builds; Cloudflare only receives
-   files.
-3. Note the **Account ID**, on the right-hand side of any Workers & Pages page.
-
-## 2. API token
-
-**My Profile → API Tokens → Create Token → Create Custom Token.**
+## 2. Build settings
 
 | Field | Value |
 |---|---|
-| Permissions | `Account` · `Cloudflare Pages` · `Edit` |
-| Account Resources | Include · your account |
-| TTL | leave open, or set a reminder to rotate |
+| Framework preset | None |
+| Build command | `pip install uv && uv run python -m src.site && test $(find site -type f \| wc -l) -le 19000` |
+| Build output directory | `site` |
+| Root directory | *(leave empty)* |
 
-That single permission is all `wrangler pages deploy` needs. Do not use the
-"Edit Cloudflare Workers" template — it grants far more than this.
+The `test` at the end is not decoration. **Cloudflare Pages rejects a
+deployment over 20 000 files**, and the build grows with the assortment — it is
+at 15 055 today. Failing the build with the count visible is much easier to
+diagnose than a rejected upload with a generic message. When it trips, read
+*Bilingual* in `docs/site-plan.md`, where the cap and the ways past it are
+written up.
 
-Copy the token when it is shown. It is not shown again.
+`uv` is not in the build image, hence `pip install uv`. It reads
+`pyproject.toml` and `uv.lock` and installs the rest itself.
 
-## 3. GitHub secrets
+## 3. Environment variables
 
-**Settings → Secrets and variables → Actions → New repository secret**, twice:
+**Settings → Environment variables → Production.**
 
-| Name | Value |
-|---|---|
-| `CLOUDFLARE_API_TOKEN` | the token from step 2 |
-| `CLOUDFLARE_ACCOUNT_ID` | the Account ID from step 1 |
-| `CF_ANALYTICS_TOKEN` | the Web Analytics beacon token — see step 6b. Add it after the domain is attached; until then leave it unset and no beacon is rendered. |
+| Name | Value | When |
+|---|---|---|
+| `PYTHON_VERSION` | `3.11.5` | now — cheap insurance against the build image changing its default under you |
+| `CF_ANALYTICS_TOKEN` | the beacon token | after step 6; leave unset until then and no beacon is rendered |
 
-The names are what `deploy.yml` reads; changing one means changing the other.
+Unset `CF_ANALYTICS_TOKEN` is a supported state, not a broken one —
+`src/site.py` renders no script at all without it, which is also what local
+builds do.
 
 ## 4. First deploy
 
-**Actions → Deploy site → Run workflow.** It should take three or four minutes,
-most of it installing dependencies.
+Saving the build settings starts one. Three or four minutes, most of it
+installing dependencies. It lands on `https://vindeklaration.pages.dev`.
 
-It lands on `https://vindeklaration.pages.dev`. Check before going further:
+Check before going further:
 
-- The front page loads and the counts add up to the total shown in the caption.
-- Typing in the search box fetches the index and returns wines. The index is
-  2.7 MB uncompressed; Cloudflare gzips it in transit, so watch the transferred
-  size in the network tab rather than the file size.
+- The front page loads, and the three counts add up to the total in the
+  caption above them.
+- Typing in the search box returns wines. The index is 2.7 MB uncompressed;
+  Cloudflare gzips it in transit, so read the transferred size in the network
+  tab rather than the file size.
 - A wine page renders, its bottle photograph appears, and the footer carries
   both Systembolaget sentences.
-- `/en/` and `/en/method/` load, and a made-up URL gets the project's own 404
-  rather than Cloudflare's.
+- `/en/` and `/en/method/` load, and a made-up URL under `/vin/` gets the
+  project's own 404 page rather than Cloudflare's.
 
-If the workflow fails on the file-count check, read *Bilingual* in
-`docs/site-plan.md` — the cap and the ways past it are written up there.
+Every branch that is not `main` now gets its own preview URL automatically.
+That is the main thing this arrangement buys, and it is what makes running
+`site-auditor` against a change worthwhile before the change is live.
 
 ## 5. Move DNS to Cloudflare
 
-The domain is registered at **INLEED** and currently uses their nameservers
-(`ns1.inleed.net` … `ns6.inleed.net`, confirmed by whois 2026-07-29). Cloudflare
-Registrar sells no `.se`, so the registration **stays at Inleed** — only the
-nameservers change. There is no transfer, no auth code and no fee.
+The domain is registered at **INLEED** and uses their nameservers
+(`ns1.inleed.net` … `ns6.inleed.net`, confirmed by whois 2026-07-29).
+Cloudflare Registrar sells no `.se`, so the registration **stays at Inleed** —
+only the nameservers change. No transfer, no auth code, no fee.
 
-1. In Cloudflare: **Add a domain** → `vindeklaration.se` → select the Free plan
-   → let it scan the existing records. There is nothing to preserve unless mail
-   is already configured for the domain, in which case copy the MX and any
-   SPF/DKIM/DMARC `TXT` records across **before** switching.
+1. In Cloudflare: **Add a domain** → `vindeklaration.se` → Free plan → let it
+   scan the existing records. There is nothing to preserve **unless mail is
+   configured for the domain**, in which case copy the MX and any SPF, DKIM and
+   DMARC `TXT` records across *before* switching. Post stops otherwise, and it
+   stops quietly.
 2. Cloudflare gives two nameservers, of the form `something.ns.cloudflare.com`.
 3. In Inleed's control panel, replace all six `inleed.net` nameservers with
    Cloudflare's two.
-4. Wait. `.se` publishes changes quickly but resolvers cache; an hour is
-   typical, 24 is the number to quote if it looks stuck. Cloudflare emails when
-   the zone goes active.
+4. Wait. `.se` publishes quickly but resolvers cache; an hour is typical, 24 is
+   the number to quote if it looks stuck. Cloudflare emails when the zone is
+   active.
 
 Verify from a machine that has not looked the domain up recently:
 
@@ -116,53 +114,58 @@ whois -h whois.iis.se vindeklaration.se | grep nserver
 dig NS vindeklaration.se +short
 ```
 
-## 6. Attach the domain to the site
+## 6. Attach the domain, then turn on Web Analytics
 
-Once the zone is active in Cloudflare: **Workers & Pages → vindeklaration →
-Custom domains → Set up a domain** → `vindeklaration.se`. Add `www` the same
-way if you want it; Cloudflare creates the records and issues the certificate
-itself, usually within minutes.
+Once the zone is active: **Workers & Pages → vindeklaration → Custom domains →
+Set up a domain** → `vindeklaration.se`. Cloudflare creates the records and
+issues the certificate itself, usually within minutes. Add `www` the same way
+if you want it, then send it to the apex with a **Redirect Rule** — the same
+page existing at two addresses helps nobody, and `vindeklaration.se` is the
+shorter thing to say out loud.
 
-Then decide which one is canonical. `vindeklaration.se` without `www` is the
-shorter thing to say out loud, and the site's audience is people reading a
-phone in a shop — a **Redirect Rule** from `www` to the apex costs nothing and
-avoids the same page existing at two addresses.
+Then **Analytics & Logs → Web Analytics → Add a site** for the hostname. Put
+the beacon token in `CF_ANALYTICS_TOKEN` (step 3) and redeploy.
 
-## 6b. Turn on Web Analytics
+Two things worth keeping straight. Cloudflare already reports requests and
+bandwidth for the site without any beacon — that is server-side, and it is why
+the beacon adds no new party. The beacon adds page-level detail from the
+browser. It sets no cookie and builds no cross-site profile, so there is still
+no cookie banner, but `/metod` names it and says what it sends. **Remove or
+replace the beacon and that paragraph is wrong** — it is `third_party` in
+`templates/strings.json`, and the template block that renders the beacon says
+so next to itself.
 
-Decided 2026-07-29. **Workers & Pages → your project → Metrics**, or
-**Analytics & Logs → Web Analytics → Add a site** for the hostname. Cloudflare
-gives a beacon token; put it in the `CF_ANALYTICS_TOKEN` secret and re-run the
-workflow.
+## 7. Optional, once it is working
 
-Two things worth keeping straight. Cloudflare Pages already reports requests
-and bandwidth without any beacon — that is server-side and needs no consent
-discussion. The beacon adds page-level detail from the browser, and it is a
-second third-party request. It sets no cookie and builds no cross-site profile,
-so there is still no cookie banner, but `/metod` names it and says what it
-sends. **If the beacon is ever removed or replaced, that paragraph changes with
-it** — `third_party` in `templates/strings.json`.
+- **Build watch paths.** *Settings → Builds & deployments.* Excluding `docs/`,
+  `deploy/`, `.claude/` and `*.md` stops a documentation commit from rebuilding
+  15 000 pages. Nothing breaks without it; it just wastes a build.
+- **`_headers` with a Content-Security-Policy** naming
+  `product-cdn.systembolaget.se` as the only image source and
+  `static.cloudflareinsights.com` as the only script source. That would turn
+  the `/metod` paragraph from a promise into something the browser enforces.
 
-## 7. After it is live
+## 8. After it is live
 
 - **Set `CDN_CHECKED` in `src/site.py` whenever the image premise is
   re-checked.** `/metod` publishes that date, and condition 2 of
   `docs/legal-notes.md` §2j says the images come down the same day a
-  technological measure appears on Systembolaget's CDN. The date is the
-  mechanism that makes that promise checkable. **Nothing automated does this
-  yet** — it is a real gap, not an oversight to inherit quietly.
-- Run `site-auditor` after any change to `templates/`. It reads the built
-  output against the plan's honesty rules and it has already caught a false
-  statement about the site's own privacy.
-- Watch the file count. It grows with the assortment, and the workflow fails at
+  technological measure appears on Systembolaget's CDN. The date is what makes
+  that promise checkable. **Nothing automated does this yet** — a real gap, not
+  an oversight to inherit quietly.
+- **Run `site-auditor` after any change to `templates/`**, against the branch's
+  preview URL. It reads the built output against the plan's honesty rules, and
+  it has already caught a sentence on `/metod` that was simply untrue about the
+  site's own privacy.
+- **Watch the file count.** It grows with the assortment and the build fails at
   19 000 deliberately — a warning shot rather than a rejected upload.
 
-## What is not set up, and is worth knowing
+## `.github/workflows/deploy.yml`
 
-- **No preview deployments.** The workflow deploys `--branch=main` only.
-  Branch previews would give every pull request a public URL, which is a
-  reasonable thing to want later and a needless surface today.
-- **No `_headers` file.** Worth adding a `Content-Security-Policy` naming
-  `product-cdn.systembolaget.se` as the only image source and
-  `static.cloudflareinsights.com` as the only script source — it would turn the
-  `/metod` paragraph from a promise into something the browser enforces.
+Kept, but **manual only**, on the same principle as `update.yml`: a standby for
+when the primary path is unavailable. It needs `CLOUDFLARE_API_TOKEN` and
+`CLOUDFLARE_ACCOUNT_ID` as repository secrets, which do not exist unless
+someone adds them, so it will fail until they do. That is the intended state.
+
+Do not put it back on `push`. With the Git integration connected, both would
+build and upload the same commit.
