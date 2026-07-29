@@ -1,0 +1,20 @@
+{
+  // Static assets only — there is no Worker script. src/site.py generates
+  // everything at build time and Cloudflare serves the directory as files.
+  //
+  // Added 2026-07-29 for `not_found_handling`. Without it a stale /vin/ URL
+  // gets Cloudflare's default 404 with an empty body instead of the project's
+  // own 404 page, and a link to a wine that left the assortment is the most
+  // likely 404 this site will ever serve.
+  //
+  // If a build fails after this file appeared, this file is the first suspect:
+  // the dashboard's build settings and a wrangler config can disagree about
+  // the output directory. `git revert` is the whole rollback.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "vindeklaration",
+  "compatibility_date": "2026-07-29",
+  "assets": {
+    "directory": "./site",
+    "not_found_handling": "404-page"
+  }
+}
