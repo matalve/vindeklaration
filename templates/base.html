@@ -11,9 +11,9 @@
 </head>
 <body>
 <header>
-  <a class="wordmark" href="{{ base }}/">{{ s.site_name }}</a>
+  <a class="wordmark" href="{{ lang_root }}/">{{ s.site_name }}</a>
   <nav>
-    <a href="{{ base }}/{{ s.method_url }}/">{{ s.method }}</a>
+    <a href="{{ lang_root }}/{{ s.method_url }}/">{{ s.method }}</a>
     <a href="{{ s.other_lang_url }}">{{ s.other_lang }}</a>
   </nav>
 </header>
@@ -29,7 +29,7 @@
   <p class="disclaimer">{{ s.sb_disclaimer }}</p>
   <p class="disclaimer">{{ s.sb_purchase }}</p>
   <p class="disclaimer">{{ s.not_health }}</p>
-  <p class="meta">{{ s.site_name }} · {{ generated }} · <a href="{{ base }}/{{ s.method_url }}/">{{ s.method }}</a></p>
+  <p class="meta">{{ s.site_name }} · {{ generated }} · <a href="{{ lang_root }}/{{ s.method_url }}/">{{ s.method }}</a></p>
 </footer>
 </body>
 </html>

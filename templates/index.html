@@ -7,6 +7,9 @@
   <input type="search" id="q" placeholder="{{ s.search }}" autocomplete="off"
          autocapitalize="off" spellcheck="false" enterkeyhint="search">
   <p id="hint" class="hint">{{ s.search_hint }}</p>
+{% if s.wine_pages_note %}
+  <p class="hint note">{{ s.wine_pages_note }}</p>
+{% endif %}
   <ol id="results" class="results"></ol>
 </section>
 

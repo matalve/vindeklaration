@@ -37,7 +37,8 @@
   "sb_purchase": "Beställning, köp och utlämning sker från/av/hos Systembolaget.",
   "image_credit": "Produktbilden visas direkt från Systembolagets webbplats.",
   "other_lang": "In English",
-  "other_lang_url": "/en/"
+  "other_lang_url": "/en/",
+  "wine_pages_note": ""
  },
  "en": {
   "site_name": "vindeklaration",
@@ -77,6 +78,7 @@
   "sb_purchase": "Ordering, purchase and collection happen at Systembolaget.",
   "image_credit": "The product photograph is shown directly from Systembolaget's website.",
   "other_lang": "På svenska",
-  "other_lang_url": "/"
+  "other_lang_url": "/",
+  "wine_pages_note": "Individual wine pages are in Swedish for now. Search results below link to them. The declaration itself is never translated in either language — it is quoted as the supplier wrote it."
  }
 }

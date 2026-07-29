@@ -737,8 +737,30 @@ can be added later without changing a single page's structure.
 
 Swedish is the default; the audience and the source text are Swedish. English
 mirrors at `/en/…`. Substance names already carry `sv` and `en` in
-`additives.yaml`; UI strings need their own table. Declarations themselves are
-never translated — they are quoted, in the language the supplier wrote them.
+`additives.yaml`; UI strings live in `templates/strings.json`. Declarations
+themselves are never translated — they are quoted, in the language the supplier
+wrote them.
+
+**Wine pages are Swedish only for now. Decided 2026-07-29, and it is a hosting
+constraint rather than a change of intent.** Two languages across 15 047 wines
+is 30 101 files, and Cloudflare Pages caps a deployment at 20 000. Swedish-only
+wine pages bring the build to 15 054 files and 36 MB, which fits. The front page
+and `/metod` stay bilingual, and English search results link to the Swedish wine
+pages, which the English front page states plainly rather than leaving the
+reader to discover.
+
+What it costs, so that nobody has to rediscover it:
+
+- **Journey 3 is the one that suffers** — someone arriving from a search engine
+  on "metavinsyra" in English reaches a Swedish page. That journey was one of
+  the six the site is built for.
+- The substance pages in phase 3 are where English matters most, and they are
+  few. They should be bilingual from the start regardless of this decision.
+
+What lifts it: a paid Workers plan raises the ceiling to 100 000 static assets,
+or the wine page could carry both languages in one document. Neither needs
+deciding now, and `WINE_PAGE_LANGUAGES` in `src/site.py` is the one line that
+changes when it is.
 
 ## Technical shape
 

@@ -41,6 +41,14 @@ IMAGE_SUFFIX = "_400.png"
 
 LANGUAGES = ("sv", "en")
 
+# Wine pages are built in Swedish only, decided 2026-07-29. Two languages times
+# 15 000 wines is 30 101 files and Cloudflare Pages caps a deployment at 20 000.
+# The chrome — front page, method — is still bilingual, and English search
+# results link to the Swedish wine pages, which the English front page says.
+# This is a hosting constraint and not a change of intent: see "Bilingual" in
+# docs/site-plan.md for what it costs and what lifts it.
+WINE_PAGE_LANGUAGES = ("sv",)
+
 
 def slugify(value: str) -> str:
     """A URL fragment that survives being read aloud and pasted into a chat."""
@@ -151,29 +159,36 @@ def build(output: Path, limit: int | None = None) -> None:
     for lang in LANGUAGES:
         s = strings(lang)
         prefix = output if lang == "sv" else output / "en"
-        base = "" if lang == "sv" else "/en"
+        # Two different roots. `lang_root` is where this language's own chrome
+        # lives; `base` is where wine pages live, which is the Swedish root for
+        # both languages because only Swedish wine pages are built.
+        lang_root = "" if lang == "sv" else "/en"
+        base = ""
 
-        for wine in wines:
-            page = prefix / wine_path(wine)
-            page.mkdir(parents=True, exist_ok=True)
-            (page / "index.html").write_text(
-                wine_template.render(
-                    wine=wine,
-                    state=state_of(wine),
-                    image=image_url(wine),
-                    source_url=wine["source_url"],
-                    lang=lang,
-                    s=s,
-                    base=base,
-                    generated=generated,
-                ),
-                encoding="utf-8",
-            )
+        if lang in WINE_PAGE_LANGUAGES:
+            for wine in wines:
+                page = prefix / wine_path(wine)
+                page.mkdir(parents=True, exist_ok=True)
+                (page / "index.html").write_text(
+                    wine_template.render(
+                        wine=wine,
+                        state=state_of(wine),
+                        image=image_url(wine),
+                        source_url=wine["source_url"],
+                        lang=lang,
+                        s=s,
+                        base=base,
+                        lang_root=lang_root,
+                        generated=generated,
+                    ),
+                    encoding="utf-8",
+                )
 
         prefix.mkdir(parents=True, exist_ok=True)
         (prefix / "index.html").write_text(
             index_template.render(
-                stats=stats, lang=lang, s=s, base=base, generated=generated
+                stats=stats, lang=lang, s=s, base=base,
+                lang_root=lang_root, generated=generated,
             ),
             encoding="utf-8",
         )
@@ -181,7 +196,8 @@ def build(output: Path, limit: int | None = None) -> None:
         method.mkdir(parents=True, exist_ok=True)
         (method / "index.html").write_text(
             method_template.render(
-                stats=stats, lang=lang, s=s, base=base, generated=generated
+                stats=stats, lang=lang, s=s, base=base,
+                lang_root=lang_root, generated=generated,
             ),
             encoding="utf-8",
         )
