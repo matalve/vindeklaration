@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import unicodedata
@@ -45,6 +46,12 @@ IMAGE_WIDTH, IMAGE_HEIGHT = 400, 400
 # so the date the CDN was last confirmed to serve cross-origin without a
 # technological measure is published on /metod rather than kept in a commit.
 CDN_CHECKED = "2026-07-29"
+
+# Cloudflare Web Analytics, decided 2026-07-29. Read from the environment so
+# the token is not in the repository and a local build stays beacon-free: an
+# unset value renders no script at all, which is what `--limit` runs and the
+# test suite see. Set CF_ANALYTICS_TOKEN in the deploy workflow.
+ANALYTICS_TOKEN = os.environ.get("CF_ANALYTICS_TOKEN", "").strip()
 
 LANGUAGES = ("sv", "en")
 
@@ -191,6 +198,7 @@ def build(output: Path, limit: int | None = None) -> None:
                         base=base,
                         lang_root=lang_root,
                         generated=generated,
+                        analytics=ANALYTICS_TOKEN,
                     ),
                     encoding="utf-8",
                 )
@@ -200,6 +208,7 @@ def build(output: Path, limit: int | None = None) -> None:
             index_template.render(
                 stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
+                analytics=ANALYTICS_TOKEN,
             ),
             encoding="utf-8",
         )
@@ -209,6 +218,7 @@ def build(output: Path, limit: int | None = None) -> None:
             method_template.render(
                 stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
+                analytics=ANALYTICS_TOKEN,
             ),
             encoding="utf-8",
         )
@@ -219,6 +229,7 @@ def build(output: Path, limit: int | None = None) -> None:
         notfound_template.render(
             lang="sv", s=strings("sv"), base="", lang_root="",
             generated=generated, cdn_checked=CDN_CHECKED,
+            analytics=ANALYTICS_TOKEN,
         ),
         encoding="utf-8",
     )

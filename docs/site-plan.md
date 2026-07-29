@@ -549,11 +549,23 @@ available and truth alone is not a defence: 5 kap. 1 § requires both that it wa
 
 The rest of the rule:
 
-- **A supplier who is or may be a natural person is never named in a ranking, at
-  any sample size.** Today's 40-wine threshold happens to exclude every one of
-  them — of the 19 suppliers reaching 40 qualifying wines on 2026-07-28, all are
-  registered companies — but that is an accident of the current catalogue, not a
-  safeguard. This is a separate rule and does not depend on the threshold.
+- **A supplier who is a natural person is ranked on the same terms as a
+  company. Decided by the owner 2026-07-29**, reversing the rule written the
+  day before. The reasoning: someone who supplies wine to Systembolaget under
+  their own name is doing so as a business, and the table reports a fact about
+  that business. Excluding them would mean the smallest suppliers are the only
+  ones the site never examines, which inverts who transparency is for.
+  What that decision carries, so it is not carried unknowingly: förtal reaches
+  a natural person where it does not reach a company (SOU 2016:7 p. 410), and
+  under BrB 5:1 second paragraph truth alone does not acquit — it must also
+  have been *försvarligt* to publish. A dated, sourced compliance statistic
+  published as consumer information has a strong claim to that, but it is a
+  claim and not a certainty, and the owner has decided against taking legal
+  advice at this stage (`docs/legal-notes.md` §3c).
+  **The practical effect today is nil.** The largest natural-person supplier
+  has 6 wines against a 40-wine threshold, so none of them can reach the table
+  as it stands. The decision matters when the catalogue changes, not now — and
+  the rules below carry the weight in the meantime.
 - **Minimum sample.** No importer is ranked on fewer than 40 wines in the
   qualifying vintages, so nobody tops or bottoms the table on four bottles.
   Those below the threshold are aggregated into one row, counted, not named.
@@ -603,10 +615,19 @@ from it or to justify it.
   Italian may understand it immediately, and the honesty costs nothing.
 - **Comparison of two or three wines** side by side, because that is the actual
   decision being made in the aisle.
-- **No accounts, no cookies, no analytics, no affiliate links.** The project
-  holds no personal data and should not start now. It also means no cookie
-  banner, which on a phone in a shop is a feature. The affiliate half of that
-  rule now has a second reason; see *What the site must never say*.
+- **No accounts, no cookies, no affiliate links — and one measurement.**
+  Decided 2026-07-29: **Cloudflare Web Analytics is used.** It sets no cookie
+  and builds no cross-site profile, so there is still no cookie banner, which
+  on a phone in a shop is a feature. The affiliate half of that rule now has a
+  second reason; see *What the site must never say*.
+  The honest accounting, because `/metod` has to state it: the beacon is a
+  second third-party request alongside the bottle photograph, and it sends the
+  page and the visitor's IP to Cloudflare. **It adds no new party.** Cloudflare
+  serves the site, so they already see every request; the beacon gives them
+  page-level detail they could largely infer from their own logs. That is a
+  smaller change than adding a measurement provider from outside would have
+  been, and it is still a change, and the page says so rather than describing
+  the site as measurement-free.
 - **Substance pages carry the aliases** — including the misspellings found in
   real declarations. Someone searching the exact string from a label should
   land on the right page.
