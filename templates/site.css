@@ -1,0 +1,204 @@
+/* One stylesheet, system fonts, no web fonts and no third-party requests.
+   The site has to be readable on a phone in a shop with poor signal.
+
+   Deliberately no traffic-light colour anywhere. The plan forbids a score, a
+   grade and a badge, and colour is the fastest way to smuggle one in: green on
+   "declares no additives" would say healthy, and red on "declares nothing"
+   would say guilty. The three states differ by border and weight instead. */
+
+:root {
+  --ink: #1a1a1a;
+  --muted: #5c5c5c;
+  --line: #d8d4cc;
+  --paper: #faf8f5;
+  --accent: #6b2737; /* wine, used for links and rules only */
+  --measure: 40rem;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0 1.25rem;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+}
+
+main, header, footer { max-width: var(--measure); margin: 0 auto; }
+
+a { color: var(--accent); }
+a:hover { text-decoration-thickness: 2px; }
+
+/* Header ------------------------------------------------------------- */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.25rem 0 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.wordmark {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--ink);
+}
+header nav a { margin-left: 1rem; font-size: 0.9rem; }
+
+/* Wine page ---------------------------------------------------------- */
+
+h1 { font-size: 1.6rem; line-height: 1.25; margin: 1.5rem 0 0.25rem; }
+h2 { font-size: 1.05rem; margin: 0 0 0.5rem; }
+
+.subtitle { color: var(--muted); margin: 0 0 1.5rem; font-size: 0.95rem; }
+
+.bottle { margin: 0 0 1.5rem; text-align: center; }
+.bottle img { max-width: 200px; height: auto; }
+.bottle figcaption {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+/* The three states. Distinguished by border weight and typography, never by
+   colour, and never by an icon that could be read as a verdict. */
+.declaration {
+  border-left: 3px solid var(--line);
+  padding: 0.75rem 0 0.75rem 1rem;
+  margin: 0 0 1.5rem;
+}
+.declaration.state-declared { border-left-color: var(--ink); }
+.declaration.state-partial  { border-left-style: dashed; }
+.declaration.state-silent   { border-left-color: var(--line); }
+.declaration.state-silent h2 { font-weight: 400; color: var(--muted); }
+
+.explain { font-size: 0.9rem; color: var(--muted); margin: 0.5rem 0 0; }
+.unread { font-size: 0.9rem; margin: 0.75rem 0 0; }
+.unread code {
+  background: #efece6;
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+  font-size: 0.9em;
+}
+
+table.additives { border-collapse: collapse; margin: 0.75rem 0 0; width: 100%; }
+table.additives td { padding: 0.3rem 0; border-bottom: 1px solid var(--line); }
+table.additives td.enum {
+  text-align: right;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.raw blockquote {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: #efece6;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+}
+
+.facts dl {
+  display: grid;
+  grid-template-columns: minmax(9rem, auto) 1fr;
+  gap: 0.35rem 1rem;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; }
+
+.provenance { font-size: 0.85rem; color: var(--muted); }
+.provenance p { margin: 0.25rem 0; }
+.label-wins { font-style: italic; }
+
+/* Search ------------------------------------------------------------- */
+
+.search h1 { margin-top: 1.75rem; }
+input[type="search"] {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  font-size: 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #fff;
+}
+input[type="search"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.hint { font-size: 0.85rem; color: var(--muted); margin: 0.5rem 0 1rem; }
+
+.results { list-style: none; margin: 0; padding: 0; }
+.results li {
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  gap: 0.15rem;
+}
+.results a { font-weight: 600; text-decoration: none; }
+.results a:hover { text-decoration: underline; }
+.results .meta { font-size: 0.85rem; color: var(--muted); }
+.results .state { font-size: 0.85rem; }
+.results .state-s { color: var(--muted); }
+.results .state-p { font-style: italic; }
+
+/* Coverage ----------------------------------------------------------- */
+
+.coverage {
+  margin: 2.5rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.coverage .headline { font-size: 1.05rem; }
+.coverage .headline strong { font-size: 1.9rem; letter-spacing: -0.02em; }
+table.counts { border-collapse: collapse; font-size: 0.9rem; margin-top: 1rem; }
+table.counts td { padding: 0.25rem 1rem 0.25rem 0; }
+table.counts td:first-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* Method ------------------------------------------------------------- */
+
+.method h2 { margin-top: 2rem; font-size: 1.15rem; }
+.method li { margin-bottom: 0.4rem; }
+
+/* Footer ------------------------------------------------------------- */
+
+footer {
+  margin: 3rem 0 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+footer p { margin: 0.4rem 0; }
+footer .meta { margin-top: 1rem; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #eceae6;
+    --muted: #a8a49c;
+    --line: #3a3733;
+    --paper: #171614;
+    --accent: #e0919f;
+  }
+  input[type="search"] { background: #201e1b; color: var(--ink); }
+  .unread code, .raw blockquote { background: #232120; }
+}

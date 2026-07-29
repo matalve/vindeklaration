@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{# The title says what the page reports, never what the wine is like. A search
+   result and a share preview show this line without any of the page's caveats,
+   so it carries no adjective — docs/site-plan.md, "What the site must never
+   say", which binds implication and not only sentences. #}
+{% block title %}{{ wine.name }}{% if wine.vintage %} {{ wine.vintage }}{% endif %} — {{ s.site_name }}{% endblock %}
+{% block description %}
+{%- if state == 'declared' %}{{ s.state_declared }} {{ wine.additive_count }}{% if wine.additive_count == 0 %} — {{ s.state_declared_zero }}{% endif %}.
+{%- elif state == 'partial' %}{{ s.state_partial }}.
+{%- else %}{{ s.state_silent }}.
+{%- endif %} {{ s.tagline }}
+{%- endblock %}
+
+{% block content %}
+<article class="wine">
+
+  <h1>{{ wine.name }}</h1>
+  <p class="subtitle">
+    {{ wine.vintage or s.unknown }} ·
+    {{ wine.country }}{% if wine.region %} · {{ wine.region }}{% endif %} ·
+    {{ wine.category }}
+  </p>
+
+  {# Condition 8: images appear here and on no ranked, filtered or comparison
+     page. Rendered straight from Systembolaget's CDN — never copied, proxied
+     or resized. If a technological measure ever appears, this block goes. #}
+  {% if image %}
+  <figure class="bottle">
+    <a href="{{ source_url }}" rel="nofollow noopener">
+      <img src="{{ image }}" alt="{{ wine.name }}" width="200" loading="lazy">
+    </a>
+    <figcaption>{{ s.image_credit }}</figcaption>
+  </figure>
+  {% endif %}
+
+  {# The three states, rendered as three states. #}
+  <section class="declaration state-{{ state }}">
+  {% if state == 'declared' %}
+    <h2>
+      {%- if wine.additive_count == 0 -%}
+        {{ s.state_declared_zero }}
+      {%- else -%}
+        {{ s.state_declared }} {{ wine.additive_count }} {{ s.additives|lower }}
+      {%- endif -%}
+    </h2>
+    {% if wine.additives %}
+    <table class="additives">
+      <tbody>
+      {% for a in wine.additives %}
+        <tr>
+          <td>{{ a.name[lang] }}</td>
+          <td class="enum">{{ a.e_number or '' }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+  {% elif state == 'partial' %}
+    <h2>{{ s.state_partial }}</h2>
+    <p class="explain">{{ s.state_partial_explain }}</p>
+    {% if wine.unknown_tokens %}
+    <p class="unread"><strong>{{ s.unread }}:</strong>
+      {% for t in wine.unknown_tokens %}<code>{{ t }}</code>{% if not loop.last %} {% endif %}{% endfor %}
+    </p>
+    {% endif %}
+    {% if wine.additives %}
+    <table class="additives">
+      <tbody>
+      {% for a in wine.additives %}
+        <tr><td>{{ a.name[lang] }}</td><td class="enum">{{ a.e_number or '' }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+  {% else %}
+    <h2>{{ s.state_silent }}</h2>
+    <p class="explain">{{ s.state_silent_explain }}</p>
+  {% endif %}
+  </section>
+
+  {# The declaration verbatim, in the language the supplier wrote it. Never
+     translated, never tidied — the interpretation above is checkable only
+     against the original. #}
+  {% if wine.raw_ingredients %}
+  <section class="raw">
+    <h2>{{ s.raw }}</h2>
+    <blockquote lang="">{{ wine.raw_ingredients }}</blockquote>
+  </section>
+  {% endif %}
+
+  <section class="facts">
+    <dl>
+      {% if wine.producer %}<dt>{{ s.producer }}</dt><dd>{{ wine.producer }}</dd>{% endif %}
+      {% if wine.supplier %}<dt>{{ s.supplier }}</dt><dd>{{ wine.supplier }}</dd>{% endif %}
+      {% if wine.price %}<dt>{{ s.price }}</dt><dd>{{ wine.price|round|int }} kr{% if wine.volume_ml %} / {{ wine.volume_ml|round|int }} ml{% endif %}</dd>{% endif %}
+      {% if wine.grapes %}<dt>{{ s.grapes }}</dt><dd>{{ wine.grapes|join(', ') }}</dd>{% endif %}
+      {% if wine.food_pairings %}<dt>{{ s.pairing }}</dt><dd>{{ wine.food_pairings|join(', ') }}</dd>{% endif %}
+    </dl>
+  </section>
+
+  <section class="provenance">
+    {# Condition 4: every page carrying an image links to that wine's product
+       page. The link is here whether or not there is an image. #}
+    <p>{{ s.source }}: <a href="{{ source_url }}" rel="nofollow noopener">systembolaget.se</a>{% if wine.fetched_at %}, {{ s.fetched }} {{ wine.fetched_at[:10] }}{% endif %}</p>
+    <p class="label-wins">{{ s.label_wins }}</p>
+  </section>
+
+</article>
+{% endblock %}

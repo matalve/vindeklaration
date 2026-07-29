@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ s.site_name }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ s.tagline }}{% endblock %}">
+{# No analytics, no fonts, no third-party requests of any kind. The absence of
+   commercial interest is load-bearing, not decorative — docs/site-plan.md. #}
+<link rel="stylesheet" href="/site.css">
+</head>
+<body>
+<header>
+  <a class="wordmark" href="{{ base }}/">{{ s.site_name }}</a>
+  <nav>
+    <a href="{{ base }}/{{ s.method_url }}/">{{ s.method }}</a>
+    <a href="{{ s.other_lang_url }}">{{ s.other_lang }}</a>
+  </nav>
+</header>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer>
+  {# Conditions 5 and 6 of docs/legal-notes.md §2j. Required on every page that
+     links to Systembolaget, in the page body, in both languages — which is why
+     they live in the footer of the base template and not on /metod alone. #}
+  <p class="disclaimer">{{ s.sb_disclaimer }}</p>
+  <p class="disclaimer">{{ s.sb_purchase }}</p>
+  <p class="disclaimer">{{ s.not_health }}</p>
+  <p class="meta">{{ s.site_name }} · {{ generated }} · <a href="{{ base }}/{{ s.method_url }}/">{{ s.method }}</a></p>
+</footer>
+</body>
+</html>

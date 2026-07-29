@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}{{ s.method }} — {{ s.site_name }}{% endblock %}
+
+{% block content %}
+<article class="method">
+<h1>{{ s.method }}</h1>
+
+{% if lang == 'sv' %}
+<p>Systembolaget publicerar varje vins ingrediensförteckning på produktsidan,
+en i taget, utan möjlighet att söka eller jämföra. Den här sajten läser dem,
+gör om fritexten till strukturerad data och visar resultatet. Datamängden är
+öppen och finns på <a href="https://github.com/matalve/vindeklaration">GitHub</a>.</p>
+
+<h2>Vad siffrorna betyder</h2>
+<p>{{ stats.wines }} viner är hämtade. {{ stats.declared }} av dem
+({{ '%.1f'|format(stats.declared_share) }}%) har en ingrediensförteckning.
+{{ stats.partial }} av förteckningarna innehåller text som inte kunnat tolkas
+({{ '%.1f'|format(stats.partial_share) }}% av de deklarerade), och de vinerna
+hålls utanför varje rangordning. {{ stats.silent }} viner har ingen förteckning
+alls.</p>
+
+<h2>Tre tillstånd, aldrig två</h2>
+<ul>
+  <li><strong>{{ s.state_declared }}</strong> — leverantören har lämnat en
+  förteckning och vi har kunnat tolka varje ord i den.</li>
+  <li><strong>{{ s.state_partial }}</strong> — förteckningen finns men
+  innehåller text vi inte känner igen. Vinet räknas inte, eftersom den olästa
+  texten kan vara en tillsats. Originaltexten visas alltid.</li>
+  <li><strong>{{ s.state_silent }}</strong> — ingen förteckning har lämnats.
+  <em>Det betyder inte att vinet saknar tillsatser.</em> Det betyder att det
+  inte redovisats.</li>
+</ul>
+
+<h2>Vad kravet omfattar</h2>
+<p>EU kräver ingrediensförteckning och näringsdeklaration för vin som
+<em>producerats</em> efter 8 december 2023. Vin som producerats tidigare får
+säljas enligt de gamla reglerna tills lagret tar slut. Datamängden innehåller
+inget produktionsdatum — Systembolaget publicerar inget — så där en siffra
+behöver avgränsas används årgång som ersättning. Felet går åt ett håll: allt
+från årgång 2024 och framåt är säkert producerat efter gränsen, men viner utan
+årgång och med årgång 2023 kan omfattas utan att synas.</p>
+
+<h2>Vad sajten inte påstår</h2>
+<p>Färre deklarerade tillsatser betyder inte nyttigare, säkrare eller bättre.
+{{ s.not_health }} Sajten redovisar vad som deklarerats, inte vad flaskan
+innehåller — och de två är olika saker så länge fyra viner av fem inte
+deklarerar något.</p>
+
+<h2>Bilder och länkar</h2>
+<p>Produktbilderna visas direkt från Systembolagets webbplats och kopieras
+aldrig hit. Bilder visas bara på enskilda vinsidor, aldrig i listor.
+{{ s.sb_disclaimer }} {{ s.sb_purchase }}</p>
+
+<h2>Finansiering</h2>
+<p>Sajten har inga annonser, inga affiliatelänkar, ingen sponsring och inga
+intäkter. Den använder inga kakor, ingen besöksmätning och hämtar inget från
+tredje part. Det finns inget att logga och ingen som tjänar på vad listorna
+visar.</p>
+
+<h2>Fel</h2>
+<p>Varje vinsida visar deklarationen i original bredvid tolkningen, så att
+varje påstående går att kontrollera mot källan. Hittar du ett fel går det att
+anmäla i <a href="https://github.com/matalve/vindeklaration/issues">projektets
+ärendehanterare</a>.</p>
+
+{% else %}
+<p>Systembolaget publishes each wine's ingredient declaration on its product
+page, one at a time, with no way to search or compare. This site reads them,
+turns the free text into structured data and shows the result. The dataset is
+open and lives on <a href="https://github.com/matalve/vindeklaration">GitHub</a>.</p>
+
+<h2>What the numbers mean</h2>
+<p>{{ stats.wines }} wines have been fetched. {{ stats.declared }} of them
+({{ '%.1f'|format(stats.declared_share) }}%) carry an ingredient declaration.
+{{ stats.partial }} of those declarations contain text that could not be read
+({{ '%.1f'|format(stats.partial_share) }}% of the declared ones), and those
+wines are kept out of every ranking. {{ stats.silent }} wines have no
+declaration at all.</p>
+
+<h2>Three states, never two</h2>
+<ul>
+  <li><strong>{{ s.state_declared }}</strong> — the supplier gave a declaration
+  and every word of it could be read.</li>
+  <li><strong>{{ s.state_partial }}</strong> — the declaration exists but
+  contains text we do not recognise. The wine is not counted, because the
+  unread text may be an additive. The original is always shown.</li>
+  <li><strong>{{ s.state_silent }}</strong> — no declaration was given.
+  <em>This does not mean the wine has no additives.</em> It means none have
+  been disclosed.</li>
+</ul>
+
+<h2>What the requirement covers</h2>
+<p>The EU requires an ingredient list and nutrition declaration for wine
+<em>produced</em> after 8 December 2023. Wine produced earlier may be sold
+under the old rules until stocks run out. The dataset holds no production
+date — Systembolaget publishes none — so vintage is used as a stand-in wherever
+a figure needs bounding. The error runs one way: everything from vintage 2024
+onwards was certainly produced after the cutoff, but wines with no vintage, or
+vintage 2023, may be covered without being visible.</p>
+
+<h2>What the site does not claim</h2>
+<p>Fewer declared additives does not mean healthier, safer or better.
+{{ s.not_health }} The site reports what has been declared, not what is in the
+bottle — and those are different things for as long as four wines in five
+declare nothing.</p>
+
+<h2>Images and links</h2>
+<p>Product photographs are shown directly from Systembolaget's website and are
+never copied here. Images appear only on individual wine pages, never in lists.
+{{ s.sb_disclaimer }} {{ s.sb_purchase }}</p>
+
+<h2>Funding</h2>
+<p>The site carries no advertising, no affiliate links, no sponsorship and
+earns nothing. It sets no cookies, runs no analytics and fetches nothing from
+third parties. There is nothing to log and nobody who profits from what the
+lists show.</p>
+
+<h2>Errors</h2>
+<p>Every wine page shows the declaration as written alongside the
+interpretation, so any claim can be checked against its source. If you find an
+error, please report it in the
+<a href="https://github.com/matalve/vindeklaration/issues">project's issue
+tracker</a>.</p>
+{% endif %}
+
+<p class="label-wins">{{ s.label_wins }}</p>
+</article>
+{% endblock %}
