@@ -40,7 +40,7 @@ rule in `CLAUDE.md`.
 | Field | Value |
 |---|---|
 | Framework preset | None |
-| Build command | `pip install uv && uv run python -m src.site && test $(find site -type f \| wc -l) -le 19000` |
+| Build command | see below |
 | Build output directory | `site` |
 | Root directory | *(leave empty)* |
 
@@ -51,8 +51,22 @@ diagnose than a rejected upload with a generic message. When it trips, read
 *Bilingual* in `docs/site-plan.md`, where the cap and the ways past it are
 written up.
 
-`uv` is not in the build image, hence `pip install uv`. It reads
-`pyproject.toml` and `uv.lock` and installs the rest itself.
+`uv` is not in the build image, so the command installs it first. Use the
+`--user` form: newer build images run Python as an externally managed
+environment where a bare `pip install` is refused.
+
+```sh
+pip install --user uv && export PATH="$HOME/.local/bin:$PATH" && \
+  uv run python -m src.site && \
+  test $(find site -type f | wc -l) -le 19000
+```
+
+Paste it as one line into the build command field. `uv` reads `pyproject.toml`
+and `uv.lock` and installs the rest itself.
+
+If the log shows `externally-managed-environment` or `uv: command not found`,
+that is this step and the `--user` plus `PATH` form is the fix. If it shows a
+Python version below 3.11, set `PYTHON_VERSION` as in step 3.
 
 ## 3. Environment variables
 
@@ -61,11 +75,13 @@ written up.
 | Name | Value | When |
 |---|---|---|
 | `PYTHON_VERSION` | `3.11.5` | now — cheap insurance against the build image changing its default under you |
-| `CF_ANALYTICS_TOKEN` | the beacon token | after step 6; leave unset until then and no beacon is rendered |
+| `CF_ANALYTICS_TOKEN` | the beacon token | **do not create it yet** — add it in step 6, once there is a token to put in it |
 
-Unset `CF_ANALYTICS_TOKEN` is a supported state, not a broken one —
-`src/site.py` renders no script at all without it, which is also what local
-builds do.
+**Cloudflare will not save a variable with an empty value, and it does not need
+to.** `src/site.py` reads the variable with a default of empty string, so a
+variable that does not exist and one that is blank are the same thing to it:
+no beacon is rendered. Local builds work the same way. Create it in step 6 and
+not before.
 
 ## 4. First deploy
 
