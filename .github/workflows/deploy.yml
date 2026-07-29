@@ -1,0 +1,55 @@
+name: Deploy site
+
+# Builds the static site and publishes it to Cloudflare Pages.
+#
+# Unlike update.yml this is safe to run automatically: it is a build, not a
+# crawler. It reads data/wines.json out of the repository and makes no request
+# to Systembolaget, so it does not compete with the Pi's nightly crawl. The Pi
+# commits the dataset around 03:20 each night, and that push triggers this.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - ".claude/**"
+      - "deploy/**"
+      - "**.md"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Build the site
+        run: uv run python -m src.site
+
+      # Cloudflare Pages rejects a deployment over 20 000 files, and the build
+      # grows with the assortment. Failing here with the number is far cheaper
+      # than a rejected upload with a generic message. See "Bilingual" in
+      # docs/site-plan.md for what to do when this trips.
+      - name: Check the file count against the Pages limit
+        run: |
+          count=$(find site -type f | wc -l)
+          echo "$count files"
+          if [ "$count" -gt 19000 ]; then
+            echo "::error::$count files — Cloudflare Pages allows 20 000."
+            exit 1
+          fi
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy site --project-name=vindeklaration --branch=main
