@@ -1,19 +1,14 @@
 name: Deploy site
 
-# Builds the static site and publishes it to Cloudflare Pages.
+# Standby only. Cloudflare Pages builds this site itself from the connected
+# repository — see docs/deploy-site.md — so this workflow exists for the day
+# that path is unavailable, on the same principle as update.yml.
 #
-# Unlike update.yml this is safe to run automatically: it is a build, not a
-# crawler. It reads data/wines.json out of the repository and makes no request
-# to Systembolaget, so it does not compete with the Pi's nightly crawl. The Pi
-# commits the dataset around 03:20 each night, and that push triggers this.
+# Deliberately not on `push`: with the Git integration connected, both would
+# build and upload the same commit. It also needs CLOUDFLARE_API_TOKEN and
+# CLOUDFLARE_ACCOUNT_ID, which are not configured, so it fails until someone
+# adds them. That is the intended state and not a bug to fix in passing.
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - "docs/**"
-      - ".claude/**"
-      - "deploy/**"
-      - "**.md"
   workflow_dispatch:
 
 concurrency:
