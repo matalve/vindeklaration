@@ -1,5 +1,9 @@
 # Substance dictionary for Swedish wine ingredient declarations.
 #
+# Licensed CC BY-SA 4.0 — this file is the project's own work. The dataset
+# built from it is not licensed, because the facts in it are not ours to
+# license. See LICENSES.md.
+#
 # Every entry is one substance. `aliases` are the spellings actually seen in
 # supplier-entered text, including their misspellings and mistranslations —
 # add to this list rather than loosening the matcher.
