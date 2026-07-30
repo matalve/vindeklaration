@@ -68,7 +68,8 @@
   "nutrition_unreadable": "Ett värde i deklarationen är fysiskt omöjligt och visas inte. Vi gissar inte vad som avsågs.",
   "energy_is_alcohol": "Det mesta av energin i vin kommer från alkoholen, inte från sockret. Ett torrt vin med högre alkoholhalt kan därför ha fler kalorier än ett sötare med lägre.",
   "alcohol": "Alkoholhalt",
-  "n_energy": "Energi"
+  "n_energy": "Energi",
+  "licence": "Licens"
  },
  "en": {
   "site_name": "vindeklaration",
@@ -139,6 +140,7 @@
   "nutrition_unreadable": "One figure in the declaration is physically impossible and is not shown. We do not guess at what was meant.",
   "energy_is_alcohol": "Most of the energy in wine comes from the alcohol, not the sugar. A dry wine at a higher strength can therefore carry more calories than a sweeter one at a lower.",
   "alcohol": "Alcohol",
-  "n_energy": "Energy"
+  "n_energy": "Energy",
+  "licence": "Licence"
  }
 }

@@ -1,6 +1,6 @@
 # vindeklaration
 
-An open dataset of the additives declared in wines sold by Systembolaget.
+A public dataset of the additives declared in wines sold by Systembolaget.
 
 Since 8 December 2023 the EU requires wine to declare its ingredients and
 nutritional values. Systembolaget shows that declaration on each product page,
@@ -168,6 +168,22 @@ Run the report, look at the top of `data/unknown.json`, and add the spellings to
 `data/additives.yaml`. Each substance carries its aliases, including the
 misspellings and mistranslations that appear in real declarations. Add a
 fixture to `tests/fixtures/declarations.json` for anything subtle.
+
+## Licence
+
+Three different things live here and they are not the same kind of thing, so
+they are not under one licence. `LICENSES.md` has the full picture.
+
+- **Code** — MIT.
+- **The dictionaries** (`data/additives.yaml`, `data/lexicon.yaml`) **and the
+  docs** — CC BY-SA 4.0. This is the project's own work and the part worth
+  having.
+- **The dataset** (`data/wines.json` and the rest) — **no licence is granted**,
+  because it is a compilation of facts published by Systembolaget and written
+  by the wines' suppliers, and it is not clear this project has the right to
+  license them. Granting a permission you do not hold is worse than granting
+  none. Use it, quote it, check the arithmetic — but if you intend to
+  redistribute it, the terms are Systembolaget's to state.
 
 ## Being a good guest
 

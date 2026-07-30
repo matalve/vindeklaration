@@ -9,8 +9,10 @@
 {% if lang == 'sv' %}
 <p>Systembolaget publicerar varje vins ingrediensförteckning på produktsidan,
 en i taget, utan möjlighet att söka eller jämföra. Den här sajten läser dem,
-gör om fritexten till strukturerad data och visar resultatet. Datamängden är
-öppen och finns på <a href="https://github.com/matalve/vindeklaration">GitHub</a>.</p>
+gör om fritexten till strukturerad data och visar resultatet. Allt ligger
+offentligt på <a href="https://github.com/matalve/vindeklaration">GitHub</a> —
+koden, ordboken och datat — så att varje siffra här går att räkna om. Se
+<a href="#licens">Licens</a> för vad du får göra med vad.</p>
 
 <h2>Vad siffrorna betyder</h2>
 <p>{{ stats.wines }} viner är hämtade. {{ stats.declared }} av dem
@@ -61,6 +63,24 @@ aldrig hit. Bilder visas bara på enskilda vinsidor, aldrig i listor.
 intäkter. Det finns inget att logga och ingen som tjänar på vad sidorna visar.</p>
 <p>{{ s.third_party }}</p>
 
+<h2 id="licens">{{ s.licence }}</h2>
+<p>Koden är MIT-licensierad. <strong>Ordboken</strong> — de flera hundra ämnena
+med E-nummer, svenska och engelska namn och alla de stavfel och felöversättningar
+som förekommer i verkliga deklarationer — är projektets eget arbete och ges bort
+under CC BY-SA 4.0. Använd den, ändra den, bygg vad du vill på den, så länge du
+säger var den kommer ifrån och låter nästa person göra detsamma.</p>
+<p><strong>Själva datamängden licensieras inte</strong>, och det är avsiktligt.
+Den är en sammanställning av uppgifter som Systembolaget publicerat och text som
+vinernas leverantörer skrivit. Inget av det är vårt. Om vi har rätt att
+licensiera sammanställningen är oklart — upphovsrättslagen 49 § kan skydda den,
+och den frågan är inte avgjord. Att ge bort en rättighet man kanske inte har är
+sämre än att inte ge bort någon alls.</p>
+<p>Det är ingen avrådan. Läs datat, citera det, kontrollera våra uträkningar och
+säg till när vi har fel — det är därför det ligger öppet. Men tänker du
+vidaredistribuera det är villkoren Systembolagets att ange, inte våra.
+Uppdelningen står i sin helhet i
+<a href="https://github.com/matalve/vindeklaration/blob/main/LICENSES.md">LICENSES.md</a>.</p>
+
 <h2>Fel</h2>
 <p>Varje vinsida visar deklarationen i original bredvid tolkningen, så att
 varje påstående går att kontrollera mot källan. Hittar du ett fel går det att
@@ -70,8 +90,10 @@ anmäla i <a href="https://github.com/matalve/vindeklaration/issues">projektets
 {% else %}
 <p>Systembolaget publishes each wine's ingredient declaration on its product
 page, one at a time, with no way to search or compare. This site reads them,
-turns the free text into structured data and shows the result. The dataset is
-open and lives on <a href="https://github.com/matalve/vindeklaration">GitHub</a>.</p>
+turns the free text into structured data and shows the result. All of it is
+public on <a href="https://github.com/matalve/vindeklaration">GitHub</a> — the
+code, the dictionary and the data — so every figure here can be recomputed. See
+<a href="#licence">Licence</a> for what you may do with which.</p>
 
 <h2>What the numbers mean</h2>
 <p>{{ stats.wines }} wines have been fetched. {{ stats.declared }} of them
@@ -122,6 +144,24 @@ never copied here. Images appear only on individual wine pages, never in lists.
 earns nothing. There is nothing to log and nobody who profits from what the
 pages show.</p>
 <p>{{ s.third_party }}</p>
+
+<h2 id="licence">{{ s.licence }}</h2>
+<p>The code is MIT licensed. <strong>The dictionary</strong> — several hundred
+substances with their E-numbers, their Swedish and English names, and every
+misspelling and mistranslation that turns up in real declarations — is the
+project's own work and is given away under CC BY-SA 4.0. Use it, change it,
+build on it, as long as you say where it came from and let the next person do
+the same.</p>
+<p><strong>The dataset itself carries no licence</strong>, deliberately. It is a
+compilation of facts Systembolaget published and text the wines' suppliers
+wrote. None of it is ours. Whether we have the right to license the compilation
+is unclear — upphovsrättslagen 49 § may protect it, and that question is not
+settled. Granting a right you may not hold is worse than granting none.</p>
+<p>This is not a discouragement. Read it, quote it, check our arithmetic and
+tell us where we are wrong — that is why it is public. But if you intend to
+redistribute it, the terms are Systembolaget's to state rather than ours. The
+full split is in
+<a href="https://github.com/matalve/vindeklaration/blob/main/LICENSES.md">LICENSES.md</a>.</p>
 
 <h2>Errors</h2>
 <p>Every wine page shows the declaration as written alongside the
