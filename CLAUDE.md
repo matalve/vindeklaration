@@ -103,6 +103,18 @@ never opened an account is unresolved and is a lawyer's question —
 `docs/legal-notes.md` §2k. The crawling discipline above is what makes the
 decision defensible in practice, so it is not negotiable.
 
+**One robots.txt is deliberately set aside, and only one.** Decided
+2026-07-30: `declaration-finder` fetches an e-label page even where the host
+disallows crawling, because that page *is* the disclosure Regulation (EU)
+2021/2117 requires and a blanket `Disallow: /` on it makes mandated consumer
+information unreadable to anyone comparing two bottles. The argument rests on
+not crawling — only URLs already discovered from the producer's own public
+linking, one request per wine, no traversal and no enumeration — and it does
+not extend to producers' ordinary marketing sites, which are honoured in full.
+A technological measure is a different thing and is absolute: a 401, 403, 429,
+login wall or bot challenge stops the fetch and is recorded as such. See
+`.claude/agents/declaration-finder.md`.
+
 ## Open decisions
 
 - ~~The quality gate is 2%.~~ Settled 2026-07-27: the gate watches drift, not a
