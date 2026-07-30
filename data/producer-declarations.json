@@ -16,9 +16,9 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "2 — rendering reconnaissance: Domaine Billaud-Simon, Tommasi Viticoltori, Hain, Hällåkra Vingård, Vini Franchetti (27 wines, vintage 2024+, not_declared). The question was whether e-labels are readable at all or whether client-side rendering is universal, not how many declarations could be collected.",
-  "attempted": 62,
-  "found": 3,
+  "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
+  "attempted": 65,
+  "found": 6,
   "not_found": 54,
   "rejected": 5,
   "declarations": [
@@ -1686,9 +1686,102 @@
       "checked_at": "2026-07-30T09:11:07Z",
       "robots_disallowed": false,
       "elabel_platform": null
+    },
+    {
+      "product_number": "7126701",
+      "name": "Philipp Kuhn Riesling Kirschgarten GG",
+      "producer": "Philipp Kuhn",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "found",
+      "source_url": "https://www.weingut-philipp-kuhn.de/e-labels/ap-512803703125",
+      "source_type": "e_label",
+      "raw_ingredients": "Trauben*, Konservierungsstoff: Sulfite\n*aus ökologischer Landwirtschaft",
+      "raw_nutrition": "Nährwertangaben:\n100 ml enthalten durchschnittlich:\nEnergie: 327 kj / 78 kcal\nKohlenhydrate: 1,2 g\ndavon Zucker: 0,2 g\nEnthält geringfügige Mengen an Fett, gesättigten Fettsäuren, Eiweiß und Salz.",
+      "raw_allergens": "Enthält Sulfite · contains sulphites · contient des sulfites · contiene solfiti · bevat sulfieten · indeholder sulfitter · innehåller sulfiter · inneholder sulfites · sisältää sulfiitteja · zawiera siarczyny contiene sulfitos · contém sulfitos",
+      "language": "de",
+      "vintage_on_source": "2024",
+      "market": "EU. The e-label is German-only; no language or market selector is offered, so no selection was made. The allergen line is printed in twelve languages including Swedish ('innehåller sulfiter'), which is a further sign the page is written for the EU market. The page is the producer's own regulated disclosure (AP/Los-Nr, Jahrgang, Nährwertangaben, Zutatenverzeichnis, allergen line, producer address).",
+      "evidence": "Producer identity is not in doubt here. Systembolaget names 'Philipp Kuhn' / 'Weingut Philipp Kuhn', Pfalz, supplier Tryffelsvinet AB; weingut-philipp-kuhn.de is the VDP estate of Philipp Kuhn at Grosskarlbacher Strasse 20, 67229 Laumersheim, Pfalz, and the address block at the foot of each e-label says so. No second Pfalz estate trades under this name. The estate's own /weinkarte/2025 and /weinkarte/2026 list its whole range in VDP tiers (Gutsweine, Ortsweine, Erste Lage, Grosse Lage, Sekt) with vintage and alcohol per wine, and Systembolaget's Philipp Kuhn wines all appear there under the same idiosyncratic vineyard names (Kirschgarten, Steinbuckel, Saumagen, Philippsbrunnen, Kapellenberg, Burgweg). Wine and vintage: the e-label is headed 'Riesling / Kirschgarten / Laumersheim', AP/Los-Nr 512803703125, Jahrgang 2024, Alkohol 13 % vol., Ausbau Trocken, Anbaugebiet Pfalz. Systembolaget's 7126701 is 'Philipp Kuhn Riesling Kirschgarten GG', 2024, 13,0 %, Riesling, Pfalz. Vintage and alcohol agree exactly. The 'GG' in Systembolaget's name is not printed on the e-label, but on the estate's own /weinkarte/2025 this AP number sits under the heading 'VDP.Grosse Lage' (the tier whose dry wines are the Grosses Gewaechs), alongside Saumagen, Steinbuckel, Philippsbrunnen and Schwarzer Herrgott, all 2024 at 13 % vol. Two other Kirschgarten wines exist in the same tier and were excluded by grape: Pinot Blanc Kirschgarten and Pinot Noir Kirschgarten. The e-label URL was taken from the estate's own sitemap and confirmed against the AP number printed on /weinkarte/2025; it was not guessed.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weingut-philipp-kuhn.de/robots.txt",
+        "https://www.weingut-philipp-kuhn.de/sitemap.xml",
+        "https://www.weingut-philipp-kuhn.de/weinkarte/2025",
+        "https://www.weingut-philipp-kuhn.de/weinkarte/2026",
+        "https://www.weingut-philipp-kuhn.de/e-labels/ap-512803703125"
+      ],
+      "checked_at": "2026-07-30T20:10:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "Producer-hosted, Webflow-built, server-rendered. Weingut Philipp Kuhn publishes one e-label page per bottling at https://www.weingut-philipp-kuhn.de/e-labels/ap-{AP number without punctuation}, and in addition a per-year collected page at /weinkarte/{year} that repeats every e-label on the current list in one document. All of them are in the sitemap at /sitemap.xml, robots.txt sets no Disallow, and the declaration is in the HTML the server returns: no JavaScript, no token, no redirect.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response",
+      "note": "SECOND SOURCE. This declaration comes from the producer's own e-label, not from Systembolaget's product page, and was matched to the wine by judgement rather than by product number. It has not been normalised."
+    },
+    {
+      "product_number": "7559101",
+      "name": "Philipp Kuhn Riesling Tradition",
+      "producer": "Philipp Kuhn",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "found",
+      "source_url": "https://www.weingut-philipp-kuhn.de/e-labels/ap-512803700925",
+      "source_type": "e_label",
+      "raw_ingredients": "Trauben*, Zucker*, Säureregulator: Weinsäure, Stabilisator: Metaweinsäure, Konservierungsstoff: Sulfite\n* aus ökologischer Landwirtschaft",
+      "raw_nutrition": "Nährwertangaben:\n100 ml enthalten durchschnittlich:\nEnergie: 301 kj / 72 kcal\nKohlenhydrate: 1,4 g\ndavon Zucker: 0,5 g\nEnthält geringfügige Mengen an Fett, gesättigten Fettsäuren, Eiweiß und Salz.",
+      "raw_allergens": "Enthält Sulfite · contains sulphites · contient des sulfites · contiene solfiti · bevat sulfieten · indeholder sulfitter · innehåller sulfiter · inneholder sulfites · sisältää sulfiitteja · zawiera siarczyny contiene sulfitos · contém sulfitos",
+      "language": "de",
+      "vintage_on_source": "2024",
+      "market": "EU. The e-label is German-only; no language or market selector is offered, so no selection was made. The allergen line is printed in twelve languages including Swedish ('innehåller sulfiter'), which is a further sign the page is written for the EU market. The page is the producer's own regulated disclosure (AP/Los-Nr, Jahrgang, Nährwertangaben, Zutatenverzeichnis, allergen line, producer address).",
+      "evidence": "Producer identity is not in doubt here. Systembolaget names 'Philipp Kuhn' / 'Weingut Philipp Kuhn', Pfalz, supplier Tryffelsvinet AB; weingut-philipp-kuhn.de is the VDP estate of Philipp Kuhn at Grosskarlbacher Strasse 20, 67229 Laumersheim, Pfalz, and the address block at the foot of each e-label says so. No second Pfalz estate trades under this name. The estate's own /weinkarte/2025 and /weinkarte/2026 list its whole range in VDP tiers (Gutsweine, Ortsweine, Erste Lage, Grosse Lage, Sekt) with vintage and alcohol per wine, and Systembolaget's Philipp Kuhn wines all appear there under the same idiosyncratic vineyard names (Kirschgarten, Steinbuckel, Saumagen, Philippsbrunnen, Kapellenberg, Burgweg). Wine and vintage: the e-label is headed 'Riesling / Tradition', AP/Los-Nr 512803700925, Jahrgang 2024, Alkohol 11,5 % vol., Ausbau Trocken, Pfalz. Systembolaget's 7559101 is 'Philipp Kuhn Riesling Tradition', 2024, 11,5 %, Riesling, Pfalz. Cuvee name, vintage and alcohol agree exactly. The successor bottling of the same wine (AP-512803702026, Jahrgang 2025, 12 % vol.) is on /weinkarte/2026 and was not used, which is what makes the vintage match here a match rather than an approximation.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weingut-philipp-kuhn.de/robots.txt",
+        "https://www.weingut-philipp-kuhn.de/sitemap.xml",
+        "https://www.weingut-philipp-kuhn.de/weinkarte/2025",
+        "https://www.weingut-philipp-kuhn.de/weinkarte/2026",
+        "https://www.weingut-philipp-kuhn.de/e-labels/ap-512803700925"
+      ],
+      "checked_at": "2026-07-30T20:10:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "Producer-hosted, Webflow-built, server-rendered. Weingut Philipp Kuhn publishes one e-label page per bottling at https://www.weingut-philipp-kuhn.de/e-labels/ap-{AP number without punctuation}, and in addition a per-year collected page at /weinkarte/{year} that repeats every e-label on the current list in one document. All of them are in the sitemap at /sitemap.xml, robots.txt sets no Disallow, and the declaration is in the HTML the server returns: no JavaScript, no token, no redirect.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response",
+      "note": "SECOND SOURCE. This declaration comes from the producer's own e-label, not from Systembolaget's product page, and was matched to the wine by judgement rather than by product number. It has not been normalised."
+    },
+    {
+      "product_number": "7159701",
+      "name": "Philipp Kuhn Chardonnay vom Kalkmergel",
+      "producer": "Philipp Kuhn",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "found",
+      "source_url": "https://www.weingut-philipp-kuhn.de/e-labels/ap-512803701126",
+      "source_type": "e_label",
+      "raw_ingredients": "Trauben*, Zucker*, Säureregulator: Weinsäure, Konservierungsstoff: Sulfite\n*aus ökologischer Landwirtschaft",
+      "raw_nutrition": "Nährwertangaben:\n100 ml enthalten durchschnittlich:\nEnergie: 339 kj /81 kcal\nKohlenhydrate: 1,1 g\ndavon Zucker: 0,1 g\nEnthält geringfügige Mengen an Fett, gesättigten Fettsäuren, Eiweiß und Salz.",
+      "raw_allergens": "Enthält Sulfite · contains sulphites · contient des sulfites · contiene solfiti · bevat sulfieten · indeholder sulfitter · innehåller sulfiter · inneholder sulfites · sisältää sulfiitteja · zawiera siarczyny contiene sulfitos · contém sulfitos",
+      "language": "de",
+      "vintage_on_source": "2024",
+      "market": "EU. The e-label is German-only; no language or market selector is offered, so no selection was made. The allergen line is printed in twelve languages including Swedish ('innehåller sulfiter'), which is a further sign the page is written for the EU market. The page is the producer's own regulated disclosure (AP/Los-Nr, Jahrgang, Nährwertangaben, Zutatenverzeichnis, allergen line, producer address).",
+      "evidence": "Producer identity is not in doubt here. Systembolaget names 'Philipp Kuhn' / 'Weingut Philipp Kuhn', Pfalz, supplier Tryffelsvinet AB; weingut-philipp-kuhn.de is the VDP estate of Philipp Kuhn at Grosskarlbacher Strasse 20, 67229 Laumersheim, Pfalz, and the address block at the foot of each e-label says so. No second Pfalz estate trades under this name. The estate's own /weinkarte/2025 and /weinkarte/2026 list its whole range in VDP tiers (Gutsweine, Ortsweine, Erste Lage, Grosse Lage, Sekt) with vintage and alcohol per wine, and Systembolaget's Philipp Kuhn wines all appear there under the same idiosyncratic vineyard names (Kirschgarten, Steinbuckel, Saumagen, Philippsbrunnen, Kapellenberg, Burgweg). Wine and vintage: the e-label is headed 'Chardonnay / Dirmstein / Vom Kalkmergel', AP/Los-Nr 512803701126, Jahrgang 2024, Alkohol 13,5 % vol., Ausbau Trocken, Pfalz. Systembolaget's 7159701 is 'Philipp Kuhn Chardonnay vom Kalkmergel', 2024, 13,5 %, Chardonnay, Pfalz. THE VINTAGE RULE BIT HERE AND WAS FOLLOWED: the estate's /weinkarte/2025 carries the same wine as AP-512803701325, Jahrgang 2023, 13 % vol., and that page would have been the obvious one to read. It was rejected on vintage and the 2024 bottling was taken from /weinkarte/2026 instead, where it appears at 13,5 % vol., matching Systembolaget. The two vintages do not declare the same ingredients: 2023 lists 'Trauben, Zucker, Saeureregulator: Weinsaeure, Stabilisator: Metaweinsaeure, Konservierungsstoff: Sulfite' with no organic asterisks, while 2024 has no Metaweinsaeure and is organic. Sister cuvee excluded: 'Chardonnay / Laumersheim / Reserve' (AP-512803701226) is also 2024 at 13,5 % vol., so alcohol alone does not separate them; it was excluded on the cuvee name, Systembolaget naming the wine 'vom Kalkmergel' which is the Dirmstein bottling.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weingut-philipp-kuhn.de/robots.txt",
+        "https://www.weingut-philipp-kuhn.de/sitemap.xml",
+        "https://www.weingut-philipp-kuhn.de/weinkarte/2025",
+        "https://www.weingut-philipp-kuhn.de/weinkarte/2026",
+        "https://www.weingut-philipp-kuhn.de/e-labels/ap-512803701126"
+      ],
+      "checked_at": "2026-07-30T20:10:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "Producer-hosted, Webflow-built, server-rendered. Weingut Philipp Kuhn publishes one e-label page per bottling at https://www.weingut-philipp-kuhn.de/e-labels/ap-{AP number without punctuation}, and in addition a per-year collected page at /weinkarte/{year} that repeats every e-label on the current list in one document. All of them are in the sitemap at /sitemap.xml, robots.txt sets no Disallow, and the declaration is in the HTML the server returns: no JavaScript, no token, no redirect.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response",
+      "note": "SECOND SOURCE. This declaration comes from the producer's own e-label, not from Systembolaget's product page, and was matched to the wine by judgement rather than by product number. It has not been normalised."
     }
   ],
-  "updated_at": "2026-07-30T09:11:07Z",
+  "updated_at": "2026-07-30T20:10:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -1704,6 +1797,11 @@
       "at": "2026-07-30T09:11:07Z",
       "batch": "2 — rendering reconnaissance across five producers in four countries (Billaud-Simon FR, Tommasi IT, Hain DE, Hällåkra SE, Vini Franchetti IT), 27 wines, all vintage 2024+ and not_declared",
       "result": "27 attempted, 3 found, 23 not found, 1 rejected. VERDICT: server-rendered e-labels do exist. Weingut Hain's are plain HTML on the Winitas shop platform at {winery}.winitas-shop.de/elabel/{id}, with the ingredient list, nutrition table, allergens and Impressum in the server's response — no JavaScript, no token, no robots restriction. Client-side rendering is therefore not universal, contrary to the worry raised by Scantrust and IMERO. The dominant finding is nevertheless scarcity: four of the five producers publish no e-label and no ingredient list anywhere this run could see, so the binding constraint is that e-labels are rare and unlinked, not that they are unreadable."
+    },
+    {
+      "at": "2026-07-30T20:10:00Z",
+      "batch": "3 — German producers with 2024+ undeclared wines, worked one producer at a time and committed after each: Philipp Kuhn, Klosterhof, Doennhoff, Robert Weil, August Kesseler, Juelg, Kerpen, Von Winning, Schloss Johannisberg",
+      "result": "in progress — Philipp Kuhn: 3 attempted, 3 found"
     }
   ]
 }
