@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{# The title reports what the page does, never what the wines are like. A share
+   preview shows this line with none of the page's caveats. #}
+{% block title %}{{ s.find }} — {{ s.site_name }}{% endblock %}
+{% block description %}{{ s.find_lede }}{% endblock %}
+
+{% block content %}
+<h1>{{ s.find }}</h1>
+<p class="lede">{{ s.find_lede }}</p>
+
+<form id="filters" hidden>
+  <div class="field checkbox">
+    <label><input type="checkbox" id="f-buyable" checked> {{ s.f_buyable }}</label>
+    <p class="explain">{{ s.f_buyable_note }}</p>
+  </div>
+
+  <div class="grid">
+    <div class="field">
+      <label for="f-category">{{ s.category }}</label>
+      <select id="f-category"><option value="">{{ s.f_any }}</option></select>
+    </div>
+    <div class="field">
+      <label for="f-country">{{ s.country }}</label>
+      <select id="f-country"><option value="">{{ s.f_any }}</option></select>
+    </div>
+    <div class="field">
+      <label for="f-price">{{ s.f_max_price }}</label>
+      <input type="number" id="f-price" min="0" step="10" inputmode="numeric">
+    </div>
+    <div class="field">
+      <label for="f-grape">{{ s.grapes }}</label>
+      <select id="f-grape"><option value="">{{ s.f_any }}</option></select>
+      <p class="explain">{{ s.f_grape_note }}</p>
+    </div>
+    <div class="field">
+      <label for="f-pairing">{{ s.pairing }}</label>
+      <select id="f-pairing"><option value="">{{ s.f_any }}</option></select>
+      <p class="explain">{{ s.f_pairing_note }}</p>
+    </div>
+  </div>
+
+  <fieldset class="substances">
+    <legend>{{ s.f_substances }}</legend>
+    <div class="grid">
+      <div class="field">
+        <label for="f-exclude">{{ s.f_exclude }}</label>
+        <select id="f-exclude"><option value="">{{ s.f_none }}</option></select>
+      </div>
+      <div class="field">
+        <label for="f-include">{{ s.f_include }}</label>
+        <select id="f-include"><option value="">{{ s.f_none }}</option></select>
+      </div>
+    </div>
+    {# Exclude is sound; include is weaker and says so. Both apply only where a
+       declaration exists — see docs/site-plan.md, "Exclusions and inclusions". #}
+    <p class="explain">{{ s.f_substances_note }}</p>
+  </fieldset>
+</form>
+
+<p id="slice-status" class="hint">{{ s.f_loading }}</p>
+<div id="slice"></div>
+
+<script>
+  window.SITE = {
+    index: "/sok-index.json",
+    noResults: {{ s.no_results|tojson }},
+    showing: {{ s.showing|tojson }},
+    of: {{ s.of|tojson }},
+    stateDeclared: {{ s.state_declared|tojson }},
+    stateDeclaredZero: {{ s.state_declared_zero|tojson }},
+    statePartial: {{ s.state_partial|tojson }},
+    stateSilent: {{ s.state_silent|tojson }},
+    sliceHeld: {{ s.slice_held|tojson }},
+    facetDropped: {{ s.facet_dropped|tojson }},
+    blockRanked: {{ s.block_ranked|tojson }},
+    blockRankedNote: {{ s.block_ranked_note|tojson }},
+    blockPartial: {{ s.block_partial|tojson }},
+    blockPartialNote: {{ s.block_partial_note|tojson }},
+    blockSilent: {{ s.block_silent|tojson }},
+    blockSilentNote: {{ s.block_silent_note|tojson }},
+    blockSilentFiltered: {{ s.block_silent_filtered|tojson }},
+    additiveNames: {{ additive_names|tojson }}
+  };
+</script>
+<script src="/sok.js" defer></script>
+<script src="/hitta.js" defer></script>
+{% endblock %}

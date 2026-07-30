@@ -94,27 +94,54 @@ def image_url(wine: dict) -> str | None:
     return f"{base}{IMAGE_SUFFIX}" if base else None
 
 
-def search_index(wines: list[dict]) -> list[dict]:
-    """The compact index the browser filters against.
+def build_index(wines: list[dict]) -> dict:
+    """One index for both search and the filter, referenced by integer.
 
-    Deliberately not the whole record: name, number, producer and the facts a
-    result row shows. No raw declaration text — it is the largest field in the
-    dataset and nothing on a results page displays it.
+    Names repeat enormously across 15 000 wines — 57 countries, 438 grapes, 58
+    substances — so the vocabularies are listed once and each wine points into
+    them. Written as arrays rather than objects because a key repeated 15 000
+    times is the largest thing in the file otherwise.
+
+    Deliberately absent: `image_base_url`. The filter is a ranked surface and
+    docs/legal-notes.md §2j condition 8 keeps photographs off those, so the
+    index the browser holds cannot render one even by accident.
     """
-    return [
-        {
-            "n": wine["product_number"],
-            "t": wine["name"],
-            "p": wine.get("producer") or "",
-            "v": wine.get("vintage") or "",
-            "c": wine.get("country") or "",
-            "pr": wine.get("price"),
-            "s": state_of(wine)[0],  # d, p or s
-            "a": wine.get("additive_count"),
-            "u": wine_path(wine),
-        }
-        for wine in wines
-    ]
+    vocab: dict[str, list[str]] = {
+        k: [] for k in ("country", "category", "assortment", "grape", "pairing", "additive")
+    }
+    seen: dict[str, dict[str, int]] = {k: {} for k in vocab}
+
+    def index_of(kind: str, value: str) -> int:
+        table = seen[kind]
+        if value not in table:
+            table[value] = len(vocab[kind])
+            vocab[kind].append(value)
+        return table[value]
+
+    rows = []
+    for wine in wines:
+        # 0 orderable, 1 temporarily out, 2 out of stock. The plan puts
+        # buyability first among the facets: a shortlist that sends someone to
+        # the shop for a bottle that is not there has not answered the question.
+        stock = 2 if wine.get("out_of_stock") else 1 if wine.get("temporarily_out_of_stock") else 0
+        rows.append([
+            wine["product_number"],
+            wine["name"],
+            wine.get("producer") or "",
+            wine.get("vintage") or "",
+            wine.get("price"),
+            state_of(wine)[0],
+            wine.get("additive_count"),
+            index_of("country", wine.get("country") or ""),
+            index_of("category", wine.get("category") or ""),
+            index_of("assortment", wine.get("assortment") or ""),
+            sorted(index_of("grape", g) for g in (wine.get("grapes") or [])),
+            sorted(index_of("pairing", p) for p in (wine.get("food_pairings") or [])),
+            sorted({index_of("additive", a["id"]) for a in wine["additives"]}),
+            stock,
+            wine_path(wine),
+        ])
+    return {"vocab": vocab, "wines": rows}
 
 
 def coverage(wines: list[dict]) -> dict:
@@ -129,6 +156,15 @@ def coverage(wines: list[dict]) -> dict:
         "declared_share": len(declared) / len(wines) * 100 if wines else 0,
         "partial_share": len(partial) / len(declared) * 100 if declared else 0,
     }
+
+
+def additive_names(wines: list[dict], lang: str) -> dict:
+    """Substance id to display name, for the filter's two substance menus."""
+    names = {}
+    for wine in wines:
+        for a in wine["additives"]:
+            names.setdefault(a["id"], a["name"][lang])
+    return names
 
 
 def allergen_labels() -> dict:
@@ -226,18 +262,19 @@ def build(output: Path, limit: int | None = None) -> None:
         shutil.rmtree(output)
     output.mkdir(parents=True)
 
-    index = search_index(wines)
     (output / "sok-index.json").write_text(
-        json.dumps(index, ensure_ascii=False, separators=(",", ":")),
+        json.dumps(build_index(wines), ensure_ascii=False, separators=(",", ":")),
         encoding="utf-8",
     )
     shutil.copy(TEMPLATE_DIR / "site.css", output / "site.css")
     shutil.copy(TEMPLATE_DIR / "sok.js", output / "sok.js")
+    shutil.copy(TEMPLATE_DIR / "hitta.js", output / "hitta.js")
 
     wine_template = env.get_template("wine.html")
     index_template = env.get_template("index.html")
     method_template = env.get_template("method.html")
     notfound_template = env.get_template("notfound.html")
+    find_template = env.get_template("hitta.html")
 
     for lang in LANGUAGES:
         s = strings(lang)
@@ -281,6 +318,17 @@ def build(output: Path, limit: int | None = None) -> None:
             ),
             encoding="utf-8",
         )
+        find = prefix / s["find_url"]
+        find.mkdir(parents=True, exist_ok=True)
+        (find / "index.html").write_text(
+            find_template.render(
+                lang=lang, s=s, base=base, lang_root=lang_root,
+                generated=generated, cdn_checked=CDN_CHECKED,
+                additive_names=additive_names(wines, lang),
+            ),
+            encoding="utf-8",
+        )
+
         method = prefix / ("metod" if lang == "sv" else "method")
         method.mkdir(parents=True, exist_ok=True)
         (method / "index.html").write_text(
