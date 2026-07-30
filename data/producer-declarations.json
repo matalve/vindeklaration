@@ -17,8 +17,8 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 77,
-  "found": 6,
+  "attempted": 79,
+  "found": 8,
   "not_found": 58,
   "rejected": 13,
   "declarations": [
@@ -2144,6 +2144,77 @@
       "server_rendered": false,
       "fetch_result": "200 on every URL; no declaration text obtained for this wine",
       "note": "Nothing about this wine's ingredients may be inferred from this record."
+    },
+    {
+      "product_number": "5782101",
+      "name": "Kesseler R Riesling",
+      "producer": "August Kesseler",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "found",
+      "source_url": "https://e-label.graphic-druck.de/20260204/r-riesling-kabinett-vdp-gutswein-2/",
+      "source_type": "e_label",
+      "raw_ingredients": "Zutaten: Trauben Stabilisatoren: enthält Citronensäure und/oder Kaliumpolyaspartat, Antioxidantien: Sulfite, die Abfüllung kann unter Schutzatmosphäre erfolgen",
+      "raw_nutrition": "Nährwertangaben: 100 ml enthalten durchschnittlich\nBrennwert 314 kJ / 74 kcal\nKohlenhydrate 5,4 g\ndavon Zucker 4,7 g\nEnthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Eiweiß und Salz.",
+      "raw_allergens": "Antioxidationsmittel : Enthält Sulfite · contains sulfites · indeholder sulfitter · contiene solfiti · bevat sulfieten · zawiera siarczyny  · contiene sulfitos · innehåller sulfiter · sisältää sulfiitteja  ·  contient des sulfites",
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU. The e-label offers a WPML language selector, which on both pages shows Deutsch as the current language with an EMPTY sub-menu — German is the only language published, so no selection was made and the German text is quoted. The allergen sentence is repeated in ten languages including Swedish ('innehaaller sulfiter'), and the page is the producer's own regulated disclosure, not market-specific copy.",
+      "evidence": "Producer identity is established by the e-label itself, which is the strongest form available here: each page carries 'Erzeugerabfuellung: Weingut August Kesseler, D-65385 Assmannshausen' and an AP-Nr. Systembolaget names the producer 'August Kesseler', Rheingau, supplier Lively Wines Sweden AB. Assmannshausen is in the Rheingau and there is one August Kesseler. The e-label URL was not guessed: it was read off the anchor 'Zutaten und Naehrwerte' in the main product block of the estate's own shop page for this wine. Wine and vintage: the e-label is headed '2025 \"R\" Riesling Kabinett / VDP.Gutswein', AP-Nr 2201600226. Systembolaget's 5782101 is 'Kesseler R Riesling', vintage 2025, Riesling, white. Vintage matches exactly. TWO POINTS ARE RECORDED RATHER THAN SMOOTHED OVER. (1) Systembolaget's name omits 'Kabinett'. That was checked rather than assumed: the estate's shop has 34 products and exactly one wine called 'R', the Riesling \"R\" Kabinett, so there is no second R-wine the Systembolaget name could mean; the entry-level 'Five o' Clock' and 'The Daily August' Gutsweine are separately named. (2) The shop's product block states 9.5 % vol against Systembolaget's 9,0 %. That is within the 0,5 % vol EU labelling tolerance, so the two are reconcilable, but the e-label carries no alcohol figure of its own and this run did not see the bottle, so the discrepancy is noted, not explained. Note the ingredient line's missing comma after 'Trauben' — quoted verbatim, including that, and including the double space before the parenthetical dots in the allergen line.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.august-kesseler.de/robots.txt",
+        "https://www.august-kesseler.de/page-sitemap.xml",
+        "https://www.august-kesseler.de/unsere-weine/",
+        "https://shop.august-kesseler.de/robots.txt",
+        "https://shop.august-kesseler.de/sitemap_index.xml",
+        "https://shop.august-kesseler.de/product-sitemap.xml",
+        "https://e-label.graphic-druck.de/robots.txt",
+        "https://shop.august-kesseler.de/shop/riesling-r-kabinett-2025/",
+        "https://e-label.graphic-druck.de/20260204/r-riesling-kabinett-vdp-gutswein-2/"
+      ],
+      "checked_at": "2026-07-30T21:45:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "A NEW SERVER-RENDERED E-LABEL PLATFORM, and the second one this project has found after Winitas. Host: e-label.graphic-druck.de, run by the printer Graphic Druck, WordPress with WPML. Two URL forms, both plain HTML with the declaration in the server's response — no JavaScript, no token, no redirect chain: (1) https://e-label.graphic-druck.de/{YYYYMMDD}/{vintage-and-wine-slug}/, where the date is the publication date and the slug usually starts with the vintage, so the wine and often the year are legible from the URL; (2) https://e-label.graphic-druck.de/e/{numeric id}, a short form that 301s to the dated slug and matches the page's own data-id attribute. The page carries the wine name with vintage, 'Erzeugerabfuellung' with the producer's name and postal town, the AP-Nr, a nutrition table and a 'Zutaten:' line, plus the allergen sentence in ten languages. robots.txt on the host disallows only /wp-admin/, so no exception was needed. Kesseler links to it from every product tile in its WooCommerce shop under the anchor text 'Zutaten und Naehrwerte', including on category and cross-sell tiles, which is why a single product page yields several wines' e-label URLs. This host is shared infrastructure for a printer's wine customers, so it is worth trying for other German estates.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response",
+      "note": "SECOND SOURCE. This declaration comes from the producer's own e-label, not from Systembolaget's product page, and was matched to the wine by judgement rather than by product number. It has not been normalised."
+    },
+    {
+      "product_number": "7409701",
+      "name": "Kesseler The Daily August Riesling",
+      "producer": "August Kesseler",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "found",
+      "source_url": "https://e-label.graphic-druck.de/20260219/2025-the-daily-august-riesling-qba-trocken-vdp-gutswein/",
+      "source_type": "e_label",
+      "raw_ingredients": "Zutaten: Trauben, Stabilisatoren: enthält Citronensäure und/oder Kaliumpolyaspartat, Antioxidantien: Sulfite, die Abfüllung kann unter Schutzatmosphäre erfolgen",
+      "raw_nutrition": "Nährwertangaben: 100 ml enthalten durchschnittlich\nBrennwert 312 kJ / 73 kcal\nKohlenhydrate 1,6 g\ndavon Zucker 0,7 g\nEnthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Eiweiß und Salz.",
+      "raw_allergens": "Antioxidationsmittel : Enthält Sulfite · contains sulfites · indeholder sulfitter · contiene solfiti · bevat sulfieten · zawiera siarczyny  · contiene sulfitos · innehåller sulfiter · sisältää sulfiitteja  ·  contient des sulfites",
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU. The e-label offers a WPML language selector, which on both pages shows Deutsch as the current language with an EMPTY sub-menu — German is the only language published, so no selection was made and the German text is quoted. The allergen sentence is repeated in ten languages including Swedish ('innehaaller sulfiter'), and the page is the producer's own regulated disclosure, not market-specific copy.",
+      "evidence": "Producer identity is established by the e-label itself, which is the strongest form available here: each page carries 'Erzeugerabfuellung: Weingut August Kesseler, D-65385 Assmannshausen' and an AP-Nr. Systembolaget names the producer 'August Kesseler', Rheingau, supplier Lively Wines Sweden AB. Assmannshausen is in the Rheingau and there is one August Kesseler. The e-label URL was not guessed: it was read off the anchor 'Zutaten und Naehrwerte' in the main product block of the estate's own shop page for this wine. Wine and vintage: the e-label is headed '2025 \"The Daily August\" Riesling QbA trocken / VDP.Gutswein', AP-Nr 2201600426. Systembolaget's 7409701 is 'Kesseler The Daily August Riesling', vintage 2025, Riesling, 11,5 %. Vintage matches exactly and the alcohol on the estate's shop page for this product, 11.50 % vol, matches Systembolaget's 11,5 % exactly too. The Daily August is a three-wine family and the siblings were excluded by grape and colour: 'The Daily August (rot)' and '(rosé)' are Pinot Noir, this is the 'weiss', a Riesling. The e-label was reached from the anchor 'Zutaten und Naehrwerte' in the main product block of /shop/the-daily-august-weiss-2025/, which gives the short form http://e-label.graphic-druck.de/e/15689; that 301s to the dated slug recorded here, and the id 15689 is the destination page's own data-id. The URL was not guessed.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.august-kesseler.de/robots.txt",
+        "https://www.august-kesseler.de/page-sitemap.xml",
+        "https://www.august-kesseler.de/unsere-weine/",
+        "https://shop.august-kesseler.de/robots.txt",
+        "https://shop.august-kesseler.de/sitemap_index.xml",
+        "https://shop.august-kesseler.de/product-sitemap.xml",
+        "https://e-label.graphic-druck.de/robots.txt",
+        "https://shop.august-kesseler.de/shop/the-daily-august-weiss-2025/",
+        "http://e-label.graphic-druck.de/e/15689",
+        "https://e-label.graphic-druck.de/20260219/2025-the-daily-august-riesling-qba-trocken-vdp-gutswein/"
+      ],
+      "checked_at": "2026-07-30T21:45:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "A NEW SERVER-RENDERED E-LABEL PLATFORM, and the second one this project has found after Winitas. Host: e-label.graphic-druck.de, run by the printer Graphic Druck, WordPress with WPML. Two URL forms, both plain HTML with the declaration in the server's response — no JavaScript, no token, no redirect chain: (1) https://e-label.graphic-druck.de/{YYYYMMDD}/{vintage-and-wine-slug}/, where the date is the publication date and the slug usually starts with the vintage, so the wine and often the year are legible from the URL; (2) https://e-label.graphic-druck.de/e/{numeric id}, a short form that 301s to the dated slug and matches the page's own data-id attribute. The page carries the wine name with vintage, 'Erzeugerabfuellung' with the producer's name and postal town, the AP-Nr, a nutrition table and a 'Zutaten:' line, plus the allergen sentence in ten languages. robots.txt on the host disallows only /wp-admin/, so no exception was needed. Kesseler links to it from every product tile in its WooCommerce shop under the anchor text 'Zutaten und Naehrwerte', including on category and cross-sell tiles, which is why a single product page yields several wines' e-label URLs. This host is shared infrastructure for a printer's wine customers, so it is worth trying for other German estates.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response",
+      "note": "SECOND SOURCE. This declaration comes from the producer's own e-label, not from Systembolaget's product page, and was matched to the wine by judgement rather than by product number. It has not been normalised."
     }
   ],
   "updated_at": "2026-07-30T20:10:00Z",
@@ -2166,7 +2237,7 @@
     {
       "at": "2026-07-30T20:10:00Z",
       "batch": "3 — German producers with 2024+ undeclared wines, worked one producer at a time and committed after each: Philipp Kuhn, Klosterhof, Doennhoff, Robert Weil, August Kesseler, Juelg, Kerpen, Von Winning, Schloss Johannisberg",
-      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (all rejected on vintage); Doennhoff 0/4 (2 rejected, 2 not found); Robert Weil 0/3 (1 rejected on vintage, 2 not found). IMERO seen at two producers and unreadable at both."
+      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 found on a new server-rendered platform, e-label.graphic-druck.de."
     }
   ]
 }
