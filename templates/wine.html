@@ -96,6 +96,29 @@
   </section>
   {% endif %}
 
+  {% if nutrition %}
+  <section class="nutrition">
+    <h2>{{ s.nutrition }}</h2>
+    <table class="nutrients">
+      <tbody>
+      {% for n in nutrition %}
+        <tr>
+          <td>{{ s['n_' + n.key] }}</td>
+          <td class="num">{% if n.display %}{{ n.display }}{% else %}{{ n.value|num }} {{ n.unit }}{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {# Energy in wine is mostly ethanol at 7 kcal per gram. Without this a
+       reader sees "0 g sugar" and infers a low calorie count, which is the
+       wrong way round often enough to be worth a sentence. #}
+    <p class="explain">{{ s.energy_is_alcohol }}</p>
+    {% if nutrition_unreadable %}
+    <p class="explain">{{ s.nutrition_unreadable }}</p>
+    {% endif %}
+  </section>
+  {% endif %}
+
   {% set animal = wine.allergens | select('in', animal_allergens) | list %}
   {% if wine.allergens %}
   <section class="allergens{% if animal %} has-animal{% endif %}">
@@ -117,6 +140,7 @@
     <dl>
       {% if wine.producer %}<dt>{{ s.producer }}</dt><dd>{{ wine.producer }}</dd>{% endif %}
       {% if wine.supplier %}<dt>{{ s.supplier }}</dt><dd>{{ wine.supplier }}</dd>{% endif %}
+      {% if wine.alcohol_percentage %}<dt>{{ s.alcohol }}</dt><dd>{{ wine.alcohol_percentage|num }} %</dd>{% endif %}
       {% if wine.price %}<dt>{{ s.price }}</dt><dd>{{ wine.price|round|int }} kr{% if wine.volume_ml %} / {{ wine.volume_ml|round|int }} ml{% endif %}</dd>{% endif %}
       {% if wine.grapes %}<dt>{{ s.grapes }}</dt><dd>{{ wine.grapes|join(', ') }}</dd>{% endif %}
       {% if wine.food_pairings %}<dt>{{ s.pairing }}</dt><dd>{{ wine.food_pairings|join(', ') }}</dd>{% endif %}
