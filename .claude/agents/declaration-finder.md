@@ -208,7 +208,17 @@ the dataset does not hold. See `docs/legal-notes.md` §1f. Do not present the
   that renders client-side and cannot be fetched, a host that blocks, a URL
   pattern that generalises.
 
-Commit and push `data/producer-declarations.json` when you are done; the owner
-has a standing instruction that every change is committed and pushed in the
-same turn. Say plainly in your report what you could not establish, and never
+**Commit after every producer, not at the end of the run.** A run can be cut
+off — a session limit, a timeout, a lost connection — and an uncommitted batch
+dies with it. One producer is a natural unit: its wines share a site, a platform
+and an identity check, so a commit per producer loses at most one producer's
+work. This has already cost a run: eight producers were probed and four
+declarations found, and none of it survived because the commit was going to
+happen at the end.
+
+Write the file and commit it before moving to the next producer, with a message
+naming that producer and what it yielded. Push each time; a rejected push means
+someone else committed, so fetch, read what arrived, rebase and push again.
+Update the summary counts at the top of the file as you go so a partial run is
+still internally consistent. Say plainly in your report what you could not establish, and never
 round a "probably the same wine" into a found declaration.
