@@ -55,7 +55,20 @@
   "animal_origin_lead": "Deklarerar klarningsmedel av animaliskt ursprung",
   "animal_origin_explain": "Husbloss kommer från fisk, kasein från mjölk och albumin från ägg. De används för att klara vinet och deklareras som allergener när det finns kvar mätbara rester.",
   "absence_is_not_proof": "Att ett vin inte deklarerar mjölk, ägg eller fisk betyder inte att inga animaliska klarningsmedel använts. De måste bara deklareras när rester återstår över en viss nivå, så ett vin som klarats med kasein och sedan filtrerats rent deklarerar ingenting. För den som konsekvent undviker animaliska produkter är leverantörens veganmärkning en säkrare uppgift än den här sidan.",
-  "vegan_flagged": "Leverantören har märkt vinet som veganskt."
+  "vegan_flagged": "Leverantören har märkt vinet som veganskt.",
+  "nutrition": "Näringsvärde per 100 ml",
+  "n_kcal_per_100ml": "Energi",
+  "n_kj_per_100ml": "Energi",
+  "n_fat_g_per_100ml": "Fett",
+  "n_saturated_fat_g_per_100ml": "varav mättat fett",
+  "n_carbohydrate_g_per_100ml": "Kolhydrat",
+  "n_sugar_g_per_100ml": "varav socker",
+  "n_protein_g_per_100ml": "Protein",
+  "n_salt_g_per_100ml": "Salt",
+  "nutrition_unreadable": "Ett värde i deklarationen är fysiskt omöjligt och visas inte. Vi gissar inte vad som avsågs.",
+  "energy_is_alcohol": "Det mesta av energin i vin kommer från alkoholen, inte från sockret. Ett torrt vin med högre alkoholhalt kan därför ha fler kalorier än ett sötare med lägre.",
+  "alcohol": "Alkoholhalt",
+  "n_energy": "Energi"
  },
  "en": {
   "site_name": "vindeklaration",
@@ -113,6 +126,19 @@
   "animal_origin_lead": "Declares fining agents of animal origin",
   "animal_origin_explain": "Isinglass comes from fish, casein from milk and albumin from egg. They are used to clarify the wine, and are declared as allergens when measurable residues remain.",
   "absence_is_not_proof": "A wine that does not declare milk, egg or fish has not necessarily been made without animal fining agents. They only have to be declared when residues remain above a threshold, so a wine fined with casein and then filtered clean declares nothing. For anyone consistently avoiding animal products, the supplier's vegan marking is a safer fact than this page.",
-  "vegan_flagged": "The supplier has marked this wine as vegan."
+  "vegan_flagged": "The supplier has marked this wine as vegan.",
+  "nutrition": "Nutrition per 100 ml",
+  "n_kcal_per_100ml": "Energy",
+  "n_kj_per_100ml": "Energy",
+  "n_fat_g_per_100ml": "Fat",
+  "n_saturated_fat_g_per_100ml": "of which saturates",
+  "n_carbohydrate_g_per_100ml": "Carbohydrate",
+  "n_sugar_g_per_100ml": "of which sugars",
+  "n_protein_g_per_100ml": "Protein",
+  "n_salt_g_per_100ml": "Salt",
+  "nutrition_unreadable": "One figure in the declaration is physically impossible and is not shown. We do not guess at what was meant.",
+  "energy_is_alcohol": "Most of the energy in wine comes from the alcohol, not the sugar. A dry wine at a higher strength can therefore carry more calories than a sweeter one at a lower.",
+  "alcohol": "Alcohol",
+  "n_energy": "Energy"
  }
 }

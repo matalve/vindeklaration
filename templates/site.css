@@ -120,6 +120,17 @@ table.additives td.enum {
 .provenance p { margin: 0.25rem 0; }
 .label-wins { font-style: italic; }
 
+/* Nutrition ---------------------------------------------------------- */
+
+.nutrition { margin: 0 0 1.5rem; }
+table.nutrients { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+table.nutrients td { padding: 0.3rem 0; border-bottom: 1px solid var(--line); }
+table.nutrients td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 /* Allergens ---------------------------------------------------------- */
 
 /* No warning colour and no icon. A declared allergen is a fact about how the

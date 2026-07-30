@@ -145,6 +145,56 @@ def allergen_labels() -> dict:
 # see the note on `allergen_labels` in data/lexicon.yaml.
 ANIMAL_ALLERGENS = ("milk", "egg", "fish")
 
+# The nutrition declaration in EU label order, with a physical ceiling for each
+# per 100 ml. Suppliers type these by hand like everything else, and two wines
+# in the corpus carry values that cannot exist — 29 872 kcal and 240 g of
+# carbohydrate in 100 ml. A figure over its ceiling is not shown and not
+# guessed at; the page says one could not be read, which is what `partial` does
+# for declaration text. Pure fat is 900 kcal per 100 g, so 400 is already far
+# above anything a wine can reach.
+NUTRIENTS = (
+    ("kcal_per_100ml", "kcal", 400),
+    ("kj_per_100ml", "kJ", 1700),
+    ("fat_g_per_100ml", "g", 50),
+    ("saturated_fat_g_per_100ml", "g", 50),
+    ("carbohydrate_g_per_100ml", "g", 100),
+    ("sugar_g_per_100ml", "g", 100),
+    ("protein_g_per_100ml", "g", 50),
+    ("salt_g_per_100ml", "g", 10),
+)
+
+
+def fmt(value: float) -> str:
+    """Swedish number: decimal comma, and no trailing .0 on a whole number."""
+    text = f"{value:g}"
+    return text.replace(".", ",")
+
+
+def nutrition_rows(wine: dict) -> tuple[list[dict], int]:
+    """The declared figures, and how many were beyond what is physically possible."""
+    declared = wine.get("nutrition") or {}
+    rows, unreadable = [], 0
+    energy = []
+    for key, unit, ceiling in NUTRIENTS:
+        value = declared.get(key)
+        if value is None:
+            continue
+        if value > ceiling:
+            unreadable += 1
+            continue
+        if key in ("kj_per_100ml", "kcal_per_100ml"):
+            energy.append((key, value, unit))
+            continue
+        rows.append({"key": key, "value": value, "unit": unit})
+    if energy:
+        # kJ before kcal, as the label prints it.
+        energy.sort(key=lambda e: e[0] != "kj_per_100ml")
+        rows.insert(0, {
+            "key": "energy",
+            "display": " / ".join(f"{fmt(v)} {u}" for _, v, u in energy),
+        })
+    return rows, unreadable
+
 
 def strings(lang: str) -> dict:
     """UI text. Declarations themselves are never translated — only chrome."""
@@ -166,6 +216,7 @@ def build(output: Path, limit: int | None = None) -> None:
         lstrip_blocks=True,
     )
     env.filters["slugify"] = slugify
+    env.filters["num"] = fmt
 
     stats = coverage(wines)
     allergens = allergen_labels()
@@ -205,6 +256,8 @@ def build(output: Path, limit: int | None = None) -> None:
                     wine_template.render(
                         wine=wine,
                         state=state_of(wine),
+                        nutrition=nutrition_rows(wine)[0],
+                        nutrition_unreadable=nutrition_rows(wine)[1],
                         allergen_labels=allergens,
                         animal_allergens=ANIMAL_ALLERGENS,
                         image=image_url(wine),
