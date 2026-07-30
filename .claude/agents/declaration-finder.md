@@ -90,9 +90,43 @@ because these are not one large site that expects traffic.
 
 - Sequential requests, at least 0.4 s apart. Never parallelise.
 - Identify yourself with the project's User-Agent, as `src/http.py` does.
-- Check `robots.txt` before fetching a host, and honour it.
 - One producer's site is not a corpus. Fetch the pages you need and stop.
 - If a host rate-limits or errors, back off and move on. Do not retry in a loop.
+
+### robots.txt, and the one place it is set aside
+
+**Read `robots.txt` on every host and honour it — with a single, narrow
+exception, decided by the owner 2026-07-30.**
+
+**The exception: a page that is itself the regulated disclosure.** Where a
+producer has met their obligation under Regulation (EU) 2021/2117 by putting
+the ingredient list behind a QR code, that e-label page exists for one legal
+purpose — to be read by the consumer holding the bottle. A blanket
+`Disallow: /` on such a host does not protect anything; it makes a mandated
+disclosure unreadable to anyone comparing more than one wine at a time. That
+is the whole reason this project exists, so the directive is set aside there.
+
+The line that makes this defensible is **not** "consumer information should be
+free". It is that you are not crawling:
+
+- **Fetch only URLs you already hold**, discovered from the producer's own
+  public linking. Never traverse, never spider, never enumerate, never follow a
+  sitemap on such a host, never guess a URL pattern to find more.
+- **One request per wine.** A handful of direct fetches is what a reader with
+  several bottles would do. Walking the host is not, and would forfeit the
+  argument.
+- The exception covers e-label pages only. A producer's ordinary marketing
+  site gets its `robots.txt` honoured in full, without exception.
+
+**A technological measure is absolute and is a different thing entirely.** 401,
+403, 429, a login wall, a bot challenge, a token that must be issued: stop, do
+not work around it, do not retry, record the wine as `not_found` and say what
+you hit. `robots.txt` is a request; those are refusals, and the project does
+not step over a refusal.
+
+Record the exception wherever you use it: in the wine's record, note that the
+e-label host disallowed crawling and that the page was fetched anyway as the
+regulated disclosure. It should be visible in the data, not just in this file.
 
 ## What to write, and where
 
