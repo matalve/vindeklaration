@@ -35,15 +35,24 @@
    "language": null,
    "vintage_on_source": "2025",
    "market": "EU",
-   "evidence": "Antinori's official shop 26generazioni.com carries one e-label link per product page ('Ingredienti e valori nutrizionali'). The only Guado al Tasso Vermentino Bolgheri in the shop's product sitemap is https://www.26generazioni.com/prodotto/vermentino-2025/, vintage 2025. No 2024 page exists in the sitemap.",
-   "rejected_because": "vintage on the source is 2025, the Systembolaget wine is 2024",
+   "evidence": "Antinori's official shop 26generazioni.com carries one e-label link per product page ('Ingredienti e valori nutrizionali'). The only Guado al Tasso Vermentino Bolgheri in the shop's product sitemap is https://www.26generazioni.com/prodotto/vermentino-2025/, vintage 2025. No 2024 page exists in the sitemap. FETCHED 2026-07-30 UNDER THE ROBOTS EXCEPTION, AND STILL NOT READ. matu.st4.ch serves 'User-agent: * / Disallow: /'; the page was fetched anyway as the disclosure Regulation (EU) 2021/2117 requires, one request, no traversal. The short link is a Scantrust QR redirect and answers 302 to https://elabel.scantrust.com/default/#/?uid=5430b284-2549-4692-aa38-7798c5d4c23b&api_key=<token>&qr=eA9Alxibv6ve . That destination returns an 828-byte HTML shell — title 'Scantrust', an empty <div id=app> and three JavaScript bundles — carrying no ingredient list, no nutrition table, no allergen line, no producer name and no vintage. The declaration is rendered client-side and this agent has no browser. The api_key is an issued token, not a URL parameter that can be reused: its prefix base64-decodes to {\"campaign_id\":35642} and its middle segment is a signer timestamp that incremented once per request across five sequential fetches, so it is minted per request and signed. Scantrust's documented e-label endpoint (GET /api/v2/products/{id}/elabel/) requires an account-issued UAT token on top of that. Under this project's rule that an issued token is a technological measure and absolute, no attempt was made to reach the data behind it, and no ingredient text is known for this wine.",
+   "rejected_because": "vintage on the source is 2025, the Systembolaget wine is 2024 The e-label page itself was fetched on 2026-07-30 and proved unreadable (client-side rendering behind an issued token), so it neither confirmed nor contradicted anything: this rejection continues to rest entirely on the evidence from Antinori's own shop recorded above.",
    "sources_checked": [
     "https://www.antinori.it/it/vino/peppoli/?wineyear=2024",
     "https://www.antinori.it/it/wp-sitemap-posts-page-1.xml",
     "https://www.26generazioni.com/product-sitemap.xml",
-    "https://www.26generazioni.com/prodotto/vermentino-2025/"
+    "https://www.26generazioni.com/prodotto/vermentino-2025/",
+    "https://matu.st4.ch/eA9Alxibv6ve",
+    "https://matu.st4.ch/robots.txt"
    ],
-   "checked_at": "2026-07-28T20:38:45Z"
+   "checked_at": "2026-07-30T10:18:00Z",
+   "robots_disallowed": true,
+   "robots_exception": "e-label host matu.st4.ch disallows all crawling in robots.txt; the page was fetched anyway under the exception decided 2026-07-30, because it is the regulated disclosure. Only the URL already held was fetched, once.",
+   "elabel_platform": "Scantrust (matu.st4.ch short link -> elabel.scantrust.com)",
+   "elabel_uid": "5430b284-2549-4692-aa38-7798c5d4c23b",
+   "elabel_campaign_id": 35642,
+   "fetch_result": "302 to elabel.scantrust.com; 200 HTML shell, 828 bytes, no declaration text",
+   "note": "e-label located and fetched; not readable without a browser, and the underlying data sits behind an issued token, which this project does not step over. Nothing about this wine's ingredients may be inferred from this record."
   },
   {
    "product_number": "7030401",
@@ -81,15 +90,24 @@
    "language": null,
    "vintage_on_source": "2024",
    "market": "EU",
-   "evidence": "https://www.26generazioni.com/prodotto/villa-antinori-2024-2/ carries an e-label link and is the right vintage, but it is a different wine: the page is filed under 'Rosso', declares Toscana IGT at 13% and describes the red first made in 1928. The Systembolaget wine is Villa Antinori Bianco, a white at 12%. The only white in the shop's range is 'Villa Antinori Pinot Bianco', a differently named cuvee, and its current vintage is 2025.",
-   "rejected_because": "cuvee mismatch: the e-label found for 'Villa Antinori 2024' is the red Toscana IGT, not Villa Antinori Bianco; the shop's white is the differently named Villa Antinori Pinot Bianco",
+   "evidence": "https://www.26generazioni.com/prodotto/villa-antinori-2024-2/ carries an e-label link and is the right vintage, but it is a different wine: the page is filed under 'Rosso', declares Toscana IGT at 13% and describes the red first made in 1928. The Systembolaget wine is Villa Antinori Bianco, a white at 12%. The only white in the shop's range is 'Villa Antinori Pinot Bianco', a differently named cuvee, and its current vintage is 2025. FETCHED 2026-07-30 UNDER THE ROBOTS EXCEPTION, AND STILL NOT READ. matu.st4.ch serves 'User-agent: * / Disallow: /'; the page was fetched anyway as the disclosure Regulation (EU) 2021/2117 requires, one request, no traversal. The short link is a Scantrust QR redirect and answers 302 to https://elabel.scantrust.com/default/#/?uid=c75213aa-2124-4cde-a477-a95d551eeac2&api_key=<token>&qr=GSgRmJZPuZpZ . That destination returns an 828-byte HTML shell — title 'Scantrust', an empty <div id=app> and three JavaScript bundles — carrying no ingredient list, no nutrition table, no allergen line, no producer name and no vintage. The declaration is rendered client-side and this agent has no browser. The api_key is an issued token, not a URL parameter that can be reused: its prefix base64-decodes to {\"campaign_id\":35642} and its middle segment is a signer timestamp that incremented once per request across five sequential fetches, so it is minted per request and signed. Scantrust's documented e-label endpoint (GET /api/v2/products/{id}/elabel/) requires an account-issued UAT token on top of that. Under this project's rule that an issued token is a technological measure and absolute, no attempt was made to reach the data behind it, and no ingredient text is known for this wine.",
+   "rejected_because": "cuvee mismatch: the e-label found for 'Villa Antinori 2024' is the red Toscana IGT, not Villa Antinori Bianco; the shop's white is the differently named Villa Antinori Pinot Bianco The e-label page itself was fetched on 2026-07-30 and proved unreadable (client-side rendering behind an issued token), so it neither confirmed nor contradicted anything: this rejection continues to rest entirely on the evidence from Antinori's own shop recorded above.",
    "sources_checked": [
     "https://www.antinori.it/it/vino/peppoli/?wineyear=2024",
     "https://www.antinori.it/it/wp-sitemap-posts-page-1.xml",
     "https://www.26generazioni.com/product-sitemap.xml",
-    "https://www.26generazioni.com/prodotto/villa-antinori-2024-2/"
+    "https://www.26generazioni.com/prodotto/villa-antinori-2024-2/",
+    "https://matu.st4.ch/GSgRmJZPuZpZ",
+    "https://matu.st4.ch/robots.txt"
    ],
-   "checked_at": "2026-07-28T20:38:45Z"
+   "checked_at": "2026-07-30T10:18:00Z",
+   "robots_disallowed": true,
+   "robots_exception": "e-label host matu.st4.ch disallows all crawling in robots.txt; the page was fetched anyway under the exception decided 2026-07-30, because it is the regulated disclosure. Only the URL already held was fetched, once.",
+   "elabel_platform": "Scantrust (matu.st4.ch short link -> elabel.scantrust.com)",
+   "elabel_uid": "c75213aa-2124-4cde-a477-a95d551eeac2",
+   "elabel_campaign_id": 35642,
+   "fetch_result": "302 to elabel.scantrust.com; 200 HTML shell, 828 bytes, no declaration text",
+   "note": "e-label located and fetched; not readable without a browser, and the underlying data sits behind an issued token, which this project does not step over. Nothing about this wine's ingredients may be inferred from this record."
   },
   {
    "product_number": "7066201",
@@ -104,16 +122,24 @@
    "language": null,
    "vintage_on_source": "2024",
    "market": "EU",
-   "evidence": "An e-label for this exact wine and vintage exists and was located: https://www.26generazioni.com/prodotto/il-bruciato-2024/ — Antinori's own shop, product 'IL BRUCIATO 2024' — links it as 'Ingredienti e valori nutrizionali'. Producer, wine, vintage and market (Italian shop, EU) all match. Located but not read: matu.st4.ch serves 'User-agent: * / Disallow: /', so this agent did not fetch the e-label. The declaration is presumed to exist at this URL; its text is unknown and nothing about the ingredients of this wine may be inferred from this record.",
+   "evidence": "An e-label for this exact wine and vintage exists and was located: https://www.26generazioni.com/prodotto/il-bruciato-2024/ — Antinori's own shop, product 'IL BRUCIATO 2024' — links it as 'Ingredienti e valori nutrizionali'. Producer, wine, vintage and market (Italian shop, EU) all match. Located but not read: matu.st4.ch serves 'User-agent: * / Disallow: /', so this agent did not fetch the e-label. The declaration is presumed to exist at this URL; its text is unknown and nothing about the ingredients of this wine may be inferred from this record. FETCHED 2026-07-30 UNDER THE ROBOTS EXCEPTION, AND STILL NOT READ. matu.st4.ch serves 'User-agent: * / Disallow: /'; the page was fetched anyway as the disclosure Regulation (EU) 2021/2117 requires, one request, no traversal. The short link is a Scantrust QR redirect and answers 302 to https://elabel.scantrust.com/default/#/?uid=6a96a9ec-f062-4966-9cbf-4438c22eab9a&api_key=<token>&qr=SO64G7XsXCGq . That destination returns an 828-byte HTML shell — title 'Scantrust', an empty <div id=app> and three JavaScript bundles — carrying no ingredient list, no nutrition table, no allergen line, no producer name and no vintage. The declaration is rendered client-side and this agent has no browser. The api_key is an issued token, not a URL parameter that can be reused: its prefix base64-decodes to {\"campaign_id\":35642} and its middle segment is a signer timestamp that incremented once per request across five sequential fetches, so it is minted per request and signed. Scantrust's documented e-label endpoint (GET /api/v2/products/{id}/elabel/) requires an account-issued UAT token on top of that. Under this project's rule that an issued token is a technological measure and absolute, no attempt was made to reach the data behind it, and no ingredient text is known for this wine.",
    "rejected_because": null,
    "sources_checked": [
     "https://www.antinori.it/it/vino/peppoli/?wineyear=2024",
     "https://www.antinori.it/it/wp-sitemap-posts-page-1.xml",
     "https://www.26generazioni.com/product-sitemap.xml",
-    "https://www.26generazioni.com/prodotto/il-bruciato-2024/"
+    "https://www.26generazioni.com/prodotto/il-bruciato-2024/",
+    "https://matu.st4.ch/SO64G7XsXCGq",
+    "https://matu.st4.ch/robots.txt"
    ],
-   "checked_at": "2026-07-28T20:38:45Z",
-   "note": "e-label located, not readable under this project's crawl policy"
+   "checked_at": "2026-07-30T10:18:00Z",
+   "note": "e-label located and fetched; not readable without a browser, and the underlying data sits behind an issued token, which this project does not step over. Nothing about this wine's ingredients may be inferred from this record.",
+   "robots_disallowed": true,
+   "robots_exception": "e-label host matu.st4.ch disallows all crawling in robots.txt; the page was fetched anyway under the exception decided 2026-07-30, because it is the regulated disclosure. Only the URL already held was fetched, once.",
+   "elabel_platform": "Scantrust (matu.st4.ch short link -> elabel.scantrust.com)",
+   "elabel_uid": "6a96a9ec-f062-4966-9cbf-4438c22eab9a",
+   "elabel_campaign_id": 35642,
+   "fetch_result": "302 to elabel.scantrust.com; 200 HTML shell, 828 bytes, no declaration text"
   },
   {
    "product_number": "7173601",
@@ -193,15 +219,24 @@
    "language": null,
    "vintage_on_source": "2025",
    "market": "EU",
-   "evidence": "The only Bramito della Sala in Antinori's shop product sitemap is https://www.26generazioni.com/prodotto/bramito-della-sala-2025/, vintage 2025, which links an e-label. Producer and wine match; the vintage does not.",
-   "rejected_because": "vintage on the source is 2025, the Systembolaget wine is 2024",
+   "evidence": "The only Bramito della Sala in Antinori's shop product sitemap is https://www.26generazioni.com/prodotto/bramito-della-sala-2025/, vintage 2025, which links an e-label. Producer and wine match; the vintage does not. FETCHED 2026-07-30 UNDER THE ROBOTS EXCEPTION, AND STILL NOT READ. matu.st4.ch serves 'User-agent: * / Disallow: /'; the page was fetched anyway as the disclosure Regulation (EU) 2021/2117 requires, one request, no traversal. The short link is a Scantrust QR redirect and answers 302 to https://elabel.scantrust.com/default/#/?uid=ebd2d2ea-2097-4a8a-b8c2-6e9bf7b1138b&api_key=<token>&qr=wxSuPu7WijSA . That destination returns an 828-byte HTML shell — title 'Scantrust', an empty <div id=app> and three JavaScript bundles — carrying no ingredient list, no nutrition table, no allergen line, no producer name and no vintage. The declaration is rendered client-side and this agent has no browser. The api_key is an issued token, not a URL parameter that can be reused: its prefix base64-decodes to {\"campaign_id\":35642} and its middle segment is a signer timestamp that incremented once per request across five sequential fetches, so it is minted per request and signed. Scantrust's documented e-label endpoint (GET /api/v2/products/{id}/elabel/) requires an account-issued UAT token on top of that. Under this project's rule that an issued token is a technological measure and absolute, no attempt was made to reach the data behind it, and no ingredient text is known for this wine.",
+   "rejected_because": "vintage on the source is 2025, the Systembolaget wine is 2024 The e-label page itself was fetched on 2026-07-30 and proved unreadable (client-side rendering behind an issued token), so it neither confirmed nor contradicted anything: this rejection continues to rest entirely on the evidence from Antinori's own shop recorded above.",
    "sources_checked": [
     "https://www.antinori.it/it/vino/peppoli/?wineyear=2024",
     "https://www.antinori.it/it/wp-sitemap-posts-page-1.xml",
     "https://www.26generazioni.com/product-sitemap.xml",
-    "https://www.26generazioni.com/prodotto/bramito-della-sala-2025/"
+    "https://www.26generazioni.com/prodotto/bramito-della-sala-2025/",
+    "https://matu.st4.ch/wxSuPu7WijSA",
+    "https://matu.st4.ch/robots.txt"
    ],
-   "checked_at": "2026-07-28T20:38:45Z"
+   "checked_at": "2026-07-30T10:18:00Z",
+   "robots_disallowed": true,
+   "robots_exception": "e-label host matu.st4.ch disallows all crawling in robots.txt; the page was fetched anyway under the exception decided 2026-07-30, because it is the regulated disclosure. Only the URL already held was fetched, once.",
+   "elabel_platform": "Scantrust (matu.st4.ch short link -> elabel.scantrust.com)",
+   "elabel_uid": "ebd2d2ea-2097-4a8a-b8c2-6e9bf7b1138b",
+   "elabel_campaign_id": 35642,
+   "fetch_result": "302 to elabel.scantrust.com; 200 HTML shell, 828 bytes, no declaration text",
+   "note": "e-label located and fetched; not readable without a browser, and the underlying data sits behind an issued token, which this project does not step over. Nothing about this wine's ingredients may be inferred from this record."
   },
   {
    "product_number": "8330501",
@@ -216,16 +251,24 @@
    "language": null,
    "vintage_on_source": "2024",
    "market": "EU",
-   "evidence": "An e-label for this exact wine and vintage exists and was located: https://www.26generazioni.com/prodotto/pian-delle-vigne-2024/ on Antinori's own shop, whose text names it a Rosso di Montalcino from 100% Sangiovese (the estate's Brunello is listed separately as 'pian-delle-vigne-2021'). Producer, wine, vintage and market match. Located but not read: matu.st4.ch serves 'User-agent: * / Disallow: /', so this agent did not fetch the e-label. The declaration is presumed to exist at this URL; its text is unknown and nothing about the ingredients of this wine may be inferred from this record.",
+   "evidence": "An e-label for this exact wine and vintage exists and was located: https://www.26generazioni.com/prodotto/pian-delle-vigne-2024/ on Antinori's own shop, whose text names it a Rosso di Montalcino from 100% Sangiovese (the estate's Brunello is listed separately as 'pian-delle-vigne-2021'). Producer, wine, vintage and market match. Located but not read: matu.st4.ch serves 'User-agent: * / Disallow: /', so this agent did not fetch the e-label. The declaration is presumed to exist at this URL; its text is unknown and nothing about the ingredients of this wine may be inferred from this record. FETCHED 2026-07-30 UNDER THE ROBOTS EXCEPTION, AND STILL NOT READ. matu.st4.ch serves 'User-agent: * / Disallow: /'; the page was fetched anyway as the disclosure Regulation (EU) 2021/2117 requires, one request, no traversal. The short link is a Scantrust QR redirect and answers 302 to https://elabel.scantrust.com/default/#/?uid=ee20b3f4-a2eb-4036-9ff3-5926de43060b&api_key=<token>&qr=dFPXRA9L-REd . That destination returns an 828-byte HTML shell — title 'Scantrust', an empty <div id=app> and three JavaScript bundles — carrying no ingredient list, no nutrition table, no allergen line, no producer name and no vintage. The declaration is rendered client-side and this agent has no browser. The api_key is an issued token, not a URL parameter that can be reused: its prefix base64-decodes to {\"campaign_id\":35642} and its middle segment is a signer timestamp that incremented once per request across five sequential fetches, so it is minted per request and signed. Scantrust's documented e-label endpoint (GET /api/v2/products/{id}/elabel/) requires an account-issued UAT token on top of that. Under this project's rule that an issued token is a technological measure and absolute, no attempt was made to reach the data behind it, and no ingredient text is known for this wine.",
    "rejected_because": null,
    "sources_checked": [
     "https://www.antinori.it/it/vino/peppoli/?wineyear=2024",
     "https://www.antinori.it/it/wp-sitemap-posts-page-1.xml",
     "https://www.26generazioni.com/product-sitemap.xml",
-    "https://www.26generazioni.com/prodotto/pian-delle-vigne-2024/"
+    "https://www.26generazioni.com/prodotto/pian-delle-vigne-2024/",
+    "https://matu.st4.ch/dFPXRA9L-REd",
+    "https://matu.st4.ch/robots.txt"
    ],
-   "checked_at": "2026-07-28T20:38:45Z",
-   "note": "e-label located, not readable under this project's crawl policy"
+   "checked_at": "2026-07-30T10:18:00Z",
+   "note": "e-label located and fetched; not readable without a browser, and the underlying data sits behind an issued token, which this project does not step over. Nothing about this wine's ingredients may be inferred from this record.",
+   "robots_disallowed": true,
+   "robots_exception": "e-label host matu.st4.ch disallows all crawling in robots.txt; the page was fetched anyway under the exception decided 2026-07-30, because it is the regulated disclosure. Only the URL already held was fetched, once.",
+   "elabel_platform": "Scantrust (matu.st4.ch short link -> elabel.scantrust.com)",
+   "elabel_uid": "ee20b3f4-a2eb-4036-9ff3-5926de43060b",
+   "elabel_campaign_id": 35642,
+   "fetch_result": "302 to elabel.scantrust.com; 200 HTML shell, 828 bytes, no declaration text"
   },
   {
    "product_number": "7015901",
@@ -854,6 +897,19 @@
     "https://thesadiefamily.com/product/mev-kirsten-2024-750ml/"
    ],
    "checked_at": "2026-07-28T20:38:45Z"
+  }
+ ],
+ "updated_at": "2026-07-30T10:18:00Z",
+ "_runs": [
+  {
+   "at": "2026-07-28T20:38:45Z",
+   "batch": "1 — Marchesi Antinori, Chateau d'Esclans, Weingut Wittmann, The Sadie Family Wines (35 wines, vintage 2024+, not_declared)",
+   "result": "35 attempted, 0 found, 31 not found, 4 rejected"
+  },
+  {
+   "at": "2026-07-30T10:18:00Z",
+   "batch": "1a — the 5 Marchesi Antinori wines whose e-label URL was already held, re-attempted under the robots.txt exception decided 2026-07-30",
+   "result": "5 pages fetched, 0 declarations read; the Scantrust e-label renders client-side and its data sits behind a per-request issued token. No status changed. The 4 wines with no e-label URL were not touched."
   }
  ]
 }
