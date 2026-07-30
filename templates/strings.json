@@ -50,7 +50,12 @@
   "not_found": "Sidan finns inte",
   "not_found_body": "Adressen leder ingenstans. Vinet kan ha utgått ur sortimentet sedan länken skapades.",
   "back_home": "Till söksidan",
-  "of": "av"
+  "of": "av",
+  "allergens": "Allergener",
+  "animal_origin_lead": "Deklarerar klarningsmedel av animaliskt ursprung",
+  "animal_origin_explain": "Husbloss kommer från fisk, kasein från mjölk och albumin från ägg. De används för att klara vinet och deklareras som allergener när det finns kvar mätbara rester.",
+  "absence_is_not_proof": "Att ett vin inte deklarerar mjölk, ägg eller fisk betyder inte att inga animaliska klarningsmedel använts. De måste bara deklareras när rester återstår över en viss nivå, så ett vin som klarats med kasein och sedan filtrerats rent deklarerar ingenting. För den som konsekvent undviker animaliska produkter är leverantörens veganmärkning en säkrare uppgift än den här sidan.",
+  "vegan_flagged": "Leverantören har märkt vinet som veganskt."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -103,6 +108,11 @@
   "not_found": "Page not found",
   "not_found_body": "That address leads nowhere. The wine may have left the assortment since the link was made.",
   "back_home": "To search",
-  "of": "of"
+  "of": "of",
+  "allergens": "Allergens",
+  "animal_origin_lead": "Declares fining agents of animal origin",
+  "animal_origin_explain": "Isinglass comes from fish, casein from milk and albumin from egg. They are used to clarify the wine, and are declared as allergens when measurable residues remain.",
+  "absence_is_not_proof": "A wine that does not declare milk, egg or fish has not necessarily been made without animal fining agents. They only have to be declared when residues remain above a threshold, so a wine fined with casein and then filtered clean declares nothing. For anyone consistently avoiding animal products, the supplier's vegan marking is a safer fact than this page.",
+  "vegan_flagged": "The supplier has marked this wine as vegan."
  }
 }

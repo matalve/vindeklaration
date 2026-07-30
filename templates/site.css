@@ -120,6 +120,27 @@ table.additives td.enum {
 .provenance p { margin: 0.25rem 0; }
 .label-wins { font-style: italic; }
 
+/* Allergens ---------------------------------------------------------- */
+
+/* No warning colour and no icon. A declared allergen is a fact about how the
+   wine was made, not a verdict on it, and the reader decides what it means to
+   them. Distinguished from the surrounding text by weight and rule only, on the
+   same principle as the three declaration states. */
+.allergens {
+  margin: 0 0 1.5rem;
+  padding: 0.75rem 0 0 0;
+  border-top: 1px solid var(--line);
+}
+.allergens .declared { margin: 0; }
+.allergens.has-animal .lead { font-weight: 600; margin: 0.5rem 0 0; }
+.allergens .caveat { margin-top: 0.6rem; }
+
+.from-animal {
+  color: var(--muted);
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
 /* Search ------------------------------------------------------------- */
 
 .search h1 { margin-top: 1.75rem; }

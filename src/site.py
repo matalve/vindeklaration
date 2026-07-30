@@ -25,11 +25,13 @@ import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
+import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 WINES_PATH = DATA_DIR / "wines.json"
+LEXICON_PATH = DATA_DIR / "lexicon.yaml"
 TEMPLATE_DIR = ROOT / "templates"
 OUTPUT_DIR = ROOT / "site"
 
@@ -129,6 +131,21 @@ def coverage(wines: list[dict]) -> dict:
     }
 
 
+def allergen_labels() -> dict:
+    """Display words for the allergen ids a substance can carry.
+
+    Sulfites sit on almost every declared wine and say nothing about how it was
+    made. Milk, egg and fish do: each names an animal-derived fining agent, and
+    a reader should not have to already know that isinglass comes from fish.
+    """
+    return yaml.safe_load(LEXICON_PATH.read_text(encoding="utf-8"))["allergen_labels"]
+
+
+# The ones that carry information. Kept separate from sulfites deliberately —
+# see the note on `allergen_labels` in data/lexicon.yaml.
+ANIMAL_ALLERGENS = ("milk", "egg", "fish")
+
+
 def strings(lang: str) -> dict:
     """UI text. Declarations themselves are never translated — only chrome."""
     table = json.loads((TEMPLATE_DIR / "strings.json").read_text(encoding="utf-8"))
@@ -151,6 +168,7 @@ def build(output: Path, limit: int | None = None) -> None:
     env.filters["slugify"] = slugify
 
     stats = coverage(wines)
+    allergens = allergen_labels()
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     if output.exists():
@@ -187,6 +205,8 @@ def build(output: Path, limit: int | None = None) -> None:
                     wine_template.render(
                         wine=wine,
                         state=state_of(wine),
+                        allergen_labels=allergens,
+                        animal_allergens=ANIMAL_ALLERGENS,
                         image=image_url(wine),
                         image_width=IMAGE_WIDTH,
                         image_height=IMAGE_HEIGHT,
