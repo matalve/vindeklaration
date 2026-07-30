@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 74,
+  "attempted": 77,
   "found": 6,
-  "not_found": 56,
-  "rejected": 12,
+  "not_found": 58,
+  "rejected": 13,
   "declarations": [
     {
       "product_number": "5106001",
@@ -2057,6 +2057,93 @@
       "server_rendered": false,
       "fetch_result": "200 on every URL; no declaration text obtained for this wine",
       "note": "Nothing about this wine's ingredients may be inferred from this record."
+    },
+    {
+      "product_number": "7513001",
+      "name": "Robert Weil Kiedricher Riesling Trocken Weingut Robert Weil",
+      "producer": "Weingut Robert Weil",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://shop.weingut-robert-weil.com/kiedricher-riesling-trocken-2025.html",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU (German-language producer site; the estate site offers DE/EN, the shop is German only)",
+      "evidence": "Producer identity is not in question: Weingut Robert Weil, Muehlberg 5, 65399 Kiedrich, Rheingau, is a single well-known VDP estate and the shop is on its own subdomain. Wine and cuvee match: 'Kiedricher Riesling Trocken' is the estate's Ortswein and Systembolaget carries it as 7513001. THE VINTAGE DOES NOT. The only Kiedricher Riesling trocken in the shop is the 2025 — vintage in the URL slug, in the page and in the e-label's own anchor text, which reads '2025 Kiedricher Riesling Trocken'. Systembolaget's is the 2024. The estate does publish a per-vintage e-label (IMERO), so a 2024 e-label very likely exists, but the estate does not link to it any more: the shop keeps only the current release, and constructing the 2024's IMERO id from the 2025's would be guessing a URL, which this run does not do. The 2025 e-label was fetched once and proved unreadable in any case.",
+      "rejected_because": "the wine on the source page is the 2025 — its own e-label link is titled '2025 Kiedricher Riesling Trocken' — and the Systembolaget wine is the 2024. No 2024 page is linked anywhere on the estate's site or shop.",
+      "sources_checked": [
+        "https://www.weingut-robert-weil.com/robots.txt",
+        "https://www.weingut-robert-weil.com/",
+        "https://shop.weingut-robert-weil.com/robots.txt",
+        "https://shop.weingut-robert-weil.com/sitemap.xml",
+        "https://shop.weingut-robert-weil.com/trocken.html",
+        "https://shop.weingut-robert-weil.com/kiedricher-riesling-trocken-2025.html",
+        "https://app.imero.io/p/698b15c0326372c55ed38562/e-label/698b15c0326372c55ed38557"
+      ],
+      "checked_at": "2026-07-30T21:20:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "IMERO again, and this time with the full URL form rather than a short link: Weingut Robert Weil's Magento shop puts, in each product's description, the heading 'Naehrwertangaben:' above a link whose anchor text is the wine and its vintage — for the current Kiedricher, '2025 Kiedricher Riesling Trocken' -> https://app.imero.io/p/{24-hex product id}/e-label/{24-hex e-label id}. That anchor text is useful, because it means the vintage an IMERO link belongs to is legible from the linking page without opening it. The e-label itself is not legible: fetched once, app.imero.io returns the same 7 535-byte Angular/Ionic shell as the s.imero.io short links, with no declaration text, and the platform's API is behind /challenge and /getaccesstoken. robots.txt on shop.weingut-robert-weil.com disallows only Magento's technical controller paths, not product pages; weingut-robert-weil.com serves no robots.txt at all (404). Note also that the shop's sitemap.xml is stale — the product URLs in it 404, and the live URLs are vintage-stamped (kiedricher-riesling-trocken-2025.html); the category pages, not the sitemap, are what to read on this shop.",
+      "server_rendered": false,
+      "fetch_result": "200 on every URL; no declaration text obtained for this wine",
+      "note": "Nothing about this wine's ingredients may be inferred from this record."
+    },
+    {
+      "product_number": "5432701",
+      "name": "Robert Weil Junior Weissburgunder Unique",
+      "producer": "Weingut Robert Weil",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.robert-weil-junior.com/unsere-weine/weissburgunder",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "de",
+      "vintage_on_source": null,
+      "market": "EU (German-language producer site; the estate site offers DE/EN, the shop is German only)",
+      "evidence": "Producer identity was worth pinning down here, because Systembolaget files these wines under 'Weingut Robert Weil' while the region field says Rheinhessen, not Rheingau, and the Kiedrich estate is a Rheingau producer. Resolved: the estate's own site has a page /de/junior which says 'Weingut Robert Weil hat Nachwuchs bekommen' and points to www.robert-weil-junior.com, whose Impressum reads 'Weinhaus Robert Weil, Wilhelm Weil, Muehlberg 5, 65399 Kiedrich' — the same address as the Weingut, a separate legal entity for the family's Rheinhessen Burgundian-varieties project. So Robert Weil Junior is the Weil family and Systembolaget's attribution is defensible, but it is a different undertaking from the Weingut and its wines are not in the Weingut's shop. Having established that, the search ended empty: robert-weil-junior.com has a Weissburgunder page that is pure tasting note. No ingredient list, no nutrition table, no vintage, no e-label link, no QR destination, and no shop through which one might be reached. The word 'Unique' on the site is an award badge image, not a cuvee. Not found means not found: it does not establish that no declaration exists.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weingut-robert-weil.com/de/junior",
+        "https://www.robert-weil-junior.com/robots.txt",
+        "https://www.robert-weil-junior.com/",
+        "https://www.robert-weil-junior.com/service/impressum"
+      ],
+      "checked_at": "2026-07-30T21:20:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "Nothing. robert-weil-junior.com is a small TYPO3 marketing site (five wine pages, contact, Impressum, Datenschutz) with no shop, no product data, no vintage, no e-label link and no QR destination. The strings 'Zutaten', 'Naehrwert', 'Sulfit', 'kcal' and 'imero' do not appear on either wine page. There is no robots.txt (404).",
+      "server_rendered": false,
+      "fetch_result": "200 on every URL; no declaration text obtained for this wine",
+      "note": "Nothing about this wine's ingredients may be inferred from this record."
+    },
+    {
+      "product_number": "5728901",
+      "name": "Robert Weil Junior Spätburgunder Unique",
+      "producer": "Weingut Robert Weil",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.robert-weil-junior.com/unsere-weine/spaetburgunder",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "de",
+      "vintage_on_source": null,
+      "market": "EU (German-language producer site; the estate site offers DE/EN, the shop is German only)",
+      "evidence": "Same producer, same finding as the Junior Weissburgunder above, on the Spaetburgunder page of the same site: a tasting note with no ingredient list, no nutrition table, no vintage and no e-label link. Identity established through the Weingut's own /de/junior page and the Junior site's Impressum ('Weinhaus Robert Weil, Wilhelm Weil, Muehlberg 5, 65399 Kiedrich').",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weingut-robert-weil.com/de/junior",
+        "https://www.robert-weil-junior.com/robots.txt",
+        "https://www.robert-weil-junior.com/",
+        "https://www.robert-weil-junior.com/service/impressum"
+      ],
+      "checked_at": "2026-07-30T21:20:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "Nothing. robert-weil-junior.com is a small TYPO3 marketing site (five wine pages, contact, Impressum, Datenschutz) with no shop, no product data, no vintage, no e-label link and no QR destination. The strings 'Zutaten', 'Naehrwert', 'Sulfit', 'kcal' and 'imero' do not appear on either wine page. There is no robots.txt (404).",
+      "server_rendered": false,
+      "fetch_result": "200 on every URL; no declaration text obtained for this wine",
+      "note": "Nothing about this wine's ingredients may be inferred from this record."
     }
   ],
   "updated_at": "2026-07-30T20:10:00Z",
@@ -2079,7 +2166,7 @@
     {
       "at": "2026-07-30T20:10:00Z",
       "batch": "3 — German producers with 2024+ undeclared wines, worked one producer at a time and committed after each: Philipp Kuhn, Klosterhof, Doennhoff, Robert Weil, August Kesseler, Juelg, Kerpen, Von Winning, Schloss Johannisberg",
-      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5, all rejected on vintage; Doennhoff 0/4, 2 rejected on vintage and 2 not found. IMERO joins Scantrust as a client-side e-label platform behind an issued token."
+      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (all rejected on vintage); Doennhoff 0/4 (2 rejected, 2 not found); Robert Weil 0/3 (1 rejected on vintage, 2 not found). IMERO seen at two producers and unreadable at both."
     }
   ]
 }
