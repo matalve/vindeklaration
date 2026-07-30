@@ -50,7 +50,9 @@
       <tbody>
       {% for a in wine.additives %}
         <tr>
-          <td>{{ a.name[lang] }}</td>
+          <td>{{ a.name[lang] }}{% if a.allergen and a.allergen in animal_allergens %}
+            <span class="from-animal">({{ allergen_labels[a.allergen][lang] }})</span>
+          {% endif %}</td>
           <td class="enum">{{ a.e_number or '' }}</td>
         </tr>
       {% endfor %}
@@ -70,7 +72,9 @@
     <table class="additives">
       <tbody>
       {% for a in wine.additives %}
-        <tr><td>{{ a.name[lang] }}</td><td class="enum">{{ a.e_number or '' }}</td></tr>
+        <tr><td>{{ a.name[lang] }}{% if a.allergen and a.allergen in animal_allergens %}
+          <span class="from-animal">({{ allergen_labels[a.allergen][lang] }})</span>{% endif %}</td>
+          <td class="enum">{{ a.e_number or '' }}</td></tr>
       {% endfor %}
       </tbody>
     </table>
@@ -89,6 +93,23 @@
   <section class="raw">
     <h2>{{ s.raw }}</h2>
     <blockquote lang="">{{ wine.raw_ingredients }}</blockquote>
+  </section>
+  {% endif %}
+
+  {% set animal = wine.allergens | select('in', animal_allergens) | list %}
+  {% if wine.allergens %}
+  <section class="allergens{% if animal %} has-animal{% endif %}">
+    <h2>{{ s.allergens }}</h2>
+    <p class="declared">{% for a in wine.allergens %}{{ allergen_labels[a][lang] | capitalize if a in allergen_labels else a }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+    {% if animal %}
+    <p class="lead">{{ s.animal_origin_lead }}.</p>
+    <p class="explain">{{ s.animal_origin_explain }}</p>
+    {% endif %}
+    {# Absence is not evidence: the declaration threshold means a wine fined
+       with casein and filtered clean declares nothing. Saying so here is the
+       same rule the site applies to undeclared wines. #}
+    <p class="explain caveat">{{ s.absence_is_not_proof }}</p>
+    {% if wine.vegan %}<p class="explain">{{ s.vegan_flagged }}</p>{% endif %}
   </section>
   {% endif %}
 

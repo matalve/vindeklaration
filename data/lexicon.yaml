@@ -6,6 +6,18 @@
 
 # Functional class headers: "Konserveringsmedel (SULFITER)". They describe the
 # substance that follows, so they must never be counted as one themselves.
+# The 14 EU allergens that appear in wine declarations, for display. The
+# `allergen` field on a substance in additives.yaml carries one of these ids;
+# these are the words to print next to it. Sulfites are on virtually every
+# declared wine and carry no information about how the wine was made; milk, egg
+# and fish do, because they name an animal-derived fining agent.
+allergen_labels:
+  sulfites: { sv: sulfiter, en: sulfites }
+  milk: { sv: mjölk, en: milk }
+  egg: { sv: ägg, en: egg }
+  fish: { sv: fisk, en: fish }
+  gluten: { sv: gluten, en: gluten }
+
 category_labels:
   - konserverings- och antioxidationsmedel
   - konservering-och antioxidationsmedel
