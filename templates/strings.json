@@ -101,7 +101,17 @@
   "stock_dropped": "{n} viner är slutsålda eller tillfälligt slut och visas inte.",
   "substance_dropped": "{n} viner deklarerade, men matchade inte ditt tillsatsval.",
   "noscript": "Filtret kräver JavaScript. Du kan söka upp ett enskilt vin på startsidan utan det.",
-  "block_partial_filtered": "Ditt tillsatsval gäller inte de här. Deras förteckning innehåller text vi inte kunnat läsa, så de kan varken bekräfta eller dementera valet — de tas inte bort, de märks."
+  "block_partial_filtered": "Ditt tillsatsval gäller inte de här. Deras förteckning innehåller text vi inte kunnat läsa, så de kan varken bekräfta eller dementera valet — de tas inte bort, de märks.",
+  "list_url": "lista",
+  "list_heading": "{cat} med färst deklarerade tillsatser",
+  "list_heading_cap": "{cat} under {cap} kr med färst deklarerade tillsatser",
+  "list_lede": "Rangordnat efter hur många tillsatser vinet deklarerar, inte efter hur mycket det innehåller. De flesta viner i den här listan har inte deklarerat något alls — de står längst ner, och det säger ingenting om vad de innehåller.",
+  "list_orderable": "Bara viner som gick att beställa när sidan byggdes.",
+  "list_description": "{n} av {held} viner har en ingrediensförteckning som gått att läsa i sin helhet. Rangordnade efter antal deklarerade tillsatser.",
+  "list_refine": "Vill du snäva in mer finns filtret.",
+  "list_silent_majority": "De flesta vinerna i den här listan har inte lämnat någon förteckning.",
+  "list_to_filter": "Bygg din egen lista i filtret →",
+  "list_others": "Andra listor"
  },
  "en": {
   "site_name": "vindeklaration",
@@ -205,6 +215,16 @@
   "stock_dropped": "{n} wines are out of stock or temporarily out and are not shown.",
   "substance_dropped": "{n} wines declared, but did not match your additive choice.",
   "noscript": "The filter needs JavaScript. You can look up a single wine from the front page without it.",
-  "block_partial_filtered": "Your additive choice does not apply to these. Their list contains text we could not read, so they can neither confirm nor deny it — they are not removed, they are labelled."
+  "block_partial_filtered": "Your additive choice does not apply to these. Their list contains text we could not read, so they can neither confirm nor deny it — they are not removed, they are labelled.",
+  "list_url": "list",
+  "list_heading": "{cat} declaring the fewest additives",
+  "list_heading_cap": "{cat} under {cap} kr declaring the fewest additives",
+  "list_lede": "Ranked by how many additives the wine declares, not by how much it contains. Most wines in this list have declared nothing at all — they are at the bottom, and that says nothing about what they contain.",
+  "list_orderable": "Only wines that could be ordered when this page was built.",
+  "list_description": "{n} of {held} wines carry an ingredient list that could be read in full. Ranked by number of declared additives.",
+  "list_refine": "The filter will narrow it further.",
+  "list_silent_majority": "Most of the wines in this list have given no list at all.",
+  "list_to_filter": "Build your own list in the filter →",
+  "list_others": "Other lists"
  }
 }

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{# Both carry the word declared. These are the pages most likely to be quoted
+   out of context — a shared link or a search result shows this line and nothing
+   else on the page, so the qualifier cannot live further down. #}
+{% block title %}{{ heading }} — {{ s.site_name }}{% endblock %}
+{% block description %}{{ s.list_description|replace("{n}", sl.ranked|length)|replace("{held}", sl.held|length) }}{% endblock %}
+
+{% block content %}
+<article class="list-page">
+<h1>{{ heading }}</h1>
+
+<p class="lede">{{ s.list_lede }}</p>
+
+{# The denominator before the ranking, not after it. #}
+<p class="hint">
+  {{ s.slice_held|replace("{n}", sl.held|length) }}
+  {{ s.list_orderable }}
+</p>
+
+<section class="block">
+  <h2>{{ s.block_ranked }} ({{ sl.ranked|length }})</h2>
+  <p class="explain">{{ s.block_ranked_note }}</p>
+  <ol class="results ranked">
+  {% for w in sl.ranked[:40] %}
+    <li>
+      <a href="{{ base }}/{{ w|wine_url }}/">{{ w.name }}{% if w.vintage %} {{ w.vintage }}{% endif %}</a>
+      <span class="meta">
+        {{ w.producer }}{% if w.price %} · {{ w.price|round|int }} kr{% endif %}
+        {%- if w.assortment %} · {{ facet_labels.assortment[w.assortment] if facet_labels.assortment and w.assortment in facet_labels.assortment else w.assortment }}{% endif %}
+      </span>
+      {# The substances, not just the count. A ranking on "fewest declared
+         additives" that will not say which ones puts the reader back to
+         opening wines one at a time, which is the friction the site exists to
+         remove. #}
+      <span class="state state-d">
+        {%- if w.additive_count == 0 -%}
+          {{ s.state_declared_zero }}
+        {%- else -%}
+          {{ s.state_declared }} {{ w.additive_count }}: {{ w.additives|map(attribute='name')|map(attribute=lang)|join(', ') }}
+        {%- endif -%}
+      </span>
+    </li>
+  {% endfor %}
+  </ol>
+  {% if sl.ranked|length > 40 %}
+  <p class="explain">{{ s.showing }} 40 {{ s.of }} {{ sl.ranked|length }}. {{ s.list_refine }}</p>
+  {% endif %}
+</section>
+
+{# Always rendered, including at zero: three states means three headings, and a
+   block that vanishes is indistinguishable from a slice that never held one. #}
+<section class="block">
+  <h2>{{ s.block_partial }} ({{ sl.partial|length }})</h2>
+  <p class="explain">{{ s.block_partial_note }}</p>
+  <ol class="results">
+  {% for w in sl.partial[:10] %}
+    <li>
+      <a href="{{ base }}/{{ w|wine_url }}/">{{ w.name }}{% if w.vintage %} {{ w.vintage }}{% endif %}</a>
+      <span class="meta">{{ w.producer }}{% if w.price %} · {{ w.price|round|int }} kr{% endif %}</span>
+      <span class="state state-p">{{ s.state_partial }}</span>
+    </li>
+  {% endfor %}
+  </ol>
+</section>
+
+<section class="block">
+  <h2>{{ s.block_silent }} ({{ sl.silent|length }})</h2>
+  <p class="explain">{{ s.block_silent_note }}</p>
+  <ol class="results">
+  {% for w in sl.silent[:10] %}
+    <li>
+      <a href="{{ base }}/{{ w|wine_url }}/">{{ w.name }}{% if w.vintage %} {{ w.vintage }}{% endif %}</a>
+      <span class="meta">{{ w.producer }}{% if w.price %} · {{ w.price|round|int }} kr{% endif %}</span>
+      <span class="state state-s">{{ s.state_silent }}</span>
+    </li>
+  {% endfor %}
+  </ol>
+  {% if sl.silent|length > 10 %}
+  <p class="explain">{{ s.showing }} 10 {{ s.of }} {{ sl.silent|length }}. {{ s.list_silent_majority }}</p>
+  {% endif %}
+</section>
+
+<p class="hint"><a href="{{ lang_root }}/{{ s.find_url }}/">{{ s.list_to_filter }}</a></p>
+
+{% if other_lists %}
+<nav class="other-lists">
+  <h2>{{ s.list_others }}</h2>
+  <ul>
+  {% for o in other_lists %}
+    <li><a href="{{ lang_root }}/{{ s.list_url }}/{{ o.slug }}/">{{ o.heading }}</a></li>
+  {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+</article>
+{% endblock %}
