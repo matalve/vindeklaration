@@ -72,7 +72,7 @@
   "licence": "Licens",
   "find": "Hitta ett vin",
   "find_url": "hitta",
-  "find_lede": "Välj vad du ändå tänkte köpa, så visas vad vinerna i den skivan deklarerar. Rangordningen gäller öppenhet, inte innehåll — fyra viner av fem deklarerar ingenting alls.",
+  "find_lede": "Välj vad du ändå tänkte köpa, så visas vad de vinerna deklarerar. Rangordningen gäller öppenhet, inte innehåll — fyra viner av fem deklarerar ingenting alls.",
   "f_any": "alla",
   "f_none": "ingen",
   "f_buyable": "Bara viner som går att beställa nu",
@@ -85,7 +85,7 @@
   "f_include": "Måste deklarera",
   "f_substances_note": "De två är inte spegelbilder. Att utesluta håller: ett vin som deklarerat fullt ut och inte listat ämnet innehåller det inte. Att kräva är svagare — det hittar viner som erkänner ämnet, inte alla som har det. Ingetdera säger något om ett vin som inte deklarerat, så båda gäller bara de två första blocken.",
   "f_loading": "Läser in …",
-  "slice_held": "{n} viner i den här skivan.",
+  "slice_held": "{n} viner matchar det du valt.",
   "facet_dropped": "Ytterligare {n} föll bort för att fältet du filtrerade på är tomt för dem.",
   "block_ranked": "Deklarerar, och all text kunde tolkas",
   "block_ranked_note": "Rangordnade efter antal deklarerade tillsatser, lägst först, sedan pris.",
@@ -93,7 +93,15 @@
   "block_partial_note": "Rangordnas inte — den olästa texten kan vara en tillsats. Osorterade.",
   "block_silent": "Deklarerar inga ingredienser",
   "block_silent_note": "Ingen förteckning har lämnats. Det säger ingenting om vad flaskorna innehåller.",
-  "block_silent_filtered": "Ditt tillsatsfilter gäller inte de här. De har inte deklarerat något, så det finns ingenting att matcha mot — de tas inte bort, de märks."
+  "block_silent_filtered": "Ditt tillsatsfilter gäller inte de här. De har inte deklarerat något, så det finns ingenting att matcha mot — de tas inte bort, de märks.",
+  "need_category": "Välj en typ av vin för att se en rangordning",
+  "need_category_why": "Ett mousserande vin deklarerar doseringssocker och ett starkvin deklarerar tillsatt alkohol. Att rangordna dem mot ett stilla rött skulle påstå en jämförbarhet som inte finns, så rangordningen börjar när du valt vad du jämför.",
+  "grape_dropped": "{n} viner har inget druvfält ifyllt och kunde inte prövas.",
+  "pairing_dropped": "{n} viner har inget passar-till ifyllt och kunde inte prövas.",
+  "stock_dropped": "{n} viner är slutsålda eller tillfälligt slut och visas inte.",
+  "substance_dropped": "{n} viner deklarerade, men matchade inte ditt tillsatsval.",
+  "block_partial_excluded": "Ditt tillsatsval har prövats mot det vi kunde läsa. Den olästa texten kan vara just det ämne du valt bort — därför är de här vinen inte ett svar på din fråga, bara det närmaste vi har.",
+  "noscript": "Filtret kräver JavaScript. Du kan söka upp ett enskilt vin på startsidan utan det."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -168,7 +176,7 @@
   "licence": "Licence",
   "find": "Find a wine",
   "find_url": "find",
-  "find_lede": "Pick what you were going to buy anyway, and see what the wines in that slice declare. The ranking is of disclosure, not contents — four wines in five declare nothing at all.",
+  "find_lede": "Pick what you were going to buy anyway, and see what those wines declare. The ranking is of disclosure, not contents — four wines in five declare nothing at all.",
   "f_any": "any",
   "f_none": "none",
   "f_buyable": "Only wines that can be ordered now",
@@ -181,7 +189,7 @@
   "f_include": "Must declare",
   "f_substances_note": "These two are not mirror images. Excluding is sound: a wine that declared fully and did not list the substance does not contain it. Requiring is weaker — it finds wines that admit to the substance, not every wine that has it. Neither says anything about a wine that declared nothing, so both apply to the first two blocks only.",
   "f_loading": "Loading …",
-  "slice_held": "{n} wines in this slice.",
+  "slice_held": "{n} wines match what you chose.",
   "facet_dropped": "A further {n} dropped out because the field you filtered on is empty for them.",
   "block_ranked": "Declare, and all of the text could be read",
   "block_ranked_note": "Ranked by number of declared additives, fewest first, then price.",
@@ -189,6 +197,14 @@
   "block_partial_note": "Not ranked — the unread text may be an additive. Unordered.",
   "block_silent": "Declare no ingredients",
   "block_silent_note": "No list was given. That says nothing about what the bottles contain.",
-  "block_silent_filtered": "Your additive filter does not apply to these. They declared nothing, so there is nothing to match against — they are not removed, they are labelled."
+  "block_silent_filtered": "Your additive filter does not apply to these. They declared nothing, so there is nothing to match against — they are not removed, they are labelled.",
+  "need_category": "Choose a type of wine to see a ranking",
+  "need_category_why": "A sparkling wine declares dosage sugar and a fortified wine declares added alcohol. Ranking them against a still red would assert a comparability that does not exist, so the ranking begins once you have chosen what you are comparing.",
+  "grape_dropped": "{n} wines have no grape recorded and could not be tested.",
+  "pairing_dropped": "{n} wines have no food pairing recorded and could not be tested.",
+  "stock_dropped": "{n} wines are out of stock or temporarily out and are not shown.",
+  "substance_dropped": "{n} wines declared, but did not match your additive choice.",
+  "block_partial_excluded": "Your additive choice was tested against what we could read. The unread text may be the very substance you excluded — so these wines are not an answer to your question, only the nearest we have.",
+  "noscript": "The filter needs JavaScript. You can look up a single wine from the front page without it."
  }
 }

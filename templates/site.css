@@ -224,6 +224,10 @@ fieldset.substances legend { padding: 0 0.4rem; font-size: 0.9rem; }
 }
 .block .results li { padding: 0.6rem 0; }
 
+/* The prompt that stands where a ranking would be until a comparison set is
+   chosen. Quiet, not an error: the reader has not done anything wrong. */
+.need-category h3 { font-weight: 400; }
+
 /* Coverage ----------------------------------------------------------- */
 
 .coverage {
