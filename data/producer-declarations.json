@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 83,
+  "attempted": 85,
   "found": 10,
-  "not_found": 60,
+  "not_found": 62,
   "rejected": 13,
   "declarations": [
     {
@@ -2343,9 +2343,74 @@
       "server_rendered": false,
       "fetch_result": "200 on every page fetched; no declaration in any server response",
       "note": "SECOND SOURCE file. status not_found records that this run did not find a declaration, not that the producer published none."
+    },
+    {
+      "product_number": "7587801",
+      "name": "Von Winning Deidesheimer Riesling",
+      "producer": "Von Winning",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "market": null,
+      "vintage_on_source": null,
+      "evidence": "Producer identified without difficulty: shop.von-winning.de and www.von-winning.de are the Deidesheim estate's own sites, Impressum 'Weingut von Winning, Weinstrasse 10, D-67146 Deidesheim'. No competing estate trades under this name. Both Swedish listings come from the same importer, Intermondi AB. The right vintage was located on the estate's shop: two Deidesheimer Riesling products exist, w223-510632701824 (Jahrgang 2023) and w223-510632703825 (Jahrgang 2024), and the 2024 one is the counterpart of Systembolaget's 7587801. So the wine and vintage would have matched; what is missing is the declaration itself. devworlds e-label, a Shopware plugin. The estate's Shopware/Nuxt storefront shows a button labelled 'Zutaten & Naehrwerte' on every wine, but it is a <button>, not a link: it opens a modal whose content is not in the server's HTML. What the server does return is the Nuxt payload with a custom field 'devworlds_elabel_fields_id' holding an opaque 24-hex id (Deidesheimer Riesling: 67fca2731ea25ba5ecfa5852; WIN WIN Riesling: 69b7aa1f5c5119abfeaeec09). The ingredient list, the nutrition table and the energy value are nowhere in the response; only 'Allergene: Enthaelt Sulfite' is. No e-label route appears in the shop's sitemap (180 URLs read, all products, categories and legal pages), and no devworlds host is linked from anywhere on the site, so this run holds no e-label URL to fetch. Constructing one from the id would be guessing a URL pattern, which the agent's rules forbid. A second producer artefact was checked and rejected as a source. Each product links a PDF 'Weinexpertise' generated per wine and per vintage at https://content.shop.von-winning.de/expertise-generator/de/weinexpertise/{slug}/{productNumber} (content.shop.von-winning.de/robots.txt: 'Allow: /', 'Disallow: /*?', so the path is permitted). The PDF for Deidesheimer Riesling 2024 was fetched and its text extracted. It is headed 'NAEHRWERTE ZUM WEIN' but contains no ingredient list and no energy value; the whole of it is 'Rebsorte: Riesling, Geschmack: trocken, Alkohol: 12 % vol, Restzucker: 8 g/l, Saeure: 7,7 g/l, Allergene: Enthaelt Sulfite'. Under the agent's rules a producer page counts only where it presents an actual ingredient list, so this is not a declaration and nothing was taken from it. DISCREPANCY RECORDED, NOT RESOLVED: the estate's own datasheet for the 2024 gives 12 % vol while Systembolaget states 11.5%. Nothing turns on it here because nothing was accepted.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.von-winning.de/robots.txt",
+        "https://www.von-winning.de/",
+        "https://shop.von-winning.de/robots.txt",
+        "https://shop.von-winning.de/sitemap_index.xml",
+        "https://shop.von-winning.de/__sitemap__/de.xml",
+        "https://shop.von-winning.de/drache-riesling/w199-510632701726",
+        "https://shop.von-winning.de/deidesheimer-riesling/w223-510632701824",
+        "https://shop.von-winning.de/deidesheimer-riesling/w223-510632703825",
+        "https://content.shop.von-winning.de/robots.txt",
+        "https://content.shop.von-winning.de/expertise-generator/de/weinexpertise/deidesheimer-riesling/w223-510632703825"
+      ],
+      "checked_at": "2026-07-31T10:15:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "devworlds e-label, a Shopware plugin. The estate's Shopware/Nuxt storefront shows a button labelled 'Zutaten & Naehrwerte' on every wine, but it is a <button>, not a link: it opens a modal whose content is not in the server's HTML. What the server does return is the Nuxt payload with a custom field 'devworlds_elabel_fields_id' holding an opaque 24-hex id (Deidesheimer Riesling: 67fca2731ea25ba5ecfa5852; WIN WIN Riesling: 69b7aa1f5c5119abfeaeec09). The ingredient list, the nutrition table and the energy value are nowhere in the response; only 'Allergene: Enthaelt Sulfite' is. No e-label route appears in the shop's sitemap (180 URLs read, all products, categories and legal pages), and no devworlds host is linked from anywhere on the site, so this run holds no e-label URL to fetch. Constructing one from the id would be guessing a URL pattern, which the agent's rules forbid.",
+      "server_rendered": false,
+      "fetch_result": "200 everywhere; the declaration is behind a client-side modal and no e-label URL is publicly linked",
+      "note": "SECOND SOURCE file. status not_found records that this run did not find a declaration, not that the producer published none. Here the producer demonstrably has one -- the shop offers a 'Zutaten & Naehrwerte' control on every wine -- but it is not reachable without running the shop's JavaScript."
+    },
+    {
+      "product_number": "7939401",
+      "name": "Von Winning Win Win Riesling Trocken",
+      "producer": "Von Winning",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "market": null,
+      "vintage_on_source": null,
+      "evidence": "Producer identified without difficulty: shop.von-winning.de and www.von-winning.de are the Deidesheim estate's own sites, Impressum 'Weingut von Winning, Weinstrasse 10, D-67146 Deidesheim'. No competing estate trades under this name. Both Swedish listings come from the same importer, Intermondi AB. The estate's shop lists WIN WIN Riesling at https://shop.von-winning.de/win-win-riesling/w200-510632700526 with Jahrgang 2025, which matches Systembolaget's 7939401 vintage. devworlds e-label, a Shopware plugin. The estate's Shopware/Nuxt storefront shows a button labelled 'Zutaten & Naehrwerte' on every wine, but it is a <button>, not a link: it opens a modal whose content is not in the server's HTML. What the server does return is the Nuxt payload with a custom field 'devworlds_elabel_fields_id' holding an opaque 24-hex id (Deidesheimer Riesling: 67fca2731ea25ba5ecfa5852; WIN WIN Riesling: 69b7aa1f5c5119abfeaeec09). The ingredient list, the nutrition table and the energy value are nowhere in the response; only 'Allergene: Enthaelt Sulfite' is. No e-label route appears in the shop's sitemap (180 URLs read, all products, categories and legal pages), and no devworlds host is linked from anywhere on the site, so this run holds no e-label URL to fetch. Constructing one from the id would be guessing a URL pattern, which the agent's rules forbid. A second producer artefact was checked and rejected as a source. Each product links a PDF 'Weinexpertise' generated per wine and per vintage at https://content.shop.von-winning.de/expertise-generator/de/weinexpertise/{slug}/{productNumber} (content.shop.von-winning.de/robots.txt: 'Allow: /', 'Disallow: /*?', so the path is permitted). The PDF for Deidesheimer Riesling 2024 was fetched and its text extracted. It is headed 'NAEHRWERTE ZUM WEIN' but contains no ingredient list and no energy value; the whole of it is 'Rebsorte: Riesling, Geschmack: trocken, Alkohol: 12 % vol, Restzucker: 8 g/l, Saeure: 7,7 g/l, Allergene: Enthaelt Sulfite'. Under the agent's rules a producer page counts only where it presents an actual ingredient list, so this is not a declaration and nothing was taken from it. DISCREPANCY RECORDED, NOT RESOLVED: the shop's own alcohol custom field for this wine reads 11.5 while Systembolaget states 12.0%. Nothing was accepted, so nothing depends on it.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://shop.von-winning.de/robots.txt",
+        "https://shop.von-winning.de/__sitemap__/de.xml",
+        "https://shop.von-winning.de/win-win-riesling/w200-510632700526"
+      ],
+      "checked_at": "2026-07-31T10:15:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "devworlds e-label, a Shopware plugin. The estate's Shopware/Nuxt storefront shows a button labelled 'Zutaten & Naehrwerte' on every wine, but it is a <button>, not a link: it opens a modal whose content is not in the server's HTML. What the server does return is the Nuxt payload with a custom field 'devworlds_elabel_fields_id' holding an opaque 24-hex id (Deidesheimer Riesling: 67fca2731ea25ba5ecfa5852; WIN WIN Riesling: 69b7aa1f5c5119abfeaeec09). The ingredient list, the nutrition table and the energy value are nowhere in the response; only 'Allergene: Enthaelt Sulfite' is. No e-label route appears in the shop's sitemap (180 URLs read, all products, categories and legal pages), and no devworlds host is linked from anywhere on the site, so this run holds no e-label URL to fetch. Constructing one from the id would be guessing a URL pattern, which the agent's rules forbid.",
+      "server_rendered": false,
+      "fetch_result": "200; declaration behind a client-side modal, no publicly linked e-label URL",
+      "note": "SECOND SOURCE file. status not_found records that this run did not find a declaration, not that the producer published none."
     }
   ],
-  "updated_at": "2026-07-31T09:45:00Z",
+  "updated_at": "2026-07-31T10:15:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -2365,7 +2430,7 @@
     {
       "at": "2026-07-30T20:10:00Z",
       "batch": "3 — German producers with 2024+ undeclared wines, worked one producer at a time and committed after each: Philipp Kuhn, Klosterhof, Doennhoff, Robert Weil, August Kesseler, Juelg, Kerpen, Von Winning, Schloss Johannisberg",
-      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 found on e-label.graphic-druck.de; Hain 3/3 found on Winitas; Wittmann 0/8; Juelg 2/2 found on Winestro.cloud (nephele-s5.de); Kerpen 0/2, no e-label anywhere, Ecwid shop renders client-side."
+      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 found on e-label.graphic-druck.de; Hain 3/3 found on Winitas; Wittmann 0/8; Juelg 2/2 found on Winestro.cloud (nephele-s5.de); Kerpen 0/2; Von Winning 0/2, declaration exists but sits behind a client-side devworlds e-label modal with no linked URL."
     }
   ]
 }
