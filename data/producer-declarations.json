@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 89,
-  "found": 12,
-  "not_found": 62,
+  "attempted": 91,
+  "found": 13,
+  "not_found": 63,
   "rejected": 15,
   "declarations": [
     {
@@ -2539,9 +2539,80 @@
       "server_rendered": true,
       "fetch_result": "200, declaration present in the server's HTML response",
       "note": "SECOND SOURCE. From the producer's own e-label, not from Systembolaget's product page, matched by judgement rather than by product number. Not normalised."
+    },
+    {
+      "product_number": "7258401",
+      "name": "Spätburgunder Rotwein Deutscher Qualitätswein trocken Pfalz",
+      "producer": "Vier Jahreszeiten",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "found",
+      "source_url": "https://p.f-label.eu/f51umd",
+      "source_type": "e_label",
+      "raw_ingredients": "Trauben, Saccharose, Stabilisatoren: Kaliumpolyaspartat; Konservierungsstoffe und Antioxidantien: Sulfite ; Säureregulatoren: Weinsäure.",
+      "raw_nutrition": "Nährwertdeklaration je 100 ml\nBrennwert 314 kJ / 75 kcal\nKohlenhydrate 1,2 g\ndavon Zucker 0,5 g\nEnthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Eiweiß und Salz.",
+      "raw_allergens": null,
+      "language": "de",
+      "market": "EU. The page offers an 11-language EU selector (Deutsch, Englisch, Polnisch, Dänisch, Finnisch, Estnisch, Niederländisch, Schwedisch, Lettisch, Litauisch); the German default, which is the link the producer publishes, was fetched and quoted. No other language variant was requested.",
+      "vintage_on_source": null,
+      "evidence": "Producer identified: www.vj-wein.de is the co-operative's own shop, Impressum and footer 'Vier Jahreszeiten Winzer eG, Limburgstrasse 8, 67098 Bad Duerkheim'. The e-label page independently names 'Vier Jahreszeiten Winzer eG, Limburgstr. 8, 67098 Bad Duerkheim' as the party responsible for the data set, so the producer identity does not rest only on the site that linked it. The co-operative bottles under several brands (Vier Jahreszeiten, Heinrich Gies, Weinparadies Freinsheim, Palmberg, Weincontor Schloss Friedelsheim), distinguished in its shop by a letter prefix on the article number; articles with no prefix are the Vier Jahreszeiten brand, which is the producer Systembolaget names. Both Swedish listings come from the importer Wine and Spirits by Kalia AB. WINE AND VINTAGE, AND EXACTLY HOW FAR THE EVIDENCE GOES. The producer's own product page https://www.vj-wein.de/Spaetburgunder-Rotwein/518-4 reads, in the shop's own words, 'Vier Jahreszeiten / 2024 / Spaetburgunder Rotwein / Deutscher Qualitaetswein trocken / Pfalz', Artikel-Nr. 518-4, 0.75 L, Alkoholgehalt 12,5 % vol, Restzucker 5-5,9 g/L, Allergene: Enthaelt Sulfite. Systembolaget's 7258401 is 'Spaetburgunder Rotwein Deutscher Qualitaetswein trocken Pfalz', vintage 2024, Spaetburgunder, 12.5% alcohol, 750 ml. The names agree word for word including 'Pfalz', and vintage, grape, alcohol and volume all agree. That page's 'Zutaten und Naehrwerte' link is this e-label URL. THE E-LABEL PAGE ITSELF CARRIES NO WINE NAME, NO VINTAGE AND NO ALCOHOL -- its 'Name' field is blank -- so the wine and the vintage are established by the producer's own per-article link and not by the e-label's own text. This is stated plainly because it is a weaker chain than the estates whose e-labels name their own vintage. Two things support it. First, the link is per article, not shared: the co-operative's 2025 Spaetburgunder Spaetlese trocken (article 607-4) links a different token, f12v19. Second, the residual sugar agrees: the shop states 5-5,9 g/L and the e-label states 0,5 g sugar per 100 ml, i.e. 5 g/L. A RESIDUAL RISK IS RECORDED RATHER THAN DISMISSED: if Euvino keys an e-label to the article number and the co-operative edits it in place at each new bottling, the page's content follows whatever vintage article 518-4 currently is. Today the producer's own page says that is the 2024, which is Systembolaget's vintage, and the shop does roll its listings forward promptly (its Spaetburgunder Spaetlese already shows 2025). This is the same article-number keying that made IMERO unreliable for Doennhoff and Robert Weil, and it is the reason this record should be re-checked rather than trusted indefinitely.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.vj-wein.de/robots.txt",
+        "https://www.vj-wein.de/sitemap.xml",
+        "https://www.vj-wein.de/sitemap/salesChannel-.../sitemap-www-vj-wein-de-1.xml.gz",
+        "https://www.vj-wein.de/Shop/Vier-Jahreszeiten/Alle-Weine/Rotweine/",
+        "https://www.vj-wein.de/Spaetburgunder-Rotwein/607-4",
+        "https://www.vj-wein.de/Spaetburgunder-Rotwein/518-4",
+        "https://p.f-label.eu/robots.txt",
+        "https://p.f-label.eu/f51umd"
+      ],
+      "checked_at": "2026-07-31T11:55:00Z",
+      "robots_disallowed": true,
+      "robots_note": "ROBOTS EXCEPTION USED, AND WHY. https://p.f-label.eu/robots.txt returns, byte for byte, 'User-agent: *\\nDisallow:\\n/\\nAllow:\\n/imprint\\n/dsa\\n/sign-up'. The file is malformed: the field values sit on their own lines, so a strict RFC 9309 parse reads 'Disallow:' as empty (allow everything) and discards the bare path lines as having no field name. Read that way nothing here is disallowed at all. This run did NOT lean on that parsing technicality. It read the file in its evident intent -- 'Disallow: /' with three narrow allowances -- and treated the host as disallowing crawling, then applied the exception the owner decided on 2026-07-30: this page is itself the disclosure Regulation (EU) 2021/2117 requires, the URL was held from the producer's own public linking and not guessed, one request was made for one wine, and nothing on the host was traversed, enumerated or spidered. Only the robots.txt and the single e-label page were fetched. No technological measure was encountered: 200 on both, no login, no challenge, no token.",
+      "elabel_platform": "f-label, operated by Euvino, at https://p.f-label.eu/{token} with a 6-character opaque token. Server-rendered plain HTML: ingredient list, nutrition declaration per 100 ml, an 11-language EU selector (DE, EN, PL, DA, FI, ET, NL, SV, LV, LT) and a 'Verantwortlich fuer den Datensatz' block naming the company that supplied the data. No JavaScript, no issued token, no redirect. Reached from the producer's Shopware shop, where each product page carries a link 'Zutaten und Naehrwerte' whose target is the token URL; the token is per article (607-4 -> f12v19, 518-4 -> f51umd) and is not derivable, so it must be read off the product page. IMPORTANT LIMITATION OF THIS PLATFORM: its 'Details' block has a 'Name' field and on these pages it is empty, and there is no vintage and no alcohol anywhere on the page. The e-label therefore cannot identify itself; identification has to come from the producer's own per-article link. That is weaker than Winitas, Winestro or qrlabelinfo, all of which restate the wine and the vintage on the e-label itself.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response",
+      "note": "SECOND SOURCE. From the producer's own e-label, not from Systembolaget's product page, matched by judgement rather than by product number. Not normalised. The e-label host disallowed crawling and the page was fetched anyway as the regulated disclosure; see robots_note."
+    },
+    {
+      "product_number": "7860301",
+      "name": "Riesling Kabinett Halbtrocken Paltz",
+      "producer": "Vier Jahreszeiten",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "market": null,
+      "vintage_on_source": null,
+      "evidence": "Producer identified: www.vj-wein.de is the co-operative's own shop, Impressum and footer 'Vier Jahreszeiten Winzer eG, Limburgstrasse 8, 67098 Bad Duerkheim'. The e-label page independently names 'Vier Jahreszeiten Winzer eG, Limburgstr. 8, 67098 Bad Duerkheim' as the party responsible for the data set, so the producer identity does not rest only on the site that linked it. The co-operative bottles under several brands (Vier Jahreszeiten, Heinrich Gies, Weinparadies Freinsheim, Palmberg, Weincontor Schloss Friedelsheim), distinguished in its shop by a letter prefix on the article number; articles with no prefix are the Vier Jahreszeiten brand, which is the producer Systembolaget names. Both Swedish listings come from the importer Wine and Spirits by Kalia AB. f-label, operated by Euvino, at https://p.f-label.eu/{token} with a 6-character opaque token. Server-rendered plain HTML: ingredient list, nutrition declaration per 100 ml, an 11-language EU selector (DE, EN, PL, DA, FI, ET, NL, SV, LV, LT) and a 'Verantwortlich fuer den Datensatz' block naming the company that supplied the data. No JavaScript, no issued token, no redirect. Reached from the producer's Shopware shop, where each product page carries a link 'Zutaten und Naehrwerte' whose target is the token URL; the token is per article (607-4 -> f12v19, 518-4 -> f51umd) and is not derivable, so it must be read off the product page. IMPORTANT LIMITATION OF THIS PLATFORM: its 'Details' block has a 'Name' field and on these pages it is empty, and there is no vintage and no alcohol anywhere on the page. The e-label therefore cannot identify itself; identification has to come from the producer's own per-article link. That is weaker than Winitas, Winestro or qrlabelinfo, all of which restate the wine and the vintage on the e-label itself. The co-operative therefore does publish readable e-labels, and one was accepted for its sibling wine 7258401. This wine is not found for a different reason: it is no longer in the co-operative's range. Its product sitemap (340 URLs) was read and the Vier Jahreszeiten 0,75 l Rieslings in it are articles 135-4, 180-4, 274-4, 294-4 and 409-4. Four of them were fetched and are all the 2025 (135-4 Duerkheimer Feuerberg Riesling D.Q. halbtrocken 12,0%; 180-4 13,0%; 274-4 12,0%; 294-4 12,0%), and 409-4 is listed in the category as '2024 Duerkheimer Hochmess Riesling Spaetlese trocken'. None is a Riesling Kabinett halbtrocken. The Weissweine and Leichte Weine category listings were read as well; the co-operative's current Kabinett wines are Gewuerztraminer, Scheurebe, Kerner and Silvaner, all lieblich, and there is no Riesling Kabinett halbtrocken at all. NOT FOUND MEANS NOT FOUND: a 2024 Riesling Kabinett halbtrocken almost certainly had an f-label token of its own when it was current, but the product page that would have carried the link is gone, and this run holds no URL for it. Guessing a token from the pattern is exactly what the rules forbid. NOTE ON COVERAGE OF THIS SITE: the shop's robots.txt disallows every URL with a query string ('Disallow: /*?'), which is how its category pagination works, so only the first page of each category could be read. The sitemap was used instead and is the reason the range could be checked at all.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.vj-wein.de/robots.txt",
+        "https://www.vj-wein.de/sitemap.xml",
+        "https://www.vj-wein.de/Shop/Vier-Jahreszeiten/Alle-Weine/Weissweine/",
+        "https://www.vj-wein.de/Shop/Vier-Jahreszeiten/Leichte-Weine/",
+        "https://www.vj-wein.de/Riesling/135-4",
+        "https://www.vj-wein.de/Riesling/180-4",
+        "https://www.vj-wein.de/Riesling/274-4",
+        "https://www.vj-wein.de/Riesling/294-4",
+        "https://www.vj-wein.de/Riesling/001-4",
+        "https://www.vj-wein.de/Riesling/002-4"
+      ],
+      "checked_at": "2026-07-31T11:58:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "f-label, operated by Euvino, at https://p.f-label.eu/{token} with a 6-character opaque token. Server-rendered plain HTML: ingredient list, nutrition declaration per 100 ml, an 11-language EU selector (DE, EN, PL, DA, FI, ET, NL, SV, LV, LT) and a 'Verantwortlich fuer den Datensatz' block naming the company that supplied the data. No JavaScript, no issued token, no redirect. Reached from the producer's Shopware shop, where each product page carries a link 'Zutaten und Naehrwerte' whose target is the token URL; the token is per article (607-4 -> f12v19, 518-4 -> f51umd) and is not derivable, so it must be read off the product page. IMPORTANT LIMITATION OF THIS PLATFORM: its 'Details' block has a 'Name' field and on these pages it is empty, and there is no vintage and no alcohol anywhere on the page. The e-label therefore cannot identify itself; identification has to come from the producer's own per-article link. That is weaker than Winitas, Winestro or qrlabelinfo, all of which restate the wine and the vintage on the e-label itself.",
+      "server_rendered": true,
+      "fetch_result": "200 on every page fetched; the wine is absent from the producer's current range so no e-label URL exists to fetch",
+      "note": "SECOND SOURCE file. status not_found records that this run did not find a declaration, not that the producer published none."
     }
   ],
-  "updated_at": "2026-07-31T11:18:00Z",
+  "updated_at": "2026-07-31T11:58:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -2561,7 +2632,7 @@
     {
       "at": "2026-07-30T20:10:00Z",
       "batch": "3 — German producers with 2024+ undeclared wines, worked one producer at a time and committed after each: Philipp Kuhn, Klosterhof, Doennhoff, Robert Weil, August Kesseler, Juelg, Kerpen, Von Winning, Schloss Johannisberg",
-      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 found on e-label.graphic-druck.de; Hain 3/3 found on Winitas; Wittmann 0/8; Juelg 2/2 found on Winestro.cloud (nephele-s5.de); Kerpen 0/2; Von Winning 0/2 (client-side devworlds modal); Schloss Johannisberg 0/2 rejected on vintage against readable qrlabelinfo e-labels; Thanisch Erben Thanisch 2/2 found on Winestro.cloud (winestro.info)."
+      "result": "in progress — Philipp Kuhn 3/3; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 (graphic-druck); Hain 3/3 (Winitas); Wittmann 0/8; Juelg 2/2 (Winestro/nephele-s5); Kerpen 0/2; Von Winning 0/2 (client-side devworlds modal); Schloss Johannisberg 0/2 rejected on vintage (qrlabelinfo readable); Thanisch Erben Thanisch 2/2 (Winestro/winestro.info); Vier Jahreszeiten 1/2 (f-label by Euvino, robots exception used)."
     }
   ]
 }
