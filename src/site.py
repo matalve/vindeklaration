@@ -167,6 +167,21 @@ def additive_names(wines: list[dict], lang: str) -> dict:
     return names
 
 
+def facet_labels(lang: str) -> dict:
+    """Swedish facet value to its English word, or empty for the Swedish build.
+
+    The Swedish is Systembolaget's own and is what the Swedish site shows. This
+    is chrome so that the English filter is not a Swedish menu under an English
+    label; a declaration is never translated, and that rule is untouched.
+    A value with no entry falls back to the Swedish, which is visibly wrong on
+    an English page — the intended failure, since a silent gap would read as a
+    translation.
+    """
+    if lang == "sv":
+        return {}
+    return yaml.safe_load(LEXICON_PATH.read_text(encoding="utf-8"))["facet_labels"]
+
+
 def allergen_labels() -> dict:
     """Display words for the allergen ids a substance can carry.
 
@@ -325,6 +340,7 @@ def build(output: Path, limit: int | None = None) -> None:
                 lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
                 additive_names=additive_names(wines, lang),
+                facet_labels=facet_labels(lang),
             ),
             encoding="utf-8",
         )

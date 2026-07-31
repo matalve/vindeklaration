@@ -67,6 +67,7 @@
 <script>
   window.SITE = {
     index: "/sok-index.json",
+    lang: {{ lang|tojson }},
     noResults: {{ s.no_results|tojson }},
     showing: {{ s.showing|tojson }},
     of: {{ s.of|tojson }},
@@ -89,7 +90,8 @@
     blockSilent: {{ s.block_silent|tojson }},
     blockSilentNote: {{ s.block_silent_note|tojson }},
     blockSilentFiltered: {{ s.block_silent_filtered|tojson }},
-    additiveNames: {{ additive_names|tojson }}
+    additiveNames: {{ additive_names|tojson }},
+    facetLabels: {{ facet_labels|tojson }}
   };
 </script>
 <script src="/sok.js" defer></script>
