@@ -17,8 +17,8 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 87,
-  "found": 10,
+  "attempted": 89,
+  "found": 12,
   "not_found": 62,
   "rejected": 15,
   "declarations": [
@@ -2475,9 +2475,73 @@
       "server_rendered": true,
       "fetch_result": "200, declaration present in the server's HTML response, but for the wrong vintage",
       "note": "SECOND SOURCE file. Nothing was accepted for this wine."
+    },
+    {
+      "product_number": "7236401",
+      "name": "Thanisch Riesling trocken",
+      "producer": "Weingut Wwe Dr H Thanisch Erben Thanisch",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "found",
+      "source_url": "https://winestro.info/?s=7ua9nw3m",
+      "source_type": "e_label",
+      "raw_ingredients": "Trauben, Saccharose,\nAntioxidationsmittel: Sulfite",
+      "raw_nutrition": "Nährwertangaben je 100ml:\nBrennwert 297 kJ / 71 kcal\nFett g\ndavon gesättigte Fettsäuren g\nKohlenhydrate 1,7 g\ndavon Zucker 0,8 g\nEiweiß g\nSalz g\nEnthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Eiweiß und Salz",
+      "raw_allergens": null,
+      "language": "de",
+      "market": "EU. The page offers a 19-language selector including SV; the German default, which is the link the producer publishes, was fetched and quoted. No other language variant was requested.",
+      "vintage_on_source": "2024",
+      "evidence": "THE IDENTITY QUESTION, WHICH IS THE WHOLE RISK ON THIS PRODUCER, AND HOW IT WAS SETTLED. Two estates in Bernkastel-Kues descend from Weingut Wwe. Dr. H. Thanisch and have disputed the name: 'Erben Thanisch' and 'Erben Mueller-Burggraef'. Attributing a compliance statement to the wrong one would be a claim about the wrong company. Four things point the same way here. (1) Systembolaget's own producer string is 'Weingut Wwe Dr H Thanisch Erben Thanisch', naming the branch explicitly. (2) The e-label page itself carries the bottler line 'Erzeugerabfuellung Wwe. Dr. H. Thanisch, Erben Thanisch, Saarallee 31, 54470 Bernkastel-Kues' and the Impressum 'Weingut Wwe. Dr. H. Thanisch, Erben Thanisch, Saarallee 31, D-54470 Bernkastel-Kues an der Mosel, fon +49 (0)6531 2282, info@thanisch-vdp.de'. Saarallee 31 and the thanisch-vdp.de domain are Erben Thanisch, the VDP member; Erben Mueller-Burggraef is a different address and a different domain. The identification does not rest on the shop that linked the page: the e-label names its own producer. (3) The chain from Systembolaget to the e-label runs through the estate's own Shopify shop at thanisch-vdp-shop.de, which is linked from thanisch-vdp.de and whose footer reads 'shop-thanisch-vdp'. (4) The archaic spelling 'Berncasteler Doctor' that Systembolaget uses is the spelling this estate uses on its own e-label. Both Swedish listings come from one importer, Pearlwines AB. Winestro.cloud again, but on a second host and a different URL form: https://winestro.info/?s={token}, where the token is an 8-character opaque string. Same product as nephele-s5.de/?id={id} used by Weingut Juelg -- the page identifies itself as 'Der Wein-Informations-Dienst von Winestro.cloud' and has the same layout, the same 19-language selector (DE, EL, FI, ET, DA, LV, NL, PL, EN, FR, IT, BG, CZ, HU, ES, SK, SV, RO) and the same sections. Plain server-rendered HTML, no JavaScript, no token to be issued, no robots.txt on the host (404). Crucially the page states the vintage, the wine, the bottle size, the alcohol and the bottler itself, so it can be identified without trusting the page that linked it. Reached here from the estate's Shopify shop, where every product's information table ends with a row 'Zutaten' whose value is the bare winestro.info URL. WINE AND VINTAGE: the e-label is headed 'Wwe. Dr. H. Thanisch, Erben Thanisch / 2024 Thanisch Riesling trocken 0.75 / 0.75 Ltr. / 11.5 % vol'. Systembolaget's 7236401 is 'Thanisch Riesling trocken', vintage 2024, Riesling, Mosel, 11.5% alcohol, 750 ml. Wine name, vintage, bottle size and alcohol all agree, and the e-label states all four itself. A TRAP ON THIS SHOP, RECORDED SO IT IS NOT WALKED INTO AGAIN: the product slugs carry a vintage and it is often wrong. /products/thanisch-riesling-trocken-2024-kopie has an information table reading Jahrgang 2025, and /products/doctor-riesling-spatlese-fruchtsuss-2023-kopie has one reading Jahrgang 2024. The products are duplicated and edited in place, so neither the slug nor its '-kopie' suffix means anything. Only the information table and the e-label itself were trusted. ONE POINT RECORDED RATHER THAN RESOLVED: the shop page that links this e-label has meanwhile been updated to the 2025 (Jahrgang 2025, Brennwert 70 kcal/294 kJ) while the e-label it still links declares itself to be the 2024 (71 kcal/297 kJ). The vintage taken here is the one the e-label states about itself, which is the 2024 and is Systembolaget's vintage; the shop's own table is not the source. The likeliest reading is that the shop listing rolled forward before its e-label link did, but this run did not see the bottle and does not assert it.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.thanisch-vdp.de/robots.txt",
+        "https://thanisch-vdp-shop.de/robots.txt",
+        "https://thanisch-vdp-shop.de/sitemap.xml",
+        "https://thanisch-vdp-shop.de/sitemap_products_1.xml",
+        "https://thanisch-vdp-shop.de/products/thanisch-riesling-trocken-2024-kopie",
+        "https://winestro.info/robots.txt",
+        "https://winestro.info/?s=7ua9nw3m"
+      ],
+      "checked_at": "2026-07-31T11:15:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "Winestro.cloud again, but on a second host and a different URL form: https://winestro.info/?s={token}, where the token is an 8-character opaque string. Same product as nephele-s5.de/?id={id} used by Weingut Juelg -- the page identifies itself as 'Der Wein-Informations-Dienst von Winestro.cloud' and has the same layout, the same 19-language selector (DE, EL, FI, ET, DA, LV, NL, PL, EN, FR, IT, BG, CZ, HU, ES, SK, SV, RO) and the same sections. Plain server-rendered HTML, no JavaScript, no token to be issued, no robots.txt on the host (404). Crucially the page states the vintage, the wine, the bottle size, the alcohol and the bottler itself, so it can be identified without trusting the page that linked it. Reached here from the estate's Shopify shop, where every product's information table ends with a row 'Zutaten' whose value is the bare winestro.info URL.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response",
+      "note": "SECOND SOURCE. From the producer's own e-label, not from Systembolaget's product page, matched by judgement rather than by product number. Not normalised."
+    },
+    {
+      "product_number": "7417001",
+      "name": "Berncasteler Doctor Riesling Spätlese",
+      "producer": "Weingut Wwe Dr H Thanisch Erben Thanisch",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "found",
+      "source_url": "https://winestro.info/?s=kb5peyxc",
+      "source_type": "e_label",
+      "raw_ingredients": "Trauben,\nAntioxidationsmittel: Sulfite",
+      "raw_nutrition": "Nährwertangaben je 100ml:\nBrennwert 303 kJ / 72 kcal\nFett g\ndavon gesättigte Fettsäuren g\nKohlenhydrate 6,7 g\ndavon Zucker 6,11 g\nEiweiß g\nSalz g\nEnthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Eiweiß und Salz",
+      "raw_allergens": null,
+      "language": "de",
+      "market": "EU. The page offers a 19-language selector including SV; the German default, which is the link the producer publishes, was fetched and quoted. No other language variant was requested.",
+      "vintage_on_source": "2024",
+      "evidence": "THE IDENTITY QUESTION, WHICH IS THE WHOLE RISK ON THIS PRODUCER, AND HOW IT WAS SETTLED. Two estates in Bernkastel-Kues descend from Weingut Wwe. Dr. H. Thanisch and have disputed the name: 'Erben Thanisch' and 'Erben Mueller-Burggraef'. Attributing a compliance statement to the wrong one would be a claim about the wrong company. Four things point the same way here. (1) Systembolaget's own producer string is 'Weingut Wwe Dr H Thanisch Erben Thanisch', naming the branch explicitly. (2) The e-label page itself carries the bottler line 'Erzeugerabfuellung Wwe. Dr. H. Thanisch, Erben Thanisch, Saarallee 31, 54470 Bernkastel-Kues' and the Impressum 'Weingut Wwe. Dr. H. Thanisch, Erben Thanisch, Saarallee 31, D-54470 Bernkastel-Kues an der Mosel, fon +49 (0)6531 2282, info@thanisch-vdp.de'. Saarallee 31 and the thanisch-vdp.de domain are Erben Thanisch, the VDP member; Erben Mueller-Burggraef is a different address and a different domain. The identification does not rest on the shop that linked the page: the e-label names its own producer. (3) The chain from Systembolaget to the e-label runs through the estate's own Shopify shop at thanisch-vdp-shop.de, which is linked from thanisch-vdp.de and whose footer reads 'shop-thanisch-vdp'. (4) The archaic spelling 'Berncasteler Doctor' that Systembolaget uses is the spelling this estate uses on its own e-label. Both Swedish listings come from one importer, Pearlwines AB. Winestro.cloud again, but on a second host and a different URL form: https://winestro.info/?s={token}, where the token is an 8-character opaque string. Same product as nephele-s5.de/?id={id} used by Weingut Juelg -- the page identifies itself as 'Der Wein-Informations-Dienst von Winestro.cloud' and has the same layout, the same 19-language selector (DE, EL, FI, ET, DA, LV, NL, PL, EN, FR, IT, BG, CZ, HU, ES, SK, SV, RO) and the same sections. Plain server-rendered HTML, no JavaScript, no token to be issued, no robots.txt on the host (404). Crucially the page states the vintage, the wine, the bottle size, the alcohol and the bottler itself, so it can be identified without trusting the page that linked it. Reached here from the estate's Shopify shop, where every product's information table ends with a row 'Zutaten' whose value is the bare winestro.info URL. WINE AND VINTAGE: the e-label is headed 'Wwe. Dr. H. Thanisch, Erben Thanisch / 2024 Berncasteler Doctor / 0.75 Ltr. / 8 % vol'. Systembolaget's 7417001 is 'Berncasteler Doctor Riesling Spatlese', vintage 2024, Riesling, Mosel, 8.0% alcohol, 750 ml. Vintage, vineyard, bottle size and alcohol agree. The e-label's own heading omits the Praedikat, so the Spatlese level is established by the page that links it: https://thanisch-vdp-shop.de/products/doctor-riesling-spatlese-fruchtsuss-2023-kopie, whose information table reads 'Weinbezeichnung DOCTOR Riesling Spatlese, Jahrgang 2024, Rebsorte Riesling, Geschmacksrichtung fruchtsuess, Flaschengroesse 0,75 L, Herkunft Mosel, Alkoholgehalt 8,0 %vol, Brennwert 72 kcal/303 kJ je 100ml' and whose 'Zutaten' row is this exact URL. The energy value on the shop page and on the e-label are identical to the kilojoule, which ties the two together independently of the link. The estate's other 2024 Doctor bottlings are a Kabinett and an Auslese at different alcohols, so 8,0 %vol at Spatlese level is not ambiguous within this range. A TRAP ON THIS SHOP, RECORDED SO IT IS NOT WALKED INTO AGAIN: the product slugs carry a vintage and it is often wrong. /products/thanisch-riesling-trocken-2024-kopie has an information table reading Jahrgang 2025, and /products/doctor-riesling-spatlese-fruchtsuss-2023-kopie has one reading Jahrgang 2024. The products are duplicated and edited in place, so neither the slug nor its '-kopie' suffix means anything. Only the information table and the e-label itself were trusted.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://thanisch-vdp-shop.de/robots.txt",
+        "https://thanisch-vdp-shop.de/sitemap_products_1.xml",
+        "https://thanisch-vdp-shop.de/products/doctor-riesling-spatlese-fruchtsuss-2023-kopie",
+        "https://winestro.info/robots.txt",
+        "https://winestro.info/?s=kb5peyxc"
+      ],
+      "checked_at": "2026-07-31T11:18:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "Winestro.cloud again, but on a second host and a different URL form: https://winestro.info/?s={token}, where the token is an 8-character opaque string. Same product as nephele-s5.de/?id={id} used by Weingut Juelg -- the page identifies itself as 'Der Wein-Informations-Dienst von Winestro.cloud' and has the same layout, the same 19-language selector (DE, EL, FI, ET, DA, LV, NL, PL, EN, FR, IT, BG, CZ, HU, ES, SK, SV, RO) and the same sections. Plain server-rendered HTML, no JavaScript, no token to be issued, no robots.txt on the host (404). Crucially the page states the vintage, the wine, the bottle size, the alcohol and the bottler itself, so it can be identified without trusting the page that linked it. Reached here from the estate's Shopify shop, where every product's information table ends with a row 'Zutaten' whose value is the bare winestro.info URL.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response",
+      "note": "SECOND SOURCE. From the producer's own e-label, not from Systembolaget's product page, matched by judgement rather than by product number. Not normalised."
     }
   ],
-  "updated_at": "2026-07-31T10:48:00Z",
+  "updated_at": "2026-07-31T11:18:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -2497,7 +2561,7 @@
     {
       "at": "2026-07-30T20:10:00Z",
       "batch": "3 — German producers with 2024+ undeclared wines, worked one producer at a time and committed after each: Philipp Kuhn, Klosterhof, Doennhoff, Robert Weil, August Kesseler, Juelg, Kerpen, Von Winning, Schloss Johannisberg",
-      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 found on e-label.graphic-druck.de; Hain 3/3 found on Winitas; Wittmann 0/8; Juelg 2/2 found on Winestro.cloud (nephele-s5.de); Kerpen 0/2; Von Winning 0/2 (client-side devworlds modal); Schloss Johannisberg 0/2, both rejected on vintage against readable qrlabelinfo e-labels for the 2025."
+      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 found on e-label.graphic-druck.de; Hain 3/3 found on Winitas; Wittmann 0/8; Juelg 2/2 found on Winestro.cloud (nephele-s5.de); Kerpen 0/2; Von Winning 0/2 (client-side devworlds modal); Schloss Johannisberg 0/2 rejected on vintage against readable qrlabelinfo e-labels; Thanisch Erben Thanisch 2/2 found on Winestro.cloud (winestro.info)."
     }
   ]
 }
