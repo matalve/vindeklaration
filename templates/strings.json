@@ -83,7 +83,7 @@
   "f_substances": "Tillsatser",
   "f_exclude": "Får inte innehålla",
   "f_include": "Måste deklarera",
-  "f_substances_note": "De två är inte spegelbilder. Att utesluta håller: ett vin som deklarerat fullt ut och inte listat ämnet innehåller det inte. Att kräva är svagare — det hittar viner som erkänner ämnet, inte alla som har det. Ingetdera säger något om ett vin som inte deklarerat, så båda gäller bara de två första blocken.",
+  "f_substances_note": "De två är inte spegelbilder. Att utesluta håller: ett vin som deklarerat fullt ut och inte listat ämnet innehåller det inte. Att kräva är svagare — det hittar viner som erkänner ämnet, inte alla som har det. Båda gäller bara det första blocket. De två andra kan varken bekräfta eller dementera ett val, så de märks i stället för att filtreras.",
   "f_loading": "Läser in …",
   "slice_held": "{n} viner matchar det du valt.",
   "facet_dropped": "Ytterligare {n} föll bort för att fältet du filtrerade på är tomt för dem.",
@@ -100,8 +100,8 @@
   "pairing_dropped": "{n} viner har inget passar-till ifyllt och kunde inte prövas.",
   "stock_dropped": "{n} viner är slutsålda eller tillfälligt slut och visas inte.",
   "substance_dropped": "{n} viner deklarerade, men matchade inte ditt tillsatsval.",
-  "block_partial_excluded": "Ditt tillsatsval har prövats mot det vi kunde läsa. Den olästa texten kan vara just det ämne du valt bort — därför är de här vinen inte ett svar på din fråga, bara det närmaste vi har.",
-  "noscript": "Filtret kräver JavaScript. Du kan söka upp ett enskilt vin på startsidan utan det."
+  "noscript": "Filtret kräver JavaScript. Du kan söka upp ett enskilt vin på startsidan utan det.",
+  "block_partial_filtered": "Ditt tillsatsval gäller inte de här. Deras förteckning innehåller text vi inte kunnat läsa, så de kan varken bekräfta eller dementera valet — de tas inte bort, de märks."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -187,7 +187,7 @@
   "f_substances": "Additives",
   "f_exclude": "Must not contain",
   "f_include": "Must declare",
-  "f_substances_note": "These two are not mirror images. Excluding is sound: a wine that declared fully and did not list the substance does not contain it. Requiring is weaker — it finds wines that admit to the substance, not every wine that has it. Neither says anything about a wine that declared nothing, so both apply to the first two blocks only.",
+  "f_substances_note": "These two are not mirror images. Excluding is sound: a wine that declared fully and did not list the substance does not contain it. Requiring is weaker — it finds wines that admit to the substance, not every wine that has it. Both apply to the first block only. The other two can neither confirm nor deny a choice, so they are labelled rather than filtered.",
   "f_loading": "Loading …",
   "slice_held": "{n} wines match what you chose.",
   "facet_dropped": "A further {n} dropped out because the field you filtered on is empty for them.",
@@ -204,7 +204,7 @@
   "pairing_dropped": "{n} wines have no food pairing recorded and could not be tested.",
   "stock_dropped": "{n} wines are out of stock or temporarily out and are not shown.",
   "substance_dropped": "{n} wines declared, but did not match your additive choice.",
-  "block_partial_excluded": "Your additive choice was tested against what we could read. The unread text may be the very substance you excluded — so these wines are not an answer to your question, only the nearest we have.",
-  "noscript": "The filter needs JavaScript. You can look up a single wine from the front page without it."
+  "noscript": "The filter needs JavaScript. You can look up a single wine from the front page without it.",
+  "block_partial_filtered": "Your additive choice does not apply to these. Their list contains text we could not read, so they can neither confirm nor deny it — they are not removed, they are labelled."
  }
 }

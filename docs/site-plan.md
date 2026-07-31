@@ -400,13 +400,31 @@ Each block carries its own count and its own one-line reason, so the shape of
 the answer is legible before a single bottle is read.
 
 The rule this must not break is unchanged: **block 3 is never presented as
-wines without additives.** An additive filter — include or exclude — applies to
-blocks 1 and 2 and cannot apply to block 3, because there is nothing there to
-match against. A wine that declares nothing is not evidence of an empty bottle;
-it is an absence of evidence, and the site says which of the two it is on every
-row. In practice that means the exclusion filter never removes block 3, it
-labels it: the user chose *deklarerar inga tillsatser* and gets a ranked list of
-wines that declare none, followed by the wines nobody can answer for.
+wines without additives.** A wine that declares nothing is not evidence of an
+empty bottle; it is an absence of evidence, and the site says which of the two
+it is on every row.
+
+**An additive filter — include or exclude — applies to block 1 and to nothing
+else.** Corrected 2026-07-31: this section previously said blocks 1 and 2,
+which contradicted *Exclusions and inclusions* above. Excluding is sound only
+where the declaration was read in full — a wine that declared everything and did
+not list the substance genuinely does not contain it. Block 2 is by definition
+the wines whose declaration was **not** read in full, so a wine whose unread
+fragment is `sulfiteraskorbinsyra` would have survived a filter for wines
+without sulphites and appeared under a heading the reader reached by asking for
+exactly that.
+
+So the pattern is uniform, which is also why it is easier to explain: **the
+filter ranks block 1, and labels blocks 2 and 3 without touching them.** Neither
+can confirm or deny a choice — one because the text could not be read, the other
+because there is no text — so filtering either would answer a question they
+never got to answer. The user chooses *deklarerar inga tillsatser* and gets a
+ranked list of wines that declare none, then the wines whose declaration nobody
+could finish reading, then the wines nobody can answer for.
+
+Every wine that leaves the catalogue on the way to the page gets its own line:
+stock, grape, pairing, and the substance choice. Summing them, or omitting one,
+leaves a total that reconciles against nothing else on the site.
 
 **The filter is named for what it does.** *Deklarerar inga tillsatser*, never
 *utan tillsatser*. The short form is a statement about the contents of the
