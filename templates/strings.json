@@ -75,8 +75,8 @@
   "find_lede": "Välj vad du ändå tänkte köpa, så visas vad de vinerna deklarerar. Rangordningen gäller öppenhet, inte innehåll — fyra viner av fem deklarerar ingenting alls.",
   "f_any": "alla",
   "f_none": "ingen",
-  "f_buyable": "Bara viner som går att beställa nu",
-  "f_buyable_note": "Slutsålda och tillfälligt slut döljs. Ett tips om en flaska som inte finns är inget svar.",
+  "f_buyable": "Dölj slutsålda och tillfälligt slut",
+  "f_buyable_note": "Gäller lagersaldot när sidan byggdes, inte hur du får tag i vinet. Det är en egen fråga.",
   "f_max_price": "Högsta pris (kr)",
   "f_grape_note": "Druvan är ifylld för 57 % av vinerna. Väljer du en försvinner resten — det är ett tomt fält hos Systembolaget, inte tystnad från leverantören.",
   "f_pairing_note": "Passar-till är ifyllt för 27 %. Samma sak där: de övriga faller bort utan att ha sagt något.",
@@ -111,7 +111,10 @@
   "list_refine": "Vill du snäva in mer finns filtret.",
   "list_silent_majority": "De flesta vinerna i den här listan har inte lämnat någon förteckning.",
   "list_to_filter": "Bygg din egen lista i filtret →",
-  "list_others": "Andra listor"
+  "list_others": "Andra listor",
+  "assortment": "Sortiment",
+  "f_assortment_note": "Fast sortiment står i butiken. Ordervaror beställs hem och tar några dagar — de är fyra av fem viner på Systembolaget, så att dölja dem gör listan kort och missvisande.",
+  "assortment_dropped": "{n} viner ligger i ett annat sortiment och visas inte."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -189,8 +192,8 @@
   "find_lede": "Pick what you were going to buy anyway, and see what those wines declare. The ranking is of disclosure, not contents — four wines in five declare nothing at all.",
   "f_any": "any",
   "f_none": "none",
-  "f_buyable": "Only wines that can be ordered now",
-  "f_buyable_note": "Out of stock and temporarily out are hidden. A tip about a bottle that is not there is not an answer.",
+  "f_buyable": "Hide out of stock and temporarily out",
+  "f_buyable_note": "This is the stock level when the page was built, not how you get hold of the wine. That is a separate question.",
   "f_max_price": "Maximum price (kr)",
   "f_grape_note": "Grape is filled in for 57% of wines. Choosing one discards the rest — that is an empty field at Systembolaget, not silence from the supplier.",
   "f_pairing_note": "Food pairing is filled in for 27%. The same applies: the others drop out without having said anything.",
@@ -225,6 +228,9 @@
   "list_refine": "The filter will narrow it further.",
   "list_silent_majority": "Most of the wines in this list have given no list at all.",
   "list_to_filter": "Build your own list in the filter →",
-  "list_others": "Other lists"
+  "list_others": "Other lists",
+  "assortment": "Range",
+  "f_assortment_note": "The fixed range is on the shelf. Order-only wines are ordered in and take a few days — they are four wines in five at Systembolaget, so hiding them makes the list short and misleading.",
+  "assortment_dropped": "{n} wines are in a different range and are not shown."
  }
 }
