@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 85,
+  "attempted": 87,
   "found": 10,
   "not_found": 62,
-  "rejected": 13,
+  "rejected": 15,
   "declarations": [
     {
       "product_number": "5106001",
@@ -2408,9 +2408,76 @@
       "server_rendered": false,
       "fetch_result": "200; declaration behind a client-side modal, no publicly linked e-label URL",
       "note": "SECOND SOURCE file. status not_found records that this run did not find a declaration, not that the producer published none."
+    },
+    {
+      "product_number": "7354001",
+      "name": "Schloss Johannisberg Gelblack Riesling Trocken",
+      "producer": "Schloss Johannisberg",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://elabel.qrlabelinfo.com/de-de/147714.html?lang=1",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "market": null,
+      "vintage_on_source": "2025",
+      "evidence": "Producer identified without difficulty: schloss-johannisberg.de is the Rheingau estate's own site and shop (WooCommerce), and Systembolaget names the same producer and region. Both Swedish listings come from the importer Ward Wines AB. The estate does publish e-labels, on the qrlabelinfo platform described below, and they are readable. What is not published is the vintage Sweden is selling. qrlabelinfo — a new readable, server-rendered e-label platform, at https://elabel.qrlabelinfo.com/{locale}/{id}.html?lang={n} (e.g. /de-de/147714.html?lang=1). Static HTML served from Azure Blob Storage: the host returns no robots.txt at all (400 OutOfRangeInput, the Azure error for a missing blob), so nothing is disallowed and the robots exception was not needed. The declaration is in the server's response with no JavaScript and no token: a heading giving vintage, wine and bottle size, a ZUTATENLISTE, a NAEHRWERTANGABEN table per 100 ml, an UMWELT LABEL recycling section and an Impressum, plus a 25-language EU selector. The id is opaque and per bottling; it must be read off the producer's link and must not be enumerated, even though the ids for two wines of the same range turned out to be two apart. HOW THE ESTATE'S PAGES WERE WALKED: robots.txt allows everything but WooCommerce internals and advertises sitemaps.xml; the product sitemap (91 URLs) and page sitemap (25 URLs) were read, and neither holds an e-label or Zutaten page. In the Gelblack Trocken category the estate currently lists four bottlings: 2022 in 0,375 l, 2024 in 1,5 l and 3,0 l, and 2025 in 0,75 l. The e-label link appears only on the 2025 0,75 l pages; neither 2024 page carries one, and neither does any other page checked. A SECOND PRODUCER SOURCE WAS CHECKED AND REJECTED: the estate publishes a per-vintage 'Weinexpertise' datasheet, and the one for this vintage, https://schloss-johannisberg.de/app/uploads/Gelblack-2024-trocken-de.pdf, was fetched and its text extracted in full. It gives Rebsorte, Herkunft, Lage, Vinifikation, Charakteristik, food pairing, 'ANALYSE Restsuesse 8,2 g/l, Gesamtsaeure 6,8 g/l, Vorh. Alkohol 12,5%' and a vintage report. It contains no ingredient list and no energy value, so under the agent's rules it is not a declaration and nothing was taken from it. (A web search summary claimed this PDF carried an ingredient list; it does not. Recorded so the next run does not chase it again.) Note also that the 2024 1,5 l product page's 'Zur Weinexpertise' link points at Gelblack-2022-trocken.pdf, a two-year-old sheet, which is a reason to distrust datasheet links on this site generally. On this wine: the only Gelblack trocken e-label the estate links is reached from https://schloss-johannisberg.de/produkt/2025-schloss-johannisberg-gelblack-qualitaetswein-trocken-075l/ and is headed '2025er GELBLACK TROCKEN 750ml'. Systembolaget's 7354001 is the 2024. Producer, wine and market all match; the vintage does not, and a vintage mismatch is a rejection. The two 2025 e-labels are not identical to each other -- the trocken declares 'Antioxidationsmittel: Ascorbinsaeure' and the feinherb does not -- which is a concrete demonstration that these declarations vary per bottling and must not be carried across. The declaration on the 2025 page, quoted here only to show what was rejected and NOT as this wine's declaration, reads 'Zutaten: Trauben, Zucker, Konservierungsstoff: SCHWEFELDIOXID; Stabilisator: Kaliumpolyaspartat; Antioxidationsmittel: Ascorbinsaeure; Saeureregulator: enthaelt Milchsaeure und/oder Weinsaeure.'",
+      "rejected_because": "the e-label the estate links is headed '2025er GELBLACK TROCKEN 750ml' and the Systembolaget wine is the 2024; no 2024 e-label is linked from any page on the estate's site, and the 2024 bottlings it still lists (1,5 l and 3,0 l) carry no e-label link at all",
+      "sources_checked": [
+        "https://www.schloss-johannisberg.de/robots.txt",
+        "https://schloss-johannisberg.de/sitemaps.xml",
+        "https://schloss-johannisberg.de/product-sitemap1.xml",
+        "https://schloss-johannisberg.de/page-sitemap1.xml",
+        "https://schloss-johannisberg.de/produkt-kategorie/gelblack-trocken/",
+        "https://schloss-johannisberg.de/produkt/2024-schloss-johannisberg-gelblack-qualitaetswein-trocken-15l/",
+        "https://schloss-johannisberg.de/produkt/2024-schloss-johannisberg-gelblack-qualitaetswein-trocken-30l/",
+        "https://schloss-johannisberg.de/produkt/2025-schloss-johannisberg-gelblack-qualitaetswein-trocken-075l/",
+        "https://schloss-johannisberg.de/app/uploads/Gelblack-2024-trocken-de.pdf",
+        "https://elabel.qrlabelinfo.com/robots.txt",
+        "https://elabel.qrlabelinfo.com/de-de/147714.html?lang=1"
+      ],
+      "checked_at": "2026-07-31T10:45:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "qrlabelinfo — a new readable, server-rendered e-label platform, at https://elabel.qrlabelinfo.com/{locale}/{id}.html?lang={n} (e.g. /de-de/147714.html?lang=1). Static HTML served from Azure Blob Storage: the host returns no robots.txt at all (400 OutOfRangeInput, the Azure error for a missing blob), so nothing is disallowed and the robots exception was not needed. The declaration is in the server's response with no JavaScript and no token: a heading giving vintage, wine and bottle size, a ZUTATENLISTE, a NAEHRWERTANGABEN table per 100 ml, an UMWELT LABEL recycling section and an Impressum, plus a 25-language EU selector. The id is opaque and per bottling; it must be read off the producer's link and must not be enumerated, even though the ids for two wines of the same range turned out to be two apart.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response, but for the wrong vintage",
+      "note": "SECOND SOURCE file. Nothing was accepted for this wine. The raw_ingredients field is deliberately null; the 2025 text is quoted inside evidence only so a later reader can see exactly what was turned down."
+    },
+    {
+      "product_number": "7372501",
+      "name": "Schloss Johannisberg Gelblack Feinherb",
+      "producer": "Schloss Johannisberg",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://elabel.qrlabelinfo.com/de-de/147716.html?lang=1",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "market": null,
+      "vintage_on_source": "2025",
+      "evidence": "Producer identified without difficulty: schloss-johannisberg.de is the Rheingau estate's own site and shop (WooCommerce), and Systembolaget names the same producer and region. Both Swedish listings come from the importer Ward Wines AB. The estate does publish e-labels, on the qrlabelinfo platform described below, and they are readable. What is not published is the vintage Sweden is selling. qrlabelinfo — a new readable, server-rendered e-label platform, at https://elabel.qrlabelinfo.com/{locale}/{id}.html?lang={n} (e.g. /de-de/147714.html?lang=1). Static HTML served from Azure Blob Storage: the host returns no robots.txt at all (400 OutOfRangeInput, the Azure error for a missing blob), so nothing is disallowed and the robots exception was not needed. The declaration is in the server's response with no JavaScript and no token: a heading giving vintage, wine and bottle size, a ZUTATENLISTE, a NAEHRWERTANGABEN table per 100 ml, an UMWELT LABEL recycling section and an Impressum, plus a 25-language EU selector. The id is opaque and per bottling; it must be read off the producer's link and must not be enumerated, even though the ids for two wines of the same range turned out to be two apart. HOW THE ESTATE'S PAGES WERE WALKED: robots.txt allows everything but WooCommerce internals and advertises sitemaps.xml; the product sitemap (91 URLs) and page sitemap (25 URLs) were read, and neither holds an e-label or Zutaten page. In the Gelblack Trocken category the estate currently lists four bottlings: 2022 in 0,375 l, 2024 in 1,5 l and 3,0 l, and 2025 in 0,75 l. The e-label link appears only on the 2025 0,75 l pages; neither 2024 page carries one, and neither does any other page checked. A SECOND PRODUCER SOURCE WAS CHECKED AND REJECTED: the estate publishes a per-vintage 'Weinexpertise' datasheet, and the one for this vintage, https://schloss-johannisberg.de/app/uploads/Gelblack-2024-trocken-de.pdf, was fetched and its text extracted in full. It gives Rebsorte, Herkunft, Lage, Vinifikation, Charakteristik, food pairing, 'ANALYSE Restsuesse 8,2 g/l, Gesamtsaeure 6,8 g/l, Vorh. Alkohol 12,5%' and a vintage report. It contains no ingredient list and no energy value, so under the agent's rules it is not a declaration and nothing was taken from it. (A web search summary claimed this PDF carried an ingredient list; it does not. Recorded so the next run does not chase it again.) Note also that the 2024 1,5 l product page's 'Zur Weinexpertise' link points at Gelblack-2022-trocken.pdf, a two-year-old sheet, which is a reason to distrust datasheet links on this site generally. On this wine: the only Gelblack feinherb e-label the estate links is reached from https://schloss-johannisberg.de/produkt/2025-schloss-johannisberg-gelblack-qualitaetswein-feinherb-075l/ and is headed '2025er GELBLACK FEINHERB 750ml'. Systembolaget's 7372501 is the 2024. The estate's shop lists no 2024 Gelblack feinherb in any format. The two 2025 e-labels are not identical to each other -- the trocken declares 'Antioxidationsmittel: Ascorbinsaeure' and the feinherb does not -- which is a concrete demonstration that these declarations vary per bottling and must not be carried across. The declaration on the 2025 page, quoted here only to show what was rejected and NOT as this wine's declaration, reads 'Zutaten: Trauben, Zucker, Konservierungsstoff: SCHWEFELDIOXID; Stabilisator: Kaliumpolyaspartat; Saeureregulator: enthaelt Milchsaeure und/oder Weinsaeure.'",
+      "rejected_because": "the e-label the estate links is headed '2025er GELBLACK FEINHERB 750ml' and the Systembolaget wine is the 2024; no 2024 feinherb bottling appears on the estate's site at all",
+      "sources_checked": [
+        "https://schloss-johannisberg.de/product-sitemap1.xml",
+        "https://schloss-johannisberg.de/produkt/2025-schloss-johannisberg-gelblack-qualitaetswein-feinherb-075l/",
+        "https://elabel.qrlabelinfo.com/robots.txt",
+        "https://elabel.qrlabelinfo.com/de-de/147716.html?lang=1"
+      ],
+      "checked_at": "2026-07-31T10:48:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "qrlabelinfo — a new readable, server-rendered e-label platform, at https://elabel.qrlabelinfo.com/{locale}/{id}.html?lang={n} (e.g. /de-de/147714.html?lang=1). Static HTML served from Azure Blob Storage: the host returns no robots.txt at all (400 OutOfRangeInput, the Azure error for a missing blob), so nothing is disallowed and the robots exception was not needed. The declaration is in the server's response with no JavaScript and no token: a heading giving vintage, wine and bottle size, a ZUTATENLISTE, a NAEHRWERTANGABEN table per 100 ml, an UMWELT LABEL recycling section and an Impressum, plus a 25-language EU selector. The id is opaque and per bottling; it must be read off the producer's link and must not be enumerated, even though the ids for two wines of the same range turned out to be two apart.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response, but for the wrong vintage",
+      "note": "SECOND SOURCE file. Nothing was accepted for this wine."
     }
   ],
-  "updated_at": "2026-07-31T10:15:00Z",
+  "updated_at": "2026-07-31T10:48:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -2430,7 +2497,7 @@
     {
       "at": "2026-07-30T20:10:00Z",
       "batch": "3 — German producers with 2024+ undeclared wines, worked one producer at a time and committed after each: Philipp Kuhn, Klosterhof, Doennhoff, Robert Weil, August Kesseler, Juelg, Kerpen, Von Winning, Schloss Johannisberg",
-      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 found on e-label.graphic-druck.de; Hain 3/3 found on Winitas; Wittmann 0/8; Juelg 2/2 found on Winestro.cloud (nephele-s5.de); Kerpen 0/2; Von Winning 0/2, declaration exists but sits behind a client-side devworlds e-label modal with no linked URL."
+      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 found on e-label.graphic-druck.de; Hain 3/3 found on Winitas; Wittmann 0/8; Juelg 2/2 found on Winestro.cloud (nephele-s5.de); Kerpen 0/2; Von Winning 0/2 (client-side devworlds modal); Schloss Johannisberg 0/2, both rejected on vintage against readable qrlabelinfo e-labels for the 2025."
     }
   ]
 }
