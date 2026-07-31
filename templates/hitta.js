@@ -60,6 +60,7 @@
     return {
       buyable: document.getElementById("f-buyable").checked,
       category: chosen("f-category"),
+      assortment: chosen("f-assortment"),
       country: chosen("f-country"),
       grape: chosen("f-grape"),
       pairing: chosen("f-pairing"),
@@ -78,11 +79,18 @@
   // empty — a gap in Systembolaget's metadata, not a supplier's silence. Those
   // two are counted separately so the results page can say which is which.
   function slice(data, c) {
-    var kept = [], dropped = { grape: 0, pairing: 0, stock: 0 };
+    var kept = [], dropped = { grape: 0, pairing: 0, stock: 0, assortment: 0 };
     for (var i = 0; i < data.wines.length; i++) {
       var w = data.wines[i];
       if (c.buyable && w[COL.STOCK] !== 0) { dropped.stock++; continue; }
       if (c.category !== null && w[COL.CATEGORY] !== c.category) continue;
+      // Stock and range are different questions and were one control until
+      // 2026-07-31. Four wines in five are order-only, of which almost none are
+      // out of stock, so a single "can be ordered" checkbox answered the stock
+      // question while its label implied the other.
+      if (c.assortment !== null && w[COL.ASSORTMENT] !== c.assortment) {
+        dropped.assortment++; continue;
+      }
       if (c.country !== null && w[COL.COUNTRY] !== c.country) continue;
       if (c.maxPrice && (w[COL.PRICE] === null || w[COL.PRICE] > c.maxPrice)) continue;
       // Counted apart, because the causes differ: an empty grape field is
@@ -166,6 +174,9 @@
     // that does not reconcile against anything else on the site.
     var lines = [S.sliceHeld.replace("{n}", s.kept.length)];
     if (s.dropped.stock) lines.push(S.stockDropped.replace("{n}", s.dropped.stock));
+    if (s.dropped.assortment) {
+      lines.push(S.assortmentDropped.replace("{n}", s.dropped.assortment));
+    }
     if (s.dropped.grape) lines.push(S.grapeDropped.replace("{n}", s.dropped.grape));
     if (s.dropped.pairing) lines.push(S.pairingDropped.replace("{n}", s.dropped.pairing));
     if (bySubstanceDropped) {
@@ -213,6 +224,7 @@
   function start() {
     loadIndex(function (data) {
       fillSelect("f-category", "category", data.vocab.category);
+      fillSelect("f-assortment", "assortment", data.vocab.assortment);
       fillSelect("f-country", "country", data.vocab.country);
       // Grape names are the same in both languages; Systembolaget already
       // normalises them and there is nothing to translate.

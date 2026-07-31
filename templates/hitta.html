@@ -21,6 +21,11 @@
       <select id="f-category"><option value="">{{ s.f_any }}</option></select>
     </div>
     <div class="field">
+      <label for="f-assortment">{{ s.assortment }}</label>
+      <select id="f-assortment"><option value="">{{ s.f_any }}</option></select>
+      <p class="explain">{{ s.f_assortment_note }}</p>
+    </div>
+    <div class="field">
       <label for="f-country">{{ s.country }}</label>
       <select id="f-country"><option value="">{{ s.f_any }}</option></select>
     </div>
@@ -88,6 +93,7 @@
     stateSilent: {{ s.state_silent|tojson }},
     sliceHeld: {{ s.slice_held|tojson }},
     stockDropped: {{ s.stock_dropped|tojson }},
+    assortmentDropped: {{ s.assortment_dropped|tojson }},
     grapeDropped: {{ s.grape_dropped|tojson }},
     pairingDropped: {{ s.pairing_dropped|tojson }},
     substanceDropped: {{ s.substance_dropped|tojson }},
