@@ -97,11 +97,12 @@
     return { kept: kept, dropped: dropped };
   }
 
-  // Exclude and include are not mirror images and the interface must not
-  // pretend they are. Exclude is sound: a wine that declared fully and did not
-  // list the substance genuinely does not contain it. Include is weaker — it
-  // finds wines that *admit* to the substance. Neither can say anything about a
-  // wine that declared nothing, so both apply to the declared blocks only.
+  // Applies to block 1 and to nothing else. Exclude is sound only where the
+  // declaration was read in full: a wine that declared everything and did not
+  // list the substance genuinely does not contain it. Blocks 2 and 3 are, by
+  // definition, the wines whose declaration was not read in full or does not
+  // exist — they can neither confirm nor deny a choice, so filtering them would
+  // answer a question they never got to answer. They are labelled instead.
   function bySubstance(rows, c) {
     if (c.exclude === null && c.include === null) return rows;
     return rows.filter(function (w) {
@@ -152,9 +153,8 @@
     });
 
     var rankable = bySubstance(declared, c);
-    var partialShown = bySubstance(partial, c);
-    var bySubstanceDropped =
-      (declared.length - rankable.length) + (partial.length - partialShown.length);
+    var bySubstanceDropped = declared.length - rankable.length;
+    var substanceChosen = c.exclude !== null || c.include !== null;
 
     rankable.sort(function (a, b) {
       if (a[COL.COUNT] !== b[COL.COUNT]) return a[COL.COUNT] - b[COL.COUNT];
@@ -199,14 +199,14 @@
     // a slice that never held one, and the plan forbids the silent drop.
     out.appendChild(block(
       S.blockPartial,
-      bySubstanceDropped ? S.blockPartialExcluded : S.blockPartialNote,
-      partialShown, 20));
+      substanceChosen ? S.blockPartialFiltered : S.blockPartialNote,
+      partial, 20));
 
     // Never filtered by substance, only labelled. This block is the reason the
     // site exists and removing it would answer a question nobody asked.
     out.appendChild(block(
       S.blockSilent,
-      (c.exclude !== null || c.include !== null) ? S.blockSilentFiltered : S.blockSilentNote,
+      substanceChosen ? S.blockSilentFiltered : S.blockSilentNote,
       silent, 20));
   }
 
