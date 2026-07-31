@@ -142,6 +142,10 @@
   {
    "match": "kalumbisulfit -> kaliumbisulfit",
    "wines": 1
+  },
+  {
+   "match": "kopparsulfatpentahydrat -> kopparsulfat pentahydrat",
+   "wines": 1
   }
  ]
 }
