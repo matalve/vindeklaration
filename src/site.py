@@ -167,6 +167,54 @@ def additive_names(wines: list[dict], lang: str) -> dict:
     return names
 
 
+# Saved slices worth their own address. Only categories with enough read
+# declarations to make an ordering mean anything: a "fewest additives" list of
+# eight wines is not a ranking, it is the whole set with numbers on it.
+LIST_CATEGORIES = ("Rött vin", "Vitt vin", "Mousserande vin", "Rosévin")
+LIST_PRICE_CAPS = (None, 150, 100)
+LIST_MINIMUM = 100
+
+
+def list_slices(wines: list[dict]) -> list[dict]:
+    """The slices that get a page, each a stated comparison set.
+
+    Never a global ranking: every slice names its category, because a sparkling
+    wine declares dosage sugar and a fortified wine declares added alcohol, and
+    ordering them against a still red would assert a comparability that does not
+    exist. Only wines that can be ordered are included — a list that sends
+    someone to the shop for a bottle that is not there has not answered.
+    """
+    slices = []
+    for category in LIST_CATEGORIES:
+        in_category = [
+            w for w in wines
+            if w.get("category") == category
+            and not w.get("out_of_stock")
+            and not w.get("temporarily_out_of_stock")
+        ]
+        for cap in LIST_PRICE_CAPS:
+            held = [
+                w for w in in_category
+                if cap is None or (w.get("price") is not None and w["price"] <= cap)
+            ]
+            ranked = sorted(
+                (w for w in held if state_of(w) == "declared"),
+                key=lambda w: (w["additive_count"], w.get("price") or 0),
+            )
+            if len(ranked) < LIST_MINIMUM:
+                continue
+            slices.append({
+                "category": category,
+                "cap": cap,
+                "held": held,
+                "ranked": ranked,
+                "partial": [w for w in held if state_of(w) == "partial"],
+                "silent": [w for w in held if state_of(w) == "silent"],
+                "slug": slugify(category) + (f"-under-{cap}-kr" if cap else ""),
+            })
+    return slices
+
+
 def facet_labels(lang: str) -> dict:
     """Swedish facet value to its English word, or empty for the Swedish build.
 
@@ -268,9 +316,11 @@ def build(output: Path, limit: int | None = None) -> None:
     )
     env.filters["slugify"] = slugify
     env.filters["num"] = fmt
+    env.filters["wine_url"] = wine_path
 
     stats = coverage(wines)
     allergens = allergen_labels()
+    slices = list_slices(wines)
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     if output.exists():
@@ -290,6 +340,7 @@ def build(output: Path, limit: int | None = None) -> None:
     method_template = env.get_template("method.html")
     notfound_template = env.get_template("notfound.html")
     find_template = env.get_template("hitta.html")
+    list_template = env.get_template("list.html")
 
     for lang in LANGUAGES:
         s = strings(lang)
@@ -298,6 +349,17 @@ def build(output: Path, limit: int | None = None) -> None:
         # lives; `base` is where wine pages live, which is the Swedish root for
         # both languages because only Swedish wine pages are built.
         lang_root = "" if lang == "sv" else "/en"
+        facets = facet_labels(lang)
+
+        def heading_for(sl: dict) -> str:
+            label = (facets.get("category", {}).get(sl["category"]) or sl["category"])
+            key = "list_heading_cap" if sl["cap"] else "list_heading"
+            return s[key].replace("{cat}", label).replace("{cap}", str(sl["cap"] or ""))
+
+        list_links = [
+            {"slug": sl["slug"], "heading": heading_for(sl)} for sl in slices
+        ]
+
         base = ""
 
         if lang in WINE_PAGE_LANGUAGES:
@@ -329,7 +391,7 @@ def build(output: Path, limit: int | None = None) -> None:
         (prefix / "index.html").write_text(
             index_template.render(
                 stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
-                generated=generated, cdn_checked=CDN_CHECKED,
+                generated=generated, cdn_checked=CDN_CHECKED, lists=list_links,
             ),
             encoding="utf-8",
         )
@@ -340,10 +402,30 @@ def build(output: Path, limit: int | None = None) -> None:
                 lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
                 additive_names=additive_names(wines, lang),
-                facet_labels=facet_labels(lang),
+                facet_labels=facets, lists=list_links,
             ),
             encoding="utf-8",
         )
+
+        # Saved slices, rendered at build time. Unlike /hitta these need no
+        # JavaScript, which makes them the version that survives a bad signal,
+        # a crawler, and being shared.
+        for sl in slices:
+            page = prefix / s["list_url"] / sl["slug"]
+            page.mkdir(parents=True, exist_ok=True)
+            others = [
+                {"slug": o["slug"], "heading": heading_for(o)}
+                for o in slices if o["slug"] != sl["slug"]
+            ]
+            (page / "index.html").write_text(
+                list_template.render(
+                    sl=sl, heading=heading_for(sl), other_lists=others,
+                    lang=lang, s=s, base=base, lang_root=lang_root,
+                    generated=generated, cdn_checked=CDN_CHECKED,
+                    facet_labels=facets,
+                ),
+                encoding="utf-8",
+            )
 
         method = prefix / ("metod" if lang == "sv" else "method")
         method.mkdir(parents=True, exist_ok=True)

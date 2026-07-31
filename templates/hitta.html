@@ -64,6 +64,17 @@
   <p class="explain">{{ s.noscript }}</p>
 </noscript>
 
+{% if lists %}
+<nav class="other-lists">
+  <h2>{{ s.list_others }}</h2>
+  <ul>
+  {% for o in lists %}
+    <li><a href="{{ lang_root }}/{{ s.list_url }}/{{ o.slug }}/">{{ o.heading }}</a></li>
+  {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+
 <script>
   window.SITE = {
     index: "/sok-index.json",
