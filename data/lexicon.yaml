@@ -14,6 +14,113 @@
 # these are the words to print next to it. Sulfites are on virtually every
 # declared wine and carry no information about how the wine was made; milk, egg
 # and fish do, because they name an animal-derived fining agent.
+# English for the facet values Systembolaget publishes in Swedish, so the
+# English filter is not a Swedish menu with an English label above it.
+#
+# These are chrome, not source text. The Swedish is what Systembolaget wrote and
+# is what the Swedish site shows; the English is ours and exists only so the
+# menus are usable. A declaration is never translated anywhere — that rule is
+# unaffected by this block.
+#
+# A value missing here falls back to the Swedish, which is visibly wrong on an
+# English page and is the intended failure: the catalogue gains countries and
+# categories over time, and a silent gap would look like a translation.
+facet_labels:
+  category:
+    Vitt vin: White wine
+    Rött vin: Red wine
+    Rosévin: Rosé wine
+    Mousserande vin: Sparkling wine
+    Starkvin: Fortified wine
+    Vermouth: Vermouth
+    Aperitifer: Aperitifs
+    Sake: Sake
+    Glögg och Glühwein: Mulled wine
+    Smaksatt vin & fruktvin: Flavoured and fruit wine
+    Drycker av flera typer: Mixed types
+    Vinlåda: Mixed case
+  assortment:
+    Fast sortiment: Fixed range
+    Ordervaror: Order only
+    Tillfälligt sortiment: Temporary range
+    Lokalt & Småskaligt: Local & small scale
+    Säsong: Seasonal
+    Webblanseringar: Web releases
+  pairing:
+    Fisk: Fish
+    Skaldjur: Shellfish
+    Fågel: Poultry
+    Fläsk: Pork
+    Lamm: Lamb
+    Nöt: Beef
+    Vilt: Game
+    Grönsaker: Vegetables
+    Ost: Cheese
+    Dessert: Dessert
+    Asiatiskt: Asian
+    Kryddstarkt: Spicy
+    Buffémat: Buffet
+    Aperitif: Aperitif
+    Sällskapsdryck: On its own
+    Avec/digestif: Digestif
+  country:
+    Frankrike: France
+    Portugal: Portugal
+    Sverige: Sweden
+    Australien: Australia
+    Sydafrika: South Africa
+    USA: United States
+    Spanien: Spain
+    Japan: Japan
+    Tyskland: Germany
+    Italien: Italy
+    Nya Zeeland: New Zealand
+    Ungern: Hungary
+    Österrike: Austria
+    Finland: Finland
+    Chile: Chile
+    Argentina: Argentina
+    Grekland: Greece
+    Moldavien: Moldova
+    Slovenien: Slovenia
+    Georgien: Georgia
+    Bulgarien: Bulgaria
+    Kroatien: Croatia
+    Cypern: Cyprus
+    Libanon: Lebanon
+    Storbritannien: United Kingdom
+    Rumänien: Romania
+    Uruguay: Uruguay
+    Golanhöjderna (israelisk bosättning): Golan Heights (Israeli settlement)
+    EU: EU
+    Norge: Norway
+    Belgien: Belgium
+    Internationellt märke: International brand
+    Schweiz: Switzerland
+    Tjeckien: Czechia
+    Kosovo: Kosovo
+    Serbien: Serbia
+    Ukraina: Ukraine
+    Montenegro: Montenegro
+    Varierande ursprung: Varying origin
+    Folkrepubliken Kina: People's Republic of China
+    Mexiko: Mexico
+    Nordmakedonien: North Macedonia
+    Bosnien och Hercegovina: Bosnia and Herzegovina
+    Slovakien: Slovakia
+    Israel: Israel
+    Nederländerna: Netherlands
+    Luxemburg: Luxembourg
+    Marocko: Morocco
+    Polen: Poland
+    Kanada: Canada
+    Danmark: Denmark
+    Armenien: Armenia
+    Brasilien: Brazil
+    Litauen: Lithuania
+    Azerbajdzjan: Azerbaijan
+    Turkiet: Türkiye
+
 allergen_labels:
   sulfites: { sv: sulfiter, en: sulfites }
   milk: { sv: mjölk, en: milk }

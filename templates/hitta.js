@@ -28,12 +28,20 @@
     return n;
   }
 
-  function fillSelect(id, values, keep) {
+  // Systembolaget publishes these in Swedish. On the English build they are
+  // looked up; a value with no entry stays Swedish, which is meant to be
+  // visible rather than silently plausible.
+  function label(kind, value) {
+    var table = S.facetLabels && S.facetLabels[kind];
+    return (table && table[value]) || value;
+  }
+
+  function fillSelect(id, kind, values, keep) {
     var sel = document.getElementById(id);
     if (!sel) return;
-    var order = values.map(function (v, i) { return [v, i]; })
+    var order = values.map(function (v, i) { return [kind ? label(kind, v) : v, i]; })
                       .filter(function (p) { return p[0]; })
-                      .sort(function (a, b) { return a[0].localeCompare(b[0], "sv"); });
+                      .sort(function (a, b) { return a[0].localeCompare(b[0], S.lang); });
     order.forEach(function (p) {
       var o = document.createElement("option");
       o.value = p[1];
@@ -111,9 +119,9 @@
     li.appendChild(a);
     li.appendChild(el("span", "meta", [
       w[COL.PRODUCER],
-      window.SITE._data.vocab.country[w[COL.COUNTRY]],
+      label("country", window.SITE._data.vocab.country[w[COL.COUNTRY]]),
       w[COL.PRICE] ? Math.round(w[COL.PRICE]) + " kr" : "",
-      window.SITE._data.vocab.assortment[w[COL.ASSORTMENT]]
+      label("assortment", window.SITE._data.vocab.assortment[w[COL.ASSORTMENT]])
     ].filter(Boolean).join(" · ")));
     li.appendChild(el("span", "state state-" + w[COL.STATE], stateLabel(w)));
     return li;
@@ -204,16 +212,17 @@
 
   function start() {
     loadIndex(function (data) {
-      fillSelect("f-category", data.vocab.category);
-      fillSelect("f-country", data.vocab.country);
-      fillSelect("f-grape", data.vocab.grape);
-      fillSelect("f-pairing", data.vocab.pairing);
-      fillSelect("f-exclude", data.vocab.additive.map(function (id) {
+      fillSelect("f-category", "category", data.vocab.category);
+      fillSelect("f-country", "country", data.vocab.country);
+      // Grape names are the same in both languages; Systembolaget already
+      // normalises them and there is nothing to translate.
+      fillSelect("f-grape", null, data.vocab.grape);
+      fillSelect("f-pairing", "pairing", data.vocab.pairing);
+      var substances = data.vocab.additive.map(function (id) {
         return S.additiveNames[id] || id;
-      }));
-      fillSelect("f-include", data.vocab.additive.map(function (id) {
-        return S.additiveNames[id] || id;
-      }));
+      });
+      fillSelect("f-exclude", null, substances);
+      fillSelect("f-include", null, substances);
       form.hidden = false;
       form.addEventListener("input", function () { render(data); });
       render(data);
