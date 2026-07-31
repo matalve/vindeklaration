@@ -40,6 +40,17 @@ apart, and doing so is half the value of this agent:
 Never state which of the two you are looking at unless you have evidence. "Not
 found" means not found, and it is a legitimate result.
 
+## Read this first
+
+**`docs/elabel-platforms.md`** carries what previous runs established: which
+platforms are server-rendered and readable, which are client-side and are not,
+the URL patterns for each, the hosts that bite, and where the yield actually
+is. Read it before you search for anything, and **extend it at the end of your
+run** with any platform or quirk it does not already name.
+
+That file exists because budget is the binding constraint on this agent, and a
+run that rediscovers a platform already listed there has spent it for nothing.
+
 ## Where to look, in order
 
 **1. The EU e-label.** Search for the producer's e-label or QR destination.
