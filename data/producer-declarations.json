@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 81,
+  "attempted": 83,
   "found": 10,
-  "not_found": 58,
+  "not_found": 60,
   "rejected": 13,
   "declarations": [
     {
@@ -2278,9 +2278,74 @@
       "server_rendered": true,
       "fetch_result": "200, declaration present in the server's HTML response",
       "note": "SECOND SOURCE. From the producer's own e-label, not from Systembolaget's product page, matched by judgement rather than by product number. Not normalised."
+    },
+    {
+      "product_number": "7686301",
+      "name": "Graacher Himmelreich Riesling Kabinett feinherb",
+      "producer": "Weingut Kerpen",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "market": null,
+      "vintage_on_source": null,
+      "evidence": "Estate identified, and the ambiguity resolved. Two entries for a Bernkastel-Wehlen Kerpen circulate in wine references ('Weingut Kerpen' and 'Weingut Heribert Kerpen'), so the name alone is not decisive. The estate whose range Systembolaget stocks is the one at https://www.weingut-kerpen.de, Impressum 'Weingut Kerpen, Uferallee 6, D-54470 Bernkastel-Kues, Eigentumer: Matthias Kerpen, USt-IdNr. DE365453525' (Wehlen is a district of Bernkastel-Kues). The match is made on two of the four Kerpen wines Systembolaget lists, by name, vintage and labelled alcohol together: the shop sells '2024 Blauschiefer Riesling trocken 11,0 % vol' against Systembolaget's 7320401 Blauschiefer Riesling Trocken 2024 at 11.0%, and '2024 Wehlener Sonnenuhr Riesling Spatlese 7,5 % vol' against 7977801 at 7.5%. All four Swedish listings share one supplier, Value Wines Kalmar AB. The identification is of the estate only; no declaration is attributed to it here. No ingredient declaration found anywhere on the estate's own web presence. The site is WordPress with an embedded Ecwid storefront; its robots.txt disallows only /wp-admin/ and advertises https://www.weingut-kerpen.de/wp-sitemap.xml, which was read. The page sitemap holds ten pages and none of them is an e-label, a Zutaten page or a Naehrwerte page. The Ecwid product pages render client-side: the server's HTML for a product URL contains no ingredient list, no nutrition table and no link to an e-label platform, only a LocalBusiness JSON-LD block. No QR destination, no u-label.com, nephele-s5.de (Winestro), winitas-shop.de, s.imero.io or scantrust URL is linked from anywhere on the site. Web search for a Kerpen e-label returned only retailers and wine databases, which this project does not accept as a source. NOT FOUND MEANS NOT FOUND: the estate may well have a QR code on the bottle that is never linked from the open web, and this run cannot see it. On this wine specifically there is a further unresolved point that would have had to be settled before any declaration could be accepted, and is recorded because the next run should not have to rediscover it: the estate's shop lists the 2024 Graacher Himmelreich Riesling Kabinett feinherb only as '2024 Kollektion Graacher Himmelreich Riesling Kabinett feinherb 9,5 % vol', while Systembolaget's 7686301 carries no 'Kollektion' in the name and states 9.0% alcohol. 'Kollektion Kerpen' is the estate's artist-label series, in which one chosen wine each year gets a commissioned label, so it is plausibly the same wine in different dress, but 9,5 against 9,0 is a half-point apart and was not resolved. Nothing was accepted on this wine.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weingut-kerpen.de/robots.txt",
+        "https://www.weingut-kerpen.de/wp-sitemap.xml",
+        "https://www.weingut-kerpen.de/wp-sitemap-posts-page-1.xml",
+        "https://www.weingut-kerpen.de/wp-sitemap-ecstore-1.xml",
+        "https://www.weingut-kerpen.de/impressum/",
+        "https://www.weingut-kerpen.de/kollektion-kerpen/",
+        "https://www.weingut-kerpen.de/shop/2024-Kollektion-Graacher-Himmelreich-Riesling-Kabinett-feinherb-9-5-vol-p522681022/"
+      ],
+      "checked_at": "2026-07-31T09:45:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": null,
+      "server_rendered": false,
+      "fetch_result": "200 on every page fetched; the Ecwid storefront renders product detail client-side and no declaration is in the server's HTML",
+      "note": "SECOND SOURCE file. status not_found records that this run did not find a declaration, not that the producer published none."
+    },
+    {
+      "product_number": "7919301",
+      "name": "Weingut Kerpen Riesling Classic",
+      "producer": "Weingut Kerpen",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "market": null,
+      "vintage_on_source": null,
+      "evidence": "Estate identified, and the ambiguity resolved. Two entries for a Bernkastel-Wehlen Kerpen circulate in wine references ('Weingut Kerpen' and 'Weingut Heribert Kerpen'), so the name alone is not decisive. The estate whose range Systembolaget stocks is the one at https://www.weingut-kerpen.de, Impressum 'Weingut Kerpen, Uferallee 6, D-54470 Bernkastel-Kues, Eigentumer: Matthias Kerpen, USt-IdNr. DE365453525' (Wehlen is a district of Bernkastel-Kues). The match is made on two of the four Kerpen wines Systembolaget lists, by name, vintage and labelled alcohol together: the shop sells '2024 Blauschiefer Riesling trocken 11,0 % vol' against Systembolaget's 7320401 Blauschiefer Riesling Trocken 2024 at 11.0%, and '2024 Wehlener Sonnenuhr Riesling Spatlese 7,5 % vol' against 7977801 at 7.5%. All four Swedish listings share one supplier, Value Wines Kalmar AB. The identification is of the estate only; no declaration is attributed to it here. No ingredient declaration found anywhere on the estate's own web presence. The site is WordPress with an embedded Ecwid storefront; its robots.txt disallows only /wp-admin/ and advertises https://www.weingut-kerpen.de/wp-sitemap.xml, which was read. The page sitemap holds ten pages and none of them is an e-label, a Zutaten page or a Naehrwerte page. The Ecwid product pages render client-side: the server's HTML for a product URL contains no ingredient list, no nutrition table and no link to an e-label platform, only a LocalBusiness JSON-LD block. No QR destination, no u-label.com, nephele-s5.de (Winestro), winitas-shop.de, s.imero.io or scantrust URL is linked from anywhere on the site. Web search for a Kerpen e-label returned only retailers and wine databases, which this project does not accept as a source. NOT FOUND MEANS NOT FOUND: the estate may well have a QR code on the bottle that is never linked from the open web, and this run cannot see it. On this wine specifically: the estate's shop sitemap lists a plain '2024 Riesling 10,0 % vol' but nothing named 'Riesling Classic', and Systembolaget's 7919301 states 11.0% alcohol. Which shop item, if any, corresponds to the Swedish listing was not established, and since no declaration was found on any of them the question did not have to be answered. It is recorded so the next run knows it is open.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weingut-kerpen.de/robots.txt",
+        "https://www.weingut-kerpen.de/wp-sitemap.xml",
+        "https://www.weingut-kerpen.de/wp-sitemap-posts-page-1.xml",
+        "https://www.weingut-kerpen.de/wp-sitemap-ecstore-1.xml",
+        "https://www.weingut-kerpen.de/impressum/",
+        "https://www.weingut-kerpen.de/kollektion-kerpen/"
+      ],
+      "checked_at": "2026-07-31T09:45:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": null,
+      "server_rendered": false,
+      "fetch_result": "200 on every page fetched; no declaration in any server response",
+      "note": "SECOND SOURCE file. status not_found records that this run did not find a declaration, not that the producer published none."
     }
   ],
-  "updated_at": "2026-07-31T09:22:00Z",
+  "updated_at": "2026-07-31T09:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -2300,7 +2365,7 @@
     {
       "at": "2026-07-30T20:10:00Z",
       "batch": "3 — German producers with 2024+ undeclared wines, worked one producer at a time and committed after each: Philipp Kuhn, Klosterhof, Doennhoff, Robert Weil, August Kesseler, Juelg, Kerpen, Von Winning, Schloss Johannisberg",
-      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 found on e-label.graphic-druck.de; Hain 3/3 found on Winitas; Wittmann 0/8; Juelg 2/2 found on a third server-rendered platform, Winestro.cloud at nephele-s5.de."
+      "result": "in progress — Philipp Kuhn 3/3 found; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 found on e-label.graphic-druck.de; Hain 3/3 found on Winitas; Wittmann 0/8; Juelg 2/2 found on Winestro.cloud (nephele-s5.de); Kerpen 0/2, no e-label anywhere, Ecwid shop renders client-side."
     }
   ]
 }
