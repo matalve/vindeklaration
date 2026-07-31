@@ -55,7 +55,9 @@
       country: chosen("f-country"),
       grape: chosen("f-grape"),
       pairing: chosen("f-pairing"),
-      maxPrice: parseFloat(document.getElementById("f-price").value) || null,
+      maxPrice: (function (v) {
+        return v === "" || isNaN(parseFloat(v)) ? null : parseFloat(v);
+      })(document.getElementById("f-price").value),
       exclude: chosen("f-exclude"),
       include: chosen("f-include")
     };
@@ -68,24 +70,23 @@
   // empty — a gap in Systembolaget's metadata, not a supplier's silence. Those
   // two are counted separately so the results page can say which is which.
   function slice(data, c) {
-    var kept = [], droppedFacet = 0;
+    var kept = [], dropped = { grape: 0, pairing: 0, stock: 0 };
     for (var i = 0; i < data.wines.length; i++) {
       var w = data.wines[i];
-      if (c.buyable && w[COL.STOCK] !== 0) continue;
+      if (c.buyable && w[COL.STOCK] !== 0) { dropped.stock++; continue; }
       if (c.category !== null && w[COL.CATEGORY] !== c.category) continue;
       if (c.country !== null && w[COL.COUNTRY] !== c.country) continue;
       if (c.maxPrice && (w[COL.PRICE] === null || w[COL.PRICE] > c.maxPrice)) continue;
-      if (c.grape !== null || c.pairing !== null) {
-        var missing =
-          (c.grape !== null && w[COL.GRAPES].length === 0) ||
-          (c.pairing !== null && w[COL.PAIRINGS].length === 0);
-        if (missing) { droppedFacet++; continue; }
-        if (c.grape !== null && w[COL.GRAPES].indexOf(c.grape) === -1) continue;
-        if (c.pairing !== null && w[COL.PAIRINGS].indexOf(c.pairing) === -1) continue;
-      }
+      // Counted apart, because the causes differ: an empty grape field is
+      // Systembolaget's missing metadata, an empty pairing field likewise, and
+      // summing them into one number tells the reader neither.
+      if (c.grape !== null && w[COL.GRAPES].length === 0) { dropped.grape++; continue; }
+      if (c.pairing !== null && w[COL.PAIRINGS].length === 0) { dropped.pairing++; continue; }
+      if (c.grape !== null && w[COL.GRAPES].indexOf(c.grape) === -1) continue;
+      if (c.pairing !== null && w[COL.PAIRINGS].indexOf(c.pairing) === -1) continue;
       kept.push(w);
     }
-    return { kept: kept, droppedFacet: droppedFacet };
+    return { kept: kept, dropped: dropped };
   }
 
   // Exclude and include are not mirror images and the interface must not
@@ -102,7 +103,7 @@
     });
   }
 
-  function row(w, showCount) {
+  function row(w) {
     var li = el("li");
     var a = el("a");
     a.href = "/" + w[COL.URL] + "/";
@@ -114,18 +115,16 @@
       w[COL.PRICE] ? Math.round(w[COL.PRICE]) + " kr" : "",
       window.SITE._data.vocab.assortment[w[COL.ASSORTMENT]]
     ].filter(Boolean).join(" · ")));
-    if (showCount) {
-      li.appendChild(el("span", "state state-" + w[COL.STATE], stateLabel(w)));
-    }
+    li.appendChild(el("span", "state state-" + w[COL.STATE], stateLabel(w)));
     return li;
   }
 
-  function block(title, note, rows, showCount, limit) {
+  function block(title, note, rows, limit) {
     var sec = el("section", "block");
     sec.appendChild(el("h3", null, title + " (" + rows.length + ")"));
     if (note) sec.appendChild(el("p", "explain", note));
     var ol = el("ol", "results");
-    rows.slice(0, limit).forEach(function (w) { ol.appendChild(row(w, showCount)); });
+    rows.slice(0, limit).forEach(function (w) { ol.appendChild(row(w)); });
     sec.appendChild(ol);
     if (rows.length > limit) {
       sec.appendChild(el("p", "explain",
@@ -146,34 +145,61 @@
 
     var rankable = bySubstance(declared, c);
     var partialShown = bySubstance(partial, c);
+    var bySubstanceDropped =
+      (declared.length - rankable.length) + (partial.length - partialShown.length);
 
-    // Fewest declared additives, ties broken by price. Never by anything the
-    // site earns from, because it earns nothing.
     rankable.sort(function (a, b) {
       if (a[COL.COUNT] !== b[COL.COUNT]) return a[COL.COUNT] - b[COL.COUNT];
       return (a[COL.PRICE] || 0) - (b[COL.PRICE] || 0);
     });
 
-    out.innerHTML = "";
-    status.textContent =
-      S.sliceHeld.replace("{n}", s.kept.length) +
-      (s.droppedFacet ? " " + S.facetDropped.replace("{n}", s.droppedFacet) : "");
+    // Every wine that left the catalogue on the way to this page gets a line of
+    // its own. Summing them, or omitting one, leaves the reader with a total
+    // that does not reconcile against anything else on the site.
+    var lines = [S.sliceHeld.replace("{n}", s.kept.length)];
+    if (s.dropped.stock) lines.push(S.stockDropped.replace("{n}", s.dropped.stock));
+    if (s.dropped.grape) lines.push(S.grapeDropped.replace("{n}", s.dropped.grape));
+    if (s.dropped.pairing) lines.push(S.pairingDropped.replace("{n}", s.dropped.pairing));
+    if (bySubstanceDropped) {
+      lines.push(S.substanceDropped.replace("{n}", bySubstanceDropped));
+    }
+    status.textContent = lines.join(" ");
 
+    out.innerHTML = "";
     if (!s.kept.length) {
       out.appendChild(el("p", "explain", S.noResults));
       return;
     }
 
-    out.appendChild(block(S.blockRanked, S.blockRankedNote, rankable, true, 50));
-    if (partialShown.length) {
-      out.appendChild(block(S.blockPartial, S.blockPartialNote, partialShown, false, 20));
+    // No ranking without a comparison set. A sparkling wine declares dosage
+    // sugar and a fortified wine declares added alcohol, so ordering them
+    // against a still red asserts a comparability that does not exist — the
+    // plan forbids a global "fewest additives" table by name, and rendering one
+    // by default is the same table with nobody having asked for it.
+    if (c.category === null) {
+      var ask = el("section", "block need-category");
+      ask.appendChild(el("h3", null,
+        S.needCategory + " (" + rankable.length + ")"));
+      ask.appendChild(el("p", "explain", S.needCategoryWhy));
+      out.appendChild(ask);
+    } else {
+      out.appendChild(block(S.blockRanked, S.blockRankedNote, rankable, 50));
     }
+
+    // Always rendered, including at zero. Three states means three headings —
+    // a block that vanishes when a filter empties it is indistinguishable from
+    // a slice that never held one, and the plan forbids the silent drop.
+    out.appendChild(block(
+      S.blockPartial,
+      bySubstanceDropped ? S.blockPartialExcluded : S.blockPartialNote,
+      partialShown, 20));
+
     // Never filtered by substance, only labelled. This block is the reason the
     // site exists and removing it would answer a question nobody asked.
     out.appendChild(block(
       S.blockSilent,
       (c.exclude !== null || c.include !== null) ? S.blockSilentFiltered : S.blockSilentNote,
-      silent, false, 20));
+      silent, 20));
   }
 
   function start() {

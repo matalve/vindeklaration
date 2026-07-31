@@ -9,7 +9,7 @@
 <h1>{{ s.find }}</h1>
 <p class="lede">{{ s.find_lede }}</p>
 
-<form id="filters" hidden>
+<form id="filters" hidden onsubmit="return false;">
   <div class="field checkbox">
     <label><input type="checkbox" id="f-buyable" checked> {{ s.f_buyable }}</label>
     <p class="explain">{{ s.f_buyable_note }}</p>
@@ -58,8 +58,11 @@
   </fieldset>
 </form>
 
-<p id="slice-status" class="hint">{{ s.f_loading }}</p>
-<div id="slice"></div>
+<p id="slice-status" class="hint" role="status" aria-live="polite">{{ s.f_loading }}</p>
+<div id="slice" aria-live="polite"></div>
+<noscript>
+  <p class="explain">{{ s.noscript }}</p>
+</noscript>
 
 <script>
   window.SITE = {
@@ -72,7 +75,13 @@
     statePartial: {{ s.state_partial|tojson }},
     stateSilent: {{ s.state_silent|tojson }},
     sliceHeld: {{ s.slice_held|tojson }},
-    facetDropped: {{ s.facet_dropped|tojson }},
+    stockDropped: {{ s.stock_dropped|tojson }},
+    grapeDropped: {{ s.grape_dropped|tojson }},
+    pairingDropped: {{ s.pairing_dropped|tojson }},
+    substanceDropped: {{ s.substance_dropped|tojson }},
+    needCategory: {{ s.need_category|tojson }},
+    needCategoryWhy: {{ s.need_category_why|tojson }},
+    blockPartialExcluded: {{ s.block_partial_excluded|tojson }},
     blockRanked: {{ s.block_ranked|tojson }},
     blockRankedNote: {{ s.block_ranked_note|tojson }},
     blockPartial: {{ s.block_partial|tojson }},
