@@ -204,6 +204,12 @@ fieldset.mode legend { padding: 0 0.4rem; font-size: 0.9rem; color: var(--muted)
 .mode-name { font-weight: 600; }
 .mode-note { grid-column: 2; font-size: 0.85rem; color: var(--muted); }
 
+.ranking-note {
+  margin: 1.5rem 0 0.25rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
 details.more { margin-top: 1.25rem; }
 details.more summary {
   cursor: pointer;

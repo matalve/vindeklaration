@@ -78,6 +78,10 @@
   </details>
 </form>
 
+{# Above the results rather than above the form: it qualifies the ranking, and
+   the ranking is what it needs to be read with. #}
+<p class="ranking-note">{{ s.ranking_is_disclosure }}</p>
+
 <p id="slice-status" class="hint" role="status" aria-live="polite">{{ s.f_loading }}</p>
 <div id="slice" aria-live="polite"></div>
 <noscript>
