@@ -44,6 +44,15 @@
     <p class="hint">{{ s.substance_declared_by|replace("{n}", sub.count)|replace("{m}", stats.declared) }}</p>
     <p class="explain caveat">{{ s.substance_silence|replace("{n}", stats.silent) }}</p>
     <p class="explain">{{ s.substance_examples_note }}</p>
+    {# A partial declaration named this substance and also carried text we
+       could not read. It belongs on the page, but never unmarked: two
+       substances in the corpus rest on a single such wine. #}
+    {% if sub.partial_count %}
+    <p class="explain caveat">{{ s.substance_partial|replace("{n}", sub.partial_count) }}</p>
+    {% endif %}
+    {% if lang != 'sv' and s.wine_pages_note %}
+    <p class="explain">{{ s.wine_pages_note }}</p>
+    {% endif %}
 
     {# No bottle photographs here. This is a filtered surface listing many
        wines, and docs/legal-notes.md §2j condition 8 keeps images on the wine
@@ -53,6 +62,9 @@
       <li>
         <a href="{{ base }}/{{ w|wine_url }}/">{{ w.name }}{% if w.vintage %} {{ w.vintage }}{% endif %}</a>
         <span class="meta">{{ w.producer }}{% if w.price %} · {{ w.price|round|int }} kr{% endif %}</span>
+        {% if w|state == 'partial' %}
+        <span class="state state-p">{{ s.state_partial }}</span>
+        {% endif %}
       </li>
     {% endfor %}
     </ol>

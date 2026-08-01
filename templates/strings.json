@@ -124,7 +124,7 @@
   "substance_url": "tillsats",
   "substances": "Ämnen",
   "substances_lede": "Varje ämne som förekommer i någon deklaration vi läst, med E-nummer, de stavningar som faktiskt står i deklarationerna, och vilka viner som nämner det. Listan säger hur ofta ett ämne redovisas — inte hur ofta det används.",
-  "substances_count": "{n} ämnen förekommer i minst en deklaration.",
+  "substances_count": "{n} ämnen har en egen sida här.",
   "substance_declared_by": "{n} av {m} viner som deklarerar sina ingredienser nämner det här ämnet.",
   "substance_silence": "Det säger ingenting om de {n} viner som inte lämnat någon förteckning. Ett ämne kan finnas i ett vin som inte redovisat det, och den här sidan kan inte se skillnaden.",
   "substance_no_note": "Ingen beskrivning av det här ämnet är skriven än. Vi lägger hellre in en tom rad än gissar vad ämnet gör.",
@@ -166,7 +166,13 @@
   "breakdown_minimum": "Grupper med färre än {n} viner slås ihop till en rad och namnges inte. En procentsats på en handfull flaskor säger mer om urvalet än om hyllan.",
   "vintage_covered_mark": "omfattas säkert av kravet",
   "no_vintage": "Ingen årgång",
-  "coverage_unread": "{n} viner har lämnat en förteckning som vi inte kunnat läsa i sin helhet. De räknas som deklarerade här, men hålls utanför varje rangordning."
+  "coverage_unread": "{n} viner har lämnat en förteckning som vi inte kunnat läsa i sin helhet. De räknas som deklarerade här, men hålls utanför varje rangordning.",
+  "substances_undefined": "{n} E-nummer förekommer i deklarationerna utan att finnas i ordlistan, och har därför ingen sida. De visas på vinsidan som den kod leverantören skrev:",
+  "col_declaring": "Viner som nämner det",
+  "substance_partial": "{n} av vinerna nedan har lämnat en deklaration som vi inte kunnat läsa i sin helhet. De nämner det här ämnet, men resten av deras förteckning är oläst, och de är märkta i listan.",
+  "coverage_silent": "{n} viner har inte lämnat någon förteckning alls. Det är sajtens vanligaste svar, och det säger ingenting om vad de flaskorna innehåller.",
+  "vintage_covered_aggregated": "Övriga årgångar som omfattas",
+  "field_blank": "Uppgift saknas hos Systembolaget"
  },
  "en": {
   "site_name": "vindeklaration",
@@ -293,7 +299,7 @@
   "substance_url": "additive",
   "substances": "Substances",
   "substances_lede": "Every substance that appears in a declaration we have read, with its E-number, the spellings that actually occur in those declarations, and which wines name it. The list says how often a substance is disclosed — not how often it is used.",
-  "substances_count": "{n} substances appear in at least one declaration.",
+  "substances_count": "{n} substances have a page here.",
   "substance_declared_by": "{n} of the {m} wines that declare their ingredients name this substance.",
   "substance_silence": "That says nothing about the {n} wines that have given no list. A substance can be in a wine that never disclosed it, and this page cannot tell the difference.",
   "substance_no_note": "No description of this substance has been written yet. We would rather leave the line empty than guess at what it does.",
@@ -335,6 +341,12 @@
   "breakdown_minimum": "Groups of fewer than {n} wines are aggregated into one row and not named. A percentage over a handful of bottles says more about the sample than about the shelf.",
   "vintage_covered_mark": "certainly covered by the requirement",
   "no_vintage": "No vintage",
-  "coverage_unread": "{n} wines have given a list we could not read in full. They count as declaring here, but are kept out of every ranking."
+  "coverage_unread": "{n} wines have given a list we could not read in full. They count as declaring here, but are kept out of every ranking.",
+  "substances_undefined": "{n} E numbers appear in the declarations without being in the dictionary, and so have no page. They are shown on the wine page as the code the supplier wrote:",
+  "col_declaring": "Wines naming it",
+  "substance_partial": "{n} of the wines below have given a declaration we could not read in full. They name this substance, but the rest of their list is unread, and they are marked in the list.",
+  "coverage_silent": "{n} wines have given no list at all. That is the site's most common answer, and it says nothing about what those bottles contain.",
+  "vintage_covered_aggregated": "Other covered vintages",
+  "field_blank": "Field left blank at Systembolaget"
  }
 }

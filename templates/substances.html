@@ -9,16 +9,26 @@
   <h1>{{ s.substances }}</h1>
   <p class="lede">{{ s.substances_lede }}</p>
   <p class="hint">{{ s.substances_count|replace("{n}", substances|length) }}</p>
+  {# The count above is pages, not substances, and those are not the same
+     number: an id can be parsed off a label without the dictionary having an
+     entry to describe it. Saying so is cheaper than a sentence that is
+     quietly wrong. #}
+  {% if undefined_substances %}
+  <p class="explain">{{ s.substances_undefined|replace("{n}", undefined_substances|length) }}
+    {% for sid in undefined_substances %}<code>{{ sid|upper }}</code>{% if not loop.last %} {% endif %}{% endfor %}
+  </p>
+  {% endif %}
 
   {# Ordered by how many wines declare each one, which is a fact about
-     disclosure and not a ranking of substances. The column header says
-     "declare" for the same reason. #}
+     disclosure and not a ranking of substances. The column header names the
+     denominator, because a bare column of counts beside a substance name is
+     read as "how many wines contain it". #}
   <table class="breakdown">
     <thead>
       <tr>
         <th>{{ s.substances }}</th>
         <th class="num">{{ s.substance_e_number }}</th>
-        <th class="num">{{ s.col_declared }}</th>
+        <th class="num">{{ s.col_declaring }}</th>
       </tr>
     </thead>
     <tbody>

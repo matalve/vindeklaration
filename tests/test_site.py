@@ -64,6 +64,31 @@ def test_vintage_rows_account_for_every_wine() -> None:
     assert rows[3]["wines"] == 12
 
 
+def test_thin_covered_years_are_not_aggregated_with_the_old_ones() -> None:
+    """The covered rows must sum to the headline figure above the table.
+
+    A vintage newer than the corpus is always thin — nine 2026 bottles in a
+    catalogue that has not turned over yet — and folding those in with 2011
+    both understates the covered rows and files certainly-covered wines under
+    a heading that says the opposite.
+    """
+    wines = (
+        [declaring(vintage=2024) for _ in range(50)]
+        + [declaring(vintage=2026) for _ in range(9)]
+        + [wine(vintage=2011) for _ in range(4)]
+    )
+    rows = vintage_rows(wines)
+
+    covered = [row for row in rows if row["covered"]]
+    assert sum(row["wines"] for row in covered) == 59
+    assert sum(row["declared"] for row in covered) == 59
+
+    kinds = [row["kind"] for row in rows]
+    assert kinds == ["year", "aggregated_covered", "aggregated"]
+    assert rows[1]["wines"] == 9
+    assert rows[2]["covered"] is False
+
+
 def test_vintage_rows_mark_only_the_certainly_covered() -> None:
     wines = (
         [declaring(vintage=2024) for _ in range(40)]
@@ -97,6 +122,7 @@ def test_breakdown_aggregates_thin_groups_rather_than_dropping_them() -> None:
 
     assert sum(row["wines"] for row in rows) == 55
     assert [row["value"] for row in rows] == ["Italien", None]
+    assert rows[-1]["kind"] == "aggregated"
     assert rows[-1]["wines"] == 5
     assert rows[-1]["declared"] == 2
 
@@ -111,13 +137,24 @@ def test_breakdown_share_is_declared_over_group() -> None:
     assert rows[0]["share"] == 30.0
 
 
-def test_breakdown_treats_an_empty_value_as_unnamed() -> None:
-    """A blank field at Systembolaget is not a group worth naming."""
-    wines = [declaring(country="") for _ in range(80)]
+def test_breakdown_keeps_a_blank_field_apart_from_a_thin_sample() -> None:
+    """Two different facts, two different rows.
+
+    "Too few to publish a percentage" and "Systembolaget left the field empty"
+    would otherwise share one row under a caption that describes only the
+    first — the conflation the filter already avoids for grape and pairing.
+    """
+    wines = (
+        [declaring(country="Italien") for _ in range(50)]
+        + [wine(country="Georgien") for _ in range(3)]
+        + [declaring(country="") for _ in range(80)]
+    )
     rows = breakdown(wines, "country")
 
-    assert [row["value"] for row in rows] == [None]
-    assert rows[0]["wines"] == 80
+    assert [row["kind"] for row in rows] == ["value", "aggregated", "blank"]
+    assert rows[1]["wines"] == 3
+    assert rows[2]["wines"] == 80
+    assert sum(row["wines"] for row in rows) == 133
 
 
 # --- covered_stats -----------------------------------------------------------
@@ -156,7 +193,7 @@ CO2 = {"id": "carbon_dioxide", "name": {"sv": "Koldioxid", "en": "Carbon dioxide
 
 def test_substance_pages_count_declaring_wines() -> None:
     wines = [declaring(name=f"W{i}", additives=[SULFITES]) for i in range(3)]
-    pages = {p["id"]: p for p in substance_pages(wines)}
+    pages = {p["id"]: p for p in substance_pages(wines)[0]}
 
     assert pages["sulfites"]["count"] == 3
     assert pages["sulfites"]["bucket"] == "additive"
@@ -168,18 +205,23 @@ def test_substance_pages_count_declaring_wines() -> None:
 
 def test_substance_pages_cover_gases_and_raw_materials() -> None:
     """A reader who saw the word on a label is owed a page either way."""
-    wines = [declaring(gases=[CO2])]
-    pages = {p["id"]: p for p in substance_pages(wines)}
+    pages = {p["id"]: p for p in substance_pages([declaring(gases=[CO2])])[0]}
 
     assert pages["carbon_dioxide"]["bucket"] == "gas"
 
 
-def test_substance_pages_skip_an_id_the_dictionary_does_not_define() -> None:
-    """Better a missing page than an invented description of a substance."""
-    ghost = {"id": "not_a_real_substance", "name": {"sv": "X", "en": "X"}}
-    pages = substance_pages([declaring(additives=[ghost])])
+def test_substance_pages_report_an_id_the_dictionary_does_not_define() -> None:
+    """Better a missing page than an invented description of a substance.
+
+    The id is returned rather than dropped, because the index page publishes
+    how many substances it covers and that sentence is wrong if the ones
+    without an entry are forgotten.
+    """
+    ghost = {"id": "e446", "name": {"sv": "E446", "en": "E446"}}
+    pages, undefined = substance_pages([declaring(additives=[ghost])])
 
     assert pages == []
+    assert undefined == ["e446"]
 
 
 def test_substance_examples_are_alphabetical_not_ranked() -> None:
@@ -187,9 +229,32 @@ def test_substance_examples_are_alphabetical_not_ranked() -> None:
         declaring(name="Zinfandel", additives=[SULFITES]),
         declaring(name="Amarone", additives=[SULFITES]),
     ]
-    page = substance_pages(wines)[0]
+    page = substance_pages(wines)[0][0]
 
     assert [w["name"] for w in page["examples"]] == ["Amarone", "Zinfandel"]
+
+
+def test_substance_pages_count_the_partly_read_declarations() -> None:
+    """A substance can rest entirely on a declaration we could not finish.
+
+    Two do in the live corpus (carmine, anthocyanins), and a page that listed
+    that wine unmarked would present it as settled.
+    """
+    wines = [
+        declaring(name="Read in full", additives=[SULFITES]),
+        declaring(name="Unread tail", parse_status="partial", additives=[SULFITES]),
+    ]
+    page = substance_pages(wines)[0][0]
+
+    assert page["count"] == 2
+    assert page["partial_count"] == 1
+
+
+def test_a_substance_carried_only_by_a_partial_declaration_says_so() -> None:
+    wines = [declaring(name="Only one", parse_status="partial", additives=[SULFITES])]
+    page = substance_pages(wines)[0][0]
+
+    assert page["count"] == page["partial_count"] == 1
 
 
 # --- pct ---------------------------------------------------------------------
