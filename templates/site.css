@@ -185,6 +185,33 @@ input[type="search"]:focus { outline: 2px solid var(--accent); outline-offset: 1
 .lede { color: var(--muted); margin: 0 0 1.5rem; }
 
 #filters { margin: 0 0 2rem; }
+fieldset.mode {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.75rem 1rem 1rem;
+  margin: 0 0 1.25rem;
+}
+fieldset.mode legend { padding: 0 0.4rem; font-size: 0.9rem; color: var(--muted); }
+.mode-choice {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 0.6rem;
+  align-items: baseline;
+  padding: 0.4rem 0;
+  cursor: pointer;
+}
+.mode-choice input { grid-row: span 2; }
+.mode-name { font-weight: 600; }
+.mode-note { grid-column: 2; font-size: 0.85rem; color: var(--muted); }
+
+details.more { margin-top: 1.25rem; }
+details.more summary {
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+details.more > * { margin-top: 0.6rem; }
+
 #filters .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
