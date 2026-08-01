@@ -29,7 +29,7 @@ before the domain depends on it.
 uv run python -m src.site        # ~24 s on the Pi
 ```
 
-15 055 files, 36 MB, output in `site/`. Nothing in it is committed — `site/`
+15 162 files, 36 MB, output in `site/`. Nothing in it is committed — `site/`
 is gitignored and rebuilt on Cloudflare, so the repository never carries two
 copies of the same data.
 
@@ -78,7 +78,7 @@ disabled entirely and the hostname stops answering at all.
 The `test` at the end is not decoration. **A Worker rejects more than 20 000
 static assets on the free plan** (100 000 on paid), and the build grows with
 the assortment — it is
-at 15 055 today. Failing the build with the count visible is much easier to
+at 15 162 today. Failing the build with the count visible is much easier to
 diagnose than a rejected upload with a generic message. When it trips, read
 *Bilingual* in `docs/site-plan.md`, where the cap and the ways past it are
 written up.

@@ -315,6 +315,57 @@ footer {
 footer p { margin: 0.4rem 0; }
 footer .meta { margin-top: 1rem; }
 
+/* Substance and coverage pages. The breakdown tables are read on a phone in a
+   shop as often as on a desktop, so the numeric columns are right-aligned and
+   tabular — a column of percentages that does not line up is slower to scan
+   than one that does. */
+table.breakdown {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+  margin: 1rem 0 0.5rem;
+}
+table.breakdown th,
+table.breakdown td {
+  padding: 0.4rem 0.6rem 0.4rem 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+table.breakdown th { font-weight: 600; color: var(--muted); font-size: 0.8rem; }
+table.breakdown .num { text-align: right; font-variant-numeric: tabular-nums; }
+table.breakdown .enum { color: var(--muted); }
+/* Aggregated rows are a real row with a real count, not a footnote — muted so
+   they read as "the rest" rather than as another named group. */
+table.breakdown tr.aggregated td { color: var(--muted); }
+table.breakdown td .meta {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.facts.inline dl, dl.facts.inline { margin: 0 0 1rem; }
+dl.facts.inline dt {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+dl.facts.inline dd { margin: 0.1rem 0 0; }
+
+/* The misspellings are data, so they are set as code rather than prose: a
+   reader comparing them against a label is matching characters. */
+.alias-list code {
+  display: inline-block;
+  margin: 0.15rem 0.3rem 0.15rem 0;
+  padding: 0.1rem 0.35rem;
+  background: #f2efe9;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.substance .caveat, .substances .caveat { margin-top: 0.6rem; }
+
 .visually-hidden {
   position: absolute;
   width: 1px; height: 1px;
@@ -335,5 +386,5 @@ footer .meta { margin-top: 1rem; }
   input[type="search"],
   #filters select,
   #filters input[type="number"] { background: #201e1b; color: var(--ink); }
-  .unread code, .raw blockquote { background: #232120; }
+  .unread code, .raw blockquote, .alias-list code { background: #232120; }
 }

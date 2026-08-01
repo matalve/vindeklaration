@@ -50,7 +50,12 @@
       <tbody>
       {% for a in wine.additives %}
         <tr>
-          <td>{{ a.name[lang] }}{% if a.allergen and a.allergen in animal_allergens %}
+          <td>
+            {%- if a.id in substance_ids -%}
+            <a href="{{ lang_root }}/{{ s.substance_url }}/{{ a.id }}/">{{ a.name[lang] }}</a>
+            {%- else -%}
+            {{ a.name[lang] }}
+            {%- endif %}{% if a.allergen and a.allergen in animal_allergens %}
             <span class="from-animal">({{ allergen_labels[a.allergen][lang] }})</span>
           {% endif %}</td>
           <td class="enum">{{ a.e_number or '' }}</td>
@@ -72,7 +77,12 @@
     <table class="additives">
       <tbody>
       {% for a in wine.additives %}
-        <tr><td>{{ a.name[lang] }}{% if a.allergen and a.allergen in animal_allergens %}
+        <tr><td>
+          {%- if a.id in substance_ids -%}
+          <a href="{{ lang_root }}/{{ s.substance_url }}/{{ a.id }}/">{{ a.name[lang] }}</a>
+          {%- else -%}
+          {{ a.name[lang] }}
+          {%- endif %}{% if a.allergen and a.allergen in animal_allergens %}
           <span class="from-animal">({{ allergen_labels[a.allergen][lang] }})</span>{% endif %}</td>
           <td class="enum">{{ a.e_number or '' }}</td></tr>
       {% endfor %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{# The title names the substance and the count, and stops there. This is the
+   page most likely to be reached from a search engine and quoted with nothing
+   around it, so it carries no adjective and no verb that could read as a
+   warning — docs/site-plan.md, "What the site must never say". #}
+{% block title %}{{ sub.name[lang] }}{% if sub.e_number %} ({{ sub.e_number }}){% endif %} — {{ s.site_name }}{% endblock %}
+{% block description %}{{ s.substance_declared_by|replace("{n}", sub.count)|replace("{m}", stats.declared) }}{% endblock %}
+
+{% block content %}
+<article class="substance">
+
+  <h1>{{ sub.name[lang] }}</h1>
+
+  <dl class="facts inline">
+    {% if sub.e_number %}
+    <dt>{{ s.substance_e_number }}</dt><dd>{{ sub.e_number }}</dd>
+    {% endif %}
+    {% if sub.category %}
+    <dt>{{ s.substance_category }}</dt><dd>{{ s['c_' + sub.category] }}</dd>
+    {% endif %}
+    <dt>{{ s.substance_bucket }}</dt><dd>{{ s['bucket_' + sub.bucket] }}</dd>
+    {% if sub.allergen %}
+    <dt>{{ s.substance_allergen }}</dt>
+    <dd>{{ allergen_labels[sub.allergen][lang] | capitalize if sub.allergen in allergen_labels else sub.allergen }}</dd>
+    {% endif %}
+  </dl>
+
+  {# The dictionary's own note, or an explicit blank. Thirty-three of the
+     entries have no note, and a generated description would be exactly the
+     guessing CLAUDE.md forbids — so the gap is stated rather than filled. #}
+  {% if sub.note %}
+  <p class="lede">{{ sub.note[lang] }}</p>
+  {% else %}
+  <p class="explain">{{ s.substance_no_note }}</p>
+  {% endif %}
+
+  <section class="block">
+    <h2>{{ s.substance_examples }} ({{ sub.count }})</h2>
+
+    {# The denominator, then the silence. In that order: a bare count against
+       15 000 wines would read as "rare", when the true statement is that four
+       wines in five never said either way. #}
+    <p class="hint">{{ s.substance_declared_by|replace("{n}", sub.count)|replace("{m}", stats.declared) }}</p>
+    <p class="explain caveat">{{ s.substance_silence|replace("{n}", stats.silent) }}</p>
+    <p class="explain">{{ s.substance_examples_note }}</p>
+
+    {# No bottle photographs here. This is a filtered surface listing many
+       wines, and docs/legal-notes.md §2j condition 8 keeps images on the wine
+       page alone. #}
+    <ol class="results">
+    {% for w in sub.examples %}
+      <li>
+        <a href="{{ base }}/{{ w|wine_url }}/">{{ w.name }}{% if w.vintage %} {{ w.vintage }}{% endif %}</a>
+        <span class="meta">{{ w.producer }}{% if w.price %} · {{ w.price|round|int }} kr{% endif %}</span>
+      </li>
+    {% endfor %}
+    </ol>
+    {% if sub.count > sub.examples|length %}
+    <p class="explain">{{ s.showing }} {{ sub.examples|length }} {{ s.of }} {{ sub.count }}.</p>
+    {% endif %}
+  </section>
+
+  {% if sub.aliases %}
+  <section class="block aliases">
+    <h2>{{ s.substance_aliases }}</h2>
+    <p class="explain">{{ s.substance_aliases_note }}</p>
+    <p class="alias-list">
+    {% for a in sub.aliases %}<code>{{ a }}</code>{% if not loop.last %} {% endif %}{% endfor %}
+    </p>
+  </section>
+  {% endif %}
+
+  <p class="hint">
+    <a href="{{ lang_root }}/{{ s.substance_url }}/">{{ s.substances }}</a> ·
+    <a href="{{ lang_root }}/{{ s.coverage_url }}/">{{ s.coverage }}</a>
+  </p>
+
+</article>
+{% endblock %}

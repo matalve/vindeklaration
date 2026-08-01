@@ -1,9 +1,9 @@
 """Step 6: generate the static site from the dataset.
 
-Phase 1 of docs/site-plan.md — lookup. A page per wine, a search page, and the
-method page, in Swedish at the root and English under /en/. No server, no
-database, no runtime dependency on Systembolaget: everything here is decided at
-build time from data/wines.json.
+Phases 1 to 3 of docs/site-plan.md: a page per wine, search, the filter and its
+saved slices, a page per substance, and the coverage breakdown. Swedish at the
+root and English under /en/. No server, no database, no runtime dependency on
+Systembolaget: everything here is decided at build time from data/wines.json.
 
 Two rules from the plan are enforced here rather than left to the templates,
 because a template is easy to change without noticing what it promised:
@@ -32,6 +32,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 WINES_PATH = DATA_DIR / "wines.json"
 LEXICON_PATH = DATA_DIR / "lexicon.yaml"
+ADDITIVES_PATH = DATA_DIR / "additives.yaml"
 TEMPLATE_DIR = ROOT / "templates"
 OUTPUT_DIR = ROOT / "site"
 
@@ -167,6 +168,178 @@ def additive_names(wines: list[dict], lang: str) -> dict:
     return names
 
 
+# The three lists a parsed declaration is split into. A substance page covers
+# all three, because a reader who saw "koldioxid" on a label is owed a page
+# whether or not the project counts it — the page says which bucket it is in.
+DECLARED_FIELDS = ("additives", "gases", "base_ingredients")
+
+# How many of the declaring wines a substance page names outright. Long enough
+# to be a real sample, short enough that the page is not a 1 800-row table.
+SUBSTANCE_EXAMPLES = 30
+
+
+def substance_pages(wines: list[dict]) -> list[dict]:
+    """One entry per substance that appears in at least one declaration.
+
+    The dictionary in data/additives.yaml is the source for what a substance
+    *is*; the corpus is the source for how often it is declared. A substance
+    the dictionary knows but no wine declares gets no page — the body of the
+    page is the wines, and an empty one would be a stub for a search engine.
+
+    `note` is carried through only where the dictionary has one. Thirty-three
+    of the entries have none, and a page that invented a description would be
+    the guessing the project forbids, so those pages say so instead.
+    """
+    dictionary = {
+        entry["id"]: entry
+        for entry in yaml.safe_load(ADDITIVES_PATH.read_text(encoding="utf-8"))
+    }
+    declaring: dict[str, list[dict]] = {}
+    for wine in wines:
+        for field in DECLARED_FIELDS:
+            for substance in wine.get(field) or []:
+                declaring.setdefault(substance["id"], []).append(wine)
+
+    pages = []
+    for sid, declared_by in declaring.items():
+        entry = dictionary.get(sid)
+        if entry is None:
+            # An id parsed onto a wine that the dictionary no longer defines.
+            # Skipping it silently would hide a real inconsistency, so the
+            # build says so and carries on rather than inventing an entry.
+            print(f"warning: {sid!r} is declared by {len(declared_by)} wines "
+                  f"but is not in additives.yaml — no page built")
+            continue
+        # Alphabetical, not by additive count. Ordering a substance's wines by
+        # how little they declare would make every substance page a second
+        # leaderboard, which is not what it is for.
+        by_name = sorted(declared_by, key=lambda w: w["name"])
+        pages.append({
+            "id": sid,
+            "name": entry["name"],
+            "e_number": entry.get("e_number"),
+            "bucket": entry["bucket"],
+            "category": entry.get("category"),
+            "allergen": entry.get("allergen"),
+            "note": entry.get("note"),
+            # The misspellings are the point: someone typing the exact string
+            # off a label should land here. docs/site-plan.md, "Details that
+            # matter more than they look".
+            "aliases": entry.get("aliases") or [],
+            "count": len(declared_by),
+            "examples": by_name[:SUBSTANCE_EXAMPLES],
+        })
+    return sorted(pages, key=lambda p: -p["count"])
+
+
+# Below this many wines a percentage says more about the sample than about the
+# shelf, so the rows are aggregated and counted rather than published. The same
+# statistical honesty rule the importer table uses, applied to a breakdown
+# where nobody is named.
+BREAKDOWN_MINIMUM = 40
+
+
+def breakdown(wines: list[dict], key: str) -> list[dict]:
+    """Declared share per value of one field, largest group first."""
+    groups: dict[str, list[dict]] = {}
+    for wine in wines:
+        groups.setdefault(wine.get(key) or "", []).append(wine)
+
+    rows, held_back, held_back_declared = [], 0, 0
+    for value, group in groups.items():
+        declared = sum(1 for w in group if w["declaration_status"] == "declared")
+        if not value or len(group) < BREAKDOWN_MINIMUM:
+            held_back += len(group)
+            held_back_declared += declared
+            continue
+        rows.append({
+            "value": value,
+            "wines": len(group),
+            "declared": declared,
+            "share": declared / len(group) * 100,
+        })
+    rows.sort(key=lambda r: -r["wines"])
+    if held_back:
+        rows.append({
+            "value": None,
+            "wines": held_back,
+            "declared": held_back_declared,
+            "share": held_back_declared / held_back * 100,
+        })
+    return rows
+
+
+# Vintage is a stand-in for the production date the dataset does not have, and
+# every page that leans on it says so. Years at or after this one are certainly
+# inside the requirement; the rest are a mix the data cannot separate.
+COVERED_FROM = 2024
+
+
+def vintage_rows(wines: list[dict]) -> list[dict]:
+    """Declared share by vintage, newest first, then older years, then undated.
+
+    Kept separate from `breakdown` because the undated wines are not a small
+    tail to be aggregated away — they are 2 854 bottles and the single largest
+    reason the coverage figure understates the shelf, so they get their own
+    labelled row rather than being folded in with the thin years.
+
+    Every wine lands in exactly one row and the rows sum to the total. A table
+    that quietly dropped the thin years would not add up, and a coverage page
+    whose own arithmetic does not close is the last place to spend credibility.
+    """
+    groups: dict[str, list[dict]] = {}
+    for wine in wines:
+        vintage = wine.get("vintage")
+        groups.setdefault(str(vintage) if vintage else "", []).append(wine)
+
+    def row(kind: str, value: str | None, group: list[dict]) -> dict:
+        declared = sum(1 for w in group if w["declaration_status"] == "declared")
+        return {
+            "kind": kind,
+            "value": value,
+            "covered": kind == "year" and int(value) >= COVERED_FROM,
+            "wines": len(group),
+            "declared": declared,
+            "share": declared / len(group) * 100 if group else 0,
+        }
+
+    rows, thin = [], []
+    for value, group in sorted(groups.items(), key=lambda kv: kv[0], reverse=True):
+        if not value:
+            continue
+        if len(group) < BREAKDOWN_MINIMUM:
+            thin.extend(group)
+            continue
+        rows.append(row("year", value, group))
+    if thin:
+        rows.append(row("aggregated", None, thin))
+    if groups.get(""):
+        rows.append(row("undated", None, groups[""]))
+    return rows
+
+
+def covered_stats(wines: list[dict]) -> dict:
+    """The figures over the wines the requirement certainly reaches.
+
+    "Certainly" is doing the work. Vintage 2024-onwards is a subset of what the
+    rule covers, never a superset, so this share is a floor — see
+    docs/site-plan.md, "Naming importers".
+    """
+    covered = [w for w in wines if str(w.get("vintage") or "").isdigit()
+               and int(w["vintage"]) >= COVERED_FROM]
+    declared = sum(1 for w in covered if w["declaration_status"] == "declared")
+    undated = sum(1 for w in wines if not w.get("vintage"))
+    older = len(wines) - len(covered) - undated
+    return {
+        "wines": len(covered),
+        "declared": declared,
+        "share": declared / len(covered) * 100 if covered else 0,
+        "undated": undated,
+        "older": older,
+        "outside": undated + older,
+    }
+
+
 # Saved slices worth their own address. Only categories with enough read
 # declarations to make an ordering mean anything: a "fewest additives" list of
 # eight wines is not a ranking, it is the whole set with numbers on it.
@@ -269,6 +442,17 @@ def fmt(value: float) -> str:
     return text.replace(".", ",")
 
 
+def pct(value: float, lang: str) -> str:
+    """A share to one decimal, in the decimal separator the language uses.
+
+    `fmt` above is Swedish-only, which was safe while it ran on wine pages
+    alone — those are built in Swedish. The coverage tables are bilingual, and
+    "19,3 %" on an English page is a typo rather than a translation.
+    """
+    text = f"{value:.1f}"
+    return text.replace(".", ",") if lang == "sv" else text
+
+
 def nutrition_rows(wine: dict) -> tuple[list[dict], int]:
     """The declared figures, and how many were beyond what is physically possible."""
     declared = wine.get("nutrition") or {}
@@ -316,11 +500,23 @@ def build(output: Path, limit: int | None = None) -> None:
     )
     env.filters["slugify"] = slugify
     env.filters["num"] = fmt
+    env.filters["pct"] = pct
     env.filters["wine_url"] = wine_path
 
     stats = coverage(wines)
     allergens = allergen_labels()
     slices = list_slices(wines)
+    substances = substance_pages(wines)
+    # A wine page links a substance only where a page was actually built, so a
+    # dictionary entry that disappears cannot turn 15 000 wine pages into
+    # 404 links.
+    substance_ids = {sub["id"] for sub in substances}
+    covered = covered_stats(wines)
+    breakdowns = {
+        "category": breakdown(wines, "category"),
+        "country": breakdown(wines, "country"),
+        "vintage": vintage_rows(wines),
+    }
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     if output.exists():
@@ -341,6 +537,9 @@ def build(output: Path, limit: int | None = None) -> None:
     notfound_template = env.get_template("notfound.html")
     find_template = env.get_template("hitta.html")
     list_template = env.get_template("list.html")
+    substance_template = env.get_template("substance.html")
+    substances_template = env.get_template("substances.html")
+    coverage_template = env.get_template("coverage.html")
 
     for lang in LANGUAGES:
         s = strings(lang)
@@ -377,6 +576,7 @@ def build(output: Path, limit: int | None = None) -> None:
                         image=image_url(wine),
                         image_width=IMAGE_WIDTH,
                         image_height=IMAGE_HEIGHT,
+                        substance_ids=substance_ids,
                         source_url=wine["source_url"],
                         lang=lang,
                         s=s,
@@ -427,6 +627,45 @@ def build(output: Path, limit: int | None = None) -> None:
                 encoding="utf-8",
             )
 
+        # A page per substance, and an index over them. Both languages: this is
+        # chrome and figures rather than declaration text, 58 substances cost
+        # 118 files, and it is the surface people arrive on from a search
+        # engine — journey 3 in docs/site-plan.md.
+        substance_root = prefix / s["substance_url"]
+        substance_root.mkdir(parents=True, exist_ok=True)
+        (substance_root / "index.html").write_text(
+            substances_template.render(
+                substances=substances, stats=stats,
+                lang=lang, s=s, base=base, lang_root=lang_root,
+                generated=generated, cdn_checked=CDN_CHECKED,
+            ),
+            encoding="utf-8",
+        )
+        for substance in substances:
+            page = substance_root / substance["id"]
+            page.mkdir(parents=True, exist_ok=True)
+            (page / "index.html").write_text(
+                substance_template.render(
+                    sub=substance, stats=stats, allergen_labels=allergens,
+                    lang=lang, s=s, base=base, lang_root=lang_root,
+                    generated=generated, cdn_checked=CDN_CHECKED,
+                ),
+                encoding="utf-8",
+            )
+
+        cover = prefix / s["coverage_url"]
+        cover.mkdir(parents=True, exist_ok=True)
+        (cover / "index.html").write_text(
+            coverage_template.render(
+                stats=stats, covered=covered, breakdowns=breakdowns,
+                lang=lang, s=s, base=base, lang_root=lang_root,
+                generated=generated, cdn_checked=CDN_CHECKED,
+                facet_labels=facets, covered_from=COVERED_FROM,
+                minimum=BREAKDOWN_MINIMUM,
+            ),
+            encoding="utf-8",
+        )
+
         method = prefix / ("metod" if lang == "sv" else "method")
         method.mkdir(parents=True, exist_ok=True)
         (method / "index.html").write_text(
@@ -448,6 +687,7 @@ def build(output: Path, limit: int | None = None) -> None:
     )
 
     print(f"wrote {len(wines)} wines x {len(LANGUAGES)} languages to {output}")
+    print(f"substance pages: {len(substances)} x {len(LANGUAGES)} languages")
     print(f"search index: {(output / 'sok-index.json').stat().st_size / 1e6:.1f} MB")
 
 

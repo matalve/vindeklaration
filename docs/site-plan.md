@@ -839,6 +839,22 @@ open, not that the site is nice.
    are not comparable and a leaderboard would say they were.
 3. **Substances and coverage.** Substance pages and the transparency dashboard.
    The coverage page is the one most likely to be quoted by someone else.
+   **Built 2026-08-01, except the importer table.** `/tillsats/{id}` for every
+   substance that appears in a declaration — 73 of them, in both languages,
+   with the E-number, the bucket, the dictionary's note where there is one and
+   an explicit blank where there is not, and the aliases including the
+   misspellings. `/tackning` carries the whole-shelf share, the share over the
+   certainly-covered vintages, and breakdowns by category, country and vintage,
+   with groups under 40 wines aggregated into a counted, unnamed row.
+   **The importer table is deliberately not built yet.** The rule in *Naming
+   importers* requires every row to be "dated, and corrigible" — a way to
+   report an error, with a stated response time. The site's only error channel
+   is the GitHub issue tracker linked from `/metod`, and the repository is
+   private, so that link cannot be opened by a reader. Publishing a named
+   compliance statistic whose correction route is a 404 is the one part of the
+   table's design that is not optional. It needs the repository made public, or
+   a contact address that is not the owner's own — an owner decision, not a
+   build step. 19 importers clear the 40-wine threshold today.
 4. **Trends.** The nightly commits are a time series: coverage by month,
    substances appearing and disappearing, suppliers who started declaring.
    It costs nothing to keep and cannot be recreated later if the history is

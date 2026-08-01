@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ s.substances }} — {{ s.site_name }}{% endblock %}
+{% block description %}{{ s.substances_count|replace("{n}", substances|length) }}{% endblock %}
+
+{% block content %}
+<article class="substances">
+
+  <h1>{{ s.substances }}</h1>
+  <p class="lede">{{ s.substances_lede }}</p>
+  <p class="hint">{{ s.substances_count|replace("{n}", substances|length) }}</p>
+
+  {# Ordered by how many wines declare each one, which is a fact about
+     disclosure and not a ranking of substances. The column header says
+     "declare" for the same reason. #}
+  <table class="breakdown">
+    <thead>
+      <tr>
+        <th>{{ s.substances }}</th>
+        <th class="num">{{ s.substance_e_number }}</th>
+        <th class="num">{{ s.col_declared }}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for sub in substances %}
+      <tr>
+        <td><a href="{{ lang_root }}/{{ s.substance_url }}/{{ sub.id }}/">{{ sub.name[lang] }}</a>
+          {% if sub.bucket != 'additive' %}
+          <span class="meta">{{ s['bucket_' + sub.bucket] }}</span>
+          {% endif %}
+        </td>
+        <td class="num enum">{{ sub.e_number or '' }}</td>
+        <td class="num">{{ sub.count }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <p class="explain caveat">{{ s.substance_silence|replace("{n}", stats.silent) }}</p>
+  <p class="explain">{{ s.counting_rule }}</p>
+
+</article>
+{% endblock %}
