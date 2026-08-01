@@ -815,9 +815,11 @@ page where it belongs.
 
 The flow already exists: the Pi crawls nightly, commits the dataset, pushes to
 GitHub. A build on push to `main` deploys the site. That is a build, not a
-crawler, so it does not conflict with the one-crawler rule. Cloudflare Pages
-fits — the domain is registered elsewhere, since `.se` needs a Swedish
-registrar, but its DNS can point at Cloudflare.
+crawler, so it does not conflict with the one-crawler rule. **Live**, deployed
+as a Cloudflare Worker with static assets that builds straight from this
+GitHub repository — see `docs/deploy-site.md` for the mechanics. The domain
+is registered at a Swedish registrar, since `.se` needs one, but its DNS
+points at Cloudflare.
 
 Publish `wines.json.gz` and `wines.sqlite` as release assets so the dataset is
 downloadable, whole, by anyone — the point of the project is that the data is
