@@ -1,7 +1,7 @@
 # Working on this repository
 
 An open dataset of the additives declared in wines sold by Systembolaget, and
-(next) a bilingual site on top of it at **vindeklaration.se**. `README.md`
+a bilingual site on top of it, live at **vindeklaration.se**. `README.md`
 explains the method and the caveats — read it before changing how anything is
 counted. This file is about how to work here.
 

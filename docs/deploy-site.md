@@ -1,9 +1,13 @@
 # Publishing the site
 
-How vindeklaration.se gets from `data/wines.json` to a browser. Rewritten
-2026-07-29 for **Workers**, after a first deploy proved the Pages flow this
-guide originally described no longer exists. Steps marked *confirmed* were
-observed working; the rest are still untested end to end.
+How vindeklaration.se gets from `data/wines.json` to a browser. **Live**: the
+domain is bought and DNS points at Cloudflare, and the site deploys as a
+Cloudflare Worker that builds straight from this GitHub repository — no
+Pi or GitHub Actions involvement. Rewritten 2026-07-29 for **Workers**, after
+a first deploy proved the Pages flow this guide originally described no
+longer exists. What follows is kept as the step-by-step record of how that
+came together, for the day it has to be redone — a lost Worker, a new
+project, a second domain.
 
 **It is a Worker with static assets, not a Cloudflare Pages project.**
 Cloudflare has absorbed Pages into Workers: Pages is not formally deprecated
@@ -150,6 +154,8 @@ That is the main thing this arrangement buys, and it is what makes running
 
 ## 5. Move DNS to Cloudflare
 
+**Done** — the domain now resolves through Cloudflare.
+
 The domain is registered at **INLEED** and uses their nameservers
 (`ns1.inleed.net` … `ns6.inleed.net`, confirmed by whois 2026-07-29).
 Cloudflare Registrar sells no `.se`, so the registration **stays at Inleed** —
@@ -175,6 +181,9 @@ dig NS vindeklaration.se +short
 ```
 
 ## 6. Attach the domain, then turn on Web Analytics
+
+**Done** — `vindeklaration.se` is the live custom domain and the workers.dev
+route is disabled.
 
 Once the zone is active: **Workers & Pages → vindeklaration → Settings →
 Domains & Routes → Add → Custom domain** → `vindeklaration.se`. Cloudflare creates the records and
