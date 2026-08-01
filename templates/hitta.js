@@ -13,6 +13,10 @@
 //   evidence of an empty bottle.
 // * Every count that is shown says what it counts and why wines are missing.
 
+// Systembolaget's own name for the shelf range. Matched by value rather than
+// by index because the index order comes from whatever the crawl saw first.
+var FIXED_RANGE = "Fast sortiment";
+
 (function () {
   var form = document.getElementById("filters");
   if (!form) return;
@@ -58,7 +62,10 @@
 
   function criteria() {
     return {
-      buyable: document.getElementById("f-buyable").checked,
+      // "Today" means the fixed range and in stock — what is on a shelf. The
+      // other mode drops only the range constraint, since an order-only wine is
+      // still a wine you can have, just not this afternoon.
+      today: document.getElementById("m-today").checked,
       category: chosen("f-category"),
       assortment: chosen("f-assortment"),
       country: chosen("f-country"),
@@ -82,7 +89,10 @@
     var kept = [], dropped = { grape: 0, pairing: 0, stock: 0, assortment: 0 };
     for (var i = 0; i < data.wines.length; i++) {
       var w = data.wines[i];
-      if (c.buyable && w[COL.STOCK] !== 0) { dropped.stock++; continue; }
+      if (w[COL.STOCK] !== 0) { dropped.stock++; continue; }
+      if (c.today && data.vocab.assortment[w[COL.ASSORTMENT]] !== FIXED_RANGE) {
+        dropped.assortment++; continue;
+      }
       if (c.category !== null && w[COL.CATEGORY] !== c.category) continue;
       // Stock and range are different questions and were one control until
       // 2026-07-31. Four wines in five are order-only, of which almost none are

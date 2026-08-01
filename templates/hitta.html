@@ -7,13 +7,26 @@
 
 {% block content %}
 <h1>{{ s.find }}</h1>
-<p class="lede">{{ s.find_lede }}</p>
 
 <form id="filters" hidden onsubmit="return false;">
-  <div class="field checkbox">
-    <label><input type="checkbox" id="f-buyable" checked> {{ s.f_buyable }}</label>
-    <p class="explain">{{ s.f_buyable_note }}</p>
-  </div>
+  {# The two occasions people actually arrive with: buying on the way home, or
+     buying ahead for something. They differ by one thing — whether an
+     order-only wine is any use — so that is the first and largest control, and
+     it puts the fixed range in front of the reader as a named idea rather than
+     as one option in a menu of six. #}
+  <fieldset class="mode">
+    <legend>{{ s.mode_legend }}</legend>
+    <label class="mode-choice">
+      <input type="radio" name="mode" value="today" id="m-today" checked>
+      <span class="mode-name">{{ s.mode_today }}</span>
+      <span class="mode-note">{{ s.mode_today_note }}</span>
+    </label>
+    <label class="mode-choice">
+      <input type="radio" name="mode" value="wait" id="m-wait">
+      <span class="mode-name">{{ s.mode_wait }}</span>
+      <span class="mode-note">{{ s.mode_wait_note }}</span>
+    </label>
+  </fieldset>
 
   <div class="grid">
     <div class="field">
@@ -21,17 +34,12 @@
       <select id="f-category"><option value="">{{ s.f_any }}</option></select>
     </div>
     <div class="field">
-      <label for="f-assortment">{{ s.assortment }}</label>
-      <select id="f-assortment"><option value="">{{ s.f_any }}</option></select>
-      <p class="explain">{{ s.f_assortment_note }}</p>
+      <label for="f-price">{{ s.f_max_price }}</label>
+      <input type="number" id="f-price" min="0" step="10" inputmode="numeric">
     </div>
     <div class="field">
       <label for="f-country">{{ s.country }}</label>
       <select id="f-country"><option value="">{{ s.f_any }}</option></select>
-    </div>
-    <div class="field">
-      <label for="f-price">{{ s.f_max_price }}</label>
-      <input type="number" id="f-price" min="0" step="10" inputmode="numeric">
     </div>
     <div class="field">
       <label for="f-grape">{{ s.grapes }}</label>
@@ -43,24 +51,31 @@
       <select id="f-pairing"><option value="">{{ s.f_any }}</option></select>
       <p class="explain">{{ s.f_pairing_note }}</p>
     </div>
+    <div class="field">
+      <label for="f-exclude">{{ s.f_exclude }}</label>
+      <select id="f-exclude"><option value="">{{ s.f_none }}</option></select>
+    </div>
+    <div class="field">
+      <label for="f-include">{{ s.f_include }}</label>
+      <select id="f-include"><option value="">{{ s.f_none }}</option></select>
+      <p class="explain">{{ s.f_substances_note|replace("{more}", s.more) }}</p>
+    </div>
   </div>
 
-  <fieldset class="substances">
-    <legend>{{ s.f_substances }}</legend>
-    <div class="grid">
-      <div class="field">
-        <label for="f-exclude">{{ s.f_exclude }}</label>
-        <select id="f-exclude"><option value="">{{ s.f_none }}</option></select>
-      </div>
-      <div class="field">
-        <label for="f-include">{{ s.f_include }}</label>
-        <select id="f-include"><option value="">{{ s.f_none }}</option></select>
-      </div>
+  {# The rules still hold and are still stated; they are one tap away rather
+     than in front of someone who has not asked a question yet. Nothing that
+     changes what a number means is hidden — the results carry their own
+     denominator lines whether or not this is ever opened. #}
+  <details class="more">
+    <summary>{{ s.more }}</summary>
+    <p class="explain">{{ s.more_stock }}</p>
+    <p class="explain">{{ s.more_facets }}</p>
+    <p class="explain">{{ s.more_substances }}</p>
+    <div class="field">
+      <label for="f-assortment">{{ s.assortment }}</label>
+      <select id="f-assortment"><option value="">{{ s.f_assortment_all }}</option></select>
     </div>
-    {# Exclude is sound; include is weaker and says so. Both apply only where a
-       declaration exists — see docs/site-plan.md, "Exclusions and inclusions". #}
-    <p class="explain">{{ s.f_substances_note }}</p>
-  </fieldset>
+  </details>
 </form>
 
 <p id="slice-status" class="hint" role="status" aria-live="polite">{{ s.f_loading }}</p>
