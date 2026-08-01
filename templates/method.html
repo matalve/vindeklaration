@@ -16,9 +16,9 @@ koden, ordboken och datat — så att varje siffra här går att räkna om. Se
 
 <h2>Vad siffrorna betyder</h2>
 <p>{{ stats.wines }} viner är hämtade. {{ stats.declared }} av dem
-({{ '%.1f'|format(stats.declared_share) }}%) har en ingrediensförteckning.
+({{ stats.declared_share|pct(lang) }} %) har en ingrediensförteckning.
 {{ stats.partial }} av förteckningarna innehåller text som inte kunnat tolkas
-({{ '%.1f'|format(stats.partial_share) }}% av de deklarerade), och de vinerna
+({{ stats.partial_share|pct(lang) }} % av de deklarerade), och de vinerna
 hålls utanför varje rangordning. {{ stats.silent }} viner har ingen förteckning
 alls.</p>
 
@@ -97,9 +97,9 @@ code, the dictionary and the data — so every figure here can be recomputed. Se
 
 <h2>What the numbers mean</h2>
 <p>{{ stats.wines }} wines have been fetched. {{ stats.declared }} of them
-({{ '%.1f'|format(stats.declared_share) }}%) carry an ingredient declaration.
+({{ stats.declared_share|pct(lang) }} %) carry an ingredient declaration.
 {{ stats.partial }} of those declarations contain text that could not be read
-({{ '%.1f'|format(stats.partial_share) }}% of the declared ones), and those
+({{ stats.partial_share|pct(lang) }} % of the declared ones), and those
 wines are kept out of every ranking. {{ stats.silent }} wines have no
 declaration at all.</p>
 

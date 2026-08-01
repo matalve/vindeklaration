@@ -49,7 +49,7 @@
   allergen: sulfites
   name: { sv: Svaveldioxid, en: Sulfur dioxide }
   note:
-    sv: Den vanligaste konserveringsmedlet i vin. Hämmar bakterier och oxidation.
+    sv: Det vanligaste konserveringsmedlet i vin. Hämmar bakterier och oxidation.
     en: The most common wine preservative. Inhibits bacteria and oxidation.
   aliases:
     - svaveldioxid
@@ -1175,7 +1175,9 @@
 
 - id: spirits
   bucket: base
-  name: { sv: Sprit (t.ex. konjak, brandy, whisky, rom, gin), en: Spirit (e.g. cognac, brandy, whisky, rum, gin) }
+  # Quoted: the commas would otherwise be read as YAML flow-mapping separators
+  # and truncate the name to "Sprit (t.ex. konjak".
+  name: { sv: "Sprit (t.ex. konjak, brandy, whisky, rom, gin)", en: "Spirit (e.g. cognac, brandy, whisky, rum, gin)" }
   note:
     sv: Destillerad sprit tillsatt som bas eller smaksättning i glögg och aromatiserade viner.
     en: Distilled spirit added as a base or flavouring in mulled wine and aromatised wines.

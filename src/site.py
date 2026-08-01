@@ -178,8 +178,13 @@ DECLARED_FIELDS = ("additives", "gases", "base_ingredients")
 SUBSTANCE_EXAMPLES = 30
 
 
-def substance_pages(wines: list[dict]) -> list[dict]:
+def substance_pages(wines: list[dict]) -> tuple[list[dict], list[str]]:
     """One entry per substance that appears in at least one declaration.
+
+    Returns the pages, and the ids that were declared but are not in the
+    dictionary. The second half is not diagnostics: the index page says how
+    many substances it covers, and that sentence would be wrong if the ids
+    without an entry were simply forgotten.
 
     The dictionary in data/additives.yaml is the source for what a substance
     *is*; the corpus is the source for how often it is declared. A substance
@@ -200,10 +205,11 @@ def substance_pages(wines: list[dict]) -> list[dict]:
             for substance in wine.get(field) or []:
                 declaring.setdefault(substance["id"], []).append(wine)
 
-    pages = []
+    pages, undefined = [], []
     for sid, declared_by in declaring.items():
         entry = dictionary.get(sid)
         if entry is None:
+            undefined.append(sid)
             # An id parsed onto a wine that the dictionary no longer defines.
             # Skipping it silently would hide a real inconsistency, so the
             # build says so and carries on rather than inventing an entry.
@@ -214,6 +220,12 @@ def substance_pages(wines: list[dict]) -> list[dict]:
         # how little they declare would make every substance page a second
         # leaderboard, which is not what it is for.
         by_name = sorted(declared_by, key=lambda w: w["name"])
+        # Three states means three states here too. A wine whose declaration
+        # could not be read in full still named this substance, so it belongs
+        # on the page — but not silently alongside the fully read ones.
+        # Two substances (carmine, anthocyanins) rest on a single partial wine
+        # and would otherwise read as settled fact.
+        partial = [w for w in by_name if state_of(w) == "partial"]
         pages.append({
             "id": sid,
             "name": entry["name"],
@@ -227,9 +239,10 @@ def substance_pages(wines: list[dict]) -> list[dict]:
             # matter more than they look".
             "aliases": entry.get("aliases") or [],
             "count": len(declared_by),
+            "partial_count": len(partial),
             "examples": by_name[:SUBSTANCE_EXAMPLES],
         })
-    return sorted(pages, key=lambda p: -p["count"])
+    return sorted(pages, key=lambda p: -p["count"]), sorted(undefined)
 
 
 # Below this many wines a percentage says more about the sample than about the
@@ -245,27 +258,33 @@ def breakdown(wines: list[dict], key: str) -> list[dict]:
     for wine in wines:
         groups.setdefault(wine.get(key) or "", []).append(wine)
 
-    rows, held_back, held_back_declared = [], 0, 0
-    for value, group in groups.items():
+    def make(kind: str, value: str | None, group: list[dict]) -> dict:
         declared = sum(1 for w in group if w["declaration_status"] == "declared")
-        if not value or len(group) < BREAKDOWN_MINIMUM:
-            held_back += len(group)
-            held_back_declared += declared
-            continue
-        rows.append({
+        return {
+            "kind": kind,
             "value": value,
             "wines": len(group),
             "declared": declared,
-            "share": declared / len(group) * 100,
-        })
+            "share": declared / len(group) * 100 if group else 0,
+        }
+
+    # "Too few to publish a percentage for" and "Systembolaget left the field
+    # blank" are different facts and get different rows. Merging them would be
+    # the same conflation the filter is careful to avoid for grape and pairing:
+    # an empty field is a gap at the source, not a thin sample.
+    rows, thin = [], []
+    for value, group in groups.items():
+        if not value:
+            continue
+        if len(group) < BREAKDOWN_MINIMUM:
+            thin.extend(group)
+            continue
+        rows.append(make("value", value, group))
     rows.sort(key=lambda r: -r["wines"])
-    if held_back:
-        rows.append({
-            "value": None,
-            "wines": held_back,
-            "declared": held_back_declared,
-            "share": held_back_declared / held_back * 100,
-        })
+    if thin:
+        rows.append(make("aggregated", None, thin))
+    if groups.get(""):
+        rows.append(make("blank", None, groups[""]))
     return rows
 
 
@@ -297,22 +316,33 @@ def vintage_rows(wines: list[dict]) -> list[dict]:
         return {
             "kind": kind,
             "value": value,
-            "covered": kind == "year" and int(value) >= COVERED_FROM,
+            "covered": kind == "aggregated_covered" or (
+                kind == "year" and int(value) >= COVERED_FROM
+            ),
             "wines": len(group),
             "declared": declared,
             "share": declared / len(group) * 100 if group else 0,
         }
 
-    rows, thin = [], []
+    # Thin years are aggregated, but never across the coverage line. A vintage
+    # 2026 with nine bottles is certainly inside the requirement; folding it in
+    # with 2011 would put covered wines in a row the page describes as thin and
+    # old, and would stop the two "certainly covered" rows from summing to the
+    # headline figure above them.
+    rows, thin_covered, thin_older = [], [], []
     for value, group in sorted(groups.items(), key=lambda kv: kv[0], reverse=True):
         if not value:
             continue
-        if len(group) < BREAKDOWN_MINIMUM:
-            thin.extend(group)
-            continue
-        rows.append(row("year", value, group))
-    if thin:
-        rows.append(row("aggregated", None, thin))
+        if len(group) >= BREAKDOWN_MINIMUM:
+            rows.append(row("year", value, group))
+        elif int(value) >= COVERED_FROM:
+            thin_covered.extend(group)
+        else:
+            thin_older.extend(group)
+    if thin_covered:
+        rows.append(row("aggregated_covered", None, thin_covered))
+    if thin_older:
+        rows.append(row("aggregated", None, thin_older))
     if groups.get(""):
         rows.append(row("undated", None, groups[""]))
     return rows
@@ -501,12 +531,13 @@ def build(output: Path, limit: int | None = None) -> None:
     env.filters["slugify"] = slugify
     env.filters["num"] = fmt
     env.filters["pct"] = pct
+    env.filters["state"] = state_of
     env.filters["wine_url"] = wine_path
 
     stats = coverage(wines)
     allergens = allergen_labels()
     slices = list_slices(wines)
-    substances = substance_pages(wines)
+    substances, undefined_substances = substance_pages(wines)
     # A wine page links a substance only where a page was actually built, so a
     # dictionary entry that disappears cannot turn 15 000 wine pages into
     # 404 links.
@@ -636,6 +667,7 @@ def build(output: Path, limit: int | None = None) -> None:
         (substance_root / "index.html").write_text(
             substances_template.render(
                 substances=substances, stats=stats,
+                undefined_substances=undefined_substances,
                 lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
             ),

@@ -16,10 +16,12 @@
   </thead>
   <tbody>
   {% for row in rows %}
-    <tr{% if row.value is none %} class="aggregated"{% endif %}>
+    <tr{% if row.kind != 'value' %} class="aggregated"{% endif %}>
       <td>
-        {%- if row.value is none -%}
+        {%- if row.kind == 'aggregated' -%}
           {{ s.row_other }}
+        {%- elif row.kind == 'blank' -%}
+          {{ s.field_blank }}
         {%- elif facet_labels.get(facet) and row.value in facet_labels[facet] -%}
           {{ facet_labels[facet][row.value] }}
         {%- else -%}
@@ -51,6 +53,11 @@
       <strong>{{ stats.declared_share|pct(lang) }} %</strong>
       {{ s.coverage_lead }} — {{ stats.declared }} {{ s.of }} {{ stats.wines }} {{ s.wines_word }}.
     </p>
+    {# The silent wines as a number, not only as a share of something else.
+       They are the site's most common answer and the front page already
+       counts them in three rows; the page most likely to be quoted should
+       not be the one that leaves them implicit. #}
+    <p class="explain">{{ s.coverage_silent|replace("{n}", stats.silent) }}</p>
     <p class="explain">{{ s.coverage_unread|replace("{n}", stats.partial) }}</p>
   </section>
 
@@ -91,12 +98,16 @@
           <td>
             {%- if row.kind == 'year' -%}
               {{ row.value }}
+            {%- elif row.kind == 'aggregated_covered' -%}
+              {{ s.vintage_covered_aggregated }}
             {%- elif row.kind == 'aggregated' -%}
               {{ s.row_other }}
             {%- else -%}
               {{ s.no_vintage }}
             {%- endif %}
-            {% if row.covered %}<span class="meta">{{ s.vintage_covered_mark }}</span>{% endif %}
+            {# The aggregated row says it in its own label; the badge would
+               only repeat the phrase back. #}
+            {% if row.covered and row.kind == 'year' %}<span class="meta">{{ s.vintage_covered_mark }}</span>{% endif %}
           </td>
           <td class="num">{{ row.wines }}</td>
           <td class="num">{{ row.declared }}</td>
