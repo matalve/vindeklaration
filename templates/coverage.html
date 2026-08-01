@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{# One table shape for category and country. Both name a facet value, so both
+   translate it through facet_labels on the English build for the same reason
+   the filter's menus do — the value itself is Systembolaget's Swedish.
+   Defined before the block that calls it: a macro is bound in source order. #}
+{% macro breakdown_table(rows, facet) %}
+<table class="breakdown">
+  <thead>
+    <tr>
+      <th>{{ s[facet] if facet in s else facet }}</th>
+      <th class="num">{{ s.col_wines }}</th>
+      <th class="num">{{ s.col_declared }}</th>
+      <th class="num">{{ s.col_share }}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for row in rows %}
+    <tr{% if row.value is none %} class="aggregated"{% endif %}>
+      <td>
+        {%- if row.value is none -%}
+          {{ s.row_other }}
+        {%- elif facet_labels.get(facet) and row.value in facet_labels[facet] -%}
+          {{ facet_labels[facet][row.value] }}
+        {%- else -%}
+          {{ row.value }}
+        {%- endif -%}
+      </td>
+      <td class="num">{{ row.wines }}</td>
+      <td class="num">{{ row.declared }}</td>
+      <td class="num">{{ row.share|pct(lang) }} %</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p class="explain">{{ s.breakdown_minimum|replace("{n}", minimum) }}</p>
+{% endmacro %}
+
+{% block title %}{{ s.coverage_title }} — {{ s.site_name }}{% endblock %}
+{% block description %}{{ s.coverage_covered|replace("{n}", covered.wines)|replace("{y}", covered_from)|replace("{d}", covered.declared)|replace("{p}", covered.share|pct(lang)) }}{% endblock %}
+
+{% block content %}
+<article class="coverage-page">
+
+  <h1>{{ s.coverage_title }}</h1>
+  <p class="lede">{{ s.coverage_lede }}</p>
+
+  <section class="block">
+    <h2>{{ s.coverage_whole_shelf }}</h2>
+    <p class="hint">
+      <strong>{{ stats.declared_share|pct(lang) }} %</strong>
+      {{ s.coverage_lead }} — {{ stats.declared }} {{ s.of }} {{ stats.wines }} {{ s.wines_word }}.
+    </p>
+    <p class="explain">{{ s.coverage_unread|replace("{n}", stats.partial) }}</p>
+  </section>
+
+  {# The headline figure, and immediately under it the reason it is a floor.
+     docs/site-plan.md requires the proxy to be stated in body text with the
+     count, not in a footnote. #}
+  <section class="block">
+    <h2>{{ s.coverage_covered_head }}</h2>
+    <p class="hint">{{ s.coverage_covered|replace("{n}", covered.wines)|replace("{y}", covered_from)|replace("{d}", covered.declared)|replace("{p}", covered.share|pct(lang)) }}</p>
+    <p class="explain caveat">{{ s.coverage_proxy|replace("{y}", covered_from)|replace("{o}", covered.outside) }}</p>
+    <p class="explain">{{ s.coverage_undated|replace("{n}", covered.undated) }}</p>
+  </section>
+
+  <section class="block">
+    <h2>{{ s.by_category }}</h2>
+    {{ breakdown_table(breakdowns.category, 'category') }}
+  </section>
+
+  <section class="block">
+    <h2>{{ s.by_country }}</h2>
+    {{ breakdown_table(breakdowns.country, 'country') }}
+  </section>
+
+  <section class="block">
+    <h2>{{ s.by_vintage }}</h2>
+    <table class="breakdown">
+      <thead>
+        <tr>
+          <th>{{ s.vintage }}</th>
+          <th class="num">{{ s.col_wines }}</th>
+          <th class="num">{{ s.col_declared }}</th>
+          <th class="num">{{ s.col_share }}</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for row in breakdowns.vintage %}
+        <tr{% if row.covered %} class="covered"{% elif row.kind != 'year' %} class="aggregated"{% endif %}>
+          <td>
+            {%- if row.kind == 'year' -%}
+              {{ row.value }}
+            {%- elif row.kind == 'aggregated' -%}
+              {{ s.row_other }}
+            {%- else -%}
+              {{ s.no_vintage }}
+            {%- endif %}
+            {% if row.covered %}<span class="meta">{{ s.vintage_covered_mark }}</span>{% endif %}
+          </td>
+          <td class="num">{{ row.wines }}</td>
+          <td class="num">{{ row.declared }}</td>
+          <td class="num">{{ row.share|pct(lang) }} %</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <p class="explain">{{ s.breakdown_minimum|replace("{n}", minimum) }}</p>
+  </section>
+
+  <p class="hint"><a href="{{ lang_root }}/{{ s.substance_url }}/">{{ s.substances }}</a></p>
+
+</article>
+{% endblock %}
