@@ -119,7 +119,8 @@
   "more_facets": "Druva och passar-till är inte ifyllda för alla viner. Väljer du en faller de tomma bort, och det redovisas som en egen rad — det är ett tomt fält hos Systembolaget, inte tystnad från leverantören.",
   "more_substances": "Att utesluta ett ämne håller: ett vin som deklarerat fullt ut och inte listat det innehåller det inte. Att kräva ett ämne är svagare — det hittar viner som erkänner det, inte alla som har det. Båda gäller bara första blocket; de två andra kan varken bekräfta eller dementera ett val och märks i stället för att filtreras.",
   "more_stock": "Lagersaldot är från när sidan byggdes, i natt. Slutsålda och tillfälligt slut visas inte.",
-  "f_assortment_all": "alla sortiment"
+  "f_assortment_all": "alla sortiment",
+  "ranking_is_disclosure": "Rangordningen gäller vad vinerna deklarerar, inte vad de innehåller."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -241,6 +242,7 @@
   "more_facets": "Grape and food pairing are not recorded for every wine. Choosing one drops those with an empty field, counted on its own line — that is a blank at Systembolaget, not silence from the supplier.",
   "more_substances": "Excluding a substance is sound: a wine that declared fully and did not list it does not contain it. Requiring one is weaker — it finds wines that admit to it, not every wine that has it. Both apply to the first block only; the other two can neither confirm nor deny a choice and are labelled rather than filtered.",
   "more_stock": "Stock is as of the last build, overnight. Out of stock and temporarily out are not shown.",
-  "f_assortment_all": "all ranges"
+  "f_assortment_all": "all ranges",
+  "ranking_is_disclosure": "The ranking is of what the wines declare, not of what they contain."
  }
 }
