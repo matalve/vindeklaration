@@ -155,51 +155,105 @@ test("the store threshold narrows the other menus", () => {
 });
 
 // `prune` is the half the reader actually touches. Extracted the same way, and
-// driven against stub <option>s rather than a real DOM.
-const pruneSource = source.slice(source.indexOf("function prune("), source.indexOf("function pruneMenus("));
-function makePrune(select) {
-  const ctx = vm.createContext({ document: { getElementById: () => select } });
-  return vm.runInContext(`${pruneSource}; prune`, ctx);
+// driven against a stub <select> — enough DOM to rebuild an option list, which
+// is what it now does. Setting `hidden` was the first implementation and left
+// the list as long as it was, only grey.
+const pruneSource = source.slice(source.indexOf("var MENUS = {}"), source.indexOf("function pruneMenus("));
+
+function fakeSelect(...values) {
+  return {
+    value: "",
+    options: values.map((v) => ({ value: v, textContent: "opt " + v })),
+    set innerHTML(_) { this.options = []; },
+    appendChild(frag) { this.options = this.options.concat(frag.children); },
+  };
 }
-const options = (...values) => values.map((v) => ({ value: v, hidden: false, disabled: false }));
 
-test("the empty option is never pruned away", () => {
-  const select = { value: "", options: options("", "3", "9") };
-  makePrune(select)("f-country", () => false);
+function makePrune(select, focused = null) {
+  const document = {
+    getElementById: () => select,
+    activeElement: focused,
+    createElement: () => ({ value: "", textContent: "" }),
+    createDocumentFragment: () => ({
+      children: [],
+      appendChild(n) { this.children.push(n); },
+    }),
+  };
+  const ctx = vm.createContext({ document, Array });
+  const { prune, snapshot } = vm.runInContext(
+    `${pruneSource}; ({ prune: prune, snapshot: snapshot })`, ctx,
+  );
+  snapshot("f-x");
+  return prune;
+}
 
-  assert.equal(select.options[0].hidden, false, "clearing the filter became impossible");
+const values = (select) => select.options.map((o) => o.value);
+
+test("an option holding nothing is removed, not merely greyed out", () => {
+  const select = fakeSelect("", "4", "9");
+  const buried = makePrune(select)("f-x", (v) => v === "9");
+
+  assert.deepEqual(values(select), ["", "9"]);
+  assert.equal(buried, 1);
 });
 
-test("the current selection is never hidden, even when it holds nothing", () => {
-  // Reachable only by changing another control first — say the reader picks a
-  // grape, then narrows the country until that grape holds nothing. Hiding the
-  // value they are looking at would change the answer without saying so.
-  const select = { value: "7", options: options("", "7", "8") };
-  const buried = makePrune(select)("f-grape", () => false);
+test("the empty option survives, or the filter cannot be cleared", () => {
+  const select = fakeSelect("", "3", "9");
+  makePrune(select)("f-x", () => false);
 
-  assert.equal(select.options[1].hidden, false);
-  assert.equal(select.options[1].disabled, false);
-  assert.equal(buried, 1, "only the unselected empty value should be counted");
+  assert.deepEqual(values(select), [""]);
 });
 
-test("an option holding nothing is both hidden and disabled", () => {
-  // `hidden` on an <option> is honoured unevenly across browsers, so the
-  // fallback has to make it unselectable rather than merely invisible.
-  const select = { value: "", options: options("", "4") };
-  makePrune(select)("f-grape", () => false);
+test("the current selection survives even when it holds nothing", () => {
+  // Reachable by changing another control: pick a grape, then narrow the
+  // country until that grape holds nothing. Dropping the value the reader is
+  // looking at would change the answer without saying so.
+  const select = fakeSelect("", "7", "8");
+  select.value = "7";
+  const buried = makePrune(select)("f-x", () => false);
 
-  assert.equal(select.options[1].hidden, true);
-  assert.equal(select.options[1].disabled, true);
+  assert.deepEqual(values(select), ["", "7"]);
+  assert.equal(select.value, "7", "the selection was lost in the rebuild");
+  assert.equal(buried, 1);
 });
 
 test("pruning is reversible: an option comes back when it holds again", () => {
-  const select = { value: "", options: options("", "4") };
+  const select = fakeSelect("", "4");
   const prune = makePrune(select);
-  prune("f-grape", () => false);
-  prune("f-grape", () => true);
+  prune("f-x", () => false);
+  assert.deepEqual(values(select), [""]);
 
-  assert.equal(select.options[1].hidden, false, "clearing a filter must restore the menu");
-  assert.equal(select.options[1].disabled, false);
+  prune("f-x", () => true);
+  assert.deepEqual(values(select), ["", "4"], "clearing a filter must restore the menu");
+});
+
+test("the menu being used is left alone until focus moves", () => {
+  // Replacing the options of an open dropdown closes it under the reader's
+  // finger. The count is still reported so the status line does not flicker.
+  const select = fakeSelect("", "4", "9");
+  const buried = makePrune(select, select)("f-x", () => false);
+
+  assert.deepEqual(values(select), ["", "4", "9"], "an open dropdown was rebuilt");
+  assert.equal(buried, 2, "the count should not depend on where focus is");
+});
+
+test("every pruned menu is snapshotted first", () => {
+  // prune() reads its option list from MENUS and returns 0 if the id was never
+  // snapshotted — so forgetting one here disables the pruning for that menu
+  // silently, with no error and no visible difference except a long list.
+  const snapshotted = new Set(
+    source.slice(source.indexOf("].forEach(snapshot)") - 400, source.indexOf("].forEach(snapshot)"))
+      .match(/"(f-[a-z]+)"/g)?.map((s) => s.replace(/"/g, "")) ?? [],
+  );
+  const pruned = new Set(
+    source.slice(source.indexOf("function pruneMenus("), source.indexOf("// Applies to block 1"))
+      .match(/prune\("(f-[a-z]+)"/g).map((s) => s.replace(/prune\("|"/g, "")),
+  );
+
+  assert.ok(pruned.size >= 6, "expected the menus to still be pruned");
+  for (const id of pruned) {
+    assert.ok(snapshotted.has(id), `${id} is pruned but never snapshotted`);
+  }
 });
 
 test("one pass over the index stays quick enough to run on every keystroke", () => {
