@@ -575,5 +575,67 @@
   "allergens": [
    "sulfites"
   ]
+ },
+ {
+  "why": "the nutrition line \"Energivärde: E/100 ml\" must not read as the colour additive E100 once the slash is blanked to a space; real declaration for Contrada Rivella Piemonte Sauvignon (x-7795501)",
+  "text": "druvmust, koncentrerad druvmust, stabiliseringsmedel: E466, antioxidant: E224 (SULFITER). Buteljerad i en skyddad atmosfär. Energivärde: E/100 ml - 76 kcal (317 kj). Innehåller 0,5 g totalt socker varav 0,4 g sockerarter. Innehåller försumbara mängder protein, fett och salt.",
+  "additives": [
+   "carboxymethylcellulose",
+   "potassium_metabisulfite"
+  ],
+  "gases": [],
+  "base": [
+   "grape_must",
+   "sugar"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "E129 (Allura Red AC) declared as a colouring agent in a flavoured sparkling wine drink, alongside two named acidity regulators for a bare E-number each; real declaration for Frökens Bubbel Hallon (x-5551901)",
+  "text": "Vino (Uva - Mosto di uve concentrato - Correttore di acidità: Ac.Malico e Ac. Tartarico - Conservanti: SOLFITI - Stabilizzanti: Ac.Ci, Vatten, Sackaros, Naturliga aromer, Färgämnen: E129. INNEHÅLLER SULFITER Buteljerad i en skyddande atmosfär",
+  "additives": [
+   "e129",
+   "flavourings",
+   "malic_acid",
+   "sulfites",
+   "tartaric_acid"
+  ],
+  "gases": [],
+  "base": [
+   "grape_must",
+   "grapes",
+   "sugar",
+   "water",
+   "wine"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "E446 (Succistearin) declared as a stabiliser alongside two additives that are actually authorised for wine (gum arabic E414, potassium polyaspartate E456); real declaration for Anthilia Bianco (x-5487501)",
+  "text": "Druvor, koncentrerad druvmust, stabilisatorer (E446, E414, E456), antioxidationsmedel (E224)",
+  "additives": [
+   "e446",
+   "gum_arabic",
+   "potassium_metabisulfite",
+   "potassium_polyaspartate"
+  ],
+  "gases": [],
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  }
 ]

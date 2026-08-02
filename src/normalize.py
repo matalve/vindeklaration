@@ -31,7 +31,10 @@ LEXICON_PATH = DATA_DIR / "lexicon.yaml"
 PUNCTUATION = ",;:()[]{}/\\*.!?\"'`+|&\n\t\r–—-"
 TRANSLATION = {ord(character): " " for character in PUNCTUATION}
 
-E_NUMBER_RE = re.compile(r"\be\s?(\d{2,4})\s?([a-z])?\b")
+# The trailing negative lookahead keeps "Energivärde: E/100 ml" (energy per
+# 100 ml, a nutrition-declaration convention, not an additive) from reading as
+# E100 once the slash has been blanked out to a space.
+E_NUMBER_RE = re.compile(r"\be\s?(\d{2,4})\s?([a-z])?\b(?!\s*ml\b)")
 FUZZY_MIN_LENGTH = 5
 FUZZY_THRESHOLD = 88
 # Regex entries win over literal aliases regardless of length.

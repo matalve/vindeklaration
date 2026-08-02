@@ -549,6 +549,16 @@
   regexes:
     - '\bkalium\s?polyaspartat\b'
 
+- id: e446
+  e_number: E446
+  bucket: additive
+  category: stabiliser
+  name: { sv: Succistearin, en: Succistearin }
+  note:
+    sv: Emulgeringsmedel (stearoylpropylenglykolvätesuccinat), tillverkat av härdat vegetabiliskt fett, succinsyraanhydrid och propylenglykol. Deklarerat här bland stabilisatorerna i ett sicilianskt vitt vin tillsammans med gummi arabicum (E414) och kaliumpolyaspartat (E456), men till skillnad från de andra två finns E446 inte med bland de tillsatser som är godkända för vinframställning enligt bilaga I till förordning (EU) 2019/934.
+    en: An emulsifier (stearoyl propylene glycol hydrogen succinate) made from hardened vegetable fat, succinic anhydride and propylene glycol. Declared here among the stabilisers in a Sicilian white wine alongside gum arabic (E414) and potassium polyaspartate (E456), but unlike those two, E446 is not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934.
+  aliases: [succistearin]
+
 - id: mannoproteins
   # E455 is not the EU-assigned number for mannoproteins (they have none), but
   # some suppliers print it after the name anyway -- recorded here so the bare
@@ -729,6 +739,16 @@
   category: colour
   name: { sv: Ponceau 4R (Cochenillrött A), en: Ponceau 4R (Cochineal Red A) }
   aliases: []
+
+- id: e129
+  e_number: E129
+  bucket: additive
+  category: colour
+  name: { sv: Allurarött AC, en: Allura Red AC }
+  note:
+    sv: Syntetiskt azofärgämne. Sett här i en smaksatt (hallon) mousserande vindryck, en kategori där färgämnen är tillåtna enligt EU:s allmänna tillsatsförordning (EG) 1333/2008 — till skillnad från vanligt vin, där färgämnen inte finns med bland de tillsatser som är godkända för vinframställning. Livsmedel som innehåller E129 ska enligt EU-regler märkas med en varning om att ämnet kan ha en negativ effekt på barns aktivitet och koncentrationsförmåga.
+    en: A synthetic azo dye. Seen here in a flavoured (raspberry) sparkling wine drink, a category where colours are permitted under the EU's general food additive regulation (EC) 1333/2008 — unlike plain wine, where colours are not among the additives authorised for winemaking. EU rules require foods containing E129 to carry a warning that it may have an adverse effect on children's activity and attention.
+  aliases: [allura red, allura red ac, allurarött, allurarött ac]
 
 - id: wheat_protein
   bucket: additive
