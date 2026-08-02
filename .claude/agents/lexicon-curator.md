@@ -62,6 +62,15 @@ ever making the data less true.
   every time. Never a regex broad enough to swallow text you have not read.
 - **Both languages, always.** Every substance carries `name.sv` and `name.en`,
   and a `note` in both when the substance needs explaining to a shopper.
+- **A note says what a substance does, never what it does to a body.** Function,
+  legal status, whether it must be declared as an allergen — not effects on
+  health. See *What the site must never say* in `docs/site-plan.md`; the rule
+  is there because a note written here reached a live page on 2026-08-02 and
+  broke it. A legally mandated warning may be reported, but only quoted
+  verbatim, with the instrument named, and on **every** substance the
+  requirement reaches rather than the one you happened to be editing —
+  carrying it on one page of three made its presence an accusation about a
+  particular wine.
 - **Never lower the quality gate** in `src/report.py`, and never widen
   `FUZZY_THRESHOLD` in `src/normalize.py` to make numbers look better. If you
   believe a threshold is genuinely wrong, say so in your report and leave it.
