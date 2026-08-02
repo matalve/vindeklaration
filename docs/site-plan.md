@@ -100,20 +100,30 @@ Three consequences that shape every page:
   writes down: sulfites are the one substance with a widely believed consumer
   reaction, and their note says only that they preserve wine and must be
   declared.
-  **Quoting a legally mandated warning is a different act and is allowed**,
-  because it is reporting rather than asserting, and making mandated disclosure
-  comparable is what the site is for. Three conditions, all of which the E129
-  page failed before it was fixed: the statutory wording is **quoted verbatim,
-  not paraphrased** — a near-miss reads as the site's own words about a health
-  effect; the instrument is **named**, so the sentence has a visible author who
-  is not us; and it appears on **every substance the requirement reaches, or
-  none of them**. The last one is the one that bites. Annex V to Regulation
-  (EC) No 1333/2008 covers six colours, the dictionary carries three, and the
-  warning sat on one — so the page silently told a reader that the wine
-  declaring one warning-colour had a problem while saying nothing about the
-  wine declaring two. **Presence is a signal independent of content**, which is
-  the same rule about implication as the bullet above, reaching a place nobody
-  had looked.
+  **Quoting a legally mandated warning is a different act and would be
+  allowed**, because it is reporting rather than asserting, and making mandated
+  disclosure comparable is what the site is for. Four conditions, and the E129
+  note failed all four in the two days it existed. The statutory wording must
+  be **quoted verbatim, not paraphrased** — the note had translated the English
+  back into Swedish and produced a near-miss, which reads as the site's own
+  words about a health effect rather than as a quotation. The instrument must
+  be **named**, so the sentence has a visible author who is not us. It must
+  appear on **every substance the requirement reaches, or none** — Annex V to
+  Regulation (EC) No 1333/2008 covers six colours, the dictionary carries
+  three, and the warning sat on one, so the page silently told a reader that
+  the wine declaring one warning-colour had a problem while saying nothing
+  about the wine declaring two. **Presence is a signal independent of content.**
+  And the requirement must **actually reach the product**, which is where the
+  whole thing collapsed: Commission Regulation (EU) No 238/2010 exempts
+  beverages above 1,2 % alcohol by volume, on the reasoning that they "are not
+  intended for consumption by children". Every wine in this dataset is above
+  that threshold. **The site published a health-adjacent warning that does not
+  apply to a single product it lists.**
+  The lesson is not only about health claims. The base act said what the note
+  claimed; a 2010 amendment reversed it, and the amendment is not what a search
+  finds first. **A regulation is not verified until the consolidated text or
+  the amending acts have been read** — see `docs/legal-notes.md` for the same
+  discipline applied elsewhere.
 - That a wine "contains no additives" when it declares nothing. It says
   *the wine does not declare any*, and the site says exactly that. No statement
   about a wine's contents may be derived from the absence of a declaration.

@@ -67,10 +67,16 @@ ever making the data less true.
   health. See *What the site must never say* in `docs/site-plan.md`; the rule
   is there because a note written here reached a live page on 2026-08-02 and
   broke it. A legally mandated warning may be reported, but only quoted
-  verbatim, with the instrument named, and on **every** substance the
-  requirement reaches rather than the one you happened to be editing —
-  carrying it on one page of three made its presence an accusation about a
-  particular wine.
+  verbatim, with the instrument named, on **every** substance the requirement
+  reaches rather than the one you happened to be editing, and only after
+  confirming the requirement reaches these products at all. That note claimed
+  the Annex V children's-attention warning applied; Commission Regulation (EU)
+  No 238/2010 had exempted drinks above 1,2 % alcohol sixteen years earlier.
+- **Read the amendments, not just the base act.** EUR-Lex serves the act as
+  adopted first, and a note sourced from it is a note sourced from text that
+  may have been reversed. Check the consolidated version or the amending acts
+  before writing a regulatory claim into a note, and say in your report which
+  one you read.
 - **Never lower the quality gate** in `src/report.py`, and never widen
   `FUZZY_THRESHOLD` in `src/normalize.py` to make numbers look better. If you
   believe a threshold is genuinely wrong, say so in your report and leave it.

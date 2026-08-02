@@ -726,20 +726,26 @@
   name: { sv: Karmin, en: Carmine }
   aliases: [karmin, karminsyra, cochenill, carmine, cochineal]
 
-# The three Annex V colours the dictionary carries — E110, E124 and E129 —
-# say the same thing about the labelling requirement, in the regulation's own
-# words. Carrying it on one and not the others would make its presence an
-# editorial signal about a particular wine rather than a fact about a
-# substance, which is what the substance pages promise not to be. E102, E104
-# and E122 are the other three in the annex and appear in no declaration here.
+# E110, E124 and E129 are Group III colours: permitted in aromatised wine
+# products under food category 14.2.7 of Annex II to 1333/2008, subject to a
+# combined maximum, and not permitted in wine itself.
+#
+# These notes carried the Annex V children's-attention warning for one day and
+# it was wrong. Commission Regulation (EU) No 238/2010 exempts beverages above
+# 1,2 % alcohol by volume from that requirement — recital 3: such products
+# "are not intended for consumption by children", so the labelling is "neither
+# necessary nor appropriate". Every wine in this dataset is above that
+# threshold, so the warning reaches none of them. Do not reinstate it from a
+# reading of the base act: 1333/2008 as adopted has no such exemption, and
+# that is the text a search engine finds first.
 - id: sunset_yellow
   e_number: E110
   bucket: additive
   category: colour
   name: { sv: Para-orange (Sunset Yellow FCF), en: Sunset Yellow FCF }
   note:
-    sv: Syntetiskt azofärgämne. E110 är ett av sex färgämnen som enligt bilaga V till förordning (EG) nr 1333/2008 kräver uppgiften ”kan ha en negativ effekt på barns beteende och koncentration” i livsmedlets märkning. Färgämnen är inte godkända för vinframställning, men är tillåtna i vissa aromatiserade vinprodukter.
-    en: A synthetic azo dye. E110 is one of six colours for which Annex V to Regulation (EC) No 1333/2008 requires the food's labelling to carry the words “may have an adverse effect on activity and attention in children”. Colours are not authorised for winemaking, but are permitted in some aromatised wine products.
+    sv: Syntetiskt azofärgämne. Färgämnen finns inte bland de tillsatser som är godkända för vinframställning enligt bilaga I till förordning (EU) 2019/934. I aromatiserade vinprodukter är E110 däremot tillåtet, som ett av grupp III-färgämnena med gemensam högsta halt 200 mg/l, enligt livsmedelskategori 14.2.7 i bilaga II till förordning (EG) nr 1333/2008.
+    en: A synthetic azo dye. Colours are not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934. In aromatised wine products E110 is permitted, as one of the Group III colours subject to a combined maximum of 200 mg/l, under food category 14.2.7 of Annex II to Regulation (EC) No 1333/2008.
   aliases: []
 
 - id: ponceau_4r
@@ -748,8 +754,8 @@
   category: colour
   name: { sv: Ponceau 4R (Cochenillrött A), en: Ponceau 4R (Cochineal Red A) }
   note:
-    sv: Syntetiskt azofärgämne. E124 är ett av sex färgämnen som enligt bilaga V till förordning (EG) nr 1333/2008 kräver uppgiften ”kan ha en negativ effekt på barns beteende och koncentration” i livsmedlets märkning. Färgämnen är inte godkända för vinframställning, men är tillåtna i vissa aromatiserade vinprodukter.
-    en: A synthetic azo dye. E124 is one of six colours for which Annex V to Regulation (EC) No 1333/2008 requires the food's labelling to carry the words “may have an adverse effect on activity and attention in children”. Colours are not authorised for winemaking, but are permitted in some aromatised wine products.
+    sv: Syntetiskt azofärgämne. Färgämnen finns inte bland de tillsatser som är godkända för vinframställning enligt bilaga I till förordning (EU) 2019/934. I aromatiserade vinprodukter är E124 däremot tillåtet, som ett av grupp III-färgämnena med gemensam högsta halt 200 mg/l, enligt livsmedelskategori 14.2.7 i bilaga II till förordning (EG) nr 1333/2008.
+    en: A synthetic azo dye. Colours are not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934. In aromatised wine products E124 is permitted, as one of the Group III colours subject to a combined maximum of 200 mg/l, under food category 14.2.7 of Annex II to Regulation (EC) No 1333/2008.
   aliases: []
 
 - id: e129
@@ -758,8 +764,8 @@
   category: colour
   name: { sv: Allurarött AC, en: Allura Red AC }
   note:
-    sv: Syntetiskt azofärgämne. Sett här i en smaksatt (hallon) mousserande vindryck, en kategori där färgämnen är tillåtna enligt EU:s allmänna tillsatsförordning (EG) 1333/2008 — till skillnad från vanligt vin, där färgämnen inte finns med bland de tillsatser som är godkända för vinframställning. E129 är ett av sex färgämnen som enligt bilaga V till samma förordning kräver uppgiften ”kan ha en negativ effekt på barns beteende och koncentration” i livsmedlets märkning.
-    en: A synthetic azo dye. Seen here in a flavoured (raspberry) sparkling wine drink, a category where colours are permitted under the EU's general food additive regulation (EC) 1333/2008 — unlike plain wine, where colours are not among the additives authorised for winemaking. E129 is one of six colours for which Annex V to the same regulation requires the food's labelling to carry the words “may have an adverse effect on activity and attention in children”.
+    sv: Syntetiskt azofärgämne. Färgämnen finns inte bland de tillsatser som är godkända för vinframställning enligt bilaga I till förordning (EU) 2019/934. I aromatiserade vinprodukter är E129 däremot tillåtet, som ett av grupp III-färgämnena med gemensam högsta halt 200 mg/l, enligt livsmedelskategori 14.2.7 i bilaga II till förordning (EG) nr 1333/2008.
+    en: A synthetic azo dye. Colours are not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934. In aromatised wine products E129 is permitted, as one of the Group III colours subject to a combined maximum of 200 mg/l, under food category 14.2.7 of Annex II to Regulation (EC) No 1333/2008.
   aliases: [allura red, allura red ac, allurarött, allurarött ac]
 
 - id: wheat_protein
