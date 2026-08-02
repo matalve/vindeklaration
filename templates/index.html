@@ -55,7 +55,11 @@
     stateDeclared: {{ s.state_declared|tojson }},
     stateDeclaredZero: {{ s.state_declared_zero|tojson }},
     statePartial: {{ s.state_partial|tojson }},
-    stateSilent: {{ s.state_silent|tojson }}
+    stateSilent: {{ s.state_silent|tojson }},
+    {# The search rows name the substances, so this page needs the same map the
+       filter uses. The index itself stays language-neutral ids: one file
+       serves both builds. #}
+    additiveNames: {{ additive_names|tojson }}
   };
 </script>
 <script src="/sok.js" defer></script>

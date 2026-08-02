@@ -256,6 +256,72 @@ test("every pruned menu is snapshotted first", () => {
   }
 });
 
+// The row label, which both the search and the filter render. Asserted on what
+// the reader ends up seeing rather than on the call that produces it.
+function siteNames(page) {
+  const html = readFileSync(page, "utf8");
+  // `,?` matters: on the filter page the map is followed by facetLabels, so a
+  // pattern anchored on "} newline" runs past the end and swallows both.
+  const m = html.match(/additiveNames: (\{.*?\}),?\n/s);
+  assert.ok(m, `${page} does not pass additiveNames to the browser`);
+  return JSON.parse(m[1]);
+}
+
+test("every substance in the index has a name on both rendering pages", () => {
+  // A gap here shows up as a raw id like "gum_arabic" in a result row.
+  for (const page of ["site/index.html", "site/hitta/index.html"]) {
+    const names = siteNames(page);
+    for (const id of data.vocab.additive) {
+      assert.ok(names[id], `${page} has no name for ${id}`);
+    }
+  }
+});
+
+test("a declared row names its substances, not just how many", () => {
+  const names = siteNames("site/index.html");
+  const ctx = vm.createContext({
+    window: { SITE: {
+      _data: data,
+      additiveNames: names,
+      stateDeclared: "Deklarerar",
+      stateDeclaredZero: "Deklarerar inga tillsatser",
+    } },
+    document: { getElementById: () => null },
+  });
+  vm.runInContext(readFileSync("templates/sok.js", "utf8"), ctx);
+
+  const row = data.wines.find((w) => w[COL.STATE] === "d" && w[COL.COUNT] >= 2);
+  assert.ok(row, "expected at least one wine declaring two substances");
+  const label = ctx.stateLabel(row);
+
+  assert.ok(label.startsWith("Deklarerar " + row[COL.COUNT] + ":"),
+    `expected the count then the names, got ${label}`);
+  for (const i of row[COL.ADDITIVES]) {
+    assert.ok(label.includes(names[data.vocab.additive[i]]),
+      `${data.vocab.additive[i]} missing from "${label}"`);
+  }
+});
+
+test("a wine declaring nothing is never given a substance list", () => {
+  const ctx = vm.createContext({
+    window: { SITE: {
+      _data: data, additiveNames: siteNames("site/index.html"),
+      stateDeclaredZero: "Deklarerar inga tillsatser",
+      stateSilent: "Deklarerar inga ingredienser",
+      statePartial: "Deklarerar, men all text kunde inte tolkas",
+    } },
+    document: { getElementById: () => null },
+  });
+  vm.runInContext(readFileSync("templates/sok.js", "utf8"), ctx);
+
+  const silent = data.wines.find((w) => w[COL.STATE] === "s");
+  assert.equal(ctx.stateLabel(silent), "Deklarerar inga ingredienser");
+  // The distinction the whole site rests on: declaring zero additives and
+  // declaring nothing at all are different sentences.
+  const zero = data.wines.find((w) => w[COL.STATE] === "d" && w[COL.COUNT] === 0);
+  if (zero) assert.equal(ctx.stateLabel(zero), "Deklarerar inga tillsatser");
+});
+
 test("one pass over the index stays quick enough to run on every keystroke", () => {
   const c = { ...none, country: data.vocab.country.indexOf("Italien") };
   const started = process.hrtime.bigint();
