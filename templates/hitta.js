@@ -112,8 +112,12 @@ var FIXED_RANGE = "Fast sortiment";
       // Same shape as grape and pairing: a null is our own unread field, not
       // a wine that sits on no shelf, so it is counted apart rather than
       // silently failing the threshold.
+      // `== null` on purpose: it catches undefined as well as null. A browser
+      // holding a cached index from before this column existed would otherwise
+      // read the missing value as passing every threshold, which is the one
+      // failure mode that silently widens a result rather than narrowing it.
       if (c.minStores !== null) {
-        if (w[COL.STORES] === null) { dropped.stores++; continue; }
+        if (w[COL.STORES] == null) { dropped.stores++; continue; }
         if (w[COL.STORES] < c.minStores) continue;
       }
       if (c.grape !== null && w[COL.GRAPES].indexOf(c.grape) === -1) continue;
@@ -121,6 +125,113 @@ var FIXED_RANGE = "Fast sortiment";
       kept.push(w);
     }
     return { kept: kept, dropped: dropped };
+  }
+
+  // Which values are still worth offering. With 433 grapes against 57
+  // countries most combinations hold nothing, and a menu that offers them is a
+  // menu that answers "no wines match" to a question the reader could not have
+  // known was empty.
+  //
+  // One pass, counting misses rather than re-slicing once per facet: a wine
+  // that fails nothing is evidence for every menu, a wine that fails exactly
+  // one criterion is evidence for that criterion's menu alone, and a wine that
+  // fails two is evidence for none. Eight re-slices of 15 000 rows on every
+  // keystroke is the obvious implementation and is the one that stutters on a
+  // phone.
+  var FACETS = ["category", "assortment", "country", "grape", "pairing", "stores"];
+
+  function available(data, c) {
+    var avail = {};
+    FACETS.forEach(function (f) { avail[f] = {}; });
+
+    for (var i = 0; i < data.wines.length; i++) {
+      var w = data.wines[i];
+      // Hard gates. Out of stock, or outside the range the mode asked for, and
+      // the wine is not evidence for anything — it cannot be reached by any
+      // menu choice without changing the mode first.
+      if (w[COL.STOCK] !== 0) continue;
+      if (c.today && data.vocab.assortment[w[COL.ASSORTMENT]] !== FIXED_RANGE) continue;
+
+      // Inlined rather than pushed through a helper: this runs once per wine
+      // per keystroke, and allocating a closure 15 000 times is the difference
+      // the reader feels.
+      var missed = null, misses = 0;
+      if (c.category !== null && w[COL.CATEGORY] !== c.category) { missed = "category"; misses++; }
+      if (c.assortment !== null && w[COL.ASSORTMENT] !== c.assortment) { missed = "assortment"; misses++; }
+      if (c.country !== null && w[COL.COUNTRY] !== c.country) { missed = "country"; misses++; }
+      if (misses > 1) continue;
+      if (c.grape !== null && w[COL.GRAPES].indexOf(c.grape) === -1) { missed = "grape"; misses++; }
+      if (c.pairing !== null && w[COL.PAIRINGS].indexOf(c.pairing) === -1) { missed = "pairing"; misses++; }
+      if (misses > 1) continue;
+      if (c.minStores !== null
+        && (w[COL.STORES] == null || w[COL.STORES] < c.minStores)) { missed = "stores"; misses++; }
+      // Price has no menu to prune, but it still has to be able to be the one
+      // thing a wine failed, or a grape sold only above the cap would look
+      // available.
+      if (c.maxPrice && (w[COL.PRICE] === null || w[COL.PRICE] > c.maxPrice)) { missed = "price"; misses++; }
+      if (misses > 1) continue;
+
+      // A wine that failed one criterion is evidence only for that criterion's
+      // own menu; one that failed nothing is evidence for all of them.
+      FACETS.forEach(function (f) {
+        if (misses === 1 && missed !== f) return;
+        if (f === "grape") {
+          w[COL.GRAPES].forEach(function (g) { avail.grape[g] = 1; });
+        } else if (f === "pairing") {
+          w[COL.PAIRINGS].forEach(function (p) { avail.pairing[p] = 1; });
+        } else if (f === "stores") {
+          if (w[COL.STORES] != null) avail.stores[w[COL.STORES]] = 1;
+        } else if (f === "category") {
+          avail.category[w[COL.CATEGORY]] = 1;
+        } else if (f === "assortment") {
+          avail.assortment[w[COL.ASSORTMENT]] = 1;
+        } else {
+          avail.country[w[COL.COUNTRY]] = 1;
+        }
+      });
+    }
+    return avail;
+  }
+
+  // Hide rather than remove, and never hide what is currently chosen — a menu
+  // that silently drops the reader's own selection has changed the answer
+  // without saying so. `disabled` rides along because `hidden` on an <option>
+  // is honoured unevenly; at worst the value is greyed out instead of gone.
+  function prune(id, ok) {
+    var sel = document.getElementById(id);
+    if (!sel) return 0;
+    var buried = 0;
+    for (var i = 0; i < sel.options.length; i++) {
+      var o = sel.options[i];
+      var keep = o.value === "" || o.value === sel.value || ok(o.value);
+      o.hidden = !keep;
+      o.disabled = !keep;
+      if (!keep) buried++;
+    }
+    return buried;
+  }
+
+  function pruneMenus(data, c, declaredAdditives) {
+    var avail = available(data, c);
+    var buried = 0;
+    buried += prune("f-category", function (v) { return avail.category[v]; });
+    buried += prune("f-assortment", function (v) { return avail.assortment[v]; });
+    buried += prune("f-country", function (v) { return avail.country[v]; });
+    buried += prune("f-grape", function (v) { return avail.grape[v]; });
+    buried += prune("f-pairing", function (v) { return avail.pairing[v]; });
+    // The thresholds are numbers, not ids: a threshold survives if any reachable
+    // wine meets it.
+    buried += prune("f-stores", function (v) {
+      var need = parseInt(v, 10);
+      for (var n in avail.stores) { if (parseInt(n, 10) >= need) return true; }
+      return false;
+    });
+    // "Must declare" is the one substance menu worth pruning. Requiring a
+    // substance nobody in the slice declares empties the ranked block, which is
+    // a real dead end. Excluding one nobody declares is a no-op and removes
+    // nothing, so that menu keeps every option.
+    buried += prune("f-include", function (v) { return declaredAdditives[v]; });
+    return buried;
   }
 
   // Applies to block 1 and to nothing else. Exclude is sound only where the
@@ -182,6 +293,14 @@ var FIXED_RANGE = "Fast sortiment";
     var bySubstanceDropped = declared.length - rankable.length;
     var substanceChosen = c.exclude !== null || c.include !== null;
 
+    // What the declared wines in this slice actually name, so "must declare"
+    // can drop the substances none of them do.
+    var declaredAdditives = {};
+    declared.forEach(function (w) {
+      w[COL.ADDITIVES].forEach(function (a) { declaredAdditives[a] = 1; });
+    });
+    var buried = pruneMenus(data, c, declaredAdditives);
+
     rankable.sort(function (a, b) {
       if (a[COL.COUNT] !== b[COL.COUNT]) return a[COL.COUNT] - b[COL.COUNT];
       return (a[COL.PRICE] || 0) - (b[COL.PRICE] || 0);
@@ -201,6 +320,9 @@ var FIXED_RANGE = "Fast sortiment";
     if (bySubstanceDropped) {
       lines.push(S.substanceDropped.replace("{n}", bySubstanceDropped));
     }
+    // The menus being shorter than they were is itself a fact about the data,
+    // and an unexplained one reads as a bug or as the site deciding for you.
+    if (buried) lines.push(S.optionsHidden.replace("{n}", buried));
     status.textContent = lines.join(" ");
 
     out.innerHTML = "";
