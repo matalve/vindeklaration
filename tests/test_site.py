@@ -217,11 +217,11 @@ def test_substance_pages_report_an_id_the_dictionary_does_not_define() -> None:
     how many substances it covers and that sentence is wrong if the ones
     without an entry are forgotten.
     """
-    ghost = {"id": "e446", "name": {"sv": "E446", "en": "E446"}}
+    ghost = {"id": "e999", "name": {"sv": "E999", "en": "E999"}}
     pages, undefined = substance_pages([declaring(additives=[ghost])])
 
     assert pages == []
-    assert undefined == ["e446"]
+    assert undefined == ["e999"]
 
 
 def test_substance_examples_are_alphabetical_not_ranked() -> None:
