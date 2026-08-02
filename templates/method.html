@@ -9,10 +9,17 @@
 {% if lang == 'sv' %}
 <p>Systembolaget publicerar varje vins ingrediensförteckning på produktsidan,
 en i taget, utan möjlighet att söka eller jämföra. Den här sajten läser dem,
-gör om fritexten till strukturerad data och visar resultatet. Allt ligger
-offentligt på <a href="https://github.com/matalve/vindeklaration">GitHub</a> —
-koden, ordboken och datat — så att varje siffra här går att räkna om. Se
-<a href="#licens">Licens</a> för vad du får göra med vad.</p>
+gör om fritexten till strukturerad data och visar resultatet.
+{% if repo_public %}
+Allt ligger offentligt på
+<a href="https://github.com/matalve/vindeklaration">GitHub</a> — koden,
+ordboken och datat — så att varje siffra här går att räkna om.
+{% else %}
+Koden, ordboken och datat ligger i ett repo som ännu inte är öppnat, så du kan
+inte räkna om siffrorna själv än. Det är avsikten att öppna det, och tills dess
+är originaltexten på varje vinsida det du kan kontrollera tolkningen mot.
+{% endif %}
+Se <a href="#licens">Licens</a> för vad du får göra med vad.</p>
 
 <h2>Vad siffrorna betyder</h2>
 <p>{{ stats.wines }} viner är hämtade. {{ stats.declared }} av dem
@@ -76,24 +83,44 @@ licensiera sammanställningen är oklart — upphovsrättslagen 49 § kan skydda
 och den frågan är inte avgjord. Att ge bort en rättighet man kanske inte har är
 sämre än att inte ge bort någon alls.</p>
 <p>Det är ingen avrådan. Läs datat, citera det, kontrollera våra uträkningar och
-säg till när vi har fel — det är därför det ligger öppet. Men tänker du
-vidaredistribuera det är villkoren Systembolagets att ange, inte våra.
+säg till när vi har fel. Men tänker du vidaredistribuera det är villkoren
+Systembolagets att ange, inte våra.
+{% if repo_public %}
 Uppdelningen står i sin helhet i
-<a href="https://github.com/matalve/vindeklaration/blob/main/LICENSES.md">LICENSES.md</a>.</p>
+<a href="https://github.com/matalve/vindeklaration/blob/main/LICENSES.md">LICENSES.md</a>.
+{% else %}
+Uppdelningen står i sin helhet i <code>LICENSES.md</code> i repot, som öppnas
+tillsammans med resten av projektet.
+{% endif %}</p>
 
 <h2>Fel</h2>
 <p>Varje vinsida visar deklarationen i original bredvid tolkningen, så att
-varje påstående går att kontrollera mot källan. Hittar du ett fel går det att
-anmäla i <a href="https://github.com/matalve/vindeklaration/issues">projektets
-ärendehanterare</a>.</p>
+varje påstående går att kontrollera mot källan.
+{% if repo_public %}
+Hittar du ett fel går det att anmäla i
+<a href="https://github.com/matalve/vindeklaration/issues">projektets
+ärendehanterare</a>.
+{% else %}
+Ärendehanteraren där fel ska anmälas öppnas när repot öppnas. Tills dess finns
+ingen väg att rapportera ett fel, och det är en brist vi hellre skriver ut än
+döljer bakom en länk som inte går att öppna.
+{% endif %}</p>
 
 {% else %}
 <p>Systembolaget publishes each wine's ingredient declaration on its product
 page, one at a time, with no way to search or compare. This site reads them,
-turns the free text into structured data and shows the result. All of it is
-public on <a href="https://github.com/matalve/vindeklaration">GitHub</a> — the
-code, the dictionary and the data — so every figure here can be recomputed. See
-<a href="#licence">Licence</a> for what you may do with which.</p>
+turns the free text into structured data and shows the result.
+{% if repo_public %}
+All of it is public on
+<a href="https://github.com/matalve/vindeklaration">GitHub</a> — the code, the
+dictionary and the data — so every figure here can be recomputed.
+{% else %}
+The code, the dictionary and the data sit in a repository that has not been
+opened yet, so you cannot recompute the figures yourself. Opening it is the
+intention; until then the original text on each wine page is what you can check
+the interpretation against.
+{% endif %}
+See <a href="#licence">Licence</a> for what you may do with which.</p>
 
 <h2>What the numbers mean</h2>
 <p>{{ stats.wines }} wines have been fetched. {{ stats.declared }} of them
@@ -158,17 +185,28 @@ wrote. None of it is ours. Whether we have the right to license the compilation
 is unclear — upphovsrättslagen 49 § may protect it, and that question is not
 settled. Granting a right you may not hold is worse than granting none.</p>
 <p>This is not a discouragement. Read it, quote it, check our arithmetic and
-tell us where we are wrong — that is why it is public. But if you intend to
-redistribute it, the terms are Systembolaget's to state rather than ours. The
-full split is in
-<a href="https://github.com/matalve/vindeklaration/blob/main/LICENSES.md">LICENSES.md</a>.</p>
+tell us where we are wrong. But if you intend to redistribute it, the terms are
+Systembolaget's to state rather than ours.
+{% if repo_public %}
+The full split is in
+<a href="https://github.com/matalve/vindeklaration/blob/main/LICENSES.md">LICENSES.md</a>.
+{% else %}
+The full split is in <code>LICENSES.md</code> in the repository, which opens
+along with the rest of the project.
+{% endif %}</p>
 
 <h2>Errors</h2>
 <p>Every wine page shows the declaration as written alongside the
-interpretation, so any claim can be checked against its source. If you find an
-error, please report it in the
+interpretation, so any claim can be checked against its source.
+{% if repo_public %}
+If you find an error, please report it in the
 <a href="https://github.com/matalve/vindeklaration/issues">project's issue
-tracker</a>.</p>
+tracker</a>.
+{% else %}
+The issue tracker where errors should be reported opens when the repository
+does. Until then there is no way to report one, and that is a gap we would
+rather write down than hide behind a link that cannot be opened.
+{% endif %}</p>
 {% endif %}
 
 <p class="label-wins">{{ s.label_wins }}</p>

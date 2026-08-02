@@ -49,6 +49,14 @@ IMAGE_WIDTH, IMAGE_HEIGHT = 400, 400
 # technological measure is published on /metod rather than kept in a commit.
 CDN_CHECKED = "2026-07-29"
 
+# The repository is private until closer to a real launch (owner, 2026-08-02),
+# so /metod may not tell a reader that the code and the data are already there
+# to check — both links 404 for anyone but the owner. Flip this the same day
+# the repository goes public and the page starts making the stronger claim.
+# The importer table waits on the same flip: docs/site-plan.md, "Naming
+# importers", requires every row to have a correction route that works.
+REPO_PUBLIC = False
+
 # Cloudflare injects its own analytics beacon at the edge, with its own token,
 # for browser-like requests — confirmed by reading a served page 2026-07-29.
 # Nothing is rendered here, and nothing should be: a second beacon would double
@@ -704,6 +712,7 @@ def build(output: Path, limit: int | None = None) -> None:
             method_template.render(
                 stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
+                repo_public=REPO_PUBLIC,
             ),
             encoding="utf-8",
         )
