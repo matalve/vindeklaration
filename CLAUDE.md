@@ -49,7 +49,13 @@ counted. This file is about how to work here.
 uv run pytest -q                  # fast, run it after any dictionary change
 uv run python -m src.build        # rebuild the dataset from the cache
 uv run python -m src.report       # coverage, unknown tokens, quality gate
+uv run python -m src.site --output site && node --test tests/test_hitta.mjs
 ```
+
+The last one is the filter's own tests. They run the browser code under Node
+against the **real** built index and check it against a brute-force re-slice,
+so they need a fresh `site/` — and they refuse to run against a stale one,
+because an index missing a column still parses and still renders every menu.
 
 ## Traps that cost time to rediscover
 

@@ -47,11 +47,13 @@ current numbers and its gate watches drift rather than a level.
 before.** `deploy/update.sh` re-fetches everything on Sundays once the first
 full pass has completed.
 
-- **`store_count` is real now** — 6 013 wines in at least one store, up to 454,
-  median 187 for the fixed range. This unblocks the plan's *"Every wine says
-  how findable it is, in words rather than a flag: finns i 187 butiker"*, which
-  is the last unimplemented half of the buyability rules and the site audit's
-  finding 8. Nothing uses it yet; it is not in the search index.
+- **`store_count` is real, and used.** 6 013 wines in at least one store, up to
+  454, median 187 for the fixed range — but **9 161 wines are in zero stores**,
+  and the median order-only wine is one of them. The plan's 2026-07-27 sample
+  said order-only wines sat at 1 store; the first full refresh says otherwise,
+  so zero is the common case rather than a missing value. Every wine page now
+  says how findable it is in words, and the filter has a store threshold
+  (index column 15).
 - **`gluten_free` is `False` on all 15 174 records and `True` on none.** After a
   full refresh that is a signal rather than a fact — either Systembolaget marks
   no wine gluten-free, or `isGlutenFree` is being read wrong in
@@ -101,6 +103,13 @@ all declarations changes those two wines and nothing else. And **a product liste
 on the site has its additives named, whatever the product is.** The three colours
 are declared by a flavoured sparkling drink and a spirit-based aperitif rather
 than by wine; that is not a reason to hedge or to leave the substance out.
+
+**The filter prunes its own menus** as of 2026-08-02. 433 grapes against 57
+countries means most combinations hold nothing, so an option that would return
+no wine is hidden — never the reader's own selection, and the results line says
+how many went and why. `tests/test_hitta.mjs` runs the browser code under Node
+against the real index and checks it against a brute-force re-slice; it is the
+only JavaScript test in the project and it caught a real bug on its first run.
 
 **Phase 4 — trends** is not started. `data/quality-history.json` has been
 accumulating one row per nightly run since 2026-07-27 and is the seed for it.
