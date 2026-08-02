@@ -157,6 +157,39 @@
     </dl>
   </section>
 
+  {# How findable the bottle is, in words rather than a flag — docs/site-plan.md,
+     "Can you actually buy it". Two facts of different ages, kept apart: the
+     store count comes off the product page and is at worst a week old, the
+     out-of-stock flags come off the nightly search. Deliberately no link into
+     Systembolaget's store-availability view: /hamta-i-butik/ is Disallowed in
+     their robots.txt, so the ordinary product page in the source line below is
+     the only link offered. #}
+  {% if stock.key %}
+  <section class="findability">
+    <h2>{{ s.findability }}</h2>
+    <p class="lead">
+      {{ s[stock.key]|replace("{n}", stock.count) }}
+      {%- if stock.out %} {{ s.stock_out }}
+      {%- elif stock.temporarily_out %} {{ s.stock_temporarily_out }}
+      {%- endif %}
+    </p>
+    {# Only where it is true: a sold-out bottle cannot be ordered, and the
+       promise is the whole point of the sentence rather than decoration. #}
+    {% if stock.can_order %}
+    <p class="lead">{{ s.order_possible }}</p>
+    {% endif %}
+    {% if wine.assortment %}
+    <p class="meta">{{ s.assortment_is }}: {{ wine.assortment }}</p>
+    {% endif %}
+    {# Nothing about stock without its date — the plan puts this on the page
+       rather than in a footnote. #}
+    {% if stock.as_of %}
+    <p class="explain">{{ s.shelves_as_of|replace("{d}", stock.as_of) }}</p>
+    {% endif %}
+    <p class="explain">{{ s.stock_nightly }}</p>
+  </section>
+  {% endif %}
+
   <section class="provenance">
     {# Condition 4: every page carrying an image links to that wine's product
        page. The link is here whether or not there is an image. #}

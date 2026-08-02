@@ -9,6 +9,7 @@ looks plausible, and is wrong in the direction that flatters the shelf.
 from __future__ import annotations
 
 from src.site import (
+    findability,
     breakdown,
     covered_stats,
     pct,
@@ -262,3 +263,51 @@ def test_a_substance_carried_only_by_a_partial_declaration_says_so() -> None:
 def test_pct_uses_the_decimal_separator_of_the_language() -> None:
     assert pct(19.34, "sv") == "19,3"
     assert pct(19.34, "en") == "19.3"
+
+
+# --- findability -------------------------------------------------------------
+
+def stocked(count: int | None, **overrides: object) -> dict:
+    return wine(store_count=count, fetched_at="2026-08-02T03:14:00Z", **overrides)
+
+
+def test_findability_words_scale_with_the_count() -> None:
+    assert findability(stocked(187))["key"] == "shelves_many"
+    assert findability(stocked(1))["key"] == "shelves_one"
+    # Zero is the common case, not a missing value: 9 161 wines are in no
+    # store at all, and the median order-only wine is one of them.
+    assert findability(stocked(0))["key"] == "shelves_none"
+
+
+def test_findability_is_silent_when_the_field_was_never_fetched() -> None:
+    """A blank is not zero stores. Saying "no shelf" from a null would be a
+    claim about the shelf drawn from our own missing data."""
+    assert findability(stocked(None))["key"] is None
+
+
+def test_findability_keeps_stock_apart_from_the_store_count() -> None:
+    """Two facts of different ages. A wine can be shelved widely and still be
+    out of stock today, so the page never folds one into the other."""
+    out = findability(stocked(187, out_of_stock=True))
+
+    assert out["key"] == "shelves_many"
+    assert out["count"] == 187
+    assert out["out"] is True
+
+
+def test_findability_carries_the_date_the_count_was_read() -> None:
+    """Nothing about stock is stated without its timestamp."""
+    assert findability(stocked(42))["as_of"] == "2026-08-02"
+
+
+def test_no_order_promise_over_a_sold_out_bottle() -> None:
+    """"A wait, not a dead end" is false once the wine is gone."""
+    assert findability(stocked(0, out_of_stock=True))["can_order"] is False
+    assert findability(stocked(0))["can_order"] is True
+    # Temporarily out is a different flag: it comes back, so the promise holds.
+    assert findability(stocked(1, temporarily_out_of_stock=True))["can_order"] is True
+
+
+def test_no_order_promise_where_the_wine_is_already_on_shelves() -> None:
+    """452 stores do not need to be told the bottle can be ordered."""
+    assert findability(stocked(452))["can_order"] is False

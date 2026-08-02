@@ -172,7 +172,17 @@
   "substance_partial": "{n} av vinerna nedan har lämnat en deklaration som vi inte kunnat läsa i sin helhet. De nämner det här ämnet, men resten av deras förteckning är oläst, och de är märkta i listan.",
   "coverage_silent": "{n} viner har inte lämnat någon förteckning alls. Det är sajtens vanligaste svar, och det säger ingenting om vad de flaskorna innehåller.",
   "vintage_covered_aggregated": "Övriga årgångar som omfattas",
-  "field_blank": "Uppgift saknas hos Systembolaget"
+  "field_blank": "Uppgift saknas hos Systembolaget",
+  "findability": "Var den finns",
+  "shelves_many": "Finns i {n} butiker.",
+  "shelves_one": "Finns i 1 butik.",
+  "shelves_none": "Står inte i någon butikshylla.",
+  "shelves_as_of": "Antalet butiker lästes {d} och ändrar sig långsamt.",
+  "stock_out": "Slutsåld när vi senast frågade.",
+  "stock_temporarily_out": "Tillfälligt slut när vi senast frågade.",
+  "stock_nightly": "Lagersaldot hämtas varje natt, antalet butiker mer sällan. Systembolaget äger svaret om sina hyllor — kontrollera på produktsidan innan du åker.",
+  "assortment_is": "Sortiment",
+  "order_possible": "Den går att beställa hem eller till en butik och tar då några dagar — det är en väntan, inte ett nej."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -347,6 +357,16 @@
   "substance_partial": "{n} of the wines below have given a declaration we could not read in full. They name this substance, but the rest of their list is unread, and they are marked in the list.",
   "coverage_silent": "{n} wines have given no list at all. That is the site's most common answer, and it says nothing about what those bottles contain.",
   "vintage_covered_aggregated": "Other covered vintages",
-  "field_blank": "Field left blank at Systembolaget"
+  "field_blank": "Field left blank at Systembolaget",
+  "findability": "Where to find it",
+  "shelves_many": "Stocked in {n} stores.",
+  "shelves_one": "Stocked in 1 store.",
+  "shelves_none": "Not on any store shelf.",
+  "shelves_as_of": "The store count was read on {d} and moves slowly.",
+  "stock_out": "Sold out when we last asked.",
+  "stock_temporarily_out": "Temporarily sold out when we last asked.",
+  "stock_nightly": "Stock is fetched nightly, the store count less often. Systembolaget owns the answer about their own shelves — check the product page before you travel.",
+  "assortment_is": "Range",
+  "order_possible": "It can be ordered to a store or to your home and takes a few days — that is a wait, not a no."
  }
 }
