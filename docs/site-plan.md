@@ -90,6 +90,30 @@ Three consequences that shape every page:
   labels, icons and share text — the places where a claim is made without a
   sentence, and the places most likely to be quoted without their context.
   A disclaimer under a ranking does not cancel the ranking.
+- **That a substance is harmful.** Added 2026-08-02, after an audit of the
+  `E129` substance page found the rule above bans claims in one direction only.
+  Nothing in this list forbade a statement of *harm*, and the site had
+  published one without noticing it had crossed anything. The site describes
+  what a substance does — its function, its legal status, whether it must be
+  declared as an allergen — and never what it does to a body. The asymmetry is
+  visible in the dictionary already and is the settled practice this bullet
+  writes down: sulfites are the one substance with a widely believed consumer
+  reaction, and their note says only that they preserve wine and must be
+  declared.
+  **Quoting a legally mandated warning is a different act and is allowed**,
+  because it is reporting rather than asserting, and making mandated disclosure
+  comparable is what the site is for. Three conditions, all of which the E129
+  page failed before it was fixed: the statutory wording is **quoted verbatim,
+  not paraphrased** — a near-miss reads as the site's own words about a health
+  effect; the instrument is **named**, so the sentence has a visible author who
+  is not us; and it appears on **every substance the requirement reaches, or
+  none of them**. The last one is the one that bites. Annex V to Regulation
+  (EC) No 1333/2008 covers six colours, the dictionary carries three, and the
+  warning sat on one — so the page silently told a reader that the wine
+  declaring one warning-colour had a problem while saying nothing about the
+  wine declaring two. **Presence is a signal independent of content**, which is
+  the same rule about implication as the bullet above, reaching a place nobody
+  had looked.
 - That a wine "contains no additives" when it declares nothing. It says
   *the wine does not declare any*, and the site says exactly that. No statement
   about a wine's contents may be derived from the absence of a declaration.
