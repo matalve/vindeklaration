@@ -40,6 +40,7 @@ counted. This file is about how to work here.
 | `data/unknown.json` | what the parser could not read, ranked by wines blocked |
 | `deploy/` | running it unattended on the Raspberry Pi |
 | `src/site.py`, `templates/` | the static site — `uv run python -m src.site` |
+| `docs/state-of-play.md` | **read this second** — what is live, what is next, what is open |
 | `docs/deploy-site.md` | Cloudflare and the DNS move, step by step |
 | `docs/elabel-platforms.md` | which e-label platforms can be read, and which cannot |
 | `.claude/agents/` | lexicon-curator, declaration-auditor, upstream-scout, domain-scout, legal-scout, declaration-finder, site-auditor |
