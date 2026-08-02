@@ -189,7 +189,8 @@
   "f_stores_50": "50 butiker",
   "f_stores_150": "150 butiker",
   "f_stores_note": "Antalet butiker läses en gång i veckan och säger hur brett vinet är utplacerat, inte om just din butik har det. Det finns inget sätt att fråga per butik, och sajten låtsas inte om det.",
-  "stores_dropped": "{n} viner saknar uppgift om antal butiker och kunde inte prövas."
+  "stores_dropped": "{n} viner saknar uppgift om antal butiker och kunde inte prövas.",
+  "options_hidden": "{n} val i menyerna är dolda för att de inte skulle ge något vin tillsammans med det du redan valt. Nollställ ett val så kommer de tillbaka."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -381,6 +382,7 @@
   "f_stores_50": "50 stores",
   "f_stores_150": "150 stores",
   "f_stores_note": "The store count is read once a week and says how widely the wine is distributed, not whether your own shop has it. There is no way to ask per store, and the site does not pretend otherwise.",
-  "stores_dropped": "{n} wines have no store count recorded and could not be tested."
+  "stores_dropped": "{n} wines have no store count recorded and could not be tested.",
+  "options_hidden": "{n} menu options are hidden because they would return no wine alongside what you have already chosen. Clear a choice and they come back."
  }
 }
