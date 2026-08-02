@@ -315,6 +315,15 @@ footer {
 footer p { margin: 0.4rem 0; }
 footer .meta { margin-top: 1rem; }
 
+/* Where to find it. Sits between the declaration and the source line, and is
+   deliberately plain: it answers a practical question and must not compete
+   with the declaration, which is what the page is for. */
+.findability { margin: 2rem 0; }
+.findability h2 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+.findability .lead { margin: 0.3rem 0; }
+.findability .meta { font-size: 0.85rem; color: var(--muted); margin: 0.5rem 0 0; }
+.findability .explain { font-size: 0.85rem; color: var(--muted); margin: 0.4rem 0 0; }
+
 /* Substance and coverage pages. The breakdown tables are read on a phone in a
    shop as often as on a desktop, so the numeric columns are right-aligned and
    tabular — a column of percentages that does not line up is slower to scan

@@ -517,6 +517,43 @@ def nutrition_rows(wine: dict) -> tuple[list[dict], int]:
     return rows, unreadable
 
 
+# How widely a wine is shelved, as words rather than a flag — docs/site-plan.md,
+# "Can you actually buy it". The number is `availableNumberOfStores`, read from
+# the product page, so it is as old as that wine's own fetch and never older
+# than the weekly refresh. The out-of-stock flags come from the nightly search
+# instead, which is why they are reported separately rather than folded in: a
+# wine can be shelved in 187 stores and still be out of stock today.
+#
+# The plan sampled order-only wines at 1 store on 2026-07-27. The first full
+# refresh says otherwise — 9 161 wines are in **zero** stores and the median
+# order-only wine is one of them — so zero is the common case and gets the
+# careful wording rather than being treated as a missing value.
+def findability(wine: dict) -> dict:
+    count = wine.get("store_count")
+    if count is None:
+        return {"key": None}
+    if count == 0:
+        key = "shelves_none"
+    elif count == 1:
+        key = "shelves_one"
+    else:
+        key = "shelves_many"
+    # Nightly, and therefore a different fact with a different age.
+    out = bool(wine.get("out_of_stock"))
+    return {
+        "key": key,
+        "count": count,
+        "out": out,
+        "temporarily_out": bool(wine.get("temporarily_out_of_stock")),
+        # "A wait, not a dead end" is the sentence this section exists to make,
+        # and it is only true while the wine can actually be ordered. Said over
+        # a sold-out bottle it is simply false, so a wine that is out of stock
+        # gets the shelving fact and no promise attached to it.
+        "can_order": count <= 1 and not out,
+        "as_of": (wine.get("fetched_at") or "")[:10],
+    }
+
+
 def strings(lang: str) -> dict:
     """UI text. Declarations themselves are never translated — only chrome."""
     table = json.loads((TEMPLATE_DIR / "strings.json").read_text(encoding="utf-8"))
@@ -616,6 +653,7 @@ def build(output: Path, limit: int | None = None) -> None:
                         image_width=IMAGE_WIDTH,
                         image_height=IMAGE_HEIGHT,
                         substance_ids=substance_ids,
+                        stock=findability(wine),
                         source_url=wine["source_url"],
                         lang=lang,
                         s=s,
