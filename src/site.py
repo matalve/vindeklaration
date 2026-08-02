@@ -674,6 +674,7 @@ def build(output: Path, limit: int | None = None) -> None:
             index_template.render(
                 stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED, lists=list_links,
+                additive_names=additive_names(wines, lang),
             ),
             encoding="utf-8",
         )

@@ -12,14 +12,36 @@ function normalise(text) {
   return text.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "");
 }
 
+// The substances a row declares, named. The index stores them as ids into a
+// shared vocabulary, because one index file serves both languages; the page
+// supplies the display names for its own language.
+function additiveList(row) {
+  var data = window.SITE._data, names = window.SITE.additiveNames;
+  if (!data || !names) return "";
+  return row[COL.ADDITIVES]
+    .map(function (i) {
+      var id = data.vocab.additive[i];
+      return names[id] || id;
+    })
+    .filter(Boolean)
+    .join(", ");
+}
+
 // A result row says the declaration state in words and never shows a bottle
 // photograph: legal-notes §2j condition 8 keeps images off every ranked or
 // filtered surface, and a row of them would also read as a shelf.
+//
+// It names the substances rather than only counting them. "Deklarerar 1" is a
+// number the reader then has to open the wine to understand, which is exactly
+// the opening-wines-one-at-a-time the site exists to remove — the built list
+// pages have named them since they were written, and this is the same rule
+// arriving in the two places that render rows in the browser.
 function stateLabel(row) {
   if (row[COL.STATE] === "d") {
-    return row[COL.COUNT] === 0
-      ? window.SITE.stateDeclaredZero
-      : window.SITE.stateDeclared + " " + row[COL.COUNT];
+    if (row[COL.COUNT] === 0) return window.SITE.stateDeclaredZero;
+    var named = additiveList(row);
+    return window.SITE.stateDeclared + " " + row[COL.COUNT] +
+      (named ? ": " + named : "");
   }
   if (row[COL.STATE] === "p") return window.SITE.statePartial;
   return window.SITE.stateSilent;
