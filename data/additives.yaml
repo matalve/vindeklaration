@@ -726,11 +726,20 @@
   name: { sv: Karmin, en: Carmine }
   aliases: [karmin, karminsyra, cochenill, carmine, cochineal]
 
+# The three Annex V colours the dictionary carries — E110, E124 and E129 —
+# say the same thing about the labelling requirement, in the regulation's own
+# words. Carrying it on one and not the others would make its presence an
+# editorial signal about a particular wine rather than a fact about a
+# substance, which is what the substance pages promise not to be. E102, E104
+# and E122 are the other three in the annex and appear in no declaration here.
 - id: sunset_yellow
   e_number: E110
   bucket: additive
   category: colour
   name: { sv: Para-orange (Sunset Yellow FCF), en: Sunset Yellow FCF }
+  note:
+    sv: Syntetiskt azofärgämne. E110 är ett av sex färgämnen som enligt bilaga V till förordning (EG) nr 1333/2008 kräver uppgiften ”kan ha en negativ effekt på barns beteende och koncentration” i livsmedlets märkning. Färgämnen är inte godkända för vinframställning, men är tillåtna i vissa aromatiserade vinprodukter.
+    en: A synthetic azo dye. E110 is one of six colours for which Annex V to Regulation (EC) No 1333/2008 requires the food's labelling to carry the words “may have an adverse effect on activity and attention in children”. Colours are not authorised for winemaking, but are permitted in some aromatised wine products.
   aliases: []
 
 - id: ponceau_4r
@@ -738,6 +747,9 @@
   bucket: additive
   category: colour
   name: { sv: Ponceau 4R (Cochenillrött A), en: Ponceau 4R (Cochineal Red A) }
+  note:
+    sv: Syntetiskt azofärgämne. E124 är ett av sex färgämnen som enligt bilaga V till förordning (EG) nr 1333/2008 kräver uppgiften ”kan ha en negativ effekt på barns beteende och koncentration” i livsmedlets märkning. Färgämnen är inte godkända för vinframställning, men är tillåtna i vissa aromatiserade vinprodukter.
+    en: A synthetic azo dye. E124 is one of six colours for which Annex V to Regulation (EC) No 1333/2008 requires the food's labelling to carry the words “may have an adverse effect on activity and attention in children”. Colours are not authorised for winemaking, but are permitted in some aromatised wine products.
   aliases: []
 
 - id: e129
@@ -746,8 +758,8 @@
   category: colour
   name: { sv: Allurarött AC, en: Allura Red AC }
   note:
-    sv: Syntetiskt azofärgämne. Sett här i en smaksatt (hallon) mousserande vindryck, en kategori där färgämnen är tillåtna enligt EU:s allmänna tillsatsförordning (EG) 1333/2008 — till skillnad från vanligt vin, där färgämnen inte finns med bland de tillsatser som är godkända för vinframställning. Livsmedel som innehåller E129 ska enligt EU-regler märkas med en varning om att ämnet kan ha en negativ effekt på barns aktivitet och koncentrationsförmåga.
-    en: A synthetic azo dye. Seen here in a flavoured (raspberry) sparkling wine drink, a category where colours are permitted under the EU's general food additive regulation (EC) 1333/2008 — unlike plain wine, where colours are not among the additives authorised for winemaking. EU rules require foods containing E129 to carry a warning that it may have an adverse effect on children's activity and attention.
+    sv: Syntetiskt azofärgämne. Sett här i en smaksatt (hallon) mousserande vindryck, en kategori där färgämnen är tillåtna enligt EU:s allmänna tillsatsförordning (EG) 1333/2008 — till skillnad från vanligt vin, där färgämnen inte finns med bland de tillsatser som är godkända för vinframställning. E129 är ett av sex färgämnen som enligt bilaga V till samma förordning kräver uppgiften ”kan ha en negativ effekt på barns beteende och koncentration” i livsmedlets märkning.
+    en: A synthetic azo dye. Seen here in a flavoured (raspberry) sparkling wine drink, a category where colours are permitted under the EU's general food additive regulation (EC) 1333/2008 — unlike plain wine, where colours are not among the additives authorised for winemaking. E129 is one of six colours for which Annex V to the same regulation requires the food's labelling to carry the words “may have an adverse effect on activity and attention in children”.
   aliases: [allura red, allura red ac, allurarött, allurarött ac]
 
 - id: wheat_protein
