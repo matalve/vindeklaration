@@ -193,20 +193,55 @@ var FIXED_RANGE = "Fast sortiment";
     return avail;
   }
 
-  // Hide rather than remove, and never hide what is currently chosen — a menu
-  // that silently drops the reader's own selection has changed the answer
-  // without saying so. `disabled` rides along because `hidden` on an <option>
-  // is honoured unevenly; at worst the value is greyed out instead of gone.
+  // Every option each menu could ever offer, captured once the menus are
+  // filled, because pruning rebuilds them and would otherwise have nothing to
+  // restore from.
+  var MENUS = {};
+
+  function snapshot(id) {
+    var sel = document.getElementById(id);
+    if (!sel) return;
+    MENUS[id] = Array.prototype.map.call(sel.options, function (o) {
+      return { value: o.value, text: o.textContent };
+    });
+  }
+
+  // Rebuild the menu rather than toggle `hidden` on its options. Setting
+  // `hidden` was the first implementation and it does not do the job: several
+  // browsers render a hidden <option> anyway, and every native picker on a
+  // phone renders a disabled one, so a 433-entry grape list stayed 433 entries
+  // long and merely turned grey. Removing the nodes shortens the list
+  // everywhere.
+  //
+  // Two things it must not do: drop the reader's own selection, which would
+  // change the answer without saying so, and drop the empty option, which is
+  // how a filter is cleared.
   function prune(id, ok) {
     var sel = document.getElementById(id);
-    if (!sel) return 0;
-    var buried = 0;
-    for (var i = 0; i < sel.options.length; i++) {
-      var o = sel.options[i];
-      var keep = o.value === "" || o.value === sel.value || ok(o.value);
-      o.hidden = !keep;
-      o.disabled = !keep;
-      if (!keep) buried++;
+    var all = MENUS[id];
+    if (!sel || !all) return 0;
+
+    var chosenValue = sel.value, keep = [], buried = 0;
+    all.forEach(function (o) {
+      if (o.value === "" || o.value === chosenValue || ok(o.value)) keep.push(o);
+      else buried++;
+    });
+
+    // Never rebuild the control being used: replacing the options of an open
+    // dropdown closes it under the reader's finger. It is pruned on the next
+    // render, once they have moved on. The count is still reported, so the
+    // status line does not flicker with the focus.
+    if (document.activeElement !== sel && keep.length !== sel.options.length) {
+      var frag = document.createDocumentFragment();
+      keep.forEach(function (o) {
+        var n = document.createElement("option");
+        n.value = o.value;
+        n.textContent = o.text;
+        frag.appendChild(n);
+      });
+      sel.innerHTML = "";
+      sel.appendChild(frag);
+      sel.value = chosenValue;
     }
     return buried;
   }
@@ -376,6 +411,10 @@ var FIXED_RANGE = "Fast sortiment";
       });
       fillSelect("f-exclude", null, substances);
       fillSelect("f-include", null, substances);
+      // After filling, before the first prune: this is the only moment the
+      // menus are known to be complete.
+      ["f-category", "f-assortment", "f-country", "f-grape", "f-pairing",
+       "f-stores", "f-include"].forEach(snapshot);
       form.hidden = false;
       form.addEventListener("input", function () { render(data); });
       render(data);
