@@ -9,6 +9,7 @@ looks plausible, and is wrong in the direction that flatters the shelf.
 from __future__ import annotations
 
 from src.site import (
+    importer_rows,
     findability,
     breakdown,
     covered_stats,
@@ -311,3 +312,100 @@ def test_no_order_promise_over_a_sold_out_bottle() -> None:
 def test_no_order_promise_where_the_wine_is_already_on_shelves() -> None:
     """452 stores do not need to be told the bottle can be ordered."""
     assert findability(stocked(452))["can_order"] is False
+
+
+# --- importer_rows -----------------------------------------------------------
+
+def supplied(name: str, vintage: int | None, declared: bool) -> dict:
+    return wine(
+        name=f"{name} {vintage}",
+        supplier=name,
+        vintage=vintage,
+        declaration_status="declared" if declared else "not_declared",
+    )
+
+
+def test_importers_are_ranked_only_over_the_covered_vintages() -> None:
+    """The whole design of the table is in this qualifier.
+
+    An importer whose covered stock declares on 40 bottles of 40 must not be
+    marked down for older stock the requirement never reached.
+    """
+    wines = (
+        [supplied("Lidby", 2024, True) for _ in range(40)]
+        + [supplied("Lidby", 2019, False) for _ in range(400)]
+    )
+    row = importer_rows(wines)["named"][0]
+
+    assert row["wines"] == 40
+    assert row["share"] == 100.0
+    # The raw figure is carried, so the page can show it labelled — but it is
+    # never what the rows are sorted on.
+    assert round(row["all_share"], 1) == 9.1
+
+
+def test_importers_below_the_threshold_are_counted_but_never_named() -> None:
+    wines = (
+        [supplied("Big", 2024, True) for _ in range(40)]
+        + [supplied("Small", 2024, True) for _ in range(5)]
+        + [supplied("Tiny", 2024, False) for _ in range(3)]
+    )
+    rows = importer_rows(wines)
+
+    assert [r["name"] for r in rows["named"]] == ["Big"]
+    assert rows["thin"]["wines"] == 8
+    assert rows["thin"]["declared"] == 5
+    assert rows["thin"]["suppliers"] == 2
+
+
+def test_the_ranking_is_by_the_corrected_share_not_the_raw_one() -> None:
+    """Published raw, the table would accuse the best importer of being worst.
+
+    Lidby declares on every covered bottle and carries a deep back catalogue;
+    Tryffel declares on few and has almost no old stock. Sorting on all
+    vintages inverts them.
+    """
+    wines = (
+        [supplied("Lidby", 2024, True) for _ in range(40)]
+        + [supplied("Lidby", 2019, False) for _ in range(300)]
+        + [supplied("Tryffel", 2024, True) for _ in range(10)]
+        + [supplied("Tryffel", 2024, False) for _ in range(30)]
+    )
+    named = importer_rows(wines)["named"]
+
+    assert [r["name"] for r in named] == ["Lidby", "Tryffel"]
+    assert named[0]["all_share"] < named[1]["all_share"]
+
+
+def test_every_named_row_carries_its_own_wines() -> None:
+    """A row that cannot be checked bottle by bottle may not be published."""
+    wines = [supplied("Big", 2024, i % 2 == 0) for i in range(40)]
+    row = importer_rows(wines)["named"][0]
+
+    assert len(row["qualifying"]) == row["wines"]
+    assert row["slug"] == "big"
+
+
+def test_a_wine_with_no_supplier_is_left_out_entirely() -> None:
+    """Better absent than gathered into a row that names nobody in particular."""
+    rows = importer_rows([wine(supplier="", vintage=2024) for _ in range(50)])
+
+    assert rows["named"] == []
+    assert rows["thin"]["wines"] == 0
+
+
+def test_the_table_is_not_rendered_while_the_correction_route_is_a_404() -> None:
+    """The gate itself, since it is the whole reason the table is not live.
+
+    Naming 19 companies in a compliance statistic whose "report an error" link
+    404s is the one part of the design that is not optional, so the build must
+    not be one edited constant away from doing it by accident.
+    """
+    import src.site
+
+    assert src.site.REPO_PUBLIC is False, (
+        "REPO_PUBLIC is on: the importer table and /metod's claim that the "
+        "repository is public will both ship. Confirm the repository is "
+        "actually public, and confirm CORRECTION_DAYS with the owner, then "
+        "delete this test."
+    )
