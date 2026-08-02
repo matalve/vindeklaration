@@ -730,22 +730,28 @@
 # products under food category 14.2.7 of Annex II to 1333/2008, subject to a
 # combined maximum, and not permitted in wine itself.
 #
-# These notes carried the Annex V children's-attention warning for one day and
-# it was wrong. Commission Regulation (EU) No 238/2010 exempts beverages above
-# 1,2 % alcohol by volume from that requirement — recital 3: such products
-# "are not intended for consumption by children", so the labelling is "neither
-# necessary nor appropriate". Every wine in this dataset is above that
-# threshold, so the warning reaches none of them. Do not reinstate it from a
-# reading of the base act: 1333/2008 as adopted has no such exemption, and
-# that is the text a search engine finds first.
+# All three are also in Annex V, and the notes say so — decided by the owner
+# 2026-08-02, on the ground that a reader is entitled to know what is in the
+# glass even where the label is not required to say it.
+#
+# Both halves have to travel together. Commission Regulation (EU) No 238/2010
+# exempts beverages above 1,2 % alcohol by volume from the Annex V wording,
+# because such products "are not intended for consumption by children"
+# (recital 3) — every wine in this dataset is above that threshold, so no
+# bottle here carries it. Stating the requirement without the exemption is
+# false; stating the exemption without its reason invites the reading that the
+# colour was found harmless in alcohol, which is not what 238/2010 says.
+#
+# The note values are double-quoted because they contain a colon. An unquoted
+# scalar with ": " in it is a YAML mapping and breaks the file.
 - id: sunset_yellow
   e_number: E110
   bucket: additive
   category: colour
   name: { sv: Para-orange (Sunset Yellow FCF), en: Sunset Yellow FCF }
   note:
-    sv: Syntetiskt azofärgämne. Färgämnen finns inte bland de tillsatser som är godkända för vinframställning enligt bilaga I till förordning (EU) 2019/934. I aromatiserade vinprodukter är E110 däremot tillåtet, som ett av grupp III-färgämnena med gemensam högsta halt 200 mg/l, enligt livsmedelskategori 14.2.7 i bilaga II till förordning (EG) nr 1333/2008.
-    en: A synthetic azo dye. Colours are not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934. In aromatised wine products E110 is permitted, as one of the Group III colours subject to a combined maximum of 200 mg/l, under food category 14.2.7 of Annex II to Regulation (EC) No 1333/2008.
+    sv: "Syntetiskt azofärgämne. Färgämnen finns inte bland de tillsatser som är godkända för vinframställning enligt bilaga I till förordning (EU) 2019/934. I aromatiserade vinprodukter är E110 däremot tillåtet, som ett av grupp III-färgämnena med gemensam högsta halt 200 mg/l, enligt livsmedelskategori 14.2.7 i bilaga II till förordning (EG) nr 1333/2008. E110 står också i bilaga V till samma förordning, och livsmedel som innehåller något av de sex färgämnena där ska märkas med uppgiften ”kan ha en negativ effekt på barns beteende och koncentration”. Drycker över 1,2 volymprocent alkohol undantogs från det kravet 2010 genom förordning (EU) nr 238/2010, med motiveringen att de inte är avsedda för barn. Undantaget gäller alltså vem som dricker, inte vad ämnet gör, och det är därför uppgiften inte står på en vinflaska."
+    en: "A synthetic azo dye. Colours are not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934. In aromatised wine products E110 is permitted, as one of the Group III colours subject to a combined maximum of 200 mg/l, under food category 14.2.7 of Annex II to Regulation (EC) No 1333/2008. E110 is also listed in Annex V to the same regulation, and foods containing any of the six colours there must carry the words “may have an adverse effect on activity and attention in children”. Beverages above 1,2 % alcohol by volume were exempted from that requirement in 2010 by Regulation (EU) No 238/2010, on the ground that they are not intended for children. The exemption is about who drinks it rather than about what the substance does, which is why the wording does not appear on a wine bottle."
   aliases: []
 
 - id: ponceau_4r
@@ -754,8 +760,8 @@
   category: colour
   name: { sv: Ponceau 4R (Cochenillrött A), en: Ponceau 4R (Cochineal Red A) }
   note:
-    sv: Syntetiskt azofärgämne. Färgämnen finns inte bland de tillsatser som är godkända för vinframställning enligt bilaga I till förordning (EU) 2019/934. I aromatiserade vinprodukter är E124 däremot tillåtet, som ett av grupp III-färgämnena med gemensam högsta halt 200 mg/l, enligt livsmedelskategori 14.2.7 i bilaga II till förordning (EG) nr 1333/2008.
-    en: A synthetic azo dye. Colours are not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934. In aromatised wine products E124 is permitted, as one of the Group III colours subject to a combined maximum of 200 mg/l, under food category 14.2.7 of Annex II to Regulation (EC) No 1333/2008.
+    sv: "Syntetiskt azofärgämne. Färgämnen finns inte bland de tillsatser som är godkända för vinframställning enligt bilaga I till förordning (EU) 2019/934. I aromatiserade vinprodukter är E124 däremot tillåtet, som ett av grupp III-färgämnena med gemensam högsta halt 200 mg/l, enligt livsmedelskategori 14.2.7 i bilaga II till förordning (EG) nr 1333/2008. E124 står också i bilaga V till samma förordning, och livsmedel som innehåller något av de sex färgämnena där ska märkas med uppgiften ”kan ha en negativ effekt på barns beteende och koncentration”. Drycker över 1,2 volymprocent alkohol undantogs från det kravet 2010 genom förordning (EU) nr 238/2010, med motiveringen att de inte är avsedda för barn. Undantaget gäller alltså vem som dricker, inte vad ämnet gör, och det är därför uppgiften inte står på en vinflaska."
+    en: "A synthetic azo dye. Colours are not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934. In aromatised wine products E124 is permitted, as one of the Group III colours subject to a combined maximum of 200 mg/l, under food category 14.2.7 of Annex II to Regulation (EC) No 1333/2008. E124 is also listed in Annex V to the same regulation, and foods containing any of the six colours there must carry the words “may have an adverse effect on activity and attention in children”. Beverages above 1,2 % alcohol by volume were exempted from that requirement in 2010 by Regulation (EU) No 238/2010, on the ground that they are not intended for children. The exemption is about who drinks it rather than about what the substance does, which is why the wording does not appear on a wine bottle."
   aliases: []
 
 - id: e129
@@ -764,8 +770,8 @@
   category: colour
   name: { sv: Allurarött AC, en: Allura Red AC }
   note:
-    sv: Syntetiskt azofärgämne. Färgämnen finns inte bland de tillsatser som är godkända för vinframställning enligt bilaga I till förordning (EU) 2019/934. I aromatiserade vinprodukter är E129 däremot tillåtet, som ett av grupp III-färgämnena med gemensam högsta halt 200 mg/l, enligt livsmedelskategori 14.2.7 i bilaga II till förordning (EG) nr 1333/2008.
-    en: A synthetic azo dye. Colours are not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934. In aromatised wine products E129 is permitted, as one of the Group III colours subject to a combined maximum of 200 mg/l, under food category 14.2.7 of Annex II to Regulation (EC) No 1333/2008.
+    sv: "Syntetiskt azofärgämne. Färgämnen finns inte bland de tillsatser som är godkända för vinframställning enligt bilaga I till förordning (EU) 2019/934. I aromatiserade vinprodukter är E129 däremot tillåtet, som ett av grupp III-färgämnena med gemensam högsta halt 200 mg/l, enligt livsmedelskategori 14.2.7 i bilaga II till förordning (EG) nr 1333/2008. E129 står också i bilaga V till samma förordning, och livsmedel som innehåller något av de sex färgämnena där ska märkas med uppgiften ”kan ha en negativ effekt på barns beteende och koncentration”. Drycker över 1,2 volymprocent alkohol undantogs från det kravet 2010 genom förordning (EU) nr 238/2010, med motiveringen att de inte är avsedda för barn. Undantaget gäller alltså vem som dricker, inte vad ämnet gör, och det är därför uppgiften inte står på en vinflaska."
+    en: "A synthetic azo dye. Colours are not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934. In aromatised wine products E129 is permitted, as one of the Group III colours subject to a combined maximum of 200 mg/l, under food category 14.2.7 of Annex II to Regulation (EC) No 1333/2008. E129 is also listed in Annex V to the same regulation, and foods containing any of the six colours there must carry the words “may have an adverse effect on activity and attention in children”. Beverages above 1,2 % alcohol by volume were exempted from that requirement in 2010 by Regulation (EU) No 238/2010, on the ground that they are not intended for children. The exemption is about who drinks it rather than about what the substance does, which is why the wording does not appear on a wine bottle."
   aliases: [allura red, allura red ac, allurarött, allurarött ac]
 
 - id: wheat_protein
