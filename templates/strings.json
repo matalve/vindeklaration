@@ -182,7 +182,14 @@
   "stock_temporarily_out": "Tillfälligt slut när vi senast frågade.",
   "stock_nightly": "Lagersaldot hämtas varje natt, antalet butiker mer sällan. Systembolaget äger svaret om sina hyllor — kontrollera på produktsidan innan du åker.",
   "assortment_is": "Sortiment",
-  "order_possible": "Den går att beställa hem eller till en butik och tar då några dagar — det är en väntan, inte ett nej."
+  "order_possible": "Den går att beställa hem eller till en butik och tar då några dagar — det är en väntan, inte ett nej.",
+  "f_stores": "Finns i minst",
+  "f_stores_1": "1 butik",
+  "f_stores_10": "10 butiker",
+  "f_stores_50": "50 butiker",
+  "f_stores_150": "150 butiker",
+  "f_stores_note": "Antalet butiker läses en gång i veckan och säger hur brett vinet är utplacerat, inte om just din butik har det. Det finns inget sätt att fråga per butik, och sajten låtsas inte om det.",
+  "stores_dropped": "{n} viner saknar uppgift om antal butiker och kunde inte prövas."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -367,6 +374,13 @@
   "stock_temporarily_out": "Temporarily sold out when we last asked.",
   "stock_nightly": "Stock is fetched nightly, the store count less often. Systembolaget owns the answer about their own shelves — check the product page before you travel.",
   "assortment_is": "Range",
-  "order_possible": "It can be ordered to a store or to your home and takes a few days — that is a wait, not a no."
+  "order_possible": "It can be ordered to a store or to your home and takes a few days — that is a wait, not a no.",
+  "f_stores": "Stocked in at least",
+  "f_stores_1": "1 store",
+  "f_stores_10": "10 stores",
+  "f_stores_50": "50 stores",
+  "f_stores_150": "150 stores",
+  "f_stores_note": "The store count is read once a week and says how widely the wine is distributed, not whether your own shop has it. There is no way to ask per store, and the site does not pretend otherwise.",
+  "stores_dropped": "{n} wines have no store count recorded and could not be tested."
  }
 }

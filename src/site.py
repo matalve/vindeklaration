@@ -149,6 +149,11 @@ def build_index(wines: list[dict]) -> dict:
             sorted({index_of("additive", a["id"]) for a in wine["additives"]}),
             stock,
             wine_path(wine),
+            # How many stores shelve it. Distinct from `stock` above: that is
+            # nightly and says whether it can be had at all, this is weekly and
+            # says whether it is on a shelf near anyone. Null stays null — the
+            # filter must not read our own unfetched field as "no shelf".
+            wine.get("store_count"),
         ])
     return {"vocab": vocab, "wines": rows}
 

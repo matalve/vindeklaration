@@ -75,7 +75,8 @@ var FIXED_RANGE = "Fast sortiment";
         return v === "" || isNaN(parseFloat(v)) ? null : parseFloat(v);
       })(document.getElementById("f-price").value),
       exclude: chosen("f-exclude"),
-      include: chosen("f-include")
+      include: chosen("f-include"),
+      minStores: chosen("f-stores")
     };
   }
 
@@ -86,7 +87,7 @@ var FIXED_RANGE = "Fast sortiment";
   // empty — a gap in Systembolaget's metadata, not a supplier's silence. Those
   // two are counted separately so the results page can say which is which.
   function slice(data, c) {
-    var kept = [], dropped = { grape: 0, pairing: 0, stock: 0, assortment: 0 };
+    var kept = [], dropped = { grape: 0, pairing: 0, stock: 0, assortment: 0, stores: 0 };
     for (var i = 0; i < data.wines.length; i++) {
       var w = data.wines[i];
       if (w[COL.STOCK] !== 0) { dropped.stock++; continue; }
@@ -108,6 +109,13 @@ var FIXED_RANGE = "Fast sortiment";
       // summing them into one number tells the reader neither.
       if (c.grape !== null && w[COL.GRAPES].length === 0) { dropped.grape++; continue; }
       if (c.pairing !== null && w[COL.PAIRINGS].length === 0) { dropped.pairing++; continue; }
+      // Same shape as grape and pairing: a null is our own unread field, not
+      // a wine that sits on no shelf, so it is counted apart rather than
+      // silently failing the threshold.
+      if (c.minStores !== null) {
+        if (w[COL.STORES] === null) { dropped.stores++; continue; }
+        if (w[COL.STORES] < c.minStores) continue;
+      }
       if (c.grape !== null && w[COL.GRAPES].indexOf(c.grape) === -1) continue;
       if (c.pairing !== null && w[COL.PAIRINGS].indexOf(c.pairing) === -1) continue;
       kept.push(w);
@@ -189,6 +197,7 @@ var FIXED_RANGE = "Fast sortiment";
     }
     if (s.dropped.grape) lines.push(S.grapeDropped.replace("{n}", s.dropped.grape));
     if (s.dropped.pairing) lines.push(S.pairingDropped.replace("{n}", s.dropped.pairing));
+    if (s.dropped.stores) lines.push(S.storesDropped.replace("{n}", s.dropped.stores));
     if (bySubstanceDropped) {
       lines.push(S.substanceDropped.replace("{n}", bySubstanceDropped));
     }
