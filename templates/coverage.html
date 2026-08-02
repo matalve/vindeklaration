@@ -119,6 +119,63 @@
     <p class="explain">{{ s.breakdown_minimum|replace("{n}", minimum) }}</p>
   </section>
 
+  {# Named companies, so the conditions in docs/site-plan.md "Naming importers"
+     are not optional: the corrected column is the only ranking, the mean is on
+     the page, nobody under the threshold is named, every row links to its own
+     wines, and the whole thing is dated and corrigible. Rendered only when the
+     correction route resolves — see REPO_PUBLIC in src/site.py. #}
+  {% if importers %}
+  <section class="block">
+    <h2>{{ s.by_importer }}</h2>
+    <p class="explain">{{ s.importer_lede }}</p>
+    <p class="explain">{{ s.importer_mean|replace("{p}", covered.share|pct(lang)) }}</p>
+
+    <table class="breakdown importers">
+      <thead>
+        <tr>
+          <th>{{ s.col_importer }}</th>
+          <th class="num">{{ s.col_wines }}</th>
+          <th class="num">{{ s.col_declared }}</th>
+          <th class="num">{{ s.col_covered_share }}</th>
+          <th class="num">{{ s.col_all_share }}</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for imp in importers.named %}
+        <tr>
+          <td><a href="{{ lang_root }}/{{ s.importer_url }}/{{ imp.slug }}/">{{ imp.name }}</a></td>
+          <td class="num">{{ imp.wines }}</td>
+          <td class="num">{{ imp.declared }}</td>
+          <td class="num">{{ imp.share|pct(lang) }} %</td>
+          {# Never the ranking, and labelled below as what it actually measures. #}
+          <td class="num muted">{{ imp.all_share|pct(lang) }} %</td>
+        </tr>
+      {% endfor %}
+      {% if importers.thin.wines %}
+        <tr class="aggregated">
+          <td>{{ s.row_other }}</td>
+          <td class="num">{{ importers.thin.wines }}</td>
+          <td class="num">{{ importers.thin.declared }}</td>
+          <td class="num">{{ importers.thin.share|pct(lang) }} %</td>
+          <td class="num"></td>
+        </tr>
+      {% endif %}
+      </tbody>
+    </table>
+
+    <p class="explain">{{ s.importer_threshold
+      |replace("{n}", importer_minimum)
+      |replace("{w}", importers.thin.wines)
+      |replace("{s}", importers.thin.suppliers)
+      |replace("{d}", importers.thin.declared) }}</p>
+    <p class="explain">{{ s.importer_raw_note }}</p>
+    <p class="explain">{{ s.importer_supplies }}</p>
+    <p class="explain caveat">{{ s.importer_measured|replace("{d}", generated) }}</p>
+    {% set issues = '<a href="https://github.com/matalve/vindeklaration/issues">' ~ s.importer_issues ~ '</a>' %}
+    <p class="explain">{{ s.importer_correction|replace("{n}", correction_days)|replace("{link}", issues)|safe }}</p>
+  </section>
+  {% endif %}
+
   <p class="hint"><a href="{{ lang_root }}/{{ s.substance_url }}/">{{ s.substances }}</a></p>
 
 </article>

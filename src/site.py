@@ -361,6 +361,95 @@ def vintage_rows(wines: list[dict]) -> list[dict]:
     return rows
 
 
+# No importer is ranked on fewer than this many wines in the qualifying
+# vintages, so nobody tops or bottoms the table on four bottles. A statistical
+# honesty rule, not a legal shield — docs/site-plan.md, "Naming importers".
+IMPORTER_MINIMUM = 40
+
+# How long an error report is promised to take. The plan requires the table to
+# be "dated, and corrigible", and a correction route with no stated turnaround
+# is a suggestion box. **The owner has not confirmed this number** — it is the
+# one thing here that is a promise on their behalf rather than a measurement,
+# and it must be settled before REPO_PUBLIC flips and the table ships.
+CORRECTION_DAYS = 14
+
+
+def is_covered(wine: dict) -> bool:
+    """Whether the requirement certainly reaches this wine.
+
+    Vintage standing in for the production date the dataset does not have. The
+    error is one-sided by construction: everything this returns True for was
+    produced after the cutoff, and an unknown number of wines it returns False
+    for were too.
+    """
+    vintage = str(wine.get("vintage") or "")
+    return vintage.isdigit() and int(vintage) >= COVERED_FROM
+
+
+def importer_rows(wines: list[dict]) -> dict:
+    """Declared share per importer, over the vintages the requirement reaches.
+
+    `supplier` is Systembolaget's `supplierName`: the company that placed the
+    wine on the Swedish market and supplied the product text they publish. That
+    is the only claim these rows make. Article 8(1) of Regulation (EU) No
+    1169/2011 puts labelling responsibility on the producer for EU-origin wine
+    and on the importer only for third-country wine, and the dataset cannot
+    resolve which limb applies — so nothing here may be read as a claim about
+    legal responsibility. See docs/site-plan.md, "Naming importers".
+
+    Two things this deliberately does not do. It does not rank on all vintages:
+    that column is a function of how old an importer's stock is, and published
+    as a ranking it would put a company declaring on 97 of every 100 covered
+    bottles near the bottom. And it does not name anyone below the threshold —
+    those are counted in one row instead.
+    """
+    covered: dict[str, list[dict]] = {}
+    everything: dict[str, list[dict]] = {}
+    for wine in wines:
+        name = (wine.get("supplier") or "").strip()
+        if not name:
+            continue
+        everything.setdefault(name, []).append(wine)
+        if is_covered(wine):
+            covered.setdefault(name, []).append(wine)
+
+    def declared_in(group: list[dict]) -> int:
+        return sum(1 for w in group if w["declaration_status"] == "declared")
+
+    named, thin, thin_declared, thin_suppliers = [], 0, 0, 0
+    for name, group in covered.items():
+        if len(group) < IMPORTER_MINIMUM:
+            thin += len(group)
+            thin_declared += declared_in(group)
+            thin_suppliers += 1
+            continue
+        whole = everything[name]
+        named.append({
+            "name": name,
+            "slug": slugify(name),
+            "wines": len(group),
+            "declared": declared_in(group),
+            "share": declared_in(group) / len(group) * 100,
+            # Shown beside the ranking and never as it, labelled as what it is.
+            "all_wines": len(whole),
+            "all_share": declared_in(whole) / len(whole) * 100 if whole else 0,
+            # Sorted for the detail page: the claim is checkable bottle by
+            # bottle or it is not checkable at all.
+            "qualifying": sorted(group, key=lambda w: w["name"]),
+        })
+
+    named.sort(key=lambda r: -r["share"])
+    return {
+        "named": named,
+        "thin": {
+            "wines": thin,
+            "declared": thin_declared,
+            "share": thin_declared / thin * 100 if thin else 0,
+            "suppliers": thin_suppliers,
+        },
+    }
+
+
 def covered_stats(wines: list[dict]) -> dict:
     """The figures over the wines the requirement certainly reaches.
 
@@ -588,6 +677,11 @@ def build(output: Path, limit: int | None = None) -> None:
     allergens = allergen_labels()
     slices = list_slices(wines)
     substances, undefined_substances = substance_pages(wines)
+    # Named compliance statistics about real companies. Built always so the
+    # tests and the build exercise it, rendered only once the correction route
+    # in /metod actually resolves — docs/site-plan.md requires every row to be
+    # corrigible, and a 404 is not a correction route.
+    importers = importer_rows(wines) if REPO_PUBLIC else None
     # A wine page links a substance only where a page was actually built, so a
     # dictionary entry that disappears cannot turn 15 000 wine pages into
     # 404 links.
@@ -621,6 +715,7 @@ def build(output: Path, limit: int | None = None) -> None:
     substance_template = env.get_template("substance.html")
     substances_template = env.get_template("substances.html")
     coverage_template = env.get_template("coverage.html")
+    importer_template = env.get_template("importer.html")
 
     for lang in LANGUAGES:
         s = strings(lang)
@@ -745,10 +840,31 @@ def build(output: Path, limit: int | None = None) -> None:
                 lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
                 facet_labels=facets, covered_from=COVERED_FROM,
-                minimum=BREAKDOWN_MINIMUM,
+                minimum=BREAKDOWN_MINIMUM, importers=importers,
+                importer_minimum=IMPORTER_MINIMUM,
+                correction_days=CORRECTION_DAYS,
             ),
             encoding="utf-8",
         )
+
+        # One page per named importer, so every row in the table can be
+        # checked bottle by bottle — by them first of all. No bottle
+        # photographs: this is a listing surface, §2j condition 8.
+        if importers:
+            for imp in importers["named"]:
+                page = prefix / s["importer_url"] / imp["slug"]
+                page.mkdir(parents=True, exist_ok=True)
+                (page / "index.html").write_text(
+                    importer_template.render(
+                        imp=imp, covered=covered, mean=covered["share"],
+                        lang=lang, s=s, base=base, lang_root=lang_root,
+                        generated=generated, cdn_checked=CDN_CHECKED,
+                        covered_from=COVERED_FROM,
+                        minimum=IMPORTER_MINIMUM,
+                        correction_days=CORRECTION_DAYS,
+                    ),
+                    encoding="utf-8",
+                )
 
         method = prefix / ("metod" if lang == "sv" else "method")
         method.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{# The title carries the measurement, never a verdict. This is the line a
+   search result and a share preview show with none of the page around it, and
+   the company named in it is a real company — docs/site-plan.md, "Naming
+   importers": it reports, it does not characterise. #}
+{% block title %}{{ imp.name }} — {{ s.importers }} — {{ s.site_name }}{% endblock %}
+{% block description %}{{ imp.declared }} {{ s.of }} {{ imp.wines }}.{% endblock %}
+
+{% block content %}
+<article class="importer">
+
+  <h1>{{ imp.name }}</h1>
+  <p class="lede">{{ s.importer_lede }}</p>
+
+  {# The figure, then immediately the baseline. A percentage published without
+     the mean it sits against is an insinuation rather than a measurement. #}
+  <p class="hint">
+    <strong>{{ imp.share|pct(lang) }} %</strong> —
+    {{ imp.declared }} {{ s.of }} {{ imp.wines }} {{ s.wines_word }}.
+  </p>
+  <p class="explain">{{ s.importer_mean|replace("{p}", mean|pct(lang)) }}</p>
+  <p class="explain">{{ s.importer_supplies }}</p>
+
+  {# What was measured, and what it is not. The strongest form of the claim is
+     also the narrowest one: a fact about what a named site published on a
+     named day. #}
+  <p class="explain caveat">{{ s.importer_measured|replace("{d}", generated) }}</p>
+  <p class="explain caveat">{{ s.coverage_proxy|replace("{y}", covered_from)|replace("{o}", covered.outside) }}</p>
+
+  <section class="block">
+    <h2>{{ s.importer_wines }} ({{ imp.qualifying|length }})</h2>
+    <p class="explain">{{ s.importer_wines_note|replace("{y}", covered_from) }}</p>
+
+    {# Every wine, not a sample: the row above is checkable bottle by bottle or
+       it is not checkable at all. No photographs — §2j condition 8. #}
+    <ol class="results">
+    {% for w in imp.qualifying %}
+      <li>
+        <a href="{{ base }}/{{ w|wine_url }}/">{{ w.name }}{% if w.vintage %} {{ w.vintage }}{% endif %}</a>
+        <span class="meta">
+          {{ w.country }}{% if w.price %} · {{ w.price|round|int }} kr{% endif %}
+        </span>
+        {% set st = w|state %}
+        <span class="state state-{{ st[0] }}">
+          {%- if st == 'declared' -%}
+            {%- if w.additive_count == 0 -%}
+              {{ s.state_declared_zero }}
+            {%- else -%}
+              {{ s.state_declared }} {{ w.additive_count }}: {{ w.additives|map(attribute='name')|map(attribute=lang)|join(', ') }}
+            {%- endif -%}
+          {%- elif st == 'partial' -%}
+            {{ s.state_partial }}
+          {%- else -%}
+            {{ s.state_silent }}
+          {%- endif -%}
+        </span>
+      </li>
+    {% endfor %}
+    </ol>
+  </section>
+
+  {# Dated and corrigible, which the plan makes a condition of the table
+     existing at all rather than a courtesy. #}
+  {# Composed as a plain string then marked safe: Jinja's `replace` escapes its
+     replacement under autoescape, so building the anchor inline would print
+     the tag rather than render it. Both halves are the site's own text. #}
+  {% set issues = '<a href="https://github.com/matalve/vindeklaration/issues">' ~ s.importer_issues ~ '</a>' %}
+  <p class="explain">
+    {{ s.importer_correction|replace("{n}", correction_days)|replace("{link}", issues)|safe }}
+  </p>
+
+  <p class="hint"><a href="{{ lang_root }}/{{ s.coverage_url }}/">{{ s.importer_back }}</a></p>
+
+</article>
+{% endblock %}
