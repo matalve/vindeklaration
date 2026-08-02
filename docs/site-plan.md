@@ -113,12 +113,20 @@ Three consequences that shape every page:
   three, and the warning sat on one, so the page silently told a reader that
   the wine declaring one warning-colour had a problem while saying nothing
   about the wine declaring two. **Presence is a signal independent of content.**
-  And the requirement must **actually reach the product**, which is where the
-  whole thing collapsed: Commission Regulation (EU) No 238/2010 exempts
-  beverages above 1,2 % alcohol by volume, on the reasoning that they "are not
-  intended for consumption by children". Every wine in this dataset is above
-  that threshold. **The site published a health-adjacent warning that does not
-  apply to a single product it lists.**
+  And the note must say **whether the requirement actually reaches the
+  product**, which is where the first version collapsed: Commission Regulation
+  (EU) No 238/2010 exempts beverages above 1,2 % alcohol by volume, on the
+  reasoning that they "are not intended for consumption by children". Every
+  wine in this dataset is above that threshold, so the site had published a
+  health-adjacent warning that applied to nothing it lists.
+  **The warning is named on all three pages anyway. Decided by the owner
+  2026-08-02**, after the correction: a reader is entitled to know what is in
+  the glass even where the label is not required to say it. That is a decision
+  about scope, not a licence to drop the conditions — the note carries the
+  requirement *and* the exemption *and* the exemption's reason, because
+  "beverages over 1,2 % are exempt" on its own invites the reading that the
+  colour was found harmless in alcohol, which is not what 238/2010 says. The
+  exemption is about who drinks it, not about what the substance does.
   The lesson is not only about health claims. The base act said what the note
   claimed; a 2010 amendment reversed it, and the amendment is not what a search
   finds first. **A regulation is not verified until the consolidated text or

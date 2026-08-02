@@ -68,10 +68,13 @@ ever making the data less true.
   is there because a note written here reached a live page on 2026-08-02 and
   broke it. A legally mandated warning may be reported, but only quoted
   verbatim, with the instrument named, on **every** substance the requirement
-  reaches rather than the one you happened to be editing, and only after
-  confirming the requirement reaches these products at all. That note claimed
-  the Annex V children's-attention warning applied; Commission Regulation (EU)
-  No 238/2010 had exempted drinks above 1,2 % alcohol sixteen years earlier.
+  reaches rather than the one you happened to be editing, and with a plain
+  statement of whether the requirement reaches these products at all. That note
+  claimed the Annex V children's-attention warning applied; Commission
+  Regulation (EU) No 238/2010 had exempted drinks above 1,2 % alcohol sixteen
+  years earlier. The three colour entries now name the warning *and* the
+  exemption *and* why the exemption exists — dropping the last turns "exempt"
+  into "found harmless", which the regulation does not say.
 - **Read the amendments, not just the base act.** EUR-Lex serves the act as
   adopted first, and a note sourced from it is a note sourced from text that
   may have been reversed. Check the consolidated version or the amending acts
