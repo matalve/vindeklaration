@@ -29,6 +29,14 @@ Build: `uv run python -m src.site`, about 25 s, ~15 000 files. **The build fails
 above 19 000 files on purpose** — a Worker rejects more than 20 000 static
 assets on the free plan.
 
+**The whole chain runs unattended, verified end to end 2026-08-02** rather than
+inferred: the timer fired at 03:01, `update.sh` crawled, committed and pushed by
+06:13, and the live `/tackning` then reported 2 919 of 15 174 wines against the
+2 882 of 14 981 a local build had given the day before. Nobody touched it. The
+one thing that would break it silently is build watch paths — step 7 of
+`docs/deploy-site.md` suggests excluding `docs/` and `*.md` from rebuilds, and
+`data/` must never join that list.
+
 ## The dataset
 
 15 174 wines. Roughly 19% carry a declaration; about 0.5% of those cannot be
@@ -65,12 +73,34 @@ obey the rules the plan spends its length on, and both have been through
 `site-auditor` — which found, among other things, that the filter's default
 state was the global leaderboard the plan forbids by name.
 
-**Phase 3 — substances and coverage.** Built 2026-08-02 by another session,
-audited, and the audit found something the rules had not covered: the site had
-published a claim that a substance was *harmful*. The "never say" list banned
-claims in one direction only. See the second bullet of *What the site must never
-say* in the site plan — it is the most instructive thing written down in this
-project.
+**Phase 3 — substances and coverage.** Built 2026-08-02, audited, and the audit
+found something the rules had not covered: the site had published a claim that a
+substance was *harmful*. The "never say" list banned claims in one direction
+only. See the second bullet of *What the site must never say* in the site plan —
+it is the most instructive thing written down in this project, and it grew twice
+more the same day.
+
+The sentence at the centre of it was about three colours and the Annex V
+children's-attention warning. Fixing it went through three states, and the
+sequence is the lesson: it was **paraphrased** rather than quoted, then it was on
+**one page of three**, and then the warning turned out to **reach no product on
+the site at all** — Commission Regulation (EU) No 238/2010 exempts drinks above
+1,2 % alcohol, which is every bottle here. The base act says otherwise, and the
+base act is what a search finds first. **A regulation is not verified until the
+amending acts have been read.**
+**The warning is named on all three pages anyway, decided by the owner
+2026-08-02**, together with the exemption and the exemption's reason — a reader
+is entitled to know what is in the glass even where the label need not say it,
+and "exempt" without its reason reads as "found harmless", which 238/2010 does
+not say.
+
+Two related settlements from the same day. `E100` was never declared by anyone:
+both wines carrying it write `Energivärde: E/100 ml`, and blanking the slash
+turned it into the colour curcumin — fixed in `src/normalize.py`, and reparsing
+all declarations changes those two wines and nothing else. And **a product listed
+on the site has its additives named, whatever the product is.** The three colours
+are declared by a flavoured sparkling drink and a spirit-based aperitif rather
+than by wine; that is not a reason to hedge or to leave the substance out.
 
 **Phase 4 — trends** is not started. `data/quality-history.json` has been
 accumulating one row per nightly run since 2026-07-27 and is the seed for it.
@@ -83,10 +113,22 @@ catalogue is a protected database; whether publishing a compliance statistic
 about a sole trader reaches förtal. All in `docs/legal-notes.md`, all recorded
 as decisions rather than oversights.
 
-**The importer table is designed and not built.** Rules are in *Naming
-importers*. It ships on the weaker claim — the company placed the wine on the
-Swedish market and supplied the text — because Article 8(1) of Regulation
-1169/2011 puts responsibility on the producer for EU wine.
+**The repository is private, and one flag knows it.** `REPO_PUBLIC` in
+`src/site.py` is `False`. `/metod` used to tell readers everything was public on
+GitHub and linked there three times; all three 404 for anyone but the owner, on
+the page whose job is to say what the site cannot show. It now states plainly
+that there is no way to report an error yet. **Decided by the owner 2026-08-02:
+the issue tracker is the right channel and the repository opens closer to a real
+launch.** Flip the flag that day and every sentence becomes the stronger one.
+
+**The importer table is designed and not built, and it waits on that same
+flip.** Rules are in *Naming importers*. It ships on the weaker claim — the
+company placed the wine on the Swedish market and supplied the text — because
+Article 8(1) of Regulation 1169/2011 puts responsibility on the producer for EU
+wine. What holds it back is not design: every row must be corrigible, and a
+named compliance statistic whose correction route is a 404 is the one part that
+is not optional. 19 importers clear the 40-wine threshold; the mean over the
+qualifying vintages is 66.0%.
 
 **Advertising is intended eventually.** Today the site takes no income, and
 that fact is what keeps five separate regimes out of scope. *When the site takes
