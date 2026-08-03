@@ -58,8 +58,12 @@ full pass has completed.
   live and compared against the cache — the field is read correctly, and
   Systembolaget simply sets it on no wine. It is genuinely `true` on beers sold
   as glutenfri, so the flag works; wine is never marked. **Never surface it**:
-  `false` means *not marked*, not *contains gluten*. The search API does not
-  populate the field at all, only the product page does.
+  `false` means *not marked*, not *contains gluten* — and it is **not** evidence
+  that no wine contains gluten. One wine in this dataset says otherwise:
+  Maison Blanche Rosé (214801) declares gluten as an allergen, from wheat
+  protein used as a fining agent. The search API does not populate the field at
+  all, only the product page does. **Thread closed — do not reopen it as
+  "no wine has gluten".**
 - **`discontinued` is `False` everywhere**, which is plausible: a discontinued
   wine leaves the catalogue rather than staying in it flagged.
 
