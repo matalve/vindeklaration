@@ -245,7 +245,7 @@ since left it:
 | Additives | the declaration | **19.3%** | The scarce one, and the point of the site |
 | Sugar and energy | detail `nutrition` | ≈ declared | Arrives with the declaration |
 | Vegan, organic | `isVeganFriendly`, `isOrganic` | 100% | Supplier's own flag, not derived from the declaration — and unset means unmarked, not disqualified |
-| Gluten-free | `isGlutenFree` | **0% until 2026-08-02** | Same kind of flag, but it lives on the product page, so it arrives with the Sunday refresh and is null until then |
+| Gluten-free | `isGlutenFree` | **useless for wine** | Verified 2026-08-03 against the live API: the field works — it is `true` on beers sold as glutenfri — but Systembolaget sets it on no wine at all, `false` on all 14 858 fetched. Never show it. `false` here means *not marked*, not *contains gluten* |
 | Buyability | catalog stock flags, detail `availableNumberOfStores` | 100% / from 2026-08-02 | See *Can you actually buy it* |
 
 Two of these are new. Grape and price were always collected; **food pairing was
