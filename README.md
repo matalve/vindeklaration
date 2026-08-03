@@ -1,6 +1,7 @@
 # vindeklaration
 
-A public dataset of the additives declared in wines sold by Systembolaget.
+A public dataset of the additives declared in wines sold by Systembolaget, and
+a bilingual site on top of it at **[vindeklaration.se](https://vindeklaration.se)**.
 
 Since 8 December 2023 the EU requires wine to declare its ingredients and
 nutritional values. Systembolaget shows that declaration on each product page,
@@ -29,12 +30,12 @@ happened later, is covered without carrying a 2024 vintage.
 **The dataset has no production date, and Systembolaget publishes none**, so
 vintage is used as a stand-in throughout. The error runs one way: every wine of
 vintage 2024 or later was necessarily produced after the cutoff, so nothing is
-counted as covered when it is not. But 33.5% of the catalogue carries vintage
+counted as covered when it is not. But 33.4% of the catalogue carries vintage
 2023 or none at all, and an unknown share of that sits inside the requirement
 while a vintage filter cannot see it. Any figure here computed "over the wines
 the requirement covers" means *the wines it certainly covers*.
 
-**19.2% of the assortment currently carries a declaration**, rising to 66%
+**19.3% of the assortment currently carries a declaration**, rising to 66%
 among wines of vintage 2024 or later. Coverage improves on its own as stock
 rotates. See `docs/legal-notes.md` §1f for the sources.
 
