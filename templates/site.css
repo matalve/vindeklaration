@@ -7,12 +7,26 @@
    would say guilty. The three states differ by border and weight instead. */
 
 :root {
+  /* Dark is the default, by the owner's preference 2026-08-03, and light is
+     opt-in rather than the other way round. The toggle in the header writes
+     data-theme on <html>; an inline script in base.html applies it before the
+     first paint, so a reader who chose light never sees a dark flash. */
+  --ink: #eceae6;
+  --muted: #a8a49c;
+  --line: #3a3733;
+  --paper: #171614;
+  --accent: #e8a0ad; /* wine, lightened for contrast on dark; links and rules only */
+  --field: #201e1b;  /* inputs and quoted source text */
+  --measure: 40rem;
+}
+
+:root[data-theme="light"] {
   --ink: #1a1a1a;
   --muted: #5c5c5c;
   --line: #d8d4cc;
   --paper: #faf8f5;
-  --accent: #6b2737; /* wine, used for links and rules only */
-  --measure: 40rem;
+  --accent: #6b2737;
+  --field: #fff;
 }
 
 * { box-sizing: border-box; }
@@ -81,7 +95,7 @@ h2 { font-size: 1.05rem; margin: 0 0 0.5rem; }
 .explain { font-size: 0.9rem; color: var(--muted); margin: 0.5rem 0 0; }
 .unread { font-size: 0.9rem; margin: 0.75rem 0 0; }
 .unread code {
-  background: #efece6;
+  background: var(--field);
   padding: 0.1em 0.35em;
   border-radius: 2px;
   font-size: 0.9em;
@@ -100,7 +114,7 @@ table.additives td.enum {
 .raw blockquote {
   margin: 0;
   padding: 0.75rem 1rem;
-  background: #efece6;
+  background: var(--field);
   border-radius: 3px;
   font-size: 0.9rem;
   white-space: pre-wrap;
@@ -161,7 +175,8 @@ input[type="search"] {
   font-size: 1.05rem;
   border: 1px solid var(--line);
   border-radius: 3px;
-  background: #fff;
+  background: var(--field);
+  color: var(--ink);
 }
 input[type="search"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .hint { font-size: 0.85rem; color: var(--muted); margin: 0.5rem 0 1rem; }
@@ -231,7 +246,7 @@ details.more > * { margin-top: 0.6rem; }
   font-size: 1rem;
   border: 1px solid var(--line);
   border-radius: 3px;
-  background: #fff;
+  background: var(--field);
   color: var(--ink);
 }
 #filters .checkbox label { display: inline; font-size: 1rem; }
@@ -368,7 +383,7 @@ dl.facts.inline dd { margin: 0.1rem 0 0; }
   display: inline-block;
   margin: 0.15rem 0.3rem 0.15rem 0;
   padding: 0.1rem 0.35rem;
-  background: #f2efe9;
+  background: var(--field);
   border-radius: 3px;
   font-size: 0.8rem;
 }
@@ -384,16 +399,49 @@ dl.facts.inline dd { margin: 0.1rem 0 0; }
   white-space: nowrap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ink: #eceae6;
-    --muted: #a8a49c;
-    --line: #3a3733;
-    --paper: #171614;
-    --accent: #e0919f;
-  }
-  input[type="search"],
-  #filters select,
-  #filters input[type="number"] { background: #201e1b; color: var(--ink); }
-  .unread code, .raw blockquote, .alias-list code { background: #232120; }
+
+
+/* Icons and the theme control ---------------------------------------- */
+
+/* The sprite is defined once and never drawn. `display: none` would stop
+   Safari resolving <use>, so it is taken out of flow instead. */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.i {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  margin-right: 0.35em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+header nav { display: flex; align-items: center; flex-wrap: wrap; gap: 0 1rem; }
+header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
+
+.theme {
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--accent);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.theme:hover { border-color: var(--accent); }
+.theme .i { margin-right: 0.3em; }
+
+@media (max-width: 30rem) {
+  /* On a phone the wordmark and the nav each get a line, and the icons carry
+     the nav rather than the words wrapping mid-label. */
+  header { flex-wrap: wrap; }
+  header nav { gap: 0 0.85rem; }
 }

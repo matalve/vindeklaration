@@ -207,7 +207,10 @@
   "importer_wines_note": "Alla viner från leverantören med årgång {y} eller senare, med vad var och en deklarerar. Klicka vidare för originaltexten och länken till produktsidan.",
   "importer_correction": "Är något fel? Anmäl det i {link}, så svarar vi inom {n} dagar och rättar eller förklarar. Täckningen stiger när lagret roterar, så en siffra här är ett datum, inte ett omdöme.",
   "importer_issues": "projektets ärendehanterare",
-  "importer_back": "Alla leverantörer"
+  "importer_back": "Alla leverantörer",
+  "theme_light": "Ljust läge",
+  "theme_dark": "Mörkt läge",
+  "local_storage": "Väljer du ljust läge sparas det ordet i din webbläsares localStorage, så att sidan slipper blinka nästa gång. Det är ingen kaka, det skickas ingenstans och det går att rensa med webbläsarens vanliga rensning."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -417,6 +420,9 @@
   "importer_wines_note": "Every wine from this supplier of vintage {y} or later, with what each declares. Follow one through for the original text and the link to its product page.",
   "importer_correction": "Something wrong? Report it in {link} and we will answer within {n} days and correct or explain. Coverage rises as stock rotates, so a figure here is a date rather than a verdict.",
   "importer_issues": "the project's issue tracker",
-  "importer_back": "All suppliers"
+  "importer_back": "All suppliers",
+  "theme_light": "Light mode",
+  "theme_dark": "Dark mode",
+  "local_storage": "If you switch to light mode, that one word is kept in your browser's localStorage so the page does not flash next time. It is not a cookie, it is never sent anywhere, and your browser's ordinary clearing removes it."
  }
 }
