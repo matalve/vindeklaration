@@ -210,13 +210,15 @@
   "importer_back": "Alla leverantörer",
   "theme_light": "Ljust läge",
   "theme_dark": "Mörkt läge",
-  "local_storage": "Väljer du ljust läge sparas det ordet i din webbläsares localStorage, så att sidan slipper blinka nästa gång. Det är ingen kaka, det skickas ingenstans och det går att rensa med webbläsarens vanliga rensning.",
+  "local_storage": "Temat följer din enhets inställning om du inte säger annat. Väljer du ljust eller mörkt sparas det ordet i din webbläsares localStorage, så att sidan slipper blinka nästa gång — och du kan klicka tillbaka till systemets tema, då raderas det. Det är ingen kaka, det skickas ingenstans och webbläsarens vanliga rensning tar bort det.",
   "intro": "Slå upp ett vin och se vad leverantören deklarerat att det innehåller — eller jämför en hel hylla på en gång. Sajten redovisar vad som står i förteckningen, inte vad som finns i flaskan.",
   "door_find": "Välj typ, pris och land, så visas vad de vinerna deklarerar.",
   "door_substances": "Slå upp ett ämne från etiketten och se vilka viner som nämner det.",
   "door_coverage": "Hur stor del av hyllan som lämnat en förteckning, per typ, land och årgång.",
   "ready_lists": "Färdiga listor",
-  "ready_lists_note": "Byggda i natt, en per typ av vin och prisklass. De kräver ingen JavaScript."
+  "ready_lists_note": "Byggda i natt, en per typ av vin och prisklass. De kräver ingen JavaScript.",
+  "theme_system": "Systemets tema",
+  "theme_switch": "Byt tema"
  },
  "en": {
   "site_name": "vindeklaration",
@@ -429,12 +431,14 @@
   "importer_back": "All suppliers",
   "theme_light": "Light mode",
   "theme_dark": "Dark mode",
-  "local_storage": "If you switch to light mode, that one word is kept in your browser's localStorage so the page does not flash next time. It is not a cookie, it is never sent anywhere, and your browser's ordinary clearing removes it.",
+  "local_storage": "The theme follows your device's setting unless you say otherwise. Choose light or dark and that one word is kept in your browser's localStorage so the page does not flash next time — and you can click back to the system theme, which deletes it. It is not a cookie, it is never sent anywhere, and your browser's ordinary clearing removes it.",
   "intro": "Look up a wine and see what its supplier declared it contains — or compare a whole shelf at once. The site reports what the list says, not what is in the bottle.",
   "door_find": "Pick a type, a price and a country, and see what those wines declare.",
   "door_substances": "Look up a substance off a label and see which wines name it.",
   "door_coverage": "How much of the shelf has given a list, by type, country and vintage.",
   "ready_lists": "Ready-made lists",
-  "ready_lists_note": "Built overnight, one per type of wine and price band. They need no JavaScript."
+  "ready_lists_note": "Built overnight, one per type of wine and price band. They need no JavaScript.",
+  "theme_system": "System theme",
+  "theme_switch": "Switch theme"
  }
 }

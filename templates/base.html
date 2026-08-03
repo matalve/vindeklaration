@@ -12,15 +12,14 @@
    browser-like requests. Nothing here renders the beacon — do not add a second
    one. The absence of commercial interest is load-bearing, not decorative. #}
 <link rel="stylesheet" href="/site.css">
-{# Inline and before the stylesheet's first paint on purpose. A reader who
-   chose light must not see a dark flash on every page, and there is no server
-   to ask. The preference is a single word in localStorage, never sent
-   anywhere — /metod says so. #}
+{# Before the first paint on purpose: a reader who overrode the OS must not see
+   the OS's answer flash first, and there is no server to ask. Nothing is
+   written unless they chose — with no stored value the stylesheet's
+   prefers-color-scheme rule decides, which is the default. #}
 <script>
   try {
-    if (localStorage.getItem("theme") === "light") {
-      document.documentElement.dataset.theme = "light";
-    }
+    var t = localStorage.getItem("theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
   } catch (e) {}
 </script>
 </head>
@@ -59,6 +58,9 @@
   <symbol id="i-moon" viewBox="0 0 24 24">
     <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/>
   </symbol>
+  <symbol id="i-auto" viewBox="0 0 24 24">
+    <rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M9 21h6M12 17v4"/>
+  </symbol>
 </svg>
 
 <header>
@@ -70,10 +72,10 @@
     <a href="{{ lang_root }}/{{ s.method_url }}/"><svg class="i"><use href="#i-book"/></svg>{{ s.method }}</a>
     <a href="{{ s.other_lang_url }}"><svg class="i"><use href="#i-globe"/></svg>{{ s.other_lang }}</a>
     {# Rendered by JS only: without it the button would promise a switch that
-       cannot happen, and the default it would switch away from is what a
-       no-JS reader already has. #}
-    <button type="button" id="theme" class="theme" hidden>
-      <svg class="i"><use href="#i-sun"/></svg><span>{{ s.theme_light }}</span>
+       cannot happen, and what it would switch away from — the OS's own
+       setting — is what a no-JS reader already gets. #}
+    <button type="button" id="theme" class="theme" hidden aria-label="{{ s.theme_switch }}">
+      <svg class="i"><use href="#i-auto"/></svg><span>{{ s.theme_system }}</span>
     </button>
   </nav>
 </header>
@@ -99,23 +101,45 @@
     var root = document.documentElement;
     var label = button.querySelector("span");
     var icon = button.querySelector("use");
-    var toLight = {{ s.theme_light|tojson }}, toDark = {{ s.theme_dark|tojson }};
 
-    function paint() {
-      var light = root.dataset.theme === "light";
-      // The control says what it will do, not what is currently on.
-      label.textContent = light ? toDark : toLight;
-      icon.setAttribute("href", light ? "#i-moon" : "#i-sun");
-      button.setAttribute("aria-pressed", light ? "true" : "false");
+    // Three states, and the third is the point: the reader can hand the
+    // decision back to the operating system after having taken it. A two-way
+    // toggle has no way back, so the OS default becomes unreachable the moment
+    // it is overridden once.
+    var MODES = [
+      { key: null,    name: {{ s.theme_system|tojson }}, icon: "#i-auto" },
+      { key: "light", name: {{ s.theme_light|tojson }},  icon: "#i-sun" },
+      { key: "dark",  name: {{ s.theme_dark|tojson }},   icon: "#i-moon" }
+    ];
+
+    function indexOfCurrent() {
+      for (var i = 0; i < MODES.length; i++) {
+        if (MODES[i].key === (root.dataset.theme || null)) return i;
+      }
+      return 0;
     }
+
+    function paint(mode) {
+      // The label names the state that is on, not the one a click would bring.
+      // With three states "what happens next" is not guessable from a word.
+      label.textContent = mode.name;
+      icon.setAttribute("href", mode.icon);
+    }
+
+    var at = indexOfCurrent();
     button.hidden = false;
-    paint();
+    paint(MODES[at]);
+
     button.addEventListener("click", function () {
-      var light = root.dataset.theme !== "light";
-      if (light) root.dataset.theme = "light";
+      at = (at + 1) % MODES.length;
+      var mode = MODES[at];
+      if (mode.key) root.dataset.theme = mode.key;
       else delete root.dataset.theme;
-      try { localStorage.setItem("theme", light ? "light" : "dark"); } catch (e) {}
-      paint();
+      try {
+        if (mode.key) localStorage.setItem("theme", mode.key);
+        else localStorage.removeItem("theme");
+      } catch (e) {}
+      paint(mode);
     });
   })();
 </script>
