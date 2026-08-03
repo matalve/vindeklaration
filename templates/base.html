@@ -65,19 +65,32 @@
 
 <header>
   <a class="wordmark" href="{{ lang_root }}/">{{ s.site_name }}</a>
-  <nav>
-    <a href="{{ lang_root }}/{{ s.find_url }}/"><svg class="i"><use href="#i-filter"/></svg>{{ s.find }}</a>
-    <a href="{{ lang_root }}/{{ s.substance_url }}/"><svg class="i"><use href="#i-tag"/></svg>{{ s.substances }}</a>
-    <a href="{{ lang_root }}/{{ s.coverage_url }}/"><svg class="i"><use href="#i-chart"/></svg>{{ s.coverage }}</a>
-    <a href="{{ lang_root }}/{{ s.method_url }}/"><svg class="i"><use href="#i-book"/></svg>{{ s.method }}</a>
-    <a href="{{ s.other_lang_url }}"><svg class="i"><use href="#i-globe"/></svg>{{ s.other_lang }}</a>
-    {# Rendered by JS only: without it the button would promise a switch that
-       cannot happen, and what it would switch away from — the OS's own
-       setting — is what a no-JS reader already gets. #}
-    <button type="button" id="theme" class="theme" hidden aria-label="{{ s.theme_switch }}">
-      <svg class="i"><use href="#i-auto"/></svg><span>{{ s.theme_system }}</span>
-    </button>
-  </nav>
+  <div class="header-right">
+    <nav>
+      <a href="{{ lang_root }}/{{ s.find_url }}/"><svg class="i"><use href="#i-filter"/></svg>{{ s.find }}</a>
+      <a href="{{ lang_root }}/{{ s.substance_url }}/"><svg class="i"><use href="#i-tag"/></svg>{{ s.substances }}</a>
+      <a href="{{ lang_root }}/{{ s.coverage_url }}/"><svg class="i"><use href="#i-chart"/></svg>{{ s.coverage }}</a>
+      <a href="{{ lang_root }}/{{ s.method_url }}/"><svg class="i"><use href="#i-book"/></svg>{{ s.method }}</a>
+      <a href="{{ s.other_lang_url }}"><svg class="i"><use href="#i-globe"/></svg>{{ s.other_lang }}</a>
+    </nav>
+    {# A segmented control, revealed by JS only: without it it would offer a
+       switch that cannot happen, and what it switches away from — the OS's own
+       setting — is what a no-JS reader already gets. The three states are shown
+       at once rather than cycled, so the reader can see that "follow my device"
+       exists instead of having to click twice to find it. #}
+    <div class="themer" id="theme" role="radiogroup" aria-label="{{ s.theme_switch }}" hidden>
+      <span class="thumb" aria-hidden="true"></span>
+      <button type="button" role="radio" data-mode="system" title="{{ s.theme_system }}">
+        <svg class="i"><use href="#i-auto"/></svg><span class="visually-hidden">{{ s.theme_system }}</span>
+      </button>
+      <button type="button" role="radio" data-mode="light" title="{{ s.theme_light }}">
+        <svg class="i"><use href="#i-sun"/></svg><span class="visually-hidden">{{ s.theme_light }}</span>
+      </button>
+      <button type="button" role="radio" data-mode="dark" title="{{ s.theme_dark }}">
+        <svg class="i"><use href="#i-moon"/></svg><span class="visually-hidden">{{ s.theme_dark }}</span>
+      </button>
+    </div>
+  </div>
 </header>
 
 <main>
@@ -96,50 +109,46 @@
 
 <script>
   (function () {
-    var button = document.getElementById("theme");
-    if (!button) return;
+    var group = document.getElementById("theme");
+    if (!group) return;
     var root = document.documentElement;
-    var label = button.querySelector("span");
-    var icon = button.querySelector("use");
+    var buttons = group.querySelectorAll("button[data-mode]");
 
-    // Three states, and the third is the point: the reader can hand the
-    // decision back to the operating system after having taken it. A two-way
-    // toggle has no way back, so the OS default becomes unreachable the moment
-    // it is overridden once.
-    var MODES = [
-      { key: null,    name: {{ s.theme_system|tojson }}, icon: "#i-auto" },
-      { key: "light", name: {{ s.theme_light|tojson }},  icon: "#i-sun" },
-      { key: "dark",  name: {{ s.theme_dark|tojson }},   icon: "#i-moon" }
-    ];
-
-    function indexOfCurrent() {
-      for (var i = 0; i < MODES.length; i++) {
-        if (MODES[i].key === (root.dataset.theme || null)) return i;
+    // "system" is the absence of a stored choice, not a third stored value:
+    // picking it removes the key so the OS decides again.
+    function apply(mode, remember) {
+      if (mode === "system") {
+        delete root.dataset.theme;
+        if (remember) { try { localStorage.removeItem("theme"); } catch (e) {} }
+      } else {
+        root.dataset.theme = mode;
+        if (remember) { try { localStorage.setItem("theme", mode); } catch (e) {} }
       }
-      return 0;
+      for (var i = 0; i < buttons.length; i++) {
+        var on = buttons[i].dataset.mode === mode;
+        buttons[i].setAttribute("aria-checked", on ? "true" : "false");
+        buttons[i].tabIndex = on ? 0 : -1;
+        if (on) group.dataset.at = i;
+      }
     }
 
-    function paint(mode) {
-      // The label names the state that is on, not the one a click would bring.
-      // With three states "what happens next" is not guessable from a word.
-      label.textContent = mode.name;
-      icon.setAttribute("href", mode.icon);
-    }
+    group.hidden = false;
+    apply(root.dataset.theme || "system", false);
 
-    var at = indexOfCurrent();
-    button.hidden = false;
-    paint(MODES[at]);
+    group.addEventListener("click", function (event) {
+      var button = event.target.closest("button[data-mode]");
+      if (button) apply(button.dataset.mode, true);
+    });
 
-    button.addEventListener("click", function () {
-      at = (at + 1) % MODES.length;
-      var mode = MODES[at];
-      if (mode.key) root.dataset.theme = mode.key;
-      else delete root.dataset.theme;
-      try {
-        if (mode.key) localStorage.setItem("theme", mode.key);
-        else localStorage.removeItem("theme");
-      } catch (e) {}
-      paint(mode);
+    // Arrow keys move within a radiogroup; without this the control is
+    // reachable by tab but not operable the way a radiogroup is expected to be.
+    group.addEventListener("keydown", function (event) {
+      var step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
+      if (!step) return;
+      event.preventDefault();
+      var at = (Number(group.dataset.at || 0) + step + buttons.length) % buttons.length;
+      apply(buttons[at].dataset.mode, true);
+      buttons[at].focus();
     });
   })();
 </script>
