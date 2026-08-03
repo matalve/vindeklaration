@@ -102,7 +102,10 @@ def build_records() -> list[dict]:
             # simply never marked. Kept because it is theirs and it is cheap;
             # **never surfaced on the site**, because `false` here means "not
             # marked" and publishing it as "contains gluten" would be the same
-            # error as reading an absent declaration as an empty bottle.
+            # error as reading an absent declaration as an empty bottle. Nor is
+            # it evidence the other way: Maison Blanche Rosé (214801) declares
+            # gluten as an allergen, from wheat protein used as a fining agent,
+            # and carries `isGlutenFree: false` like everything else.
             "gluten_free": detail.get("isGlutenFree"),
             "nutrition": detail.get("nutrition") or {},
             "declaration_status": "declared" if raw else "not_declared",
