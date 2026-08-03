@@ -906,142 +906,65 @@ open, not that the site is nice.
 
 ## Open questions for the owner
 
-- ~~**Are undeclared wines listed at all?**~~ Settled 2026-07-27: they are
-  shown, in their own block, with the reason. See *Undeclared wines stay in the
-  results*.
-- ~~**Are suppliers named on the coverage page?**~~ Settled 2026-07-27: yes,
-  importers are named, under the rules in *Naming importers*.
-- ~~**Public or private dataset?**~~ Settled 2026-07-27: private for now, but
-  written throughout as if already public, since making it public exposes the
-  whole history and not just the current tree.
-- ~~**The quality gate.**~~ Settled 2026-07-27: it watches drift rather than an
-  absolute level, so the figure the site publishes is the measured share of
-  unread declarations, not a target anyone is grinding towards. `/metod` states
-  it plainly and dates it.
-- ~~**Verify who carries labelling responsibility** — importer or producer —
-  before the importer table goes live.~~ Researched 2026-07-28,
-  `docs/legal-notes.md` §1. **The answer moved the plan**: under Article 8(1) of
-  Regulation (EU) No 1169/2011 it is the producer/bottler for EU-origin wine and
-  the EU importer only for third-country wine, so the table's justification was
-  rewritten to a factual one. Two things remain open and are the owner's to take
-  further: **who is liable in Sweden when a declaration is wrong** (not
-  established, needs a Swedish lawyer), and whether naming importers is
-  defensible at all under förtal and marknadsföringslagen (not researched — that
-  is a separate question below).
-- ~~**The requirement covers the 2024 harvest onwards.**~~ Corrected 2026-07-28:
-  it covers wine **produced** after 8 December 2023. Vintage is a proxy the
-  dataset is stuck with, it is conservative but leaves a third of the catalogue
-  uncounted, and every page that uses it must say so. See *Naming importers* and
-  `docs/legal-notes.md` §1f–1g. **`README.md` still states the harvest version
-  and needs the same correction.**
-- **Is the site acting *i näringsverksamhet*?** **Answered for now by the owner,
-  2026-07-28: no — build and operate it as pure consumer information.** The site
-  takes no income, carries no advertising and has nothing to gain from what its
-  lists say, so every regime that gates on this question is out of scope while
-  that stays true. The owner has decided not to consult a lawyer at this stage.
-  The site *will* become näringsverksamhet if and when the features are in place
-  and there is appetite to run it as a business; the data collection would move
-  to a different footing then. That is a future problem and may never arrive.
-  **What this settles is the present, not the transition** — see *When the site
-  takes income*, which stays written for the day it is needed.
-  Below is what the research established, kept because it is what makes the
-  above a decision rather than an assumption.
-- **Is the site marketing at all?** Researched 2026-07-28 and **not resolved**.
-  Alkohollagen 7 kap. bites only on *marknadsföring*, which marknadsföringslagen
-  3 § defines as measures *i näringsverksamhet* that are *ägnade att främja
-  avsättningen*. A site with no income fails the first element on its face, and
-  Regulation (EC) No 1924/2006 likewise applies only to "commercial
-  communications". But no fetched case or guidance draws the line for an
-  independent information site, and the one decided alcohol case found
-  (Mackmyra ./. KO) concerned a producer promoting its own goods. **Needs a
-  Swedish lawyer before launch.** See `docs/legal-notes.md` §4d.
-- **Wording review before launch.** Still open, and now narrower. The health
-  claims regime bars *health claims* on beverages over 1.2% abv without
-  exception, and the CJEU reads "health claim" to include any implication of
-  reduced harm (*Deutsches Weintor* C-544/10) — but only in commercial
-  communications, which loops back to the question above. What research settled:
-  the phrase *utan tillsatser* is out, *fewest declared additives* is the only
-  permitted form, and the never-say rules now cover implication by layout and by
-  URL, not just by sentence. What it did not settle: whether a ranked list is
-  itself an implied claim regardless of its wording. See
-  `docs/legal-notes.md` §4c and §4f.
-- ~~**May the site hotlink Systembolaget's bottle photographs?**~~ Researched
-  2026-07-28, `docs/legal-notes.md` §2. The five judgments were fetched and read.
-  **Embedding is not copying and the line falls at a technological measure**
-  (*Svensson*, *BestWater*, *VG Bild-Kunst* §46); copying to our host would be
-  infringement (*Renckhoff*). Systembolaget's own linking page concedes embedding
-  in terms. The *Bottle photographs* section above is rewritten with the
-  conditions that come attached. Two residues remain open and are the owner's:
-  whether the CJEU's Article 3(1) case law reaches the purely Swedish
-  neighbouring right in 49 a § URL, and who actually owns the photographs.
-- ~~**Is naming importers defensible?**~~ Researched 2026-07-28,
-  `docs/legal-notes.md` §3. **Förtal does not reach a company at all** (SOU 2016:7
-  p. 410), so for the aktiebolag in the table there is no defamation exposure.
-  Marknadsföringslagen 18 § binds "en näringsidkare … i sin reklam" and so hangs
-  on the same unresolved threshold as everything else. **The answer moved the
-  plan**: the dataset contains suppliers whose names are personal names, förtal
-  *is* available to them, and a new rule now excludes them from any ranking
-  independently of the 40-wine threshold.
-  **And the table ships. Decided by the owner 2026-07-28**, after being told the
-  claim it rests on is weaker than the one originally commissioned: it can say
-  the company placed the wine on the Swedish market and supplied the text
-  Systembolaget publishes, not that it is accountable for the declaration. The
-  owner accepts that basis for European wines and applies the same reasoning to
-  the rest of the world, so **the table is built on one uniform claim regardless
-  of a wine's origin** — no split between EU and non-EU rows, and no assertion
-  of responsibility anywhere in it.
-- **Does the project's own crawl breach Systembolaget's terms of use?** Found
-  2026-07-28 while researching the images; `docs/legal-notes.md` §2f. Clause 1.7
-  of their Allmänna användarvillkor (version 2026-04-21) prohibits using
-  "crawlers eller spindlar … för att samla in information från eller om
-  Webbplatsen … i syfte att tillhandhålla funktioner eller tjänster relaterat till
-  marknadsföring av, eller **information om** alkoholdrycker". That describes this
-  project, and unlike their intellectual-property clause it carries **no
-  commercial qualifier**, so being non-commercial does not sidestep it. Whether a
-  browsewrap term binds a client that never created an account, and what would
-  follow if it does, was not established. **`robots.txt` is not the whole
-  permission set and this plan, `README.md` and `CLAUDE.md` have all been treating
-  it as if it were.**
-  **Decided by the owner 2026-07-28: the crawl continues.** The reasoning is
-  that Systembolaget publishes a product API for use and a `robots.txt` reading
-  `Allow: /`, and that a clause forbidding what those two invite is internally
-  contradictory. That is a judgement about the site owner's evident intent, not
-  a resolution of the clause — the wording stands unchanged and the browsewrap
-  question is still unanswered. It remains worth putting to a lawyer, and it
-  becomes materially more pressing if the site takes income, since clause 4 of
-  the same terms engages then. The crawling discipline in `CLAUDE.md` —
-  sequential, 0.4 s apart, self-identifying, never accelerating after an
-  outage — is what makes the decision defensible in practice and is not
-  negotiable.
-- **Is the dataset itself someone else's database?** Not resolved;
-  `docs/legal-notes.md` §2i. Upphovsrättslagen 49 § protects a compilation "i
-  vilket ett stort antal uppgifter har sammanställts **eller** vilket är resultatet
-  av en väsentlig investering" — alternatives, not cumulative — for fifteen years.
-  *British Horseracing Board* (C-203/02) holds that public accessibility is no
-  defence, and that repeated small extractions whose cumulative effect
-  reconstitutes the database are caught. The text-and-data-mining exception in
-  15 a § URL does not obviously help, because it forbids keeping the copies longer
-  than the mining needs and forbids using them for another purpose, and this
-  project does both. Needs a Swedish lawyer.
-- **Is the site acting *i näringsverksamhet*?** This was already open under
-  *Is the site marketing at all?* above. It is recorded again here because
-  research has now shown it gates **five** separate regimes rather than one:
-  alkohollagen 7 kap. (via marknadsföringslagen 3 §), Regulation (EC) No 1924/2006
-  Article 1(2), marknadsföringslagen 18 § on comparative advertising,
-  varumärkeslagen 1 kap. 10 §, and clause 4 of Systembolaget's user terms. See the
-  table in `docs/legal-notes.md` §3e. **It is the single highest-value question to
-  put to a lawyer** — one answer closes five exposures.
-- **Are supplier names that are personal names personal data?** Partly settled
-  2026-07-28. The collision with `CLAUDE.md` was a misreading of that rule: it
-  protects the **owner's** data, not third parties'. Carrying sole traders'
-  names in `supplier` is approved — the values are public business information,
-  quoted verbatim from the source, and stripping them would misattribute the
-  wines. `CLAUDE.md` now says so, so no future session re-opens it.
-  **What is not settled is publishing a compliance statistic about them.**
-  Naming a company in the importer table and naming a natural person are
-  different acts: förtal reaches the second and not the first, and truth alone
-  does not acquit under BrB 5:1. **No GDPR analysis has been done**, and
-  Bolagsverket has not been queried to confirm which entries are enskilda
-  firmor. Today the 40-wine threshold keeps all of them out of the table, but
-  that is this quarter's catalogue rather than a safeguard. See
-  `docs/legal-notes.md` §3c and the natural-person rule in *Naming importers*.
+Every entry here is a decision or a gap, in one line each. The reasoning that
+made them lives in `docs/legal-notes.md`, with the sources fetched and quoted;
+repeating it here only lets the two drift apart.
+
+### Settled
+
+| | |
+|---|---|
+| Undeclared wines are listed | 2026-07-27, in their own block with the reason |
+| Importers are named | 2026-07-27; table built 2026-08-02, gated on `REPO_PUBLIC` |
+| Dataset stays private for now | 2026-07-27, written throughout as if public |
+| The quality gate watches drift, not a level | 2026-07-27; `/metod` states and dates it |
+| Labelling responsibility is the producer's for EU wine | 2026-07-28, §1 — Article 8(1) of Regulation (EU) No 1169/2011. The importer limb fires only for third-country wine, and the dataset cannot tell which applies, so the table's claim is factual rather than one about responsibility |
+| The requirement covers wine **produced** after 8 December 2023 | 2026-07-28, §1f–1g. Not "the 2024 harvest". Vintage is a proxy and every page using it says so |
+| Bottle photographs may be embedded, never copied | 2026-07-28, §2 — the line falls at a technological measure (*Svensson*, *BestWater*, *VG Bild-Kunst* §46; *Renckhoff* for copying) |
+| Naming importers is defensible, and the table ships | 2026-07-28, §3 — förtal does not reach an aktiebolag (SOU 2016:7 p. 410). One uniform claim regardless of a wine's origin: the company placed it on the Swedish market and supplied the text |
+| A supplier who is a natural person is ranked on the same terms | 2026-07-29, reversing the rule written the day before. Excluding them would mean the smallest suppliers are the only ones never examined |
+| The crawl continues despite clause 1.7 | 2026-07-28, §2f — a public product API and `Allow: /` contradict a clause forbidding what they invite. A judgement about evident intent, not a resolution of the clause |
+| The site is not *i näringsverksamhet* today | 2026-07-28 — no income, so every regime gating on it is out of scope while that holds. See *When the site takes income* |
+| Sole traders' names stay in `supplier` | 2026-07-28 — public business information, quoted verbatim; stripping it would misattribute the wines |
+| The site never says a substance is harmful | 2026-08-02 — see *What the site must never say*, which is where that rule and its exception are written |
+
+### Open
+
+**Needs a Swedish lawyer, and the owner has decided not to consult one at this
+stage.**
+
+- **Is the site acting *i näringsverksamhet*?** The single highest-value
+  question: one answer closes five exposures — alkohollagen 7 kap. via
+  marknadsföringslagen 3 §, Regulation (EC) No 1924/2006 Article 1(2),
+  marknadsföringslagen 18 §, varumärkeslagen 1 kap. 10 §, and clause 4 of
+  Systembolaget's terms. §3e has the table. A site with no income fails the
+  first element on its face, but no fetched case draws the line for an
+  independent information site. It becomes pressing the day the site takes
+  income.
+- **Is the dataset someone else's database?** §2i. Upphovsrättslagen 49 §
+  protects a compilation of a large number of items **or** the result of a
+  substantial investment — alternatives, not cumulative. *British Horseracing
+  Board* (C-203/02): public accessibility is no defence, and repeated small
+  extractions that reconstitute the database are caught. The text-and-data-mining
+  exception in 15 a § does not obviously help, since it forbids keeping copies
+  longer than the mining needs.
+- **Whether a browsewrap term binds a party that never opened an account**, and
+  what follows if it does. §2k.
+- **Who is liable in Sweden when a declaration is wrong.** Not established.
+
+**Not researched, and not a lawyer's question:**
+
+- **Publishing a compliance statistic about a natural person.** No GDPR
+  analysis has been done and Bolagsverket has not been queried to confirm which
+  suppliers are enskilda firmor. The 40-wine threshold keeps all of them out of
+  the table today, but that is this quarter's catalogue rather than a
+  safeguard. §3c.
+- **Whether a ranked list is itself an implied health claim**, regardless of
+  its wording. *Deutsches Weintor* (C-544/10) reads "health claim" to include
+  any implication of reduced harm, but only in commercial communications, which
+  loops back to the first question above. §4c, §4f.
+- **Who owns the bottle photographs**, and whether the CJEU's Article 3(1) case
+  law reaches the purely Swedish neighbouring right in 49 a § URL. §2.
+- **`CORRECTION_DAYS` in `src/site.py` is 14 and unconfirmed.** It is the one
+  number the site would publish as a promise rather than a measurement, and the
+  importer table states it. Settle it before `REPO_PUBLIC` flips.
