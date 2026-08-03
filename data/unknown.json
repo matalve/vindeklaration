@@ -66,16 +66,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7180801/"
   },
   {
-   "token": "cas9000",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7236101/"
-  },
-  {
-   "token": "cas16731",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7236101/"
-  },
-  {
    "token": "odesa",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7507201/"
@@ -136,11 +126,11 @@
    "wines": 1
   },
   {
-   "match": "kaliummetabisilfit -> kaliummetabisulfit",
+   "match": "kalumbisulfit -> kaliumbisulfit",
    "wines": 1
   },
   {
-   "match": "kalumbisulfit -> kaliumbisulfit",
+   "match": "matavinsyra -> metavinsyra",
    "wines": 1
   },
   {
