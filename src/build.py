@@ -92,9 +92,17 @@ def build_records() -> list[dict]:
             "organic": bool(product.get("isOrganic")),
             "natural_wine": bool(detail.get("isNaturalWine")),
             "vegan": bool(detail.get("isVeganFriendly")),
-            # Not coerced to a bool like the flags above: this field arrives
-            # only with a refetched declaration, and a wine we have not asked
-            # again yet is not the same thing as a wine that is not gluten free.
+            # Not coerced to a bool like the flags above: a wine we have not
+            # refetched yet is not the same thing as a wine that is not gluten
+            # free.
+            #
+            # Verified 2026-08-03 against the live API: Systembolaget sets this
+            # on no wine — false on all 14 858 fetched — while it is genuinely
+            # true on beers sold as glutenfri, so the field works and wine is
+            # simply never marked. Kept because it is theirs and it is cheap;
+            # **never surfaced on the site**, because `false` here means "not
+            # marked" and publishing it as "contains gluten" would be the same
+            # error as reading an absent declaration as an empty bottle.
             "gluten_free": detail.get("isGlutenFree"),
             "nutrition": detail.get("nutrition") or {},
             "declaration_status": "declared" if raw else "not_declared",

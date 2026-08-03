@@ -39,7 +39,7 @@ one thing that would break it silently is build watch paths — step 7 of
 
 ## The dataset
 
-15 174 wines. Roughly 19% carry a declaration; about 0.5% of those cannot be
+15 124 wines. Roughly 19% carry a declaration; about 0.5% of those cannot be
 read in full and are excluded from every ranking. `src/report.py` prints the
 current numbers and its gate watches drift rather than a level.
 
@@ -54,11 +54,12 @@ full pass has completed.
   so zero is the common case rather than a missing value. Every wine page now
   says how findable it is in words, and the filter has a store threshold
   (index column 15).
-- **`gluten_free` is `False` on all 15 174 records and `True` on none.** After a
-  full refresh that is a signal rather than a fact — either Systembolaget marks
-  no wine gluten-free, or `isGlutenFree` is being read wrong in
-  `src/details.py`. Worth ten minutes against a live product page before
-  anything is built on it.
+- ~~**`gluten_free` may be misread.**~~ Settled 2026-08-03: it is not. Fetched
+  live and compared against the cache — the field is read correctly, and
+  Systembolaget simply sets it on no wine. It is genuinely `true` on beers sold
+  as glutenfri, so the flag works; wine is never marked. **Never surface it**:
+  `false` means *not marked*, not *contains gluten*. The search API does not
+  populate the field at all, only the product page does.
 - **`discontinued` is `False` everywhere**, which is plausible: a discontinued
   wine leaves the catalogue rather than staying in it flagged.
 
@@ -130,14 +131,19 @@ that there is no way to report an error yet. **Decided by the owner 2026-08-02:
 the issue tracker is the right channel and the repository opens closer to a real
 launch.** Flip the flag that day and every sentence becomes the stronger one.
 
-**The importer table is designed and not built, and it waits on that same
-flip.** Rules are in *Naming importers*. It ships on the weaker claim — the
-company placed the wine on the Swedish market and supplied the text — because
-Article 8(1) of Regulation 1169/2011 puts responsibility on the producer for EU
-wine. What holds it back is not design: every row must be corrigible, and a
-named compliance statistic whose correction route is a 404 is the one part that
-is not optional. 19 importers clear the 40-wine threshold; the mean over the
-qualifying vintages is 66.0%.
+**The importer table is built, and waits on that same flip.** Rules are in
+*Naming importers*; `importer_rows()` and `templates/importer.html` implement
+them and are tested. It renders only when `REPO_PUBLIC` is on, because a named
+compliance statistic whose correction route is a 404 is the one part of the
+design that is not optional. Verified with the flag on: 19 importers clear the
+40-wine threshold, all aktiebolag, plus one counted row of 1 608 wines from 239
+unnamed suppliers. The share is over covered vintages only — published raw the
+table would put Johan Lidby, who declares on 97 of every 100 covered bottles,
+near the bottom at 29.2%, because that column measures how old the stock is.
+
+**Before the flag flips, `CORRECTION_DAYS` needs an answer.** It is 14 and the
+owner has not confirmed it. It is the one figure the site would publish as a
+promise rather than a measurement, and a test guards the flag saying so.
 
 **Advertising is intended eventually.** Today the site takes no income, and
 that fact is what keeps five separate regimes out of scope. *When the site takes
