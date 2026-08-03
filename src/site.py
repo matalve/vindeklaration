@@ -703,6 +703,10 @@ def build(output: Path, limit: int | None = None) -> None:
         encoding="utf-8",
     )
     shutil.copy(TEMPLATE_DIR / "site.css", output / "site.css")
+    # Committed rather than generated per build: they change when the mark
+    # changes, which is not nightly. tools/make_icons.py redraws them.
+    for icon in sorted((TEMPLATE_DIR / "icons").iterdir()):
+        shutil.copy(icon, output / icon.name)
     shutil.copy(TEMPLATE_DIR / "sok.js", output / "sok.js")
     shutil.copy(TEMPLATE_DIR / "hitta.js", output / "hitta.js")
 
