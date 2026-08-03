@@ -3,15 +3,42 @@
 {% block content %}
 <section class="search">
   <h1>{{ s.tagline }}</h1>
+  {# What the site is for, before the box. The old page opened with a search
+     field and no statement of what it searches, which asks the reader to
+     already know. #}
+  <p class="lede intro">{{ s.intro }}</p>
   <label class="visually-hidden" for="q">{{ s.search }}</label>
-  <input type="search" id="q" placeholder="{{ s.search }}" autocomplete="off"
-         autocapitalize="off" spellcheck="false" enterkeyhint="search">
+  <div class="searchbox">
+    <svg class="i" aria-hidden="true"><use href="#i-search"/></svg>
+    <input type="search" id="q" placeholder="{{ s.search }}" autocomplete="off"
+           autocapitalize="off" spellcheck="false" enterkeyhint="search">
+  </div>
   <p id="hint" class="hint">{{ s.search_hint }}</p>
 {% if s.wine_pages_note %}
   <p class="hint note">{{ s.wine_pages_note }}</p>
 {% endif %}
   <ol id="results" class="results"></ol>
 </section>
+
+{# The three things you can actually do, as doors rather than as a menu bar.
+   Wording is deliberately about disclosure and never about contents. #}
+<nav class="doors">
+  <a href="{{ lang_root }}/{{ s.find_url }}/">
+    <svg class="i" aria-hidden="true"><use href="#i-filter"/></svg>
+    <span class="door-name">{{ s.find }}</span>
+    <span class="door-note">{{ s.door_find }}</span>
+  </a>
+  <a href="{{ lang_root }}/{{ s.substance_url }}/">
+    <svg class="i" aria-hidden="true"><use href="#i-tag"/></svg>
+    <span class="door-name">{{ s.substances }}</span>
+    <span class="door-note">{{ s.door_substances }}</span>
+  </a>
+  <a href="{{ lang_root }}/{{ s.coverage_url }}/">
+    <svg class="i" aria-hidden="true"><use href="#i-chart"/></svg>
+    <span class="door-name">{{ s.coverage }}</span>
+    <span class="door-note">{{ s.door_coverage }}</span>
+  </a>
+</nav>
 
 {# The denominator, on the front page, before anything is ranked. Four wines in
    five declare nothing, and that is the site's largest finding rather than a
@@ -32,9 +59,14 @@
   </table>
 </section>
 
+{# Moved above the coverage block 2026-08-03: these are ten finished answers
+   and they were below the fold under a heading that read as an afterthought.
+   The qualifier stays attached — each heading already carries the word
+   declared, which is the only permitted form. #}
 {% if lists %}
-<nav class="other-lists">
-  <h2>{{ s.list_others }}</h2>
+<nav class="other-lists ready">
+  <h2>{{ s.ready_lists }}</h2>
+  <p class="explain">{{ s.ready_lists_note }}</p>
   <ul>
   {% for o in lists %}
     <li><a href="{{ lang_root }}/{{ s.list_url }}/{{ o.slug }}/">{{ o.heading }}</a></li>

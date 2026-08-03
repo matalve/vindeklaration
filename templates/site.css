@@ -445,3 +445,53 @@ header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
   header { flex-wrap: wrap; }
   header nav { gap: 0 0.85rem; }
 }
+
+/* Front page --------------------------------------------------------- */
+
+.intro { margin: 0 0 1.25rem; color: var(--ink); }
+
+.searchbox { position: relative; display: flex; align-items: center; }
+.searchbox .i {
+  position: absolute;
+  left: 0.8rem;
+  width: 1.1em;
+  height: 1.1em;
+  margin: 0;
+  color: var(--muted);
+  pointer-events: none;
+}
+.searchbox input[type="search"] { padding-left: 2.6rem; }
+
+/* Three doors, not a menu bar. Each says what it does in a sentence, because
+   a label alone makes the reader guess and guessing is what the site removes.
+   No counts on them: a number beside "substances" would rank nothing, but a
+   number beside a door invites reading it as a score. */
+.doors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+.doors a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 0.5rem;
+  align-items: start;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.doors a:hover { border-color: var(--accent); }
+.doors .i { color: var(--accent); margin: 0.15rem 0 0; }
+.doors .door-name { font-weight: 600; color: var(--accent); }
+.doors .door-note {
+  grid-column: 2;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.other-lists.ready { margin-top: 2rem; }
+.other-lists.ready .explain { margin: 0 0 0.5rem; }
