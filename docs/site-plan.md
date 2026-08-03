@@ -838,10 +838,86 @@ What it costs, so that nobody has to rediscover it:
 - The substance pages in phase 3 are where English matters most, and they are
   few. They should be bilingual from the start regardless of this decision.
 
-What lifts it: a paid Workers plan raises the ceiling to 100 000 static assets,
-or the wine page could carry both languages in one document. Neither needs
-deciding now, and `WINE_PAGE_LANGUAGES` in `src/site.py` is the one line that
-changes when it is.
+What lifts it: the wine page could carry both languages in one document, or the
+sharded-HTML plan in *The file-count ceiling* below removes the count as a
+constraint altogether. A paid Workers plan would also raise the ceiling to
+100 000 assets, and is deliberately not the answer — see that section. Neither
+needs deciding now, and `WINE_PAGE_LANGUAGES` in `src/site.py` is the one line
+that changes when it is.
+
+## The file-count ceiling
+
+A Worker on the free plan rejects more than 20 000 static assets, and the build
+fails on purpose above 19 000 — the mechanics are in `docs/deploy-site.md`.
+Today's build is 15 309 files, of which 15 124 are wine pages. **The way past it
+is architecture, not a paid plan. Decided 2026-08-03.**
+
+The count does not come from the dataset. `wines.json` is a single file and is
+never uploaded to Cloudflare at all; the files are pre-rendered HTML, one per
+wine URL. Packing the data more tightly changes nothing, because the count
+follows the URL space and not the storage format. Three properties hold today:
+
+1. fully static — no code runs at request time
+2. one URL per wine
+3. real HTML without JavaScript, indexable and readable with scripts off
+
+Any two are cheap. All three together mean one file per wine, so exactly one has
+to give.
+
+**Give up (1): sharded HTML behind a Worker script.** The build renders wine
+pages exactly as it does now — Jinja stays the only renderer — but packs them
+into 64–256 shard files instead of writing 15 124 directories. The Worker is a
+lookup and nothing more: slug → shard id → `env.ASSETS.fetch(shard)` → return
+the stored HTML verbatim. No second renderer in JavaScript means no template
+drift to discover months later, which is the trap that makes most
+render-at-request rewrites expensive. The build drops to roughly 250 files and
+the ceiling stops being a subject.
+
+Measured against the live build on 2026-08-03: 50.8 MB of wine HTML, 3 355 B per
+page, and 163 B per page gzipped in bulk over a 2 000-page sample — the pages
+resemble each other closely enough that gzip dedupes hard across a shard.
+Extrapolated, the whole set is about 2.5 MB compressed, against a 25 MiB
+per-asset limit. The routing needs no configuration: Cloudflare serves a
+matching asset without invoking the Worker and only falls through to the script
+when no asset matches, which is what `/vin/{slug}` becomes. `run_worker_first`
+is the wrong switch here and would make every request billable.
+
+What it costs, so that nobody has to rediscover it:
+
+- **Every wine page view becomes a billable Worker request.** Static assets are
+  free and unlimited; Worker requests are 100 000 a day on the free plan. A full
+  search-engine crawl of 15 124 pages fits inside one day with margin rather
+  than with room to spare.
+- **`not_found_handling: "404-page"` stops covering `/vin/`.** The Worker has to
+  serve the 404 page itself for a slug it cannot find — which is exactly the
+  case `wrangler.jsonc` already names as the most likely 404 this site will ever
+  serve.
+- A JavaScript layer in a deploy chain that renders nothing today.
+
+If the request budget ever binds, the escape is a split rather than a plan
+upgrade: keep the ~2 900 declared wines as static files and shard only the
+~12 200 undeclared ones. That is about 3 100 files, and when the budget runs out
+it is the tail that returns 429 rather than the pages people link to. Start
+undivided; take the split only when the budget is the binding constraint.
+
+**The two branches not taken**, written down so they are not re-proposed:
+
+- **Give up (3), render on the client.** One shell for `/vin/*` plus JavaScript
+  that fetches the shard. It solves the count without spending a single Worker
+  request, but the wine page is then empty to a search engine and to a reader
+  with scripts off. Journey 3 already loses the English wine page; this would
+  take the rest of it.
+- **Give up (2), publish fewer URLs.** A page only for wines that declare —
+  about 3 000 files, still fully static, no new moving parts. But the undeclared
+  pages carry the `findability()` result: where declaration-finder looked and
+  what it did not find. That absence is one of the project's own findings, not
+  filler around a blank.
+
+None of this is built. It is the plan for when the margin closes, and there is
+no sign yet that it is closing: `data/quality-history.json` has the assortment
+between 14 877 and 15 174 across the eight days it has recorded, noise around
+15 000 with no direction. Eight days is too short to call it flat, but nothing
+in it points up, so this is work to schedule rather than work that is late.
 
 ## Technical shape
 
