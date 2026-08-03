@@ -8,7 +8,10 @@ looks plausible, and is wrong in the direction that flatters the shelf.
 
 from __future__ import annotations
 
+import re
+
 from src.site import (
+    TEMPLATE_DIR,
     importer_rows,
     findability,
     breakdown,
@@ -409,3 +412,44 @@ def test_the_table_is_not_rendered_while_the_correction_route_is_a_404() -> None
         "actually public, and confirm CORRECTION_DAYS with the owner, then "
         "delete this test."
     )
+
+
+# --- theme -------------------------------------------------------------------
+
+def test_the_theme_follows_the_system_unless_the_reader_overrides_it() -> None:
+    """Three states, and the cascade is what makes the third one work.
+
+    The OS decides by default; an explicit choice wins in both directions. The
+    `:not([data-theme="light"])` guard is the whole mechanism — without it a
+    reader on a dark OS who asks for light gets dark anyway, and nothing else
+    in the file would look wrong.
+    """
+    css = (TEMPLATE_DIR / "site.css").read_text(encoding="utf-8")
+
+    assert ':root {' in css
+    assert '@media (prefers-color-scheme: dark) {' in css
+    assert ':root:not([data-theme="light"]) {' in css
+    assert ':root[data-theme="dark"] {' in css
+
+    # An explicit dark choice has to be declared after the media block, or a
+    # reader on a light OS asking for dark loses to the base palette.
+    assert css.index('@media (prefers-color-scheme: dark)') < css.index(':root[data-theme="dark"]')
+
+
+def test_no_hard_coded_theme_colour_survives_in_the_stylesheet() -> None:
+    """Every colour is a variable, or half the page stays light in dark mode.
+
+    Four did not, and each was invisible until the theme was switched: two
+    inputs and the block that quotes a supplier's own declaration.
+    """
+    css = (TEMPLATE_DIR / "site.css").read_text(encoding="utf-8")
+    palette = {"--ink", "--muted", "--line", "--paper", "--accent", "--field"}
+    # A hex literal, not an id selector: `#filters` is a selector and fine.
+    hex_colour = re.compile(r"#[0-9a-fA-F]{3,8}\b")
+
+    for line in css.splitlines():
+        body = line.split("/*")[0]
+        if any(f"{name}:" in body for name in palette):
+            continue
+        found = hex_colour.findall(body)
+        assert not found, f"hard-coded colour outside the palette: {line.strip()}"

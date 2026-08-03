@@ -7,26 +7,40 @@
    would say guilty. The three states differ by border and weight instead. */
 
 :root {
-  /* Dark is the default, by the owner's preference 2026-08-03, and light is
-     opt-in rather than the other way round. The toggle in the header writes
-     data-theme on <html>; an inline script in base.html applies it before the
-     first paint, so a reader who chose light never sees a dark flash. */
-  --ink: #eceae6;
-  --muted: #a8a49c;
-  --line: #3a3733;
-  --paper: #171614;
-  --accent: #e8a0ad; /* wine, lightened for contrast on dark; links and rules only */
-  --field: #201e1b;  /* inputs and quoted source text */
-  --measure: 40rem;
-}
-
-:root[data-theme="light"] {
+  /* Three states, not two. The operating system decides unless the reader has
+     said otherwise, and the toggle can hand the decision back — decided
+     2026-08-03. The dark palette appears twice on purpose: once for "the OS
+     says dark and nobody overrode it", once for "the reader asked for dark".
+     They cannot be merged across a media-query boundary, and an indirection
+     through a second layer of custom properties costs more than the six
+     duplicated lines. */
   --ink: #1a1a1a;
   --muted: #5c5c5c;
   --line: #d8d4cc;
   --paper: #faf8f5;
-  --accent: #6b2737;
-  --field: #fff;
+  --accent: #6b2737; /* wine, used for links and rules only */
+  --field: #fff;     /* inputs and quoted source text */
+  --measure: 40rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #eceae6;
+    --muted: #a8a49c;
+    --line: #3a3733;
+    --paper: #171614;
+    --accent: #e8a0ad; /* lightened for contrast on dark */
+    --field: #201e1b;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ink: #eceae6;
+  --muted: #a8a49c;
+  --line: #3a3733;
+  --paper: #171614;
+  --accent: #e8a0ad;
+  --field: #201e1b;
 }
 
 * { box-sizing: border-box; }
