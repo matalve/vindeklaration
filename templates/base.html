@@ -5,22 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}{{ s.site_name }}{% endblock %}</title>
 <meta name="description" content="{% block description %}{{ s.tagline }}{% endblock %}">
+<meta name="color-scheme" content="dark light">
 {# No fonts and no third-party requests from these templates. Two reach the
    browser anyway and /metod names both: the bottle photograph on a wine page,
    and Cloudflare's analytics beacon, which they inject at the edge for
    browser-like requests. Nothing here renders the beacon — do not add a second
    one. The absence of commercial interest is load-bearing, not decorative. #}
 <link rel="stylesheet" href="/site.css">
+{# Inline and before the stylesheet's first paint on purpose. A reader who
+   chose light must not see a dark flash on every page, and there is no server
+   to ask. The preference is a single word in localStorage, never sent
+   anywhere — /metod says so. #}
+<script>
+  try {
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.dataset.theme = "light";
+    }
+  } catch (e) {}
+</script>
 </head>
 <body>
+{# One sprite, monochrome, currentColor, drawn once and referenced. Icons here
+   are navigation and nothing else: docs/site-plan.md names icons among the
+   places a claim gets made without a sentence, so no icon marks a declaration
+   state, a substance or a ranking. A beaker beside "substances" would say
+   chemical, and that is exactly the kind of implication the rule forbids. #}
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-search" viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/>
+  </symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24">
+    <path d="M4 7h16M7 12h10M10 17h4"/>
+  </symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24">
+    <path d="M3 12V4h8l9 9-8 8-9-9Z"/><circle cx="7.5" cy="7.5" r="1.5"/>
+  </symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24">
+    <path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>
+  </symbol>
+  <symbol id="i-book" viewBox="0 0 24 24">
+    <path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M4 19a2 2 0 0 1 2-2h13"/>
+  </symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18M12 3c-5 5-5 13 0 18"/>
+  </symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24">
+    <path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/>
+  </symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="4.5"/>
+    <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5"/>
+  </symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24">
+    <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/>
+  </symbol>
+</svg>
+
 <header>
   <a class="wordmark" href="{{ lang_root }}/">{{ s.site_name }}</a>
   <nav>
-    <a href="{{ lang_root }}/{{ s.find_url }}/">{{ s.find }}</a>
-    <a href="{{ lang_root }}/{{ s.substance_url }}/">{{ s.substances }}</a>
-    <a href="{{ lang_root }}/{{ s.coverage_url }}/">{{ s.coverage }}</a>
-    <a href="{{ lang_root }}/{{ s.method_url }}/">{{ s.method }}</a>
-    <a href="{{ s.other_lang_url }}">{{ s.other_lang }}</a>
+    <a href="{{ lang_root }}/{{ s.find_url }}/"><svg class="i"><use href="#i-filter"/></svg>{{ s.find }}</a>
+    <a href="{{ lang_root }}/{{ s.substance_url }}/"><svg class="i"><use href="#i-tag"/></svg>{{ s.substances }}</a>
+    <a href="{{ lang_root }}/{{ s.coverage_url }}/"><svg class="i"><use href="#i-chart"/></svg>{{ s.coverage }}</a>
+    <a href="{{ lang_root }}/{{ s.method_url }}/"><svg class="i"><use href="#i-book"/></svg>{{ s.method }}</a>
+    <a href="{{ s.other_lang_url }}"><svg class="i"><use href="#i-globe"/></svg>{{ s.other_lang }}</a>
+    {# Rendered by JS only: without it the button would promise a switch that
+       cannot happen, and the default it would switch away from is what a
+       no-JS reader already has. #}
+    <button type="button" id="theme" class="theme" hidden>
+      <svg class="i"><use href="#i-sun"/></svg><span>{{ s.theme_light }}</span>
+    </button>
   </nav>
 </header>
 
@@ -37,5 +91,33 @@
   <p class="disclaimer">{{ s.not_health }}</p>
   <p class="meta">{{ s.site_name }} · {{ generated }} · <a href="{{ lang_root }}/{{ s.method_url }}/">{{ s.method }}</a></p>
 </footer>
+
+<script>
+  (function () {
+    var button = document.getElementById("theme");
+    if (!button) return;
+    var root = document.documentElement;
+    var label = button.querySelector("span");
+    var icon = button.querySelector("use");
+    var toLight = {{ s.theme_light|tojson }}, toDark = {{ s.theme_dark|tojson }};
+
+    function paint() {
+      var light = root.dataset.theme === "light";
+      // The control says what it will do, not what is currently on.
+      label.textContent = light ? toDark : toLight;
+      icon.setAttribute("href", light ? "#i-moon" : "#i-sun");
+      button.setAttribute("aria-pressed", light ? "true" : "false");
+    }
+    button.hidden = false;
+    paint();
+    button.addEventListener("click", function () {
+      var light = root.dataset.theme !== "light";
+      if (light) root.dataset.theme = "light";
+      else delete root.dataset.theme;
+      try { localStorage.setItem("theme", light ? "light" : "dark"); } catch (e) {}
+      paint();
+    });
+  })();
+</script>
 </body>
 </html>
