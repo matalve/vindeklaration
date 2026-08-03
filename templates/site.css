@@ -71,12 +71,24 @@ header {
   padding: 1.25rem 0 1rem;
   border-bottom: 1px solid var(--line);
 }
+/* The one place the site uses a serif, and it uses the reader's own. A web
+   font would be the first bytes this project has ever asked a browser to fetch
+   for decoration, on a page whose whole point is loading on a shop's signal —
+   so the wordmark gets character from a stack that is already installed.
+   High-contrast old-style faces first, with the platform defaults behind them;
+   every branch resolves to something with real stroke contrast, which is what
+   separates it from the body text. */
 .wordmark {
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: "Iowan Old Style", "Hoefler Text", "Palatino Linotype", Palatino,
+               Constantia, Cambria, "Noto Serif", "Liberation Serif", Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   text-decoration: none;
   color: var(--ink);
+  line-height: 1;
 }
+.wordmark:hover { color: var(--accent); }
 header nav a { margin-left: 1rem; font-size: 0.9rem; }
 
 /* Wine page ---------------------------------------------------------- */
@@ -434,29 +446,71 @@ dl.facts.inline dd { margin: 0.1rem 0 0; }
   flex: none;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 header nav { display: flex; align-items: center; flex-wrap: wrap; gap: 0 1rem; }
 header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
 
-.theme {
-  font: inherit;
-  font-size: 0.9rem;
-  color: var(--accent);
-  background: none;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  padding: 0.2rem 0.55rem;
-  cursor: pointer;
+/* The theme control: three segments and a thumb that slides between them.
+   All three states are visible at once, so "follow my device" is a thing the
+   reader can see rather than something they reach by clicking twice. */
+.themer {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  white-space: nowrap;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px;
+  background: var(--field);
+  flex: none;
 }
-.theme:hover { border-color: var(--accent); }
-.theme .i { margin-right: 0.3em; }
+.themer .thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.85rem;
+  height: calc(100% - 4px);
+  border-radius: 999px;
+  background: var(--accent);
+  transition: transform 0.18s ease;
+}
+.themer[data-at="1"] .thumb { transform: translateX(1.85rem); }
+.themer[data-at="2"] .thumb { transform: translateX(3.7rem); }
 
-@media (max-width: 30rem) {
-  /* On a phone the wordmark and the nav each get a line, and the icons carry
-     the nav rather than the words wrapping mid-label. */
+.themer button {
+  position: relative;      /* above the thumb */
+  z-index: 1;
+  width: 1.85rem;
+  height: 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--muted);
+  border-radius: 999px;
+}
+.themer button .i { margin: 0; width: 0.95em; height: 0.95em; }
+.themer button:hover { color: var(--ink); }
+/* On the thumb, so it has to read against the accent rather than the page. */
+.themer button[aria-checked="true"] { color: var(--paper); }
+.themer button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .themer .thumb { transition: none; }
+}
+
+@media (max-width: 34rem) {
+  /* The wordmark keeps its line; the nav and the control share the next one. */
   header { flex-wrap: wrap; }
+  .header-right { width: 100%; justify-content: space-between; }
   header nav { gap: 0 0.85rem; }
 }
 
