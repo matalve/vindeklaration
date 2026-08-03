@@ -11,6 +11,7 @@ from __future__ import annotations
 import re
 
 from src.site import (
+    ROOT,
     TEMPLATE_DIR,
     importer_rows,
     findability,
@@ -453,3 +454,39 @@ def test_no_hard_coded_theme_colour_survives_in_the_stylesheet() -> None:
             continue
         found = hex_colour.findall(body)
         assert not found, f"hard-coded colour outside the palette: {line.strip()}"
+
+
+# --- the icon ----------------------------------------------------------------
+
+def test_the_icon_ink_matches_the_stylesheet_accent() -> None:
+    """One mark, one palette. The icon is drawn by a separate script, so the
+    two can drift silently — a wine glass in last season's red on a tab strip
+    is the kind of thing nobody notices for months."""
+    css = (TEMPLATE_DIR / "site.css").read_text(encoding="utf-8")
+    icon = (ROOT / "tools" / "make_icons.py").read_text(encoding="utf-8")
+
+    accents = {m.lower() for m in re.findall(r"--accent:\s*#([0-9a-fA-F]{6})", css)}
+    inks = {
+        "".join(f"{int(part, 16):02x}" for part in parts)
+        for parts in re.findall(
+            r"INK_(?:LIGHT|DARK) = \(0x([0-9A-Fa-f]{2}), 0x([0-9A-Fa-f]{2}), 0x([0-9A-Fa-f]{2})\)",
+            icon,
+        )
+    }
+
+    assert inks, "could not read the icon inks"
+    assert inks == accents, f"icon {sorted(inks)} vs stylesheet {sorted(accents)}"
+
+
+def test_the_icon_is_drawn_on_whole_pixels_at_tab_size() -> None:
+    """16 px is the size a browser tab shows, and every edge has to land on a
+    pixel boundary there — the first two drafts blurred into a smear below
+    32 px because they did not."""
+    icon = (ROOT / "tools" / "make_icons.py").read_text(encoding="utf-8")
+    shapes = re.findall(r"\((\d+), (\d+), (\d+), (\d+)\),\s+#", icon)
+
+    assert len(shapes) == 5, "expected the five rectangles of the mark"
+    for x, y, w, h in shapes:
+        for value in (x, y, w, h):
+            assert int(value) == float(value), "a rectangle left the integer grid"
+        assert int(y) + int(h) <= 16 and int(x) + int(w) <= 16, "a rectangle left the grid"

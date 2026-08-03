@@ -6,6 +6,12 @@
 <title>{% block title %}{{ s.site_name }}{% endblock %}</title>
 <meta name="description" content="{% block description %}{{ s.tagline }}{% endblock %}">
 <meta name="color-scheme" content="dark light">
+{# Drawn by tools/make_icons.py on a 16-unit grid so the tab-strip size lands
+   on whole pixels. The SVG carries its own prefers-color-scheme; the PNG is
+   for browsers that will not take an SVG icon. #}
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 {# No fonts and no third-party requests from these templates. Two reach the
    browser anyway and /metod names both: the bottle photograph on a wine page,
    and Cloudflare's analytics beacon, which they inject at the edge for

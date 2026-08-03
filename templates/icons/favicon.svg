@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <title>vindeklaration</title>
+  <style>
+    /* Wine on a light tab strip, lightened wine on a dark one. Firefox and
+       Chrome honour this in an SVG favicon; Safari falls back to the PNG. */
+    :root { fill: rgb(107, 39, 55); }
+    @media (prefers-color-scheme: dark) { :root { fill: rgb(232, 160, 173); } }
+  </style>
+  <rect x="2" y="1" width="12" height="2" rx="0.4"/>
+  <rect x="3" y="4" width="10" height="2" rx="0.4"/>
+  <rect x="4" y="7" width="8" height="2" rx="0.4"/>
+  <rect x="7" y="9" width="2" height="4" rx="0.4"/>
+  <rect x="3" y="13" width="10" height="2" rx="0.4"/>
+</svg>
