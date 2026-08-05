@@ -695,3 +695,17 @@ header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
   margin: 0.75rem 0 0;
   line-height: 1.5;
 }
+
+/* The facts that fill the column beside the bottle. On a phone held upright
+   the head is stacked and these read as an ordinary list under the name; in
+   landscape, and on any wider screen, they occupy the paper that was empty. */
+.headline-facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 0.9rem;
+  margin: 0.9rem 0 0;
+  font-size: 0.9rem;
+}
+.headline-facts dt { color: var(--muted); }
+.headline-facts dd { margin: 0; }
+.headline-facts .muted { color: var(--muted); }
