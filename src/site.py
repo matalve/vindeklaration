@@ -763,14 +763,19 @@ def count(value: int | None, lang: str) -> str:
 
 
 def pct(value: float, lang: str) -> str:
-    """A share to one decimal, in the decimal separator the language uses.
+    """A share to one decimal, with its sign, in the language's own typography.
 
-    `fmt` above is Swedish-only, which was safe while it ran on wine pages
-    alone — those are built in Swedish. The coverage tables are bilingual, and
-    "19,3 %" on an English page is a typo rather than a translation.
+    Two conventions and they differ in both places. Swedish writes 19,3 % — a
+    decimal comma and a space before the sign; English writes 19.3% with a
+    decimal point and no space. The sign belongs here rather than after the
+    filter in every template, which is how thirteen templates came to hardcode
+    a Swedish space onto English pages.
+
+    The space is non-breaking: a percentage that wraps between the number and
+    the sign has stopped being one value.
     """
     text = f"{value:.1f}"
-    return text.replace(".", ",") if lang == "sv" else text
+    return text.replace(".", ",") + "\u00a0%" if lang == "sv" else text + "%"
 
 
 def nutrition_rows(wine: dict) -> tuple[list[dict], int]:
