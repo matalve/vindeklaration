@@ -28,8 +28,8 @@
           {{ row.value }}
         {%- endif -%}
       </td>
-      <td class="num">{{ row.wines }}</td>
-      <td class="num">{{ row.declared }}</td>
+      <td class="num">{{ row.wines|count(lang) }}</td>
+      <td class="num">{{ row.declared|count(lang) }}</td>
       <td class="num">{{ row.share|pct(lang) }} %</td>
     </tr>
   {% endfor %}
@@ -39,7 +39,7 @@
 {% endmacro %}
 
 {% block title %}{{ s.coverage_title }} — {{ s.site_name }}{% endblock %}
-{% block description %}{{ s.coverage_covered|replace("{n}", covered.wines)|replace("{y}", covered_from)|replace("{d}", covered.declared)|replace("{p}", covered.share|pct(lang)) }}{% endblock %}
+{% block description %}{{ s.coverage_covered|replace("{n}", covered.wines|count(lang))|replace("{y}", covered_from)|replace("{d}", covered.declared|count(lang))|replace("{p}", covered.share|pct(lang)) }}{% endblock %}
 
 {% block content %}
 <article class="coverage-page">
@@ -51,14 +51,14 @@
     <h2>{{ s.coverage_whole_shelf }}</h2>
     <p class="hint">
       <strong>{{ stats.declared_share|pct(lang) }} %</strong>
-      {{ s.coverage_lead }} — {{ stats.declared }} {{ s.of }} {{ stats.wines }} {{ s.wines_word }}.
+      {{ s.coverage_lead }} — {{ stats.declared|count(lang) }} {{ s.of }} {{ stats.wines|count(lang) }} {{ s.wines_word }}.
     </p>
     {# The silent wines as a number, not only as a share of something else.
        They are the site's most common answer and the front page already
        counts them in three rows; the page most likely to be quoted should
        not be the one that leaves them implicit. #}
-    <p class="explain">{{ s.coverage_silent|replace("{n}", stats.silent) }}</p>
-    <p class="explain">{{ s.coverage_unread|replace("{n}", stats.partial) }}</p>
+    <p class="explain">{{ s.coverage_silent|replace("{n}", stats.silent|count(lang)) }}</p>
+    <p class="explain">{{ s.coverage_unread|replace("{n}", stats.partial|count(lang)) }}</p>
   </section>
 
   {# The headline figure, and immediately under it the reason it is a floor.
@@ -66,9 +66,9 @@
      count, not in a footnote. #}
   <section class="block">
     <h2>{{ s.coverage_covered_head }}</h2>
-    <p class="hint">{{ s.coverage_covered|replace("{n}", covered.wines)|replace("{y}", covered_from)|replace("{d}", covered.declared)|replace("{p}", covered.share|pct(lang)) }}</p>
-    <p class="explain caveat">{{ s.coverage_proxy|replace("{y}", covered_from)|replace("{o}", covered.outside) }}</p>
-    <p class="explain">{{ s.coverage_undated|replace("{n}", covered.undated) }}</p>
+    <p class="hint">{{ s.coverage_covered|replace("{n}", covered.wines|count(lang))|replace("{y}", covered_from)|replace("{d}", covered.declared|count(lang))|replace("{p}", covered.share|pct(lang)) }}</p>
+    <p class="explain caveat">{{ s.coverage_proxy|replace("{y}", covered_from)|replace("{o}", covered.outside|count(lang)) }}</p>
+    <p class="explain">{{ s.coverage_undated|replace("{n}", covered.undated|count(lang)) }}</p>
   </section>
 
   <section class="block">
@@ -98,8 +98,10 @@
         {% for line in chart.grid %}
         <line class="grid" x1="{{ chart.left }}" x2="{{ chart.right }}"
               y1="{{ line.y }}" y2="{{ line.y }}"/>
+        {# The unit on the scale, not only in the caption: a screenshot of the
+           graphic alone would otherwise show an unlabelled 0–100. #}
         <text class="tick" x="{{ chart.left - 6 }}" y="{{ line.y + 3 }}"
-              text-anchor="end">{{ line.value }}</text>
+              text-anchor="end">{{ line.value }}{% if loop.last %} %{% endif %}</text>
         {% endfor %}
 
         {% for b in chart.bars %}
@@ -112,20 +114,31 @@
            alone. #}
         <rect class="hit" x="{{ b.hit_x }}" y="{{ chart.top }}"
               width="{{ b.hit_width }}" height="{{ chart.baseline - chart.top }}">
-          <title>{{ b.year }}: {{ b.share|pct(lang) }} % ({{ b.declared }} {{ s.of }} {{ b.wines }})</title>
+          <title>{{ b.year }}: {{ b.share|pct(lang) }} % ({{ b.declared|count(lang) }} {{ s.of }} {{ b.wines|count(lang) }})</title>
         </rect>
         <text class="tick" x="{{ b.mid }}" y="{{ chart.baseline + 14 }}"
               text-anchor="middle">{{ b.year }}</text>
         {% endfor %}
 
+        {# The line stays in the figure; its explanation does not. At phone
+           width the whole viewBox scales to about half, which put this label
+           at under 5 px — the one mitigation that makes the rising shape read
+           as law rather than as improvement, illegible on the majority
+           device. It is HTML below the figure now, at real text size, and it
+           can carry the hedge it needs. #}
         {% if chart.boundary %}
         <line class="boundary" x1="{{ chart.boundary }}" x2="{{ chart.boundary }}"
               y1="{{ chart.top }}" y2="{{ chart.baseline }}"/>
-        <text class="note" x="{{ chart.boundary - 5 }}" y="{{ chart.top + 9 }}"
-              text-anchor="end">{{ s.chart_boundary }}</text>
         {% endif %}
       </svg>
-      <figcaption>{{ s.chart_caption|replace("{n}", minimum)|replace("{u}", covered.undated) }}</figcaption>
+      {% if chart.boundary %}
+      <p class="chart-note">{{ s.chart_boundary|replace("{y}", covered_from) }}</p>
+      {% endif %}
+      <figcaption>{{ s.chart_caption
+        |replace("{n}", minimum)
+        |replace("{u}", covered.undated|count(lang))
+        |replace("{p}", chart.plotted|count(lang))
+        |replace("{t}", stats.wines|count(lang)) }}</figcaption>
     </figure>
     {% endif %}
 
@@ -155,8 +168,8 @@
                only repeat the phrase back. #}
             {% if row.covered and row.kind == 'year' %}<span class="meta">{{ s.vintage_covered_mark }}</span>{% endif %}
           </td>
-          <td class="num">{{ row.wines }}</td>
-          <td class="num">{{ row.declared }}</td>
+          <td class="num">{{ row.wines|count(lang) }}</td>
+          <td class="num">{{ row.declared|count(lang) }}</td>
           <td class="num">{{ row.share|pct(lang) }} %</td>
         </tr>
       {% endfor %}
@@ -200,8 +213,8 @@
       {% if importers.thin.wines %}
         <tr class="aggregated">
           <td>{{ s.row_other }}</td>
-          <td class="num">{{ importers.thin.wines }}</td>
-          <td class="num">{{ importers.thin.declared }}</td>
+          <td class="num">{{ importers.thin.wines|count(lang) }}</td>
+          <td class="num">{{ importers.thin.declared|count(lang) }}</td>
           <td class="num">{{ importers.thin.share|pct(lang) }} %</td>
           <td class="num"></td>
         </tr>
@@ -211,9 +224,9 @@
 
     <p class="explain">{{ s.importer_threshold
       |replace("{n}", importer_minimum)
-      |replace("{w}", importers.thin.wines)
+      |replace("{w}", importers.thin.wines|count(lang))
       |replace("{s}", importers.thin.suppliers)
-      |replace("{d}", importers.thin.declared) }}</p>
+      |replace("{d}", importers.thin.declared|count(lang)) }}</p>
     <p class="explain">{{ s.importer_raw_note }}</p>
     <p class="explain">{{ s.importer_supplies }}</p>
     <p class="explain caveat">{{ s.importer_measured|replace("{d}", generated) }}</p>

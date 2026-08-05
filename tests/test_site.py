@@ -12,6 +12,7 @@ import re
 
 from src.site import (
     CHART,
+    count,
     ROOT,
     TEMPLATE_DIR,
     importer_rows,
@@ -574,3 +575,28 @@ def test_the_figure_is_not_the_only_place_a_value_lives() -> None:
 
     assert '<table class="breakdown">' in after, "the vintage table must follow the figure"
     assert after.index("</figure>") < after.index('<table class="breakdown">')
+
+
+def test_counts_are_grouped_in_the_language_being_written() -> None:
+    """`15124` in running Swedish prose is a typo, not a number."""
+    assert count(15124, "sv") == "15 124"
+    assert count(15124, "en") == "15,124"
+    assert count(44, "sv") == "44"
+    assert count(None, "sv") == ""
+
+
+def test_the_figure_reconciles_against_the_page_it_sits_on() -> None:
+    """The caption names what the figure covers and what it leaves out, and
+    the two have to add up to the site total — otherwise a reader checking the
+    arithmetic comes up short and has no way to know which number is wrong."""
+    wines = (
+        [supplied("A", 2024, True) for _ in range(50)]
+        + [supplied("A", 2023, False) for _ in range(45)]
+        + [supplied("A", 2011, True) for _ in range(3)]
+        + [wine(supplier="A", vintage=None) for _ in range(80)]
+    )
+    chart = vintage_chart(vintage_rows(wines))
+    rows = vintage_rows(wines)
+
+    aggregated = sum(r["wines"] for r in rows if r["kind"] != "year")
+    assert chart["plotted"] + aggregated == len(wines)

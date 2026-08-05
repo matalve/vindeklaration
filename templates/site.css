@@ -652,19 +652,30 @@ header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
 .chart .hit { fill: transparent; }
 .chart .hit:hover { fill: var(--ink); fill-opacity: 0.06; }
 
-/* Solid hairlines one shade off the surface. Never dashed: a dashed rule
-   reads as a threshold or a projection when it is only a grid. */
-.chart .grid { stroke: var(--line); stroke-width: 1; }
+/* Solid hairlines, never dashed: a dashed rule reads as a threshold or a
+   projection when it is only a grid. --line rather than --muted was too faint
+   to attach a bar height to — 1.4:1 against the paper — so a tall bar read as
+   "high" instead of as a number. */
+.chart .grid { stroke: var(--muted); stroke-width: 0.5; }
 .chart .tick {
   fill: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
 /* The boundary is an annotation, not a second series: where the requirement
    starts is a fact about the law, and a second colour would need a legend to
    say what the colour meant. */
-.chart .boundary { stroke: var(--muted); stroke-width: 1; }
-.chart .note { fill: var(--muted); font-size: 9px; }
+.chart .boundary { stroke: var(--ink); stroke-width: 1; }
+
+/* The boundary's explanation lives here rather than inside the viewBox, so it
+   is real text at real size on a phone instead of 4 px of scaled SVG. */
+.chart-note {
+  font-size: 0.85rem;
+  margin: 0.6rem 0 0;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--ink);
+  line-height: 1.5;
+}
 
 .chart figcaption {
   font-size: 0.85rem;

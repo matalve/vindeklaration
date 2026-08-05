@@ -5,7 +5,7 @@
    the company named in it is a real company — docs/site-plan.md, "Naming
    importers": it reports, it does not characterise. #}
 {% block title %}{{ imp.name }} — {{ s.importers }} — {{ s.site_name }}{% endblock %}
-{% block description %}{{ imp.declared }} {{ s.of }} {{ imp.wines }}.{% endblock %}
+{% block description %}{{ imp.declared|count(lang) }} {{ s.of }} {{ imp.wines|count(lang) }}.{% endblock %}
 
 {% block content %}
 <article class="importer">
@@ -17,7 +17,7 @@
      the mean it sits against is an insinuation rather than a measurement. #}
   <p class="hint">
     <strong>{{ imp.share|pct(lang) }} %</strong> —
-    {{ imp.declared }} {{ s.of }} {{ imp.wines }} {{ s.wines_word }}.
+    {{ imp.declared|count(lang) }} {{ s.of }} {{ imp.wines|count(lang) }} {{ s.wines_word }}.
   </p>
   <p class="explain">{{ s.importer_mean|replace("{p}", mean|pct(lang)) }}</p>
   <p class="explain">{{ s.importer_supplies }}</p>

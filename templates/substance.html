@@ -5,7 +5,7 @@
    around it, so it carries no adjective and no verb that could read as a
    warning — docs/site-plan.md, "What the site must never say". #}
 {% block title %}{{ sub.name[lang] }}{% if sub.e_number %} ({{ sub.e_number }}){% endif %} — {{ s.site_name }}{% endblock %}
-{% block description %}{{ s.substance_declared_by|replace("{n}", sub.count)|replace("{m}", stats.declared) }}{% endblock %}
+{% block description %}{{ s.substance_declared_by|replace("{n}", sub.count|count(lang))|replace("{m}", stats.declared|count(lang)) }}{% endblock %}
 
 {% block content %}
 <article class="substance">
@@ -36,13 +36,13 @@
   {% endif %}
 
   <section class="block">
-    <h2>{{ s.substance_examples }} ({{ sub.count }})</h2>
+    <h2>{{ s.substance_examples }} ({{ sub.count|count(lang) }})</h2>
 
     {# The denominator, then the silence. In that order: a bare count against
        15 000 wines would read as "rare", when the true statement is that four
        wines in five never said either way. #}
-    <p class="hint">{{ s.substance_declared_by|replace("{n}", sub.count)|replace("{m}", stats.declared) }}</p>
-    <p class="explain caveat">{{ s.substance_silence|replace("{n}", stats.silent) }}</p>
+    <p class="hint">{{ s.substance_declared_by|replace("{n}", sub.count|count(lang))|replace("{m}", stats.declared|count(lang)) }}</p>
+    <p class="explain caveat">{{ s.substance_silence|replace("{n}", stats.silent|count(lang)) }}</p>
     <p class="explain">{{ s.substance_examples_note }}</p>
     {# A partial declaration named this substance and also carried text we
        could not read. It belongs on the page, but never unmarked: two
