@@ -116,8 +116,12 @@
               width="{{ b.hit_width }}" height="{{ chart.baseline - chart.top }}">
           <title>{{ b.year }}: {{ b.share|pct(lang) }} % ({{ b.declared|count(lang) }} {{ s.of }} {{ b.wines|count(lang) }})</title>
         </rect>
+        {# Every nth year once the bars are too narrow for four digits side by
+           side. The value is still in the tooltip and in the table. #}
+        {% if loop.index0 % chart.label_step == 0 %}
         <text class="tick" x="{{ b.mid }}" y="{{ chart.baseline + 14 }}"
               text-anchor="middle">{{ b.year }}</text>
+        {% endif %}
         {% endfor %}
 
         {# The line stays in the figure; its explanation does not. At phone
@@ -132,7 +136,7 @@
         {% endif %}
       </svg>
       {% if chart.boundary %}
-      <p class="chart-note">{{ s.chart_boundary|replace("{y}", covered_from) }}</p>
+      <p class="chart-note">{{ s.chart_boundary|replace("{y}", chart.boundary_year) }}</p>
       {% endif %}
       <figcaption>{{ s.chart_caption
         |replace("{n}", minimum)

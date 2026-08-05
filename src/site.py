@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import shutil
 import unicodedata
@@ -515,12 +516,23 @@ def vintage_chart(rows: list[dict]) -> dict | None:
             "covered": row["covered"],
         })
 
-    # Where the requirement starts, drawn as an annotation rather than as a
-    # second colour: it is a fact about the law, not a second data series, and
-    # colouring it would need a legend to say what the colour meant.
-    boundary = next(
-        (b["x"] - CHART["gap"] / 2 for b in bars if b["covered"]), None
-    )
+    # Where the certainly-covered vintages begin, drawn as an annotation rather
+    # than as a second colour: it is a fact about the law, not a second data
+    # series, and colouring it would need a legend to say what it meant.
+    #
+    # The line goes to the left of the oldest covered year that has its own
+    # bar, and the note names *that* year rather than COVERED_FROM. The two are
+    # 2024 today and will not always be: once 2024 sells down past the
+    # threshold it is aggregated away, and a note hard-coded to 2024 would then
+    # point at a bar that is not there.
+    first_covered = next((b for b in bars if b["covered"]), None)
+
+    # Four-digit years need about 26 units to sit side by side. Past roughly 25
+    # bars they collide, so every nth label is drawn instead of every one. The
+    # window is self-limiting in practice — old vintages fall below the
+    # threshold as stock rotates — but "in practice" is not a guarantee, and a
+    # figure that degrades into overlapping ink is worse than a sparse axis.
+    label_step = max(1, math.ceil(26 / band))
     return {
         "bars": bars,
         "baseline": baseline,
@@ -535,7 +547,9 @@ def vintage_chart(rows: list[dict]) -> dict | None:
             {"value": v, "y": baseline - plot_h * v / 100}
             for v in (0, 25, 50, 75, 100)
         ],
-        "boundary": boundary,
+        "boundary": (first_covered["x"] - CHART["gap"] / 2) if first_covered else None,
+        "boundary_year": first_covered["year"] if first_covered else None,
+        "label_step": label_step,
         "left": CHART["left"],
         "right": CHART["width"] - CHART["right"],
         "top": CHART["top"],
