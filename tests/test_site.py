@@ -600,3 +600,55 @@ def test_the_figure_reconciles_against_the_page_it_sits_on() -> None:
 
     aggregated = sum(r["wines"] for r in rows if r["kind"] != "year")
     assert chart["plotted"] + aggregated == len(wines)
+
+
+def test_the_boundary_note_names_the_year_the_line_is_actually_drawn_at() -> None:
+    """COVERED_FROM is the law; the line is drawn at data.
+
+    They are the same year today and will not always be. Once 2024 sells down
+    past the threshold it is aggregated away, and a note hard-coded to 2024
+    would point at a bar that is not on the chart.
+    """
+    wines = (
+        [wine(vintage=year) for year in (2022, 2023) for _ in range(60)]
+        + [declaring(vintage=2024) for _ in range(12)]   # thin, aggregated away
+        + [declaring(vintage=year) for year in (2025, 2026) for _ in range(60)]
+    )
+    chart = vintage_chart(vintage_rows(wines))
+
+    assert "2024" not in [b["year"] for b in chart["bars"]]
+    assert chart["boundary_year"] == "2025"
+    first_covered = next(b for b in chart["bars"] if b["covered"])
+    assert chart["boundary"] == first_covered["x"] - CHART["gap"] / 2
+
+
+def test_a_new_vintage_needs_no_code_change_to_appear() -> None:
+    """The question this was written to answer: next year's releases arrive on
+    their own. Nothing enumerates the years, and `covered` is derived from the
+    cutoff in law rather than from a list that has to be maintained."""
+    wines = [
+        declaring(vintage=year)
+        for year in range(2023, 2031)
+        for _ in range(50)
+    ]
+    chart = vintage_chart(vintage_rows(wines))
+
+    assert [b["year"] for b in chart["bars"]] == [str(y) for y in range(2023, 2031)]
+    assert [b["year"] for b in chart["bars"] if b["covered"]] == \
+        [str(y) for y in range(2024, 2031)]
+
+
+def test_the_axis_thins_its_labels_before_they_collide() -> None:
+    """Four digits need about 26 units side by side. The window is
+    self-limiting in practice — old vintages drop below the threshold as stock
+    rotates — but a figure that degrades into overlapping ink is worse than a
+    sparse axis, and "in practice" is not a guarantee."""
+    few = vintage_chart(vintage_rows(
+        [declaring(vintage=y) for y in range(2011, 2026) for _ in range(50)]))
+    many = vintage_chart(vintage_rows(
+        [declaring(vintage=y) for y in range(1996, 2026) for _ in range(50)]))
+
+    assert few["label_step"] == 1, "15 years fit and must all be labelled"
+    assert many["label_step"] > 1, "30 years do not fit and must be thinned"
+    band = many["bars"][1]["x"] - many["bars"][0]["x"]
+    assert band * many["label_step"] >= 26
