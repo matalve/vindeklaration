@@ -116,6 +116,27 @@ how many went and why. `tests/test_hitta.mjs` runs the browser code under Node
 against the real index and checks it against a brute-force re-slice; it is the
 only JavaScript test in the project and it caught a real bug on its first run.
 
+**Presentation, 2026-08-03 to 2026-08-05.** Theme follows the operating system
+with a three-segment control; icons are one inline sprite and are navigation
+only; the front page says what it is for; the wine page has a hierarchy instead
+of ten identical blocks; `/tackning` has a bar figure of declared share by
+vintage. `docs/site-plan.md` §*Presentation* has the rules and what is left.
+The figure was audited twice and the second pass found that two fixes from the
+first had broken something else — **text and stroke widths inside an SVG scale
+with the viewBox**, so a 6:1 palette value and a 12 px font both describe
+something the reader cannot see on a phone. Anything that must be read lives in
+HTML beside the figure.
+
+**The site computes its own figures now, 2026-08-05.** Four percentages were
+written into `strings.json` by hand in July and one had already gone wrong —
+order-only wines were published as "four in five" and are 71.7%. Grape and
+pairing coverage, the silent share and the order-only share are measured at
+build time. Two names the site matches literally against Systembolaget's
+vocabulary — `LIST_CATEGORIES` and `FIXED_RANGE` — now have `check_vocabulary()`
+behind them: a build warning, plus a deliberately non-hermetic test that reads
+the live dataset so the suite turns red the day a category is renamed rather
+than the day someone notices a list has been empty for a month.
+
 **Phase 4 — trends** is not started. `data/quality-history.json` has been
 accumulating one row per nightly run since 2026-07-27 and is the seed for it.
 
