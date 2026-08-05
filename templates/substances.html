@@ -40,13 +40,13 @@
           {% endif %}
         </td>
         <td class="num enum">{{ sub.e_number or '' }}</td>
-        <td class="num">{{ sub.count }}</td>
+        <td class="num">{{ sub.count|count(lang) }}</td>
       </tr>
     {% endfor %}
     </tbody>
   </table>
 
-  <p class="explain caveat">{{ s.substance_silence|replace("{n}", stats.silent) }}</p>
+  <p class="explain caveat">{{ s.substance_silence|replace("{n}", stats.silent|count(lang)) }}</p>
   <p class="explain">{{ s.counting_rule }}</p>
 
 </article>

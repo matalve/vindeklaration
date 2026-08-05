@@ -311,9 +311,11 @@ def vintage_rows(wines: list[dict]) -> list[dict]:
     """Declared share by vintage, newest first, then older years, then undated.
 
     Kept separate from `breakdown` because the undated wines are not a small
-    tail to be aggregated away — they are 2 854 bottles and the single largest
-    reason the coverage figure understates the shelf, so they get their own
-    labelled row rather than being folded in with the thin years.
+    tail to be aggregated away — they are thousands of bottles and the single
+    largest reason the coverage figure understates the shelf, so they get their
+    own labelled row rather than being folded in with the thin years. No count
+    is quoted here: the figure moves nightly and a number in a docstring ages
+    into a lie.
 
     Every wine lands in exactly one row and the rows sum to the total. A table
     that quietly dropped the thin years would not add up, and a coverage page
@@ -469,10 +471,9 @@ def vintage_chart(rows: list[dict]) -> dict | None:
     trend across a gap where there is no data — and a rising line is the exact
     shape a reader takes for a grade. See *What the site must never say*.
 
-    Only real years are plotted. The aggregated and undated rows are 2 844
-    bottles and more, and they have no place on a time axis; they stay in the
-    table under the figure, and the caption says the figure is not the whole
-    shelf.
+    Only real years are plotted. The aggregated and undated rows have no place
+    on a time axis; they stay in the table under the figure, and the caption
+    names both the total plotted and the wines left out, so the two reconcile.
 
     One colour for every bar. Shading each by its own value would double-encode
     the height as hue and turn the figure into a ranking of vintages.
@@ -480,7 +481,10 @@ def vintage_chart(rows: list[dict]) -> dict | None:
     years = [r for r in rows if r["kind"] == "year"]
     if len(years) < 2:
         return None
-    years = sorted(years, key=lambda r: r["value"])
+    # By number, not by string. Four-digit years happen to sort the same either
+    # way, which is exactly why a string sort here would survive unnoticed
+    # until the day it did not.
+    years = sorted(years, key=lambda r: int(r["value"]))
 
     plot_w = CHART["width"] - CHART["left"] - CHART["right"]
     plot_h = CHART["height"] - CHART["top"] - CHART["bottom"]
@@ -520,6 +524,11 @@ def vintage_chart(rows: list[dict]) -> dict | None:
     return {
         "bars": bars,
         "baseline": baseline,
+        # How many wines the figure actually stands on. The caption names the
+        # wines it leaves out; without this the reader has the excluded count
+        # and no total to set it against, and the two exclusions do not add up
+        # to the difference on their own.
+        "plotted": sum(b["wines"] for b in bars),
         # Solid hairlines, one shade off the surface. Never dashed: a dashed
         # rule reads as a threshold or a projection when it is just a grid.
         "grid": [
@@ -659,6 +668,19 @@ def fmt(value: float) -> str:
     return text.replace(".", ",")
 
 
+def count(value: int | None, lang: str) -> str:
+    """A whole number with its thousands separator.
+
+    Swedish groups with a space and English with a comma, and `15124` in
+    running Swedish prose is simply a typo. The space is non-breaking: a count
+    that wraps across a line break stops being one number.
+    """
+    if value is None:
+        return ""
+    grouped = f"{int(value):,}"
+    return grouped.replace(",", " ") if lang == "sv" else grouped
+
+
 def pct(value: float, lang: str) -> str:
     """A share to one decimal, in the decimal separator the language uses.
 
@@ -755,6 +777,7 @@ def build(output: Path, limit: int | None = None) -> None:
     env.filters["slugify"] = slugify
     env.filters["num"] = fmt
     env.filters["pct"] = pct
+    env.filters["count"] = count
     env.filters["state"] = state_of
     env.filters["wine_url"] = wine_path
 

@@ -50,11 +50,11 @@
   </p>
   <p>{{ s.coverage_rest }}</p>
   <table class="counts">
-    <caption>{{ s.counts_caption }} — {{ stats.wines }} {{ s.wines_word }}</caption>
+    <caption>{{ s.counts_caption }} — {{ stats.wines|count(lang) }} {{ s.wines_word }}</caption>
     <tbody>
-      <tr><td>{{ stats.read }}</td><td>{{ s.state_read }}</td></tr>
-      <tr><td>{{ stats.partial }}</td><td>{{ s.state_partial|lower }}</td></tr>
-      <tr><td>{{ stats.silent }}</td><td>{{ s.state_silent|lower }}</td></tr>
+      <tr><td>{{ stats.read|count(lang) }}</td><td>{{ s.state_read }}</td></tr>
+      <tr><td>{{ stats.partial|count(lang) }}</td><td>{{ s.state_partial|lower }}</td></tr>
+      <tr><td>{{ stats.silent|count(lang) }}</td><td>{{ s.state_silent|lower }}</td></tr>
     </tbody>
   </table>
 </section>
