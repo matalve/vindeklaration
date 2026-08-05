@@ -637,3 +637,38 @@ header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
 
 .other-lists.ready { margin-top: 2rem; }
 .other-lists.ready .explain { margin: 0 0 0.5rem; }
+
+/* The vintage figure ------------------------------------------------- */
+
+/* One series, so one colour and no legend — the heading names it. Nothing
+   here encodes a judgement: the bars are all the same fill, because shading
+   each by its own height would double-encode the value and turn the figure
+   into a ranking of vintages. */
+.chart { margin: 1rem 0 0.75rem; }
+.chart svg { width: 100%; height: auto; display: block; }
+
+.chart .bar { fill: var(--accent); }
+/* Transparent, above the bars, and it is what the pointer actually meets. */
+.chart .hit { fill: transparent; }
+.chart .hit:hover { fill: var(--ink); fill-opacity: 0.06; }
+
+/* Solid hairlines one shade off the surface. Never dashed: a dashed rule
+   reads as a threshold or a projection when it is only a grid. */
+.chart .grid { stroke: var(--line); stroke-width: 1; }
+.chart .tick {
+  fill: var(--muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+/* The boundary is an annotation, not a second series: where the requirement
+   starts is a fact about the law, and a second colour would need a legend to
+   say what the colour meant. */
+.chart .boundary { stroke: var(--muted); stroke-width: 1; }
+.chart .note { fill: var(--muted); font-size: 9px; }
+
+.chart figcaption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}

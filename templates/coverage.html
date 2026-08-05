@@ -83,6 +83,52 @@
 
   <section class="block">
     <h2>{{ s.by_vintage }}</h2>
+
+    {# Bars, not a line. The vintages are separate groups with separate
+       denominators and nothing runs between them, so a line would draw a trend
+       across a gap where there is no data — and a rising line is the shape a
+       reader takes for a grade. One colour for every bar: shading each by its
+       own height would double-encode the value and rank the vintages.
+       Every number here is also in the table below, which is the accessible
+       twin rather than an afterthought. #}
+    {% if chart %}
+    <figure class="chart">
+      <svg viewBox="0 0 {{ chart.width }} {{ chart.height }}" role="img"
+           aria-label="{{ s.chart_alt }}" preserveAspectRatio="xMidYMid meet">
+        {% for line in chart.grid %}
+        <line class="grid" x1="{{ chart.left }}" x2="{{ chart.right }}"
+              y1="{{ line.y }}" y2="{{ line.y }}"/>
+        <text class="tick" x="{{ chart.left - 6 }}" y="{{ line.y + 3 }}"
+              text-anchor="end">{{ line.value }}</text>
+        {% endfor %}
+
+        {% for b in chart.bars %}
+        <rect class="bar" x="{{ b.x }}" y="{{ b.y }}"
+              width="{{ b.width }}" height="{{ b.height }}" rx="1"/>
+        {# The hit area is the whole column, not the bar. A thin bar is a
+           pinpoint target, and a vintage that declares on nothing has no bar
+           to point at — 2014 is one. A native tooltip, so the read-out costs
+           no JavaScript; every value is in the table as well, never here
+           alone. #}
+        <rect class="hit" x="{{ b.hit_x }}" y="{{ chart.top }}"
+              width="{{ b.hit_width }}" height="{{ chart.baseline - chart.top }}">
+          <title>{{ b.year }}: {{ b.share|pct(lang) }} % ({{ b.declared }} {{ s.of }} {{ b.wines }})</title>
+        </rect>
+        <text class="tick" x="{{ b.mid }}" y="{{ chart.baseline + 14 }}"
+              text-anchor="middle">{{ b.year }}</text>
+        {% endfor %}
+
+        {% if chart.boundary %}
+        <line class="boundary" x1="{{ chart.boundary }}" x2="{{ chart.boundary }}"
+              y1="{{ chart.top }}" y2="{{ chart.baseline }}"/>
+        <text class="note" x="{{ chart.boundary - 5 }}" y="{{ chart.top + 9 }}"
+              text-anchor="end">{{ s.chart_boundary }}</text>
+        {% endif %}
+      </svg>
+      <figcaption>{{ s.chart_caption|replace("{n}", minimum)|replace("{u}", covered.undated) }}</figcaption>
+    </figure>
+    {% endif %}
+
     <table class="breakdown">
       <thead>
         <tr>
