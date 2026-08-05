@@ -692,6 +692,58 @@ from it or to justify it.
   real declarations. Someone searching the exact string from a label should
   land on the right page.
 
+## Presentation
+
+The site is deliberately plain, and the constraints below are the reason rather
+than the taste: system fonts, no web fonts, no third-party request from any
+template, and it has to be readable on a phone in a shop on a bad signal. The
+no-colour rule at the top of `templates/site.css` is the load-bearing one —
+green on "declares no additives" would say healthy and red on "declares
+nothing" would say guilty, so the three states differ by border and weight
+instead.
+
+**Done, 2026-08-03 to 2026-08-05.**
+
+- **The theme follows the operating system**, with a three-segment control at
+  the right of the header that can take the decision and hand it back. Light is
+  not the base and dark is not the base; the reader's device is. Nothing is
+  stored until they choose.
+- **Icons are one inline sprite**, monochrome, `currentColor`. They are
+  navigation and nothing else — *What the site must never say* names icons
+  among the places a claim gets made without a sentence, so none marks a
+  declaration state, a substance or a ranking. **A symbol nothing references
+  costs its own size on all 15 000 pages**: dropping two unused ones took 4.6 MB
+  off a build.
+- **The front page says what it is for** before it shows a search box, and the
+  three doors under it each explain themselves in a sentence. No counts on
+  them: a number beside a door invites being read as a score.
+- **The language link is a flag**, with its words kept for a screen reader,
+  since a flag names a country and not a language.
+- **The wordmark is a serif from the reader's own machine.** A web font would
+  be the first bytes this project ever asked a browser to fetch for decoration.
+- **The icon is drawn by `tools/make_icons.py`** on a 16-unit grid so the
+  tab-strip size lands on whole pixels. Its ink is `--accent`, and a test keeps
+  the two from drifting.
+
+**Outstanding.**
+
+- **A figure on `/tackning`.** Declared share by vintage is a real curve and
+  tells the project's story faster than the table under it. Inline SVG, no
+  library. It is also the highest-risk graphic on the site: a rising line is
+  exactly the shape that gets read as a grade, so it goes past `site-auditor`
+  before it ships.
+- **Rhythm on the wine page.** The declaration, the nutrition table and *where
+  to find it* are typographically identical, so nothing signals which one the
+  page is actually about.
+- **Typographic hierarchy generally.** Headings and body sit in one grey scale;
+  the pages have sections but no visible order among them.
+- **A `_headers` file with a Content-Security-Policy** naming
+  `product-cdn.systembolaget.se` as the only image source and
+  `static.cloudflareinsights.com` as the only script source, which would turn
+  the `/metod` paragraph from a promise into something the browser enforces.
+  Listed here rather than only in `docs/deploy-site.md` because it is a claim
+  the site makes about itself.
+
 ## Bottle photographs
 
 Link them from Systembolaget's CDN. Do not copy them onto our own host.
