@@ -173,6 +173,27 @@ def coverage(wines: list[dict]) -> dict:
     }
 
 
+def facet_coverage(wines: list[dict]) -> dict:
+    """How much of the catalogue each filterable field is filled in for.
+
+    The filter tells the reader these shares so that "no wines match" can be
+    told apart from "the grape field is empty for 6 400 wines". They were
+    written into the strings by hand in July and had begun to drift: the
+    order-only share was published as "four wines in five" and is 71.7%, which
+    is nearer three in four. A figure in prose that nobody recomputes is a
+    figure that goes quietly wrong, so every one of them is measured here.
+    """
+    total = len(wines) or 1
+    order_only = sum(1 for w in wines if (w.get("assortment") or "") == "Ordervaror")
+    silent = sum(1 for w in wines if w["declaration_status"] != "declared")
+    return {
+        "grape": sum(1 for w in wines if w.get("grapes")) / total * 100,
+        "pairing": sum(1 for w in wines if w.get("food_pairings")) / total * 100,
+        "order_only": order_only / total * 100,
+        "silent": silent / total * 100,
+    }
+
+
 def additive_names(wines: list[dict], lang: str) -> dict:
     """Substance id to display name, for the filter's two substance menus."""
     names = {}
@@ -584,8 +605,29 @@ def covered_stats(wines: list[dict]) -> dict:
 # declarations to make an ordering mean anything: a "fewest additives" list of
 # eight wines is not a ranking, it is the whole set with numbers on it.
 LIST_CATEGORIES = ("Rött vin", "Vitt vin", "Mousserande vin", "Rosévin")
+# Systembolaget's own name for the shelf range, matched literally here and in
+# templates/hitta.js. Change one, change both — and see check_vocabulary().
+FIXED_RANGE = "Fast sortiment"
 LIST_PRICE_CAPS = (None, 150, 100)
 LIST_MINIMUM = 100
+
+
+def check_vocabulary(wines: list[dict]) -> list[str]:
+    """Names this site matches by string against names Systembolaget controls.
+
+    `LIST_CATEGORIES` and `FIXED_RANGE` are their words, not ours, and they are
+    compared literally. If a category is renamed upstream the saved lists for
+    it stop being built and the filter's "today" mode matches nothing — in both
+    cases silently, because an empty result looks exactly like a slice that
+    happens to hold nothing. Everything else on the site derives its vocabulary
+    from the data; these two cannot, so they are checked instead.
+    """
+    categories = {w.get("category") for w in wines}
+    assortments = {w.get("assortment") for w in wines}
+    missing = [c for c in LIST_CATEGORIES if c not in categories]
+    if FIXED_RANGE not in assortments:
+        missing.append(FIXED_RANGE)
+    return missing
 
 
 def list_slices(wines: list[dict]) -> list[dict]:
@@ -798,6 +840,13 @@ def build(output: Path, limit: int | None = None) -> None:
     stats = coverage(wines)
     allergens = allergen_labels()
     slices = list_slices(wines)
+    facets_filled = facet_coverage(wines)
+    for name in check_vocabulary(wines):
+        # Not fatal: a renamed category should not take the whole site down.
+        # Loud, though, because the symptom is a list that quietly stops being
+        # built rather than anything that looks like an error.
+        print(f"warning: {name!r} is matched by name but no wine has it — "
+              f"a saved list or the filter's range mode is now empty")
     substances, undefined_substances = substance_pages(wines)
     # Named compliance statistics about real companies. Built always so the
     # tests and the build exercise it, rendered only once the correction route
@@ -907,7 +956,7 @@ def build(output: Path, limit: int | None = None) -> None:
                 lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
                 additive_names=additive_names(wines, lang),
-                facet_labels=facets, lists=list_links,
+                facet_labels=facets, lists=list_links, filled=facets_filled,
             ),
             encoding="utf-8",
         )

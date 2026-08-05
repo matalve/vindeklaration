@@ -3,7 +3,7 @@
 {# The title reports what the page does, never what the wines are like. A share
    preview shows this line with none of the page's caveats. #}
 {% block title %}{{ s.find }} — {{ s.site_name }}{% endblock %}
-{% block description %}{{ s.find_lede }}{% endblock %}
+{% block description %}{{ s.find_lede|replace("{n}", filled.silent|pct(lang)) }}{% endblock %}
 
 {% block content %}
 <h1>{{ s.find }}</h1>
@@ -24,7 +24,7 @@
     <label class="mode-choice">
       <input type="radio" name="mode" value="wait" id="m-wait">
       <span class="mode-name">{{ s.mode_wait }}</span>
-      <span class="mode-note">{{ s.mode_wait_note }}</span>
+      <span class="mode-note">{{ s.mode_wait_note|replace("{n}", filled.order_only|pct(lang)) }}</span>
     </label>
   </fieldset>
 
@@ -44,12 +44,12 @@
     <div class="field">
       <label for="f-grape">{{ s.grapes }}</label>
       <select id="f-grape"><option value="">{{ s.f_any }}</option></select>
-      <p class="explain">{{ s.f_grape_note }}</p>
+      <p class="explain">{{ s.f_grape_note|replace("{n}", filled.grape|pct(lang)) }}</p>
     </div>
     <div class="field">
       <label for="f-pairing">{{ s.pairing }}</label>
       <select id="f-pairing"><option value="">{{ s.f_any }}</option></select>
-      <p class="explain">{{ s.f_pairing_note }}</p>
+      <p class="explain">{{ s.f_pairing_note|replace("{n}", filled.pairing|pct(lang)) }}</p>
     </div>
     <div class="field">
       <label for="f-exclude">{{ s.f_exclude }}</label>

@@ -8,10 +8,14 @@ looks plausible, and is wrong in the direction that flatters the shelf.
 
 from __future__ import annotations
 
+import json
 import re
 
 from src.site import (
     CHART,
+    FIXED_RANGE,
+    LIST_CATEGORIES,
+    check_vocabulary,
     count,
     ROOT,
     TEMPLATE_DIR,
@@ -652,3 +656,53 @@ def test_the_axis_thins_its_labels_before_they_collide() -> None:
     assert many["label_step"] > 1, "30 years do not fit and must be thinned"
     band = many["bars"][1]["x"] - many["bars"][0]["x"]
     assert band * many["label_step"] >= 26
+
+
+# --- vocabulary we do not control --------------------------------------------
+
+def test_a_renamed_category_is_noticed() -> None:
+    """The two places the site matches Systembolaget's words literally.
+
+    A rename upstream stops the saved lists being built and empties the
+    filter's range mode, and both failures look exactly like a slice that
+    happens to hold nothing. Hermetic on purpose: it checks the detector, not
+    tonight's catalogue, so a crawl cannot turn the suite red.
+    """
+    healthy = [
+        wine(category=category, assortment="Fast sortiment")
+        for category in LIST_CATEGORIES
+    ]
+    assert check_vocabulary(healthy) == []
+
+    renamed = [w | {"category": "Rosé"} if w["category"] == "Rosévin" else w
+               for w in healthy]
+    assert check_vocabulary(renamed) == ["Rosévin"]
+
+    no_range = [w | {"assortment": "Ordinarie sortiment"} for w in healthy]
+    assert FIXED_RANGE in check_vocabulary(no_range)
+
+
+def test_todays_catalogue_still_uses_the_names_the_site_matches() -> None:
+    """Not hermetic, and deliberately so — this one is the canary.
+
+    It reads the live dataset, so it turns red the day Systembolaget renames a
+    category. That is the point: the alternative is noticing when someone
+    happens to look at a list that has been empty for a month.
+    """
+    payload = json.loads((ROOT / "data" / "wines.json").read_text(encoding="utf-8"))
+
+    assert check_vocabulary(payload["wines"]) == []
+
+
+def test_the_range_name_is_the_same_in_python_and_in_the_browser() -> None:
+    """`FIXED_RANGE` is matched literally in src/site.py and in hitta.js.
+
+    Two copies of somebody else's word, and the failure mode if they drift is
+    that the filter's "today" mode silently matches nothing while the build
+    reports itself healthy.
+    """
+    js = (TEMPLATE_DIR / "hitta.js").read_text(encoding="utf-8")
+    declared = re.search(r'var FIXED_RANGE = "([^"]+)"', js)
+
+    assert declared, "hitta.js no longer declares FIXED_RANGE"
+    assert declared.group(1) == FIXED_RANGE
