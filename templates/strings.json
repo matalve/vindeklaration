@@ -219,7 +219,8 @@
   "ready_lists_note": "Byggda i natt, en per typ av vin och prisklass. De kräver ingen JavaScript.",
   "theme_system": "Systemets tema",
   "theme_switch": "Byt tema",
-  "other_lang_flag": "#i-flag-gb"
+  "other_lang_flag": "#i-flag-gb",
+  "wine_facts": "Om vinet"
  },
  "en": {
   "site_name": "vindeklaration",
@@ -441,6 +442,7 @@
   "ready_lists_note": "Built overnight, one per type of wine and price band. They need no JavaScript.",
   "theme_system": "System theme",
   "theme_switch": "Switch theme",
-  "other_lang_flag": "#i-flag-se"
+  "other_lang_flag": "#i-flag-se",
+  "wine_facts": "About the wine"
  }
 }
