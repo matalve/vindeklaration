@@ -222,8 +222,9 @@
   "other_lang_flag": "#i-flag-gb",
   "wine_facts": "Om vinet",
   "chart_alt": "Stapeldiagram: andel viner med ingrediensförteckning, per årgång. Figuren visar inte hela hyllan — samma siffror, och de årgångar som saknas här, står i tabellen under diagrammet.",
-  "chart_boundary": "Linjen står vid {y} — den äldsta årgången med egen stapel som säkert omfattas av kravet. Till vänster om den vet vi inte: kravet gäller produktionsdatum och inte årgång, så en okänd del av de äldre årgångarna omfattas också. Det syns på att 2023 redan deklarerar mer än dubbelt så mycket som 2022.",
-  "chart_caption": "Andel med förteckning, per årgång. Diagrammet visar {p} av {t} viner. Bara årgångar med minst {n} viner får en egen stapel; övriga årgångar och de {u} vinerna utan årgång står i tabellen men inte här. Att staplarna stiger åt höger beror på att kravet bara gäller nyare vin och att lagret roterar. Det är inte ett mått på att någon blivit bättre."
+  "chart_boundary": "Linjen står vid {y} — den äldsta årgången med egen stapel som säkert omfattas av kravet. Till vänster om den vet vi inte, för kravet gäller produktionsdatum och inte årgång, så en okänd del av de äldre årgångarna omfattas också.",
+  "chart_caption": "Andel med förteckning, per årgång. Diagrammet visar {p} av {t} viner: utanför står {u} viner utan årgång och {x} i årgångar med för få viner för en egen stapel. Båda grupperna finns i tabellen. En stapel räknar alla viner som lämnat en förteckning, även de vars text inte kunnat läsas i sin helhet.",
+  "chart_reading": "Staplarna stiger åt höger för att kravet bara gäller nyare vin och för att lagret roterar. Det är inte ett mått på att någon blivit bättre."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -448,7 +449,8 @@
   "other_lang_flag": "#i-flag-se",
   "wine_facts": "About the wine",
   "chart_alt": "Bar chart: share of wines carrying an ingredient list, by vintage. The figure is not the whole shelf — the same figures, and the vintages missing here, are in the table below the chart.",
-  "chart_boundary": "The line sits at {y} — the oldest vintage with a bar of its own that is certainly covered by the requirement. To the left of it we do not know: the requirement turns on the production date rather than the vintage, so an unknown share of the older vintages is covered too. It shows in 2023 already declaring more than twice as much as 2022.",
-  "chart_caption": "Share carrying a list, by vintage. The chart shows {p} of {t} wines. Only vintages with at least {n} wines get their own bar; the remaining vintages and the {u} wines with no vintage are in the table but not here. The bars rise to the right because the requirement only reaches newer wine and stock rotates. It is not a measure of anyone improving."
+  "chart_boundary": "The line sits at {y} — the oldest vintage with a bar of its own that is certainly covered by the requirement. To the left of it we do not know, because the requirement turns on the production date rather than the vintage, so an unknown share of the older vintages is covered too.",
+  "chart_caption": "Share carrying a list, by vintage. The chart shows {p} of {t} wines: outside it are {u} wines with no vintage and {x} in vintages with too few wines for a bar of their own. Both groups are in the table. A bar counts every wine that gave a list, including those whose text could not be read in full.",
+  "chart_reading": "The bars rise to the right because the requirement only reaches newer wine and because stock rotates. It is not a measure of anyone improving."
  }
 }

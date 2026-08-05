@@ -642,20 +642,33 @@ def test_a_new_vintage_needs_no_code_change_to_appear() -> None:
         [str(y) for y in range(2024, 2031)]
 
 
-def test_the_axis_thins_its_labels_before_they_collide() -> None:
-    """Four digits need about 26 units side by side. The window is
-    self-limiting in practice — old vintages drop below the threshold as stock
-    rotates — but a figure that degrades into overlapping ink is worse than a
-    sparse axis, and "in practice" is not a guarantee."""
-    few = vintage_chart(vintage_rows(
-        [declaring(vintage=y) for y in range(2011, 2026) for _ in range(50)]))
-    many = vintage_chart(vintage_rows(
-        [declaring(vintage=y) for y in range(1996, 2026) for _ in range(50)]))
+def test_the_axis_keeps_a_real_gap_between_year_labels() -> None:
+    """Four digits at the tick size are about 40 units wide, so labels need
+    more than 40 units of pitch or they touch. The first threshold was the
+    label width itself, which let them collide at 20 bars."""
+    for count_of_years in (10, 15, 20, 26, 34):
+        chart = vintage_chart(vintage_rows(
+            [declaring(vintage=2026 - i) for i in range(count_of_years)
+             for _ in range(50)]))
+        band = chart["bars"][1]["x"] - chart["bars"][0]["x"]
 
-    assert few["label_step"] == 1, "15 years fit and must all be labelled"
-    assert many["label_step"] > 1, "30 years do not fit and must be thinned"
-    band = many["bars"][1]["x"] - many["bars"][0]["x"]
-    assert band * many["label_step"] >= 26
+        assert band * chart["label_step"] >= CHART["label_pitch"], (
+            f"{count_of_years} years: labels {band * chart['label_step']:.0f} "
+            f"units apart, need {CHART['label_pitch']}"
+        )
+
+
+def test_the_newest_vintage_is_always_labelled() -> None:
+    """Thinning used to count from the oldest bar, which dropped the label off
+    the most recent vintage whenever the count was even — the one year the
+    figure is actually about."""
+    for count_of_years in range(8, 32):
+        chart = vintage_chart(vintage_rows(
+            [declaring(vintage=2026 - i) for i in range(count_of_years)
+             for _ in range(50)]))
+        last = len(chart["bars"]) - 1
+
+        assert (last - last) % chart["label_step"] == 0, "the newest bar must be labelled"
 
 
 # --- vocabulary we do not control --------------------------------------------
@@ -706,3 +719,34 @@ def test_the_range_name_is_the_same_in_python_and_in_the_browser() -> None:
 
     assert declared, "hitta.js no longer declares FIXED_RANGE"
     assert declared.group(1) == FIXED_RANGE
+
+
+def test_the_caption_names_every_wine_it_leaves_out() -> None:
+    """Two exclusions with two different reasons, and both are counted.
+
+    Undated wines and vintages too thin to draw are not the same fact, and
+    giving only one of them leaves a reader who checks the arithmetic short by
+    the other with no way to see which number is wrong.
+    """
+    wines = (
+        [declaring(vintage=2024) for _ in range(50)]
+        + [wine(vintage=2023) for _ in range(45)]
+        + [declaring(vintage=2011) for _ in range(3)]     # thin year
+        + [wine(vintage=None) for _ in range(80)]         # undated
+    )
+    chart = vintage_chart(vintage_rows(wines))
+    stats = covered_stats(wines)
+
+    assert chart["thin_years"] == 3
+    assert chart["plotted"] + chart["thin_years"] + stats["undated"] == len(wines)
+
+
+def test_no_boundary_line_once_every_bar_is_covered() -> None:
+    """The rule would sit on the y-axis, under a note about what lies to the
+    left of it, with nothing there. Years away, and still a line describing
+    nothing."""
+    wines = [declaring(vintage=year) for year in (2024, 2025) for _ in range(50)]
+    chart = vintage_chart(vintage_rows(wines))
+
+    assert all(b["covered"] for b in chart["bars"])
+    assert chart["boundary"] is None

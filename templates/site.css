@@ -18,7 +18,7 @@
   --muted: #5c5c5c;
   --line: #d8d4cc;
   --paper: #faf8f5;
-  --accent: #6b2737; /* wine, used for links and rules only */
+  --accent: #6b2737; /* wine: links, rules, and the bars on /tackning */
   --field: #fff;     /* inputs and quoted source text */
   --measure: 40rem;
 }
@@ -656,10 +656,13 @@ header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
    projection when it is only a grid. --line rather than --muted was too faint
    to attach a bar height to — 1.4:1 against the paper — so a tall bar read as
    "high" instead of as a number. */
-.chart .grid { stroke: var(--muted); stroke-width: 0.5; }
+/* stroke-width is in user units too, so 0.5 rendered at a quarter of a CSS
+   pixel on a phone — the colour was fixed and the thing the reader sees was
+   not. 1 unit is 0.5 px there and 1 px on a desktop. */
+.chart .grid { stroke: var(--muted); stroke-width: 1; }
 .chart .tick {
   fill: var(--muted);
-  font-size: 12px;
+  font-size: 18px;
   font-variant-numeric: tabular-nums;
 }
 /* The boundary is an annotation, not a second series: where the requirement
@@ -681,5 +684,14 @@ header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
   font-size: 0.85rem;
   color: var(--muted);
   margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+/* The reading, above the boundary note and in full ink. The rising bars are
+   the loudest thing on the page and this is the sentence that says what they
+   are not; it does not belong at the tail of a muted caption. */
+.chart-reading {
+  font-size: 0.95rem;
+  margin: 0.75rem 0 0;
   line-height: 1.5;
 }

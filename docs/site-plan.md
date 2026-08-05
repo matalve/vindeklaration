@@ -704,6 +704,18 @@ instead.
 
 **Done, 2026-08-03 to 2026-08-05.**
 
+- **The vintage figure on `/tackning`**, built 2026-08-05 and audited twice.
+  Bars rather than a line, because the vintages are separate groups with
+  separate denominators and a rising line is the shape that gets read as a
+  grade. One fill for every bar; where the requirement starts is an annotation
+  and not a second colour. The two audits are worth reading before touching it:
+  the first found the in-figure label claiming the requirement *starts* at 2024,
+  which the page body denies; the second found that the sentence saying the
+  rise is not improvement had been left as the last clause of the smallest,
+  greyest text under the loudest thing on the page. **Text inside the viewBox
+  scales with it** — 12 user units renders at 6 px on a phone — so anything a
+  reader must read lives in HTML beside the figure, not in it.
+
 - **The theme follows the operating system**, with a three-segment control at
   the right of the header that can take the decision and hand it back. Light is
   not the base and dark is not the base; the reader's device is. Nothing is
@@ -727,11 +739,6 @@ instead.
 
 **Outstanding.**
 
-- **A figure on `/tackning`.** Declared share by vintage is a real curve and
-  tells the project's story faster than the table under it. Inline SVG, no
-  library. It is also the highest-risk graphic on the site: a rising line is
-  exactly the shape that gets read as a grade, so it goes past `site-auditor`
-  before it ships.
 - **Rhythm on the wine page.** The declaration, the nutrition table and *where
   to find it* are typographically identical, so nothing signals which one the
   page is actually about.
