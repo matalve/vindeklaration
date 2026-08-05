@@ -15,25 +15,32 @@
 {% block content %}
 <article class="wine">
 
-  <h1>{{ wine.name }}</h1>
-  <p class="subtitle">
-    {{ wine.vintage or s.unknown }} ·
-    {{ wine.country }}{% if wine.region %} · {{ wine.region }}{% endif %} ·
-    {{ wine.category }}
-  </p>
-
-  {# Condition 8: images appear here and on no ranked, filtered or comparison
-     page. Rendered straight from Systembolaget's CDN — never copied, proxied
-     or resized. If a technological measure ever appears, this block goes. #}
-  {% if image %}
-  <figure class="bottle">
-    <a href="{{ source_url }}" rel="nofollow noopener">
-      <img src="{{ image }}" alt="{{ wine.name }}"
-           width="{{ image_width }}" height="{{ image_height }}" loading="lazy">
-    </a>
-    <figcaption>{{ s.image_credit }}</figcaption>
-  </figure>
-  {% endif %}
+  {# The bottle and the name share a row on anything wider than a phone, so the
+     declaration — the reason the page exists — starts near the top instead of
+     below a centred photograph. docs/site-plan.md: design for the image not
+     being there, so the row collapses to a tidy text block without it. #}
+  <div class="wine-head{% if not image %} no-image{% endif %}">
+    {# Condition 8: images appear here and on no ranked, filtered or comparison
+       page. Rendered straight from Systembolaget's CDN — never copied, proxied
+       or resized. If a technological measure ever appears, this block goes. #}
+    {% if image %}
+    <figure class="bottle">
+      <a href="{{ source_url }}" rel="nofollow noopener">
+        <img src="{{ image }}" alt="{{ wine.name }}"
+             width="{{ image_width }}" height="{{ image_height }}" loading="lazy">
+      </a>
+      <figcaption>{{ s.image_credit }}</figcaption>
+    </figure>
+    {% endif %}
+    <div class="wine-title">
+      <h1>{{ wine.name }}</h1>
+      <p class="subtitle">
+        {{ wine.vintage or s.unknown }} ·
+        {{ wine.country }}{% if wine.region %} · {{ wine.region }}{% endif %} ·
+        {{ wine.category }}
+      </p>
+    </div>
+  </div>
 
   {# The three states, rendered as three states. #}
   <section class="declaration state-{{ state }}">
@@ -147,6 +154,7 @@
   {% endif %}
 
   <section class="facts">
+    <h2>{{ s.wine_facts }}</h2>
     <dl>
       {% if wine.producer %}<dt>{{ s.producer }}</dt><dd>{{ wine.producer }}</dd>{% endif %}
       {% if wine.supplier %}<dt>{{ s.supplier }}</dt><dd>{{ wine.supplier }}</dd>{% endif %}

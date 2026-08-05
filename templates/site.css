@@ -89,21 +89,70 @@ header {
   line-height: 1;
 }
 .wordmark:hover { color: var(--accent); }
-header nav a { margin-left: 1rem; font-size: 0.9rem; }
 
 /* Wine page ---------------------------------------------------------- */
 
 h1 { font-size: 1.6rem; line-height: 1.25; margin: 1.5rem 0 0.25rem; }
 h2 { font-size: 1.05rem; margin: 0 0 0.5rem; }
 
-.subtitle { color: var(--muted); margin: 0 0 1.5rem; font-size: 0.95rem; }
+.subtitle { color: var(--muted); margin: 0; font-size: 0.95rem; }
 
-.bottle { margin: 0 0 1.5rem; text-align: center; }
-.bottle img { max-width: 200px; height: auto; }
+/* The page has one subject and nine supporting blocks, and until now all ten
+   looked alike. The declaration gets the weight; everything else is labelled
+   rather than headed. No colour does any of this work — the same reason the
+   three states are told apart by border and rule. */
+.wine h1 { font-size: 1.75rem; margin: 0 0 0.3rem; }
+
+.wine-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin: 1.5rem 0 1.75rem;
+}
+.wine-title { min-width: 0; }
+.bottle { margin: 0; text-align: center; flex: none; width: 7.5rem; }
+.bottle img { max-width: 100%; height: auto; }
 .bottle figcaption {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--muted);
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 26rem) {
+  /* Too narrow for a row: the photograph goes back above the name rather than
+     squeezing it into three words a line. */
+  .wine-head { display: block; }
+  .bottle { width: auto; margin: 0 0 1rem; }
+  .bottle img { max-width: 160px; }
+}
+
+/* The declaration is the page. It is the one heading that stays a heading. */
+.declaration h2 { font-size: 1.3rem; margin: 0 0 0.4rem; letter-spacing: -0.01em; }
+
+/* Everything after it is supporting detail, so its headings become labels:
+   small, tracked, muted, with a rule to separate one block from the next.
+   Hierarchy out of typography rather than out of colour. */
+.wine .raw h2,
+.wine .nutrition h2,
+.wine .allergens h2,
+.wine .facts h2,
+.wine .findability h2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.6rem;
+}
+.wine .raw,
+.wine .nutrition,
+.wine .allergens,
+.wine .facts,
+.wine .findability {
+  margin: 1.75rem 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
 }
 
 /* The three states. Distinguished by border weight and typography, never by
@@ -150,7 +199,7 @@ table.additives td.enum {
   display: grid;
   grid-template-columns: minmax(9rem, auto) 1fr;
   gap: 0.35rem 1rem;
-  margin: 1.5rem 0;
+  margin: 0;
   font-size: 0.9rem;
 }
 .facts dt { color: var(--muted); }
@@ -162,7 +211,6 @@ table.additives td.enum {
 
 /* Nutrition ---------------------------------------------------------- */
 
-.nutrition { margin: 0 0 1.5rem; }
 table.nutrients { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
 table.nutrients td { padding: 0.3rem 0; border-bottom: 1px solid var(--line); }
 table.nutrients td.num {
@@ -175,13 +223,7 @@ table.nutrients td.num {
 
 /* No warning colour and no icon. A declared allergen is a fact about how the
    wine was made, not a verdict on it, and the reader decides what it means to
-   them. Distinguished from the surrounding text by weight and rule only, on the
-   same principle as the three declaration states. */
-.allergens {
-  margin: 0 0 1.5rem;
-  padding: 0.75rem 0 0 0;
-  border-top: 1px solid var(--line);
-}
+   them. Spacing and the rule come from the shared block rules above. */
 .allergens .declared { margin: 0; }
 .allergens.has-animal .lead { font-weight: 600; margin: 0.5rem 0 0; }
 .allergens .caveat { margin-top: 0.6rem; }
