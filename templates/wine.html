@@ -39,6 +39,23 @@
         {{ wine.country }}{% if wine.region %} · {{ wine.region }}{% endif %} ·
         {{ wine.category }}
       </p>
+      {# The three a shopper reads first, beside the bottle rather than under
+         the declaration. They used to sit in "Om vinet" halfway down the page,
+         which left a column of empty paper next to a tall photograph on any
+         screen wider than a phone held upright. They are not repeated below —
+         that list keeps the rest. #}
+      <dl class="headline-facts">
+        {% if wine.price %}
+        <dt>{{ s.price }}</dt>
+        <dd>{{ wine.price|round|int }} kr{% if wine.volume_ml %} <span class="muted">/ {{ wine.volume_ml|round|int }} ml</span>{% endif %}</dd>
+        {% endif %}
+        {% if wine.alcohol_percentage %}
+        <dt>{{ s.alcohol }}</dt><dd>{{ wine.alcohol_percentage|num }} %</dd>
+        {% endif %}
+        {% if wine.producer %}
+        <dt>{{ s.producer }}</dt><dd>{{ wine.producer }}</dd>
+        {% endif %}
+      </dl>
     </div>
   </div>
 
@@ -156,10 +173,8 @@
   <section class="facts">
     <h2>{{ s.wine_facts }}</h2>
     <dl>
-      {% if wine.producer %}<dt>{{ s.producer }}</dt><dd>{{ wine.producer }}</dd>{% endif %}
+      {# Price, alcohol and producer are in the head beside the bottle. #}
       {% if wine.supplier %}<dt>{{ s.supplier }}</dt><dd>{{ wine.supplier }}</dd>{% endif %}
-      {% if wine.alcohol_percentage %}<dt>{{ s.alcohol }}</dt><dd>{{ wine.alcohol_percentage|num }} %</dd>{% endif %}
-      {% if wine.price %}<dt>{{ s.price }}</dt><dd>{{ wine.price|round|int }} kr{% if wine.volume_ml %} / {{ wine.volume_ml|round|int }} ml{% endif %}</dd>{% endif %}
       {% if wine.grapes %}<dt>{{ s.grapes }}</dt><dd>{{ wine.grapes|join(', ') }}</dd>{% endif %}
       {% if wine.food_pairings %}<dt>{{ s.pairing }}</dt><dd>{{ wine.food_pairings|join(', ') }}</dd>{% endif %}
     </dl>
