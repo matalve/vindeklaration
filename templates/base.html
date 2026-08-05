@@ -51,12 +51,6 @@
   <symbol id="i-book" viewBox="0 0 24 24">
     <path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M4 19a2 2 0 0 1 2-2h13"/>
   </symbol>
-  <symbol id="i-globe" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18M12 3c-5 5-5 13 0 18"/>
-  </symbol>
-  <symbol id="i-pin" viewBox="0 0 24 24">
-    <path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/>
-  </symbol>
   <symbol id="i-sun" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="4.5"/>
     <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5"/>
@@ -66,6 +60,27 @@
   </symbol>
   <symbol id="i-auto" viewBox="0 0 24 24">
     <rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M9 21h6M12 17v4"/>
+  </symbol>
+
+  {# The two flags. Filled rather than stroked, so they sit outside the .i
+     rules and carry the only saturated colour on the site — a flag is
+     wayfinding, not a verdict about a wine, which is what the no-colour rule
+     at the top of site.css is actually about.
+
+     A flag names a country and not a language, so the link keeps its words for
+     a screen reader and its title on hover. The Union Jack's saltires are
+     drawn symmetrically: the real counterchange is invisible at this size and
+     would only add path data. #}
+  <symbol id="i-flag-se" viewBox="0 0 16 10">
+    <path fill="#005293" d="M0 0h16v10H0z"/>
+    <path fill="#fecb00" d="M5 0h2v10H5zM0 4h16v2H0z"/>
+  </symbol>
+  <symbol id="i-flag-gb" viewBox="0 0 60 30">
+    <path fill="#012169" d="M0 0h60v30H0z"/>
+    <path stroke="#fff" stroke-width="6" d="M0 0l60 30M60 0L0 30"/>
+    <path stroke="#c8102e" stroke-width="4" d="M0 0l60 30M60 0L0 30"/>
+    <path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/>
+    <path stroke="#c8102e" stroke-width="6" d="M30 0v30M0 15h60"/>
   </symbol>
 </svg>
 
@@ -77,8 +92,17 @@
       <a href="{{ lang_root }}/{{ s.substance_url }}/"><svg class="i"><use href="#i-tag"/></svg>{{ s.substances }}</a>
       <a href="{{ lang_root }}/{{ s.coverage_url }}/"><svg class="i"><use href="#i-chart"/></svg>{{ s.coverage }}</a>
       <a href="{{ lang_root }}/{{ s.method_url }}/"><svg class="i"><use href="#i-book"/></svg>{{ s.method }}</a>
-      <a href="{{ s.other_lang_url }}"><svg class="i"><use href="#i-globe"/></svg>{{ s.other_lang }}</a>
     </nav>
+
+    {# Language and theme together, pushed right by margin-left:auto on the
+       group rather than by the parent's justify-content. When the nav wraps to
+       its own line a space-between parent leaves these at the start of the
+       next one, which is what the theme control was doing on a phone. #}
+    <div class="header-tools">
+      <a class="lang" href="{{ s.other_lang_url }}" title="{{ s.other_lang }}">
+        <svg class="flag" aria-hidden="true"><use href="{{ s.other_lang_flag }}"/></svg>
+        <span class="visually-hidden">{{ s.other_lang }}</span>
+      </a>
     {# A segmented control, revealed by JS only: without it it would offer a
        switch that cannot happen, and what it switches away from — the OS's own
        setting — is what a no-JS reader already gets. The three states are shown
@@ -95,6 +119,7 @@
       <button type="button" role="radio" data-mode="dark" title="{{ s.theme_dark }}">
         <svg class="i"><use href="#i-moon"/></svg><span class="visually-hidden">{{ s.theme_dark }}</span>
       </button>
+      </div>
     </div>
   </div>
 </header>

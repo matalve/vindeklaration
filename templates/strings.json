@@ -218,7 +218,8 @@
   "ready_lists": "Färdiga listor",
   "ready_lists_note": "Byggda i natt, en per typ av vin och prisklass. De kräver ingen JavaScript.",
   "theme_system": "Systemets tema",
-  "theme_switch": "Byt tema"
+  "theme_switch": "Byt tema",
+  "other_lang_flag": "#i-flag-gb"
  },
  "en": {
   "site_name": "vindeklaration",
@@ -439,6 +440,7 @@
   "ready_lists": "Ready-made lists",
   "ready_lists_note": "Built overnight, one per type of wine and price band. They need no JavaScript.",
   "theme_system": "System theme",
-  "theme_switch": "Switch theme"
+  "theme_switch": "Switch theme",
+  "other_lang_flag": "#i-flag-se"
  }
 }

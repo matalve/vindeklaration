@@ -507,10 +507,42 @@ header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
   .themer .thumb { transition: none; }
 }
 
+/* Language and theme, always hard right. `margin-left: auto` rather than the
+   parent's justify-content, because these two wrap onto their own line on a
+   narrow screen and space-between puts a lone item at the start of a line —
+   which is why the theme control sat left on a phone. An auto margin follows
+   the group onto whatever line it lands on. */
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 0 0.6rem;
+  margin-left: auto;
+  flex: none;
+}
+
+.lang {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 2px;
+  line-height: 0;
+}
+.flag {
+  width: 1.5rem;
+  height: 1rem;
+  border-radius: 2px;
+  /* The flags are the only saturated colour on the page, so they get a hairline
+     rather than floating against the paper — and the white in the Union Jack
+     needs an edge in light mode to stop the flag melting into the background. */
+  box-shadow: 0 0 0 1px var(--line);
+  object-fit: cover;
+}
+.lang:hover .flag { box-shadow: 0 0 0 1px var(--accent); }
+.lang:focus-visible .flag { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 @media (max-width: 34rem) {
-  /* The wordmark keeps its line; the nav and the control share the next one. */
+  /* The wordmark keeps its line; the nav and the tools share the next one. */
   header { flex-wrap: wrap; }
-  .header-right { width: 100%; justify-content: space-between; }
+  .header-right { width: 100%; }
   header nav { gap: 0 0.85rem; }
 }
 
