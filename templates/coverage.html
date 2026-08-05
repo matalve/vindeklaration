@@ -30,7 +30,7 @@
       </td>
       <td class="num">{{ row.wines|count(lang) }}</td>
       <td class="num">{{ row.declared|count(lang) }}</td>
-      <td class="num">{{ row.share|pct(lang) }} %</td>
+      <td class="num">{{ row.share|pct(lang) }}</td>
     </tr>
   {% endfor %}
   </tbody>
@@ -50,7 +50,7 @@
   <section class="block">
     <h2>{{ s.coverage_whole_shelf }}</h2>
     <p class="hint">
-      <strong>{{ stats.declared_share|pct(lang) }} %</strong>
+      <strong>{{ stats.declared_share|pct(lang) }}</strong>
       {{ s.coverage_lead }} — {{ stats.declared|count(lang) }} {{ s.of }} {{ stats.wines|count(lang) }} {{ s.wines_word }}.
     </p>
     {# The silent wines as a number, not only as a share of something else.
@@ -99,9 +99,11 @@
         <line class="grid" x1="{{ chart.left }}" x2="{{ chart.right }}"
               y1="{{ line.y }}" y2="{{ line.y }}"/>
         {# The unit on the scale, not only in the caption: a screenshot of the
-           graphic alone would otherwise show an unlabelled 0–100. #}
+           graphic alone would otherwise show an unlabelled 0–100. Through the
+           filter so the sign follows the language — Swedish spaces it, English
+           does not. #}
         <text class="tick" x="{{ chart.left - 6 }}" y="{{ line.y + 3 }}"
-              text-anchor="end">{{ line.value }}{% if loop.last %} %{% endif %}</text>
+              text-anchor="end">{{ line.value }}{% if loop.last %}{{ s.pct_sign }}{% endif %}</text>
         {% endfor %}
 
         {% for b in chart.bars %}
@@ -114,7 +116,7 @@
            alone. #}
         <rect class="hit" x="{{ b.hit_x }}" y="{{ chart.top }}"
               width="{{ b.hit_width }}" height="{{ chart.baseline - chart.top }}">
-          <title>{{ b.year }}: {{ b.share|pct(lang) }} % ({{ b.declared|count(lang) }} {{ s.of }} {{ b.wines|count(lang) }})</title>
+          <title>{{ b.year }}: {{ b.share|pct(lang) }} ({{ b.declared|count(lang) }} {{ s.of }} {{ b.wines|count(lang) }})</title>
         </rect>
         {# Every nth year once the bars are too narrow for four digits side by
            side. The value is still in the tooltip and in the table. #}
@@ -180,7 +182,7 @@
           </td>
           <td class="num">{{ row.wines|count(lang) }}</td>
           <td class="num">{{ row.declared|count(lang) }}</td>
-          <td class="num">{{ row.share|pct(lang) }} %</td>
+          <td class="num">{{ row.share|pct(lang) }}</td>
         </tr>
       {% endfor %}
       </tbody>
@@ -215,9 +217,9 @@
           <td><a href="{{ lang_root }}/{{ s.importer_url }}/{{ imp.slug }}/">{{ imp.name }}</a></td>
           <td class="num">{{ imp.wines|count(lang) }}</td>
           <td class="num">{{ imp.declared|count(lang) }}</td>
-          <td class="num">{{ imp.share|pct(lang) }} %</td>
+          <td class="num">{{ imp.share|pct(lang) }}</td>
           {# Never the ranking, and labelled below as what it actually measures. #}
-          <td class="num muted">{{ imp.all_share|pct(lang) }} %</td>
+          <td class="num muted">{{ imp.all_share|pct(lang) }}</td>
         </tr>
       {% endfor %}
       {% if importers.thin.wines %}
@@ -225,7 +227,7 @@
           <td>{{ s.row_other }}</td>
           <td class="num">{{ importers.thin.wines|count(lang) }}</td>
           <td class="num">{{ importers.thin.declared|count(lang) }}</td>
-          <td class="num">{{ importers.thin.share|pct(lang) }} %</td>
+          <td class="num">{{ importers.thin.share|pct(lang) }}</td>
           <td class="num"></td>
         </tr>
       {% endif %}

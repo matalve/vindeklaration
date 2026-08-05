@@ -272,9 +272,15 @@ def test_a_substance_carried_only_by_a_partial_declaration_says_so() -> None:
 
 # --- pct ---------------------------------------------------------------------
 
-def test_pct_uses_the_decimal_separator_of_the_language() -> None:
-    assert pct(19.34, "sv") == "19,3"
-    assert pct(19.34, "en") == "19.3"
+def test_pct_uses_the_typography_of_the_language() -> None:
+    """Two conventions that differ in both places, and the sign belongs to the
+    filter. Thirteen templates used to append a Swedish space themselves,
+    which is how English pages came to read "19.3 %"."""
+    assert pct(19.34, "sv") == "19,3\u00a0%"
+    assert pct(19.34, "en") == "19.3%"
+    # Non-breaking: a percentage that wraps between number and sign has
+    # stopped being one value.
+    assert "\u00a0" in pct(5.0, "sv") and " " not in pct(5.0, "sv")
 
 
 # --- findability -------------------------------------------------------------

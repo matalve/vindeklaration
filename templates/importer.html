@@ -16,7 +16,7 @@
   {# The figure, then immediately the baseline. A percentage published without
      the mean it sits against is an insinuation rather than a measurement. #}
   <p class="hint">
-    <strong>{{ imp.share|pct(lang) }} %</strong> —
+    <strong>{{ imp.share|pct(lang) }}</strong> —
     {{ imp.declared|count(lang) }} {{ s.of }} {{ imp.wines|count(lang) }} {{ s.wines_word }}.
   </p>
   <p class="explain">{{ s.importer_mean|replace("{p}", mean|pct(lang)) }}</p>
