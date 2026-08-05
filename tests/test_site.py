@@ -11,6 +11,7 @@ from __future__ import annotations
 import re
 
 from src.site import (
+    CHART,
     ROOT,
     TEMPLATE_DIR,
     importer_rows,
@@ -19,6 +20,7 @@ from src.site import (
     covered_stats,
     pct,
     substance_pages,
+    vintage_chart,
     vintage_rows,
 )
 
@@ -490,3 +492,85 @@ def test_the_icon_is_drawn_on_whole_pixels_at_tab_size() -> None:
         for value in (x, y, w, h):
             assert int(value) == float(value), "a rectangle left the integer grid"
         assert int(y) + int(h) <= 16 and int(x) + int(w) <= 16, "a rectangle left the grid"
+
+
+# --- the vintage figure ------------------------------------------------------
+
+def test_only_real_years_get_a_bar() -> None:
+    """The aggregated and undated rows have no place on a time axis.
+
+    2 844 wines carry no vintage. Plotting them anywhere would invent a year
+    for them; leaving them out silently would let the figure pass for the whole
+    shelf, which is what the caption exists to deny.
+    """
+    wines = (
+        [supplied("A", 2024, True) for _ in range(50)]
+        + [supplied("A", 2023, False) for _ in range(50)]
+        + [supplied("A", 2011, True) for _ in range(3)]     # thin -> aggregated
+        + [wine(supplier="A", vintage=None) for _ in range(80)]  # undated
+    )
+    chart = vintage_chart(vintage_rows(wines))
+
+    assert [b["year"] for b in chart["bars"]] == ["2023", "2024"]
+
+
+def test_bars_run_chronologically() -> None:
+    """Left to right in time. vintage_rows() returns newest first for the
+    table, and a figure that inherited that order would read backwards."""
+    wines = (
+        [supplied("A", year, True) for year in (2022, 2023, 2024) for _ in range(45)]
+    )
+    chart = vintage_chart(vintage_rows(wines))
+
+    years = [b["year"] for b in chart["bars"]]
+    assert years == sorted(years)
+    assert [b["x"] for b in chart["bars"]] == sorted(b["x"] for b in chart["bars"])
+
+
+def test_a_vintage_declaring_nothing_gets_no_stub() -> None:
+    """Zero is drawn as zero. A minimum visible height would put a bar under a
+    year that declares on nothing, which is a small lie in the one place the
+    figure is most stark — the hit area is what makes it readable instead."""
+    wines = (
+        [supplied("A", 2024, True) for _ in range(45)]
+        + [supplied("A", 2023, False) for _ in range(45)]
+    )
+    chart = vintage_chart(vintage_rows(wines))
+    empty = next(b for b in chart["bars"] if b["year"] == "2023")
+
+    assert empty["height"] == 0
+    assert empty["hit_width"] > 0, "a zero bar still needs somewhere to point"
+
+
+def test_the_requirement_boundary_sits_at_the_first_covered_vintage() -> None:
+    wines = [supplied("A", year, True) for year in (2023, 2024) for _ in range(45)]
+    chart = vintage_chart(vintage_rows(wines))
+    first_covered = next(b for b in chart["bars"] if b["covered"])
+
+    assert chart["boundary"] == first_covered["x"] - CHART["gap"] / 2
+
+
+def test_the_figure_carries_no_second_encoding_of_its_own_values() -> None:
+    """One series, one colour. Shading each bar by its own height would
+    double-encode the value and rank the vintages against each other, which is
+    the reading *What the site must never say* forbids.
+    """
+    template = (TEMPLATE_DIR / "coverage.html").read_text(encoding="utf-8")
+    figure = template[template.index('<figure class="chart"'):template.index("</figure>")]
+
+    assert 'class="bar"' in figure
+    # No per-bar class, style or fill that could vary with the datum.
+    assert "fill=" not in figure
+    assert "style=" not in figure
+    assert "{{ b.share }}" not in figure.replace("b.share|pct(lang)", "")
+
+
+def test_the_figure_is_not_the_only_place_a_value_lives() -> None:
+    """Tooltips enhance, never gate. The table below is the accessible twin."""
+    template = (TEMPLATE_DIR / "coverage.html").read_text(encoding="utf-8")
+    # From the figure onwards, not from the top: the shared breakdown_table
+    # macro defines a table of its own further up the file.
+    after = template[template.index('<figure class="chart"'):]
+
+    assert '<table class="breakdown">' in after, "the vintage table must follow the figure"
+    assert after.index("</figure>") < after.index('<table class="breakdown">')

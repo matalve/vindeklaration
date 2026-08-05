@@ -220,7 +220,10 @@
   "theme_system": "Systemets tema",
   "theme_switch": "Byt tema",
   "other_lang_flag": "#i-flag-gb",
-  "wine_facts": "Om vinet"
+  "wine_facts": "Om vinet",
+  "chart_alt": "Stapeldiagram: andel viner med ingrediensförteckning, per årgång. Samma siffror står i tabellen under diagrammet.",
+  "chart_boundary": "kravet gäller härifrån",
+  "chart_caption": "Andel med förteckning, per årgång. Bara årgångar med minst {n} viner har en egen stapel — övriga årgångar, och de {u} vinerna utan årgång, står i tabellen men inte i diagrammet, så figuren visar inte hela hyllan. Att staplarna stiger åt höger beror på att kravet bara gäller nyare vin och att lagret roterar. Det är inte ett mått på att någon blivit bättre."
  },
  "en": {
   "site_name": "vindeklaration",
@@ -443,6 +446,9 @@
   "theme_system": "System theme",
   "theme_switch": "Switch theme",
   "other_lang_flag": "#i-flag-se",
-  "wine_facts": "About the wine"
+  "wine_facts": "About the wine",
+  "chart_alt": "Bar chart: share of wines carrying an ingredient list, by vintage. The same figures are in the table below the chart.",
+  "chart_boundary": "requirement starts here",
+  "chart_caption": "Share carrying a list, by vintage. Only vintages with at least {n} wines get their own bar — the remaining vintages, and the {u} wines with no vintage at all, are in the table but not in the chart, so the figure is not the whole shelf. The bars rise to the right because the requirement only reaches newer wine and stock rotates. It is not a measure of anyone improving."
  }
 }

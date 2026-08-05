@@ -450,6 +450,91 @@ def importer_rows(wines: list[dict]) -> dict:
     }
 
 
+# Geometry for the vintage figure, in SVG user units. The viewBox scales to
+# whatever width the column gives it, so these are proportions rather than
+# pixels — but the bottom band exists so the x labels are inside the box and
+# the container never grows a nested scrollbar.
+CHART = {
+    "width": 640, "height": 250,
+    "left": 34, "right": 6, "top": 10, "bottom": 40,
+    "gap": 2,  # surface gap between adjacent bars, never a border around them
+}
+
+
+def vintage_chart(rows: list[dict]) -> dict | None:
+    """Declared share per vintage, as bars.
+
+    Bars and not a line. The vintages are separate groups with separate
+    denominators and nothing runs between them, so a line would interpolate a
+    trend across a gap where there is no data — and a rising line is the exact
+    shape a reader takes for a grade. See *What the site must never say*.
+
+    Only real years are plotted. The aggregated and undated rows are 2 844
+    bottles and more, and they have no place on a time axis; they stay in the
+    table under the figure, and the caption says the figure is not the whole
+    shelf.
+
+    One colour for every bar. Shading each by its own value would double-encode
+    the height as hue and turn the figure into a ranking of vintages.
+    """
+    years = [r for r in rows if r["kind"] == "year"]
+    if len(years) < 2:
+        return None
+    years = sorted(years, key=lambda r: r["value"])
+
+    plot_w = CHART["width"] - CHART["left"] - CHART["right"]
+    plot_h = CHART["height"] - CHART["top"] - CHART["bottom"]
+    band = plot_w / len(years)
+    baseline = CHART["top"] + plot_h
+
+    bars = []
+    for i, row in enumerate(years):
+        height = plot_h * row["share"] / 100
+        bars.append({
+            "x": CHART["left"] + i * band + CHART["gap"] / 2,
+            "y": baseline - height,
+            "width": band - CHART["gap"],
+            "height": height,
+            "mid": CHART["left"] + (i + 0.5) * band,
+            # A transparent target over the whole column. Two reasons: a
+            # pinpoint hit area on a thin bar is the interaction anti-pattern,
+            # and 2014 declares on nothing at all — a zero-height rect cannot
+            # be hovered, so without this the one vintage with the starkest
+            # figure would be the only one with no read-out. The visible bar
+            # stays honest at zero rather than being given a stub.
+            "hit_x": CHART["left"] + i * band,
+            "hit_width": band,
+            "year": row["value"],
+            "share": row["share"],
+            "wines": row["wines"],
+            "declared": row["declared"],
+            "covered": row["covered"],
+        })
+
+    # Where the requirement starts, drawn as an annotation rather than as a
+    # second colour: it is a fact about the law, not a second data series, and
+    # colouring it would need a legend to say what the colour meant.
+    boundary = next(
+        (b["x"] - CHART["gap"] / 2 for b in bars if b["covered"]), None
+    )
+    return {
+        "bars": bars,
+        "baseline": baseline,
+        # Solid hairlines, one shade off the surface. Never dashed: a dashed
+        # rule reads as a threshold or a projection when it is just a grid.
+        "grid": [
+            {"value": v, "y": baseline - plot_h * v / 100}
+            for v in (0, 25, 50, 75, 100)
+        ],
+        "boundary": boundary,
+        "left": CHART["left"],
+        "right": CHART["width"] - CHART["right"],
+        "top": CHART["top"],
+        "width": CHART["width"],
+        "height": CHART["height"],
+    }
+
+
 def covered_stats(wines: list[dict]) -> dict:
     """The figures over the wines the requirement certainly reaches.
 
@@ -692,6 +777,7 @@ def build(output: Path, limit: int | None = None) -> None:
         "country": breakdown(wines, "country"),
         "vintage": vintage_rows(wines),
     }
+    chart = vintage_chart(breakdowns["vintage"])
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     if output.exists():
@@ -844,7 +930,7 @@ def build(output: Path, limit: int | None = None) -> None:
                 lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
                 facet_labels=facets, covered_from=COVERED_FROM,
-                minimum=BREAKDOWN_MINIMUM, importers=importers,
+                minimum=BREAKDOWN_MINIMUM, importers=importers, chart=chart,
                 importer_minimum=IMPORTER_MINIMUM,
                 correction_days=CORRECTION_DAYS,
             ),
