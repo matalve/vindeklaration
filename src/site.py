@@ -479,9 +479,22 @@ def importer_rows(wines: list[dict]) -> dict:
 # pixels — but the bottom band exists so the x labels are inside the box and
 # the container never grows a nested scrollbar.
 CHART = {
-    "width": 640, "height": 250,
-    "left": 34, "right": 6, "top": 10, "bottom": 40,
+    "width": 640, "height": 260,
+    # 56 on the left because the top tick reads "100 %" and not "100": at the
+    # tick font size that string is about 45 units wide, and the first version
+    # put it at x=28 with text-anchor="end", which started it left of the
+    # viewBox and clipped the leading digit at every width.
+    "left": 56, "right": 6, "top": 12, "bottom": 44,
     "gap": 2,  # surface gap between adjacent bars, never a border around them
+    # User units, so they scale with the viewBox. The svg is 640 wide and is
+    # displayed at 640 on a desktop but about 335 on a phone — a factor of two.
+    # 12 units rendered at 6 CSS px there, which is the same failure that moved
+    # the boundary note out of the figure, one pixel short of it.
+    "tick": 18,
+    # What one year label needs, end to end, before the next may start. Four
+    # digits at 18 units is about 40, so 48 leaves a real gap rather than
+    # letting them touch.
+    "label_pitch": 48,
 }
 
 
@@ -548,12 +561,10 @@ def vintage_chart(rows: list[dict]) -> dict | None:
     # point at a bar that is not there.
     first_covered = next((b for b in bars if b["covered"]), None)
 
-    # Four-digit years need about 26 units to sit side by side. Past roughly 25
-    # bars they collide, so every nth label is drawn instead of every one. The
-    # window is self-limiting in practice — old vintages fall below the
-    # threshold as stock rotates — but "in practice" is not a guarantee, and a
-    # figure that degrades into overlapping ink is worse than a sparse axis.
-    label_step = max(1, math.ceil(26 / band))
+    # Every nth year label, counted back from the newest. Anchoring on the
+    # oldest bar was wrong: with an even number of bars it dropped the label
+    # from the most recent vintage, which is the one carrying the story.
+    label_step = max(1, math.ceil(CHART["label_pitch"] / band))
     return {
         "bars": bars,
         "baseline": baseline,
@@ -562,13 +573,27 @@ def vintage_chart(rows: list[dict]) -> dict | None:
         # and no total to set it against, and the two exclusions do not add up
         # to the difference on their own.
         "plotted": sum(b["wines"] for b in bars),
+        # The vintages that exist but are too thin to draw, counted apart from
+        # the undated ones. Both are excluded and they are excluded for
+        # different reasons, and without this the two named counts do not add
+        # up to the total the caption also gives.
+        "thin_years": sum(
+            r["wines"] for r in rows
+            if r["kind"] in ("aggregated", "aggregated_covered")
+        ),
         # Solid hairlines, one shade off the surface. Never dashed: a dashed
         # rule reads as a threshold or a projection when it is just a grid.
         "grid": [
             {"value": v, "y": baseline - plot_h * v / 100}
             for v in (0, 25, 50, 75, 100)
         ],
-        "boundary": (first_covered["x"] - CHART["gap"] / 2) if first_covered else None,
+        # None when the oldest plotted bar is already covered: the line would
+        # then sit exactly on the y-axis, under a note that says "to the left
+        # of it we do not know" with nothing to the left of it. Years away —
+        # every vintage before 2024 would have to have sold down past the
+        # threshold — but it draws a rule that describes nothing.
+        "boundary": (first_covered["x"] - CHART["gap"] / 2)
+                    if first_covered and first_covered is not bars[0] else None,
         "boundary_year": first_covered["year"] if first_covered else None,
         "label_step": label_step,
         "left": CHART["left"],

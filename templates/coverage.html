@@ -118,7 +118,7 @@
         </rect>
         {# Every nth year once the bars are too narrow for four digits side by
            side. The value is still in the tooltip and in the table. #}
-        {% if loop.index0 % chart.label_step == 0 %}
+        {% if (chart.bars|length - 1 - loop.index0) % chart.label_step == 0 %}
         <text class="tick" x="{{ b.mid }}" y="{{ chart.baseline + 14 }}"
               text-anchor="middle">{{ b.year }}</text>
         {% endif %}
@@ -135,12 +135,18 @@
               y1="{{ chart.top }}" y2="{{ chart.baseline }}"/>
         {% endif %}
       </svg>
+      {# The sentence that stops the rising shape reading as improvement, in
+         full ink and first. It was the last clause of a muted caption, which
+         is the smallest and least-read text under the loudest thing on the
+         page — and the plan says a disclaimer below a ranking does not cancel
+         it. #}
+      <p class="chart-reading">{{ s.chart_reading }}</p>
       {% if chart.boundary %}
       <p class="chart-note">{{ s.chart_boundary|replace("{y}", chart.boundary_year) }}</p>
       {% endif %}
       <figcaption>{{ s.chart_caption
-        |replace("{n}", minimum)
         |replace("{u}", covered.undated|count(lang))
+        |replace("{x}", chart.thin_years|count(lang))
         |replace("{p}", chart.plotted|count(lang))
         |replace("{t}", stats.wines|count(lang)) }}</figcaption>
     </figure>
@@ -207,8 +213,8 @@
       {% for imp in importers.named %}
         <tr>
           <td><a href="{{ lang_root }}/{{ s.importer_url }}/{{ imp.slug }}/">{{ imp.name }}</a></td>
-          <td class="num">{{ imp.wines }}</td>
-          <td class="num">{{ imp.declared }}</td>
+          <td class="num">{{ imp.wines|count(lang) }}</td>
+          <td class="num">{{ imp.declared|count(lang) }}</td>
           <td class="num">{{ imp.share|pct(lang) }} %</td>
           {# Never the ranking, and labelled below as what it actually measures. #}
           <td class="num muted">{{ imp.all_share|pct(lang) }} %</td>
@@ -229,7 +235,7 @@
     <p class="explain">{{ s.importer_threshold
       |replace("{n}", importer_minimum)
       |replace("{w}", importers.thin.wines|count(lang))
-      |replace("{s}", importers.thin.suppliers)
+      |replace("{s}", importers.thin.suppliers|count(lang))
       |replace("{d}", importers.thin.declared|count(lang)) }}</p>
     <p class="explain">{{ s.importer_raw_note }}</p>
     <p class="explain">{{ s.importer_supplies }}</p>
