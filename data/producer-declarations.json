@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to 13 wines across 12 producers)",
-  "attempted": 129,
+  "attempted": 130,
   "found": 18,
   "not_found": 83,
-  "rejected": 28,
+  "rejected": 29,
   "declarations": [
     {
       "product_number": "5106001",
@@ -3697,9 +3697,43 @@
       "robots_disallowed": false,
       "server_rendered": true,
       "note": "A certificate quirk worth recording: www.corvers-kauter.de presents a certificate for another hostname, so https fails outright while plain http serves the whole site with no redirect. Same family as weingut-hauck.de and www.erbeldinger.de — a broken cert is usually not a wall, and http is worth trying before giving up. The structural finding is the more useful one: an estate whose shop is a set of inline category listings has nowhere to put a per-wine e-label link, and in this project that has predicted 'no declaration' every time."
+    },
+    {
+      "product_number": "7408901",
+      "name": "August Eser My Way Désirée Eser Riesling Trocken",
+      "producer": "Freiherr Zu Knyphausen",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://winestro.info/?s=x3zd6pns",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "A COMPLETE, READABLE, SELF-IDENTIFYING E-LABEL FOR THE WRONG VINTAGE. VDP.Weingut August Eser, Friedensplatz 19, 65375 Oestrich-Winkel (Rheingau), links a Winestro e-label from its Gambio shop product page under the sentence 'Hier geht es zum Nährwertangaben'. The e-label at https://winestro.info/?s=x3zd6pns is plain server-rendered HTML with a 19-language EU selector, and it states its own identity: 'Weingut August Eser — 2025 My Way Riesling trocken VDP.GUTSWEIN — 0.75 Ltr. | 12 % vol', with the Impressum 'Erzeugerabfüllung Weingut August Eser, Friedensplatz 19, 65375 Oestrich' and 'Désirée Eser Freifrau zu Knyphausen'. Its declaration reads 'Trauben, unter Schutzatmosphäre abgefüllt, Konservierungsstoff: Sulfite' with Brennwert 311 kJ / 74 kcal per 100 ml. PRODUCER IDENTITY IS SETTLED AND IS NOT THE PROBLEM. Systembolaget's producer field says 'Freiherr Zu Knyphausen', and there is a separate VDP estate of that exact name at Erbach — a sister-name trap. The e-label's own Impressum resolves it: the wine is made at Weingut August Eser by Désirée Eser Freifrau zu Knyphausen, who married into the Knyphausen family, so Systembolaget has recorded the person's surname in the producer field. Cuvée, estate, bottle size and market all match. THE VINTAGE DOES NOT. The disclosure page says 2025; Systembolaget 7408901 is the 2024. Alcohol corroborates rather than rescues: the e-label says 12 % vol, Systembolaget says 11,0 % — 1,0 pp, twice the 0,5 % vol EU labelling tolerance, which is what a different harvest looks like. NO 2024 E-LABEL WAS LOOKED FOR BY PATTERN. The Winestro token 's=x3zd6pns' is opaque and article-keyed, and guessing another would be exactly the enumeration the rules forbid. The shop's My Way category holds one product and it is the 2025, so the 2024 has rolled off the estate's own listing.",
+      "rejected_because": "The e-label states vintage 2025; the wine on Systembolaget is the 2024. Alcohol differs by 1,0 pp, twice the labelling tolerance, which is consistent with a different vintage and not with a transcription difference.",
+      "sources_checked": [
+        "https://www.august-eser-weinshop.de/ (redirects to https://www.eser-wein.de/; that host answers 200 with the home page for /robots.txt, i.e. a soft 404, so no directives)",
+        "https://www.eser-wein.de/",
+        "https://www.eser-wein.shop/robots.txt (Gambio; disallows admin, cache and every faceted query string, nothing relevant)",
+        "https://www.eser-wein.shop/",
+        "https://www.eser-wein.shop/trocken/vdp-gutswein/myway/ (one product: the 2025)",
+        "https://www.eser-wein.shop/myway-riesling-401.html (Art.Nr. 2505, the 2025)",
+        "https://winestro.info/robots.txt (404 — no file, consistent with the other Winestro host)",
+        "https://winestro.info/?s=x3zd6pns"
+      ],
+      "checked_at": "2026-08-07T00:35:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "Winestro.cloud, on winestro.info/?s={token}. Already documented; nothing new about the platform except the anchor text, 'Hier geht es zum Nährwertangaben', on a Gambio shop.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML — and rejected on vintage",
+      "note": "The Winestro article number is visible on both sides here and makes the vintage keying explicit: the shop's Art.Nr. is 2505 and the estate's printable Expertise PDF is /Expertisen/2505.pdf, where 25 is the vintage. The same convention appears in Carl Loewen's QR filenames (2406 = 2024, 2506 = 2025). That is a useful reading aid and it is NOT a licence to construct a 2024 token — the Winestro 's' parameter is a random string, not the article number."
     }
   ],
-  "updated_at": "2026-08-07T00:20:00Z",
+  "updated_at": "2026-08-07T00:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -3739,7 +3773,7 @@
     {
       "at": "2026-08-06T23:40:00Z",
       "batch": "3c — Carl Loewen re-attempted under the widened robots.txt exception (a producer's own file on a general host), then the rest of the German 2024 pool",
-      "result": "in progress — Carl Loewen 9601001 not_found -> found (Dropbox zip -> QR PNG -> Winitas e-label stating vintage 2024). Gröhl 0/1. Bioweingut Lorenz 0/1. Corvers-Kauter 0/1."
+      "result": "in progress — Carl Loewen 9601001 not_found -> found. Gröhl 0/1. Bioweingut Lorenz 0/1. Corvers-Kauter 0/1. August Eser / Knyphausen 0/1 (rejected on vintage)."
     }
   ]
 }
