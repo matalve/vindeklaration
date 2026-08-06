@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 105,
+  "attempted": 106,
   "found": 16,
   "not_found": 70,
-  "rejected": 19,
+  "rejected": 20,
   "declarations": [
     {
       "product_number": "5106001",
@@ -3002,9 +3002,42 @@
       "checked_at": "2026-08-06T11:05:00Z",
       "robots_disallowed": false,
       "note": "Winestro again, third estate, and the winestro.info/?s={token} form. The estate's site is Wix and server-renders the product page in full, so the anchor was readable. weingut-steitz.de/robots.txt is Allow: / with only *?lightbox= disallowed, and the sitemap it names was used — an ordinary marketing site honoured in full, no exception needed. NOTE for the normaliser: 'unter Schutzatmosphäre abgefüllt' appears inside the Zutatenliste here, not as a separate processing note, and the list ends with a trailing comma in the served HTML."
+    },
+    {
+      "product_number": "7387101",
+      "name": "Sebastian Erbeldinger Riesling",
+      "producer": "Weingut Sebastian Erbeldinger",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "rejected",
+      "source_url": "https://www.bastianshauserhof.de/riesling-sebastian-erbeldinger-rheinhessen/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "A complete, correctly formed declaration was found on the producer's own page and was rejected on identification of the fill. The estate is Weingut Bastianshauser Hof – Erbeldinger in Bechtheim, Rheinhessen, which markets its top line under the name of the son, Sebastian Erbeldinger; Systembolaget's producer field 'Weingut Sebastian Erbeldinger' is that line. NOT to be confused with weingut-erbeldinger.de, a Shopify shop of 'Weingut Familie Erbeldinger, Inh. Christoph Erbeldinger', also in Bechtheim-West — a separate entity whose pages carry no declaration and which was not used. On bastianshauserhof.de the Sebastian Erbeldinger category holds exactly one wine called simply Riesling: 'RIESLING Sebastian Erbeldinger | BIO' (the others are EDELGARD Single Vineyard, Heiligkreuz, Grauburgunder, Sauvignac, Pinot Noir, Rosé, SERO). Its product page carries an accordion block giving, in full: 'Jahrgang: 2025 / Alk.: 13,0 % vol. / Flasche: 0,75l / Bio-Hinweis: DE-ÖKO-022 / Deutscher Qualitätswein / Rheinhessen / Zutaten: Trauben*, Stabilisator: Metaweinsäure, Antioxidantien: Sulfite unter Schutzatmosphäre abgefüllt / *aus ökologischer Erzeugung / Ø Nährwerte pro 100 ml: Brennwert: 327 kJ/79 kcal, Kohlenhydrate: 1,5 g, davon Zucker: <0,5 g / Enthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Eiweiß und Salz. / Gutsabfüllung Weingut Sebastian & Ralf Erbeldinger, D-67595 Bechtheim'. That is the full mandated set, ingredient list included, self-dated to the 2025 vintage and to a 0,75 l fill — so producer, cuvée, vintage, pack and market all line up with 7387101. TWO THINGS DO NOT. (1) Alcohol: the declaring block says 13,0 % vol, Systembolaget says 12,0 %. The EU labelling tolerance for wine is 0,5 % vol, so 1,0 percentage point is outside it and the two statements cannot both describe the same fill. Every alcohol discrepancy tolerated elsewhere in this file was inside that tolerance; this one is not. (2) Organic: the estate's entire range is certified (DE-ÖKO-022) and the declaration itself says '*aus ökologischer Erzeugung', while Systembolaget's record for 7387101 has organic: false. Systembolaget's record for this article is thin — region, style, serving note and product image are all null — so organic: false may mean 'not registered' rather than 'not organic', and on its own it would not be decisive; together with the alcohol gap it is. The other 2025 Rieslings on the site do not resolve it either: EDELGARD 2025 is 11,5 % vol and the 'Riesling Edition trocken' is the 2024 at 12,5 % vol, so no bottling of this estate is a 2025 Riesling at 12,0 %. Because a record in this file would OUTRANK Systembolaget's own text, a declaration that contradicts the shelf record on strength is not one to attach. Revisit if Systembolaget's alcohol figure changes.",
+      "rejected_because": "the producer's declaration states 13,0 % vol and Systembolaget states 12,0 % — outside the 0,5 % vol EU labelling tolerance, so the two do not describe the same fill; the estate also declares the wine organic (DE-ÖKO-022, '*aus ökologischer Erzeugung') where Systembolaget's record is not flagged organic",
+      "sources_checked": [
+        "https://www.erbeldinger.de/robots.txt (TLS: certificate expired)",
+        "https://weingut-erbeldinger.de/robots.txt",
+        "https://weingut-erbeldinger.de/sitemap.xml",
+        "https://weingut-erbeldinger.de/sitemap_products_1.xml",
+        "https://weingut-erbeldinger.de/products/erbeldingers-riesling-trocken",
+        "web search: Sebastian Erbeldinger Weingut Bechtheim Riesling",
+        "https://www.bastianshauserhof.de/robots.txt",
+        "https://www.bastianshauserhof.de/riesling-sebastian-erbeldinger-rheinhessen/",
+        "https://www.bastianshauserhof.de/edelgard-riesling/",
+        "https://www.bastianshauserhof.de/erbeldinger-riesling-trocken-s/",
+        "https://www.bastianshauserhof.de/riesling-edition-trocken-bio/",
+        "https://www.bastianshauserhof.de/sebastian-erbeldinger-kategorie/"
+      ],
+      "checked_at": "2026-08-06T11:25:00Z",
+      "robots_disallowed": false,
+      "note": "NEW SHAPE, worth remembering: no e-label platform at all — the estate publishes the complete mandated declaration INLINE on its WooCommerce product page, inside a collapsed accordion whose panel is in the server's HTML (class 'dion-0-label', Dion/Elementor accordion). A scan of <a href> values and <iframe src> finds nothing here; only grepping the raw HTML for 'Zutaten' and 'Brennwert' finds it. bastianshauserhof.de/robots.txt disallows only wp-admin, wc-logs and add-to-cart query strings; everything fetched was allowed and no exception was needed."
     }
   ],
-  "updated_at": "2026-08-06T11:05:00Z",
+  "updated_at": "2026-08-06T11:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
