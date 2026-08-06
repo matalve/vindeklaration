@@ -17,8 +17,8 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 107,
-  "found": 16,
+  "attempted": 108,
+  "found": 17,
   "not_found": 71,
   "rejected": 20,
   "declarations": [
@@ -3061,9 +3061,42 @@
       "checked_at": "2026-08-06T11:35:00Z",
       "robots_disallowed": false,
       "note": "not found by this run. robots.txt disallows only wp-admin, wc-logs and add-to-cart query strings; everything fetched was allowed. A cooperative that bottles under a Swedish importer's specification is a distinct sub-case of 'not on the producer's site': the bottle exists only on the Swedish shelf, so there is no producer page for it to be on."
+    },
+    {
+      "product_number": "7525801",
+      "name": "Horizn 29 Riesling",
+      "producer": "Andreas Oster Weinkellerei",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "found",
+      "source_url": "https://elabel.apys.de/e-Label/e-Label.php?p1=A52BC893-6FFB-4313-AE79-2EBB5B2D4F14&p2=2913",
+      "source_type": "e_label",
+      "raw_ingredients": "Zutaten: Trauben, Saccharose, Stabilisator: Metaweinsäure, Konservierungsstoffe und Antioxidationsmittel: Sulfite. Unter Schutzatmosphäre abgefüllt.",
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "HORIZN29 is a project brand of Andreas Oster Weinkellerei KG (Weingartenstraße 1, 56812 Cochem) with Rheinhessen growers; its shop is horizn29.com (Shopify). The product /products/riesling states, in the server's HTML: 'Art-Nr.: 2900AO / Jahrgang: 2025 / Rebsorte: Riesling / Geschmack: trocken / Qualitätsstufe: Deutscher Qualitätswein / Herkunft: Rheinhessen / Erzeuger: Andreas Oster Weinkellerei KG / Alkohol: 12.0 % vol. / Restzucker: 7.5 g/L / Allergene: Enthält Sulfite', followed by the anchor 'Zu den Nährwerten' carrying this URL. Systembolaget 7525801 is 'Horizn 29 Riesling', producer 'Andreas Oster Weinkellerei', vintage 2025, region Rheinhessen, 12,0 % vol — producer, brand, cuvée, vintage, region and alcohol all agree exactly. CUVÉE: the shop holds two Rieslings under this brand and they are not confusable — /products/riesling (2900AO, trocken, 12,0 %) and /products/riesling-copy (2911AO, 'Riesling Kabinett', lieblich, 11,0 %), plus a 'Golden Goddess Riesling Spätlese'. Systembolaget's is the plain dry Riesling. THE LEITZ TRAP WAS CHECKED AND DOES NOT APPLY HERE. elabel.apys.de states no wine name, no vintage and no bottle size, so identification rests on the producer's linking — and at Leitz that linking was self-contradictory, two different wines carrying one p2. On this shop p2 is genuinely per-product: riesling 2913, riesling-copy 2800, chardonnay 2914, grauburgunder 2917, golden-goddess 2798, five distinct values across five products, with a single shared p1 identifying the company. The e-label's Impressum names 'Andreas Oster Weinkellerei KG' as responsible for the data set, which confirms the company but not the bottle. WEAKEST LINK, STATED PLAINLY: neither the e-label nor the shop page gives a fill volume. The shop lists one variant only (sku 2900AO, 'Default Title') and no litre or magnum bottling of this cuvée exists anywhere in the shop's product sitemap, and Systembolaget's is the default 750 ml, so nothing contradicts the pack — but unlike the Gysler case nothing confirms it either. MARKET: the page's language selector carries the 24 EU languages including Svenska; German was read and is recorded.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.andreas-oster.de/robots.txt (DNS: no such host)",
+        "web search: Andreas Oster Weinkellerei Horizn 29",
+        "https://horizn29.com/sitemap.xml",
+        "https://horizn29.com/sitemap_products_1.xml",
+        "https://horizn29.com/robots.txt",
+        "https://horizn29.com/products/riesling",
+        "https://horizn29.com/products/riesling-copy",
+        "https://horizn29.com/products/chardonnay",
+        "https://horizn29.com/products/grauburgunder",
+        "https://horizn29.com/products/golden-goddess-riesling-spatlese",
+        "https://elabel.apys.de/robots.txt (Disallow: /)",
+        "https://elabel.apys.de/e-Label/e-Label.php?p1=A52BC893-6FFB-4313-AE79-2EBB5B2D4F14&p2=2913"
+      ],
+      "checked_at": "2026-08-06T11:50:00Z",
+      "robots_disallowed": true,
+      "note": "ROBOTS EXCEPTION USED. elabel.apys.de serves 'User-agent: *\\nDisallow: /' — a blanket disallow on a host that exists for nothing but the regulated disclosure. The page was fetched anyway under the exception decided 2026-07-30: the URL was already held, taken from the producer's own public linking on horizn29.com, and exactly one request was made for it. No traversal, no enumeration, no sitemap on that host. The producer's own shop robots.txt (Shopify) was honoured in full and allows /products/. PLATFORM NOTE: apys is the second producer to turn up on it (after Leitz) and this is the first find there. Its p1 is the company and p2 the article; the Impressum is per-company, so the platform still cannot identify a bottle by itself. NORMALISER NOTE: 'Saccharose' in the list — this is an Anreicherung/Süßung declaration, not a common one in this dataset."
     }
   ],
-  "updated_at": "2026-08-06T11:35:00Z",
+  "updated_at": "2026-08-06T11:50:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
