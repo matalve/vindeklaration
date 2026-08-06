@@ -139,6 +139,33 @@ Record the exception wherever you use it: in the wine's record, note that the
 e-label host disallowed crawling and that the page was fetched anyway as the
 regulated disclosure. It should be visible in the data, not just in this file.
 
+### The narrower widening: a producer's own file on a general host
+
+Decided 2026-08-06. Some estates publish the e-label as a **file on a general
+file-sharing service** rather than a web page — Weingut Carl Loewen links a
+Dropbox folder, one per vintage, from its own site's "Download Center" under
+the words "eLabels/Nährwerte & Zutaten". Recognise the pattern by "Download
+Center" or "Presse" plus "eLabels" appearing together on the producer's own
+site.
+
+Dropbox's (or any such host's) `robots.txt` disallow is **not** the same kind
+of thing as an e-label vendor's — it exists for ordinary reasons that have
+nothing to do with wine declarations, so "the disallow protects nothing" does
+not carry over by itself. The exception reaches this case anyway, on the
+narrower ground that it is still the producer's own act of publishing that one
+document at a URL the producer itself hands out. It does **not** make the host
+fair game generally:
+
+- Fetch only the exact file or folder the producer's own page names as the
+  declaration. Nothing else on that host.
+- One request per wine, and no traversal beyond entering that single linked
+  folder — do not browse siblings, do not guess adjacent folder IDs.
+- Everything else the host serves keeps its `robots.txt` honoured in full.
+
+Many such folder views render client-side, so a permitted fetch can still come
+back an empty shell. That is a rendering limit, not a reason to revisit the
+policy — record it as `not_found` and say which it was.
+
 ## What to write, and where
 
 Write to **`data/producer-declarations.json`**, which is yours alone. Never
