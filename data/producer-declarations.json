@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
-  "attempted": 119,
+  "attempted": 120,
   "found": 17,
-  "not_found": 77,
+  "not_found": 78,
   "rejected": 25,
   "declarations": [
     {
@@ -3403,9 +3403,37 @@
       "checked_at": "2026-08-06T21:55:00Z",
       "robots_disallowed": false,
       "note": "First German producer found on Scantrust — until now it had only turned up at Marchesi Antinori, and the guess that it was an Italian-market platform is wrong. The linking pattern is worth recognising: a Shopware product page whose only nutrition reference is the sentence 'Nährwerte finden Sie hier!' with 'hier' as the anchor. Also a vintage warning for this shop specifically: slug, listing tile and tasting note give three different years for one product, and a bottle-size variant on the same page carries a fourth. Nothing on shop.balthasar-ress.de should be trusted as a vintage statement."
+    },
+    {
+      "product_number": "9601001",
+      "name": "Riesling Alte Reben Weingut Carl Loewen",
+      "producer": "Weingut Carl Loewen",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.dropbox.com/scl/fo/nadirqke5qqtbbd99xal9/AD_J3mTTsMVS09NjryU6uaI?rlkey=jkh1eeeur1w6hjr3n7a7p6tih&st=ctxo468c&dl=0",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE DECLARATION EXISTS, FOR THIS EXACT VINTAGE, AND IT WAS NOT FETCHED — this is a robots.txt call, not a failure to find. Weingut Carl Loewen, Leiwen an der Mosel, publishes at https://weingut-loewen.de/download-center/ the line 'eLabels/Nährwerte & Zutaten des Jahrgangs 2024 können Sie hier herunterladen', where 'hier' is a Dropbox shared folder, and a second identical line for the 2025. So the estate has produced per-vintage e-labels and put them where the trade can get them; the 2024 folder is the one that would cover Systembolaget 9601001. THE HOST IS THE PROBLEM. www.dropbox.com/robots.txt disallows /scl/ for User-agent: *, and the e-label exception decided 2026-07-30 does not reach it: that exception is for a host whose blanket Disallow makes a mandated disclosure unreadable and which exists for nothing but that disclosure. Dropbox is a general file service whose directive is narrow and ordinary, and a shared-folder listing is not itself the regulated disclosure page a consumer is sent to by a QR code. The folder was therefore not fetched. WHAT WAS CHECKED ON THE PRODUCER'S OWN SITE: the range page https://weingut-loewen.de/aktuelleweine/ ('Weine ab Jahrgang 2024') carries no e-label link, no QR destination, no iframe, and the words Zutat, Nährwert and Brennwert appear nowhere in its HTML. Each wine instead links an 'Expertise' PDF; the one for our wine, Expertise_Carl-Loewen_Riesling-Alte-Reben.pdf, was downloaded and its text extracted in full — one page of prose about old vines and 100-day spontaneous fermentation, with no ingredient list, no nutrition, no alcohol and no vintage. The estate runs no webshop. THE IDENTITY IS OTHERWISE CLEAN: 'Riesling Alte Reben' is a distinct cuvée in the estate's own range, separate from the 'Laurentiuslay Alte Reben Riesling', and the page it sits on is the 2024-and-later list.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.carl-loewen.de/ (TLS handshake fails, TLSV1_ALERT_INTERNAL_ERROR, as does carl-loewen.de; the live host is weingut-loewen.de)",
+        "https://weingut-loewen.de/robots.txt (WordPress default: only /wp-admin/ disallowed)",
+        "https://weingut-loewen.de/",
+        "https://weingut-loewen.de/aktuelleweine/",
+        "https://weingut-loewen.de/download-center/",
+        "https://weingut-loewen.de/wp-content/uploads/2025/05/Expertise_Carl-Loewen_Riesling-Alte-Reben.pdf (PDF, text extracted — prose only)",
+        "https://www.dropbox.com/robots.txt (Disallow: /scl/ for *; the e-label folder was NOT fetched)"
+      ],
+      "checked_at": "2026-08-06T22:10:00Z",
+      "robots_disallowed": false,
+      "note": "A NEW SHAPE, and one the owner may want to rule on. Some estates publish their e-labels not as web pages but as a per-vintage folder of files on a consumer file-sharing service, linked from a press/download page aimed at importers. Carl Loewen does it on Dropbox, one folder per vintage, and it is the only place the declaration lives. Three reasons this run did not fetch it: Dropbox disallows /scl/ in robots.txt; the exception is written for hosts that exist only to serve the regulated disclosure, which Dropbox plainly is not; and a Dropbox folder listing renders client-side anyway, so the fetch would most likely have returned an empty shell and spent the argument for nothing. If the owner extends the exception to cover a producer's own files on a general host, this wine and its siblings become readable — the folder is per-vintage, so the vintage rule would be satisfied by construction. Recognise the pattern by the words 'Download Center' or 'Presse' plus 'eLabels' in the same sentence."
     }
   ],
-  "updated_at": "2026-08-06T21:55:00Z",
+  "updated_at": "2026-08-06T22:10:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
