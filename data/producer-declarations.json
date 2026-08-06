@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to 13 wines across 12 producers)",
-  "attempted": 128,
+  "attempted": 129,
   "found": 18,
-  "not_found": 82,
+  "not_found": 83,
   "rejected": 28,
   "declarations": [
     {
@@ -3666,9 +3666,40 @@
       "robots_disallowed": false,
       "server_rendered": true,
       "note": "The third Shopify storefront in this project to carry the openclaw-style agent preamble in robots.txt. It is now common enough to be unremarkable; treat it as page content every time."
+    },
+    {
+      "product_number": "7377501",
+      "name": "Corvers Kauter R3 Rheingau Riesling Remastered",
+      "producer": "Dr Corvers - Kauter",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE ESTATE'S SITE CARRIES NO INGREDIENT LIST FOR ANY WINE, AND HAS NO PER-PRODUCT PAGE TO HANG AN E-LABEL ON. Weingut Dr. Corvers-Kauter, Oestrich-Winkel (Rheingau), runs an old Drupal site that is also its shop: the wines are listed inline on six category pages (/weine/basis, /weine/klassiker, /weine/charakterköpfe, /weine/grosse-bergweine, /weine/r3, /weine/sixpack) with no detail URL per wine, the same shape already recorded for bergkloster.com. Each entry gives Vintage, Vineyard, Vinesort, Vinetype, Volume und Alcoholic Strength, Bottle Price and a tasting note ending 'Enthält Sulfite - 12,5% vol.' — the allergen-plus-strength near-miss, with no ingredient list and no energy value. The words Zutat, Nährwert, Brennwert and kcal appear zero times across the four pages fetched, including the front page. /weine/r3 is a 'MANIFEST' and 'MAKING OF' essay about the R3 concept with no analytical data at all. No e-label link, no QR destination, no iframe anywhere. A web search for a Corvers-Kauter e-label returned only generic vendor and DWV pages, no producer URL. THE CUVÉE IS RIGHT AND UNAMBIGUOUS: 'R3 — Rheingau Riesling Remastered' is the estate's own named concept wine, a blend from Oestrich, Winkel and Rüdesheim, and matches Systembolaget 7377501 by name. The vintage could not be checked against a product page because the R3 Riesling itself did not appear on the Gutswein or Terroirwein listings fetched (those hold the R3 ZeroHero de-alcoholised line, 2024 and 2025); the site's other listings run 2025 for most whites. That question is moot: there is no declaration to attach at any vintage.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.corvers-kauter.de/ (TLS fails: CERTIFICATE_VERIFY_FAILED, hostname mismatch, on both www and apex; over plain http the same host answers 200 and does not redirect to https)",
+        "http://www.corvers-kauter.de/robots.txt (Drupal default boilerplate; nothing relevant disallowed)",
+        "http://www.corvers-kauter.de/",
+        "http://www.corvers-kauter.de/weine/r3",
+        "http://www.corvers-kauter.de/weine/basis",
+        "http://www.corvers-kauter.de/weine/klassiker",
+        "web search for a Corvers-Kauter e-label URL (nothing producer-specific)"
+      ],
+      "checked_at": "2026-08-07T00:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "note": "A certificate quirk worth recording: www.corvers-kauter.de presents a certificate for another hostname, so https fails outright while plain http serves the whole site with no redirect. Same family as weingut-hauck.de and www.erbeldinger.de — a broken cert is usually not a wall, and http is worth trying before giving up. The structural finding is the more useful one: an estate whose shop is a set of inline category listings has nowhere to put a per-wine e-label link, and in this project that has predicted 'no declaration' every time."
     }
   ],
-  "updated_at": "2026-08-07T00:05:00Z",
+  "updated_at": "2026-08-07T00:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -3708,7 +3739,7 @@
     {
       "at": "2026-08-06T23:40:00Z",
       "batch": "3c — Carl Loewen re-attempted under the widened robots.txt exception (a producer's own file on a general host), then the rest of the German 2024 pool",
-      "result": "in progress — Carl Loewen 9601001 not_found -> found (Dropbox zip -> QR PNG -> Winitas e-label stating vintage 2024). Gröhl 0/1. Bioweingut Lorenz 0/1."
+      "result": "in progress — Carl Loewen 9601001 not_found -> found (Dropbox zip -> QR PNG -> Winitas e-label stating vintage 2024). Gröhl 0/1. Bioweingut Lorenz 0/1. Corvers-Kauter 0/1."
     }
   ]
 }
