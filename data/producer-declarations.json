@@ -17,8 +17,8 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 104,
-  "found": 15,
+  "attempted": 105,
+  "found": 16,
   "not_found": 70,
   "rejected": 19,
   "declarations": [
@@ -2975,9 +2975,36 @@
       "checked_at": "2026-08-06T09:20:00Z",
       "robots_disallowed": false,
       "note": "not found by this run — the platform renders client-side, not the producer's silence. NEW HOST for a known-unreadable platform: app.e-label.eu is IMERO, alongside the s.imero.io/c{id} form already documented. No robots.txt is served on it; the path /robots.txt returns the same application shell as every other path, so there is no directive to honour or set aside. The Shopify shop's robots.txt allows /products/ and was honoured. Also worth recording: a producer datasheet whose ZUTATEN row is a bare URL rather than a list is a signpost, not a declaration."
+    },
+    {
+      "product_number": "7768701",
+      "name": "Steitz Riesling Trocken",
+      "producer": "Weingut Steitz",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "found",
+      "source_url": "https://winestro.info/?s=uxlsk2dh",
+      "source_type": "e_label",
+      "raw_ingredients": "Trauben*, Konservierungsstoff: Sulfite, Stabilisator: Metaweinsäure, unter Schutzatmosphäre abgefüllt, *aus ökologischer Landwirtschaft,",
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "All five matching tests are settled on the e-label page itself, which is the Winestro platform's strength. The page states its own identity: 'Weingut Steitz', 'RIESLING 2025 BIO', '0.75 Ltr.', '12 % vol', 'in Deutschland hergestellt', 'Erzeugerabfüllung Weingut Steitz, Mörsfelder Str. 3, 55599 Stein-Bockenheim'. Systembolaget 7768701 is 'Steitz Riesling Trocken', vintage 2025, 750 ml, 12,0 % vol, organic — producer, wine, vintage, alcohol, pack and organic status all agree. CUVÉE: the estate's sitemap lists five Rieslings (riesling-2025, riesling-feinherb-2025, heerkretz-riesling, porphyr-riesling, riesling-praesentkarton). The URL that carries this e-label is /product-page/riesling-2025, the estate's plain Gutsriesling, whose product page states 'RIESLING 2025 / STEITZ Weinnummer: 17 / Flaschengröße: 0,75l / Alkohol: 12,0 % vol / Geschmack: trocken / Bio-Wein | DE-ÖKO-039 / Vegan'. The feinherb, Heerkretz and Porphyr bottlings are separate products and were not used. The e-label link is the anchor 'Lebensmittelkennzeichnung' on that page. MARKET: the page offers a 19-language EU selector including SV; German was read and is recorded, per the convention used for the other Winestro finds in this file.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weingut-steitz.de/robots.txt",
+        "https://www.weingut-steitz.de/sitemap.xml",
+        "https://www.weingut-steitz.de/store-products-sitemap.xml",
+        "https://www.weingut-steitz.de/product-page/riesling-2025",
+        "https://winestro.info/robots.txt (404)",
+        "https://winestro.info/?s=uxlsk2dh"
+      ],
+      "checked_at": "2026-08-06T11:05:00Z",
+      "robots_disallowed": false,
+      "note": "Winestro again, third estate, and the winestro.info/?s={token} form. The estate's site is Wix and server-renders the product page in full, so the anchor was readable. weingut-steitz.de/robots.txt is Allow: / with only *?lightbox= disallowed, and the sitemap it names was used — an ordinary marketing site honoured in full, no exception needed. NOTE for the normaliser: 'unter Schutzatmosphäre abgefüllt' appears inside the Zutatenliste here, not as a separate processing note, and the list ends with a trailing comma in the served HTML."
     }
   ],
-  "updated_at": "2026-08-06T09:20:00Z",
+  "updated_at": "2026-08-06T11:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
