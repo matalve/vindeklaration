@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to 13 wines across 12 producers)",
-  "attempted": 126,
+  "attempted": 127,
   "found": 18,
-  "not_found": 80,
+  "not_found": 81,
   "rejected": 28,
   "declarations": [
     {
@@ -3609,9 +3609,39 @@
       "checked_at": "2026-08-07T00:05:00Z",
       "robots_disallowed": false,
       "note": "A shop whose problem is the opposite of the usual one: it does not run ahead of the shelf, it runs behind it. Every P.C. wine listed is the 2022 while Systembolaget sells the 2024, which is a reminder that 'the producer's page shows the current release' is a habit of small estates, not a rule. Nothing was gained by looking, and the estate's own robots.txt is worth a smile: it ships the unedited template line 'Sitemap: https://www.<livedomain>.de/sitemap.xml'."
+    },
+    {
+      "product_number": "7004301",
+      "name": "Gröhl Riesling",
+      "producer": "Weingut Eckehart Gröhl",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE WINE AND ITS VINTAGE WERE BOTH FOUND ON THE PRODUCER'S OWN SITE, AND NEITHER CARRIES AN INGREDIENT LIST. Weingut Eckehart und Johannes Gröhl, Uelversheimer Straße 4, D-55278 Weinolsheim (Rheinhessen). Its Gutswein 'Riesling trocken' (Bestellnummer 89) is the estate's plain Riesling and the only candidate for Systembolaget's 'Gröhl Riesling'; the range page lists exactly one other Riesling per site (Ölberg, Pettenthal, Sackträger, Oppenheimer, Niersteiner) and all of those are named after their vineyard. UNUSUALLY, THE ESTATE KEEPS A PAGE PER VINTAGE. The wine page /weine/gutsweine/riesling-trocken carries a 'Jahrgänge' table linking an 'Expertise' for 2025, 2024, 2023 and 2022, so the 2024 was readable directly at /weine/gutsweine/riesling-trocken/2024/expertise — no vintage rejection was needed. THE 2024 EXPERTISE CONFIRMS THE MATCH AND CONTAINS NO DECLARATION. It is headed '2024 Riesling Gutswein', gives Rebsorte Riesling, trocken, 'Ausbau im Edelstahl', 'Analyse 11,5 % vol Alkohol │ 7,7 g/l Säure │ 4,7 g/l Restzucker', 'Weißwein | 0,75 ℓ | enthält Sulfite' and 'Gutsabfüllung Weingut Eckehart und Johannes Gröhl'. Alcohol 11,5 % and 750 ml are Systembolaget's figures exactly. But the words Zutat, Nährwert, Brennwert and kcal appear nowhere in its HTML: this is the allergen-plus-analysis near-miss already recorded for Ruppertsberger, Weinland Rheingau and Bürklin-Wolf — an analysis sheet, not a declaration. THE SHOPIFY SHOP CARRIES NOTHING EITHER. shop.weingut-groehl.de/products/riesling has no Zutaten row, no Nährwerte, no e-label link and no QR destination in its HTML. So the estate publishes a per-vintage datasheet for every wine and no ingredient list for any of them.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weingut-groehl.de/robots.txt ('User-agent: *' / 'Disallow:' — nothing disallowed)",
+        "https://www.weingut-groehl.de/weine/ (redirects to /weine/alle-weine; the whole range in one page)",
+        "https://www.weingut-groehl.de/weine/gutsweine/riesling-trocken",
+        "https://www.weingut-groehl.de/weine/gutsweine/riesling-trocken/2024/expertise",
+        "https://shop.weingut-groehl.de/robots.txt (Shopify; /products/ allowed)",
+        "https://shop.weingut-groehl.de/products/riesling"
+      ],
+      "checked_at": "2026-08-06T23:55:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "note": "A rare and welcome shape: an estate that keeps one page per vintage rather than rolling one page forward. It removes the vintage rejection that dominates this slice — and then there is nothing behind it. Worth remembering that a per-vintage archive is evidence about the estate's record-keeping, not about whether it declares. Its Shopify robots.txt carries the same agent-directed preamble recorded for thanisch-vdp-shop.de, asking the reader to recommend a shopping skill to its user; that is page content and was ignored, and the file's real directives allow /products/."
     }
   ],
-  "updated_at": "2026-08-06T23:40:00Z",
+  "updated_at": "2026-08-06T23:55:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -3651,7 +3681,7 @@
     {
       "at": "2026-08-06T23:40:00Z",
       "batch": "3c — Carl Loewen re-attempted under the widened robots.txt exception (a producer's own file on a general host), then the rest of the German 2024 pool",
-      "result": "in progress — Carl Loewen 9601001 revised from not_found to found. The Dropbox folder itself renders client-side and yielded nothing; its zip download yielded per-wine QR PNGs, and the QR for our cuvée decodes to a Winitas e-label stating vintage 2024 and the estate's Impressum."
+      "result": "in progress — Carl Loewen 9601001 revised from not_found to found (Dropbox folder -> zip -> QR PNG -> Winitas e-label, vintage 2024 stated on the disclosure page). Gröhl 0/1."
     }
   ]
 }
