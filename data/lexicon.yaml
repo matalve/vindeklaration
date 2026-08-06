@@ -155,6 +155,7 @@ category_labels:
   - enzym
   - ingrediensförteckning
   - ingredienser
+  - ingredienserråmaterial  # "Ingredienser" merged with the following "Råmaterial" header, no space
   - ingrediens
   - råvaror/råingredienser
   - råingredienser
@@ -437,6 +438,11 @@ processing_notes:
   - id: contains_allergen_notice
     name: { sv: Allergenupplysning, en: Allergen notice }
     aliases: [innehåller allergener, allergener, allergen]
+    # "Allergener" runs straight into the following substance with no space:
+    # "AllergenerSULFITER". The lookahead leaves "sulfiter" for its own
+    # pattern to match.
+    regexes:
+      - '\ballergener(?=sulfiter)'
   - id: integrated_production
     name:
       sv: Integrerad produktion (PRODI)
@@ -551,7 +557,13 @@ stopwords:
   - oenologiskt  # "oenologiskt tannin" — describes the tannin, not a separate substance
   - gjort  # "vin gjort på 100% ... druvor"
   - energivärde  # nutrition declaration header
+  - öäå  # trailing form-placeholder text left in a declaration, not a substance
   - cas  # "CAS 7773-03-07" — a registry number for the substance named just before it
+  # "Cas" glued to the front of its own registry number, no space:
+  # "Gummi Arabicum E414/Cas9000-1-5 ... E224/Cas16731-55-8". Each is one
+  # specific CAS number seen in the wild, not a pattern worth generalising.
+  - cas9000  # CAS 9000-01-5, gum arabic (E414)
+  - cas16731  # CAS 16731-55-8, potassium metabisulfite (E224)
   # English filler, for declarations entered in English.
   - and
   - and/or
@@ -615,6 +627,14 @@ stopwords:
   - gewurztraminer
   - xarel·lo  # middle-dot character does not match the hyphenated catalog spelling
   - rieslingdruvor  # "Riesling grapes", merged compound
+  - pinot  # "50 % Pinot Noir, 50 % Chardonnay" — catalog's own grape list is empty
+  - noir
+  - odesa  # "100% Odesa Black" — Ukrainian grape variety, also called Alibernet
+  - black  # second half of "Odesa Black", the grape name above
+  # "muscat" is deliberately NOT here: it is the fixture
+  # test_named_grape_variety_is_not_unknown_text's worked example of a variety
+  # that only reads through `known_names`, kept out of this list on purpose so
+  # that test keeps proving the mechanism rather than the fixed list.
   # Colour adjectives describing grapes, not a separate ingredient.
   - vit
   - vita

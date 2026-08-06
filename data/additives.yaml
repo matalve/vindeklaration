@@ -40,6 +40,12 @@
     - ssulfiter  # typo seen in the wild
     - sulfilter  # typo seen in the wild
     - sufiter  # typo seen in the wild
+  # "sulfiter" run together with the word on either side, no space in the
+  # source: "AllergenerSULFITER" and "SULFITERaskorbinsyra". The lookaround
+  # leaves the neighbouring word for its own pattern to match.
+  regexes:
+    - '(?<=allergener)sulfiter\b'
+    - '\bsulfiter(?=askorbinsyra)'
 
 - id: sulfur_dioxide
   e_number: E220
@@ -97,6 +103,7 @@
     - kalliummetabisulfit  # typo seen in the wild, doubled l
     - kaliumdisulfiter  # plural, seen in the wild
     - kaliummetabisulft  # typo seen in the wild, missing i
+    - kaliummetabisilfit  # typo seen in the wild, i for u
   regexes:
     - '\b(meta\s?)?kalium\s?(meta\s?bi|meta|pyro|di)\s?sulfit\b'
     - '\b(meta\s?bi|meta|pyro|di)\s?sulfit\s+av\s+kalium\b'
@@ -119,6 +126,7 @@
     - potassium bisulfate
     - kaliumbisulfiter  # plural, seen in the wild
     - kalimbisulfit  # typo seen in the wild, missing u
+    - kalumbisulfit  # typo seen in the wild, missing i
     # "Kaliumsulfit" reads as potassium bisulfite rather than potassium
     # metabisulfite: one wine's declaration pairs the word with "(E228)",
     # which is potassium bisulfite's own number, not E224's.
@@ -200,6 +208,7 @@
     - _laskorbinsyra  # stray leading character seen in the wild
     - askorbunsyra  # typo seen in the wild
     - ascorbico  # Italian, "Acido L-ascorbico"
+    - skorbinsyra  # typo seen in the wild, missing the leading "a"
 
 - id: tartaric_acid
   e_number: E334
@@ -244,6 +253,7 @@
     - metatartarinsyra  # typo seen in the wild
     - metatarinsyra  # typo seen in the wild
     - metatartarico  # Italian
+    - matavinsyra  # typo seen in the wild
 
 - id: malic_acid
   e_number: E296
@@ -386,6 +396,20 @@
     - ammonium sulphate
     - ammonium sulfate
 
+- id: ammonium_bisulfite
+  bucket: additive
+  category: preservative
+  group: sulfites
+  allergen: sulfites
+  name: { sv: Ammoniumbisulfit, en: Ammonium bisulphite }
+  note:
+    sv: Tillsätts under jäsningen som både kvävekälla för jästen och svaveldioxidkälla. Ett sulfitsalt, men saknar ett eget E-nummer i EU:s tillsatsförteckning.
+    en: Added during fermentation as both a nitrogen source for the yeast and a source of sulfur dioxide. A sulphite salt, but without its own E-number in the EU additive list.
+  aliases:
+    - ammoniumbisulfit
+    - ammonium bisulphite
+    - ammonium bisulfite
+
 - id: copper_sulfate
   bucket: additive
   category: other
@@ -398,6 +422,7 @@
     - copper sulphate
     - copper sulfate
     - kopparsulfat pentahydrat
+    - kopparsulfatpentahydrat  # merged, no space in the source
     - cus04  # chemical formula CuSO4 written by the supplier
 
 - id: pectinase
@@ -526,6 +551,9 @@
   # spelled "arabiska"/"rabicum", or reordered, in the wild.
   regexes:
     - '\bgummi\s*a?rabi\w*\b'
+    # A footnote marker glued to the front, "stabilisatorer 8gummi
+    # arabicum)" — compare the plain-digit footnotes on "druvor1" above.
+    - '\b\d{1,2}gummi\b'
 
 - id: potassium_polyaspartate
   e_number: E456
@@ -543,6 +571,7 @@
     - kaliumpolyasperat  # typo seen in the wild
     - kaliumpolyasparat  # typo seen in the wild
     - kaliumpolyasprtat  # typo seen in the wild
+    - kaliumpoluasparat  # typo seen in the wild, u for y
     # "gummi" (from the following "gummi arabicum") merged onto this word with
     # no space, and its own spelling slipped too ("aspartat" -> "asparpat").
     - kaliumpolyasparpatgummi
@@ -844,7 +873,10 @@
   bucket: additive
   category: other
   name: { sv: Gelatin, en: Gelatin }
-  aliases: [gelatin, gelatine]
+  aliases:
+    - gelatin
+    - gelatine
+    - gecoll supra  # Laffort's trade name for an oenological (pork) gelatin fining agent
 
 - id: chitosan
   bucket: additive
@@ -866,6 +898,11 @@
     - bentonita  # typo seen in the wild
     - bentoniter  # plural, seen in the wild
     - natriumbentonit  # sodium-activated bentonite, still E558
+  # "E 558" runs straight into the following category header with no space:
+  # "Klarningsmedel > E 558Gaser och förpackningsgaser". The lookahead leaves
+  # "gaser" for the "gaser och förpackningsgaser" header to match.
+  regexes:
+    - '\be\s?558(?=gaser)'
 
 - id: nitrogen
   e_number: E941
@@ -941,6 +978,11 @@
   regexes:
     - '\b(vit|vita|röd|röda|svart|svarta|blå|blåa)?\s*druv(a|an|ar|or|orna)\b'
     - '\bvindruv(a|an|ar|or|orna)\b'
+    # "druvor" runs straight into the following category header with no
+    # space: "Ekologisk druvorKonserverings- och antioxidationsmedel". The
+    # lookahead leaves "konserverings- och antioxidationsmedel" for that
+    # header's own pattern to match.
+    - '\bdruvor(?=konserverings)'
 
 - id: grape_must
   bucket: base
@@ -984,6 +1026,13 @@
   regexes:
     - '\brektifiera[dt]?\s+\w*must\w*'
     - '\b\w*mustkoncentrat\b'
+    # "Druvor, koncentrerade druvor mest, ..." — a mistranslation of
+    # "koncentrerad druvmust" (concentrated grape must) that split the
+    # compound into "druvor" (already read as grapes by its own pattern) and
+    # "mest" (typo/mistranslation of "must"). The fixed-width lookbehind
+    # anchors "mest" to the word "druvor" right before it, so a bare "mest"
+    # elsewhere is untouched.
+    - '(?<=druvor )mest\b'
 
 - id: expedition_liqueur
   bucket: base
@@ -1060,6 +1109,11 @@
     - sackarod  # typo seen in the wild, d for s
     - biosackaroser  # "bio" (organic) + plural "sackaroser", merged
     - sciroppo zuccherino  # Italian, "sugar syrup"
+  # "sackaros" runs straight into the following category header with no
+  # space: "Druvor, sackarossurhetsreglerande medel, ...". The lookahead
+  # leaves "surhetsreglerande" for that header's own pattern to match.
+  regexes:
+    - '\bsackaros(?=surhetsreglerande)'
 
 - id: wine_alcohol
   bucket: base
