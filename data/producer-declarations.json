@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 93,
+  "attempted": 95,
   "found": 13,
-  "not_found": 64,
-  "rejected": 16,
+  "not_found": 65,
+  "rejected": 17,
   "declarations": [
     {
       "product_number": "5106001",
@@ -2670,9 +2670,60 @@
       "checked_at": "2026-08-06T00:00:00Z",
       "robots_disallowed": false,
       "note": "not found by this run. It does not mean the producer published nothing - a QR code that is never linked from the web is invisible here."
+    },
+    {
+      "product_number": "7742501",
+      "name": "Landerer Weissburgunder Organic vom Löss Weingut Landerer",
+      "producer": "Weingut Landerer",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://s.imero.io/lejD0At",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "Producer and cuvee match without ambiguity. Weingut Landerer, Vogtsburg-Oberrotweil, Kaiserstuhl, Baden, bottles a Gutswein called 'Weissburgunder -vom Loess-'; Systembolaget's 7742501 is 'Landerer Weissburgunder Organic vom Loess', Baden, Weissburgunder, organic, 750 ml, 12,5%. The estate's own wine list (weingut-landerer.de/weine/index) carries one wine of that name, /weine/detail?id=24, and it is now the 2025: Artikelnummer 2G25T, Jahr 2025, 750 ml, 12,50 % vol, Saeure 5,80 g/l, Restsuesse 4,00 g/l, 'Bio-Wein'. Every wine on the site carries a link labelled 'eLabel - Angaben zu den Zutaten und Naehrwerten dieses Weines finden Sie hier', and on this page it points at https://s.imero.io/lejD0At. Landerer has therefore met the obligation electronically, but only for the release the site currently sells. The site keeps no earlier vintage: there is no vintage selector, no archive, and the whole catalogue lists one page per wine at its current vintage. The alcohol happens to agree at 12,5% across both years, which for a Gutswein is unremarkable and is not evidence of identity. The IMERO link was NOT fetched: the vintage had already failed, and docs/elabel-platforms.md records IMERO (s.imero.io -> app.imero.io Angular/Ionic SPA) as client-side and unreadable in two earlier probes, so the fetch could not have changed the outcome. Guessing at the 2024's IMERO token from the 2025's is exactly the URL-pattern guessing this project does not do.",
+      "rejected_because": "vintage on the source is 2025, the Systembolaget wine is 2024",
+      "sources_checked": [
+        "https://www.weingut-landerer.de/robots.txt",
+        "https://www.weingut-landerer.de/weine/index",
+        "https://www.weingut-landerer.de/weine/detail?id=24"
+      ],
+      "checked_at": "2026-08-06T00:10:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "IMERO (s.imero.io short link). Landerer links one per wine from its own site, under the heading 'eLabel'.",
+      "server_rendered": false,
+      "fetch_result": "not fetched; vintage mismatch established from the producer's own page before any e-label request",
+      "note": "SECOND SOURCE. The estate does publish e-labels; this bottle's vintage is not among them. No ingredient text is recorded for this wine."
+    },
+    {
+      "product_number": "7822501",
+      "name": "Landerer Weissburgunder Trocken Weingut Landerer",
+      "producer": "Weingut Landerer",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "This is the 1000 ml bottling, and the estate publishes no litre wine at all. Weingut Landerer's complete wine list (weingut-landerer.de/weine/index, one page per wine across Gutsweine, Ortsweine, Lagenweine, Wild Roots, Prickelndes and Edelbraende) contains no 1,0-litre product: the only plain Weissburgunder is the 750 ml Gutswein 'Weissburgunder -vom Loess-' (see 7742501 in this file), and there is nothing named simply 'Weissburgunder trocken'. A litre bottling sold through a Swedish importer is plausibly an export-only fill, but that is a supposition and nothing here establishes it. Because no product page exists for this wine, there is no per-wine eLabel link to follow - Landerer's e-label links are IMERO short tokens attached to individual product pages and cannot be derived. No ingredient list appears anywhere on the estate's site. Not found means not found; it does not establish that no declaration exists for this bottle.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weingut-landerer.de/robots.txt",
+        "https://www.weingut-landerer.de/weine/index",
+        "https://www.weingut-landerer.de/weine/detail?id=24"
+      ],
+      "checked_at": "2026-08-06T00:10:00Z",
+      "robots_disallowed": false,
+      "note": "not found by this run."
     }
   ],
-  "updated_at": "2026-08-06T00:00:00Z",
+  "updated_at": "2026-08-06T00:10:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
