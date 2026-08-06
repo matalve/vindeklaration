@@ -9,7 +9,7 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-06, across 35 producers and 110 wine records.
+Status as of 2026-08-07, across 44 producers and 126 wine records.
 
 ## Readable — server-rendered
 
@@ -23,6 +23,7 @@ Status as of 2026-08-06, across 35 producers and 110 wine records.
 | **Producer's own site** | e.g. `weingut-philipp-kuhn.de/e-labels/{id}` | Some estates host their own. No pattern generalises, but worth a look before assuming a vendor platform. |
 | **graphic-druck** | `e-label.graphic-druck.de/{yyyymmdd}/{slug}` | A print supplier's e-label service. The date segment appears to be a publication date and the slug carries the wine and vintage. Found via August Kesseler. Two URL forms: the short `/e/{id}` that producers actually link 302s to the dated slug. |
 | **apys** | `elabel.apys.de/e-Label/e-Label.php?p1={company-guid}&p2={article}` | Plain server-rendered PHP by soppe + partner Software GmbH. 24-language EU selector including Svenska; nutrition, ingredient list and a per-company Impressum naming who is responsible for the data set. **It states no wine name, no vintage and no bottle size**, so like f-label it cannot identify itself and a find rests on the producer's linking. `robots.txt` is `Disallow: /` — this is where the e-label exception applies. Seen at Leitz (rejected, see below) and Andreas Oster / HORIZN29 (found). |
+| **EuvinoPRO shop** | `iframe.euvino.eu/iframe/{shop-slug}` or a white-label domain like `shop.weingut-knipser.de` | **The declaration is inline on the product page**, not behind a link: a `Zutaten / Inhaltsangaben` row and a `Nährwerte (je 100 ml)` table, beside a Produktinformationen table with grape, Flaschengröße, closure, quality level, region, Einzellage and `Vorhandener Alkohol`. Server-rendered, and it identifies itself — wine and vintage in the H1. Same company as f-label, far better provenance. Three shops in one batch (Max Ferd. Richter, Paulinshof, Knipser) plus one that leaves the fields empty (In den Zehn Morgen). See the traps below. |
 | **Producer's page itself** | no platform at all | Bastianshauser Hof – Erbeldinger puts the **complete mandated set inline** on its WooCommerce product page, inside a collapsed accordion whose panel is in the server's HTML: Jahrgang, Alk., Flasche, Bio-Hinweis, `Zutaten:`, `Ø Nährwerte pro 100 ml` and the Gutsabfüller. No link, no iframe, nothing for an href scan to find — only a raw-HTML grep for `Zutaten` finds it. |
 
 ## Unreadable — client-side rendering
@@ -31,6 +32,7 @@ Status as of 2026-08-06, across 35 producers and 110 wine records.
 |---|---|---|
 | **Scantrust** | `matu.st4.ch/{token}` → `elabel.scantrust.com/default/#/?uid=…&api_key=…` | 828-byte shell, empty `<div id=app>`. **The uid and api_key are in the URL fragment, which is never sent to the server** — that host cannot serve the declaration by construction. The api_key is minted and signed per request, so it is an issued token and absolute under the agent's rules. Do not mine the JS bundles. `matu.st4.ch` answers `Disallow: /`, which is where the robots exception applies. |
 | **IMERO** | `s.imero.io/c{id}` | Angular/Ionic SPA. Its catalogue lists per-article e-labels keyed by article number whose first two digits are the vintage, so a wine can be present for one vintage and absent for another — Dönnhoff and Robert Weil both failed this way. |
+| **Dropbox folder** | `dropbox.com/scl/fo/…`, one folder per vintage | Not a rendering problem but a permission one. Carl Loewen publishes 'eLabels/Nährwerte & Zutaten des Jahrgangs 2024' as a shared Dropbox folder from its Download Center. `www.dropbox.com/robots.txt` has `Disallow: /scl/` for `*`, and the e-label exception does not reach a general file service — it is written for hosts that exist only to serve the regulated disclosure. Left alone. **If the owner ever widens the exception, this is the wine to revisit**, because the folders are per-vintage and would satisfy the vintage rule by construction. |
 | **devworlds e-label** | Shopware plugin, no public URL | The shop shows a "Zutaten & Nährwerte" **`<button>`, not a link**, opening a modal. All the server returns is a custom field `devworlds_elabel_fields_id` holding an opaque 24-hex id, plus `Allergene: Enthält Sulfite`. No devworlds host is linked anywhere and no e-label route appears in the sitemap, so **there is no URL to hold** and building one from the id would be guessing a pattern. Found via Von Winning. |
 
 ## Where a declaration is not, however much it looks like one
@@ -80,8 +82,16 @@ survives stripping and sometimes the only thing that doesn't.
 Anchor texts seen: "Nährwerte & Zutaten" (Jülg), "Nährwertangaben je 100 ml"
 (Hain), "Zutaten und Nährwerte" (Vier Jahreszeiten), "Nährwertangaben"
 (Schloss Johannisberg), "eLabel — Angaben zu den Zutaten und Nährwerten dieses
-Weines finden Sie hier" (Landerer), and a table row labelled "Zutaten" whose
-value is a bare URL (Thanisch).
+Weines finden Sie hier" (Landerer), a table row labelled "Zutaten" whose
+value is a bare URL (Thanisch), "Nährwertangaben" (Wagner-Stempel),
+"Informationen zu Zutaten und Nährwerten" (Hauck), and — the shortest and
+easiest to miss — a sentence ending "Nährwerte finden Sie **hier**!" where the
+one-word anchor is the whole link (Balthasar Ress).
+
+**And sometimes there is no link because there is no e-label**: three shop
+systems in the 2026-08-07 batch print the declaration straight into the product
+page (EuvinoPRO, the Magento shop at Andres, the Shopware shop at Dr. Koehler).
+Grep the raw HTML for `Zutaten` before concluding a shop links nothing.
 
 **It is not always an anchor.** Gysler embeds its weinlabels.de e-label as an
 `<iframe src=…>` under a heading "Nährwerttabelle:", which a scan of `<a href>`
@@ -157,6 +167,45 @@ worth recognising in an `href`; nothing is known about how they render.
   — see the name trap below.
 - `www.andreas-oster.de` does not resolve; the company is at
   `andreasoster.com` and its Rheinhessen project brand at `horizn29.com`.
+- **EuvinoPRO has three traps.** (1) A bare `iframe.euvino.eu/wein/{slug}`
+  answers `Fehler 500`; the shop needs a session, so enter through
+  `iframe.euvino.eu/iframe/{shop-slug}?redirect=/wein/{slug}`, which is the
+  producer's own linking pattern and 302s to the product with an `_ISID`. (2)
+  The listing page is client-side templated with `${ product.name }`, but the
+  catalogue is embedded as JSON in the same HTML — grep for `"slug":` — and
+  `?page=2` is ignored, returning the identical set. **That embedded set is the
+  VISIBLE range, not the catalogue**: Knipser's `/sitemaps/products.xml` holds
+  62 where the listing embeds 36. On a white-label domain use the sitemap; the
+  shared `iframe.euvino.eu` publishes only a 3-URL platform sitemap and cannot
+  be enumerated per winery. (3) **The Zutaten and Nährwerte fields are typed in
+  by the winery, not generated.** In den Zehn Morgen leaves them empty on every
+  product. A Euvino shop is a good bet, not a guarantee.
+- **Finding a EuvinoPRO shop from a WordPress estate site**: the `/shop/` page
+  contains no product markup at all, only
+  `<script src="https://www.euvino.eu/jsc/iframe.js">` followed by
+  `initIframe("{shop-slug}", 0)`. One grep for `initIframe` hands you the shop
+  slug and therefore the whole catalogue URL.
+- `www.knipser.de` answers **403 on every path** and is not the estate's site.
+  Weingut Knipser is at `www.weingut-knipser.de`, whose robots.txt is the bare
+  line `User-agent: *`. Do not read the 403 as the producer refusing.
+- `www.carl-loewen.de` and `carl-loewen.de` fail TLS
+  (`TLSV1_ALERT_INTERNAL_ERROR`); the estate is at `weingut-loewen.de`.
+- `weingut-hauck.de` has an expired certificate over https, but over plain
+  http it redirects to `www.weinhaus-hauck.de`, which is valid — the estate is
+  reachable without bypassing the broken TLS. Same trick is worth trying
+  wherever a cert has expired.
+- `zehnmorgen.de` 301s to `www.st-antony.de`, a different Rheinhessen estate
+  whose sitemap contains no Zehn Morgen product. **A redirect is not an
+  identity** — the Drathen rule. The live site is `www.indenzehnmorgen.de`.
+- `www.weingut-andres.de` redirects to `lilienthal-weine.de`, **a different
+  Pfalz Weingut Andres** in the mulled-wine business. The Deidesheim estate
+  that makes the Haardt Chardonnay is at `andres-wein.de` /
+  `shop.andres-wein.de`.
+- `shop.andres-wein.de/sitemap.xml` returns the shop's HTML, not a sitemap, and
+  its Magento `robots.txt` disallows `/*?` — use the category `.html` pages.
+- `shop.buerklin-wolf.de/robots.txt` is a 1-byte 200, and the estate's main
+  `robots.txt` still carries the unedited template line
+  `Sitemap: https://www.<livedomain>.de/sitemap.xml`.
 - `jjpruem.com` is a 3,7 kB one-page contact card — no wine list, no shop, no
   outbound links. Some famous estates have no searchable surface at all, and
   that is a two-request finding, not a reason to keep looking.
@@ -215,10 +264,22 @@ alternative is inventing one.
 
 ## What the numbers say so far
 
-**Most producers publish nothing reachable.** Of 35 producers probed, ten have
-a readable e-label or an inline declaration, five have an unreadable one, and
+**Most producers publish nothing reachable.** Of 44 producers probed, 16 have
+a readable e-label or an inline declaration, six have an unreadable one, and
 the rest put no ingredient list anywhere this project can see. The binding
 constraint is not rendering — it is existence and discoverability.
+
+**The German 2024 slice has now produced a batch with no find at all.** Nine
+producers on 2026-08-07 (Max Ferd. Richter, Knipser, Balthasar Ress, Carl
+Loewen, Wagner-Stempel, Paulinshof, Andres, Hauck, In den Zehn Morgen,
+Bürklin-Wolf), eleven wines, zero attached. **Seven of the ten publish a
+complete declaration** — Euvino inline, graphic-druck, Winestro, Magento
+inline — and every one of them publishes it for a vintage that is not ours.
+That is the whole story of this slice: **discoverability is no longer the
+binding constraint in Germany, the vintage is.** The corollary for choosing
+work: within a 2024 pool, prefer wines whose producer keeps several vintages on
+sale (Hauck's shop holds four other 2024s; Bürklin-Wolf's whole range is the
+2022) over wines from estates that keep exactly one page per cuvée.
 
 **And increasingly it is the vintage, not the platform.** In the first
 2026-08-06 batch six of nine wines belonged to producers who demonstrably do
@@ -263,7 +324,8 @@ estate's own domain is often not where the wine is.
 
 **German small estates are where it works.** Hain, Philipp Kuhn, Kesseler,
 Jülg, Thanisch, Vier Jahreszeiten, Schloss Johannisberg, Battenfeld Spanier,
-Steitz and Andreas Oster all publish. The
+Steitz, Andreas Oster, Max Ferd. Richter, Knipser, Paulinshof, Wagner-Stempel,
+Hauck and Andres all publish. The
 first international batch — Antinori, d'Esclans, Wittmann, Sadie Family,
 Alheit — yielded nothing readable at all. If a batch has to be prioritised,
 prioritise Germany.
@@ -284,3 +346,11 @@ same as finding the vintage.
 **A QR code that is never linked from the web is invisible.** "Not found" here
 means not found by a crawler; it does not mean the producer published nothing.
 Keep saying so.
+
+**Alcohol earns its keep on the wines the vintage rule lets through.** The one
+wine in the 2026-08-07 batch whose vintage matched was rejected on strength and
+cuvée: Max Ferd. Richter's 2024 Wehlener Sonnenuhr exists as a Kabinett
+*feinherb* at 9,5 % vol where Systembolaget sells the fruity Kabinett at 7,5 %.
+On the Mosel, "Kabinett" and "Kabinett feinherb" are two bottlings of one site,
+not two names for one wine, and 2,0 pp is four times the tolerance. Without
+the alcohol test that would have looked like a plausible attachment.
