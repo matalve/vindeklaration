@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 106,
+  "attempted": 107,
   "found": 16,
-  "not_found": 70,
+  "not_found": 71,
   "rejected": 20,
   "declarations": [
     {
@@ -3035,9 +3035,35 @@
       "checked_at": "2026-08-06T11:25:00Z",
       "robots_disallowed": false,
       "note": "NEW SHAPE, worth remembering: no e-label platform at all — the estate publishes the complete mandated declaration INLINE on its WooCommerce product page, inside a collapsed accordion whose panel is in the server's HTML (class 'dion-0-label', Dion/Elementor accordion). A scan of <a href> values and <iframe src> finds nothing here; only grepping the raw HTML for 'Zutaten' and 'Brennwert' finds it. bastianshauserhof.de/robots.txt disallows only wp-admin, wc-logs and add-to-cart query strings; everything fetched was allowed and no exception was needed."
+    },
+    {
+      "product_number": "7230801",
+      "name": "Weinland Rheingau Rüdesheimer Burgweg Qba Trocken",
+      "producer": "Weinland Rheingau EG",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "The producer was found, the wine was not, and the producer publishes no ingredient list even for the wines it does sell. Weinland Rheingau eG is the Rheingau growers' cooperative; weinland-rheingau.de and weinland-rheingau.com are one WooCommerce site (the .de robots.txt names the .com sitemap). Its product sitemap lists the entire range — 45 entries, of which 21 are wine, sekt or juice — and there is NO Rüdesheimer Burgweg bottling in any vintage. The Grosslage wines the cooperative does sell are Hallgartener Mehrhölzchen, Rauenthaler Steinmächer, Rauenthaler Wülfen, Johannisberger Erntebringer, Hochheimer Daubhaus, Lorchhäuser Seligmacher, Östricher Lenchen and Winkeler Hasensprung. 7230801 looks like an export bottling made for the Swedish importer (Premiumpartners AB), which would explain its absence. Separately, and more usefully for the next run: the cooperative's product pages carry a wine-data block with Alkoholgehalt, Säure, Restzucker, 'Allergene: Sulfite' and 'Nährwertangaben je 100ml' with energy, carbohydrate and sugar — and NO 'Zutaten' row. Checked on the 2025er Lorchhäuser Seligmacher. That is the same shape as the Von Winning and Schloss Johannisberg datasheets already documented: energy and allergen without a list of substances, which under this project's rules is not a declaration. So even if the Rüdesheimer Burgweg had a page here it would not have carried one. No e-label link, iframe or QR destination appears anywhere on the pages fetched.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.weinland-rheingau.de/robots.txt",
+        "https://weinland-rheingau.com/wp-sitemap.xml",
+        "https://weinland-rheingau.com/wp-sitemap-posts-product-1.xml",
+        "https://weinland-rheingau.com/produkt/2025er-lorchhaeuser-seligmacher-qualitaetswein-trocken/",
+        "web search: Weinland Rheingau Rüdesheimer Burgweg Riesling 2025 Zutaten"
+      ],
+      "checked_at": "2026-08-06T11:35:00Z",
+      "robots_disallowed": false,
+      "note": "not found by this run. robots.txt disallows only wp-admin, wc-logs and add-to-cart query strings; everything fetched was allowed. A cooperative that bottles under a Swedish importer's specification is a distinct sub-case of 'not on the producer's site': the bottle exists only on the Swedish shelf, so there is no producer page for it to be on."
     }
   ],
-  "updated_at": "2026-08-06T11:25:00Z",
+  "updated_at": "2026-08-06T11:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
