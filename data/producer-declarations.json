@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
-  "attempted": 117,
+  "attempted": 118,
   "found": 17,
-  "not_found": 75,
+  "not_found": 76,
   "rejected": 25,
   "declarations": [
     {
@@ -3345,9 +3345,40 @@
       "checked_at": "2026-08-06T21:12:00Z",
       "robots_disallowed": false,
       "note": "Systembolaget lists this estate under two different producer strings, 'Max Ferd Richter' here and 'Weinhandlung Max Ferd richter' on 5703401. One estate, two spellings — worth remembering when counting producers. Also: this is the first wine in the batch where a declaration for the RIGHT VINTAGE existed and the match failed on something else. Alcohol did the work; without the 0,5 % vol test the feinherb would have looked like a plausible attachment."
+    },
+    {
+      "product_number": "7907801",
+      "name": "Dry Riesling Weingut Knipser",
+      "producer": "Weingut Knipser",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "The estate publishes a complete inline declaration for every wine it sells, and none of them is this one. Weingut Knipser GbR, Johannishof, Hauptstraße 47-49, 67229 Laumersheim/Pfalz, runs a EuvinoPRO shop at shop.weingut-knipser.de whose product pages carry 'Zutaten / Inhaltsangaben' and 'Nährwerte (je 100 ml)' in full, server-rendered, next to a Produktinformationen table with Geschmack, Füllmenge and Alkohol. THE IMPORTER RELATIONSHIP IS CONFIRMED: the estate's own Export page names 'Schweden (Swerige) Winestain, Tulgatan 11, SE-11353 Stockholm', and Systembolaget's supplier for 7907801 is Wine Stain AB. So the producer is right and the wine is genuinely theirs; what cannot be established is WHICH of their wines it is. No wine called 'Dry Riesling' appears anywhere on the shop, and no 2024 dry Riesling matches on strength. The full product sitemap (62 URLs, https://shop.weingut-knipser.de/sitemaps/products.xml) holds exactly three current dry Rieslings and all three were opened and read: 2024 Riesling »Kalkmergel« 11,5 % vol (Trauben, Saccharose, Säureregulatoren (Weinsäure, Apfelsäure), Konservierungsstoffe (Sulfite), Stabilisatoren (Carboxymethylcellulose), Packgase), 2024 »HPB« 11,5 % vol (same list), and 2025 Riesling »Johannishof« 12,0 % vol (Saccharose, Trauben, Säureregulatoren …, unter Schutzatmosphäre abgefüllt). Systembolaget states 12,5 % vol at 750 ml. Both 2024 wines are 1,0 pp adrift, twice the EU tolerance of 0,5 % vol, and neither carries the name. The likeliest counterpart is the Gutsriesling, the wine now sold as »Johannishof« — its 12,0 % would be within tolerance — but the shop has rolled that one forward to the 2025 and the 2024 is gone, so attaching it would be a vintage substitution. Nothing recorded.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.knipser.de/ (403 Forbidden, Apache; robots.txt 404. A refusal, not worked around — the estate's live host is www.weingut-knipser.de)",
+        "https://www.weingut-knipser.de/robots.txt ('User-agent: *' and nothing else — no restriction)",
+        "https://www.weingut-knipser.de/",
+        "https://www.weingut-knipser.de/export (names Winestain, Stockholm, as the Swedish distributor)",
+        "https://shop.weingut-knipser.de/robots.txt (Allow: / bar /checkout)",
+        "https://shop.weingut-knipser.de/wein and ?page=2 (36 visible products, identical both times)",
+        "https://shop.weingut-knipser.de/sitemaps/products.xml (62 product URLs — the authoritative range)",
+        "https://shop.weingut-knipser.de/wein/2025-riesling-johannishof-… (12,0 % vol, full declaration)",
+        "https://shop.weingut-knipser.de/wein/2024-riesling-kalkmergel-…-684665 (11,5 % vol, full declaration)",
+        "https://shop.weingut-knipser.de/wein/2024-hpb-… (11,5 % vol, full declaration)"
+      ],
+      "checked_at": "2026-08-06T21:40:00Z",
+      "robots_disallowed": false,
+      "note": "TWO PLATFORM FACTS WORTH KEEPING. (1) EuvinoPRO runs on white-label domains as well as on iframe.euvino.eu — shop.weingut-knipser.de is the same software, same URL shape /wein/{vintage}-{cuvee}-{winery}-{qualitaetsstufe}, same inline Zutaten and Nährwerte tables — but on a white-label domain the product URLs work directly, with no session and no ?redirect= dance. Recognise the platform by the slug shape and by 'Shopsystem von EuvinoPro' in the footer. (2) THE EMBEDDED LISTING IS NOT THE CATALOGUE. Both Euvino shops seen embed exactly 36 products as JSON in the listing HTML and ignore ?page=2 entirely, returning the same 36; Knipser's own /sitemaps/products.xml holds 62. The 26 extra are mostly sold-out older vintages, but two are current wines. Use /sitemaps/products.xml on a white-label Euvino domain for a complete range; the shared iframe.euvino.eu host publishes only a 3-URL platform sitemap and cannot be enumerated per winery. Also note www.knipser.de: it answers 403 on every path and is not the estate's site — do not read that as the producer refusing, the estate is at www.weingut-knipser.de and allows everything."
     }
   ],
-  "updated_at": "2026-08-06T21:12:00Z",
+  "updated_at": "2026-08-06T21:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
