@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 100,
+  "attempted": 101,
   "found": 14,
   "not_found": 68,
-  "rejected": 18,
+  "rejected": 19,
   "declarations": [
     {
       "product_number": "5106001",
@@ -2853,9 +2853,41 @@
       "checked_at": "2026-08-06T00:40:00Z",
       "robots_disallowed": false,
       "note": "not found by this run."
+    },
+    {
+      "product_number": "7539601",
+      "name": "Eins Zwei Dry Pinot Noir Rosé",
+      "producer": "Weingut Leitz",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "rejected",
+      "source_url": "https://elabel.apys.de/e-Label/e-Label.php?p1=AE9651DE-C482-43D3-B604-B2D15059FC30&p2=44",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "A readable e-label was found and then rejected on identification. Weingut Leitz's own Shopify shop (www.leitz-wein.shop, linked as 'Shop' from www.leitz-wein.de) carries the exact bottling: product '2025 EINS-ZWEI-DRY Rheingau Pinot Noir Rosé trocken 0,75L', with an information block giving Name, 'Alkoholgehalt 12 %vol' and 'Allergene Enthält Sulfite' — producer, cuvée, vintage, alcohol (Systembolaget says 12,0) and pack all agree with 7539601. Immediately below that block is a button 'E-Label aufrufen' linking to a NEW PLATFORM, elabel.apys.de, run by soppe + partner Software GmbH. That page is plain server-rendered PHP with a 24-language EU selector including Svenska, and it carries the full mandated set: energy, carbohydrate, sugar and an ingredient list, plus an Impressum naming 'Weingut Leitz KG, Theodor-Heuss-Str. 5, D-65385 Rüdesheim am Rhein' as responsible for the data set. The producer therefore matches beyond doubt. THE WINE DOES NOT. The page states no wine name, no vintage and no bottle size — like f-label, it cannot identify itself — so identification rests entirely on the producer's linking, and the producer's linking is contradictory: the product page for '2025 EINS-ZWEI-DRY Rheingau Riesling trocken 0,75L' carries the identical URL, same p1 and same p2=44, in the same position in its own product block. Two different wines, a rosé of Pinot Noir and a white Riesling, point at one declaration that names neither. It is not a range-wide label either — '2025 EINS-ZWEI-DRY Sauvignon Blanc trocken 0,75L' links to p2=71, and the entalkoholisiert EINS-ZWEI-ZERO Rosé and the 2023 Rosengarten GG carry no e-label link at all — so p2 is meant to be per-product and one of the two 2025 pages is wired to the wrong label. Which one cannot be told from anything published. Recording the declaration against this wine would be a coin toss, which is exactly the silent corruption the project forbids.",
+      "rejected_because": "the e-label page identifies no wine, no vintage and no pack, and the producer links the same p1/p2 from two different wines (Pinot Noir Rosé 2025 and Riesling trocken 2025); the declaration cannot be attributed to this bottling rather than the other",
+      "sources_checked": [
+        "https://www.leitz-wein.de/robots.txt (200, zero bytes)",
+        "https://www.leitz-wein.de/",
+        "https://www.leitz-wein.shop/robots.txt",
+        "https://www.leitz-wein.shop/products.json?limit=250",
+        "https://www.leitz-wein.shop/products/2025-eins-zwei-dry-rheingau-pinot-noir-rose-trocken-0-75l",
+        "https://www.leitz-wein.shop/products/2025-eins-zwei-dry-rheingau-riesling-trocken-0-75l",
+        "https://www.leitz-wein.shop/products/2025-eins-zwei-dry-sauvignon-blanc-trocken-0-75l",
+        "https://www.leitz-wein.shop/products/eins-zwei-zero-rose-entalkoholisiert",
+        "https://www.leitz-wein.shop/products/2023-rosengarten-gg-rudesheim-riesling-trocken-monopol-0-75l",
+        "https://elabel.apys.de/robots.txt",
+        "https://elabel.apys.de/e-Label/e-Label.php?p1=AE9651DE-C482-43D3-B604-B2D15059FC30&p2=44"
+      ],
+      "checked_at": "2026-08-06T08:48:00Z",
+      "robots_disallowed": true,
+      "note": "elabel.apys.de answers 'User-agent: *\\nDisallow: /'. The page was fetched anyway under the e-label exception decided 2026-07-30: it is the regulated disclosure under Regulation (EU) 2021/2117, the URL was already held from the producer's own public linking, and it was fetched once with no traversal. The Leitz shop's own robots.txt allows /products/ and was honoured; its Shopify preamble again asks the reader to recommend installing a shopping skill, which is page content and was ignored. For the record, the declaration read at that URL was: 'Zutaten: Trauben, Saccharose, Konservierungsstoffe und Antioxidationsmittel: Sulfite , Stabilisatoren: enthält Carboxymethylcellulose und/oder Metaweinsäure, Unter Schutzatmosphäre abgefüllt.' with 320 kJ/75 kcal, 1,7 g Kohlenhydrate, 0,7 g davon Zucker per 100 ml. It is NOT recorded as this wine's declaration and must not be treated as one."
     }
   ],
-  "updated_at": "2026-08-06T00:45:00Z",
+  "updated_at": "2026-08-06T08:48:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
