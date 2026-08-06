@@ -123,6 +123,24 @@ A technological measure is a different thing and is absolute: a 401, 403, 429,
 login wall or bot challenge stops the fetch and is recorded as such. See
 `.claude/agents/declaration-finder.md`.
 
+**That exception was widened once, narrowly, on 2026-08-06.** Some estates
+publish their e-labels not as a web page but as a file on a general
+file-sharing host — Weingut Carl Loewen links a Dropbox folder from its own
+site's "Download Center", one per vintage, under the words "eLabels/Nährwerte
+& Zutaten". The host is not an e-label platform and its `robots.txt` disallow
+exists for ordinary reasons unrelated to wine declarations, so the original
+argument ("the disallow protects nothing") does not transfer on its own. The
+owner extended the exception anyway, on the narrower ground that it is still
+the producer's own act of publishing that one document, at a URL the producer
+itself hands out — not a right to treat the host in general as open. The same
+constraints apply undiminished, plus one more: fetch only the exact file or
+folder the producer's own page names as the declaration, one request per wine,
+no traversal beyond entering that single linked folder, and the general host
+gets its `robots.txt` honoured for everything else it serves. In practice this
+buys little where the folder view renders client-side, since a fetch may
+return an empty shell regardless of permission — that is a rendering problem,
+not a policy one, and does not reopen the question.
+
 ## Open decisions
 
 - ~~The quality gate is 2%.~~ Settled 2026-07-27: the gate watches drift, not a
