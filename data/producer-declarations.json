@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
-  "attempted": 118,
+  "attempted": 119,
   "found": 17,
-  "not_found": 76,
+  "not_found": 77,
   "rejected": 25,
   "declarations": [
     {
@@ -3376,9 +3376,36 @@
       "checked_at": "2026-08-06T21:40:00Z",
       "robots_disallowed": false,
       "note": "TWO PLATFORM FACTS WORTH KEEPING. (1) EuvinoPRO runs on white-label domains as well as on iframe.euvino.eu — shop.weingut-knipser.de is the same software, same URL shape /wein/{vintage}-{cuvee}-{winery}-{qualitaetsstufe}, same inline Zutaten and Nährwerte tables — but on a white-label domain the product URLs work directly, with no session and no ?redirect= dance. Recognise the platform by the slug shape and by 'Shopsystem von EuvinoPro' in the footer. (2) THE EMBEDDED LISTING IS NOT THE CATALOGUE. Both Euvino shops seen embed exactly 36 products as JSON in the listing HTML and ignore ?page=2 entirely, returning the same 36; Knipser's own /sitemaps/products.xml holds 62. The 26 extra are mostly sold-out older vintages, but two are current wines. Use /sitemaps/products.xml on a white-label Euvino domain for a complete range; the shared iframe.euvino.eu host publishes only a 3-URL platform sitemap and cannot be enumerated per winery. Also note www.knipser.de: it answers 403 on every path and is not the estate's site — do not read that as the producer refusing, the estate is at www.weingut-knipser.de and allows everything."
+    },
+    {
+      "product_number": "5300601",
+      "name": "Balthasar Ress Von Unserm Rheingau Riesling trocken",
+      "producer": "Weingut Balthasar Ress KG",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://elabel.scantrust.com/default/#/?uid=9dfff22c-134f-4de5-982c-815cad8e963e",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "An e-label exists, is publicly linked, and cannot be read by anything but a browser. Weingut Balthasar Ress KG, Hattenheim (Rheingau), sells »von unserm« Rheingau Riesling trocken in its Shopware shop at https://shop.balthasar-ress.de/alle-weine/vdp.gutswein/215/2023-von-unserm-riesling-trocken. The product page's own data block reads 'Alkoholgehalt: 12% / Allergene: enthält Sulfite / EU-Öko zertifiziert: ja (Öko-DE-039) / Geschmack: trocken / Herkunft: Rheingau / Inhalt: 0,75 l / Rebsorte: Riesling / Restzucker: 3,9g / Säure: 7,9g / VDP.GUTSWEIN / Vegan: Ja' — allergen and strength but NO ingredient list and no energy value, the familiar near-miss. The declaration itself sits behind the line 'Nährwerte finden Sie hier!', whose href is an elabel.scantrust.com URL with the uid and api_key in the FRAGMENT. That is the platform docs/elabel-platforms.md already records as unreadable by construction: the fragment is never sent to the server, and the api_key is a per-request signed token, i.e. an issued credential the project does not work around. Batch 1a fetched five such pages for Antinori and read nothing; it was not repeated here. THE VINTAGE IS ALSO UNSETTLED, so even a readable page would have needed care: the shop disagrees with itself three ways on this one product — the listing tile says '2025 »von unserm« Riesling trocken', the URL slug says 2023, the tasting note says 'Der 2023er »Von Unserm«', and the 1,5-litre variant on the same page is labelled '2024 … Jahrgang: 2018'. Systembolaget holds a 2024 at 12,0 % vol, 750 ml, organic — the strength and the organic status agree with the page, the vintage cannot be pinned to anything.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.balthasar-ress.de/robots.txt ('User-agent: *' only — no restriction)",
+        "https://www.balthasar-ress.de/",
+        "https://shop.balthasar-ress.de/robots.txt (Allow: / with Disallow: /*? — query URLs avoided; the product URL has none)",
+        "https://shop.balthasar-ress.de/alle-weine/",
+        "https://shop.balthasar-ress.de/alle-weine/vdp.gutswein/215/2023-von-unserm-riesling-trocken",
+        "the Scantrust e-label URL was NOT fetched: its payload lives in the URL fragment and behind an issued api_key"
+      ],
+      "checked_at": "2026-08-06T21:55:00Z",
+      "robots_disallowed": false,
+      "note": "First German producer found on Scantrust — until now it had only turned up at Marchesi Antinori, and the guess that it was an Italian-market platform is wrong. The linking pattern is worth recognising: a Shopware product page whose only nutrition reference is the sentence 'Nährwerte finden Sie hier!' with 'hier' as the anchor. Also a vintage warning for this shop specifically: slug, listing tile and tasting note give three different years for one product, and a bottle-size variant on the same page carries a fourth. Nothing on shop.balthasar-ress.de should be trusted as a vintage statement."
     }
   ],
-  "updated_at": "2026-08-06T21:40:00Z",
+  "updated_at": "2026-08-06T21:55:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
