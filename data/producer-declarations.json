@@ -16,7 +16,7 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
+  "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to 13 wines across 12 producers)",
   "attempted": 126,
   "found": 17,
   "not_found": 81,
@@ -3604,7 +3604,7 @@
       "note": "A shop whose problem is the opposite of the usual one: it does not run ahead of the shelf, it runs behind it. Every P.C. wine listed is the 2022 while Systembolaget sells the 2024, which is a reminder that 'the producer's page shows the current release' is a habit of small estates, not a rule. Nothing was gained by looking, and the estate's own robots.txt is worth a smile: it ships the unedited template line 'Sitemap: https://www.<livedomain>.de/sitemap.xml'."
     }
   ],
-  "updated_at": "2026-08-07T00:05:00Z",
+  "updated_at": "2026-08-07T00:10:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -3635,6 +3635,11 @@
       "at": "2026-08-06T12:20:00Z",
       "batch": "3d — Weingut Steitz (recovering a find lost to a session limit in the previous run), then the whole of what remained of the German 2025 slice: Weingut Sebastian Erbeldinger, Weinland Rheingau eG, Andreas Oster Weinkellerei / HORIZN29, Bergkloster Winery, Ruppertsberger Weinkeller Hoheburg eG",
       "result": "6 attempted, 2 found, 3 not found, 1 rejected, one producer each and a commit after each. Steitz 1/1 (Winestro at winestro.info/?s={token}, linked as 'Lebensmittelkennzeichnung' from a Wix product page that server-renders in full; the e-label states producer, wine, vintage, pack and alcohol itself and all five agreed). Andreas Oster 1/1 (elabel.apys.de, the platform first seen at Leitz, here yielding its first find; robots exception used because that host serves Disallow: / — five sibling products were checked to prove p2 is per-article, which is exactly the test Leitz failed). Sebastian Erbeldinger 0/1 REJECTED: a complete declaration published inline on the estate's own WooCommerce page, right cuvee, right vintage 2025, right pack, but 13,0 % vol against Systembolaget's 12,0 — outside the 0,5 % vol EU tolerance — and organic where Systembolaget is not. Weinland Rheingau 0/1, Ruppertsberger 0/1, Bergkloster 0/1: none of the three publishes an ingredient list anywhere, and in all three the specific Swedish bottling has no page on the producer's site at all. NOT ONE WINE WAS REJECTED ON VINTAGE, the first batch of which that is true, which confirms the 2025-first heuristic from the previous run. The German 2025 pool is now empty; 29 wines across 28 producers remain in the German 2024 pool."
+    },
+    {
+      "at": "2026-08-07T00:10:00Z",
+      "batch": "3e — nine more German producers from the 2024-vintage pool, one commit each: Weingut Max Ferd. Richter (2 wines), Weingut Knipser, Weingut Balthasar Ress, Weingut Carl Loewen, Wagner-Stempel, Weingut Paulinshof, Weingut Andres, Weingut Hauck, In den Zehn Morgen, Dr. Bürklin-Wolf",
+      "result": "11 attempted, 0 found, 6 not found, 5 rejected. THE FIRST BATCH WITH NO FIND AT ALL, and the reason is uniform: seven of the ten producers demonstrably publish a complete declaration, and in every case it is for a vintage other than the one on the Swedish shelf. Rejections: Richter Sonnenlay (only the 2025 declared), Richter Wehlener Sonnenuhr (right vintage, wrong cuvée — the feinherb at 9,5 % against our fruity Kabinett at 7,5), Wagner-Stempel (graphic-druck e-label naming itself the 2025), Paulinshof (Euvino shop rolled to the 2025 at 12 % against our 11,5), Hauck (Winestro e-label naming itself the 2025 at 13,0 against our 12,5 Spätlese). Not founds: Knipser (declares everything, but no wine called 'Dry Riesling' and no 2024 dry Riesling at 12,5 %), Balthasar Ress (e-label exists and is Scantrust, unreadable by construction), Carl Loewen (per-vintage e-labels published as a DROPBOX FOLDER, including the 2024 — not fetched, Dropbox disallows /scl/ and is not a host the e-label exception reaches), Andres (declares inline on its Magento shop, but the Haardt Chardonnay is a trade bottling absent from shop and price list), In den Zehn Morgen (EuvinoPRO shop with the ingredient fields left empty on every product), Bürklin-Wolf (whole Premier Cru range listed at the 2022, and no ingredient list on any page). NEW PLATFORM: EuvinoPRO, three shops in this batch, with the declaration inline on the product page. Scantrust seen on a German producer for the first time. Nine producers, zero attachable declarations — the constraint in the German 2024 slice is now purely the vintage."
     }
   ]
 }
