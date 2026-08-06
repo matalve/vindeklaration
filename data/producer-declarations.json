@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
-  "attempted": 113,
+  "attempted": 114,
   "found": 17,
-  "not_found": 74,
+  "not_found": 75,
   "rejected": 22,
   "declarations": [
     {
@@ -3237,9 +3237,35 @@
       "checked_at": "2026-08-06T19:05:00Z",
       "robots_disallowed": true,
       "note": "The f-label page was fetched under the e-label exception: p.f-label.eu serves the malformed robots.txt already documented, whose evident intent is Disallow: /. Only the one URL held from the estate's own product page was fetched, plus its ?_lang=de rendering. Two things new about f-label: the language switch is a query parameter, ?_lang=de|en|fi|sv, and THE LANGUAGE SET IS PER PRODUCER, not the platform's full EU list — this instance offers only those four. It defaulted to Finnish for our request, so always set _lang explicitly rather than trusting the default. Also worth recognising: Magento shops of this shape put the e-label behind a 'Nährwerte + Zutaten' anchor next to an 'Expertise herunterladen' PDF link, and the PDF is the datasheet, not the declaration. Finally, sanderweine.de product URLs carry a mutable counter suffix (…-s4-27.html was replaced by …-s4-28.html and now 404s), so a stored Sander URL will rot; find the product from /alle-weine.html."
+    },
+    {
+      "product_number": "7705701",
+      "name": "Weingut Tobias Rickes Der Kosmopolit",
+      "producer": "Weingut Tobias Rickes",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "ALL FOUR IDENTITY TESTS PASS AND THERE IS STILL NO DECLARATION — the cleanest example so far of an empty result that is about the producer rather than about the search. Weingut Tobias Rickes, Bad Kreuznach/Winzenheim (Nahe), sells the exact bottle in its own Shopify shop at https://weingut-tobias-rickes.myshopify.com/products/der-kosmopolit. The product description reads in full: 'ROTWEINCUVÈE / Besticht mit Aromen reifer roter Beerenfrüchte und Noten dunkler Schokolade. Runder harmonisch-fruchtiger Charakter mit einer feinen Würze. / 2024 KOSMOPOLIT / 750ml / 13,0 % vol / Enthält Sulfite'. Producer, cuvée, vintage 2024, pack 750 ml and alcohol 13,0 % all agree exactly with Systembolaget 7705701. THE ONLY LABEL STATEMENT IS THE ALLERGEN. There is no ingredient list, no nutrition table, no energy value, no e-label link, no iframe and no QR destination anywhere in the page's HTML — a grep for Zutat, Nährwert, Brennwert, kcal, e-label, Energie and Jahrgang returns nothing but that 'Enthält Sulfite'. The estate's own Squarespace site at www.tobias-rickes.de carries the same wine on /wein as a photograph and a tasting note with no data at all; its only per-wine documents are three 'Expertise' PDFs (ANPFIFF, Huxelrebe, Spätburgunder I) and none is for the Kosmopolit. Under Regulation (EU) 2021/2117 the allergen and the energy value stay on the physical bottle and the rest may go behind a QR code — so a QR code may well exist on this label; it is simply not linked from anywhere on the web that a reader could reach.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://weingut-tobias-rickes.myshopify.com/robots.txt",
+        "https://weingut-tobias-rickes.myshopify.com/products/der-kosmopolit",
+        "https://www.tobias-rickes.de/robots.txt",
+        "https://www.tobias-rickes.de/wein",
+        "web search: Weingut Tobias Rickes Kosmopolit"
+      ],
+      "checked_at": "2026-08-06T19:25:00Z",
+      "robots_disallowed": false,
+      "note": "not found by this run. Worth keeping as the reference case for the shape 'identity confirmed, declaration absent': normally a not_found leaves open whether we even had the right bottle, and here we plainly did — the estate's own shop states the vintage, the fill and the strength and they match the shelf to the decimal. Two host notes. (1) www.tobias-rickes.de is Squarespace, whose stock robots.txt names ClaudeBot, anthropic-ai and about thirty other AI agents in a blanket disallow group; our User-Agent is none of them, so the User-agent: * group applies and /wein is allowed. Do not read that list as covering this project, and do not fetch it under a borrowed identity either. (2) The Shopify storefront serves the same agents.md / shop.app SKILL.md preamble already recorded for Thanisch — page content addressed to shopping assistants, not directives, and ignored."
     }
   ],
-  "updated_at": "2026-08-06T19:05:00Z",
+  "updated_at": "2026-08-06T19:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
