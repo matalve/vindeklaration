@@ -17,8 +17,8 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 102,
-  "found": 14,
+  "attempted": 103,
+  "found": 15,
   "not_found": 69,
   "rejected": 19,
   "declarations": [
@@ -2912,9 +2912,43 @@
       "checked_at": "2026-08-06T08:55:00Z",
       "robots_disallowed": false,
       "note": "not found by this run."
+    },
+    {
+      "product_number": "5072901",
+      "name": "Battenfeld Spanier Riesling Trocken",
+      "producer": "Battenfeld Spanier",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "found",
+      "source_url": "https://e-label.graphic-druck.de/e/18812",
+      "source_type": "e_label",
+      "raw_ingredients": "Zutaten: Trauben*, Säureregulator: Weinsäure Konservierungsstoff: Sulfite *aus ökologischer Erzeugung. Die Abfüllung kann unter Schutzatmosphäre erfolgt sein.",
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "The cuvée looked wrong at first and was proved right. Systembolaget calls the wine 'Battenfeld Spanier Riesling Trocken'; the estate's 2025 bottling is labelled 'Eisquell'. Five things tie them together. (1) The estate. Battenfeld Spanier and Kühling-Gillot share one house at kuehlingandbattenfeld.com and one Magento shop at shop.kuehlingandbattenfeld.com; the e-label names the bottler 'Weingut Spanier-Gillot eGbR D-67591' (Hohen-Sülzen), which is that house's legal entity. (2) The shop's Gutsweine category holds exactly two wines, and it says which estate each belongs to: 'Der Eisquell Riesling ist die Visitenkarte von Battenfeld Spanier', against 'Der QVINTERRA® Riesling ist die Visitenkarte von Kühling-Gillot'. Qvinterra is the sister estate's and was not used. (3) The estate's own Expertise link on the Eisquell product page is '/de/battenfeldspanier/weinliste/pdf-expertise/38-riesling-trocken' — the producer's internal identifier for this wine is literally battenfeldspanier + riesling-trocken, which is Systembolaget's name — and the PDF it returns is headed 'VDP.GUTSWEIN / EISQUELL RIESLING TROCKEN / 2025'. Eisquell is therefore the new label name of the Battenfeld Spanier Gutswein Riesling trocken, not a second wine. (4) The two bottle photographs are the same label. Systembolaget's product image (37861318_400.webp) shows a silver label reading BATTENFELD SPANIER over the estate's horned-emblem compass with 'RIESLING TROCKEN' along the bottom and a red VDP.GUTSWEIN capsule; the shop's 2025 image is the identical artwork with the bottom line reading 'RIESLING EISQUELL'. Only that one line changed. (5) The numbers agree: e-label 12,0 % vol, Systembolaget 12,0; shop 0,75 l, Systembolaget 750 ml; both organic (DE-ÖKO-006 / Systembolaget organic: true). No other Battenfeld Spanier Riesling trocken exists in the 2025 vintage anywhere in the estate's shop. VINTAGE: the e-label states its own vintage in its heading — '2025 Eisquell Riesling trocken' — and carries the German AP-Nr. 4343179/3426, so this is not a case of trusting a shop's vintage field. The page is German only in its language row; the allergen line is given in ten EU languages including 'innehåller sulfiter', so it is an EU-market disclosure. Recorded in German. One oddity worth noting for the normaliser: the nutrition table's 'davon Zucker' row has NO VALUE at all — Brennwert 304 kJ / 73 kcal and Kohlenhydrate 0,9 g are given, the sugar cell is empty in the served HTML. That is the producer's page as published, not a fetching artefact.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.battenfeld-spanier.de/robots.txt (redirects to kuehlingandbattenfeld.com)",
+        "https://www.kuehlingandbattenfeld.com/robots.txt (404)",
+        "https://www.kuehlingandbattenfeld.com/de/",
+        "https://www.kuehlingandbattenfeld.com/de/battenfeldspanier",
+        "https://www.kuehlingandbattenfeld.com/de/battenfeldspanier/weinliste/pdf-expertise/38-riesling-trocken",
+        "https://shop.kuehlingandbattenfeld.com/robots.txt",
+        "https://shop.kuehlingandbattenfeld.com/",
+        "https://shop.kuehlingandbattenfeld.com/gutsweine.html",
+        "https://shop.kuehlingandbattenfeld.com/alle-weine.html",
+        "https://shop.kuehlingandbattenfeld.com/qvinterra-riesling-2025-trocken.html",
+        "https://shop.kuehlingandbattenfeld.com/eisquell-riesling-2025.html",
+        "https://e-label.graphic-druck.de/robots.txt",
+        "https://e-label.graphic-druck.de/e/18812"
+      ],
+      "checked_at": "2026-08-06T09:05:00Z",
+      "robots_disallowed": false,
+      "note": "graphic-druck again, but a SECOND URL FORM: /e/{id} 302s to the /{yyyymmdd}/{slug} form already documented — here /20260504/3426-2025-eisquell-riesling-trocken/. The short form is what producers link. e-label.graphic-druck.de's robots.txt disallows only /wp-admin/, so no exception was needed. shop.kuehlingandbattenfeld.com disallows GPTBot alone and was honoured. Systembolaget's own product image was used as identity evidence only; no declaration was taken from it."
     }
   ],
-  "updated_at": "2026-08-06T08:55:00Z",
+  "updated_at": "2026-08-06T09:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
