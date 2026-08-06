@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
-  "attempted": 112,
+  "attempted": 113,
   "found": 17,
   "not_found": 74,
-  "rejected": 21,
+  "rejected": 22,
   "declarations": [
     {
       "product_number": "5106001",
@@ -3209,9 +3209,37 @@
       "checked_at": "2026-08-06T18:35:00Z",
       "robots_disallowed": false,
       "note": "NEW E-LABEL HOST, and a dead one: www.glvweuz.de/{digits}.htm, linked from a Shopify product page under the anchor 'Hier geht es zum offiziellen E-Label'. It serves no robots.txt (404) and every path tried returns 404 over a placeholder site. A producer can designate an e-label destination and let it lapse; that is a third outcome alongside 'renders client-side' and 'was never published'. Also of note: drloosen.de puts the ingredient list inline on the shop page anyway, in a collapsed accordion present in the server's HTML — the Bastianshauser Hof shape, found only by grepping the raw HTML for 'Zutat'. A slip to admit: one request went to /search/suggest.json before robots.txt had been read in full, and drloosen.de disallows /search. No further request touched that path; the sitemap was used instead."
+    },
+    {
+      "product_number": "2018101",
+      "name": "Sander Prestige Cuvée Riesling Brut",
+      "producer": "Weingut Sander",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://p.f-label.eu/f3f31z?_lang=de",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "language": "de",
+      "vintage_on_source": null,
+      "market": "EU",
+      "evidence": "The producer and the cuvée match exactly and a readable e-label exists — it is the alcohol that fails, and the vintage cannot be established at all. SANDER — ökologische Weine, In den Weingärten 11, 67582 Mettenheim (Rheinhessen, Germany's oldest organic estate, DE-ÖKO-022, Naturland 67001 W) sells '\"Prestige Cuvée\" Riesling, Deutscher Sekt, brut' at https://shop.sanderweine.de/22prestige-cuv-c3-a9e-22-riesling-deutscher-sekt-s4-28.html, SKU S4/28, 0,75 L, BIO. Its 'Nährwerte + Zutaten' link is an f-label (Euvino) e-label at https://p.f-label.eu/f3f31z, which is server-rendered and complete: 'Zutaten: Trauben(1), Saccharose(1), Fülldosage(1), Versanddosage(1), Antioxidantien: Sulfite. (1) aus ökologischer Landwirtschaft' with Nährwertdeklaration je 100 ml — Brennwert 306 kJ / 73 kcal, Fett 0 g, davon gesättigte Fettsäuren 0 g, Kohlenhydrate 1,6 g, davon Zucker 0,6 g, Eiweiß 0 g, Salz 0 g — and it names 'Sander ökologische Weine, In den Weingärten 11, 67582 Mettenheim' as the party responsible for the data set. TWO REASONS IT IS NOT ATTACHED. (1) ALCOHOL. The shop page and the estate's own Expertise PDF (https://shop.sanderweine.de/expertise/product/pdf/id/540, text extracted in full) both state ALKOHOLGEHALT 12,5 % vol. Systembolaget 2018101 states 11,5 %. That is 1,0 percentage point, twice the EU labelling tolerance of 0,5 % vol, so the two statements cannot describe the same fill — the Erbeldinger rule. (2) VINTAGE. Neither the shop page, nor the Expertise PDF, nor the f-label states any vintage; f-label carries no Name, no vintage and no alcohol by design, as docs/elabel-platforms.md already records. Systembolaget holds this as a 2024. There is therefore no way to show the e-label describes the 2024 fill rather than a later or earlier one, and a Deutscher Sekt is commonly blended across years. Since a record in this file outranks Systembolaget's own text, neither failure can be waved through.",
+      "rejected_because": "the estate declares 12,5 % vol on both the shop page and its Expertise PDF where Systembolaget records 11,5 % — 1,0 pp, outside the 0,5 % vol EU tolerance; and no source states a vintage, so the 2024 cannot be confirmed either",
+      "sources_checked": [
+        "https://shop.sanderweine.de/robots.txt (1 byte, i.e. no restriction)",
+        "https://shop.sanderweine.de/alle-weine.html",
+        "https://shop.sanderweine.de/22prestige-cuv-c3-a9e-22-riesling-deutscher-sekt-s4-28.html",
+        "https://shop.sanderweine.de/expertise/product/pdf/id/540 (PDF, text extracted)",
+        "https://p.f-label.eu/f3f31z",
+        "https://p.f-label.eu/f3f31z?_lang=de",
+        "https://www.weingut-sander.de/robots.txt (TLS handshake fails, TLSV1_ALERT_INTERNAL_ERROR; the live host is shop.sanderweine.de)"
+      ],
+      "checked_at": "2026-08-06T19:05:00Z",
+      "robots_disallowed": true,
+      "note": "The f-label page was fetched under the e-label exception: p.f-label.eu serves the malformed robots.txt already documented, whose evident intent is Disallow: /. Only the one URL held from the estate's own product page was fetched, plus its ?_lang=de rendering. Two things new about f-label: the language switch is a query parameter, ?_lang=de|en|fi|sv, and THE LANGUAGE SET IS PER PRODUCER, not the platform's full EU list — this instance offers only those four. It defaulted to Finnish for our request, so always set _lang explicitly rather than trusting the default. Also worth recognising: Magento shops of this shape put the e-label behind a 'Nährwerte + Zutaten' anchor next to an 'Expertise herunterladen' PDF link, and the PDF is the datasheet, not the declaration. Finally, sanderweine.de product URLs carry a mutable counter suffix (…-s4-27.html was replaced by …-s4-28.html and now 404s), so a stored Sander URL will rot; find the product from /alle-weine.html."
     }
   ],
-  "updated_at": "2026-08-06T18:35:00Z",
+  "updated_at": "2026-08-06T19:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
