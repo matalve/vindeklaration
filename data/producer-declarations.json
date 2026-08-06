@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 101,
+  "attempted": 102,
   "found": 14,
-  "not_found": 68,
+  "not_found": 69,
   "rejected": 19,
   "declarations": [
     {
@@ -2885,9 +2885,36 @@
       "checked_at": "2026-08-06T08:48:00Z",
       "robots_disallowed": true,
       "note": "elabel.apys.de answers 'User-agent: *\\nDisallow: /'. The page was fetched anyway under the e-label exception decided 2026-07-30: it is the regulated disclosure under Regulation (EU) 2021/2117, the URL was already held from the producer's own public linking, and it was fetched once with no traversal. The Leitz shop's own robots.txt allows /products/ and was honoured; its Shopify preamble again asks the reader to recommend installing a shopping skill, which is page content and was ignored. For the record, the declaration read at that URL was: 'Zutaten: Trauben, Saccharose, Konservierungsstoffe und Antioxidationsmittel: Sulfite , Stabilisatoren: enthält Carboxymethylcellulose und/oder Metaweinsäure, Unter Schutzatmosphäre abgefüllt.' with 320 kJ/75 kcal, 1,7 g Kohlenhydrate, 0,7 g davon Zucker per 100 ml. It is NOT recorded as this wine's declaration and must not be treated as one."
+    },
+    {
+      "product_number": "9332201",
+      "name": "Ziereisen Schmätterling Rosé",
+      "producer": "Weingut Ziereisen",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Weingut Ziereisen (Efringen-Kirchen, Baden) publishes a small WordPress marketing site and no shop. The apex and www names fail TLS with SSLV3_ALERT_HANDSHAKE_FAILURE on both ziereisen.de and www.ziereisen.de; the estate's live host is weingut-ziereisen.de, reachable over http on www.ziereisen.de which redirects there. It serves no robots.txt (404), so nothing was set aside. The site is five pages — Startseite, Philosophie, Über uns, Weine, Kontakt, plus Impressum and Datenschutz. The Weine page (?page_id=565) is the only place the range appears and it is a wall of label images with prose beneath: the Gutsweine paragraph names 'den Rosé „Schmätterling“' among Heugumber, Marienchäfer and the Ohrechübler Sekt, which confirms the cuvée is theirs, but there are no product pages, no vintages, no data sheets, no downloads and no outbound links except the estate's own mail address and a newsletter campaign. A grep of the raw HTML for Nährwert, Zutat, Brennwert, kcal, e-label and qr returned only cookie-banner markup — no anchor and no iframe. A web search for a Ziereisen e-label or QR destination returned e-label vendors' own marketing pages and two German retailers (der-weinmakler.de, vinocentral.de, the latter listing the 2024), which this project does not accept as a source. There is therefore no URL to hold for this bottling and nothing for the e-label exception to apply to. Whether a QR code on the bottle points somewhere never linked from the web cannot be told from here.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.ziereisen.de/robots.txt (TLS handshake failure)",
+        "https://ziereisen.de/robots.txt (TLS handshake failure)",
+        "http://www.ziereisen.de/robots.txt (404 via weingut-ziereisen.de)",
+        "https://weingut-ziereisen.de/",
+        "https://weingut-ziereisen.de/?page_id=565",
+        "web search: Ziereisen Schmätterling e-label Zutaten Nährwerte QR"
+      ],
+      "checked_at": "2026-08-06T08:55:00Z",
+      "robots_disallowed": false,
+      "note": "not found by this run."
     }
   ],
-  "updated_at": "2026-08-06T08:48:00Z",
+  "updated_at": "2026-08-06T08:55:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
