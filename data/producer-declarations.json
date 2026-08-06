@@ -18,8 +18,8 @@
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to 13 wines across 12 producers)",
   "attempted": 126,
-  "found": 17,
-  "not_found": 81,
+  "found": 18,
+  "not_found": 80,
   "rejected": 28,
   "declarations": [
     {
@@ -3410,27 +3410,34 @@
       "producer": "Weingut Carl Loewen",
       "country": "Tyskland",
       "vintage": "2024",
-      "status": "not_found",
-      "source_url": "https://www.dropbox.com/scl/fo/nadirqke5qqtbbd99xal9/AD_J3mTTsMVS09NjryU6uaI?rlkey=jkh1eeeur1w6hjr3n7a7p6tih&st=ctxo468c&dl=0",
+      "status": "found",
+      "source_url": "https://weingut-loewen.winitas-shop.de/elabel/627",
       "source_type": "e_label",
-      "raw_ingredients": null,
-      "language": null,
-      "vintage_on_source": null,
-      "market": null,
-      "evidence": "THE DECLARATION EXISTS, FOR THIS EXACT VINTAGE, AND IT WAS NOT FETCHED — this is a robots.txt call, not a failure to find. Weingut Carl Loewen, Leiwen an der Mosel, publishes at https://weingut-loewen.de/download-center/ the line 'eLabels/Nährwerte & Zutaten des Jahrgangs 2024 können Sie hier herunterladen', where 'hier' is a Dropbox shared folder, and a second identical line for the 2025. So the estate has produced per-vintage e-labels and put them where the trade can get them; the 2024 folder is the one that would cover Systembolaget 9601001. THE HOST IS THE PROBLEM. www.dropbox.com/robots.txt disallows /scl/ for User-agent: *, and the e-label exception decided 2026-07-30 does not reach it: that exception is for a host whose blanket Disallow makes a mandated disclosure unreadable and which exists for nothing but that disclosure. Dropbox is a general file service whose directive is narrow and ordinary, and a shared-folder listing is not itself the regulated disclosure page a consumer is sent to by a QR code. The folder was therefore not fetched. WHAT WAS CHECKED ON THE PRODUCER'S OWN SITE: the range page https://weingut-loewen.de/aktuelleweine/ ('Weine ab Jahrgang 2024') carries no e-label link, no QR destination, no iframe, and the words Zutat, Nährwert and Brennwert appear nowhere in its HTML. Each wine instead links an 'Expertise' PDF; the one for our wine, Expertise_Carl-Loewen_Riesling-Alte-Reben.pdf, was downloaded and its text extracted in full — one page of prose about old vines and 100-day spontaneous fermentation, with no ingredient list, no nutrition, no alcohol and no vintage. The estate runs no webshop. THE IDENTITY IS OTHERWISE CLEAN: 'Riesling Alte Reben' is a distinct cuvée in the estate's own range, separate from the 'Laurentiuslay Alte Reben Riesling', and the page it sits on is the 2024-and-later list.",
+      "raw_ingredients": "Trauben, Saccharose, Konservierungsstoff: Sulfite, Stabilisator: Carboxymethylcellulose, unter Schutzatmosphäre abgefüllt",
+      "raw_nutrition": "Nährwertangaben je 100 ml\nBrennwert 318 kJ/ 76 kcal\nFett Ungesättigte Fettsäuren 0,0 g 0,0 g\nKohlenhydrate davon Zucker 2,0 g 1,0 g\nGlycerin 0,0 g\nEiweiß 0,0 g\nSalz 0,0 g\nEnthält geringfügige Mengen von Fett, gesättigten Fettsäuren, Eiweiß und Salz.\nAnalysewerte: Alkohol 12,10 Vol%, Säure 7,30 g/l, Restzucker 10,40 g/l",
+      "raw_allergens": "Sulfite",
+      "language": "de",
+      "vintage_on_source": "2024",
+      "market": "EU. The Winitas e-label is served in German by default with an 'Übersetzen' selector; the German default was used and quoted, and no other language variant was fetched. It is the producer's own regulated disclosure page (Nährwertangaben, Zutaten, Allergene, Recycling, Impressum), not market-specific text.",
+      "evidence": "REVISED 2026-08-06 from not_found to found, under the widening of the robots.txt exception decided the same day. The route: Weingut Carl Loewen's own site publishes at https://weingut-loewen.de/download-center/ the sentence 'eLabels/Nährwerte & Zutaten des Jahrgangs 2024 können Sie hier herunterladen', where 'hier' is a Dropbox shared folder. That folder was fetched (see robots_disallowed below), its server HTML is an empty client-side shell as predicted, but two things survived without JavaScript: the page title, 'Carl Loewen - eLabels Jahrgang 2024', and the folder's own zip download, which is the same resource delivered as a file. The zip holds one PNG per wine, named after the wine, each a QR code — not the declaration itself but the pointer the bottle carries. The PNG named '2406 Riesling Alte Reben.png' decodes (OpenCV QRCodeDetector, offline, no request) to https://weingut-loewen.winitas-shop.de/elabel/627, which was then fetched normally. IDENTITY. The e-label states its own identity, which is why this stands: it is headed '2024 Riesling Alte Reben', repeats 'Riesling (2024)', gives '0,75 Liter', and carries the Impressum 'WEINGUT CARL LOEWEN, Inhaber: Christopher Loewen, Matthiasstraße 30, 54340 Leiwen', USt-ID DE 149 81 41 78. Systembolaget 9601001 is 'Riesling Alte Reben Weingut Carl Loewen', vintage 2024, 750 ml, 12,0 % vol, Mosel. Producer, cuvée, vintage, pack and market all match on the disclosure page's own text, without relying on the linking. The cuvée is distinct in the estate's range from 'Laurentiuslay Alte Reben' and from the 2025 file of the same name, which sits in a separate subfolder ('Carl Loewen - eLabels Jahrgang 2025/Riesling alte Reben 2506.png') and was not opened. ALCOHOL. The e-label's Analysewerte give 12,10 Vol% against Systembolaget's 12,0 — 0,1 pp, well inside the 0,5 % vol EU labelling tolerance. Noted, not resolved.",
       "rejected_because": null,
       "sources_checked": [
-        "https://www.carl-loewen.de/ (TLS handshake fails, TLSV1_ALERT_INTERNAL_ERROR, as does carl-loewen.de; the live host is weingut-loewen.de)",
-        "https://weingut-loewen.de/robots.txt (WordPress default: only /wp-admin/ disallowed)",
-        "https://weingut-loewen.de/",
-        "https://weingut-loewen.de/aktuelleweine/",
-        "https://weingut-loewen.de/download-center/",
-        "https://weingut-loewen.de/wp-content/uploads/2025/05/Expertise_Carl-Loewen_Riesling-Alte-Reben.pdf (PDF, text extracted — prose only)",
-        "https://www.dropbox.com/robots.txt (Disallow: /scl/ for *; the e-label folder was NOT fetched)"
+        "https://weingut-loewen.de/download-center/ (checked 2026-08-06 in the earlier attempt; the source of the Dropbox link)",
+        "https://www.dropbox.com/robots.txt (Disallow: /scl/ for *)",
+        "https://www.dropbox.com/scl/fo/nadirqke5qqtbbd99xal9/AD_J3mTTsMVS09NjryU6uaI?rlkey=jkh1eeeur1w6hjr3n7a7p6tih&st=ctxo468c&dl=0 (200, 309 kB, client-side shell — no file names in the HTML)",
+        "the same folder URL with the &noscript=1 the page's own <noscript> meta refresh names (200, still no listing, but the title 'Carl Loewen - eLabels Jahrgang 2024')",
+        "the same folder URL with dl=1, Dropbox's own download flag (200 application/zip, 136 kB, one QR PNG per wine)",
+        "https://weingut-loewen.winitas-shop.de/robots.txt (404; the body reads 'E-Label — Es sind nur Aufrufe des eLabels gestattet. Diese Domain hat keine Shopanbindung.')",
+        "https://weingut-loewen.winitas-shop.de/elabel/627"
       ],
-      "checked_at": "2026-08-06T22:10:00Z",
-      "robots_disallowed": false,
-      "note": "A NEW SHAPE, and one the owner may want to rule on. Some estates publish their e-labels not as web pages but as a per-vintage folder of files on a consumer file-sharing service, linked from a press/download page aimed at importers. Carl Loewen does it on Dropbox, one folder per vintage, and it is the only place the declaration lives. Three reasons this run did not fetch it: Dropbox disallows /scl/ in robots.txt; the exception is written for hosts that exist only to serve the regulated disclosure, which Dropbox plainly is not; and a Dropbox folder listing renders client-side anyway, so the fetch would most likely have returned an empty shell and spent the argument for nothing. If the owner extends the exception to cover a producer's own files on a general host, this wine and its siblings become readable — the folder is per-vintage, so the vintage rule would be satisfied by construction. Recognise the pattern by the words 'Download Center' or 'Presse' plus 'eLabels' in the same sentence."
+      "checked_at": "2026-08-06T23:40:00Z",
+      "robots_disallowed": true,
+      "robots_disallowed_detail": "www.dropbox.com/robots.txt carries 'Disallow: /scl/' for User-agent: *, and the folder was fetched anyway under the widening of the e-label exception decided by the owner on 2026-08-06: a producer's own act of publishing one document at a URL the producer itself hands out. Only that one folder was touched — three requests to the identical folder resource (default view, the site's own noscript variant, and its own zip download), no traversal, no sibling browsing, no guessed folder ids, and nothing else on dropbox.com. The Winitas host that actually served the declaration serves no robots.txt at all (404) and imposed no restriction.",
+      "elabel_platform": "Winitas (winitas-shop.de), reached by an unusual route: the producer distributes the QR code images themselves in a per-vintage Dropbox folder rather than linking the e-label from a web page. The estate runs no webshop, so weingut-loewen.winitas-shop.de exists only to serve e-labels — its 404 body says so in as many words.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server's HTML response",
+      "note": "SECOND SOURCE. This declaration comes from the producer's own e-label, not from Systembolaget's product page, and was matched to the wine by judgement rather than by product number. It has not been normalised. THE FIRST YIELD OF THE 2026-08-06 WIDENING, and worth recording as a shape: a Dropbox folder view really does render client-side, exactly as the earlier attempt predicted, so the widening alone would have produced nothing. What made it readable is that the same folder can be requested as a zip, and that what the estate put in the folder was the QR codes rather than PDFs — so the declaration was never on Dropbox at all, only the address of it. An estate with no shop and no e-label link on its site can still be findable this way.",
+      "previous_status": "not_found as of 2026-08-06T22:10:00Z, on the ground that the e-label exception did not then reach a general file service. The owner widened it the same day; nothing about the wine changed."
     },
     {
       "product_number": "9267601",
@@ -3604,7 +3611,7 @@
       "note": "A shop whose problem is the opposite of the usual one: it does not run ahead of the shelf, it runs behind it. Every P.C. wine listed is the 2022 while Systembolaget sells the 2024, which is a reminder that 'the producer's page shows the current release' is a habit of small estates, not a rule. Nothing was gained by looking, and the estate's own robots.txt is worth a smile: it ships the unedited template line 'Sitemap: https://www.<livedomain>.de/sitemap.xml'."
     }
   ],
-  "updated_at": "2026-08-07T00:10:00Z",
+  "updated_at": "2026-08-06T23:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -3640,6 +3647,11 @@
       "at": "2026-08-07T00:10:00Z",
       "batch": "3e — nine more German producers from the 2024-vintage pool, one commit each: Weingut Max Ferd. Richter (2 wines), Weingut Knipser, Weingut Balthasar Ress, Weingut Carl Loewen, Wagner-Stempel, Weingut Paulinshof, Weingut Andres, Weingut Hauck, In den Zehn Morgen, Dr. Bürklin-Wolf",
       "result": "11 attempted, 0 found, 6 not found, 5 rejected. THE FIRST BATCH WITH NO FIND AT ALL, and the reason is uniform: seven of the ten producers demonstrably publish a complete declaration, and in every case it is for a vintage other than the one on the Swedish shelf. Rejections: Richter Sonnenlay (only the 2025 declared), Richter Wehlener Sonnenuhr (right vintage, wrong cuvée — the feinherb at 9,5 % against our fruity Kabinett at 7,5), Wagner-Stempel (graphic-druck e-label naming itself the 2025), Paulinshof (Euvino shop rolled to the 2025 at 12 % against our 11,5), Hauck (Winestro e-label naming itself the 2025 at 13,0 against our 12,5 Spätlese). Not founds: Knipser (declares everything, but no wine called 'Dry Riesling' and no 2024 dry Riesling at 12,5 %), Balthasar Ress (e-label exists and is Scantrust, unreadable by construction), Carl Loewen (per-vintage e-labels published as a DROPBOX FOLDER, including the 2024 — not fetched, Dropbox disallows /scl/ and is not a host the e-label exception reaches), Andres (declares inline on its Magento shop, but the Haardt Chardonnay is a trade bottling absent from shop and price list), In den Zehn Morgen (EuvinoPRO shop with the ingredient fields left empty on every product), Bürklin-Wolf (whole Premier Cru range listed at the 2022, and no ingredient list on any page). NEW PLATFORM: EuvinoPRO, three shops in this batch, with the declaration inline on the product page. Scantrust seen on a German producer for the first time. Nine producers, zero attachable declarations — the constraint in the German 2024 slice is now purely the vintage."
+    },
+    {
+      "at": "2026-08-06T23:40:00Z",
+      "batch": "3c — Carl Loewen re-attempted under the widened robots.txt exception (a producer's own file on a general host), then the rest of the German 2024 pool",
+      "result": "in progress — Carl Loewen 9601001 revised from not_found to found. The Dropbox folder itself renders client-side and yielded nothing; its zip download yielded per-wine QR PNGs, and the QR for our cuvée decodes to a Winitas e-label stating vintage 2024 and the estate's Impressum."
     }
   ]
 }
