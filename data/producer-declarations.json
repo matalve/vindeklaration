@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
-  "attempted": 120,
+  "attempted": 121,
   "found": 17,
   "not_found": 78,
-  "rejected": 25,
+  "rejected": 26,
   "declarations": [
     {
       "product_number": "5106001",
@@ -3431,9 +3431,37 @@
       "checked_at": "2026-08-06T22:10:00Z",
       "robots_disallowed": false,
       "note": "A NEW SHAPE, and one the owner may want to rule on. Some estates publish their e-labels not as web pages but as a per-vintage folder of files on a consumer file-sharing service, linked from a press/download page aimed at importers. Carl Loewen does it on Dropbox, one folder per vintage, and it is the only place the declaration lives. Three reasons this run did not fetch it: Dropbox disallows /scl/ in robots.txt; the exception is written for hosts that exist only to serve the regulated disclosure, which Dropbox plainly is not; and a Dropbox folder listing renders client-side anyway, so the fetch would most likely have returned an empty shell and spent the argument for nothing. If the owner extends the exception to cover a producer's own files on a general host, this wine and its siblings become readable — the folder is per-vintage, so the vintage rule would be satisfied by construction. Recognise the pattern by the words 'Download Center' or 'Presse' plus 'eLabels' in the same sentence."
+    },
+    {
+      "product_number": "9267601",
+      "name": "Grauburgunder Wagner Stempel",
+      "producer": "Wagner Stempel",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://e-label.graphic-druck.de/20260202/0426-grauburgunder-2025/",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "A complete, readable, self-identifying e-label for the wrong year. Weingut Wagner-Stempel, Daniel Wagner, Wöllsteiner Straße 10, 55599 Siefersheim (Rheinhessen), links 'Nährwertangaben' from its shop product page for the Grauburgunder Gutswein to https://e-label.graphic-druck.de/20260202/0426-grauburgunder-2025/, the graphic-druck platform already recorded as server-rendered. The page states its own identity in full: '2025 Grauburgunder trocken VDP.GUTSWEIN, Gutsabfüllung Weingut WAGNER-STEMPEL, D-55599 Siefersheim, alc. 12,0 % vol - 750ml, AP-Nr. 43161420426', with 'Zutaten: Trauben¹ ¹aus ökologischer Landwirtschaft, Antioxidationsmittel: Sulfite' and Nährwertangaben je 100 ml (301 kJ / 72 kcal, Kohlenhydrate 0,9 g, davon Zucker 0,5 g), plus an Impressum naming the estate and DE-ÖKO-022. Systembolaget 9267601 is the same wine, same estate, same 750 ml, same 12,0 % vol — but VINTAGE 2024, and the e-label declares itself the 2025 twice over, in its heading and in its slug. The shop sells only the 2025 (product page headed '2025 Grauburgunder Gutswein | BIO') and the estate's Expertise PDF for this cuvée is likewise gw_grauburgunder_2025.pdf. A 2024 e-label may well exist on the same platform, but the only way to reach it would be to alter the year in the URL, which is enumeration and is not done. Nothing attached.",
+      "rejected_because": "the e-label declares itself '2025 Grauburgunder' in both heading and URL; Systembolaget's bottle is the 2024, and no 2024 e-label is linked anywhere on the estate's site",
+      "sources_checked": [
+        "https://www.wagner-stempel.de/robots.txt ('Disallow:' — nothing restricted)",
+        "https://www.wagner-stempel.de/",
+        "https://www.wagner-stempel.de/47/VDPGutswein.htm",
+        "https://shop.wagner-stempel.de/robots.txt ('Disallow:' — nothing restricted)",
+        "https://shop.wagner-stempel.de/9//pid/7/apg/1/Grauburgunder-Gutswein-|-BIO.htm",
+        "https://e-label.graphic-druck.de/robots.txt (WordPress default, only /wp-admin/)",
+        "https://e-label.graphic-druck.de/20260202/0426-grauburgunder-2025/"
+      ],
+      "checked_at": "2026-08-06T22:25:00Z",
+      "robots_disallowed": false,
+      "note": "Second producer found on graphic-druck after August Kesseler, and the slug pattern now reads clearly: /{yyyymmdd}/{article}-{cuvée}-{vintage}/, where the date is when the label was published (20260202 for a 2025 wine) and the article number matches the estate's own — 0426 here, the same 0426 that ends the AP-Nr. 43161420426. VINTAGE IS IN THE SLUG, which makes the platform easy to reject on and tempting to enumerate on; do not. The estate's marketing site is worth knowing too: www.wagner-stempel.de carries no e-label links at all, only 'Expertise' PDFs, and the e-label link exists solely on shop.wagner-stempel.de. Checking only the marketing site would have produced a false 'publishes nothing'."
     }
   ],
-  "updated_at": "2026-08-06T22:10:00Z",
+  "updated_at": "2026-08-06T22:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
