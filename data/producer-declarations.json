@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress)",
-  "attempted": 108,
+  "attempted": 109,
   "found": 17,
-  "not_found": 71,
+  "not_found": 72,
   "rejected": 20,
   "declarations": [
     {
@@ -3094,9 +3094,37 @@
       "checked_at": "2026-08-06T11:50:00Z",
       "robots_disallowed": true,
       "note": "ROBOTS EXCEPTION USED. elabel.apys.de serves 'User-agent: *\\nDisallow: /' — a blanket disallow on a host that exists for nothing but the regulated disclosure. The page was fetched anyway under the exception decided 2026-07-30: the URL was already held, taken from the producer's own public linking on horizn29.com, and exactly one request was made for it. No traversal, no enumeration, no sitemap on that host. The producer's own shop robots.txt (Shopify) was honoured in full and allows /products/. PLATFORM NOTE: apys is the second producer to turn up on it (after Leitz) and this is the first find there. Its p1 is the company and p2 the article; the Impressum is per-company, so the platform still cannot identify a bottle by itself. NORMALISER NOTE: 'Saccharose' in the list — this is an Anreicherung/Süßung declaration, not a common one in this dataset."
+    },
+    {
+      "product_number": "7231901",
+      "name": "Bergkloster Lebendig Frisch",
+      "producer": "Bergkloster Winery",
+      "country": "Tyskland",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "The estate is Weingut Bergkloster, Familie Groebe, Seegasse 25, D-67593 Westhofen, Rheinhessen — a 3 ha zero-added-sulphur natural-wine estate run by Jason Groebe (bergkloster.de times out; bergkloster.com is the live site, WordPress/WooCommerce, robots.txt 'Disallow:' i.e. allow all). Its ENTIRE shop is a single page, /de/shop/, with no per-product URLs — the sitemap index contains one page sitemap and ten page URLs, no product sitemap. That page carries six wines: 2021 Weissburgunder, 2021 Super Lit, 2021 Riesling, N.V. Super Lecka, 2022 Cuvée Weiss and Hauswein Weiss. Each has a short data line of the form '0,75L • erzeugt in Rheinhessen • Gutsabfüllung • DE-ÖKO-022 • enthält keine zugesetzten Sulfite • ab 18 Jahren • 11,5 vol. %'. THAT IS NOT AN INGREDIENT LIST and there is no nutrition table, no energy value and no e-label link, iframe or QR destination anywhere on the shop page or the German home page. NO 2025 WINE IS PUBLISHED AT ALL — the estate's current releases on the site are 2021 and 2022, four vintages behind the Swedish shelf. The name 'Lebendig Frisch' appears nowhere on the estate's site; the closest bottling is 'Hauswein Weiss', described as 'eine Cuvée aus direkt gepresstem Riesling & Pinot Blanc' at 11,5 vol. %, which matches Systembolaget's grape list (Pinot blanc, Riesling) and alcohol (11,5) — but that is a resemblance, not an identification, the page states no vintage for it, and in any case the page carries no declaration to attach. Recorded as not found on the declaration, with the cuvée question left open.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.bergkloster.de/robots.txt (connect timeout)",
+        "web search: Bergkloster Winery Rheinhessen",
+        "https://bergkloster.com/robots.txt",
+        "https://bergkloster.com/sitemap_index.xml",
+        "https://bergkloster.com/page-sitemap.xml",
+        "https://bergkloster.com/de/shop/",
+        "https://bergkloster.com/de/"
+      ],
+      "checked_at": "2026-08-06T12:00:00Z",
+      "robots_disallowed": false,
+      "note": "not found by this run. A shape worth recognising: a very small natural-wine estate whose whole webshop is one page with no product URLs, and whose only label-adjacent statement is 'enthält keine zugesetzten Sulfite'. There is no page for an e-label link to hang on. Also a reminder that a Swedish-market name ('Lebendig Frisch') can have no counterpart in the producer's own range."
     }
   ],
-  "updated_at": "2026-08-06T11:50:00Z",
+  "updated_at": "2026-08-06T12:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
