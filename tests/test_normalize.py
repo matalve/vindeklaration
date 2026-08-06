@@ -105,8 +105,10 @@ def test_every_alias_is_unique() -> None:
 def test_abbreviation_and_full_name_do_not_double_count() -> None:
     """An oenological abbreviation (KHT) next to the spelled-out name of the
     same substance must resolve to one additive, not two — real declaration
-    from a wine that also names a fining agent by an unverifiable trade name
-    ("Gecoll Supra"), which is why it stays partial rather than complete.
+    from a wine that also names a fining agent by its trade name ("Gecoll
+    Supra"), Laffort's liquid pork gelatin, confirmed against the
+    manufacturer's own technical data sheet (laffort.com), so it reads as
+    plain gelatin rather than staying unknown.
     """
     text = (
         "Vindruvor, Mjölkkasein, Isinglass, Gecoll Supra, Konserveringsmedel och "
@@ -121,5 +123,6 @@ def test_abbreviation_and_full_name_do_not_double_count() -> None:
     assert ids.count("potassium_bicarbonate") == 1
     assert ids.count("potassium_carbonate") == 0
     assert ids.count("copper_sulfate") == 1
-    assert set(parsed.unknown_tokens) == {"gecoll", "supra"}
-    assert parsed.status == "partial"
+    assert ids.count("gelatin") == 1
+    assert parsed.unknown_tokens == []
+    assert parsed.status == "complete"

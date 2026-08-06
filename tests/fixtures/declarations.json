@@ -637,5 +637,207 @@
   "allergens": [
    "sulfites"
   ]
+ },
+ {
+  "why": "a category header runs into the preceding base ingredient with no space (\"druvorKonserverings-\"), and separately the E-number of the fining agent that follows runs into its own header (\"E 558Gaser\"); real declaration for Poggiotondo Vermentino Delle Conchiglie (x-2014901)",
+  "text": "Ekologisk druvorKonserverings- och antioxidationsmedel > E 220 - SULFITER Klarningsmedel > E 558Gaser och förpackningsgaser > Kan buteljeras i skyddande atmosfär",
+  "additives": [
+   "bentonite",
+   "sulfur_dioxide"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "organic",
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "sugar runs into the acidity-regulator header with no space (\"sackarossurhetsreglerande\"); real declaration for Louis Jadot Coteaux Bourguignons Blanc (x-7180801)",
+  "text": "Druvor, sackarossurhetsreglerande medel, konserveringsmedel (SULFITER)",
+  "additives": [
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "grapes",
+   "sugar"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "two named substances run together with no separator (\"SULFITERaskorbinsyra\"), the lookahead must leave ascorbic acid for its own alias rather than swallowing it; real declaration for Gérard Bertrand Picpoul de Pinet (x-7917501)",
+  "text": "Druvor, Stabiliseringsmedel (gummi arabicum, karboximetylcellulosa, mannoproteiner från jäst), Konserveringsmedel och antioxidanter (SULFITERaskorbinsyra) Tappad på flaska i en skyddande atmosfär",
+  "additives": [
+   "ascorbic_acid",
+   "carboxymethylcellulose",
+   "gum_arabic",
+   "mannoproteins",
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "the allergen-notice header runs into the substance it introduces with no space (\"AllergenerSULFITER\"); real declaration for Åhus Rosé (x-3451201)",
+  "text": "Druvor, Konserverings- och antioxidationsmedel (Svaveldioxid), AllergenerSULFITER",
+  "additives": [
+   "sulfur_dioxide"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "contains_allergen_notice"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "two category headers merge into one word with no space (\"IngredienserRåmaterial\"); real declaration for Gio Rosso Piceno (x-253401)",
+  "text": "IngredienserRåmaterial: druvor*, koncentrerad druvmust*;Stabilisatorer: Gummi arabicum;Konserveringsmedel/Antioxidanter: KaliumpyroSULFIT, SVAVELDIOXID.Tappat i en skyddande atmosfär.*Biologisk",
+  "additives": [
+   "gum_arabic",
+   "potassium_metabisulfite",
+   "sulfur_dioxide"
+  ],
+  "gases": [],
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "processing": [
+   "organic",
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "CAS registry numbers glued straight onto their own \"Cas\" prefix (\"Cas9000-1-5\", \"Cas16731-55-8\"), one per named substance, both specific real-world numbers rather than a guessed-at pattern; real declaration for 3 Sensi (x-7236101)",
+  "text": "Gummi Arabicum E414/Cas9000-1-5 Kaliumpolyaspartat E456/Cas 64723-18-8 Kaliummetabisilfit E224/Cas16731-55-8 Askorbinsyra E300",
+  "additives": [
+   "ascorbic_acid",
+   "gum_arabic",
+   "potassium_metabisulfite",
+   "potassium_polyaspartate"
+  ],
+  "gases": [],
+  "base": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "a footnote marker glued to the front of gum arabic (\"8gummi arabicum\"), compare the existing plain-digit footnotes on \"druvor1\"; real declaration for Merci Chardonnay (x-7825801)",
+  "text": "Druvor, druvmust, syror (citronsyra), antioxidationsmedel (L-askorbinsyra, SULFITER), stabilisatorer 8gummi arabicum)",
+  "additives": [
+   "ascorbic_acid",
+   "citric_acid",
+   "gum_arabic",
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "mistranslation splits \"koncentrerad druvmust\" (concentrated grape must) into \"druvor\" plus a typo of \"must\" (\"koncentrerade druvor mest\"); the lookbehind must anchor \"mest\" to the \"druvor\" right before it so a bare \"mest\" elsewhere stays unknown; real declaration for Sorelle Blanc de Blancs (x-7615301)",
+  "text": "Druvor, koncentrerade druvor mest, gummiarabicum, metatvinsyra, citronsyra, monohydrat, askorbinsyra, kaliummetabisulfit",
+  "additives": [
+   "ascorbic_acid",
+   "citric_acid",
+   "gum_arabic",
+   "metatartaric_acid",
+   "potassium_metabisulfite"
+  ],
+  "gases": [],
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "ammonium bisulfite is a distinct sulfite salt (no EU E-number of its own) used as a fermentation activator, named alongside sulfur dioxide from a separate preservative header; both must survive as two additives; real declaration for Alta Vista Atemporal (x-9435501)",
+  "text": "Druvor, Surhetsreglerande medel (Vinsyra (L(+)-)), Aktivatorer för alkoholjäsning och malolaktisk jäsning (Diammoniumvätefosfat, Inaktiverad jäst, Ammoniumbisulfit), Konserverings- och antioxidationsmedel (SULFIT, SVAVELDIOXID), Klarningsmedel (Ärtprotein), Jäsmedel (Jäst för vinframställning), Gaser och förpackningsgaser (Kväve)",
+  "additives": [
+   "ammonium_bisulfite",
+   "diammonium_phosphate",
+   "pea_protein",
+   "sulfur_dioxide",
+   "tartaric_acid",
+   "yeast"
+  ],
+  "gases": [
+   "nitrogen"
+  ],
+  "base": [
+   "grapes"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "copper sulfate pentahydrate merged into one word (\"KOPPARSULFATPENTAHYDRAT\"); real declaration for Etna Bianco (x-9209501)",
+  "text": "Druva, (KALIUMMETABISULFIT), KOPPARSULFATPENTAHYDRAT",
+  "additives": [
+   "copper_sulfate",
+   "potassium_metabisulfite"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "trailing form-placeholder text (\"öäå\") is not a substance; real declaration for Ciavolich Aries Pecorino (x-5335301), which also exercises the \"skorbinsyra\" typo of ascorbic acid",
+  "text": "druva, konserveringsmedel(sulfiter,L-skorbinsyra),Stabiliseringsmedel(innehåller gummi arabicum och/eller karboximetylcellulosa och/eller citronsyra), Buteljerad i skyddande atmosfär. öäå",
+  "additives": [
+   "ascorbic_acid",
+   "carboxymethylcellulose",
+   "citric_acid",
+   "gum_arabic",
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
  }
 ]
