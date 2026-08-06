@@ -9,7 +9,7 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-06, across 25 producers and 100 wine records.
+Status as of 2026-08-06, across 35 producers and 110 wine records.
 
 ## Readable — server-rendered
 
@@ -21,7 +21,9 @@ Status as of 2026-08-06, across 25 producers and 100 wine records.
 | **f-label (Euvino)** | `p.f-label.eu/{token}` | Server-rendered, 11-language EU selector, and it names the company responsible for the data set. **But its `Name` field is blank and it states no vintage and no alcohol**, so it cannot identify itself; identification rests entirely on the producer's per-article link. Weakest of the readable platforms for provenance, and the token looks article-keyed rather than vintage-keyed — the same trap as IMERO. `robots.txt` is malformed (see below). Found via Vier Jahreszeiten. |
 | **weinlabels.de** | `weinlabels.de/php/qr-code-iframe.php?qr_id={id}&firmenId={company}` | Plain server-rendered PHP; the `-iframe` URL 302s to `/php/qr-code.php` with the same query. Full mandated set plus an "Angaben zum Wein" table giving **vintage, grape, quality level, style, alcohol, bottle size, residual sugar, acidity, region, country and the German Amtliche Prüfnummer** — so it identifies itself as well as Winestro does. 24-language EU selector including Svenska. No `robots.txt` (404). **Its `Name` field is a placeholder (`qr_id-2551`), so read the identity off the wine table, not the heading.** Found via Gysler. |
 | **Producer's own site** | e.g. `weingut-philipp-kuhn.de/e-labels/{id}` | Some estates host their own. No pattern generalises, but worth a look before assuming a vendor platform. |
-| **graphic-druck** | `e-label.graphic-druck.de/{yyyymmdd}/{slug}` | A print supplier's e-label service. The date segment appears to be a publication date and the slug carries the wine and vintage. Found via August Kesseler. |
+| **graphic-druck** | `e-label.graphic-druck.de/{yyyymmdd}/{slug}` | A print supplier's e-label service. The date segment appears to be a publication date and the slug carries the wine and vintage. Found via August Kesseler. Two URL forms: the short `/e/{id}` that producers actually link 302s to the dated slug. |
+| **apys** | `elabel.apys.de/e-Label/e-Label.php?p1={company-guid}&p2={article}` | Plain server-rendered PHP by soppe + partner Software GmbH. 24-language EU selector including Svenska; nutrition, ingredient list and a per-company Impressum naming who is responsible for the data set. **It states no wine name, no vintage and no bottle size**, so like f-label it cannot identify itself and a find rests on the producer's linking. `robots.txt` is `Disallow: /` — this is where the e-label exception applies. Seen at Leitz (rejected, see below) and Andreas Oster / HORIZN29 (found). |
+| **Producer's page itself** | no platform at all | Bastianshauser Hof – Erbeldinger puts the **complete mandated set inline** on its WooCommerce product page, inside a collapsed accordion whose panel is in the server's HTML: Jahrgang, Alk., Flasche, Bio-Hinweis, `Zutaten:`, `Ø Nährwerte pro 100 ml` and the Gutsabfüller. No link, no iframe, nothing for an href scan to find — only a raw-HTML grep for `Zutaten` finds it. |
 
 ## Unreadable — client-side rendering
 
@@ -38,6 +40,22 @@ declaration and is not one. **Check before spending a fetch on the next.**
 
 - Von Winning, `content.shop.von-winning.de/expertise-generator/de/weinexpertise/{slug}/{productNumber}`
 - Schloss Johannisberg, `schloss-johannisberg.de/app/uploads/{Wine}-{year}-{style}-de.pdf`
+
+A third and a fourth publish the same non-declaration on the web page itself,
+one of them under a heading that promises otherwise:
+
+- **Ruppertsberger Weinkeller Hoheburg**, Shopware, a product tab headed
+  literally **"Nährwerte & Zutaten" that contains neither**. Under it:
+  Abfüller, Gebindegröße, Jahrgang, Alkohol, Restsüße, Gesamtsäure, "Allergene:
+  enthält Sulfite". Its `Expertise PDF` at `/expertise/index/article/{id}`
+  repeats those fields and adds nothing — and is served at 18 MB for one page
+  of text, so fetch it only when it decides the question. **The grep heuristic
+  below finds this page and it is a dead end: read what is under the heading,
+  not the heading.**
+- **Weinland Rheingau eG**, WooCommerce, a wine-data block with Alkoholgehalt,
+  Säure, Restzucker, "Allergene: Sulfite" and a full `Nährwertangaben je 100ml`
+  — energy, carbohydrate, sugar — and **no `Zutaten` row**. Nutrition without
+  an ingredient list is the commonest near-miss.
 
 Both are headed "Nährwerte zum Wein" or similar. Both give grape, style,
 alcohol, residual sugar and acidity, and Von Winning's adds "Allergene: Enthält
@@ -124,6 +142,21 @@ worth recognising in an `href`; nothing is known about how they render.
   same host answers 200 and redirects to `www.josef-drathen.de`, **a different
   legal entity** (Josef Drathen GmbH & Co. KG against Ewald Theod. Drathen
   GmbH, two firms in Zell/Mosel). A redirect is not an identity.
+- `elabel.apys.de` answers `User-agent: *` / `Disallow: /` — a blanket disallow
+  on a host that exists for nothing but the regulated disclosure. Exception
+  territory, and it was used once, for one URL already held.
+- Wix estate sites (Steitz) **are server-rendered** and the e-label anchor is in
+  the HTML. `weingut-steitz.de/robots.txt` is `Allow: /` bar `*?lightbox=`, and
+  its `store-products-sitemap.xml` lists the whole range — a cheap way to see
+  which cuvées exist before deciding which page to open.
+- `bergkloster.com` is a whole webshop on **one page**, `/de/shop/`, with no
+  per-product URLs at all. Nothing to hang an e-label link on. Very small
+  natural-wine estates look like this, and their only label-adjacent statement
+  is often "enthält keine zugesetzten Sulfite".
+- `www.erbeldinger.de` has an expired TLS certificate. Different estate anyway
+  — see the name trap below.
+- `www.andreas-oster.de` does not resolve; the company is at
+  `andreasoster.com` and its Rheinhessen project brand at `horizn29.com`.
 - `jjpruem.com` is a 3,7 kB one-page contact card — no wine list, no shop, no
   outbound links. Some famous estates have no searchable surface at all, and
   that is a two-request finding, not a reason to keep looking.
@@ -146,7 +179,28 @@ Three producers in one batch disagreed with themselves about the vintage.
 
 **The rule this suggests: prefer a platform that identifies itself.** Winestro,
 qrlabelinfo and weinlabels.de state wine, vintage and alcohol on the disclosure
-page. f-label does not, and a find there rests on the producer's linking alone.
+page. f-label and apys do not, and a find there rests on the producer's linking
+alone.
+
+**When it does rest on the linking, test the linking.** Leitz was rejected
+because two different 2025 wines carried the identical apys `p1`+`p2`. Andreas
+Oster was accepted on the same platform because five products carried five
+distinct `p2` values under one company `p1`. Four extra product fetches on the
+producer's own shop is what separates those two outcomes, and it is the
+cheapest identity evidence available on a platform that names no wine.
+
+## Alcohol is not a matching rule, but it is a matching test
+
+The EU labelling tolerance for wine is **0,5 % vol**. Inside it, a discrepancy
+between the declaration and Systembolaget is noted and the find stands — Hain
+(11,00 against 10,5) and Kesseler are recorded that way. **Outside it, the two
+statements cannot describe the same fill.** Sebastian Erbeldinger's own page
+declares 13,0 % vol for the 2025 Riesling where Systembolaget says 12,0, and
+the estate's whole range is DE-ÖKO certified where Systembolaget's record is
+not flagged organic; producer, cuvée, vintage, pack and market all matched and
+it was **rejected anyway**. Since a record in this file outranks Systembolaget's
+own text, a declaration that contradicts the shelf record on strength is not
+one to attach.
 
 ## The pack is a fifth matching test, and it has now bitten once
 
@@ -161,22 +215,55 @@ alternative is inventing one.
 
 ## What the numbers say so far
 
-**Most producers publish nothing reachable.** Of 25 producers probed, eight
-have a readable e-label, four have an unreadable one, and the rest put no
-ingredient list anywhere this project can see. The binding constraint is not
-rendering — it is existence and discoverability.
+**Most producers publish nothing reachable.** Of 35 producers probed, ten have
+a readable e-label or an inline declaration, five have an unreadable one, and
+the rest put no ingredient list anywhere this project can see. The binding
+constraint is not rendering — it is existence and discoverability.
 
-**And increasingly it is the vintage, not the platform.** In the 2026-08-06
-batch six of nine wines belonged to producers who demonstrably do publish
-e-labels, and only one declaration could be recorded. The others failed because
-the estate keeps exactly one page per wine, at whatever vintage it is selling
-now, and Systembolaget's shelf runs a year behind it. **Prefer wines whose
-Systembolaget vintage is 2025 over 2024** when choosing what to probe: 2025 is
-the current release for most German estates and is the only group where the
-producer's own page is likely to still be about our bottle.
+**And increasingly it is the vintage, not the platform.** In the first
+2026-08-06 batch six of nine wines belonged to producers who demonstrably do
+publish e-labels, and only one declaration could be recorded. The others failed
+because the estate keeps exactly one page per wine, at whatever vintage it is
+selling now, and Systembolaget's shelf runs a year behind it. **Prefer wines
+whose Systembolaget vintage is 2025 over 2024** when choosing what to probe:
+2025 is the current release for most German estates and is the only group where
+the producer's own page is likely to still be about our bottle.
+
+**That prediction held.** The 2025-only run that followed it (Steitz,
+Erbeldinger, Weinland Rheingau, Andreas Oster, Bergkloster, Ruppertsberger)
+found the current release on the producer's page every time the wine existed
+there at all, and **not one wine was rejected on vintage** — the first batch
+of which that is true. The failures moved elsewhere: to producers who publish
+no list (Weinland Rheingau, Ruppertsberger, Bergkloster) and to bottlings that
+have no producer page in the first place. **The German 2025 slice is now
+exhausted; what remains is 2024, where the vintage rejection returns.**
+
+**The next thing that fails is the bottling, not the vintage.** Three of the
+six were export or importer-specific items with no page anywhere on the
+producer's site: a cooperative that bottles per destination market
+(Ruppertsberger lists a 3 l BiB "Sonderausstattung Finnland" and another for
+Rimi, but nothing for Sweden), a Grosslage bottling absent from the
+cooperative's whole range (Weinland Rheingau's Rüdesheimer Burgweg), and a
+Swedish-market name with no counterpart in the estate's own list (Bergkloster
+"Lebendig Frisch"). **A wine that exists only on the Swedish shelf has no
+producer page to carry a declaration**, and no amount of searching changes
+that. Recognise it early: if the estate's own range does not contain the
+cuvée under any name, stop.
+
+**A producer's name in Systembolaget's field can be a brand, a line or a
+project, not the legal estate.** Three in one run. "Weingut Sebastian
+Erbeldinger" is the son's line at Weingut Bastianshauser Hof – Erbeldinger, and
+there is a *different* Erbeldinger estate in the same village at
+`weingut-erbeldinger.de` (Inh. Christoph Erbeldinger) — a sister-name trap of
+exactly the kind the matching rules forbid walking into. "Andreas Oster
+Weinkellerei" sells the Swedish wine under its Rheinhessen project brand
+HORIZN29, on a separate domain. "Bergkloster Winery" is Weingut Bergkloster,
+Familie Groebe. **Search the wine name as well as the producer name**; the
+estate's own domain is often not where the wine is.
 
 **German small estates are where it works.** Hain, Philipp Kuhn, Kesseler,
-Jülg, Thanisch, Vier Jahreszeiten and Schloss Johannisberg all publish. The
+Jülg, Thanisch, Vier Jahreszeiten, Schloss Johannisberg, Battenfeld Spanier,
+Steitz and Andreas Oster all publish. The
 first international batch — Antinori, d'Esclans, Wittmann, Sadie Family,
 Alheit — yielded nothing readable at all. If a batch has to be prioritised,
 prioritise Germany.
