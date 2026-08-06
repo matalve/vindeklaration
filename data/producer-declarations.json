@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
-  "attempted": 123,
+  "attempted": 124,
   "found": 17,
   "not_found": 79,
-  "rejected": 27,
+  "rejected": 28,
   "declarations": [
     {
       "product_number": "5106001",
@@ -3517,9 +3517,39 @@
       "checked_at": "2026-08-06T23:05:00Z",
       "robots_disallowed": false,
       "note": "A NAME TRAP AND A PLATFORM NOTE. The trap: www.weingut-andres.de is NOT this estate. It redirects to lilienthal-weine.de, a Shopify shop titled 'Weingut Andres – Winzerglühwein aus eigener Herstellung in der Pfalz – Lilienthal Weine' — a second Pfalz Weingut Andres, in the mulled-wine business. The Deidesheim estate that makes the Haardt Chardonnay is at andres-wein.de and shop.andres-wein.de. Anyone starting from the obvious domain lands on the wrong producer. The platform note: a Magento shop can carry the declaration inline with no e-label link at all — this one prints 'Nährwerttabelle ⓘ' and 'Zutaten:' straight into the product page, unlike the Magento shops at Jülg and Sander which link out to f-label. Grep for 'Zutaten' in the raw HTML before concluding a Magento shop links nothing. Its age gate is client-side only and does not block fetching."
+    },
+    {
+      "product_number": "7461701",
+      "name": "Weingut Hauck Riesling Klosterberg Alte Reben Spätläse Trocken",
+      "producer": "Weingut Hauck",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://winestro.info/?s=5hj8fi6l",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "A readable, self-identifying Winestro e-label for the 2025 where our bottle is the 2024. Weinhaus Hauck GmbH & Co. KG, Albiger Str. 15, 55234 Bermersheim vor der Höhe (Rheinhessen) — trading as Weingut Hauck — runs a Shopware shop at shop.weinhaus-hauck.de. Its product '2025 Riesling \"Alte Reben\" // Klosterberg // trocken' (article 30-2025-WG4325) states Lage Bermersheimer Klosterberg, Jahrgang 2025, Alkohol 13,0 % vol, Gutsabfüllung Weingut Hauck, and links 'Informationen zu Zutaten und Nährwerten' to https://winestro.info/?s=5hj8fi6l. That page declares its own identity — 'Weinhaus Hauck GmbH & Co. KG, 2025 Riesling \"Alte Reben\" trocken, 0.75 Ltr. | 13.0 % vol, Erzeugerabfüllung Weinhaus Hauck GmbH & Co. KG, Albiger Str. 15, 55234 Bermersheim v.d.H.' — with 'Zutatenliste: Trauben, Stabilisator: Carboxymethylcellulose, Konservierungsstoff: Sulfite. Unter Schutzatmosphäre abgefüllt.' and Nährwertangaben je 100 ml, 333 kJ / 80 kcal. Systembolaget 7461701 is the 2024, 750 ml, 12,5 % vol, and labelled a Spätlese; the 2025 is a Deutscher Qualitätswein with no Prädikat and half a point stronger. So the vintage differs, the Prädikat differs and the strength differs. THE 2024 IS NOT IN THE SHOP: its Weißwein/Trocken category does keep four 2024 wines (Alvarinho, Auxerrois, Chardonnay Hildegardisberg, Sauvignon Blanc Kachelberg), so this is not a shop that discards old vintages wholesale — the Riesling Alte Reben simply exists there only as the 2025 — and the Réserve category holds nothing but a 2021 magnum. The Winestro token is per product, and constructing another would be guessing. Rejected.",
+      "rejected_because": "the Winestro e-label states '2025 Riesling Alte Reben trocken, 13,0 % vol' in its own text; Systembolaget's bottle is the 2024 Spätlese trocken at 12,5 %, which the shop no longer carries",
+      "sources_checked": [
+        "https://www.weingut-hauck.de/ (expired TLS certificate over https; over http it redirects to www.weinhaus-hauck.de, which is valid — the certificate was not bypassed)",
+        "https://www.weinhaus-hauck.de/ (Webflow marketing site)",
+        "https://shop.weinhaus-hauck.de/robots.txt (404 — the shop returns its HTML error page, so no directives)",
+        "https://shop.weinhaus-hauck.de/",
+        "https://shop.weinhaus-hauck.de/Weisswein/Trocken/",
+        "https://shop.weinhaus-hauck.de/Weisswein/Reserve/",
+        "https://shop.weinhaus-hauck.de/2025-Riesling-Alte-Reben-Klosterberg-trocken/30-2025-WG4325",
+        "https://winestro.info/robots.txt (404)",
+        "https://winestro.info/?s=5hj8fi6l"
+      ],
+      "checked_at": "2026-08-06T23:25:00Z",
+      "robots_disallowed": false,
+      "note": "Weingut Hauck trades as Weinhaus Hauck GmbH & Co. KG and its own domain weingut-hauck.de has an expired certificate — over plain http it redirects to www.weinhaus-hauck.de, so the estate is reachable without touching the broken TLS. Same Shopware-plus-Winestro pairing as Dr. Koehler's Shopware-plus-apys: the anchor text is 'Informationen zu Zutaten und Nährwerten' and the article number in the URL carries the vintage (30-2025-WG4325), which makes vintage triage possible from the listing alone. Unlike most estates in this batch, this shop keeps several 2024s alongside its 2025s, so a 2024 absence here is genuine evidence that the bottling is finished rather than an artefact of the shop rolling everything forward."
     }
   ],
-  "updated_at": "2026-08-06T23:05:00Z",
+  "updated_at": "2026-08-06T23:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
