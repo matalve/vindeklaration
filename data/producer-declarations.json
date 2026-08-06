@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
-  "attempted": 114,
+  "attempted": 115,
   "found": 17,
   "not_found": 75,
-  "rejected": 22,
+  "rejected": 23,
   "declarations": [
     {
       "product_number": "5106001",
@@ -3263,9 +3263,38 @@
       "checked_at": "2026-08-06T19:25:00Z",
       "robots_disallowed": false,
       "note": "not found by this run. Worth keeping as the reference case for the shape 'identity confirmed, declaration absent': normally a not_found leaves open whether we even had the right bottle, and here we plainly did — the estate's own shop states the vintage, the fill and the strength and they match the shelf to the decimal. Two host notes. (1) www.tobias-rickes.de is Squarespace, whose stock robots.txt names ClaudeBot, anthropic-ai and about thirty other AI agents in a blanket disallow group; our User-Agent is none of them, so the User-agent: * group applies and /wein is allowed. Do not read that list as covering this project, and do not fetch it under a borrowed identity either. (2) The Shopify storefront serves the same agents.md / shop.app SKILL.md preamble already recorded for Thanisch — page content addressed to shopping assistants, not directives, and ignored."
+    },
+    {
+      "product_number": "7223201",
+      "name": "Dr. Koehler Riesling Trocken",
+      "producer": "Dr. Koehler Wein GmbH",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://dr-koehler-wein.de/Dr.-Koehler-Riesling/14-2025",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "Producer, cuvée, pack and alcohol match to the decimal; the vintage is one year out. Weingut Dr. Koehler GbR, Pfandturmstr. 16, 67595 Bechtheim (Rheinhessen), runs a Shopware shop at dr-koehler-wein.de. Its Gutswein 'Dr. Koehler Riesling' is article 14-{vintage} and the current listing carries only 14-2025: Jahrgang 2025, Rebsorte Riesling, Qualitätswein, Geschmack trocken, Alkoholgehalt 12,0 % Vol., 0,75 Liter, Gutsabfüllung Weingut Dr. Koehler GbR. Systembolaget 7223201 is the same wine at 12,0 % and 750 ml, VINTAGE 2024. The 2025 page carries a full declaration inline in a Shopware custom field — 'Zutatenverzeichnis: Trauben; Saccharose; Stabilisatoren: Carboxymethylcellulose; Antioxidantien: Schwefeldioxid; Sulfite; Unter Schutzatmosphäre abgefüllt;' with 'Allergiehinweise: Enthält Sulfite' — and an apys e-label button 'Informationen zu Zutaten' at https://elabel.apys.de/e-Label/e-Label.php?p1=29334ED7-5B49-45A7-A5AA-A6720DF93558&p2=43. THE 2024 IS GONE FROM THE SHOP. The Alle-Weine listing (46 URLs) holds 14-2025 and no 14-2024, and the gzipped sitemap is stale, listing 14-2022 and 14-2023 only. Constructing /Dr.-Koehler-Riesling/14-2024 from the pattern would be guessing a URL on an ordinary shop, which this agent does not do, so no 2024 page was fetched and the 2024 apys e-label was not sought either. THE ONE 2024 THE SHOP DOES SELL IS A DIFFERENT WINE AND WAS CHECKED AND EXCLUDED: 'Dr. Koehler Riesling Qualitätswein Kabinett 2024' (article 17-2024) is 7,5 % Vol. with 55,4 g/l Restzucker and a different ingredient list ('Trauben; Säureregulatoren: Citronensäure; Weinsäure; Stabilisatoren: Metaweinsäure; Antioxidantien: Schwefeldioxid; Sulfite; unter Schutzatmosphäre abgefüllt;'), which is neither trocken nor 12,0 %. That the two 2024/2025 lists differ from each other is itself the argument for the vintage rule: this producer demonstrably changes the recipe between bottlings.",
+      "rejected_because": "the only Dr. Koehler Riesling trocken published is the 2025; the wine on Systembolaget is the 2024, which has been removed from the shop, and the estate's other 2024 Riesling is a 7,5 % Kabinett with a different ingredient list",
+      "sources_checked": [
+        "https://dr-koehler-wein.de/robots.txt",
+        "https://dr-koehler-wein.de/sitemap.xml",
+        "https://dr-koehler-wein.de/sitemap/salesChannel-…-sitemap-dr-koehler-wein-de--1.xml.gz",
+        "https://dr-koehler-wein.de/Weine/Alle-Weine/",
+        "https://dr-koehler-wein.de/Dr.-Koehler-Riesling/14-2025",
+        "https://dr-koehler-wein.de/Dr.-Koehler-Riesling-Qualitaetswein-Kabinett-2024/17-2024",
+        "https://dr-koehler.de/robots.txt (parking page), https://www.weingut-dr-koehler.de (does not resolve)",
+        "https://www.rheinhessen.de/winzerdatenbank/a-weingut-dr-koehler-gbr (to establish the estate's own domain)"
+      ],
+      "checked_at": "2026-08-06T19:50:00Z",
+      "robots_disallowed": false,
+      "note": "A useful pairing to recognise: this Shopware shop states the complete Zutatenverzeichnis inline in a product custom field AND links an apys e-label for the same wine, so the declaration can be read without touching the disallowed apys host at all. Two per-article apys p2 values were seen under one company GUID (p2=43 for article 14-2025, p2=63 for 17-2024), which is further evidence that apys keys per article rather than per producer — the test Leitz failed and Andreas Oster passed. The estate's own domain is dr-koehler-wein.de; dr-koehler.de is an unrelated parking page and weingut-dr-koehler.de does not resolve. Its Shopware robots.txt is 'Disallow: /*?', so category pagination is unreadable — use /Weine/Alle-Weine/, which lists the whole range on one page, rather than the sitemap, which is years out of date."
     }
   ],
-  "updated_at": "2026-08-06T19:25:00Z",
+  "updated_at": "2026-08-06T19:50:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
