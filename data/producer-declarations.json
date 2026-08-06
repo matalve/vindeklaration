@@ -2855,7 +2855,7 @@
       "note": "not found by this run."
     }
   ],
-  "updated_at": "2026-08-06T00:40:00Z",
+  "updated_at": "2026-08-06T00:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -2876,6 +2876,11 @@
       "at": "2026-07-30T20:10:00Z",
       "batch": "3 — German producers with 2024+ undeclared wines, worked one producer at a time and committed after each: Philipp Kuhn, Klosterhof, Doennhoff, Robert Weil, August Kesseler, Juelg, Kerpen, Von Winning, Schloss Johannisberg",
       "result": "in progress — Philipp Kuhn 3/3; Klosterhof 0/5 (rejected on vintage); Doennhoff 0/4; Robert Weil 0/3; August Kesseler 2/2 (graphic-druck); Hain 3/3 (Winitas); Wittmann 0/8; Juelg 2/2 (Winestro/nephele-s5); Kerpen 0/2; Von Winning 0/2 (client-side devworlds modal); Schloss Johannisberg 0/2 rejected on vintage (qrlabelinfo readable); Thanisch Erben Thanisch 2/2 (Winestro/winestro.info); Vier Jahreszeiten 1/2 (f-label by Euvino, robots exception used)."
+    },
+    {
+      "at": "2026-08-06T00:45:00Z",
+      "batch": "3c — five more German producers with 2024+ undeclared wines, committed one producer at a time: Weingut Philipps-Eckstein, Weingut Landerer, WG Gysler, Joh. Jos. Pruem, Ewald Theod. Drathen",
+      "result": "9 attempted, 1 found, 4 not found, 4 rejected. Philipps-Eckstein 0/2 (Winitas e-label readable but for the 2025; the Grauschiefer cuvee is in no vintage on the shop); Landerer 0/2 (IMERO e-label per wine, but the site keeps only the current 2025 release, and the litre bottling has no product page at all); Gysler 1/2 (NEW PLATFORM weinlabels.de, server-rendered, embedded as an IFRAME on the estate's own product page; the magnum of the same wine rejected because the e-label names a 0,75 l fill); Joh. Jos. Pruem 0/2 (the estate's entire website is a one-page contact card); Drathen 0/1 (no producer site; drathen.de fails TLS and redirects to a sister company). The rejections are all one of two shapes: the vintage on the shelf is a year behind the only release the producer still publishes, or the pack differs. Six of the nine wines belong to producers who demonstrably do publish e-labels; the declaration for the bottle actually on the Swedish shelf is what is missing."
     }
   ]
 }
