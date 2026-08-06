@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
-  "attempted": 110,
+  "attempted": 111,
   "found": 17,
-  "not_found": 73,
+  "not_found": 74,
   "rejected": 20,
   "declarations": [
     {
@@ -3148,9 +3148,38 @@
       "checked_at": "2026-08-06T12:15:00Z",
       "robots_disallowed": false,
       "note": "not found by this run. TRAP WORTH NAMING: a Shopware tab headed 'Nährwerte & Zutaten' that contains neither. The anchor-text heuristic in docs/elabel-platforms.md ('grep for Zutaten / Nährwerte') finds this page and it is a dead end — read what is under the heading, not the heading. Also: this cooperative bottles per export market (Finland, Rimi/Baltics, and evidently Sweden), and the market-specific packs live only on the destination shelf, so there is no producer page for them. robots.txt disallows /listing/, /checkout/ and account paths; the /weine/ product paths and the sitemap are allowed and only those were fetched. The Expertise PDF is served at 18 MB — large for one page of text; fetch it only when it is the deciding question."
+    },
+    {
+      "product_number": "7935001",
+      "name": "Black Tower Pinot Noir Rosé Club Edition",
+      "producer": "Reh Kendermann GmbH Weinkellerei",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "The producer is right and the wine is right — Reh Kendermann GmbH Weinkellerei, Bingen, publishes the exact cuvée at https://www.reh-kendermann.de/produkt/club-edition-pinot-noir-rose/ (Black Tower Club Edition Pinot Noir Rosé, 0,75 L, Deutschland/Pfalz, Pinot Noir, trocken, EAN Flasche 4069600018668). NO INGREDIENT LIST AND NO E-LABEL. The product page carries a marketing description, three unlabelled bar graphics for Alkohol/Restzucker/Gesamtsäure, aroma icons, region, grape, quality level and the two EANs. A raw-HTML grep for Zutat, Nährwert, Brennwert, kcal, e-label, QR, Sulfit and Jahrgang returns nothing but a CSS class named 'ingredients' on the bar graphics. THE PAGE ALSO STATES NO VINTAGE AT ALL, so even a declaration found here could not have passed the vintage test for our 2024. The only per-product document is a 'Weinexpertise PDF' at https://www.reh-kendermann.de/de?product_pdf=21774 (647 kB, one page); it was fetched and its text could NOT be extracted — the whole page is drawn as vector outlines with no text-showing operators in the content stream, and no OCR is available on this machine. It is product-keyed (21774), not vintage-keyed, and it is the same 'Weinexpertise' shape that Von Winning and Ruppertsberger publish, which docs/elabel-platforms.md already records as a datasheet rather than a declaration. The brand site de.black-tower.wine (robots.txt allows all but /wp-admin/) links only the same six Weinexpertise PDFs and carries no declaration either. A search for a Reh Kendermann e-label platform returned nothing.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.reh-kendermann.de/robots.txt (404, i.e. no restriction)",
+        "https://de.black-tower.wine/robots.txt",
+        "https://de.black-tower.wine/",
+        "https://www.reh-kendermann.de/sitemap_index.xml",
+        "https://www.reh-kendermann.de/product-sitemap.xml",
+        "https://www.reh-kendermann.de/produkt/club-edition-pinot-noir-rose/",
+        "https://www.reh-kendermann.de/de?product_pdf=21774 (PDF fetched, text not extractable)",
+        "web search: Reh Kendermann / Black Tower e-label"
+      ],
+      "checked_at": "2026-08-06T18:05:00Z",
+      "robots_disallowed": false,
+      "note": "not found by this run. Two things worth carrying forward. (1) A large branded bottler exporting to 35 countries publishes less online than the small Mosel estates do — no e-label anywhere, and no vintage on the product page. (2) A PDF that yields no text is not necessarily a scan: this one has fonts in its resources but renders every glyph as a filled path, so pypdf returns an empty string and there is nothing to grep. Without OCR that document is closed, and there is no OCR on this machine."
     }
   ],
-  "updated_at": "2026-08-06T12:20:00Z",
+  "updated_at": "2026-08-06T18:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
