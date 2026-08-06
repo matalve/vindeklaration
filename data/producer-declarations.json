@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is now exhausted)",
-  "attempted": 115,
+  "attempted": 117,
   "found": 17,
   "not_found": 75,
-  "rejected": 23,
+  "rejected": 25,
   "declarations": [
     {
       "product_number": "5106001",
@@ -3292,9 +3292,62 @@
       "checked_at": "2026-08-06T19:50:00Z",
       "robots_disallowed": false,
       "note": "A useful pairing to recognise: this Shopware shop states the complete Zutatenverzeichnis inline in a product custom field AND links an apys e-label for the same wine, so the declaration can be read without touching the disallowed apys host at all. Two per-article apys p2 values were seen under one company GUID (p2=43 for article 14-2025, p2=63 for 17-2024), which is further evidence that apys keys per article rather than per producer — the test Leitz failed and Andreas Oster passed. The estate's own domain is dr-koehler-wein.de; dr-koehler.de is an unrelated parking page and weingut-dr-koehler.de does not resolve. Its Shopware robots.txt is 'Disallow: /*?', so category pagination is unreadable — use /Weine/Alle-Weine/, which lists the whole range on one page, rather than the sitemap, which is years out of date."
+    },
+    {
+      "product_number": "5703401",
+      "name": "Mülheimer Sonnenlay Riesling Zeppelinlabel",
+      "producer": "Weinhandlung Max Ferd richter",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://iframe.euvino.eu/wein/2025-muelheimer-sonnenlay-riesling-kabinett-feinherb-weingut-max-ferd-richter-deutscher-praedikatswein-kabinett",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "Producer, lieu-dit, grape, pack and alcohol all match to the decimal; only the vintage is wrong. Weingut Max Ferd. Richter, Hauptstraße 37/85, D-54486 Mülheim/Mosel, runs its shop on EuvinoPRO at iframe.euvino.eu/iframe/weingut-max-ferd-richter, and that platform states the COMPLETE declaration inline on the product page (see the note). The estate's own Lagen page https://www.maxferdrichter.de/wp/?page_id=36 establishes what 'Zeppelinlabel' means: 'Die Weine aus der Mülheimer Sonnenlay wurden in den 1920er und 1930er Jahren in den luxuriösen Restaurants der Zeppeline … serviert. Aufgrund dieser Tatsache werden heute noch Weine dieser Lage weltweit als „Zeppelinwein“ vermarktet, ausgestattet mit dem Orginaletikett aus den 1920er Jahren'. So the Swedish bottling is a Mülheimer Sonnenlay Riesling in the historic label, and the estate's only current Mülheimer Sonnenlay still wine of that shape is '2025 Mülheimer Sonnenlay Riesling Kabinett, feinherb' — Riesling, Flaschengröße 0,75 l, Vorhandener Alkohol 10 % vol, Einzellage Sonnenlay, Mosel (DE), with 'Zutaten / Inhaltsangaben: Trauben, Antioxidantien (SULFITE), Unter Schutzatmosphäre abgefüllt.' and Nährwerte je 100 ml (288 kJ / 69 kcal …). Systembolaget 5703401 is 750 ml at 10,0 % — identical fill and strength — but VINTAGE 2024. THE 2024 DOES NOT EXIST ON THE SHOP. The shop's embedded catalogue lists 36 products and its Mülheimer Sonnenlay still wines are the 2020, 2022 and 2023 'Alte Reben feinherb' and this 2025 Kabinett feinherb; there is no 2024 Sonnenlay of any kind, and no 2024 Sonnenlay page to fetch. A 2025 declaration is not evidence about a 2024 bottle, so nothing is attached.",
+      "rejected_because": "the only Mülheimer Sonnenlay Riesling the estate publishes a declaration for is the 2025 Kabinett feinherb; the wine on Systembolaget is the 2024, which has left the shop entirely",
+      "sources_checked": [
+        "https://www.maxferdrichter.de/robots.txt (404 — an IONOS/Sedo parking frameset, i.e. no directives)",
+        "https://www.maxferdrichter.de/wp/?page_id=663 (the estate's Shop page, which is only a frame around the Euvino shop)",
+        "https://www.maxferdrichter.de/wp/?page_id=36 (Lage Mülheimer Sonnenlay — establishes the Zeppelin label)",
+        "https://iframe.euvino.eu/robots.txt (Allow: / bar /checkout)",
+        "https://iframe.euvino.eu/iframe/weingut-max-ferd-richter (full 36-product catalogue, embedded as JSON in the HTML)",
+        "https://iframe.euvino.eu/iframe/weingut-max-ferd-richter?redirect=/wein/2025-muelheimer-sonnenlay-riesling-kabinett-feinherb-…",
+        "https://www.maxferdrichter.com (TLS handshake fails, TLSV1_ALERT_INTERNAL_ERROR; the live host is www.maxferdrichter.de)"
+      ],
+      "checked_at": "2026-08-06T21:10:00Z",
+      "robots_disallowed": false,
+      "note": "NEW PLATFORM, and a productive one: EuvinoPRO webshops at iframe.euvino.eu carry the complete mandated declaration INLINE on the product page — a 'Zutaten / Inhaltsangaben' row and a 'Nährwerte (je 100 ml)' table with Brennwert in kJ and kcal — alongside a Produktinformationen table giving grape, bottle size, closure, quality level, region, Einzellage and 'Vorhandener Alkohol'. Server-rendered, no JavaScript needed, and it identifies itself: vintage and wine name are in the H1, alcohol and pack in the table. This is the same company as the p.f-label.eu e-labels already recorded (Euvino), but the shop rendering is far better provenance than f-label, which states no name, vintage or alcohol. TWO ACCESS TRAPS. (1) A bare https://iframe.euvino.eu/wein/{slug} answers 'Fehler 500' — the shop needs a session. Enter through https://iframe.euvino.eu/iframe/{winery}?redirect=/wein/{slug}, which is the estate's own linking pattern (its footer uses ?redirect=/widerruf) and 302s to the product with an _ISID session parameter. (2) The listing page is client-side templated with ${ product.name } placeholders, but the whole catalogue is embedded as JSON in the same HTML — grep for \"slug\": to get every product in one request, which is a cheap complete vintage census for the estate."
+    },
+    {
+      "product_number": "9232601",
+      "name": "Wehlener Sonnenuhr Riesling Kabinett Max Ferd Richter",
+      "producer": "Max Ferd Richter",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://iframe.euvino.eu/wein/2024-wehlener-sonnenuhr-riesling-kabinett-feinherb-weingut-max-ferd-richter-deutscher-praedikatswein-kabinett",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "de",
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "evidence": "The vintage is right for once and the CUVÉE is wrong. Weingut Max Ferd. Richter's EuvinoPRO shop does publish a complete inline declaration for a '2024 Wehlener Sonnenuhr Riesling Kabinett' — 'Zutaten / Inhaltsangaben: Trauben, Antioxidantien (SULFITE), Unter Schutzatmosphäre abgefüllt.' with Nährwerte je 100 ml, Brennwert 270 kJ / 65 kcal, Kohlenhydrate 2,9 g, davon Zucker 2,1 g. But the wine it belongs to is the FEINHERB, and the product table gives 'Vorhandener Alkohol 9,5 % vol'. Systembolaget 9232601 is a fruity Kabinett — style 'Friskt & Fruktigt', 7,5 % vol, 750 ml. 9,5 against 7,5 is 2,0 percentage points, four times the EU labelling tolerance of 0,5 % vol, so the two statements cannot describe the same fill; and on the Mosel 'Kabinett' and 'Kabinett feinherb' are two different bottlings of the same site, not two names for one. The estate's full 36-product catalogue holds only two 2024 Wehlener Sonnenuhr wines, this Kabinett feinherb and a 'Riesling Großes Gewächs uralte Reben trocken'; the sweet Kabinett that Systembolaget sells is not among them. Recording the feinherb's list against the fruity Kabinett would be exactly the silent corruption the matching rules exist to prevent.",
+      "rejected_because": "the only 2024 Wehlener Sonnenuhr Kabinett the estate declares is the feinherb at 9,5 % vol; Systembolaget's bottle is the fruity Kabinett at 7,5 % — a different cuvée and 2,0 pp outside the 0,5 % vol EU tolerance",
+      "sources_checked": [
+        "https://iframe.euvino.eu/robots.txt (Allow: / bar /checkout)",
+        "https://iframe.euvino.eu/iframe/weingut-max-ferd-richter (full 36-product catalogue)",
+        "https://iframe.euvino.eu/iframe/weingut-max-ferd-richter?redirect=/wein/2024-wehlener-sonnenuhr-riesling-kabinett-feinherb-…",
+        "https://www.maxferdrichter.de/wp/?page_id=30 (Lage Wehlener Sonnenuhr — prose only, no wine list)"
+      ],
+      "checked_at": "2026-08-06T21:12:00Z",
+      "robots_disallowed": false,
+      "note": "Systembolaget lists this estate under two different producer strings, 'Max Ferd Richter' here and 'Weinhandlung Max Ferd richter' on 5703401. One estate, two spellings — worth remembering when counting producers. Also: this is the first wine in the batch where a declaration for the RIGHT VINTAGE existed and the match failed on something else. Alcohol did the work; without the 0,5 % vol test the feinherb would have looked like a plausible attachment."
     }
   ],
-  "updated_at": "2026-08-06T19:50:00Z",
+  "updated_at": "2026-08-06T21:12:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
