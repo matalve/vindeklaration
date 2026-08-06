@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to 13 wines across 12 producers)",
-  "attempted": 130,
+  "attempted": 131,
   "found": 18,
   "not_found": 83,
-  "rejected": 29,
+  "rejected": 30,
   "declarations": [
     {
       "product_number": "5106001",
@@ -3731,9 +3731,41 @@
       "server_rendered": true,
       "fetch_result": "200, declaration present in the server's HTML — and rejected on vintage",
       "note": "The Winestro article number is visible on both sides here and makes the vintage keying explicit: the shop's Art.Nr. is 2505 and the estate's printable Expertise PDF is /Expertisen/2505.pdf, where 25 is the vintage. The same convention appears in Carl Loewen's QR filenames (2406 = 2024, 2506 = 2025). That is a useful reading aid and it is NOT a licence to construct a 2024 token — the Winestro 's' parameter is a random string, not the article number."
+    },
+    {
+      "product_number": "7896601",
+      "name": "Benzinger Jeden Tag",
+      "producer": "Benzinger Family Wineery",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://s.imero.io/G8fkj25",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": null,
+      "evidence": "THE WINE IS UNMISTAKABLE AND THE E-LABEL IS ATTACHED TO THE FOLLOWING VINTAGE. Weingut Benzinger, Weinstrasse Nord 24, 67281 Kirchheim (Pfalz), DE-ÖKO-022 and ECOVIN certified, sells from a Magento shop at shop.weingut-benzinger.de. Its litre Riesling lives at /riesling-fur-jeden-tag.html — the slug is the Swedish item's name, 'Riesling für jeden Tag', which the shop itself now displays as 'BIO - Riesling', Artikelnummer 8a. The page gives '1L', 'enthält Sulfite', 'Alkohol: 11,5 % vol', Säure 6,6 g/l, Restsüße 6,9 g/l, 'Product of Germany -enthält Sulfite- vegan' and 'Gutsabfüllung: Weingut Benzinger'. Systembolaget 7896601 is 1000 ml at 11,5 % vol, organic, Riesling — pack, strength and grape all match exactly, which is unusual precision for a litre wine. THE VINTAGE ON THE PAGE IS 2025 AND OURS IS 2024. The 'zu den Nährwertangaben' link on that 2025 page goes to https://s.imero.io/G8fkj25, so the e-label the producer publishes is the 2025's. AND IT COULD NOT HAVE BEEN READ EITHER. IMERO is an Angular/Ionic single-page app already recorded in docs/elabel-platforms.md as client-side and unreadable, and already the reason Dönnhoff, Robert Weil and one Wittmann were rejected; its per-article keying means a wine can have an e-label for one vintage and none for the next. So this rejection has two independent grounds and the vintage is the operative one. NOTHING WAS GUESSED. The IMERO token was not varied to look for a 2024, and the shop's 'Gutsweine in der 1,0l-Flasche' category holds three articles, none of them a second, older Riesling.",
+      "rejected_because": "The e-label is linked from the shop's 2025 bottling; the wine on Systembolaget is the 2024. Independently, the IMERO platform renders client-side, so even the 2025 declaration is not readable.",
+      "sources_checked": [
+        "https://www.weingut-benzinger.de/robots.txt (404, and the 404 body is served gzipped without a Content-Encoding header — no directives)",
+        "https://www.weingut-benzinger.de/",
+        "https://shop.weingut-benzinger.de/robots.txt (Magento default; disallows /*? and the usual app paths, allows the .html product URLs)",
+        "https://shop.weingut-benzinger.de/",
+        "https://shop.weingut-benzinger.de/alle-weine.html (all 30 articles in one page)",
+        "https://shop.weingut-benzinger.de/riesling-fur-jeden-tag.html"
+      ],
+      "checked_at": "2026-08-07T00:50:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "IMERO (s.imero.io/{token}) — first sighting on a Magento shop; previously seen at Dönnhoff, Robert Weil and Wittmann. Anchor text here is 'zu den Nährwertangaben', inside the product's short description rather than in a data table.",
+      "server_rendered": false,
+      "fetch_result": "not fetched — IMERO is known client-side and the linked label belongs to the wrong vintage, so a fetch would have decided nothing",
+      "note": "The IMERO page was deliberately not fetched. It would have returned a shell, and the vintage question is already answered by the page that links it. Recording the URL is still worth doing: if IMERO ever becomes readable, this is one of the wines to revisit — though only for a 2025 bottling, which is not ours."
     }
   ],
-  "updated_at": "2026-08-07T00:35:00Z",
+  "updated_at": "2026-08-07T00:50:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -3773,7 +3805,7 @@
     {
       "at": "2026-08-06T23:40:00Z",
       "batch": "3c — Carl Loewen re-attempted under the widened robots.txt exception (a producer's own file on a general host), then the rest of the German 2024 pool",
-      "result": "in progress — Carl Loewen 9601001 not_found -> found. Gröhl 0/1. Bioweingut Lorenz 0/1. Corvers-Kauter 0/1. August Eser / Knyphausen 0/1 (rejected on vintage)."
+      "result": "in progress — Carl Loewen 9601001 not_found -> found. Gröhl 0/1. Bioweingut Lorenz 0/1. Corvers-Kauter 0/1. August Eser / Knyphausen 0/1 (vintage). Benzinger 0/1 (vintage, and IMERO)."
     }
   ]
 }
