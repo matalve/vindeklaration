@@ -16,7 +16,7 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to the last handful)",
+  "batch": "3 — German producers with 2024+ undeclared wines. COMPLETE: every German wine with vintage 2024 or later and no declaration on Systembolaget has been attempted (89 wines). What remains undeclared in Germany is 415 wines of 2023 and earlier, which the production-date trigger may not reach.",
   "attempted": 140,
   "found": 18,
   "not_found": 91,
@@ -4038,7 +4038,7 @@
       "note": "Third of three Prüm wines on the Swedish shelf, all three not found for the same reason. Recorded separately rather than folded into the earlier two because the file is one record per wine and the next run needs to see that this product number was attempted. The single fetch was worth making: a producer's site can change between runs and citing a day-old observation as current would be exactly the kind of unverified claim this project does not make."
     }
   ],
-  "updated_at": "2026-08-07T02:15:00Z",
+  "updated_at": "2026-08-07T02:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -4079,6 +4079,11 @@
       "at": "2026-08-06T23:40:00Z",
       "batch": "3c — Carl Loewen re-attempted under the widened robots.txt exception (a producer's own file on a general host), then the rest of the German 2024 pool",
       "result": "in progress — Carl Loewen 9601001 not_found -> found. Gröhl 0/1. Bioweingut Lorenz 0/1. Corvers-Kauter 0/1. August Eser / Knyphausen 0/1 (vintage). Benzinger 0/1 (vintage, and IMERO)."
+    },
+    {
+      "at": "2026-08-07T02:20:00Z",
+      "batch": "3f — the last of the German 2024-vintage undeclared pool, one commit per producer: Weingüter Wegeler, Weingut Hoffmann-Simon, Weingut Keller, Emrich-Schönleber, Spring Wine & Spirits / Weingut Mehrlein, Solera Sweden (2 wines), Rewine, Joh. Jos. Prüm. THE GERMAN 2024+ POOL IS NOW EXHAUSTED.",
+      "result": "9 attempted, 0 found, 8 not found, 1 rejected. THE REJECTION: Hoffmann-Simon, a complete self-identifying Winitas e-label for exactly this cuvée — Klüsserather Bruderschaft Riesling Spätlese trocken, Bio-Weintrauben, 322 kJ/77 kcal — naming itself the 2025 where the shelf holds the 2024; the Winitas one-request vintage census proved the 2024 is on no listing the estate publishes. THE NOT FOUNDS SPLIT THREE WAYS. (1) Producer found, current vintage on sale, no declaration published: Wegeler, whose Shopware shop has per-wine pages, per-vintage URLs and our exact 2024 at 12,0 % vol to the decimal, and links nothing but 'enthält Sulphite' — the clearest evidence yet that structure does not predict publication. (2) Estate with no searchable surface: Keller (a three-URL Wix brochure, from Gault Millau's Winzer des Jahrzehnts) and Prüm (a 3,7 kB contact card, third wine, re-fetched rather than assumed). (3) Importer in the producer field: four wines. Spring's Even & Odd was traced to Weingut Mehrlein via the agency's own 'Producent' field, and Mehrlein's site states outright that it vinifies exclusively for trade partners, so the cuvée has no page to begin with; Rewine's Robusta is absent from both of that importer's sitemaps; Solera's Pride and Phonetics are own labels whose estate could not be established at all, and nothing was guessed from the two German bottlers on Solera's producer list. ONE OUTAGE, RECORDED AS SUCH: emrich-schoenleber.de answered 503 on every content URL across three requests — an outage, not a refusal — and a German retailer carries what is very probably the producer's own text for our exact vintage and alcohol. It was not taken. A retailer's transcription cannot be allowed to outrank Systembolaget's in a file that outranks Systembolaget's. That wine is the strongest revisit candidate in the pool. WHAT THE WHOLE GERMAN POOL CAME TO: 89 wines across some 60 producers attempted, 18 declarations attached."
     }
   ]
 }

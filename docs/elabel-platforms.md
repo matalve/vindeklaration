@@ -9,7 +9,8 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-07, across 44 producers and 126 wine records.
+Status as of 2026-08-07, across 51 producers and 140 wine records. **The German
+2024-and-later undeclared pool is exhausted** — see the closing section.
 
 ## Readable — server-rendered
 
@@ -32,8 +33,38 @@ Status as of 2026-08-07, across 44 producers and 126 wine records.
 |---|---|---|
 | **Scantrust** | `matu.st4.ch/{token}` → `elabel.scantrust.com/default/#/?uid=…&api_key=…` | 828-byte shell, empty `<div id=app>`. **The uid and api_key are in the URL fragment, which is never sent to the server** — that host cannot serve the declaration by construction. The api_key is minted and signed per request, so it is an issued token and absolute under the agent's rules. Do not mine the JS bundles. `matu.st4.ch` answers `Disallow: /`, which is where the robots exception applies. |
 | **IMERO** | `s.imero.io/c{id}` | Angular/Ionic SPA. Its catalogue lists per-article e-labels keyed by article number whose first two digits are the vintage, so a wine can be present for one vintage and absent for another — Dönnhoff and Robert Weil both failed this way. |
-| **Dropbox folder** | `dropbox.com/scl/fo/…`, one folder per vintage | Not a rendering problem but a permission one. Carl Loewen publishes 'eLabels/Nährwerte & Zutaten des Jahrgangs 2024' as a shared Dropbox folder from its Download Center. `www.dropbox.com/robots.txt` has `Disallow: /scl/` for `*`, and the e-label exception does not reach a general file service — it is written for hosts that exist only to serve the regulated disclosure. Left alone. **If the owner ever widens the exception, this is the wine to revisit**, because the folders are per-vintage and would satisfy the vintage rule by construction. |
+| **Dropbox folder** | `dropbox.com/scl/fo/…`, one folder per vintage | The folder *view* renders client-side: 309 kB of shell, no file names, and the page's own `&noscript=1` variant is no better. **But the same folder answers `&dl=1` with a zip**, and that is a server response. See *The Dropbox route* below — it is now a resolved find, not a dead end. |
 | **devworlds e-label** | Shopware plugin, no public URL | The shop shows a "Zutaten & Nährwerte" **`<button>`, not a link**, opening a modal. All the server returns is a custom field `devworlds_elabel_fields_id` holding an opaque 24-hex id, plus `Allergene: Enthält Sulfite`. No devworlds host is linked anywhere and no e-label route appears in the sitemap, so **there is no URL to hold** and building one from the id would be guessing a pattern. Found via Von Winning. |
+
+## The Dropbox route, which worked
+
+Some estates publish the e-label as a **file on a general file host** instead of
+a web page. Recognise it by "Download Center" or "Presse" plus "eLabels" on the
+producer's own site. Carl Loewen's page says *"eLabels/Nährwerte & Zutaten des
+Jahrgangs 2024 können Sie hier herunterladen"*, where *hier* is a per-vintage
+Dropbox shared folder — and per-vintage means the vintage rule is satisfied by
+construction, which no other route in this project gives you for free.
+
+The owner widened the robots exception to reach this case on **2026-08-06**, on
+the narrow ground that it is still the producer's own act of publishing one
+document at a URL the producer itself hands out. It is not a licence on the
+host: fetch only the named folder or file, never a sibling, never a guessed
+folder id.
+
+What made Loewen readable is worth generalising:
+
+- The default folder view is a client-side shell. So is `&noscript=1`.
+- **`&dl=1` on the same folder URL returns a zip, server-side, 200
+  `application/zip`.** Same resource, one request, no traversal.
+- **What was in the folder was not the declaration but the QR codes** — one PNG
+  per wine, named after the wine (`2406 Riesling Alte Reben.png`, where 2406 is
+  the vintage-keyed article number). Decode them offline (OpenCV
+  `QRCodeDetector`, no network) and you hold a URL the producer published.
+  Loewen's pointed at Winitas.
+- An estate with **no webshop at all** can still be findable this way.
+  `weingut-loewen.winitas-shop.de` exists for nothing else — its 404 body reads
+  "Es sind nur Aufrufe des eLabels gestattet. Diese Domain hat keine
+  Shopanbindung."
 
 ## Where a declaration is not, however much it looks like one
 
@@ -209,6 +240,30 @@ worth recognising in an `href`; nothing is known about how they render.
 - `jjpruem.com` is a 3,7 kB one-page contact card — no wine list, no shop, no
   outbound links. Some famous estates have no searchable surface at all, and
   that is a two-request finding, not a reason to keep looking.
+- `keller-wein.de` is the same shape on Wix, and its **`pages-sitemap.xml` lists
+  three URLs**: home, Impressum, Datenschutz. There is no
+  `store-products-sitemap.xml`. Read the sitemap index before the home page —
+  on Wix it settles "does this estate publish products at all" in two requests.
+  Reputation predicts nothing: Keller is Gault Millau *Winzer des Jahrzehnts*
+  and has a smaller web presence than any co-operative in these batches.
+- `emrich-schoenleber.de` served `robots.txt` but answered **HTTP 503 on every
+  content URL** across three requests. A generic Apache 503 is an outage, not a
+  refusal and not a challenge — record `not_found`, say which, and leave the
+  wine as a revisit candidate. `emrich-schoenleber.com` fails TLS with a
+  hostname mismatch.
+- `shop.wegeler.com` (Shopware 6) has every structural precondition for an
+  e-label — per-wine pages, per-vintage SEO URLs `{vintage}-{slug}`, the current
+  release on sale — and links none. **Structure does not predict publication.**
+  Its `robots.txt` disallows `/detail/` but the SEO URLs are allowed.
+- `webshop.solera.se` (Magento 2) disallows `*/catalogsearch/` and `/*?q=`, so
+  an importer's B2B catalogue **cannot be searched within its own directives**,
+  and the `/produkter` listing returns the category tree without the product
+  grid. Its `robots.txt` also names ClaudeBot, GPTBot and a dozen other AI
+  agents with `Disallow: /`; we are not any of them, and the `User-agent: *`
+  block is what applies.
+- `solera.se/robots.txt` answers **200 with the body
+  `An error occurred. Error: Error: 404 - Not Found`** — a soft 404 dressed as a
+  success. Read the body, not the status.
 
 ## Don't trust a slug, or a shop's own vintage field
 
@@ -264,10 +319,13 @@ alternative is inventing one.
 
 ## What the numbers say so far
 
-**Most producers publish nothing reachable.** Of 44 producers probed, 16 have
-a readable e-label or an inline declaration, six have an unreadable one, and
-the rest put no ingredient list anywhere this project can see. The binding
-constraint is not rendering — it is existence and discoverability.
+**Most producers publish nothing reachable.** Across 63 producers probed and
+140 wine records, 18 declarations are attached, 31 wines were rejected against
+a declaration that was found and read, and 91 came to nothing. Roughly a third
+of producers have a readable e-label or an inline declaration; a handful have
+an unreadable one; the rest put no ingredient list anywhere this project can
+see. The binding constraint is not rendering — it is existence, discoverability
+and, in Germany, the vintage.
 
 **The German 2024 slice has now produced a batch with no find at all.** Nine
 producers on 2026-08-07 (Max Ferd. Richter, Knipser, Balthasar Ress, Carl
@@ -354,3 +412,51 @@ cuvée: Max Ferd. Richter's 2024 Wehlener Sonnenuhr exists as a Kabinett
 On the Mosel, "Kabinett" and "Kabinett feinherb" are two bottlings of one site,
 not two names for one wine, and 2,0 pp is four times the tolerance. Without
 the alcohol test that would have looked like a plausible attachment.
+
+## When the producer field holds a Swedish importer
+
+Four of the last eight German wines had an importer, not an estate, in
+Systembolaget's producer field. **Try the importer's own agency site first**:
+some present their growers and name the estate outright.
+
+- **It works when the importer is an agency.** `springwine.se` gives each wine
+  a `Producent` field — that is what identified Weingut Mehrlein behind "Even &
+  Odd", in two requests. `rewine.se` is a Wix site with both a
+  `store-products-sitemap.xml` and one page per producer in
+  `pages-sitemap.xml`, so a wine can be ruled out of the whole portfolio in
+  three requests.
+- **It fails when the importer is a private-label operation.** Solera lists 21
+  producers, none of them a Rheingau estate, and its own brands are not tied to
+  any of them. Two wines, no estate, no identity test possible.
+- **An importer's attribution identifies the estate; it is not a source.** It
+  says which producer page to open, and nothing more.
+- And identifying the estate is often not enough. Weingut Bernhard Mehrlein
+  turned out to be behind two different importers' own labels in one batch, and
+  its site says why that leads nowhere: *"Da die Weine für unsere Partner
+  exklusiv vinifiziert werden, finden Sie im Weingut meist nicht den gleichen
+  Wein."* A house that vinifies per trade partner has no page for the cuvée to
+  begin with.
+
+## The German pool is finished, and this is what it came to
+
+**Every German wine with vintage 2024 or later and no declaration on
+Systembolaget has now been attempted** — 89 wines across some 60 producers,
+recorded in `data/producer-declarations.json`. What remains undeclared in
+Germany is 415 wines of 2023 and earlier, where the regulation's production-date
+trigger may not even reach and where the producer's current page certainly will
+not be about the bottle.
+
+The honest headline for the coverage page: **of the German producers whose
+2024+ wines Systembolaget records no declaration for, well under half publish
+an ingredient list anywhere a reader can reach, and of those, most publish it
+only for a later vintage than the one on the shelf.** The two failure modes are
+not the same and the file keeps them apart — a `rejected` record means the
+producer complied and the shelf is behind; a `not_found` record means nothing
+was reachable, which is not the same as nothing existing.
+
+**Where the remaining work is, if anyone asks for it**: 906 unattempted 2024+
+undeclared wines, of which Italy 252 and France 244 are more than half. The one
+prior international batch — Antinori, d'Esclans, Wittmann, Sadie, Alheit —
+yielded nothing readable, so expect a lower hit rate than Germany's and a
+different platform mix (U-label is Italian- and Spanish-heavy and still has no
+publicly linked URL in this project's notes).
