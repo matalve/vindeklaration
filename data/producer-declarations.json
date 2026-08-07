@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 165,
+  "attempted": 168,
   "found": 18,
-  "not_found": 116,
+  "not_found": 119,
   "rejected": 31,
   "declarations": [
     {
@@ -4818,9 +4818,108 @@
       "vintage": "2024",
       "evidence": "THE HOUSE PUBLISHES NO PER-WINE PAGE AT ALL, SO THERE IS NOTHING TO CARRY A DECLARATION. Saget La Perrière, Pouilly-sur-Loire, is the producer for all four wines and Systembolaget's supplier is Philipson Söderberg AB. The corporate site is a Magento install whose sitemap holds exactly twenty URLs, every one of them editorial: the family, the seven estates and ranges (Locus, Les Éclaireurs, Clair de Brumes, La Perrière, Château de la Mulonnière, Domaine des Grandes Espérances, Domaine de Terres Blanches), wine tourism, FAQ, contact, points of sale, recruitment and legal notices. THERE IS NOT ONE PRODUCT PAGE IN THE SITEMAP OR IN THE SITE'S OWN NAVIGATION, and the .fr sitemap is the same twenty URLs pointed back at the .com. The FAQ mentions nothing about ingredients, nutrition, allergens or a QR code. THE HOUSE'S 'PRESSE' DOWNLOAD SITE WAS CHECKED FOR THE PATTERN THAT WORKED IN GERMANY AND DOES NOT HAVE IT. media.sagetlaperriere.fr is the Download Center analogue — the German batch found Carl Loewen's e-labels exactly there, under 'Presse' plus 'eLabels'. Saget's holds a brochure, two 2023 portfolios and press photographs; the words 'eLabel', 'ingrédient', 'nutrition', 'étiquette' and 'allergène' appear nowhere on it, and its file list is rendered client-side in any case. A DECLARATION FOR THIS RANGE DOES EXIST ON THE WEB AND IS NOT USABLE. The German retailer vinello.eu publishes an ingredient list for a La Petite Perrière Sauvignon (grape must, grapes, saccharose, acidity regulators, metatartaric acid, ascorbic acid, sulphites). Under this project's rules a retailer's transcription in another country is not a source: its provenance is no better than Systembolaget's and its vintage and market are unverified. IT WAS NOT USED AND MUST NOT BE. It is recorded here only so the next run does not mistake it for a find. LA PETITE PERRIÈRE IS ABSENT FROM THE HOUSE'S OWN SITE ENTIRELY.",
       "note": null
+    },
+    {
+      "producer": "Chateau d´Astros",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS/TLS: astros.fr serves a self-signed certificate over https but 301s to www.chateauastros.com over plain http; chateaudastros.com fails TLS with TLSV1_ALERT_INTERNAL_ERROR; www.chateau-astros.com is a different host. The estate is www.chateauastros.com",
+        "https://www.chateauastros.com/robots.txt (Yoast, 'Disallow:' empty — everything allowed bar one plugin JSON)",
+        "https://www.chateauastros.com/sitemap_index.xml and /page-sitemap.xml (67 pages; there is no product sitemap — the shop is a separate host)",
+        "https://www.chateauastros.com/nos-vins/ (the five ranges: Amour, Absolu, Aventure, Commandeur, La Belle Vie en Provence)",
+        "https://www.chateauastros.com/nos-vins/amour/ (the Amour range page, linking the per-vintage fiches and the shop)",
+        "https://www.chateauastros.com/ft_print_amour_b_2024-fr/ -> /wp-content/uploads/2025/03/FT_PRINT_Amour_B_2024-FR.pdf (text extracted in full)",
+        "https://www.chateauastros.com/f-t-amour-2024-rouge-fr/ -> /wp-content/uploads/2026/01/F-T-Amour-2024-rouge-FR-.pdf (text extracted in full)",
+        "https://boutique-chateauastros.com/robots.txt (Shopify default, products allowed)",
+        "https://boutique-chateauastros.com/products/amour-blanc-bio-copie (the shop's Amour Blanc, which is the 2025)"
+      ],
+      "checked_at": "2026-08-07T07:55:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7007801",
+      "name": "Amour Blanc Chateau d´Astros",
+      "vintage": "2024",
+      "evidence": "THE ESTATE PUBLISHES A PER-VINTAGE FICHE FOR OUR EXACT WINES AND IT IS NOT A DECLARATION. Château d'Astros, Vidauban (Var), AOP Côtes-de-Provence; Systembolaget's supplier is Premier Taste Sweden AB and the producer field is the estate. Its WordPress site publishes one page per range and, from the Amour range page, a 'Fiche produit' link per wine per vintage — a WordPress slug that 302s to a dated PDF under /wp-content/uploads/. TWO OF THOSE PDFS WERE FETCHED AND BOTH ARE OUR EXACT VINTAGE: FT_PRINT_Amour_B_2024-FR.pdf ('BLANC 2024', 100 % Rolle) and F-T-Amour-2024-rouge-FR-.pdf ('ROUGE 2024', Grenache & Syrah). Both extract cleanly and both carry the same fields: a range story, tasting notes, vinification, serving temperature and food pairing. VINIFICATION SAYS ONLY 'Sulfitage maîtrisé et respectueux' — sulphiting described in prose, which is exactly the tasting-note mention this project's rules say not to accept. THERE IS NO INGREDIENT LIST, NO NUTRITION TABLE AND NO ENERGY VALUE ON EITHER. THE SEPARATE SHOPIFY SHOP DOES NOT CARRY ONE EITHER. boutique-chateauastros.com is a Shopify storefront on its own host (products allowed by robots.txt); its Amour Blanc product page was fetched — 470 kB of server-rendered HTML — and contains no ingredient, nutrition, allergen or e-label content of any kind. The shop has also rolled forward to the 2025 ('Amour blanc BIO 2025', 75 cl and 6×75 cl), so the shop is a vintage ahead of the fiches and of two of our three bottles. The FR (EU) pages were used throughout. For this wine the fiche is FT_PRINT_Amour_B_2024-FR.pdf, headed 'BLANC 2024', 100 % Rolle, matching Systembolaget 7007801 (Amour Blanc, 2024, 750 ml, 12,5 % vol, organic) on producer, cuvée and vintage. The vintage rule is satisfied and there is no ingredient list to attach.",
+      "note": "A useful URL shape: the estate's 'Fiche produit' links are WordPress page slugs (/ft_print_amour_b_2024-fr/, /f-t-amour-2024-rouge-fr/) that 302 to a dated PDF in /wp-content/uploads/. The slug carries the cuvée, colour and vintage, so the range page alone tells you which vintages the estate still documents — without opening a PDF."
+    },
+    {
+      "producer": "Chateau d´Astros",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS/TLS: astros.fr serves a self-signed certificate over https but 301s to www.chateauastros.com over plain http; chateaudastros.com fails TLS with TLSV1_ALERT_INTERNAL_ERROR; www.chateau-astros.com is a different host. The estate is www.chateauastros.com",
+        "https://www.chateauastros.com/robots.txt (Yoast, 'Disallow:' empty — everything allowed bar one plugin JSON)",
+        "https://www.chateauastros.com/sitemap_index.xml and /page-sitemap.xml (67 pages; there is no product sitemap — the shop is a separate host)",
+        "https://www.chateauastros.com/nos-vins/ (the five ranges: Amour, Absolu, Aventure, Commandeur, La Belle Vie en Provence)",
+        "https://www.chateauastros.com/nos-vins/amour/ (the Amour range page, linking the per-vintage fiches and the shop)",
+        "https://www.chateauastros.com/ft_print_amour_b_2024-fr/ -> /wp-content/uploads/2025/03/FT_PRINT_Amour_B_2024-FR.pdf (text extracted in full)",
+        "https://www.chateauastros.com/f-t-amour-2024-rouge-fr/ -> /wp-content/uploads/2026/01/F-T-Amour-2024-rouge-FR-.pdf (text extracted in full)",
+        "https://boutique-chateauastros.com/robots.txt (Shopify default, products allowed)",
+        "https://boutique-chateauastros.com/products/amour-blanc-bio-copie (the shop's Amour Blanc, which is the 2025)"
+      ],
+      "checked_at": "2026-08-07T07:55:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7036001",
+      "name": "Chateau d´Astros Amour Rouge",
+      "vintage": "2024",
+      "evidence": "THE ESTATE PUBLISHES A PER-VINTAGE FICHE FOR OUR EXACT WINES AND IT IS NOT A DECLARATION. Château d'Astros, Vidauban (Var), AOP Côtes-de-Provence; Systembolaget's supplier is Premier Taste Sweden AB and the producer field is the estate. Its WordPress site publishes one page per range and, from the Amour range page, a 'Fiche produit' link per wine per vintage — a WordPress slug that 302s to a dated PDF under /wp-content/uploads/. TWO OF THOSE PDFS WERE FETCHED AND BOTH ARE OUR EXACT VINTAGE: FT_PRINT_Amour_B_2024-FR.pdf ('BLANC 2024', 100 % Rolle) and F-T-Amour-2024-rouge-FR-.pdf ('ROUGE 2024', Grenache & Syrah). Both extract cleanly and both carry the same fields: a range story, tasting notes, vinification, serving temperature and food pairing. VINIFICATION SAYS ONLY 'Sulfitage maîtrisé et respectueux' — sulphiting described in prose, which is exactly the tasting-note mention this project's rules say not to accept. THERE IS NO INGREDIENT LIST, NO NUTRITION TABLE AND NO ENERGY VALUE ON EITHER. THE SEPARATE SHOPIFY SHOP DOES NOT CARRY ONE EITHER. boutique-chateauastros.com is a Shopify storefront on its own host (products allowed by robots.txt); its Amour Blanc product page was fetched — 470 kB of server-rendered HTML — and contains no ingredient, nutrition, allergen or e-label content of any kind. The shop has also rolled forward to the 2025 ('Amour blanc BIO 2025', 75 cl and 6×75 cl), so the shop is a vintage ahead of the fiches and of two of our three bottles. The FR (EU) pages were used throughout. For this wine the fiche is F-T-Amour-2024-rouge-FR-.pdf, headed 'ROUGE 2024', Grenache & Syrah, matching Systembolaget 7036001 (Amour Rouge, 2024, 750 ml, 13,0 % vol, organic). Vintage matched, declaration absent.",
+      "note": null
+    },
+    {
+      "producer": "Chateau d´Astros",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS/TLS: astros.fr serves a self-signed certificate over https but 301s to www.chateauastros.com over plain http; chateaudastros.com fails TLS with TLSV1_ALERT_INTERNAL_ERROR; www.chateau-astros.com is a different host. The estate is www.chateauastros.com",
+        "https://www.chateauastros.com/robots.txt (Yoast, 'Disallow:' empty — everything allowed bar one plugin JSON)",
+        "https://www.chateauastros.com/sitemap_index.xml and /page-sitemap.xml (67 pages; there is no product sitemap — the shop is a separate host)",
+        "https://www.chateauastros.com/nos-vins/ (the five ranges: Amour, Absolu, Aventure, Commandeur, La Belle Vie en Provence)",
+        "https://www.chateauastros.com/nos-vins/amour/ (the Amour range page, linking the per-vintage fiches and the shop)",
+        "https://www.chateauastros.com/ft_print_amour_b_2024-fr/ -> /wp-content/uploads/2025/03/FT_PRINT_Amour_B_2024-FR.pdf (text extracted in full)",
+        "https://www.chateauastros.com/f-t-amour-2024-rouge-fr/ -> /wp-content/uploads/2026/01/F-T-Amour-2024-rouge-FR-.pdf (text extracted in full)",
+        "https://boutique-chateauastros.com/robots.txt (Shopify default, products allowed)",
+        "https://boutique-chateauastros.com/products/amour-blanc-bio-copie (the shop's Amour Blanc, which is the 2025)"
+      ],
+      "checked_at": "2026-08-07T07:55:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "9293001",
+      "name": "Chateau d'Astros Amour Rosé",
+      "vintage": "2025",
+      "evidence": "THE ESTATE PUBLISHES A PER-VINTAGE FICHE FOR OUR EXACT WINES AND IT IS NOT A DECLARATION. Château d'Astros, Vidauban (Var), AOP Côtes-de-Provence; Systembolaget's supplier is Premier Taste Sweden AB and the producer field is the estate. Its WordPress site publishes one page per range and, from the Amour range page, a 'Fiche produit' link per wine per vintage — a WordPress slug that 302s to a dated PDF under /wp-content/uploads/. TWO OF THOSE PDFS WERE FETCHED AND BOTH ARE OUR EXACT VINTAGE: FT_PRINT_Amour_B_2024-FR.pdf ('BLANC 2024', 100 % Rolle) and F-T-Amour-2024-rouge-FR-.pdf ('ROUGE 2024', Grenache & Syrah). Both extract cleanly and both carry the same fields: a range story, tasting notes, vinification, serving temperature and food pairing. VINIFICATION SAYS ONLY 'Sulfitage maîtrisé et respectueux' — sulphiting described in prose, which is exactly the tasting-note mention this project's rules say not to accept. THERE IS NO INGREDIENT LIST, NO NUTRITION TABLE AND NO ENERGY VALUE ON EITHER. THE SEPARATE SHOPIFY SHOP DOES NOT CARRY ONE EITHER. boutique-chateauastros.com is a Shopify storefront on its own host (products allowed by robots.txt); its Amour Blanc product page was fetched — 470 kB of server-rendered HTML — and contains no ingredient, nutrition, allergen or e-label content of any kind. The shop has also rolled forward to the 2025 ('Amour blanc BIO 2025', 75 cl and 6×75 cl), so the shop is a vintage ahead of the fiches and of two of our three bottles. The FR (EU) pages were used throughout. For this wine the estate's own range page links only ft_print_amour_rs_2024-fr — the 2024 rosé fiche — where Systembolaget 9293001 is the 2025. That PDF was NOT fetched: the format was already settled by the two fiches read above, so the only thing it could have added is a declaration the format does not contain, and it is a vintage behind our bottle in any case. The shop's Amour rosé page exists but the shop publishes no declaration.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-07T07:35:00Z",
+  "updated_at": "2026-08-07T07:55:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -4896,6 +4995,11 @@
       "at": "2026-08-07T07:35:00Z",
       "batch": "3g — Saget la Perrière, 4 wines (Sancerre La Perrière 2024, La Petite Perrière Sauvignon Blanc 2025, Pinot Noir Rosé 2025, Pinot Noir 2024)",
       "result": "4 attempted, 0 found, 4 not found, 0 rejected. A Loire house of real size whose site has NO product pages: twenty editorial URLs and nothing else, on both .com and .fr. Three of the four wines are the export brand La Petite Perrière, which does not appear on the producer's site at all. The house's 'Presse' media site was checked for the Carl Loewen Download-Center pattern and has brochures and logos, no eLabels. NOTABLE NEGATIVE FINDING: a German retailer (vinello.eu) publishes a full ingredient list for La Petite Perrière Sauvignon. It was not used and must not be — a retailer in another country is explicitly not a source under this project's rules — and it is recorded so a later run does not mistake it for a find."
+    },
+    {
+      "at": "2026-08-07T07:55:00Z",
+      "batch": "3g — Château d'Astros, 3 wines (Amour Blanc 2024, Amour Rouge 2024, Amour Rosé 2025)",
+      "result": "3 attempted, 0 found, 3 not found, 0 rejected. The estate documents its wines per vintage — 'Fiche produit' slugs that 302 to dated PDFs — and TWO OF THE THREE SWEDISH WINES HAVE THEIR OWN 2024 FICHE, our exact vintage. Both were read in full and neither has an ingredient list, a nutrition table or an energy value; their only additive-adjacent words are the prose 'Sulfitage maîtrisé et respectueux'. Its separate Shopify shop (boutique-chateauastros.com) carries nothing either and has already rolled to the 2025. CLOSES THE FRENCH BATCH ON THE SAME SHAPE AS REVELETTE: in France the near-miss is the fiche technique, and the vintage often matches, which makes the absence of a declaration the finding rather than a side effect of stale stock."
     }
   ]
 }
