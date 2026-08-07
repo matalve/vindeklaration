@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-07 cooperative run: 20 French producers, 61 wines, 0 found, 5 rejected, 183 French 2024+ wines untouched.",
-  "attempted": 201,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-07 Alsace run: 21 French producers, 62 wines, 0 found, 5 rejected, 182 French 2024+ wines untouched.",
+  "attempted": 202,
   "found": 18,
-  "not_found": 147,
+  "not_found": 148,
   "rejected": 36,
   "declarations": [
     {
@@ -5897,9 +5897,37 @@
       "vintage": "2025",
       "evidence": "A GROWER GROUP WITH A REAL WEBSHOP, AND ITS PRODUCT PAGES CARRY NEITHER A DECLARATION NOR A VINTAGE. Vignerons Proprietes Associes, Rue Emile Bilhau, 30510 Generac — a 1994 association of 20 chateaux and estates across nine appellations, three winemaking sites; Systembolaget's producer field is 'Vignerons Proprietes Associes' and the supplier is Ex Terra Wines AB. This is the fifth cooperative-shaped producer of the batch and it fails the same way the small estates did. TWO PRODUCT PAGES WERE READ, ONE FROM EACH OF OUR TWO BRANDS, and both return ZERO hits for ingr, nutri, sulfit, allerg and kcal in 198 kB of server-rendered HTML. What the template holds is Terroir, Cepage, Vinification, Degustation and Conservation — a tasting note, with a price and an add-to-cart button. THE DECISIVE FACT IS THE MISSING VINTAGE. Neither page states one anywhere: the only four-digit years in the whole of chapitre-3 are WordPress's own article:modified_time and dateModified metadata (2024-07-02), and the catalogue is organised one product per colour and format — three Mr Paul products, four Chapitre products — rather than one per bottling. Under the rule already recorded for Denis Pere & Fils, Barraud and Vigneau-Chevreau, AN UNDATED CUVEE PAGE CANNOT BE MATCHED TO A BOTTLING however much text it carries, so this producer could not have yielded an attachable record even if a list appeared tomorrow. That is worth saying precisely because the site is otherwise well built. Also checked and absent: no QR platform, no vin.co or Vincod short code, no alliance-alsace link, no e-label vendor of any kind. FR (EU) pages used; an /en/ mirror exists and was not used. Systembolaget's bottle is the ROSE; the page read here, chapitre-3, is the AOP Cotes du Rhone red (70 % Grenache, 30 % Syrah). The rose is one of chapitre, chapitre-2 or chapitre-magnum and was deliberately not opened, for the same reason.",
       "note": null
+    },
+    {
+      "producer": "Dopff & Irion",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.dopff-irion.com/robots.txt (356 bytes, one 'User-agent: *' group. It disallows the Flash placeholder, /404/, /mobile/, the image directories and the /de/ /es/ /it/ /cn/ /jp/ /dk/ /co/ language trees, and names http://www.dopff-irion.com/sitemap.php. /fr/ and /en/ are allowed; everything read here is allowed and NO robots exception was needed)",
+        "http://www.dopff-irion.com/sitemap.php (the whole site in eight language trees; the wine pages are /fr/les-vins/{id}/{slug} with an /en/vin/{id}/{slug} mirror, and there is a /fr/boutique)",
+        "https://www.dopff-irion.com/fr/les-vins/15/riesling-cuvee-rene-dopff-a-o-p-alsace (302s to the boutique product page below — on this platform the marketing URL and the shop URL are one page)",
+        "https://www.dopff-irion.com/fr/boutique/000100010000000452/riesling-cuvee-rene-dopff-a-o-p-alsace (345 kB, fully server-rendered; H1 'Riesling Cuvee Rene Dopff A.O.P. Alsace 2024')",
+        "https://www.dopff-irion.com/pdf/fr/riesling-cuvee-rene-dopff-a-o-p-alsace-2024-260.pdf (the per-vintage 'Fiche PDF' the product page links; 343 kB, text extracted in full with pypdf)"
+      ],
+      "checked_at": "2026-08-07T16:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "217301",
+      "name": "Dopff & Irion Cuvée René Dopff Riesling",
+      "vintage": "2024",
+      "evidence": "OUR EXACT BOTTLE IS ON THE PRODUCER'S OWN SHOP, AT OUR VINTAGE, AND THERE IS NO INGREDIENT LIST ANYWHERE ON IT. Vins d'Alsace Dopff & Irion, Riquewihr; Systembolaget 217301, supplier Solera Sweden AB. The product page is headed 'Riesling Cuvee Rene Dopff A.O.P. Alsace 2024', sold as 6 x 75 cl, and states 'alc 12.5% vol.' against Systembolaget's 12,0 — 0,5 pp, at the EU labelling tolerance and not beyond it, so the identity is not in doubt. Producer, cuvee, vintage and pack all match. WHAT THE PAGE CARRIES INSTEAD OF A DECLARATION: Cepage, Vendange, Service, Conservation, Vinification, Degustation, Accords Gourmands — a tasting note — plus three pictograms in a block the CSS calls '_legal': the pregnant-woman warning, an ecoemballages mark and a SULFITES icon. An allergen pictogram is not an ingredient list and there is no nutrition table and no energy value. THE PER-VINTAGE FICHE PDF IS THE SAME NON-DECLARATION AS THE REST OF FRANCE. Its slug carries the vintage (…-2024-260.pdf), it was fetched once and its text extracted in full, and it holds exactly the fields already on the page: cepage, degre d'alcool, vendange, service, conservation, vinification, degustation, accords. No substances, no kcal. This is the fiche technique pattern this project has now seen at Revelette, Astros, Gerard Bertrand and Clos Cibonne. NO PLATFORM IS LINKED. The page's outbound links are Facebook, Instagram, a share widget, ecoemballages and info-calories-alcool.org — the French drinks industry's per-CATEGORY calorie calculator, already recorded here as looking like compliance and not being it. No m. subdomain, no vincod.com short code, no alliance-alsace.com GS1 URL, no u-label, nothing. THE PLATFORM IS VINIUM, the same framework as La Cave des Vignerons de Pfaffenheim ('Creation Vinium' in the footer), and that is not a coincidence: Dopff & Irion belongs to the Pfaffenheim group. Pfaffenheim was probed in the previous batch and publishes no list either, so this is one owner failing twice rather than two independent observations. ONE USEFUL DIFFERENCE FROM PFAFFENHEIM: there the /fr/nos_vins/ marketing pages render client-side and only the shop was readable. Here the marketing URL simply redirects into the shop, so the whole Vinium deployment is server-rendered and 'no declaration' is a real observation and not a rendering artefact. FR (EU) pages used throughout; an /en/ mirror exists and was not needed."
     }
   ],
-  "updated_at": "2026-08-07T14:45:00Z",
+  "updated_at": "2026-08-07T16:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -6020,6 +6048,11 @@
       "at": "2026-08-07T14:45:00Z",
       "batch": "3c — the French cooperative hypothesis, plus two Alsace houses picked for sibling economics. Cave de Turckheim, La Cave des Vignerons de Pfaffenheim, Cellier des Dauphins, Les Quatre Tours, Gustave Lorentz, Hugel, Vignerons Proprietes Associes — 12 wines, all vintage 2024 or 2025, all not_declared",
       "result": "12 attempted, 0 found, 9 not found, 3 rejected. THE COOPERATIVE HYPOTHESIS DID NOT HOLD: five co-ops (Turckheim, Pfaffenheim, Cellier des Dauphins, Les Quatre Tours, Vignerons Proprietes Associes) produced one declaration between them, and it was a vintage behind. BUT THE RUN FOUND TWO PLATFORMS. (1) ALLIANCE NUTRI, alliance-alsace.com/01/{gtin}/22/{variant} — the project's first GS1 Digital Link and its first third-party e-label vendor on a French producer's page, server-rendered, 11 EU languages including Svenska, honours Accept-Language, and states designation, sweetness, vintage, format and GTIN. Found via Cave de Turckheim's 'INGREDIENTS ET NUTRITION' button; rejected only because the shop had not rolled forward to our 2025. (2) VINCOD IS VIN.CO, and m.rhonea.fr and m.hugel.com are the same platform — images from cdn.vin.co, every short code mirrored at vincod.com. Its per-wine page carries a <select id=millesime> naming the code for every vintage back to 2007, so OUR vintage is reachable from the producer's own control, and the vintage page can link a true e-label at /{code}/n/{hash}/{lang} with lot number, labelled alcohol, ingredients and nutrition per 100 ml and per 125 ml. That corrects the earlier reading of Rhonea: the platform is capable of an ingredient list and Rhonea had not filled it in. TWO COMPLETE HUGEL DECLARATIONS FOR OUR EXACT 2024 BOTTLES WERE READ AND BOTH WERE REJECTED ON STRENGTH — 12 % vol against Systembolaget's 13,0 and 14 % vol against 13,0, each twice the 0,5 % vol tolerance and in opposite directions, so not a rounding artefact. The third Hugel, whose strength agrees exactly, is the one whose page carries no e-label link. Also first in this project: a GEOBLOCK — boutique.gustavelorentz.com answers 403 'This website is only authorised from France and Germany', treated as a technological measure and absolute."
+    },
+    {
+      "at": "2026-08-07T16:05:00Z",
+      "batch": "3d — the rest of the Alsace 2024+ undeclared pool. Dopff & Irion, Blanck Andre et ses Fils, SARL Etienne Simonis, Faller Henri et Luc — the four French producers left in Alsace after batch 3c, one wine each. Picked because both French e-label platforms found so far (Alliance Nutri, Vincod) were found in Alsace.",
+      "result": "IN PROGRESS. Dopff & Irion: 1 wine, not found. Its Riesling Cuvee Rene Dopff 2024 is on the producer's own Vinium shop at our exact vintage and pack, with a sulphite pictogram, an alc 12.5 % vol line and no ingredient list, no nutrition table and no linked platform; the per-vintage fiche PDF holds the same fields and no substances. Same Vinium framework as Pfaffenheim, and the same owner — Dopff & Irion belongs to the Pfaffenheim group — so it is one owner failing twice, not two independent observations."
     }
   ]
 }
