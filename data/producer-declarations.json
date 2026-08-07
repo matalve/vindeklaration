@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 187,
+  "attempted": 189,
   "found": 18,
-  "not_found": 136,
+  "not_found": 138,
   "rejected": 33,
   "declarations": [
     {
@@ -5477,9 +5477,73 @@
       "vintage": "2024",
       "evidence": "RHONÉA PUBLISHES A COMPLETE, PROPERLY STRUCTURED DECLARATION — FOR THE VINTAGE AFTER OURS. Rhonéa (CVR, 228 route de Carpentras, 84190 Beaumes-de-Venise), the Vacqueyras/Beaumes-de-Venise cooperative group; Systembolaget's supplier is Vintedge AB and the producer field is Rhonéa, which matches. THE FIRST FRENCH PRODUCER IN THIS PROJECT TO PUBLISH AN INGREDIENT LIST AT ALL. It sits inline on the PrestaShop product page under a heading 'Ingrédients / Nutrition' — a 'bloc_ingnutri' div in the server's HTML, no JavaScript, no vendor platform — with an Ingrédients paragraph and a 'Déclaration nutritionnelle' table per 100 ml (Energie kJ and kcal, Matières grasses, dont acides gras saturés, Glucides, dont sucres, Protéines, Sel). That is the full mandated set. THE PRODUCT PAGE STATES ITS OWN VINTAGE IN THE HEADING, AND IT IS 2025 FOR BOTH OF OUR WINES, where Systembolaget's bottles are 2024. Its 'Le millésime' paragraph confirms it independently ('2025 est un millésime précoce et contrasté…'). PrestaShop keeps one product per cuvée and edits it forward, so there is no 2024 page on the shop and no per-vintage archive. AND THE PRODUCER'S OWN PER-VINTAGE CHANNEL, WHICH DOES COVER OUR 2024, CARRIES NO INGREDIENT LIST. Rhonéa runs a QR platform on its own subdomain, m.rhonea.fr, one short code per wine per vintage, server-rendered, with a language selector and a vintage switcher. https://m.rhonea.fr/M723LF IS 'Passe Colline, AOC Ventoux, Rouge, 2024' — our exact wine and vintage, in French, published by CVR at Beaumes-de-Venise. Its whole content is Présentation, Le millésime, Terroir, Vinification, Cépages (Carignan, Grenache noir, Syrah), Spécifications ('Sucre résiduel : inferieur à 2 g/l. Contient des sulfites.'), Service, Dégustation and Accords gourmands. NO INGREDIENT LIST AND NO NUTRITION TABLE — the sulphite line is an allergen statement. Its downloadable fiche produit PDF was fetched and extracted and repeats exactly the same fields and nothing more. So the 2024 has a per-vintage disclosure page without a declaration, and the 2025 has a declaration without being our bottle. Attaching the 2025 list to the 2024 bottle is precisely the substitution the vintage rule forbids, and the two cuvées' lists differ from each other in their stabilisers, which is direct evidence that these lists are formulated per wine rather than boilerplate. FR (EU) pages used throughout; a /gb/ mirror exists and was not used. THE 2025 WHITE'S LIST, RECORDED HERE ONLY AS EVIDENCE AND NOT ATTACHED: 'Raisins, Conservateurs et Antioxydants (sulfites, Acide L-ascorbique), Agents stabilisateurs (Acide citrique, Carboxyméthylcellulose), Mise en bouteille sous atmosphère protectrice', same nutrition figures. NOTE THAT IT DIFFERS FROM THE RED'S — citric acid and carboxymethylcellulose against gum arabic and potassium polyaspartate — which is why a per-cuvée, per-vintage list cannot be borrowed sideways. For this white no m.rhonea.fr code was opened: the platform's format was settled by the red's 2024 page and its PDF, and finding the white's code would have meant searching for or guessing a short code rather than following the producer's own linking.",
       "note": null
+    },
+    {
+      "producer": "Les Vignerons de Tavel",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://boutique.cave-tavel-lirac.fr/robots.txt (stock Shopify; /products/ allowed)",
+        "https://boutique.cave-tavel-lirac.fr/sitemap.xml and /sitemap_pages_1.xml (SEVEN pages in the whole shop: contact, CGV, confidentialité, mentions légales, suivi colissimo, guide Hachette, nos gammes — no ingredients page, no e-label page)",
+        "https://boutique.cave-tavel-lirac.fr/sitemap_products_1.xml (54 products; the shop keeps SEPARATE per-vintage products where the vintage matters — tavel-tresor-des-sables-2023 and -2025 both exist)",
+        "https://boutique.cave-tavel-lirac.fr/products/tavel-tresor-des-sables-2025 (H1 'TAVEL Trésor des sables 2025')",
+        "https://boutique.cave-tavel-lirac.fr/products/cuvee-royale (H1 'TAVEL Cuvée Royale 2025')",
+        "https://cave-tavel-lirac.fr/robots.txt (WordPress/WooCommerce; the two 'User-agent: *' groups allow everything bar wp-admin, wc-logs and add-to-cart query strings. It also names ClaudeBot, GPTBot, CCBot, Bytespider and others with Disallow: / — we are none of them, our User-Agent is the project's own, and the '*' group is what applies. Its Content-Signal line reads search=yes, ai-train=no, use=reference)",
+        "https://cave-tavel-lirac.fr/sitemap_index.xml and /product-sitemap.xml (58 product URLs)",
+        "https://cave-tavel-lirac.fr/produit/tresor-des-sables/ (the marketing site's product page — 'Année : 2022')"
+      ],
+      "checked_at": "2026-08-07T11:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7700301",
+      "name": "Tavel Trésor des Sables Les Vignerons de Tavel & Lirac",
+      "vintage": "2025",
+      "evidence": "A COOPERATIVE WITH TWO SITES, PER-VINTAGE PRODUCTS, OUR EXACT VINTAGE ON SALE, AND NO INGREDIENT LIST ANYWHERE. Les Vignerons de Tavel & Lirac, 04 66 50 03 57, the 1937 Tavel cooperative merged with the Lirac cave in 2018 and making roughly half of all Tavel; Systembolaget's supplier is Terrific Wines AB and the producer field is the cooperative. It runs a WooCommerce marketing site (cave-tavel-lirac.fr) and a separate Shopify boutique (boutique.cave-tavel-lirac.fr), and BOTH ARE SERVER-RENDERED, so a negative here is a real observation. THIS WAS THE STRONGEST-POSITIONED FRENCH PRODUCER OF THE BATCH AND IT STILL PUBLISHES NOTHING. Both Swedish bottles are the 2025, which is the current release; the Shopify shop sells both cuvées AT EXACTLY THAT VINTAGE ('TAVEL Trésor des sables 2025' and 'TAVEL Cuvée Royale 2025' in the H1 and 'Millésime : 2025' in the meta description); and the shop even keeps separate products per vintage where it matters, so it is structurally capable of a per-vintage declaration. BOTH PRODUCT PAGES RETURN ZERO HITS for ingrédient, nutrition, allergène, sulfite, kcal, énergie and conservateur. The Shopify store's complete page sitemap is seven administrative pages with no ingredients or e-label page among them, and the only non-Shopify hosts referenced anywhere on a product page are judge.me, PayPal and Google Fonts — there is no QR platform and no e-label vendor. The WooCommerce site's own product page for Trésor des Sables is a stale 2022 with the same fields and no list, and its 'Télécharger la fiche produit' is FICHE-TAVEL-TRESOR-DES-SABLES-fr.pdf under /wp-content/uploads/2018/07/ — a 2018 upload, predating the obligation entirely, so it was deliberately NOT fetched. FR (EU) pages used; /en/ and 简体中文 mirrors exist. The comparison with Rhonéa in the same batch is the point: two Rhône cooperative groups of similar size and similar e-commerce sophistication, one publishing the full mandated set inline and the other publishing nothing at all.",
+      "note": null
+    },
+    {
+      "producer": "Les Vignerons de Tavel",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://boutique.cave-tavel-lirac.fr/robots.txt (stock Shopify; /products/ allowed)",
+        "https://boutique.cave-tavel-lirac.fr/sitemap.xml and /sitemap_pages_1.xml (SEVEN pages in the whole shop: contact, CGV, confidentialité, mentions légales, suivi colissimo, guide Hachette, nos gammes — no ingredients page, no e-label page)",
+        "https://boutique.cave-tavel-lirac.fr/sitemap_products_1.xml (54 products; the shop keeps SEPARATE per-vintage products where the vintage matters — tavel-tresor-des-sables-2023 and -2025 both exist)",
+        "https://boutique.cave-tavel-lirac.fr/products/tavel-tresor-des-sables-2025 (H1 'TAVEL Trésor des sables 2025')",
+        "https://boutique.cave-tavel-lirac.fr/products/cuvee-royale (H1 'TAVEL Cuvée Royale 2025')",
+        "https://cave-tavel-lirac.fr/robots.txt (WordPress/WooCommerce; the two 'User-agent: *' groups allow everything bar wp-admin, wc-logs and add-to-cart query strings. It also names ClaudeBot, GPTBot, CCBot, Bytespider and others with Disallow: / — we are none of them, our User-Agent is the project's own, and the '*' group is what applies. Its Content-Signal line reads search=yes, ai-train=no, use=reference)",
+        "https://cave-tavel-lirac.fr/sitemap_index.xml and /product-sitemap.xml (58 product URLs)",
+        "https://cave-tavel-lirac.fr/produit/tresor-des-sables/ (the marketing site's product page — 'Année : 2022')"
+      ],
+      "checked_at": "2026-08-07T11:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7923601",
+      "name": "Tavel Cuvée Royale Les Vignerons de Tavel",
+      "vintage": "2025",
+      "evidence": "A COOPERATIVE WITH TWO SITES, PER-VINTAGE PRODUCTS, OUR EXACT VINTAGE ON SALE, AND NO INGREDIENT LIST ANYWHERE. Les Vignerons de Tavel & Lirac, 04 66 50 03 57, the 1937 Tavel cooperative merged with the Lirac cave in 2018 and making roughly half of all Tavel; Systembolaget's supplier is Terrific Wines AB and the producer field is the cooperative. It runs a WooCommerce marketing site (cave-tavel-lirac.fr) and a separate Shopify boutique (boutique.cave-tavel-lirac.fr), and BOTH ARE SERVER-RENDERED, so a negative here is a real observation. THIS WAS THE STRONGEST-POSITIONED FRENCH PRODUCER OF THE BATCH AND IT STILL PUBLISHES NOTHING. Both Swedish bottles are the 2025, which is the current release; the Shopify shop sells both cuvées AT EXACTLY THAT VINTAGE ('TAVEL Trésor des sables 2025' and 'TAVEL Cuvée Royale 2025' in the H1 and 'Millésime : 2025' in the meta description); and the shop even keeps separate products per vintage where it matters, so it is structurally capable of a per-vintage declaration. BOTH PRODUCT PAGES RETURN ZERO HITS for ingrédient, nutrition, allergène, sulfite, kcal, énergie and conservateur. The Shopify store's complete page sitemap is seven administrative pages with no ingredients or e-label page among them, and the only non-Shopify hosts referenced anywhere on a product page are judge.me, PayPal and Google Fonts — there is no QR platform and no e-label vendor. The WooCommerce site's own product page for Trésor des Sables is a stale 2022 with the same fields and no list, and its 'Télécharger la fiche produit' is FICHE-TAVEL-TRESOR-DES-SABLES-fr.pdf under /wp-content/uploads/2018/07/ — a 2018 upload, predating the obligation entirely, so it was deliberately NOT fetched. FR (EU) pages used; /en/ and 简体中文 mirrors exist. The comparison with Rhonéa in the same batch is the point: two Rhône cooperative groups of similar size and similar e-commerce sophistication, one publishing the full mandated set inline and the other publishing nothing at all.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-07T10:55:00Z",
+  "updated_at": "2026-08-07T11:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -5590,6 +5654,11 @@
       "at": "2026-08-07T10:55:00Z",
       "batch": "3h — Rhonéa, 2 wines (Ventoux Passe Colline Blanc 2024, Ventoux Passe Colline Rouge 2024)",
       "result": "2 attempted, 0 found, 0 not found, 2 REJECTED ON VINTAGE. THE FIRST FRENCH PRODUCER IN THIS PROJECT THAT PUBLISHES AN INGREDIENT LIST AT ALL — a full mandated set, inline and server-rendered, on its own PrestaShop product page under 'Ingrédients / Nutrition'. Both of our wines are the 2024 and the shop has rolled to the 2025, and PrestaShop keeps one product per cuvée, so there is no 2024 page. Rhonéa ALSO runs a per-vintage QR platform on its own subdomain, m.rhonea.fr/{code}, whose page for our exact 2024 red is server-rendered and readable and carries residual sugar and 'Contient des sulfites' and NO ingredient list — so the vintage that has a per-vintage disclosure has no declaration, and the vintage that has a declaration is not ours. France's failure mode has finally shifted from Germany's shape to Germany's other shape."
+    },
+    {
+      "at": "2026-08-07T11:20:00Z",
+      "batch": "3h — Les Vignerons de Tavel & Lirac, 2 wines (Tavel Trésor des Sables 2025, Tavel Cuvée Royale 2025)",
+      "result": "2 attempted, 0 found, 2 not found, 0 rejected. Chosen as a direct replication of Rhonéa — a second Rhône cooperative with a modern shop — and it did not replicate. The co-op runs a WooCommerce marketing site and a Shopify boutique, both server-rendered, sells BOTH of our cuvées at OUR EXACT 2025 vintage, keeps separate per-vintage products, and returns zero hits for ingrédient, nutrition, allergène, sulfite, kcal or énergie on either product page. Its Shopify page sitemap is seven administrative pages with no e-label page, and no QR host appears anywhere. Its downloadable fiche produit lives under /wp-content/uploads/2018/07/ and was not fetched: a 2018 upload cannot carry a declaration the regulation only required from 2023."
     }
   ]
 }
