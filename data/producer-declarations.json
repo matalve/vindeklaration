@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 183,
+  "attempted": 185,
   "found": 18,
-  "not_found": 134,
+  "not_found": 136,
   "rejected": 31,
   "declarations": [
     {
@@ -5357,9 +5357,67 @@
       "vintage": "2024",
       "evidence": "A FOUR-PAGE HAND-BUILT STATIC SITE, NO WEBSHOP, NO VINTAGE ANYWHERE. Domaine Vigneau-Chevreau, 4 rue du Clos Baglin, Vallée de Vaux, 37210 Chançay, 26 ha of Chenin in AOC Vouvray farmed biodynamically; Systembolaget's supplier is Tryffelsvinet AB, the producer field is the estate and Systembolaget flags both wines organic, which matches. The site is four pages of static HTML (accueil, vins, terroir, domaine) with an English mirror and no e-commerce of any kind — no 'boutique', no 'acheter', no outbound shop link. /vins.html carries the whole range as prose: cépage, terroir, vine age, harvest, residual sugar in g/l, tasting note and food pairings. IT NAMES BOTH OF OUR CUVÉES BY NAME — 'Silex, Vouvray sec' and 'Clos de Rougemont, Abbaye de Marmoutier' — so the producer and cuvée match is settled, and there is NO INGREDIENT LIST, NO NUTRITION TABLE, NO ENERGY VALUE, NO ALLERGEN LINE AND NO E-LABEL LINK on it. NO VINTAGE IS STATED FOR ANY WINE, so the page is a standing description of the cuvée rather than a per-bottle disclosure and could not have been vintage-matched even had it carried a list. The only additive-adjacent words on the site belong to a different wine: the Pet. Nat. is described as 'élaboré sans aucun additif (sans sulfites)' — prose about a cuvée Systembolaget does not stock from this estate. FR (EU) pages used throughout.",
       "note": null
+    },
+    {
+      "producer": "Domaine Paul Blanck",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.blanck.com/robots.txt (404 — the host answers its own styled 404 page with HTTP 404, so there are no directives)",
+        "https://www.blanck.com/sitemap_index.xml (404, same page)",
+        "https://www.blanck.com/boutique/ (the whole shop on one page — 34 products with a per-product vintage in an 'item-date' div, which is a ONE-REQUEST VINTAGE CENSUS of the estate's entire range)",
+        "https://www.blanck.com/boutique/alsace-cepage-tradition/classiques/riesling-classique-125619.html (the shop's Riesling, vintage 2025)",
+        "https://www.blanck.com/boutique/alsace-cepage-tradition/classiques/pinot-noir-d-alsace-125615.html (the shop's 'Pinot-Noir (rouge) Cuvée spéciale', vintage 2024)"
+      ],
+      "checked_at": "2026-08-07T10:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7678601",
+      "name": "Paul Blanck Riesling",
+      "vintage": "2024",
+      "evidence": "AN ALSACE ESTATE WITH ITS OWN SERVER-RENDERED WEBSHOP AND PER-VINTAGE PRODUCT PAGES, AND NO INGREDIENT LIST ON ANY OF THEM. Domaine Paul Blanck & Fils, 32 Grand'Rue, 68240 Kientzheim (Kaysersberg Vignoble), 36 ha, third generation Frédéric and Philippe Blanck; Systembolaget's supplier is Fine Brands Sweden AB and the producer field is the estate. The shop is a bespoke PHP storefront on the estate's own domain with one page per wine, each stating its VINTAGE, price and bottle size, then Accords mets-vins, Terroir, Vinification, Élevage, Dégustation and a sugar/acid perception scale. TWO PRODUCT PAGES WERE READ AND BOTH RETURN ZERO HITS for ingrédient, nutrition, allergène, e-label, sulfite, kcal, énergie and QR. There is no ingredient list, no nutrition table, no energy value, no allergen line and no e-label link anywhere on the shop. The estate's only nutrition-adjacent gesture is a FOOTER LOGO LINKING TO info-calories-alcool.org, the French drinks industry's generic calorie-calculator site — a per-category calculator, not a per-wine declaration, and not usable as a source. It is worth recognising because it looks like compliance and is not. THE SHOP'S OWN LISTING GIVES EVERY VINTAGE IN ONE REQUEST: Riesling 2025, Pinot d'Alsace 2024, Pinot-Noir Cuvée spéciale 2024, Sylvaner VV 2024, Pinot Gris 2022, Gewurztraminer 2023, and the crus and grands crus back to 1999. FR (EU) pages used; an /en/ mirror exists. FOR THIS WINE THE SHOP HAS ROLLED FORWARD: its Riesling 'Classiques' is the 2025 where Systembolaget's bottle is the 2024, so the page is not about our bottle. Nothing was found to reject; recorded as not found.",
+      "note": null
+    },
+    {
+      "producer": "Domaine Paul Blanck",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.blanck.com/robots.txt (404 — the host answers its own styled 404 page with HTTP 404, so there are no directives)",
+        "https://www.blanck.com/sitemap_index.xml (404, same page)",
+        "https://www.blanck.com/boutique/ (the whole shop on one page — 34 products with a per-product vintage in an 'item-date' div, which is a ONE-REQUEST VINTAGE CENSUS of the estate's entire range)",
+        "https://www.blanck.com/boutique/alsace-cepage-tradition/classiques/riesling-classique-125619.html (the shop's Riesling, vintage 2025)",
+        "https://www.blanck.com/boutique/alsace-cepage-tradition/classiques/pinot-noir-d-alsace-125615.html (the shop's 'Pinot-Noir (rouge) Cuvée spéciale', vintage 2024)"
+      ],
+      "checked_at": "2026-08-07T10:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7377601",
+      "name": "Paul Blanck Pinot Noir",
+      "vintage": "2024",
+      "evidence": "AN ALSACE ESTATE WITH ITS OWN SERVER-RENDERED WEBSHOP AND PER-VINTAGE PRODUCT PAGES, AND NO INGREDIENT LIST ON ANY OF THEM. Domaine Paul Blanck & Fils, 32 Grand'Rue, 68240 Kientzheim (Kaysersberg Vignoble), 36 ha, third generation Frédéric and Philippe Blanck; Systembolaget's supplier is Fine Brands Sweden AB and the producer field is the estate. The shop is a bespoke PHP storefront on the estate's own domain with one page per wine, each stating its VINTAGE, price and bottle size, then Accords mets-vins, Terroir, Vinification, Élevage, Dégustation and a sugar/acid perception scale. TWO PRODUCT PAGES WERE READ AND BOTH RETURN ZERO HITS for ingrédient, nutrition, allergène, e-label, sulfite, kcal, énergie and QR. There is no ingredient list, no nutrition table, no energy value, no allergen line and no e-label link anywhere on the shop. The estate's only nutrition-adjacent gesture is a FOOTER LOGO LINKING TO info-calories-alcool.org, the French drinks industry's generic calorie-calculator site — a per-category calculator, not a per-wine declaration, and not usable as a source. It is worth recognising because it looks like compliance and is not. THE SHOP'S OWN LISTING GIVES EVERY VINTAGE IN ONE REQUEST: Riesling 2025, Pinot d'Alsace 2024, Pinot-Noir Cuvée spéciale 2024, Sylvaner VV 2024, Pinot Gris 2022, Gewurztraminer 2023, and the crus and grands crus back to 1999. FR (EU) pages used; an /en/ mirror exists. FOR THIS WINE THE VINTAGE MATCHES: the shop's Pinot Noir is the 2024, 0,75 l, and that page was read in full and carries no declaration. One caveat on identity, which does not change the outcome: the estate sells the wine as 'Pinot-Noir (rouge) Cuvée spéciale' while Systembolaget calls it 'Paul Blanck Pinot Noir', and the estate also makes a grand cru \"F\" Pinot Noir (2020 on the shop). Had a declaration existed here it would have needed the cuvée question settled before attaching it; there is none, so the wine is recorded as not found.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-07T10:00:00Z",
+  "updated_at": "2026-08-07T10:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -5460,6 +5518,11 @@
       "at": "2026-08-07T10:00:00Z",
       "batch": "3h — Domaine Vigneau-Chevreau, 2 wines (Vouvray Cuvée Silex 2024, Vouvray Clos de Rougemont 2024)",
       "result": "2 attempted, 0 found, 2 not found, 0 rejected. A biodynamic 26 ha Vouvray estate whose entire web presence is four static pages and no shop. Its one range page names both of our cuvées and states residual sugar in g/l but no vintage and no ingredient list. Four requests. Third French estate in a row where the failure is that nothing is published, not that anything is unreadable."
+    },
+    {
+      "at": "2026-08-07T10:20:00Z",
+      "batch": "3h — Domaine Paul Blanck, 2 wines (Paul Blanck Riesling 2024, Paul Blanck Pinot Noir 2024)",
+      "result": "2 attempted, 0 found, 2 not found, 0 rejected. TESTED THE HYPOTHESIS THAT ALSACE MIGHT FOLLOW GERMAN E-LABEL PRACTICE, AND IT DID NOT. A 36 ha Kientzheim estate with its own bespoke webshop, one page per wine, an explicit vintage field on every product and the current release of our Pinot Noir at our exact vintage — and zero hits for ingrédient, nutrition, allergène, e-label, sulfite or kcal on any page. Its only nutrition gesture is a footer logo linking to info-calories-alcool.org, the industry's generic calorie calculator, which looks like compliance and is not a per-wine declaration. Useful mechanic: /boutique/ lists all 34 products with a per-product vintage, a one-request census of the whole range."
     }
   ]
 }
