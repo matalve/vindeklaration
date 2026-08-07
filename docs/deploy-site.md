@@ -163,3 +163,11 @@ Kept as a **manual-only** standby. It needs `CLOUDFLARE_API_TOKEN` and
 `CLOUDFLARE_ACCOUNT_ID` as repository secrets, which do not exist, so it fails
 until someone adds them. That is the intended state. Do not put it back on
 `push`: with the Git integration connected, both would build the same commit.
+
+**Both standby workflows are stale until PR #1's body is applied.** The change
+that moved the dataset out of git could not touch `.github/workflows/` (the
+authoring token lacked the `workflow` scope), so `deploy.yml` still builds
+without downloading `wines.json` first and `update.yml` still commits the
+dataset files. Their updated contents are in PR #1's body; paste them in with
+workflow-scoped credentials at the same time as the build-command change
+above. Remove this paragraph when that is done.
