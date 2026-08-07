@@ -6,24 +6,9 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
-   "token": "druvorkonserverings",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-2014901/"
-  },
-  {
-   "token": "558gaser",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-2014901/"
-  },
-  {
    "token": "muscat",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-2030541/"
-  },
-  {
-   "token": "ingredienserråmaterial",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-253401/"
   },
   {
    "token": "polygreen",
@@ -46,109 +31,22 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-259711/"
   },
   {
-   "token": "allergenersulfiter",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-3451201/"
-  },
-  {
    "token": "syttegulatorer",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
-  },
-  {
-   "token": "öäå",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5335301/"
-  },
-  {
-   "token": "sackarossurhetsreglerande",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7180801/"
-  },
-  {
-   "token": "cas9000",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7236101/"
-  },
-  {
-   "token": "cas16731",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7236101/"
-  },
-  {
-   "token": "odesa",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7507201/"
-  },
-  {
-   "token": "black",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7507201/"
-  },
-  {
-   "token": "pinot",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7521401/"
-  },
-  {
-   "token": "noir",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7521401/"
-  },
-  {
-   "token": "mest",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7615301/"
-  },
-  {
-   "token": "8gummi",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7825801/"
-  },
-  {
-   "token": "sulfiteraskorbinsyra",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7917501/"
-  },
-  {
-   "token": "gecoll",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9323601/"
-  },
-  {
-   "token": "supra",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9323601/"
-  },
-  {
-   "token": "ammoniumbisulfit",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9435501/"
   }
  ],
  "fuzzy_matches": [
   {
-   "match": "skorbinsyra -> askorbinsyra",
+   "match": "konserverings -> konserverings",
    "wines": 1
   },
   {
-   "match": "kaliumpoluasparat -> kaliumpolyasparat",
+   "match": "surhetsreglerande -> surhetsreglerande",
    "wines": 1
   },
   {
-   "match": "kaliummetabisilfit -> kaliummetabisulfit",
-   "wines": 1
-  },
-  {
-   "match": "kalumbisulfit -> kaliumbisulfit",
-   "wines": 1
-  },
-  {
-   "match": "matavinsyra -> metavinsyra",
-   "wines": 1
-  },
-  {
-   "match": "kopparsulfatpentahydrat -> kopparsulfat pentahydrat",
+   "match": "askorbinsyra -> askorbinsyra",
    "wines": 1
   }
  ]
