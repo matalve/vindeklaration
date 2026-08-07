@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 179,
+  "attempted": 181,
   "found": 18,
-  "not_found": 130,
+  "not_found": 132,
   "rejected": 31,
   "declarations": [
     {
@@ -5235,9 +5235,75 @@
       "vintage": "2024",
       "evidence": "AN 11-PAGE STATIC SITE WITH ONE PAGE PER APPELLATION, NO WEBSHOP AND A DEAD BUY LINK. Domaine Barraud (Daniel & Julien Barraud), Vergisson, 71960, Mâconnais; Systembolaget's supplier is Tryffelsvinet AB and the producer field is the estate, which matches. The site is hand-built static HTML, copyright 2014, sitemap lastmod 2010, with pages for Mâcon Villages, Saint-Véran and Pouilly-Fuissé rather than per-wine pages. TWO OF THE THREE APPELLATION PAGES WERE READ IN FULL AND CARRY NO INGREDIENT LIST, NO NUTRITION TABLE, NO ENERGY VALUE, NO ALLERGEN LINE AND NO E-LABEL LINK — every keyword grep came back empty, which on a 8–13 kB hand-written page is conclusive rather than suggestive. Each wine gets a paragraph on soil, planting year and vinification (fût, demi-muid, cuve) and NO VINTAGE IS STATED ANYWHERE on either page, so even a declaration found here could not have been vintage-matched. The 'Acheter' buttons beside every wine have href='#' — dead — and the only real outbound sales link on the site is to the marketplace restonsenvigne.fr, whose page for this estate now 404s. That marketplace would not have been usable as a source in any case (a third-party retailer, like vinello.eu), but it is worth recording that the estate's own direct-sales channel is broken: there is no consumer-facing surface at all for a QR destination to sit on. The FR pages were used; an /en/ mirror exists and is the same content. THE CUVÉE NAMES DO LINE UP where they appear: the Pouilly-Fuissé page names 'Pouilly Fuissé Alliance' and the Mâcon page names 'Mâcon Fuissé' (described as a calcaire à chailles soil, which is our 'Les Chailles') and 'Mâcon Vergisson La Roche'.",
       "note": null
+    },
+    {
+      "producer": "Domaines Bunan",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://bunan.com/robots.txt (29 bytes, and its ONLY block is 'User-agent: Scrapy / Allow: /' — there is no User-agent: * group at all, so nothing is disallowed)",
+        "https://bunan.com/nos-vins-rouge-rose-et-blanc-bandol-et-cotes-de-provence-sud-de-la-france/ (the estate's range page, 275 kB, all cuvées as an Essential Grid; greps for ingrédient/nutrition/allergène/e-label/étiquette/sulfite/kcal returned only JS option names)",
+        "https://bunan.com/nos_vins/moulin-des-costes-3/ (the per-wine page for the white; 62 kB of which the body is a grid placeholder — no wine text at all, and no declaration)",
+        "https://bunan.com/nos_vins/chateau-la-rouviere-3/ (same shape)",
+        "https://boutique.bunan.com/robots.txt (stock PrestaShop; product pages allowed, only cart/account/sort-and-search query strings disallowed)",
+        "https://boutique.bunan.com/sitemap.xml (404)",
+        "https://boutique.bunan.com/fr/2-bandol (the Bandol category)",
+        "https://boutique.bunan.com/fr/bandol/12-bandol-moulin-des-costes-blanc-2019.html (H1 'MOULIN DES COSTES BLANC 2024' — the slug is stale, the product is our vintage)",
+        "https://boutique.bunan.com/fr/bandol/3-20-bandol-chateau-la-rouviere-blanc-2021.html (H1 'CHATEAU LA ROUVIERE BLANC 2025' — also stale-slugged, and a vintage ahead of ours)"
+      ],
+      "checked_at": "2026-08-07T09:45:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7852401",
+      "name": "Moulin des Costes Blanc Domaines Bunan",
+      "vintage": "2024",
+      "evidence": "THE ESTATE HAS A REAL WEBSHOP, THE PRODUCT PAGE IS SERVER-RENDERED, AND THERE IS NO INGREDIENT LIST ON IT. Domaines Bunan, 338 bis chemin de Fontanieu, La Cadière d'Azur (83), AOP Bandol; Systembolaget's supplier is Vingourmet Sweden AB and the producer field is the estate. The estate runs a WordPress marketing site (bunan.com) whose per-wine pages are empty grid placeholders, and a separate PrestaShop boutique (boutique.bunan.com) that is genuinely server-rendered. WHAT THE PRODUCT PAGE CARRIES IS A FEATURES TABLE — Terroir, Vinification, Cépages, Caractéristiques, Dégustation, Accord mets et vin, Temps de garde, Degré, Label — plus a description block reading in full: 'Contient des sulfites. La consommation de boissons alcoolisées pendant la grossesse, même en faible quantité, peut avoir des conséquences graves sur la santé de l'enfant.' THAT IS AN ALLERGEN STATEMENT AND A PREGNANCY WARNING, NOT AN INGREDIENT LIST: no list of substances, no nutrition table, no energy value, no e-label link and no QR destination anywhere on either host. A LOAD-BEARING TRAP HERE: THE PRESTASHOP SLUGS ARE STALE AND THE H1 IS NOT. Products are edited in place across vintages exactly as Thanisch's Shopify does, so ...12-bandol-moulin-des-costes-blanc-2019.html serves an H1 of 'MOULIN DES COSTES BLANC 2024' and ...3-20-...-blanc-2021.html serves 'CHATEAU LA ROUVIERE BLANC 2025'. Reading the slug would have given the wrong vintage for both wines. FR (EU) pages used; an /en/ mirror exists. FOR THIS WINE THE VINTAGE MATCHES EXACTLY: the shop's Moulin des Costes Blanc is the 2024, Degré 13.5° against Systembolaget's 13,5 % vol, Label 'Agriculture biologique' against Systembolaget's organic flag, 750 ml. Producer, cuvée, vintage, pack and market all match and the declaration is simply absent — this is an absence, not a stale-stock artefact.",
+      "note": "Cépages given as Clairette Pointue 50 %, Bourboulenc 20 %, Sauvignon 10 %, Ugni blanc 20 % — grape composition, which is not an ingredient list under this project's rules."
+    },
+    {
+      "producer": "Domaines Bunan",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://bunan.com/robots.txt (29 bytes, and its ONLY block is 'User-agent: Scrapy / Allow: /' — there is no User-agent: * group at all, so nothing is disallowed)",
+        "https://bunan.com/nos-vins-rouge-rose-et-blanc-bandol-et-cotes-de-provence-sud-de-la-france/ (the estate's range page, 275 kB, all cuvées as an Essential Grid; greps for ingrédient/nutrition/allergène/e-label/étiquette/sulfite/kcal returned only JS option names)",
+        "https://bunan.com/nos_vins/moulin-des-costes-3/ (the per-wine page for the white; 62 kB of which the body is a grid placeholder — no wine text at all, and no declaration)",
+        "https://bunan.com/nos_vins/chateau-la-rouviere-3/ (same shape)",
+        "https://boutique.bunan.com/robots.txt (stock PrestaShop; product pages allowed, only cart/account/sort-and-search query strings disallowed)",
+        "https://boutique.bunan.com/sitemap.xml (404)",
+        "https://boutique.bunan.com/fr/2-bandol (the Bandol category)",
+        "https://boutique.bunan.com/fr/bandol/12-bandol-moulin-des-costes-blanc-2019.html (H1 'MOULIN DES COSTES BLANC 2024' — the slug is stale, the product is our vintage)",
+        "https://boutique.bunan.com/fr/bandol/3-20-bandol-chateau-la-rouviere-blanc-2021.html (H1 'CHATEAU LA ROUVIERE BLANC 2025' — also stale-slugged, and a vintage ahead of ours)"
+      ],
+      "checked_at": "2026-08-07T09:45:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7522401",
+      "name": "Domaines Bunan Chateau la Rouvière Blanc",
+      "vintage": "2024",
+      "evidence": "THE ESTATE HAS A REAL WEBSHOP, THE PRODUCT PAGE IS SERVER-RENDERED, AND THERE IS NO INGREDIENT LIST ON IT. Domaines Bunan, 338 bis chemin de Fontanieu, La Cadière d'Azur (83), AOP Bandol; Systembolaget's supplier is Vingourmet Sweden AB and the producer field is the estate. The estate runs a WordPress marketing site (bunan.com) whose per-wine pages are empty grid placeholders, and a separate PrestaShop boutique (boutique.bunan.com) that is genuinely server-rendered. WHAT THE PRODUCT PAGE CARRIES IS A FEATURES TABLE — Terroir, Vinification, Cépages, Caractéristiques, Dégustation, Accord mets et vin, Temps de garde, Degré, Label — plus a description block reading in full: 'Contient des sulfites. La consommation de boissons alcoolisées pendant la grossesse, même en faible quantité, peut avoir des conséquences graves sur la santé de l'enfant.' THAT IS AN ALLERGEN STATEMENT AND A PREGNANCY WARNING, NOT AN INGREDIENT LIST: no list of substances, no nutrition table, no energy value, no e-label link and no QR destination anywhere on either host. A LOAD-BEARING TRAP HERE: THE PRESTASHOP SLUGS ARE STALE AND THE H1 IS NOT. Products are edited in place across vintages exactly as Thanisch's Shopify does, so ...12-bandol-moulin-des-costes-blanc-2019.html serves an H1 of 'MOULIN DES COSTES BLANC 2024' and ...3-20-...-blanc-2021.html serves 'CHATEAU LA ROUVIERE BLANC 2025'. Reading the slug would have given the wrong vintage for both wines. FR (EU) pages used; an /en/ mirror exists. FOR THIS WINE THE SHOP HAS ALREADY ROLLED FORWARD: its Château la Rouvière Blanc is the 2025 (H1), at 13° against Systembolaget's 13,5 % vol for our 2024, so the page is not about our bottle. That would have been a vintage rejection had there been anything to reject; there is not, so it is recorded as not found. The estate publishes no per-vintage archive and no older page for the 2024.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-07T09:20:00Z",
+  "updated_at": "2026-08-07T09:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -5328,6 +5394,11 @@
       "at": "2026-08-07T09:20:00Z",
       "batch": "3h — Domaine Barraud, 5 wines (Pouilly-Fuissé Alliance, Pouilly-Fuissé 1er Cru Sur la Roche, Mâcon Villages Harmonie, Mâcon Fuissé Les Chailles, Mâcon Vergisson La Roche, all 2024)",
       "result": "5 attempted, 0 found, 5 not found, 0 rejected. Hand-built static site from 2014, one page per APPELLATION rather than per wine, no vintage stated anywhere, no webshop. Its 'Acheter' buttons are href='#' and its only outbound sales link — to the marketplace restonsenvigne.fr — 404s. Second Burgundy estate in a row with no consumer-facing surface at all: not a rendering problem and not a vintage problem, simply nothing published."
+    },
+    {
+      "at": "2026-08-07T09:45:00Z",
+      "batch": "3h — Domaines Bunan, 2 wines (Château la Rouvière Blanc 2024, Moulin des Costes Blanc 2024)",
+      "result": "2 attempted, 0 found, 2 not found, 0 rejected. FIRST FRENCH SMALL ESTATE IN THIS PROJECT WITH A REAL, SERVER-RENDERED WEBSHOP OF ITS OWN — a PrestaShop boutique on its own subdomain — and it publishes no ingredient list. One of the two wines is our exact vintage on that shop (Moulin des Costes Blanc 2024, 13.5°, bio, matching Systembolaget on every field), so the absence is the finding rather than a consequence of stale stock. What the product page does carry is 'Contient des sulfites' plus a pregnancy warning and a terroir/cépages/degré table. NEW TRAP: PrestaShop slugs here are stale where the H1 is current — /12-bandol-moulin-des-costes-blanc-2019.html is the 2024 and /3-20-...-2021.html is the 2025. Trust the H1, never the slug."
     }
   ]
 }
