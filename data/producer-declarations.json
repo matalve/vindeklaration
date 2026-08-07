@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to the last handful)",
-  "attempted": 132,
+  "attempted": 133,
   "found": 18,
   "not_found": 84,
-  "rejected": 30,
+  "rejected": 31,
   "declarations": [
     {
       "product_number": "5106001",
@@ -3794,9 +3794,43 @@
       "robots_disallowed": false,
       "server_rendered": true,
       "note": "Wegeler is a Shopware 6 shop with a per-wine detail page, per-vintage URLs and the current vintage on sale — every structural precondition for an e-label link — and it still links none. Structure predicts nothing here. Also worth recording for the next run: the shop keeps 2024 as the current release for its Ortsweine while most German estates in this batch had rolled to 2025, so Wegeler was one of the few producers in the 2024 pool where the vintage rule was never going to be the obstacle."
+    },
+    {
+      "product_number": "8060401",
+      "name": "Hoffmann Simon Klüsserather Bruderschaft Riesling Spätlese Trocken",
+      "producer": "Weingut Hoffmann-Simon",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://hoffmann-simon.winitas-shop.de/elabel/540",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "A COMPLETE, SELF-IDENTIFYING WINITAS E-LABEL FOR EXACTLY THIS CUVÉE, ONE VINTAGE TOO NEW. Weingut Hoffmann-Simon, Kettergasse 24, 54498 Piesport (Mosel), Ecovin / DE-ÖKO-039, links its shop hoffmann-simon.winitas-shop.de from the estate site's main navigation. The Winitas one-request vintage census (ajax_search.html with jahrgang=2024) returns the estate's entire 2024 range — Rivaner Liter 0124A, Piesporter Goldtröpfchen Kabinett 1024, Riesling trocken Liter 0424, Piesporter Goldtröpfchen Riesling trocken 1724, Riesling Blauschiefer Kabinett trocken 3124, Riesling Liter feinherb 0524, Piesporter Günterslay Kabinett feinherb 0824, Köwericher Laurentiuslay feinherb 1224, Rivaner trocken 0124, Sauvignac 2224, Rosé 2524 — AND NO KLÜSSERATHER BRUDERSCHAFT. The unfiltered census (jahrgang=) shows why: the cuvée is on the shop as '2025 Klüsserather Bruderschaft Riesling trocken', Artikel-Nr. 1125, subtitle 'Riesling Spätlese trocken', 0,75 l, 12,50 Vol% — and otherwise only as a 2011 (Artikel-Nr. 1111). Winitas article numbers are {cuvée}{vintage}, so ours would be 1124, and it is not on the shop in any listing. THE E-LABEL LINKED FROM THE 2025 PRODUCT PAGE, /elabel/540, IDENTIFIES ITSELF IN FULL: '2025 Klüsserather Bruderschaft Riesling trocken, Riesling Spätlese (2025), 0,75 Liter, Anbaugebiet Mosel / Deutschland', Alkohol 12,50 Vol%, Brennwert 322 kJ / 77 kcal, Zutaten 'Bio-Weintrauben, Antioxidationsmittel: SULFITE', with an Impressum naming Weingut Hoffmann Simon, Dieter Hoffmann, Piesport. Producer, cuvée, Prädikat, style, pack and market all match Systembolaget 8060401. THE VINTAGE DOES NOT: the disclosure says 2025 and the wine on the shelf is the 2024. Alcohol corroborates the mismatch rather than rescuing it — 12,50 against Systembolaget's 12,0, at the edge of the 0,5 % vol tolerance and consistent with a different harvest. NOTHING WAS ENUMERATED: /elabel/540 was read off the 2025 product page's 'Nährwertangaben je 100 ml' anchor, and no other elabel id was constructed or tried. The elabel id is the shop's internal wine id and is not derivable from the article number, so there was no 2024 URL to hold.",
+      "rejected_because": "The e-label states vintage 2025 in its own heading; the wine on Systembolaget is the 2024. The 2024 Klüsserather Bruderschaft is absent from the shop's complete 2024 listing, so no e-label for our vintage is linked anywhere.",
+      "sources_checked": [
+        "https://hoffmann-simon.de/robots.txt (WordPress default: /wp-admin/ only)",
+        "https://hoffmann-simon.de/wp-sitemap.xml (posts and pages only, no products)",
+        "https://hoffmann-simon.de/ (links the Winitas shop from the main navigation)",
+        "https://hoffmann-simon.winitas-shop.de/robots.txt (404 — no file, as on every Winitas host so far)",
+        "https://hoffmann-simon.winitas-shop.de/ajax_search.html?...&jahrgang=2024& (the complete 2024 range, 11 articles)",
+        "https://hoffmann-simon.winitas-shop.de/ajax_search.html?...&jahrgang=& (the whole catalogue)",
+        "https://hoffmann-simon.winitas-shop.de/artikel.html?artnr=1125 (the 2025 Klüsserather Bruderschaft)",
+        "https://hoffmann-simon.winitas-shop.de/elabel/540"
+      ],
+      "checked_at": "2026-08-07T01:20:00Z",
+      "robots_disallowed": false,
+      "elabel_platform": "Winitas ({winery}.winitas-shop.de/elabel/{id}) — already documented. Confirms both known traits: the page states its own vintage, Prädikat and fill, and the elabel id is unrelated to the article number.",
+      "server_rendered": true,
+      "fetch_result": "200, declaration present in the server HTML — and rejected on vintage",
+      "note": "The Winitas vintage census earned its keep here: one request settled 'is our bottling still on the shop' outright, without walking a single category, and it is what makes the rejection safe rather than a guess. Worth noting that Hoffmann-Simon declares Bio-Weintrauben, so its e-labels are among the more informative in this batch — if a Swedish importer ever brings in a current vintage of this estate, it is a certain find."
     }
   ],
-  "updated_at": "2026-08-07T01:05:00Z",
+  "updated_at": "2026-08-07T01:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
