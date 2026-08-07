@@ -9,10 +9,11 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-07, across 90 producers and 215 wine records. **The German
+Status as of 2026-08-07, across 95 producers and 228 wine records. **The German
 2024-and-later undeclared pool is exhausted** — see the closing section. **The
-French pool opened on 2026-08-07; twenty-six producers and 75 wines in, still
-zero declarations attached** — see *France, and why it is not Germany*.
+French pool opened on 2026-08-07; thirty-one producers and 88 wines in, and the
+first French declaration was finally attached on the fifth French batch** —
+see *France, and why it is not Germany* and *The first French find*.
 **The Alsace slice is now exhausted too** — see *Alsace, tested to exhaustion*.
 
 ## Readable — server-rendered
@@ -29,7 +30,7 @@ zero declarations attached** — see *France, and why it is not Germany*.
 | **apys** | `elabel.apys.de/e-Label/e-Label.php?p1={company-guid}&p2={article}` | Plain server-rendered PHP by soppe + partner Software GmbH. 24-language EU selector including Svenska; nutrition, ingredient list and a per-company Impressum naming who is responsible for the data set. **It states no wine name, no vintage and no bottle size**, so like f-label it cannot identify itself and a find rests on the producer's linking. `robots.txt` is `Disallow: /` — this is where the e-label exception applies. Seen at Leitz (rejected, see below) and Andreas Oster / HORIZN29 (found). |
 | **EuvinoPRO shop** | `iframe.euvino.eu/iframe/{shop-slug}` or a white-label domain like `shop.weingut-knipser.de` | **The declaration is inline on the product page**, not behind a link: a `Zutaten / Inhaltsangaben` row and a `Nährwerte (je 100 ml)` table, beside a Produktinformationen table with grape, Flaschengröße, closure, quality level, region, Einzellage and `Vorhandener Alkohol`. Server-rendered, and it identifies itself — wine and vintage in the H1. Same company as f-label, far better provenance. Three shops in one batch (Max Ferd. Richter, Paulinshof, Knipser) plus one that leaves the fields empty (In den Zehn Morgen). See the traps below. |
 | **Alliance Nutri** | `alliance-alsace.com/01/{gtin}/22/{variant}` | **The project's first GS1 Digital Link** (AI 01 = GTIN, AI 22 = consumer product variant) and its **first third-party e-label vendor on a French producer's page**. About 6 kB of plain server-rendered HTML on a Laravel host: designation, sweetness, **vintage**, format, Gencode, an ingredient paragraph and a nutrition table per 100 ml. 11-language EU selector (fr, en, it, da, de, es, fi, nl, pt, ro, **sv**) driven by a POST with a CSRF token — **but it also honours the `Accept-Language` request header**, which is the cheap way to get French or Swedish. `robots.txt` is `User-agent: *` / `Disallow:` — an *empty* Disallow, everything allowed, no exception needed. **It identifies itself as well as Winestro does.** The bare GS1 root `/01/{gtin}` returns 404, so the variant segment is required and no vintage can be reached without the producer linking it. Found via Cave de Turckheim. |
-| **Vincod (vin.co)** | `m.{producer}.{tld}/{code}` and the mirror `vincod.com/{code}`; the e-label is `/{code}/n/{hash}/{lang}` | **The `m.rhonea.fr` platform, now identified**: `m.hugel.com` is the same thing, images from `cdn.vin.co`, every short code mirrored at `vincod.com/{code}`, and byte-identical `robots.txt`. Three levels: domaine page → range page → **per-wine, per-vintage page**. The wine page's `<select id="millesime">` **names the short code for every vintage back to 2007**, so our vintage is reachable from the producer's own control and never by guessing — the only platform in this project that gives a vintage archive. The wine page itself is a tasting note plus a Spécifications block (alcohol *analysis*, residual sugar, acidity, pH, vine age, yield) and **is not a declaration**. The declaration, where the producer has filled it in, is a link **"Ingredients & nutrition ›"** to `/{code}/n/{hash}/{lang}`: wine, vintage, **lot number**, *labelled* alcohol, bottle size, an `Ingredients` line and a nutrition table **per 100 ml and per 125 ml**. `robots.txt` is a bad-bot blocklist ending `Disallow: /`, then a separate `User-agent: *` group disallowing only `/ajax`, `/admin`, `/manage`, `/create`, `/superadmin` and `/*/get/{qrcode,tablecard,embed}$` — **the wine and `/n/` pages are allowed, so no exception is needed.** |
+| **Vincod (vin.co)** | `m.{producer}.{tld}/{code}` and the mirror `vincod.com/{code}`; the e-label is `/{code}/n/{hash}/{lang}` | **The project's only source of a French declaration so far** (Famille Quiot, 2026-08-07) and its most productive French platform. **The `m.rhonea.fr` platform, now identified**: `m.hugel.com` is the same thing, images from `cdn.vin.co`, every short code mirrored at `vincod.com/{code}`, and byte-identical `robots.txt`. Three levels: domaine page → range page → **per-wine, per-vintage page**. The wine page's `<select id="millesime">` **names the short code for every vintage back to 2007**, so our vintage is reachable from the producer's own control and never by guessing — the only platform in this project that gives a vintage archive. The wine page itself is a tasting note plus a Spécifications block (alcohol *analysis*, residual sugar, acidity, pH, vine age, yield) and **is not a declaration**. The declaration, where the producer has filled it in, is a link **"Ingredients & nutrition ›"** to `/{code}/n/{hash}/{lang}`: wine, vintage, **lot number**, *labelled* alcohol, bottle size, an `Ingredients` line and a nutrition table **per 100 ml and per 125 ml**. `robots.txt` is a bad-bot blocklist ending `Disallow: /`, then a separate `User-agent: *` group disallowing only `/ajax`, `/admin`, `/manage`, `/create`, `/superadmin` and `/*/get/{qrcode,tablecard,embed}$` — **the wine and `/n/` pages are allowed, so no exception is needed.** The `/n/` page also states a **Contenance** (`Bouteille (75 cl)`) and the **labelled** alcohol, which is not always the alcohol in the wine page's Spécifications block — that one is the analysis. Match on the `/n/` figure. |
 | **Rhonéa's own QR platform** | `m.rhonea.fr/{code}` plus `/{code}/get/tech-sheet` | **This is Vincod — see the row above.** A producer-run QR destination on the producer's own subdomain, server-rendered, **one short code per wine per vintage** with a vintage switcher and a language selector. It states wine, appellation, colour and vintage in its own heading, so it identifies itself as well as Winestro does. On Rhonéa's deployment it carries no declaration: its "Spécifications" block holds residual sugar and "Contient des sulfites" and no ingredient list or nutrition table, and its downloadable fiche produit repeats the same fields. **That observation stands but the reason is now clear — the platform supports a full e-label at `/{code}/n/{hash}/{lang}` and Rhonéa had not filled it in.** On a Vincod page, look for an "Ingredients & nutrition" link inside the Spécifications block before concluding there is none. Its `robots.txt` is a long bad-bot blocklist ending in `Disallow: /`, then a separate `User-agent: *` group disallowing only `/ajax`, `/admin`, `/manage`, `/create` and `/*/get/{qrcode,tablecard,embed}$` — **the wine pages and `/get/tech-sheet` are allowed, so no exception is needed.** |
 | **Producer's page itself** | no platform at all | Bastianshauser Hof – Erbeldinger puts the **complete mandated set inline** on its WooCommerce product page, inside a collapsed accordion whose panel is in the server's HTML: Jahrgang, Alk., Flasche, Bio-Hinweis, `Zutaten:`, `Ø Nährwerte pro 100 ml` and the Gutsabfüller. No link, no iframe, nothing for an href scan to find — only a raw-HTML grep for `Zutaten` finds it. |
 
@@ -368,6 +369,87 @@ Two things from this half worth carrying forward:
   before assuming a small estate's site is merely hard to find** —
   `vigneron-independant.com` and `wineroute.alsace` / `routedesvins.alsace`
   both have a website field and both leave it blank when there is none.
+
+### The first French find, and what Burgundy-avoidance bought
+
+**2026-08-07, five non-Burgundy producers, thirteen wines: one declaration
+attached, two rejected against declarations that were found and read, ten not
+found.** The batch was chosen to avoid Burgundy deliberately, on the Marc Morey
+evidence, and that was right — but the thing that produced the find was not the
+region. It was **Vincod again**, on a Rhône house.
+
+| Producer | Region | Site | Our bottle on it? | Declaration? |
+|---|---|---|---|---|
+| **Famille Quiot** | Rhône / Provence | **Vincod**, `m.famillequiot.com` | yes, all three, per vintage | **yes, all three** — 1 found, 2 rejected |
+| Bougrier | Loire | 5-page WordPress | no page for any wine | none |
+| Domaine Roquefeuille | Languedoc | Angular SPA | unreadable | unreadable |
+| Château de Saint Cosme | Rhône | one PDF booklet | yes, the 2025 CdR | none |
+| Ravoire & Fils | Provence | PrestaShop | **yes, both packs at 2025** | none |
+
+**Famille Quiot is the third French Vincod deployment and the first to yield.**
+Recognise it exactly as before: `m.{producer}.{tld}`, a CNAME to
+`domains.vincod.com`, and the documented `robots.txt` that allows both the wine
+page and the `/n/` e-label. The wildcard-DNS check (`randomxyz123.` →
+NXDOMAIN) took one command and confirmed the match before a single fetch.
+
+Three things this deployment adds to what Hugel and Rhonéa taught:
+
+- **The `/n/` page's alcohol is the labelled strength; the wine page's
+  Spécifications block is the analysis, and they differ.** Trignon Viognier
+  2024 reads `13.5 % vol.` on the wine page and `Alc. 13 % vol.` on the
+  e-label; Systembolaget says 13,0. **Match against the `/n/` figure.** Had the
+  wine page been used, a correct find would have been thrown away.
+- **Vincod states the Contenance, and it is a real rejection criterion.**
+  Vieux Lazaret Châteauneuf-du-Pape 2024 has a complete, correctly-vintaged
+  e-label with a lot number and an exact 14,5 % vol — and says
+  `Bouteille (75 cl)` where Systembolaget's item is the magnum. The Gysler
+  magnum case, in France. There is no contenance selector; one code, one pack.
+- **Quiot's lists are written per wine**, unlike Hugel's house template: the
+  Viognier has `Acide tartrique` and `Sulfites`, the Vieux Lazaret rouge adds
+  "Peut être" to its protective-atmosphere line, and the Houchart rosé uses
+  `Dioxyde de soufre` and no tartaric acid.
+
+#### The new failure mode: two cuvées, one label text
+
+Houchart cost more requests than the rest of the producer put together and
+still ended in a rejection, and the reason is worth recognising early next
+time. Famille Quiot publishes **two** 2024 e-labels for a *Domaine Houchart
+Côtes de Provence rosé* — `Houchart Tradition Rosé` and `Houchart, Les
+Cigales, Rosé`. They share grapes, appellation, colour, vintage, 13 % vol,
+75 cl and word-for-word identical presentation, terroir, vinification and
+tasting text. Their ingredient lists are identical too; only the energy differs
+(319 against 318 kJ), which proves they are two disclosures rather than one.
+
+**And neither label prints its cuvée name.** Both read only "Domaine Houchart /
+Côtes de Provence / Mis en bouteille au domaine", so Systembolaget's product
+name is exactly what either yields and cannot discriminate. Les Cigales is
+identified on the bottle by two gold cicadas and nothing else.
+
+The tie-breakers tried, and what each said:
+
+- **Alcohol** — both 13 % vol. Useless.
+- **Systembolaget's own product photo** (of the 2022) — a Provençal flute.
+  Les Cigales is bottled in that flute; Tradition is in a straight-shouldered
+  bottle in both its 2022 and its current packshot. Favours Les Cigales.
+- **The Vincod vintage archive** — Les Cigales' selector starts at 2023, so it
+  did not exist when that 2022 photo was taken. Favours Tradition.
+- **Asset file names** — Les Cigales' ambience photograph is filed as
+  `sweden lake with Houchart`. Suggestive, and evidence of nothing.
+
+Recorded as `rejected`, not `not_found`, because a complete declaration was
+found and read and it is the *match* that failed. **When a producer's range
+holds two undifferentiated bottlings of one appellation, stop early**: the
+question is decided by the physical bottle, not by anything on the web.
+
+#### Burgundy-avoidance: right call, wrong reason
+
+Skipping Burgundy did pay, but not because the other regions are richer. Four
+of the five non-Burgundy producers failed **in the same way Burgundy does** —
+the estate has no per-wine consumer page, or has one and puts nothing on it.
+What changed the outcome was one producer having adopted a QR platform. That
+remains the only predictor with a track record, and **it is worth spending the
+first two commands of every French producer on the DNS check for `m.{domain}`
+plus its nonsense-subdomain control**, before any HTTP request at all.
 
 ### A fourth way a French declaration is not there: the negative list
 
@@ -726,6 +808,41 @@ worth recognising in an `href`; nothing is known about how they render.
   `User-agent: *` with no directives and whose **sitemap is seventeen URLs with
   no wine among them** — the range is organised by colour, grape and
   appellation. Six wines closed in five requests.
+- `m.famillequiot.com` is a **CNAME to `domains.vincod.com`** and
+  `randomxyz123.famillequiot.com` is NXDOMAIN, so this one is genuine and not
+  the `m.grandsud.fr` wildcard trap. **Run both DNS lookups before any fetch**;
+  together they cost nothing and settle whether the producer is on Vincod.
+- `bougrier.fr` and `www.bougrier.fr` **reset the connection on port 443**;
+  over plain http they 301 to `famille-bougrier.fr`, whose certificate is for a
+  different hostname, so **the site is only reachable over http**. Its
+  `wp-sitemap-posts-page-1.xml` is five URLs and there is no product post type;
+  its "Nos Vins" menu item is an in-page anchor showing seven range names as
+  unclickable images. A large Loire négociant can have no wine on its website.
+- `www.roquefeuille.fr` **refuses port 443**; over http it 301s to
+  `www.domaineroquefeuille.fr`, an **Angular SPA** whose every URL returns the
+  identical 67 kB shell with an empty `<pw-root>` and whose `/sitemap.xml` is a
+  soft 404 serving that shell. The backend is ASP.NET — recognise it by a
+  `robots.txt` that disallows `/WebResource.axd` and `/ApplicationError.aspx*`
+  and carries `crawl-delay: 10`. Nothing is server-rendered; this is the
+  `quatretours.com` failure mode on a second French platform.
+- `www.saintcosme.com` **is one page and four PDF links** — a logo, "Est. 1570",
+  and the estate's annual *Livret*. `robots.txt` is 30 bytes (`User-agent: *`,
+  `Crawl-delay: 10`, no Disallow) and there is no sitemap. The 2026 booklet is
+  19,6 MB and 48 pages; it was fetched once because it *is* the producer's
+  surface, and it contains no ingredient list and no nutrition table.
+  **It does reproduce the labels**, and their extracted text reads
+  `RED RHONE WINE - PRODUCT OF FRANCE - CONTAINS SULFITES` — an allergen line on
+  a picture of a label is not a declaration.
+- `www.ravoire.fr` fails TLS with `unable to get local issuer certificate` and
+  **this one is the site's fault, not ours**: the server sends the leaf alone
+  and omits the Sectigo OV R36 intermediate. Distinguish it from the ISRG Root
+  YR case with `openssl s_client` — if the chain shows only one certificate,
+  fetch the issuer named in the leaf's **AIA `CA Issuers` URI**, convert DER to
+  PEM and append it to the bundle. Verification still happens.
+  `ravoire.fr/robots.txt` is a **soft 404 serving the home page**.
+- `manon.fr` is a wine brand's own site whose eight **`Ingrédients` headings are
+  cooking recipes** in a food-pairing section. A raw-HTML grep for `ingr` on a
+  French brand site will find these; read what follows the heading.
 - `rhonea.fr/fr/{category-slug}/` **404s**; its categories are
   `/fr/{id}-{slug}` (e.g. `/fr/15-ventoux`) while its products are
   `/fr/{slug}/{id}-{slug}.html`. Fetch the category to get the product URLs
@@ -790,9 +907,9 @@ alternative is inventing one.
 
 ## What the numbers say so far
 
-**Most producers publish nothing reachable.** Across 90 producers probed and
-215 wine records, 18 declarations are attached, 36 wines were rejected against
-a declaration that was found and read, and 161 came to nothing. Roughly a third
+**Most producers publish nothing reachable.** Across 95 producers probed and
+228 wine records, 19 declarations are attached, 38 wines were rejected against
+a declaration that was found and read, and 171 came to nothing. Roughly a third
 of producers have a readable e-label or an inline declaration; a handful have
 an unreadable one; the rest put no ingredient list anywhere this project can
 see. The binding constraint is not rendering — it is existence, discoverability
@@ -933,43 +1050,54 @@ yielded nothing readable, so expect a lower hit rate than Germany's and a
 different platform mix (U-label is Italian- and Spanish-heavy and still has no
 publicly linked URL in this project's notes).
 
-**France now stands at 75 wines across 26 producers, 0 found, 5 rejected**, and
-**169 French 2024+ undeclared wines remain untouched**. Germany's rate across
-its whole pool was 18 in 89. **Not one French wine has yet been attached.**
+**France now stands at 88 wines across 31 producers, 1 found, 7 rejected**, and
+**156 French 2024+ undeclared wines remain untouched**. Germany's rate across
+its whole pool was 18 in 89; France's is 1 in 88.
 
-Three of the twenty publish an ingredient list somewhere a reader can reach —
-Rhonéa inline on its shop, Cave de Turckheim on Alliance Nutri, Hugel on
-Vincod — and all five wines they cover were rejected: two on vintage, two on
-alcohol, one because the shop had not rolled forward. **The French failure has
-moved.** For the first thirteen producers nothing existed to reject; now
-something does, and the matching rules are what stop it.
+Four of the thirty-one publish an ingredient list somewhere a reader can reach
+— Rhonéa inline on its shop, Cave de Turckheim on Alliance Nutri, Hugel on
+Vincod, Famille Quiot on Vincod — and of the eight wines they cover, one was
+attached and seven were rejected: two on vintage, two on alcohol, one on pack,
+one because the shop had not rolled forward, and one because two of the
+producer's own cuvées could not be told apart. **The French failure has moved
+twice.** For the first thirteen producers nothing existed to reject; then
+something did, and the matching rules stopped it; now one has finally survived
+them.
 
 **Shape does not predict publication in France; platform adoption does.**
-Big house, small estate and cooperative have each been tried as a profile and
-each has failed. What the three publishing producers have in common is that
-they run a QR platform at all. The three cheap questions to ask of a French
-producer, in order:
+Big house, small estate, cooperative and Loire négociant have each been tried
+as a profile and each has failed. What the four publishing producers have in
+common is that they run a QR platform at all. The cheap questions to ask of a
+French producer, in order:
 
 1. ~~**Is it in Alsace?**~~ **Withdrawn 2026-08-07.** It was the right place to
    look and it has been looked at: the region is finished, eight producers,
    and the two adopters were found in the first afternoon. Geography did not
    predict a second wave.
-2. **Does any product page link an `m.` subdomain, a `vincod.com` code or an
-   `alliance-alsace.com` GS1 URL?** One grep of one product page settles it.
-   This is now the only question with a track record.
-3. **Does the range page state a vintage?** If not, stop — an undated cuvée
+2. **Is `m.{domain}` a real host?** Two DNS lookups — `m.{domain}` and a
+   nonsense subdomain as the wildcard control — and **not a single HTTP
+   request**. A CNAME to `domains.vincod.com` is the strongest signal in the
+   French pool: three of the four publishing producers are on Vincod and it is
+   the source of the only attached French declaration. Do this first, always.
+3. **Does any product page link a `vincod.com` code or an `alliance-alsace.com`
+   GS1 URL?** One grep of one product page settles the rest.
+4. **Does the range page state a vintage?** If not, stop — an undated cuvée
    page cannot be matched to a bottling however much text it carries. Six
    French producers have now failed on this alone.
-4. **Does a sitemap exist, and does it contain a wine?** Cheapest probe in the
-   file. Marc Morey's seventeen URLs closed six wines; Les Quatre Tours'
-   twenty-nine closed a producer. **Read the sitemap before the home page.**
+5. **Does a sitemap exist, and does it contain a wine?** Cheapest HTTP probe in
+   the file. Marc Morey's seventeen URLs closed six wines, Les Quatre Tours'
+   twenty-nine closed a producer, Bougrier's five closed three wines.
+   **Read the sitemap before the home page.**
 
 **Where the remaining French work is**, by cluster size, all vintage 2024+ and
-undeclared: Domaine Fontaine-Gagnard 5, Famille Quiot 3, Domaine Roquefeuille
-3, Chartron et Trébuchet 3, Bougrier 3, then a long tail of ones and twos.
-Burgundy is 62 of the 169 and, on the Marc Morey evidence, is the weakest
-region yet — its estates sell through allocation and have no reason to keep a
-consumer-facing product page at all.
+undeclared: Domaine Fontaine-Gagnard 5, Chartron et Trébuchet 3, then pairs —
+François Chidaine, Domaine de la Rectorie, Clotilde Davenne, Georges Duboeuf,
+Château de Chausse, Domaine de la Bouvaude, Domaine de Terres Blanches, Alain
+Brumont, Mommessin, Domaine Fontanel, Les Sablonnettes, Vignoble Hermouet,
+Henri Boillot, Jean-Paul & Benoît Droin — and a long tail of ones.
+Burgundy is around 60 of the 156 and, on the Marc Morey evidence, is the
+weakest region yet — its estates sell through allocation and have no reason to
+keep a consumer-facing product page at all.
 
 Prefer wines whose Systembolaget vintage is **2025** over 2024, with one
 correction: **the French shop is not reliably ahead of the Swedish shelf.**
