@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 191,
+  "attempted": 192,
   "found": 18,
-  "not_found": 139,
+  "not_found": 140,
   "rejected": 34,
   "declarations": [
     {
@@ -5600,9 +5600,38 @@
       "vintage": "2024",
       "evidence": "OUR EXACT BOTTLE IS ON THE COOPERATIVE'S OWN SHOP, CONFIRMED ON FOUR FIELDS, AND THERE IS NO DECLARATION ON IT. Cave des Vignerons de Pfaffenheim (Pfaff), the Alsace cooperative; Systembolaget's producer field is 'La Cave des Vignerons de Pfaffenheim', supplier Amka Vinimport AB. The shop product page is headed 'Black Tie by Pfaff A.O.P. Alsace SEC 2024' with 'Cepage Riesling/Pinot Gris', 'Degre d'alcool alc 12,5% vol.' and '75cl Bouteille' in its title — producer, cuvee, vintage, grape blend, strength and pack all match Systembolaget 7623701 (2024, 12,5 %, 750 ml) exactly. This is the strongest identity match of the batch and it makes the negative a real one. THE PAGE CONTAINS NO INGREDIENT LIST, NO NUTRITION TABLE AND NOT EVEN A SULPHITE STATEMENT: zero hits for ingr, nutri, sulfit, allerg and kcal in the raw HTML. Its content is Cepage, Degre, Terroir, Vendange, Vinification, Degustation, Accords Gourmands, Service — a tasting note with a vinification paragraph. The only off-site links on the whole page are info-calories-alcool.org (the French drinks industry's generic per-category calorie calculator, already recorded as a decoy), Facebook, the agency vinium.com and Google's policy pages. There is no QR platform and no e-label vendor. NOTE THE CONTRAST WITH CAVE DE TURCKHEIM IN THE SAME BATCH: another Alsace cooperative of similar size links a full GS1 Digital Link e-label from every product page. Alliance Nutri is therefore NOT a shared Alsace platform that every cooperative in the region uses — Pfaffenheim references it nowhere. TWO RENDERING FACTS WORTH KEEPING: the marketing site's /nos_vins/ pages are an AJAX shell (the Vinium framework; only the <title> is server-rendered) while the /fr/boutique/ and /fr/produit/ shop pages are fully server-rendered, so on this platform the shop is the readable surface and the marketing site is not. And the sitemap keeps ONE MARKETING PAGE PER VINTAGE for each cuvee, 2020 to 2024, which would have made this an ideal vintage match had the pages carried anything. FR (EU) pages used throughout.",
       "note": null
+    },
+    {
+      "producer": "Cellier des Dauphins",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.cellier-des-dauphins.com/robots.txt (a Yoast block with 'User-agent: *' and an empty Disallow — everything allowed)",
+        "https://www.cellier-des-dauphins.com/wp-sitemap.xml and /wp-sitemap-posts-page-1.xml (THE WHOLE SITE IS 29 PAGES; the four ranges are Reserve, Prestige, Carnet d'Invitation and Signature, and there is no 'Les Dauphins' range and no ingredients, nutrition or e-label page in it)",
+        "https://www.cellier-des-dauphins.com/nos-vins/nos-gammes/ (the range hub, confirming the same four ranges)",
+        "https://www.cellier-des-dauphins.com/nos-vins/nos-gammes/signature/signature-cotes-du-rhone-bio-rouge/ (the closest wine the producer does publish — its organic Cotes du Rhone red, under the Signature brand)",
+        "https://www.cellier-des-dauphins.com/en/our-sunny-wines/our-ranges/les-dauphins/les-dauphins-organic/ (the English URL a search engine still indexes for this exact wine — 404, and the /en/ tree is absent from the sitemap index)"
+      ],
+      "checked_at": "2026-08-07T13:35:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7245801",
+      "name": "Les Dauphins Côtes du Rhône Organic Rouge",
+      "vintage": "2025",
+      "evidence": "AN EXPORT BRAND WITH NO PAGE ON ITS OWN PRODUCER'S SITE — the Saget la Perriere pattern, on a cooperative. Cellier des Dauphins is the brand of the Union des Vignerons des Cotes du Rhone, a union of Rhone cooperatives; Systembolaget's producer field is 'Cellier des Dauphins' and the supplier is Solera Sweden AB. 'Les Dauphins' is a separate export range of the same group and IT DOES NOT APPEAR ANYWHERE ON THE PRODUCER'S CURRENT SITE. The whole site is 29 pages by its own sitemap, the ranges are Reserve, Prestige, Carnet d'Invitation and Signature, and the English URL that search engines still index for precisely this wine, /en/our-sunny-wines/our-ranges/les-dauphins/les-dauphins-organic/, now returns 404 with the /en/ tree gone from the sitemap index. Every other page a search finds for 'Les Dauphins Organic' is a foreign retailer — vivino, wine.com, saratogawine, agedcork — and a retailer's transcription is not a source. AND THE PRODUCER PUBLISHES NO DECLARATION FOR ANY WINE ANYWAY, so the missing page is not the only obstacle. Its own organic Cotes du Rhone red, Signature Cotes du Rhone Bio Rouge — the same appellation, the same colour, the same organic certification, plausibly the same liquid under a different label, and deliberately NOT used as a substitute — returns zero hits for ingr, nutri, sulfit, allerg, kcal and energie in 89 kB of server-rendered HTML. It carries tasting notes, terroir, food pairings and competition medals and no substances. The site states no vintage on any wine page either, so even a list would not have been matchable to a 2025. FR (EU) pages used; the site is server-rendered WordPress, so the negative is a real observation and not a rendering artefact.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-07T13:20:00Z",
+  "updated_at": "2026-08-07T13:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
