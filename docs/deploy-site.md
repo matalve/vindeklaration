@@ -1,16 +1,43 @@
 # Publishing the site
 
 **vindeklaration.se is live**, as a Cloudflare **Worker with static assets**
-that builds from this repository on every push to `main` — including the Pi's
-nightly dataset commit around 03:20. Nothing runs on the Pi or in GitHub
-Actions for a deploy to happen.
-
-Verified end to end 2026-08-02: the timer fired at 03:01, `update.sh` pushed by
-06:13, and `/tackning` served the new figures without anyone touching it.
+that builds from this repository on every push to `main`. The dataset is not
+in git: each build downloads `wines.json` from the R2 bucket behind `/data/`,
+and the Pi's nightly `update.sh` publishes to that bucket *before* pushing the
+small commit (`data/quality-history.json`, which changes on every recorded
+run) that triggers the rebuild. Nothing runs on the Pi or in GitHub Actions
+for a deploy to happen.
 
 It is **not a Pages project**. Cloudflare absorbed Pages into Workers; existing
 Pages projects keep working, but "Connect to Git" now creates a Worker, and the
 two differ in the hostname and in 404 handling.
+
+## The dataset lives in R2, not git
+
+`data/wines.json` and `data/catalog.json` are gitignored — a nightly 16 MB
+commit costs its near-full size in history, forever. The crawler publishes
+them as build output instead:
+
+- **The R2 bucket `vindeklaration-data`**, served by `worker/index.js` at
+  `/data/*` with an hour of edge cache. This is what the site build downloads.
+- **A rolling `dataset-latest` GitHub release** (`--clobber`, so the download
+  URL is stable) for everyone else, plus a frozen `dataset-YYYY-MM` snapshot
+  on the first Sunday of each month — with the dataset out of git, history no
+  longer answers "what did the assortment look like in spring".
+
+One-time setup:
+
+```sh
+wrangler r2 bucket create vindeklaration-data
+# Populate the bucket BEFORE the first build that downloads from it:
+gzip -kf data/wines.json data/catalog.json
+wrangler r2 object put vindeklaration-data/wines.json.gz --file data/wines.json.gz
+wrangler r2 object put vindeklaration-data/catalog.json.gz --file data/catalog.json.gz
+```
+
+The Pi's timer needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in its
+environment (the systemd unit) for `wrangler r2 object put`, and a logged-in
+`gh` for the release upload.
 
 ## The build
 
@@ -19,15 +46,21 @@ uv run python -m src.site        # ~25 s, 15 400 files, output in site/
 ```
 
 `site/` is gitignored and rebuilt on Cloudflare, so the repository never
-carries two copies of the dataset. This is a build, not a crawler: it reads
-`data/wines.json` and makes no request to Systembolaget.
+carries two copies of the site. This is a build, not a crawler: it reads
+`data/wines.json` — downloaded from the R2 bucket by the step below — and
+makes no request to Systembolaget.
 
 **Build command**, confirmed working on Cloudflare's image:
 
 ```sh
-pip install uv && uv run python -m src.site && \
+mkdir -p data && \
+  curl -fsSL https://vindeklaration.se/data/wines.json.gz | gunzip > data/wines.json && \
+  pip install uv && uv run python -m src.site && \
   test $(find site -type f | wc -l) -le 19000
 ```
+
+If the bucket is ever unreachable the release is the fallback:
+`https://github.com/matalve/vindeklaration/releases/download/dataset-latest/wines.json.gz`.
 
 | Setting | Value |
 |---|---|
@@ -113,8 +146,10 @@ documentation:
   automates the check. A real gap, not an oversight to inherit quietly.
 - **Build watch paths are not configured.** Excluding `docs/`, `deploy/`,
   `.claude/` and `*.md` would stop a documentation commit rebuilding 15 000
-  pages. Harmless either way — but **`data/` must never join that list**, or the
-  nightly dataset commit stops reaching the site, silently.
+  pages. Harmless either way — but the nightly rebuild rides on the Pi's
+  post-publish commit (`data/quality-history.json` changes on every recorded
+  run), so if watch paths are ever configured, **`data/` must stay on the
+  trigger list** or the rebuild stops firing, silently.
 - **No Content-Security-Policy.** A `_headers` file naming
   `product-cdn.systembolaget.se` as the only image source and
   `static.cloudflareinsights.com` as the only script source would turn the
