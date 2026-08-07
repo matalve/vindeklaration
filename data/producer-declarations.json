@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 189,
+  "attempted": 190,
   "found": 18,
   "not_found": 138,
-  "rejected": 33,
+  "rejected": 34,
   "declarations": [
     {
       "product_number": "5106001",
@@ -5541,9 +5541,39 @@
       "vintage": "2025",
       "evidence": "A COOPERATIVE WITH TWO SITES, PER-VINTAGE PRODUCTS, OUR EXACT VINTAGE ON SALE, AND NO INGREDIENT LIST ANYWHERE. Les Vignerons de Tavel & Lirac, 04 66 50 03 57, the 1937 Tavel cooperative merged with the Lirac cave in 2018 and making roughly half of all Tavel; Systembolaget's supplier is Terrific Wines AB and the producer field is the cooperative. It runs a WooCommerce marketing site (cave-tavel-lirac.fr) and a separate Shopify boutique (boutique.cave-tavel-lirac.fr), and BOTH ARE SERVER-RENDERED, so a negative here is a real observation. THIS WAS THE STRONGEST-POSITIONED FRENCH PRODUCER OF THE BATCH AND IT STILL PUBLISHES NOTHING. Both Swedish bottles are the 2025, which is the current release; the Shopify shop sells both cuvées AT EXACTLY THAT VINTAGE ('TAVEL Trésor des sables 2025' and 'TAVEL Cuvée Royale 2025' in the H1 and 'Millésime : 2025' in the meta description); and the shop even keeps separate products per vintage where it matters, so it is structurally capable of a per-vintage declaration. BOTH PRODUCT PAGES RETURN ZERO HITS for ingrédient, nutrition, allergène, sulfite, kcal, énergie and conservateur. The Shopify store's complete page sitemap is seven administrative pages with no ingredients or e-label page among them, and the only non-Shopify hosts referenced anywhere on a product page are judge.me, PayPal and Google Fonts — there is no QR platform and no e-label vendor. The WooCommerce site's own product page for Trésor des Sables is a stale 2022 with the same fields and no list, and its 'Télécharger la fiche produit' is FICHE-TAVEL-TRESOR-DES-SABLES-fr.pdf under /wp-content/uploads/2018/07/ — a 2018 upload, predating the obligation entirely, so it was deliberately NOT fetched. FR (EU) pages used; /en/ and 简体中文 mirrors exist. The comparison with Rhonéa in the same batch is the point: two Rhône cooperative groups of similar size and similar e-commerce sophistication, one publishing the full mandated set inline and the other publishing nothing at all.",
       "note": null
+    },
+    {
+      "producer": "Cave de Turckheim",
+      "country": "Frankrike",
+      "status": "rejected",
+      "source_url": "https://alliance-alsace.com/01/03274550732866/22/008859",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": "fr",
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "rejected_because": "the e-label declares itself 'PINOT GRIS 2024 AOP ALSACE RESERVE', Millesime 2024; Systembolaget 211901 is the 2025. The producer links no 2025 e-label and the platform's variant code cannot be derived.",
+      "sources_checked": [
+        "https://www.cave-turckheim.com/robots.txt (404, served as the site's own styled 404 page — there are no directives)",
+        "https://www.cave-turckheim.com/fr/14-vins-reserve (the Vins Reserve category, one product per grape variety)",
+        "https://www.cave-turckheim.com/fr/vins-reserve/23-pinot-gris.html (the Pinot Gris Reserve product page — 'Pinot gris 2024', 'Millesime : 2024', 13 degrees, 'Contient des sulfites', and a button 'INGREDIENTS ET NUTRITION')",
+        "https://alliance-alsace.com/robots.txt (User-agent: * / Disallow: — an empty Disallow, so everything is allowed and NO robots exception was needed)",
+        "https://alliance-alsace.com/01/03274550732866/22/008859 (the e-label itself, fetched once in English and once with Accept-Language: fr-FR)",
+        "https://alliance-alsace.com/01/03274550732866 (the bare GS1 Digital Link GTIN root — 404 'Page not found', so the platform is keyed on the variant segment and cannot be resolved from the GTIN alone)"
+      ],
+      "checked_at": "2026-08-07T13:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "211901",
+      "name": "Turckheim Pinot Gris Réserve",
+      "vintage": "2025",
+      "evidence": "THE FIRST THIRD-PARTY E-LABEL PLATFORM FOUND ON A FRENCH PRODUCER'S PAGE, AND THE FIRST GS1 DIGITAL LINK IN THIS PROJECT — AND OUR BOTTLE IS A VINTAGE AHEAD OF IT. Cave Vinicole de Turckheim, 16 rue des Tuileries, 68230 Turckheim, the Alsace cooperative; Systembolaget's producer field is 'Cave de Turckheim' and the supplier is Nigab, so the producer matches. Its PrestaShop site puts a button labelled 'INGREDIENTS ET NUTRITION' at the foot of each product page, linking to https://alliance-alsace.com/01/{GTIN}/22/{variant} — a GS1 Digital Link URI (AI 01 = GTIN, AI 22 = consumer product variant) on a platform that titles itself 'Alliance Nutri'. The page is plain server-rendered HTML, about 6 kB, with an 11-language EU selector (Francais, English, Italiano, Dansk, Deutsch, Espanol, Suomalainen, Nederlands, Portugues, Romana, Svenska) driven by a POST, and it also honours the Accept-Language request header, which is how the French text below was read. IT IDENTIFIES ITSELF AS WELL AS WINESTRO DOES: designation, sweetness, vintage, format and Gencode are all on the page. AND WHAT IT SAYS IS 2024. 'Denomination: PINOT GRIS 2024 AOP ALSACE RESERVE / Sucrosite : DEMI-SEC / Millesime : 2024 / Format : 75cL / Gencode : 03274550732866'. Systembolaget 211901 is the 2025 at 12,5 %; the producer's own product page agrees with its e-label at 'Millesime : 2024' and 13 degrees. The shop keeps exactly one product per grape in the Reserve range and edits it forward, so there is no 2025 page and no 2025 e-label link. The bare GS1 root /01/03274550732866 returns 404, so the variant segment (008859) is required and there is no way to reach a 2025 variant without guessing it, which the rules forbid. THE 2024'S LIST, RECORDED ONLY AS EVIDENCE AND NOT ATTACHED, in French: 'Raisins, mout de raisins concentre, sucre, conservateur (SULFITES), regulateur d'acidite (acide tartrique [L(+)-]), agent stabilisateur (contient acide metatartrique et/ou mannoproteines de levures). Mis en bouteille sous atmosphere protectrice.' Nutrition per 100 ml: 330 kJ / 80 kcal, fats 0 g of which saturates 0 g, carbohydrate 1,8 g of which sugars 1,1 g, protein 0 g, salt 0 g. Note that it declares concentrated grape must and sugar — a chaptalised Alsace wine — which is exactly the kind of per-vintage detail that cannot be carried across a vintage boundary. FR (EU) reading used; an English default and a Svenska option exist.",
+      "note": "Alliance Nutri (alliance-alsace.com) is a shared Alsace platform and is the best French lead this project has: look for the same 'INGREDIENTS ET NUTRITION' button on other Alsace cooperatives."
     }
   ],
-  "updated_at": "2026-08-07T11:20:00Z",
+  "updated_at": "2026-08-07T13:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
