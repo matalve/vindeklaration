@@ -9,10 +9,10 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-07, across 77 producers and 189 wine records. **The German
+Status as of 2026-08-07, across 84 producers and 201 wine records. **The German
 2024-and-later undeclared pool is exhausted** — see the closing section. **The
-French pool opened on 2026-08-07; thirteen producers and 49 wines in, exactly
-one publishes an ingredient list** — see *France, and why it is not Germany*.
+French pool opened on 2026-08-07; twenty producers and 61 wines in, still zero
+declarations attached** — see *France, and why it is not Germany*.
 
 ## Readable — server-rendered
 
@@ -27,7 +27,9 @@ one publishes an ingredient list** — see *France, and why it is not Germany*.
 | **graphic-druck** | `e-label.graphic-druck.de/{yyyymmdd}/{slug}` | A print supplier's e-label service. The date segment appears to be a publication date and the slug carries the wine and vintage. Found via August Kesseler. Two URL forms: the short `/e/{id}` that producers actually link 302s to the dated slug. |
 | **apys** | `elabel.apys.de/e-Label/e-Label.php?p1={company-guid}&p2={article}` | Plain server-rendered PHP by soppe + partner Software GmbH. 24-language EU selector including Svenska; nutrition, ingredient list and a per-company Impressum naming who is responsible for the data set. **It states no wine name, no vintage and no bottle size**, so like f-label it cannot identify itself and a find rests on the producer's linking. `robots.txt` is `Disallow: /` — this is where the e-label exception applies. Seen at Leitz (rejected, see below) and Andreas Oster / HORIZN29 (found). |
 | **EuvinoPRO shop** | `iframe.euvino.eu/iframe/{shop-slug}` or a white-label domain like `shop.weingut-knipser.de` | **The declaration is inline on the product page**, not behind a link: a `Zutaten / Inhaltsangaben` row and a `Nährwerte (je 100 ml)` table, beside a Produktinformationen table with grape, Flaschengröße, closure, quality level, region, Einzellage and `Vorhandener Alkohol`. Server-rendered, and it identifies itself — wine and vintage in the H1. Same company as f-label, far better provenance. Three shops in one batch (Max Ferd. Richter, Paulinshof, Knipser) plus one that leaves the fields empty (In den Zehn Morgen). See the traps below. |
-| **Rhonéa's own QR platform** | `m.rhonea.fr/{code}` plus `/{code}/get/tech-sheet` | A producer-run QR destination on the producer's own subdomain, server-rendered, **one short code per wine per vintage** with a vintage switcher and a language selector. It states wine, appellation, colour and vintage in its own heading, so it identifies itself as well as Winestro does. **It is not an e-label**: its "Spécifications" block holds residual sugar and "Contient des sulfites" and no ingredient list or nutrition table, and its downloadable fiche produit repeats the same fields. Its `robots.txt` is a long bad-bot blocklist ending in `Disallow: /`, then a separate `User-agent: *` group disallowing only `/ajax`, `/admin`, `/manage`, `/create` and `/*/get/{qrcode,tablecard,embed}$` — **the wine pages and `/get/tech-sheet` are allowed, so no exception is needed.** |
+| **Alliance Nutri** | `alliance-alsace.com/01/{gtin}/22/{variant}` | **The project's first GS1 Digital Link** (AI 01 = GTIN, AI 22 = consumer product variant) and its **first third-party e-label vendor on a French producer's page**. About 6 kB of plain server-rendered HTML on a Laravel host: designation, sweetness, **vintage**, format, Gencode, an ingredient paragraph and a nutrition table per 100 ml. 11-language EU selector (fr, en, it, da, de, es, fi, nl, pt, ro, **sv**) driven by a POST with a CSRF token — **but it also honours the `Accept-Language` request header**, which is the cheap way to get French or Swedish. `robots.txt` is `User-agent: *` / `Disallow:` — an *empty* Disallow, everything allowed, no exception needed. **It identifies itself as well as Winestro does.** The bare GS1 root `/01/{gtin}` returns 404, so the variant segment is required and no vintage can be reached without the producer linking it. Found via Cave de Turckheim. |
+| **Vincod (vin.co)** | `m.{producer}.{tld}/{code}` and the mirror `vincod.com/{code}`; the e-label is `/{code}/n/{hash}/{lang}` | **The `m.rhonea.fr` platform, now identified**: `m.hugel.com` is the same thing, images from `cdn.vin.co`, every short code mirrored at `vincod.com/{code}`, and byte-identical `robots.txt`. Three levels: domaine page → range page → **per-wine, per-vintage page**. The wine page's `<select id="millesime">` **names the short code for every vintage back to 2007**, so our vintage is reachable from the producer's own control and never by guessing — the only platform in this project that gives a vintage archive. The wine page itself is a tasting note plus a Spécifications block (alcohol *analysis*, residual sugar, acidity, pH, vine age, yield) and **is not a declaration**. The declaration, where the producer has filled it in, is a link **"Ingredients & nutrition ›"** to `/{code}/n/{hash}/{lang}`: wine, vintage, **lot number**, *labelled* alcohol, bottle size, an `Ingredients` line and a nutrition table **per 100 ml and per 125 ml**. `robots.txt` is a bad-bot blocklist ending `Disallow: /`, then a separate `User-agent: *` group disallowing only `/ajax`, `/admin`, `/manage`, `/create`, `/superadmin` and `/*/get/{qrcode,tablecard,embed}$` — **the wine and `/n/` pages are allowed, so no exception is needed.** |
+| **Rhonéa's own QR platform** | `m.rhonea.fr/{code}` plus `/{code}/get/tech-sheet` | **This is Vincod — see the row above.** A producer-run QR destination on the producer's own subdomain, server-rendered, **one short code per wine per vintage** with a vintage switcher and a language selector. It states wine, appellation, colour and vintage in its own heading, so it identifies itself as well as Winestro does. On Rhonéa's deployment it carries no declaration: its "Spécifications" block holds residual sugar and "Contient des sulfites" and no ingredient list or nutrition table, and its downloadable fiche produit repeats the same fields. **That observation stands but the reason is now clear — the platform supports a full e-label at `/{code}/n/{hash}/{lang}` and Rhonéa had not filled it in.** On a Vincod page, look for an "Ingredients & nutrition" link inside the Spécifications block before concluding there is none. Its `robots.txt` is a long bad-bot blocklist ending in `Disallow: /`, then a separate `User-agent: *` group disallowing only `/ajax`, `/admin`, `/manage`, `/create` and `/*/get/{qrcode,tablecard,embed}$` — **the wine pages and `/get/tech-sheet` are allowed, so no exception is needed.** |
 | **Producer's page itself** | no platform at all | Bastianshauser Hof – Erbeldinger puts the **complete mandated set inline** on its WooCommerce product page, inside a collapsed accordion whose panel is in the server's HTML: Jahrgang, Alk., Flasche, Bio-Hinweis, `Zutaten:`, `Ø Nährwerte pro 100 ml` and the Gutsabfüller. No link, no iframe, nothing for an href scan to find — only a raw-HTML grep for `Zutaten` finds it. |
 
 ## Unreadable — client-side rendering
@@ -252,6 +254,75 @@ French wines whose Systembolaget vintage is **2025** for the same reason
 Germany's 2025 slice worked. Tavel & Lirac was picked to replicate Rhonéa and
 did not, so one co-op is not a rule.
 
+### The cooperative hypothesis was tested and failed too
+
+Rhonéa was a co-op, so the next run took the co-op as the profile: **seven
+producers on 2026-08-07, twelve wines, zero attached.** Five of the seven are
+cooperative-shaped and between them they produced one declaration, a vintage
+behind.
+
+| Producer | Shape | Web presence | Our bottle on it? | Declaration? |
+|---|---|---|---|---|
+| Cave de Turckheim | Alsace co-op | PrestaShop | no, shop is on the 2024, ours is the 2025 | **yes, a full GS1 e-label** — rejected on vintage |
+| Pfaffenheim | Alsace co-op | Vinium AJAX site + server-rendered shop | **yes, exactly** — 2024, Riesling/Pinot Gris, 12,5 %, 75 cl | none, not even a sulphite line |
+| Cellier des Dauphins | union of Rhône co-ops | 29-page WordPress | no, the brand is absent from the site | none for any wine |
+| Les Quatre Tours | Coteaux d'Aix co-op | Nuxt SPA, `serverRendered:false` | no per-wine URL exists at all | unreadable |
+| Vignerons Propriétés Associés | 20-estate grower group | WooCommerce | cuvée yes, but **no vintage stated** | none |
+| Gustave Lorentz | Alsace house | WordPress + **geoblocked** shop | range pages only, no vintage | none on the readable side |
+| Hugel | Alsace house | Vincod | **yes, all three, per vintage** | **yes, two of three** — both rejected on alcohol |
+
+**Neither the big house, nor the small estate, nor the co-op is the French
+profile that works.** What actually predicted a declaration in this batch was
+not the producer's shape but **whether it had adopted a QR platform at all** —
+Turckheim (Alliance Nutri) and Hugel (Vincod) both had, and both published the
+complete mandated set; the five that had not published nothing. That is a
+better question to ask of the next French producer than how it is owned.
+
+**Alsace is where the platforms are.** Both were found there in one afternoon,
+after thirteen producers across Provence, the Rhône, the Loire and Burgundy
+turned up none. Alsace is also where the remaining French pool is densest per
+producer. Start there.
+
+**But a shared regional platform it is not.** Pfaffenheim, twenty minutes from
+Turckheim and the same size, references `alliance-alsace.com` nowhere.
+
+### In France the vintage stopped being the problem and the alcohol started
+
+Four French wines have now been rejected against a declaration that was found
+and read. **One was the vintage; three were not.**
+
+- Turckheim's shop is on the **2024** while Systembolaget sells the **2025** —
+  the Rhonéa failure mode inverted. A PrestaShop with one product per cuvée can
+  be behind the Swedish shelf as easily as ahead of it, so do not assume the
+  producer is always the newer of the two.
+- **Hugel's Gentil 2024 and Pinot Gris Classic 2024 both have a complete
+  e-label for our exact bottle and were rejected on strength**: 12 % vol
+  against Systembolaget's 13,0 and 14 % vol against 13,0. Each is 1,0 pp,
+  twice the tolerance, **and they are out in opposite directions**, so it is
+  not a units or rounding artefact on one side — the two records genuinely
+  disagree. Hugel's third Swedish wine, Riesling Classic 2024, is the one whose
+  strength agrees exactly (12 against 12,0) and the one whose Vincod page
+  carries no e-label link.
+
+That pattern is worth watching. If it recurs — a producer whose per-vintage
+disclosure is unimpeachable and whose alcohol simply does not match
+Systembolaget's field — the question becomes whether Systembolaget's
+`alcohol_percentage` is refreshed per vintage or carried forward with the
+product number. **That is a decision about the rule and not one a finder run
+should take**; the two Hugel records are flagged as revisit candidates and the
+declarations are quoted in full in their `evidence` so no refetch is needed.
+
+**A Vincod e-label is also lot-specific** — it prints `Lot No. : L.CFCN D` —
+which is a second, independent reason a strength mismatch is not safe to
+wave through: it is a disclosure for one bottling run, and an export
+allocation may be another.
+
+**And one house can use one list for everything.** All three Hugel
+declarations read are the identical `Grapes, Sulphites , Carboxymethyl
+cellulose`, double space and all — a house template. Rhonéa's two cuvées
+differed from each other. Per-wine formulation is not something to assume in
+either direction.
+
 ### Where a French declaration is not, three more ways
 
 - **`info-calories-alcool.org`** — a footer logo on Paul Blanck's shop and on
@@ -266,14 +337,23 @@ did not, so one co-op is not a rule.
   spending the fetch — a 2018 file cannot carry a declaration first required of
   wine produced after 8 December 2023.
 
-### French e-label vendors, all still unseen in the wild
+### French e-label vendors — two are now seen, the rest are not
 
-Searching for a French producer's e-label surfaces only the vendors' own
-marketing. After thirteen French producers the more useful negative is that
-**no third-party e-label vendor has appeared on a French producer's page at
-all** — where a French producer publishes, it publishes on its own host, inline
-(Rhonéa's shop) or on its own subdomain (`m.rhonea.fr`). Names still worth
-recognising in an `href`: `vin.co` (Nutri QR Code), `qrcode.vin`
+The 2026-08-07 cooperative run ended the "no third-party vendor in France"
+finding. Two are now documented in the readable table above:
+
+- **`vin.co` / Vincod** — `m.{producer}.{tld}/{code}`, mirrored at
+  `vincod.com/{code}`, assets on `cdn.vin.co`. Seen at Hugel and, without its
+  e-label filled in, at Rhonéa. Server-rendered.
+- **Alliance Nutri**, `alliance-alsace.com` — a GS1 Digital Link resolver.
+  Seen at Cave de Turckheim. Server-rendered.
+
+**Recognise Vincod by the `m.` subdomain**, which is how both deployments are
+reached, and note that Hugel has pointed `hugel.com` itself at its Vincod
+domaine page with the path preserved — so a producer's own apex domain can *be*
+the QR platform.
+
+Names still worth recognising in an `href` and still unseen: `qrcode.vin`
 (which also sells under VINISCAN, VITIQUETTE and VINICODE),
 `labelletiquette.fr`, `lesiteduvigneron.fr`, `e-label.eu`, `wine-elabels.eu`,
 `littlewine.io`, `scanthiswine.com`, `bottlebooks.me`. `e-label.online` was
@@ -496,6 +576,42 @@ worth recognising in an `href`; nothing is known about how they render.
 - `rhonea.fr` and `www.rhonea.fr` are **two hostnames serving the same
   PrestaShop with no redirect between them**. Read `robots.txt` on whichever you
   actually fetch from; both are the stock PrestaShop file.
+- `boutique.gustavelorentz.com` answers **HTTP 403 with the body "This website
+  is only authorised from France and Germany"** — on every path including
+  `robots.txt`. **The first geoblock in this project.** It is a technological
+  measure and therefore absolute: one request, no workaround, record
+  `not_found` and keep the product slugs so a future run from an eligible
+  country can go straight to them. It says nothing about whether the producer
+  publishes; it does say a Swedish reader holding the bottle cannot get there
+  either. The estate's marketing site `www.gustavelorentz.com` is open and
+  server-rendered, keeps **range pages rather than per-wine pages**, states no
+  vintage, and carries no list.
+- `www.cave-turckheim.com` serves **no `robots.txt`** — it answers 404 with the
+  site's own styled error page. Its PrestaShop puts the e-label link in a
+  button labelled **"INGREDIENTS ET NUTRITION"** at the foot of the technical
+  block on every product page, after "Contient des sulfites".
+- `www.pfaffenheim.com` runs the **Vinium** framework and is two sites in one:
+  the `/fr/nos_vins/{id}/{slug}/{vintage}` marketing pages **render
+  client-side** (30 kB of chrome, the wine only in the `<title>`, and an
+  `X-Requested-With: XMLHttpRequest` refetch returns the identical shell),
+  while `/fr/boutique` and `/fr/produit/{gtin}-{slug}` are **fully
+  server-rendered**. On this platform the shop is the readable surface.
+  Its `sitemap.php` keeps **one marketing page per vintage** per cuvée.
+- `quatretours.com` is a Nuxt SPA whose inline state reads literally
+  `serverRendered:false`; its `robots.txt` is a 200 serving the SPA shell, a
+  soft 404 like `solera.se`'s. **Its `sitemap.xml` is 29 static pages in two
+  locales with no per-wine URL at all**, which settles the producer in two
+  requests without fighting the rendering. `les4tours.com` does not resolve.
+- `hugel.com` and `www.hugel.com` **refuse port 443**; over plain http both
+  redirect, path preserved, to `m.hugel.com/598DGMB3C4` — the producer's Vincod
+  domaine page. `hugel.fr` is a frameset whose only content is an
+  `<iframe src="http://www.hugel.com/fr">`.
+- `vigneronsproprietesassocies.fr/robots.txt` (Netalys WordPress) names
+  **ClaudeBot and anthropic-ai** as well as GPTBot, CCBot, Google-Extended and
+  the usual SEO crawlers with `Disallow: /`. We are none of them — the
+  User-Agent is the project's own — and the `User-agent: *` group, which allows
+  `/produit/`, is what applies. Same reading as `webshop.solera.se`,
+  `cave-tavel-lirac.fr` and `www.gerard-bertrand.com`.
 - `rhonea.fr/fr/{category-slug}/` **404s**; its categories are
   `/fr/{id}-{slug}` (e.g. `/fr/15-ventoux`) while its products are
   `/fr/{slug}/{id}-{slug}.html`. Fetch the category to get the product URLs
@@ -560,9 +676,9 @@ alternative is inventing one.
 
 ## What the numbers say so far
 
-**Most producers publish nothing reachable.** Across 77 producers probed and
-189 wine records, 18 declarations are attached, 33 wines were rejected against
-a declaration that was found and read, and 138 came to nothing. Roughly a third
+**Most producers publish nothing reachable.** Across 84 producers probed and
+201 wine records, 18 declarations are attached, 36 wines were rejected against
+a declaration that was found and read, and 147 came to nothing. Roughly a third
 of producers have a readable e-label or an inline declaration; a handful have
 an unreadable one; the rest put no ingredient list anywhere this project can
 see. The binding constraint is not rendering — it is existence, discoverability
@@ -695,25 +811,40 @@ not the same and the file keeps them apart — a `rejected` record means the
 producer complied and the shelf is behind; a `not_found` record means nothing
 was reachable, which is not the same as nothing existing.
 
-**Where the remaining work is, if anyone asks for it**: 906 unattempted 2024+
-undeclared wines, of which Italy 252 and France 244 are more than half. The one
+**Where the remaining work is, if anyone asks for it**: 844 unattempted 2024+
+undeclared wines, of which Italy 252 and France 183 are more than half, then
+Spain 79, South Africa 59, Austria 42 and Portugal 39. The one
 prior international batch — Antinori, d'Esclans, Wittmann, Sadie, Alheit —
 yielded nothing readable, so expect a lower hit rate than Germany's and a
 different platform mix (U-label is Italian- and Spanish-heavy and still has no
 publicly linked URL in this project's notes).
 
-**France now stands at 49 wines across 13 producers, 0 found, 2 rejected**, and
-195 French 2024+ undeclared wines remain. Germany's rate across its whole pool
-was 18 in 89. Exactly one French producer of the thirteen — Rhonéa — publishes
-an ingredient list anywhere, and both its wines were a vintage behind.
+**France now stands at 61 wines across 20 producers, 0 found, 5 rejected**, and
+**183 French 2024+ undeclared wines remain untouched**. Germany's rate across
+its whole pool was 18 in 89. **Not one French wine has yet been attached.**
 
-**Neither the big house nor the small estate is the French profile that works.**
-Chapoutier, Gérard Bertrand and an LVMH estate failed; so did six small estates
-with and without their own webshops. What produced the one hit was a
-**cooperative group with a first-party e-commerce site**, and a second co-op
-picked to replicate it did not. If another French batch is run, the ordering to
-try is: co-ops and grower groups with their own shop first, wines whose
-Systembolaget vintage is **2025** ahead of 2024, and abandon any producer whose
-range page states no vintage — three of six small estates state none at all,
-and an undated cuvée page cannot be matched to a bottling however much text it
-carries.
+Three of the twenty publish an ingredient list somewhere a reader can reach —
+Rhonéa inline on its shop, Cave de Turckheim on Alliance Nutri, Hugel on
+Vincod — and all five wines they cover were rejected: two on vintage, two on
+alcohol, one because the shop had not rolled forward. **The French failure has
+moved.** For the first thirteen producers nothing existed to reject; now
+something does, and the matching rules are what stop it.
+
+**Shape does not predict publication in France; platform adoption does.**
+Big house, small estate and cooperative have each been tried as a profile and
+each has failed. What the three publishing producers have in common is that
+they run a QR platform at all. The three cheap questions to ask of a French
+producer, in order:
+
+1. **Is it in Alsace?** Both French e-label platforms were found there, after
+   thirteen producers elsewhere found none.
+2. **Does any product page link an `m.` subdomain, a `vincod.com` code or an
+   `alliance-alsace.com` GS1 URL?** One grep of one product page settles it.
+3. **Does the range page state a vintage?** If not, stop — an undated cuvée
+   page cannot be matched to a bottling however much text it carries. Five
+   French producers have now failed on this alone.
+
+Prefer wines whose Systembolaget vintage is **2025** over 2024, with one
+correction: **the French shop is not reliably ahead of the Swedish shelf.**
+Rhonéa's had rolled past our 2024; Turckheim's had not yet reached our 2025.
+Both directions cost a wine in this pool.
