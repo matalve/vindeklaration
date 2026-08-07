@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to the last handful)",
-  "attempted": 134,
+  "attempted": 135,
   "found": 18,
-  "not_found": 85,
+  "not_found": 86,
   "rejected": 31,
   "declarations": [
     {
@@ -3857,9 +3857,40 @@
       "robots_disallowed": false,
       "server_rendered": true,
       "note": "Reputation is not a predictor. Keller is Gault Millau 'Winzer des Jahrzehnts' and its wines are among the most expensive in Germany, and its web presence is smaller than that of every village co-operative in this batch. The reliable predictor remains the one already in the platform notes: an estate with a per-product page somewhere might publish; an estate with no per-product page cannot. A Wix site whose pages-sitemap holds three URLs and no store-products-sitemap.xml is a two-request finding — check the sitemap before the home page."
+    },
+    {
+      "product_number": "9443501",
+      "name": "Emrich-Schönleber Lenz Riesling",
+      "producer": "Emrich-Schönleber",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE PRODUCER'S SITE WAS DOWN THROUGHOUT, AND THE ONLY DECLARATION FOUND WAS A RETAILER'S, WHICH THE RULES EXCLUDE. VDP.Weingut Emrich-Schönleber, Soonwaldstraße 10a, 55569 Monzingen (Nahe), is at emrich-schoenleber.de, a Joomla site. Its robots.txt served normally (200, Joomla default, nothing relevant disallowed), but every content URL tried — https://www.emrich-schoenleber.de/, https://emrich-schoenleber.de/ and https://www.emrich-schoenleber.de/de/ — returned a generic Apache '503 Service Temporarily Unavailable' with the IE-padding comment, spread over three requests several seconds apart. THAT IS AN OUTAGE, NOT A REFUSAL: no challenge page, no rate-limit header, no login wall, and the robots.txt on the same host answered. It was not retried further. www.emrich-schoenleber.com additionally fails TLS with a hostname mismatch. NOTHING WAS TAKEN FROM THE RETAILER THAT HAS IT. A web search surfaced what is very probably the producer's own text for exactly this wine and vintage — 'Emrich-Schönleber Riesling Lenz halbtrocken Nahe 2024' with Zutaten 'Trauben, Zucker', Brennwert 302 kJ / 72 kcal per 100 ml, 11,5 % Vol., Restzucker 11,3 g/l, Gesamtsäure 8,2 g/l, 'Enthält Sulfite (E 220 - E 224)' — on pinard-de-picard.de, a German wine merchant. The alcohol matches Systembolaget 9443501 (11,5 % vol) exactly and the vintage matches. IT IS STILL NOT USABLE. The agent's rules exclude a retailer in another country outright: their transcription is no better than Systembolaget's and their provenance is worse, and a second source that outranks the primary dataset cannot be built on a shop's data entry. Recorded here only so the next run does not spend a search rediscovering it. THIS IS THE STRONGEST REVISIT CANDIDATE IN THE GERMAN POOL: the declaration for our exact bottle demonstrably exists in circulation, and the producer's own copy of it was unreachable for reasons that will probably not last.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.emrich-schoenleber.de/robots.txt (200, Joomla default; /administrator/, /bin/, /cache/ etc.)",
+        "https://www.emrich-schoenleber.de/ (503)",
+        "https://emrich-schoenleber.de/ (503)",
+        "https://www.emrich-schoenleber.de/de/ (503)",
+        "https://www.emrich-schoenleber.com/ (TLS hostname mismatch, certificate not valid for that name)",
+        "web search (found the declaration on a German retailer only — excluded by the source rules)"
+      ],
+      "checked_at": "2026-08-07T01:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": null,
+      "fetch_result": "HTTP 503 on every content URL, three requests, no retry loop. Transient server error, not a technological refusal.",
+      "note": "Worth separating two things the report should not blur. A 503 is not a bot challenge and not a Disallow: it is the host failing, and the correct handling is to record not_found, say so, and move on — the wine is a candidate for a later run, not a closed question. And the retailer near-miss is the sharpest illustration yet of why the source rules matter: the text is right there, it matches on vintage and alcohol, and taking it would put a shop's transcription above Systembolaget's in a file that outranks the primary dataset. That is exactly the silent corruption the project forbids."
     }
   ],
-  "updated_at": "2026-08-07T01:30:00Z",
+  "updated_at": "2026-08-07T01:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
