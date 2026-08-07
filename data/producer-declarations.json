@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 142,
+  "attempted": 146,
   "found": 18,
-  "not_found": 93,
+  "not_found": 97,
   "rejected": 31,
   "declarations": [
     {
@@ -4098,9 +4098,125 @@
       "vintage": "2025",
       "evidence": "SECOND GALOUPET WINE, SAME SITE, SAME RESULT. /fr-fr/nos-vins/g-de-galoupet-2025 is the estate's own page for the 2025 G de Galoupet, the second-label rosé, matching Systembolaget 7293601 (G de Galoupet Côtes de Provence Rosé, 2025, 750 ml, 13,0 % vol, organic, supplier Moët Hennessy Sverige AB). The page carries grape varieties, tasting notes and vinification and no declaration: a grep of the 134 kB of raw HTML for 'ingrédient', 'nutrition', 'kcal', 'valeur énergétique', 'sulfite' and 'u-label' returns only the phrase 'Teneur en alcool'. Its only external links are lvmh.com and Millésima. The estate's respect-code.org pages exist for the Cru Classé 2021-2023 only and none is published for G de Galoupet in any vintage. Two wines, two live current-vintage pages, no ingredient list on either.",
       "note": null
+    },
+    {
+      "producer": "M.Chapoutier",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "evidence": "A CLOUDFLARE MANAGED CHALLENGE, WHICH IS A REFUSAL AND STOPS THE FETCH. Maison M. Chapoutier, Tain-l'Hermitage, is the producer for all four Swedish wines and the identity is not in doubt — Systembolaget's supplier is Lively Wines Sweden AB and the producer field names Chapoutier directly. The site's robots.txt is served normally and is permissive: it disallows only the login, password-reset and cart paths and the ?order= sort parameter, and it advertises four locale sitemaps. But every content URL behind it answers HTTP 403 with the Cloudflare 'Just a moment...' interstitial — a managed challenge carrying a per-request __cf_chl_tk token and a challenge-platform script. Two requests were made (the fr sitemap the robots.txt itself names, and the fr home page) and both were challenged; no third was made and nothing was attempted to get around it. Under this project's rules a bot challenge is a technological measure and is absolute, unlike robots.txt, so the e-label exception does not reach it and the crawl stopped there. NO ALTERNATIVE HOST EXISTS TO TRY. Chapoutier's Roussillon estate Domaine de Bila-Haut and its Pays d'Oc Marius range are both published under www.chapoutier.com; domainedebilahaut.com, bilahaut.com, www.bila-haut.com, elabel.chapoutier.com and label.chapoutier.com do not resolve, and a web search surfaced no e-label URL for the house. Recorded as not found on the strict reading: the four matching rules could not be attempted at all. Whether Chapoutier publishes a declaration is unknown and unknowable from here without stepping over the challenge.",
+      "sources_checked": [
+        "https://www.chapoutier.com/robots.txt (200, served normally; disallows only /login.html, /password_forgotten.html, /shopping_cart.html and ?order=, and names four locale sitemaps)",
+        "https://www.chapoutier.com/fr/sitemap.xml (Cloudflare interstitial instead of XML)",
+        "https://www.chapoutier.com/fr/ (HTTP 403, Cloudflare managed challenge)",
+        "DNS checks for a separate e-label or estate host: domainedebilahaut.com, bilahaut.com, www.bila-haut.com, elabel.chapoutier.com, label.chapoutier.com — none resolves",
+        "web search for a Chapoutier e-label (nothing but French e-label vendors' own marketing pages)"
+      ],
+      "checked_at": "2026-08-07T06:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": null,
+      "note": "First of four Chapoutier wines, all blocked by the same challenge. Recorded per wine because the file is one record per wine and the next run needs to see each product number attempted.",
+      "product_number": "5775101",
+      "name": "M.Chapoutier Marius Vermentino Terret",
+      "vintage": "2025"
+    },
+    {
+      "producer": "M.Chapoutier",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "evidence": "A CLOUDFLARE MANAGED CHALLENGE, WHICH IS A REFUSAL AND STOPS THE FETCH. Maison M. Chapoutier, Tain-l'Hermitage, is the producer for all four Swedish wines and the identity is not in doubt — Systembolaget's supplier is Lively Wines Sweden AB and the producer field names Chapoutier directly. The site's robots.txt is served normally and is permissive: it disallows only the login, password-reset and cart paths and the ?order= sort parameter, and it advertises four locale sitemaps. But every content URL behind it answers HTTP 403 with the Cloudflare 'Just a moment...' interstitial — a managed challenge carrying a per-request __cf_chl_tk token and a challenge-platform script. Two requests were made (the fr sitemap the robots.txt itself names, and the fr home page) and both were challenged; no third was made and nothing was attempted to get around it. Under this project's rules a bot challenge is a technological measure and is absolute, unlike robots.txt, so the e-label exception does not reach it and the crawl stopped there. NO ALTERNATIVE HOST EXISTS TO TRY. Chapoutier's Roussillon estate Domaine de Bila-Haut and its Pays d'Oc Marius range are both published under www.chapoutier.com; domainedebilahaut.com, bilahaut.com, www.bila-haut.com, elabel.chapoutier.com and label.chapoutier.com do not resolve, and a web search surfaced no e-label URL for the house. Recorded as not found on the strict reading: the four matching rules could not be attempted at all. Whether Chapoutier publishes a declaration is unknown and unknowable from here without stepping over the challenge.",
+      "sources_checked": [
+        "https://www.chapoutier.com/robots.txt (200, served normally; disallows only /login.html, /password_forgotten.html, /shopping_cart.html and ?order=, and names four locale sitemaps)",
+        "https://www.chapoutier.com/fr/sitemap.xml (Cloudflare interstitial instead of XML)",
+        "https://www.chapoutier.com/fr/ (HTTP 403, Cloudflare managed challenge)",
+        "DNS checks for a separate e-label or estate host: domainedebilahaut.com, bilahaut.com, www.bila-haut.com, elabel.chapoutier.com, label.chapoutier.com — none resolves",
+        "web search for a Chapoutier e-label (nothing but French e-label vendors' own marketing pages)"
+      ],
+      "checked_at": "2026-08-07T06:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": null,
+      "note": null,
+      "product_number": "5775401",
+      "name": "Marius Rosé",
+      "vintage": "2025"
+    },
+    {
+      "producer": "M.Chapoutier",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "evidence": "A CLOUDFLARE MANAGED CHALLENGE, WHICH IS A REFUSAL AND STOPS THE FETCH. Maison M. Chapoutier, Tain-l'Hermitage, is the producer for all four Swedish wines and the identity is not in doubt — Systembolaget's supplier is Lively Wines Sweden AB and the producer field names Chapoutier directly. The site's robots.txt is served normally and is permissive: it disallows only the login, password-reset and cart paths and the ?order= sort parameter, and it advertises four locale sitemaps. But every content URL behind it answers HTTP 403 with the Cloudflare 'Just a moment...' interstitial — a managed challenge carrying a per-request __cf_chl_tk token and a challenge-platform script. Two requests were made (the fr sitemap the robots.txt itself names, and the fr home page) and both were challenged; no third was made and nothing was attempted to get around it. Under this project's rules a bot challenge is a technological measure and is absolute, unlike robots.txt, so the e-label exception does not reach it and the crawl stopped there. NO ALTERNATIVE HOST EXISTS TO TRY. Chapoutier's Roussillon estate Domaine de Bila-Haut and its Pays d'Oc Marius range are both published under www.chapoutier.com; domainedebilahaut.com, bilahaut.com, www.bila-haut.com, elabel.chapoutier.com and label.chapoutier.com do not resolve, and a web search surfaced no e-label URL for the house. Recorded as not found on the strict reading: the four matching rules could not be attempted at all. Whether Chapoutier publishes a declaration is unknown and unknowable from here without stepping over the challenge.",
+      "sources_checked": [
+        "https://www.chapoutier.com/robots.txt (200, served normally; disallows only /login.html, /password_forgotten.html, /shopping_cart.html and ?order=, and names four locale sitemaps)",
+        "https://www.chapoutier.com/fr/sitemap.xml (Cloudflare interstitial instead of XML)",
+        "https://www.chapoutier.com/fr/ (HTTP 403, Cloudflare managed challenge)",
+        "DNS checks for a separate e-label or estate host: domainedebilahaut.com, bilahaut.com, www.bila-haut.com, elabel.chapoutier.com, label.chapoutier.com — none resolves",
+        "web search for a Chapoutier e-label (nothing but French e-label vendors' own marketing pages)"
+      ],
+      "checked_at": "2026-08-07T06:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": null,
+      "note": null,
+      "product_number": "5777001",
+      "name": "Chapoutier Marius Grenache Syrah",
+      "vintage": "2025"
+    },
+    {
+      "producer": "M.Chapoutier",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "evidence": "A CLOUDFLARE MANAGED CHALLENGE, WHICH IS A REFUSAL AND STOPS THE FETCH. Maison M. Chapoutier, Tain-l'Hermitage, is the producer for all four Swedish wines and the identity is not in doubt — Systembolaget's supplier is Lively Wines Sweden AB and the producer field names Chapoutier directly. The site's robots.txt is served normally and is permissive: it disallows only the login, password-reset and cart paths and the ?order= sort parameter, and it advertises four locale sitemaps. But every content URL behind it answers HTTP 403 with the Cloudflare 'Just a moment...' interstitial — a managed challenge carrying a per-request __cf_chl_tk token and a challenge-platform script. Two requests were made (the fr sitemap the robots.txt itself names, and the fr home page) and both were challenged; no third was made and nothing was attempted to get around it. Under this project's rules a bot challenge is a technological measure and is absolute, unlike robots.txt, so the e-label exception does not reach it and the crawl stopped there. NO ALTERNATIVE HOST EXISTS TO TRY. Chapoutier's Roussillon estate Domaine de Bila-Haut and its Pays d'Oc Marius range are both published under www.chapoutier.com; domainedebilahaut.com, bilahaut.com, www.bila-haut.com, elabel.chapoutier.com and label.chapoutier.com do not resolve, and a web search surfaced no e-label URL for the house. Recorded as not found on the strict reading: the four matching rules could not be attempted at all. Whether Chapoutier publishes a declaration is unknown and unknowable from here without stepping over the challenge.",
+      "sources_checked": [
+        "https://www.chapoutier.com/robots.txt (200, served normally; disallows only /login.html, /password_forgotten.html, /shopping_cart.html and ?order=, and names four locale sitemaps)",
+        "https://www.chapoutier.com/fr/sitemap.xml (Cloudflare interstitial instead of XML)",
+        "https://www.chapoutier.com/fr/ (HTTP 403, Cloudflare managed challenge)",
+        "DNS checks for a separate e-label or estate host: domainedebilahaut.com, bilahaut.com, www.bila-haut.com, elabel.chapoutier.com, label.chapoutier.com — none resolves",
+        "web search for a Chapoutier e-label (nothing but French e-label vendors' own marketing pages)"
+      ],
+      "checked_at": "2026-08-07T06:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": null,
+      "note": null,
+      "product_number": "7712901",
+      "name": "M.Chapoutier Les Vignes de Bila-Haut",
+      "vintage": "2024"
     }
   ],
-  "updated_at": "2026-08-07T06:05:00Z",
+  "updated_at": "2026-08-07T06:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -4151,6 +4267,11 @@
       "at": "2026-08-07T06:05:00Z",
       "batch": "3g — FRANCE OPENS. Château du Galoupet (Moët Hennessy), 2 wines, both vintage 2025",
       "result": "2 attempted, 0 found, 2 not found, 0 rejected. The estate publishes one page per wine per vintage and both 2025 pages are live and match Systembolaget on vintage, alcohol and organic status — the vintage rule is satisfied and the ingredient list is simply not there. Its 'Plateforme de Transparence' links respect-code.org traceability pages for the 2021-2023 Cru Classé only, which is neither a declaration nor our vintage. HOST NOTE: galoupet.com resolves but refuses port 443; the live host is www.chateaugaloupet.com, reached via the plain-http 301."
+    },
+    {
+      "at": "2026-08-07T06:20:00Z",
+      "batch": "3g — M. Chapoutier, 4 wines (Marius Vermentino Terret 2025, Marius Rosé 2025, Marius Grenache Syrah 2025, Les Vignes de Bila-Haut 2024)",
+      "result": "4 attempted, 0 found, 4 not found, 0 rejected. THE HOST REFUSES. www.chapoutier.com serves a permissive robots.txt and then answers HTTP 403 with a Cloudflare managed challenge on every content URL, including the sitemap its own robots.txt names. A challenge is a technological measure and absolute; two requests, no workaround, stop. No alternative host: Bila-Haut and Marius are both published under chapoutier.com and no separate domain resolves. FIRST CLOUDFLARE CHALLENGE IN THIS PROJECT — French estates are more likely to sit behind one than German ones were."
     }
   ]
 }
