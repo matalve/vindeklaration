@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — German producers with 2024+ undeclared wines. COMPLETE: every German wine with vintage 2024 or later and no declaration on Systembolaget has been attempted (89 wines). What remains undeclared in Germany is 415 wines of 2023 and earlier, which the production-date trigger may not reach.",
-  "attempted": 140,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
+  "attempted": 142,
   "found": 18,
-  "not_found": 91,
+  "not_found": 93,
   "rejected": 31,
   "declarations": [
     {
@@ -4036,9 +4036,71 @@
       "robots_disallowed": false,
       "server_rendered": true,
       "note": "Third of three Prüm wines on the Swedish shelf, all three not found for the same reason. Recorded separately rather than folded into the earlier two because the file is one record per wine and the next run needs to see that this product number was attempted. The single fetch was worth making: a producer's site can change between runs and citing a day-old observation as current would be exactly the kind of unverified claim this project does not make."
+    },
+    {
+      "producer": "Château du Galoupet",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.galoupet.com/ (does not resolve to a working https host; port 443 refused on 185.16.44.132, plain http 301s to www.chateaugaloupet.com)",
+        "https://www.chateaugaloupet.com/robots.txt (Drupal default; content paths allowed, only /core/, /admin/, /search/, /user/* disallowed)",
+        "https://www.chateaugaloupet.com/sitemap.xml (complete, 4 locales, one page per wine per vintage 2021-2025)",
+        "https://www.chateaugaloupet.com/fr-fr/nos-vins/chateau-galoupet-cru-classe-2025",
+        "https://www.chateaugaloupet.com/fr-fr/nos-vins/g-de-galoupet-2025",
+        "https://www.chateaugaloupet.com/fr-fr/transparence",
+        "web search for a Galoupet e-label (nothing; only French e-label vendors' own marketing)"
+      ],
+      "checked_at": "2026-08-07T06:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "5701801",
+      "name": "Château Galoupet Cru Classé de Provence",
+      "vintage": "2025",
+      "evidence": "THE ESTATE'S OWN PER-VINTAGE PAGE FOR EXACTLY THIS BOTTLE EXISTS AND CARRIES NO INGREDIENT LIST. Château du Galoupet, La Londe-les-Maures, Côtes de Provence, owned by Moët Hennessy since 2019; Systembolaget's supplier field is Moët Hennessy Sverige AB, so producer and importer agree and there is no brand-versus-estate ambiguity. The site publishes one page per wine per vintage and the 2025 pages for both Swedish wines are live — /fr-fr/nos-vins/chateau-galoupet-cru-classe-2025 states 'Le millésime 2025 est un rosé de terroir biologique' with 'Teneur en alcool 13.5%', matching Systembolaget's 2025, 13,5 % vol, organic, 750 ml exactly. THE VINTAGE RULE IS SATISFIED AND THE DECLARATION IS SIMPLY ABSENT. The page's raw HTML was grepped for 'ingrédient', 'nutrition', 'kcal', 'valeur énergétique', 'sulfite', 'u-label', 'e-label' and 'qr' and matches none of them; its only two external links are lvmh.com/careers and a Millésima retail listing. The FR (EU) locale was used. THE ONE TRANSPARENCY PLATFORM THE ESTATE DOES RUN IS NOT A DECLARATION AND IS THE WRONG VINTAGE. /fr-fr/transparence describes a 'Plateforme de Transparence' and links three respect-code.org product pages — 80W0I2E9, PG5ZT17E, VRUZCAW8 — which the page's own captions tie to the Cru Classé 2021, 2022 and 2023. Respect Code is a supply-chain traceability service, not an ingredient list, and no code is published for the 2025, so it was not fetched: even a perfect read there would fail the vintage rule. The site also has a 'fiche produit relative aux qualités et caractéristiques environnementales', which is the French AGEC environmental sheet, a different obligation with no ingredient content. Recorded as not found, not as 'the producer published nothing': a QR code on the bottle would satisfy the regulation and be invisible here.",
+      "note": "The most compliance-resourced producer in this batch — an LVMH estate that publishes a dedicated transparency platform, a lightweight-bottle explainer and a carbon narrative — and it publishes no ingredient list. Worth remembering when 'a big owner probably has an e-label' looks like a good prior."
+    },
+    {
+      "producer": "Château du Galoupet",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.galoupet.com/ (does not resolve to a working https host; port 443 refused on 185.16.44.132, plain http 301s to www.chateaugaloupet.com)",
+        "https://www.chateaugaloupet.com/robots.txt (Drupal default; content paths allowed, only /core/, /admin/, /search/, /user/* disallowed)",
+        "https://www.chateaugaloupet.com/sitemap.xml (complete, 4 locales, one page per wine per vintage 2021-2025)",
+        "https://www.chateaugaloupet.com/fr-fr/nos-vins/chateau-galoupet-cru-classe-2025",
+        "https://www.chateaugaloupet.com/fr-fr/nos-vins/g-de-galoupet-2025",
+        "https://www.chateaugaloupet.com/fr-fr/transparence",
+        "web search for a Galoupet e-label (nothing; only French e-label vendors' own marketing)"
+      ],
+      "checked_at": "2026-08-07T06:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7293601",
+      "name": "G de Galoupet Côtes de Provence Rosé",
+      "vintage": "2025",
+      "evidence": "SECOND GALOUPET WINE, SAME SITE, SAME RESULT. /fr-fr/nos-vins/g-de-galoupet-2025 is the estate's own page for the 2025 G de Galoupet, the second-label rosé, matching Systembolaget 7293601 (G de Galoupet Côtes de Provence Rosé, 2025, 750 ml, 13,0 % vol, organic, supplier Moët Hennessy Sverige AB). The page carries grape varieties, tasting notes and vinification and no declaration: a grep of the 134 kB of raw HTML for 'ingrédient', 'nutrition', 'kcal', 'valeur énergétique', 'sulfite' and 'u-label' returns only the phrase 'Teneur en alcool'. Its only external links are lvmh.com and Millésima. The estate's respect-code.org pages exist for the Cru Classé 2021-2023 only and none is published for G de Galoupet in any vintage. Two wines, two live current-vintage pages, no ingredient list on either.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-07T02:20:00Z",
+  "updated_at": "2026-08-07T06:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -4084,6 +4146,11 @@
       "at": "2026-08-07T02:20:00Z",
       "batch": "3f — the last of the German 2024-vintage undeclared pool, one commit per producer: Weingüter Wegeler, Weingut Hoffmann-Simon, Weingut Keller, Emrich-Schönleber, Spring Wine & Spirits / Weingut Mehrlein, Solera Sweden (2 wines), Rewine, Joh. Jos. Prüm. THE GERMAN 2024+ POOL IS NOW EXHAUSTED.",
       "result": "9 attempted, 0 found, 8 not found, 1 rejected. THE REJECTION: Hoffmann-Simon, a complete self-identifying Winitas e-label for exactly this cuvée — Klüsserather Bruderschaft Riesling Spätlese trocken, Bio-Weintrauben, 322 kJ/77 kcal — naming itself the 2025 where the shelf holds the 2024; the Winitas one-request vintage census proved the 2024 is on no listing the estate publishes. THE NOT FOUNDS SPLIT THREE WAYS. (1) Producer found, current vintage on sale, no declaration published: Wegeler, whose Shopware shop has per-wine pages, per-vintage URLs and our exact 2024 at 12,0 % vol to the decimal, and links nothing but 'enthält Sulphite' — the clearest evidence yet that structure does not predict publication. (2) Estate with no searchable surface: Keller (a three-URL Wix brochure, from Gault Millau's Winzer des Jahrzehnts) and Prüm (a 3,7 kB contact card, third wine, re-fetched rather than assumed). (3) Importer in the producer field: four wines. Spring's Even & Odd was traced to Weingut Mehrlein via the agency's own 'Producent' field, and Mehrlein's site states outright that it vinifies exclusively for trade partners, so the cuvée has no page to begin with; Rewine's Robusta is absent from both of that importer's sitemaps; Solera's Pride and Phonetics are own labels whose estate could not be established at all, and nothing was guessed from the two German bottlers on Solera's producer list. ONE OUTAGE, RECORDED AS SUCH: emrich-schoenleber.de answered 503 on every content URL across three requests — an outage, not a refusal — and a German retailer carries what is very probably the producer's own text for our exact vintage and alcohol. It was not taken. A retailer's transcription cannot be allowed to outrank Systembolaget's in a file that outranks Systembolaget's. That wine is the strongest revisit candidate in the pool. WHAT THE WHOLE GERMAN POOL CAME TO: 89 wines across some 60 producers attempted, 18 declarations attached."
+    },
+    {
+      "at": "2026-08-07T06:05:00Z",
+      "batch": "3g — FRANCE OPENS. Château du Galoupet (Moët Hennessy), 2 wines, both vintage 2025",
+      "result": "2 attempted, 0 found, 2 not found, 0 rejected. The estate publishes one page per wine per vintage and both 2025 pages are live and match Systembolaget on vintage, alcohol and organic status — the vintage rule is satisfied and the ingredient list is simply not there. Its 'Plateforme de Transparence' links respect-code.org traceability pages for the 2021-2023 Cru Classé only, which is neither a declaration nor our vintage. HOST NOTE: galoupet.com resolves but refuses port 443; the live host is www.chateaugaloupet.com, reached via the plain-http 301."
     }
   ]
 }
