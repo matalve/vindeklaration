@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to the last handful)",
-  "attempted": 135,
+  "attempted": 136,
   "found": 18,
-  "not_found": 86,
+  "not_found": 87,
   "rejected": 31,
   "declarations": [
     {
@@ -3888,9 +3888,39 @@
       "server_rendered": null,
       "fetch_result": "HTTP 503 on every content URL, three requests, no retry loop. Transient server error, not a technological refusal.",
       "note": "Worth separating two things the report should not blur. A 503 is not a bot challenge and not a Disallow: it is the host failing, and the correct handling is to record not_found, say so, and move on — the wine is a candidate for a later run, not a closed question. And the retailer near-miss is the sharpest illustration yet of why the source rules matter: the text is right there, it matches on vintage and alcohol, and taking it would put a shop's transcription above Systembolaget's in a file that outranks the primary dataset. That is exactly the silent corruption the project forbids."
+    },
+    {
+      "product_number": "7352301",
+      "name": "Even & Odd Riesling",
+      "producer": "Spring Wine & Spirits",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE PRODUCER WAS IDENTIFIED, AND THE PRODUCER SAYS IN SO MANY WORDS THAT THIS WINE HAS NO PAGE. Systembolaget 7352301 carries the importer in the producer field ('Spring Wine & Spirits', supplier Spendrups). The agency's own product page, https://springwine.se/produkter/vin/vitt/even-odd-riesling/, names the estate outright in a 'Producent' field: WEINGUT MEHRLEIN, Rheingau, Riesling 100 %. That is an importer's attribution rather than the producer's own statement, so it settles which estate to look at and nothing more — no declaration was taken from it. WEINGUT MEHRLEIN PUBLISHES NO PRODUCT PAGES AT ALL, AND EXPLAINS WHY. weingut-mehrlein.de is a seven-page static HTML brochure (weingut, produktion, aktuelles, weine, venture, eco-step, kontakt) with no shop, no wine list and no per-wine URL; there is no robots.txt (404). Its /weine.html says the estate is a Rheingau Riesling specialist working with Handelspartner and — verbatim — 'Da die Weine für unsere Partner exklusiv vinifiziert werden, finden Sie im Weingut meist nicht den gleichen Wein, jedoch stets die gleich hohe Qualität!' A house that vinifies each cuvée exclusively for a trade partner has, by its own account, no 'Even & Odd' in its own range to hang an e-label on. The raw HTML of /weine.html contains no occurrence of Zutat, Nährwert, Brennwert, kcal, e-label or QR. This is the pattern already named in docs/elabel-platforms.md — a wine that exists only on the Swedish shelf has no producer page to carry a declaration — here confirmed by the producer's own words rather than inferred from an absence.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://springwine.se/robots.txt (Yoast block, empty Disallow — everything allowed)",
+        "https://springwine.se/produkter/vin/vitt/even-odd-riesling/ (importer page; names Weingut Mehrlein as producer)",
+        "https://www.weingut-mehrlein.de/robots.txt (404 — no file)",
+        "https://www.weingut-mehrlein.de/",
+        "https://www.weingut-mehrlein.de/weine.html",
+        "web search for the producer behind Even & Odd (Swedish retail aggregators only; the importer page was what resolved it)"
+      ],
+      "checked_at": "2026-08-07T01:50:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "note": "Worth carrying forward: when Systembolaget's producer field holds a Swedish importer, the importer's own agency site often names the estate in a 'Producent' field, and that is a cheap way to convert an unidentifiable item into a real producer to probe. It converted this one in two requests. What it converted it into was a dead end, but a documented dead end — Mehrlein's own text about exclusive vinification for trade partners is the clearest statement in this whole batch of why private-label bottlings cannot be traced to a producer declaration."
     }
   ],
-  "updated_at": "2026-08-07T01:40:00Z",
+  "updated_at": "2026-08-07T01:50:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
