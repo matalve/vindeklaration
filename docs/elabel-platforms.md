@@ -9,10 +9,11 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-07, across 84 producers and 201 wine records. **The German
+Status as of 2026-08-07, across 90 producers and 215 wine records. **The German
 2024-and-later undeclared pool is exhausted** — see the closing section. **The
-French pool opened on 2026-08-07; twenty producers and 61 wines in, still zero
-declarations attached** — see *France, and why it is not Germany*.
+French pool opened on 2026-08-07; twenty-six producers and 75 wines in, still
+zero declarations attached** — see *France, and why it is not Germany*.
+**The Alsace slice is now exhausted too** — see *Alsace, tested to exhaustion*.
 
 ## Readable — server-rendered
 
@@ -323,6 +324,61 @@ cellulose`, double space and all — a house template. Rhonéa's two cuvées
 differed from each other. Per-wine formulation is not something to assume in
 either direction.
 
+### Alsace, tested to exhaustion, and it was not a vein
+
+The batch after the cooperative run took the closing advice — *Alsace is where
+the platforms are, start there* — and finished the region. **All thirteen
+Alsace wines with vintage 2024 or later and no declaration on Systembolaget
+have now been attempted, across eight producers, and the two platform
+adoptions found in the first afternoon were the whole of it.**
+
+| Producer | Site | Our bottle on it? | Declaration? |
+|---|---|---|---|
+| Cave de Turckheim | PrestaShop | no, shop on the 2024, ours the 2025 | **Alliance Nutri** — rejected on vintage |
+| Hugel | Vincod | yes, all three | **yes, two of three** — rejected on alcohol |
+| Pfaffenheim | Vinium | yes, exactly | none |
+| Gustave Lorentz | WordPress + geoblocked shop | no | none readable |
+| Paul Blanck | bespoke PHP shop | yes | none |
+| **Dopff & Irion** | **Vinium** | **yes, exactly** | none |
+| **Blanck André et ses Fils** | own shop, one page per cuvée | one control page at our vintage | none |
+| **Etienne Simonis** | Soluxa site + per-vintage fiche PDF | **yes, exactly** | none |
+| **Vignoble Luc Faller** | **no website at all** | — | — |
+
+**Four of the eight had our exact bottle on their own page and none of them
+declared anything on it.** Adoption of a QR platform remains the only thing
+that predicted a declaration, and adoption did not spread by geography: two
+adopters, six non-adopters, in one small region.
+
+Two things from this half worth carrying forward:
+
+- **Vinium is Pfaffenheim's and Dopff & Irion's, and they are the same owner.**
+  Dopff & Irion belongs to the Pfaffenheim group, so that is one observation,
+  not two. It does correct the platform note: at Pfaffenheim the
+  `/fr/nos_vins/` marketing pages render client-side and only the shop was
+  readable, while at Dopff & Irion the marketing URL simply **302s into the
+  boutique**, so the whole deployment is server-rendered and its silence is
+  real. Recognise Vinium by `Création Vinium` in the footer and a
+  `sitemap.php`.
+- **A producer can have no website.** Vignoble Luc Faller, Itterswiller, 8,3 ha,
+  Demeter — six candidate domains checked by DNS, none resolves; the Vignerons
+  Indépendants register (of which the estate is a member) and the official
+  Route des Vins d'Alsace directory both carry **no website field**; every page
+  a search returns is a retailer or a guide. That is a complete answer in two
+  fetches, not a reason to keep looking. **Check the two French directories
+  before assuming a small estate's site is merely hard to find** —
+  `vigneron-independant.com` and `wineroute.alsace` / `routedesvins.alsace`
+  both have a website field and both leave it blank when there is none.
+
+### A fourth way a French declaration is not there: the negative list
+
+Etienne Simonis's per-vintage fiche says the wine is made *"sans levurage, sans
+collage, sans chaptalisation ni acidification"*, and the vineyard paragraph
+says only sulphur, copper and plant teas are used. **A statement of what was
+not added is not an ingredient list.** Expect it on organic and biodynamic
+estates, where it reads more like compliance than a tasting note does and is
+still not one — a wine made without fining agents must still declare its
+sulphites, and the energy value is absent either way.
+
 ### Where a French declaration is not, three more ways
 
 - **`info-calories-alcool.org`** — a footer logo on Paul Blanck's shop and on
@@ -369,6 +425,15 @@ already on the German list. Nothing is known about how any of them renders.
   Systembolaget's and its vintage and market are unverified. Expect to meet this
   more in France than in Germany, because French export brands are on more
   foreign shelves. Note it and move on.
+- **The list is in circulation and still may not be used.** Grand Sud
+  Chardonnay (Les Grands Chais de France) has a complete, plausible ingredient
+  list — grapes, concentrated must, sulphites, potassium sorbate, tartaric and
+  malic acid, gum arabic, CMC — on Carrefour, on Openfoodfacts, on a Belgian
+  wholesaler's tech sheet and on vinello.eu, and **nowhere on the producer's
+  own surface**. It is the vinello rule again and the temptation is stronger
+  because the list looks right. It stays out: a record in
+  `producer-declarations.json` outranks Systembolaget's own text, so attaching
+  an unsourced list overrides a correct absence with an unverifiable presence.
 - **The export-only brand.** Saget la Perrière's whole Swedish presence bar one
   wine is *La Petite Perrière*, which appears nowhere on the producer's own site
   — not in the navigation, not in the sitemap. Every page a search finds for it
@@ -612,6 +677,55 @@ worth recognising in an `href`; nothing is known about how they render.
   User-Agent is the project's own — and the `User-agent: *` group, which allows
   `/produit/`, is what applies. Same reading as `webshop.solera.se`,
   `cave-tavel-lirac.fr` and `www.gerard-bertrand.com`.
+- **`unable to get local issuer certificate` is now usually OUR fault, not the
+  site's.** `www.groupegcf.fr` and `www.groupegcf.com` fail TLS under httpx,
+  curl and a freshly installed `certifi` — and the chain is perfectly valid:
+  `openssl s_client` shows a Let's Encrypt leaf under intermediate `YR2` under
+  **`ISRG Root YR`**, Let's Encrypt's 2025 root, which neither the Pi's
+  `ca-certificates` nor certifi carries yet. **Do not record this as a TLS
+  failure and do not disable verification.** Fetch Let's Encrypt's own
+  cross-signed root, `https://letsencrypt.org/certs/gen-y/root-yr-by-x1.pem`,
+  which verifies under the already-trusted ISRG Root X1, append it to a copy of
+  the CA bundle and pass that as the `cafile`. Verification still happens.
+  Let's Encrypt is rotating to this root, so **expect this on more and more
+  hosts over the coming year**; a self-signed or expired certificate is a
+  different thing and stays a real failure.
+- `www.gcfplanet.com` fails TLS with a genuinely self-signed chain; over plain
+  http it is a 134-byte meta-refresh to `https://www.groupegcf.fr`. The group's
+  `robots.txt` **disallows four specific content pages**, among them
+  `/nos-marques/decouvrez-nos-marques.html`, the brands index — honoured in
+  full, this being an ordinary corporate site. The per-brand pages the sitemap
+  lists are allowed and are where the brand links live.
+- `www.grandsud-wines.com` serves a self-signed certificate on 443, so **http is
+  what the producer's own page links** and http is what to use. The site is
+  WordPress with sitepress 2.4.3 and a joliprint button, and its own metadata
+  dates it **12 June 2012**; every URL redirects to a JS country-and-age gate.
+  A brand site a decade older than the obligation is a two-request finding.
+- `m.grandsud.fr` resolves — and so does `randomxyz123.grandsud.fr`. **Wildcard
+  DNS will fake the Vincod `m.` pattern.** Probe a nonsense subdomain before
+  believing an `m.` host means anything.
+- `www.dopff-irion.com/robots.txt` disallows the `/de/ /es/ /it/ /cn/ /jp/
+  /dk/ /co/` language trees but allows `/fr/` and `/en/`, and names
+  `sitemap.php`. Its `/fr/les-vins/{id}/{slug}` pages **302 into
+  `/fr/boutique/{16-digit-id}/{slug}`** — one page, two URLs.
+- `www.andreblanck.com` is Domaine **André** Blanck, Kientzheim; `www.blanck.com`
+  is Domaine **Paul** Blanck, the same village. Two estates, one surname.
+- `www.vins-simonis.fr` serves **no robots.txt** (404 as its own styled page).
+  Its Soluxa-built `?pdf` endpoint returns a **malformed PDF** — five bytes of
+  leading whitespace before `%PDF` and no `%%EOF` — so pypdf refuses it until
+  the prefix is stripped and `%%EOF` appended, and it truncates over HTTP/2
+  (curl exit 92) where `--http1.1` returns the whole file. A broken generator,
+  not a protected document. The fiche's own footer prints
+  `www.domaine-simonis.fr`, **which does not resolve**.
+- `vins-faller.fr` is **Domaine André Faller, 2 route du Vin, Itterswiller** —
+  not Vignoble Luc Faller, 51 route des Vins, the same village. Same surname,
+  same village, different street, different estate, and the wrong one has the
+  webshop.
+- `domaine-marc-morey.com` is a **Gandi parking page** with 443 refused;
+  the estate is `domaine-marc-morey.fr`, whose `robots.txt` is a bare
+  `User-agent: *` with no directives and whose **sitemap is seventeen URLs with
+  no wine among them** — the range is organised by colour, grape and
+  appellation. Six wines closed in five requests.
 - `rhonea.fr/fr/{category-slug}/` **404s**; its categories are
   `/fr/{id}-{slug}` (e.g. `/fr/15-ventoux`) while its products are
   `/fr/{slug}/{id}-{slug}.html`. Fetch the category to get the product URLs
@@ -676,9 +790,9 @@ alternative is inventing one.
 
 ## What the numbers say so far
 
-**Most producers publish nothing reachable.** Across 84 producers probed and
-201 wine records, 18 declarations are attached, 36 wines were rejected against
-a declaration that was found and read, and 147 came to nothing. Roughly a third
+**Most producers publish nothing reachable.** Across 90 producers probed and
+215 wine records, 18 declarations are attached, 36 wines were rejected against
+a declaration that was found and read, and 161 came to nothing. Roughly a third
 of producers have a readable e-label or an inline declaration; a handful have
 an unreadable one; the rest put no ingredient list anywhere this project can
 see. The binding constraint is not rendering — it is existence, discoverability
@@ -819,8 +933,8 @@ yielded nothing readable, so expect a lower hit rate than Germany's and a
 different platform mix (U-label is Italian- and Spanish-heavy and still has no
 publicly linked URL in this project's notes).
 
-**France now stands at 61 wines across 20 producers, 0 found, 5 rejected**, and
-**183 French 2024+ undeclared wines remain untouched**. Germany's rate across
+**France now stands at 75 wines across 26 producers, 0 found, 5 rejected**, and
+**169 French 2024+ undeclared wines remain untouched**. Germany's rate across
 its whole pool was 18 in 89. **Not one French wine has yet been attached.**
 
 Three of the twenty publish an ingredient list somewhere a reader can reach —
@@ -836,13 +950,26 @@ each has failed. What the three publishing producers have in common is that
 they run a QR platform at all. The three cheap questions to ask of a French
 producer, in order:
 
-1. **Is it in Alsace?** Both French e-label platforms were found there, after
-   thirteen producers elsewhere found none.
+1. ~~**Is it in Alsace?**~~ **Withdrawn 2026-08-07.** It was the right place to
+   look and it has been looked at: the region is finished, eight producers,
+   and the two adopters were found in the first afternoon. Geography did not
+   predict a second wave.
 2. **Does any product page link an `m.` subdomain, a `vincod.com` code or an
    `alliance-alsace.com` GS1 URL?** One grep of one product page settles it.
+   This is now the only question with a track record.
 3. **Does the range page state a vintage?** If not, stop — an undated cuvée
-   page cannot be matched to a bottling however much text it carries. Five
+   page cannot be matched to a bottling however much text it carries. Six
    French producers have now failed on this alone.
+4. **Does a sitemap exist, and does it contain a wine?** Cheapest probe in the
+   file. Marc Morey's seventeen URLs closed six wines; Les Quatre Tours'
+   twenty-nine closed a producer. **Read the sitemap before the home page.**
+
+**Where the remaining French work is**, by cluster size, all vintage 2024+ and
+undeclared: Domaine Fontaine-Gagnard 5, Famille Quiot 3, Domaine Roquefeuille
+3, Chartron et Trébuchet 3, Bougrier 3, then a long tail of ones and twos.
+Burgundy is 62 of the 169 and, on the Marc Morey evidence, is the weakest
+region yet — its estates sell through allocation and have no reason to keep a
+consumer-facing product page at all.
 
 Prefer wines whose Systembolaget vintage is **2025** over 2024, with one
 correction: **the French shop is not reliably ahead of the Swedish shelf.**
