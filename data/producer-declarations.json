@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 146,
+  "attempted": 149,
   "found": 18,
-  "not_found": 97,
+  "not_found": 100,
   "rejected": 31,
   "declarations": [
     {
@@ -4214,9 +4214,105 @@
       "product_number": "7712901",
       "name": "M.Chapoutier Les Vignes de Bila-Haut",
       "vintage": "2024"
+    },
+    {
+      "producer": "Gérard Bertrand",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.gerard-bertrand.com/robots.txt (Shopify; Allow: / for products, pages and collections)",
+        "https://www.gerard-bertrand.com/sitemap.xml",
+        "https://www.gerard-bertrand.com/sitemap_metaobject_pages_1.xml (73 metaobjects: 11 estates, 9 distributors, 53 recipes — no e-label objects)",
+        "https://www.gerard-bertrand.com/sitemap_products_1.xml (581 products, one per cuvee per vintage per format)",
+        "https://www.gerard-bertrand.com/sitemap_pages_1.xml (212 pages; none matching ingred|nutri|etiq|label|allerg|composition|energ)",
+        "https://www.gerard-bertrand.com/products/art-de-vivre-vin-blanc-clairette-du-languedoc-adissan-75cl-2024-vin-blanc-sucre",
+        "https://www.gerard-bertrand.com/products/cote-des-roses-rose-2025-75cl",
+        "https://cdn.shopify.com/s/files/1/1860/3211/files/Art_de_Vivre_-_Blanc_-_Nouveau_efa7fb5b-8d7e-44fd-9fe2-2780333b9725.pdf (the Clairette's own linked datasheet; text extracted in full, no ingredient list)"
+      ],
+      "checked_at": "2026-08-07T06:45:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7293201",
+      "name": "Gérard Bertrand Clairette du Languedoc Adissan",
+      "vintage": "2024",
+      "evidence": "THE HOUSE'S WHOLE SHOPIFY CATALOGUE WAS CHECKED AND IT PUBLISHES NO INGREDIENT LIST ANYWHERE. Gerard Bertrand SA, Narbonne, is the producer and Systembolaget's supplier is Ward Wines AB; the producer field is the estate, not a brand or an importer, so no identification step was needed. The shop is the best-structured French site in this batch: a Shopify storefront whose product sitemap holds 581 URLs, one per cuvee per vintage per format, so the vintage question is answerable from the sitemap alone. Two product pages were fetched and the raw HTML of both was grepped for 'ingredient', 'nutrition', 'etiquette', 'allergene', 'energetique', 'kcal', 'sulfite', 'u-label' and 'e-label': ZERO MATCHES IN EITHER, on nearly 400 kB and 420 kB of HTML respectively. The pages sitemap holds 212 pages and none of them is an ingredient, nutrition or e-label page. The metaobject sitemap — the Shopify feature a house of this size would most naturally use for per-wine e-labels — holds 73 objects that are eleven estate pages, nine distributor pages and fifty-three cocktail and food recipes. THE ONE DOCUMENT THAT LOOKS LIKE A DECLARATION IS NOT ONE. Each product links a PDF datasheet on the Shopify CDN; the Clairette's was fetched and its text extracted in full, and it carries presentation, vinification, tasting notes and grape variety, no ingredient list, no nutrition table, and not even a vintage. That is the same near-miss shape recorded for Von Winning and Schloss Johannisberg in the German batch. The FR (EU) storefront was used throughout; the .co.uk and .de storefronts are separate hosts and were not fetched. THIS WINE'S OWN PAGE, AT OUR OWN VINTAGE AND PACK, EXISTS: /products/art-de-vivre-vin-blanc-clairette-du-languedoc-adissan-75cl-2024-vin-blanc-sucre, SKU 827001, the Art de Vivre AOP Clairette du Languedoc Adissan, 75 cl, 2024 — matching Systembolaget 7293201 (750 ml, 2024) on cuvee, vintage and pack. The vintage rule is satisfied and the declaration is absent, which is the cleanest possible negative.",
+      "note": "Systembolaget's name omits the range: the wine is Gérard Bertrand's 'Art de Vivre' Clairette du Languedoc Adissan, sold in a terracotta-look bottle. Searching 'Clairette du Languedoc Adissan' finds it; searching Systembolaget's string alone does not."
+    },
+    {
+      "producer": "Gérard Bertrand",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.gerard-bertrand.com/robots.txt (Shopify; Allow: / for products, pages and collections)",
+        "https://www.gerard-bertrand.com/sitemap.xml",
+        "https://www.gerard-bertrand.com/sitemap_metaobject_pages_1.xml (73 metaobjects: 11 estates, 9 distributors, 53 recipes — no e-label objects)",
+        "https://www.gerard-bertrand.com/sitemap_products_1.xml (581 products, one per cuvee per vintage per format)",
+        "https://www.gerard-bertrand.com/sitemap_pages_1.xml (212 pages; none matching ingred|nutri|etiq|label|allerg|composition|energ)",
+        "https://www.gerard-bertrand.com/products/art-de-vivre-vin-blanc-clairette-du-languedoc-adissan-75cl-2024-vin-blanc-sucre",
+        "https://www.gerard-bertrand.com/products/cote-des-roses-rose-2025-75cl",
+        "https://cdn.shopify.com/s/files/1/1860/3211/files/Art_de_Vivre_-_Blanc_-_Nouveau_efa7fb5b-8d7e-44fd-9fe2-2780333b9725.pdf (the Clairette's own linked datasheet; text extracted in full, no ingredient list)"
+      ],
+      "checked_at": "2026-08-07T06:45:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7127401",
+      "name": "Gérard Bertrand Côte des Roses",
+      "vintage": "2025",
+      "evidence": "THE HOUSE'S WHOLE SHOPIFY CATALOGUE WAS CHECKED AND IT PUBLISHES NO INGREDIENT LIST ANYWHERE. Gerard Bertrand SA, Narbonne, is the producer and Systembolaget's supplier is Ward Wines AB; the producer field is the estate, not a brand or an importer, so no identification step was needed. The shop is the best-structured French site in this batch: a Shopify storefront whose product sitemap holds 581 URLs, one per cuvee per vintage per format, so the vintage question is answerable from the sitemap alone. Two product pages were fetched and the raw HTML of both was grepped for 'ingredient', 'nutrition', 'etiquette', 'allergene', 'energetique', 'kcal', 'sulfite', 'u-label' and 'e-label': ZERO MATCHES IN EITHER, on nearly 400 kB and 420 kB of HTML respectively. The pages sitemap holds 212 pages and none of them is an ingredient, nutrition or e-label page. The metaobject sitemap — the Shopify feature a house of this size would most naturally use for per-wine e-labels — holds 73 objects that are eleven estate pages, nine distributor pages and fifty-three cocktail and food recipes. THE ONE DOCUMENT THAT LOOKS LIKE A DECLARATION IS NOT ONE. Each product links a PDF datasheet on the Shopify CDN; the Clairette's was fetched and its text extracted in full, and it carries presentation, vinification, tasting notes and grape variety, no ingredient list, no nutrition table, and not even a vintage. That is the same near-miss shape recorded for Von Winning and Schloss Johannisberg in the German batch. The FR (EU) storefront was used throughout; the .co.uk and .de storefronts are separate hosts and were not fetched. THIS WINE'S OWN PAGE, AT OUR OWN VINTAGE AND PACK, EXISTS: /products/cote-des-roses-rose-2025-75cl, the Cote des Roses rose 2025 in 75 cl, matching Systembolaget 7127401 (750 ml, 2025). It is the current release and the page is fully server-rendered, and it contains no ingredient list, no nutrition and no e-label link — only a CDN datasheet PDF of the same non-declaring kind as the Clairette's.",
+      "note": null
+    },
+    {
+      "producer": "Gérard Bertrand",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.gerard-bertrand.com/robots.txt (Shopify; Allow: / for products, pages and collections)",
+        "https://www.gerard-bertrand.com/sitemap.xml",
+        "https://www.gerard-bertrand.com/sitemap_metaobject_pages_1.xml (73 metaobjects: 11 estates, 9 distributors, 53 recipes — no e-label objects)",
+        "https://www.gerard-bertrand.com/sitemap_products_1.xml (581 products, one per cuvee per vintage per format)",
+        "https://www.gerard-bertrand.com/sitemap_pages_1.xml (212 pages; none matching ingred|nutri|etiq|label|allerg|composition|energ)",
+        "https://www.gerard-bertrand.com/products/art-de-vivre-vin-blanc-clairette-du-languedoc-adissan-75cl-2024-vin-blanc-sucre",
+        "https://www.gerard-bertrand.com/products/cote-des-roses-rose-2025-75cl",
+        "https://cdn.shopify.com/s/files/1/1860/3211/files/Art_de_Vivre_-_Blanc_-_Nouveau_efa7fb5b-8d7e-44fd-9fe2-2780333b9725.pdf (the Clairette's own linked datasheet; text extracted in full, no ingredient list)"
+      ],
+      "checked_at": "2026-08-07T06:45:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7041906",
+      "name": "Gérard Bertrand Gris Blanc Rosé",
+      "vintage": "2024",
+      "evidence": "THE HOUSE'S WHOLE SHOPIFY CATALOGUE WAS CHECKED AND IT PUBLISHES NO INGREDIENT LIST ANYWHERE. Gerard Bertrand SA, Narbonne, is the producer and Systembolaget's supplier is Ward Wines AB; the producer field is the estate, not a brand or an importer, so no identification step was needed. The shop is the best-structured French site in this batch: a Shopify storefront whose product sitemap holds 581 URLs, one per cuvee per vintage per format, so the vintage question is answerable from the sitemap alone. Two product pages were fetched and the raw HTML of both was grepped for 'ingredient', 'nutrition', 'etiquette', 'allergene', 'energetique', 'kcal', 'sulfite', 'u-label' and 'e-label': ZERO MATCHES IN EITHER, on nearly 400 kB and 420 kB of HTML respectively. The pages sitemap holds 212 pages and none of them is an ingredient, nutrition or e-label page. The metaobject sitemap — the Shopify feature a house of this size would most naturally use for per-wine e-labels — holds 73 objects that are eleven estate pages, nine distributor pages and fifty-three cocktail and food recipes. THE ONE DOCUMENT THAT LOOKS LIKE A DECLARATION IS NOT ONE. Each product links a PDF datasheet on the Shopify CDN; the Clairette's was fetched and its text extracted in full, and it carries presentation, vinification, tasting notes and grape variety, no ingredient list, no nutrition table, and not even a vintage. That is the same near-miss shape recorded for Von Winning and Schloss Johannisberg in the German batch. The FR (EU) storefront was used throughout; the .co.uk and .de storefronts are separate hosts and were not fetched. FOR THIS WINE THE VINTAGE ALSO FAILS, ON TOP OF THE ABSENCE. Systembolaget 7041906 is the Gris Blanc rose 2024 in MAGNUM (1500 ml), organic. The product sitemap's Gris Blanc magnums are all 2025 — 'gris-blanc-2025-vin-rose-magnum-6x150cl-edition-speciale' and 'gris-blanc-2025-magnum-150cl-edition-20-ans' — and no 2024 Gris Blanc appears in any format. So even had the house published a declaration, there would be no 2024 magnum page to attach it to. Recorded as not found rather than rejected because nothing was found to reject: no declaration exists anywhere on the site to consider.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-07T06:20:00Z",
+  "updated_at": "2026-08-07T06:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -4272,6 +4368,11 @@
       "at": "2026-08-07T06:20:00Z",
       "batch": "3g — M. Chapoutier, 4 wines (Marius Vermentino Terret 2025, Marius Rosé 2025, Marius Grenache Syrah 2025, Les Vignes de Bila-Haut 2024)",
       "result": "4 attempted, 0 found, 4 not found, 0 rejected. THE HOST REFUSES. www.chapoutier.com serves a permissive robots.txt and then answers HTTP 403 with a Cloudflare managed challenge on every content URL, including the sitemap its own robots.txt names. A challenge is a technological measure and absolute; two requests, no workaround, stop. No alternative host: Bila-Haut and Marius are both published under chapoutier.com and no separate domain resolves. FIRST CLOUDFLARE CHALLENGE IN THIS PROJECT — French estates are more likely to sit behind one than German ones were."
+    },
+    {
+      "at": "2026-08-07T06:45:00Z",
+      "batch": "3g — Gérard Bertrand, 3 wines (Clairette du Languedoc Adissan 2024, Côte des Roses rosé 2025, Gris Blanc rosé 2024 magnum)",
+      "result": "3 attempted, 0 found, 3 not found, 0 rejected. THE CLEANEST NEGATIVE IN THE FILE SO FAR. A 581-product Shopify catalogue keyed by cuvee, vintage and format; the exact page for two of the three wines exists at our exact vintage and pack; and a grep of both pages for nine declaration keywords returns nothing at all. 212 site pages, none about ingredients; 73 Shopify metaobjects, all estates, distributors and recipes. The per-product CDN datasheet PDF is the Von Winning near-miss again — vinification and tasting notes, no list. Scale and structure predict publication no better in France than in Germany."
     }
   ]
 }
