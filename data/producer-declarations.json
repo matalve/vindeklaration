@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to the last handful)",
-  "attempted": 133,
+  "attempted": 134,
   "found": 18,
-  "not_found": 84,
+  "not_found": 85,
   "rejected": 31,
   "declarations": [
     {
@@ -3828,9 +3828,38 @@
       "server_rendered": true,
       "fetch_result": "200, declaration present in the server HTML — and rejected on vintage",
       "note": "The Winitas vintage census earned its keep here: one request settled 'is our bottling still on the shop' outright, without walking a single category, and it is what makes the rejection safe rather than a guess. Worth noting that Hoffmann-Simon declares Bio-Weintrauben, so its e-labels are among the more informative in this batch — if a Swedish importer ever brings in a current vintage of this estate, it is a certain find."
+    },
+    {
+      "product_number": "9390501",
+      "name": "Keller Limestone Riesling Goldkapsel",
+      "producer": "Weingut Keller",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "ONE OF GERMANY'S MOST FAMOUS ESTATES PUBLISHES A THREE-PAGE BROCHURE AND NOTHING ELSE. VDP.Weingut Keller, Bahnhofstraße 1, 67592 Flörsheim-Dalsheim (Rheinhessen), is at www.keller-wein.de, a Wix site whose own pages-sitemap.xml lists exactly three URLs: the home page, /impressum and /datenschutzerklärung. There is no wine list, no vintage list, no per-wine page, no shop and no product sitemap — the front page is a photo collage, a link to a Lagenkarte and the opening hours, with a footer copyright of 2021. Wix renders server-side (established at Steitz), so this is a real observation and not a fetching artefact: the raw HTML contains no occurrence of Zutat, Nährwert, Brennwert, kcal, e-label, u-label or QR outside the page's own CSS and JS bundles. THE CUVÉE IS PLAUSIBLE AND UNVERIFIABLE FROM THE PRODUCER. Systembolaget 9390501 is 'Keller Limestone Riesling Goldkapsel' 2024, Rheinhessen, Riesling, 750 ml, 10,5 % vol, an allocation item in Tillfälligt sortiment via Origo Wine Import. Keller's Limestone Riesling exists and is bottled as a Kabinett — 10,5 % vol and a Goldkapsel selection are consistent with that — but the estate itself states nothing about it anywhere on the web, so neither the cuvée nor the vintage could be confirmed against a producer page. A web search returned only merchants, wine databases and review sites, all of which the rules exclude as sources. NOTHING WAS TAKEN FROM THEM. This is the Joh. Jos. Prüm shape repeated at a larger estate: a producer that sells its entire allocation through a mailing list has no reason to build a searchable surface, and no crawler can reach a QR code that is never linked from the web.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.keller-wein.de/robots.txt (Wix default: Allow: /, bar *?lightbox=; PetalBot blocked, which is not us)",
+        "https://www.keller-wein.de/sitemap.xml",
+        "https://www.keller-wein.de/pages-sitemap.xml (three URLs, no store-products sitemap)",
+        "https://www.keller-wein.de/",
+        "web search for a Keller e-label or ingredient declaration (merchants and databases only)"
+      ],
+      "checked_at": "2026-08-07T01:30:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "note": "Reputation is not a predictor. Keller is Gault Millau 'Winzer des Jahrzehnts' and its wines are among the most expensive in Germany, and its web presence is smaller than that of every village co-operative in this batch. The reliable predictor remains the one already in the platform notes: an estate with a per-product page somewhere might publish; an estate with no per-product page cannot. A Wix site whose pages-sitemap holds three URLs and no store-products-sitemap.xml is a two-request finding — check the sitemap before the home page."
     }
   ],
-  "updated_at": "2026-08-07T01:20:00Z",
+  "updated_at": "2026-08-07T01:30:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
