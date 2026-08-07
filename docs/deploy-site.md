@@ -25,15 +25,38 @@ them as build output instead:
   on the first Sunday of each month — with the dataset out of git, history no
   longer answers "what did the assortment look like in spring".
 
-One-time setup:
+**One-time setup — order matters.** The build downloads from the Worker this
+change adds, and that Worker only exists after a deploy, so the route must be
+bootstrapped before the build command may point at it:
 
-```sh
-wrangler r2 bucket create vindeklaration-data
-# Populate the bucket BEFORE the first build that downloads from it:
-gzip -kf data/wines.json data/catalog.json
-wrangler r2 object put vindeklaration-data/wines.json.gz --file data/wines.json.gz
-wrangler r2 object put vindeklaration-data/catalog.json.gz --file data/catalog.json.gz
-```
+1. Create and seed the bucket:
+
+   ```sh
+   wrangler r2 bucket create vindeklaration-data
+   gzip -kf data/wines.json data/catalog.json
+   wrangler r2 object put vindeklaration-data/wines.json.gz --file data/wines.json.gz
+   wrangler r2 object put vindeklaration-data/catalog.json.gz --file data/catalog.json.gz
+   ```
+
+2. **Bootstrap-deploy the Worker once by hand**, from a checkout with `site/`
+   already built:
+
+   ```sh
+   uv run python -m src.site
+   wrangler deploy
+   ```
+
+   After this, `/data/wines.json.gz` answers 200 and every later build can
+   download from it.
+
+3. Update the Workers Builds build command (below) and merge.
+
+Do not point the build command at `/data/` before step 2: the request happens
+during the build, *before* the Worker that would serve it has been deployed,
+and the 404 fails the very deployment that creates the route. The release URL
+is not a bootstrap alternative while the repository is private — release
+assets of a private repo need an `Authorization` header, and the build image
+has none.
 
 The Pi's timer needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in its
 environment (the systemd unit) for `wrangler r2 object put`, and a logged-in
@@ -59,7 +82,8 @@ mkdir -p data && \
   test $(find site -type f | wc -l) -le 19000
 ```
 
-If the bucket is ever unreachable the release is the fallback:
+If the bucket is ever unreachable the release is the fallback once the
+repository is public:
 `https://github.com/matalve/vindeklaration/releases/download/dataset-latest/wines.json.gz`.
 
 | Setting | Value |
