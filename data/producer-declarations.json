@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to 13 wines across 12 producers)",
-  "attempted": 131,
+  "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to the last handful)",
+  "attempted": 132,
   "found": 18,
-  "not_found": 83,
+  "not_found": 84,
   "rejected": 30,
   "declarations": [
     {
@@ -3763,9 +3763,40 @@
       "server_rendered": false,
       "fetch_result": "not fetched — IMERO is known client-side and the linked label belongs to the wrong vintage, so a fetch would have decided nothing",
       "note": "The IMERO page was deliberately not fetched. It would have returned a shell, and the vintage question is already answered by the page that links it. Recording the URL is still worth doing: if IMERO ever becomes readable, this is one of the wines to revisit — though only for a 2025 bottling, which is not ours."
+    },
+    {
+      "product_number": "7915401",
+      "name": "Rüdesheim Riesling Trocken Weingüter Wegeler",
+      "producer": "Weingüter Wegeler",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE RIGHT WINE, THE RIGHT VINTAGE, ON THE PRODUCER'S OWN SHOP — AND NO INGREDIENT LIST ANYWHERE ON IT. Weingüter Geheimrat J. Wegeler, Friedensplatz 9-11, 65375 Oestrich-Winkel, runs a Shopware 6 shop at shop.wegeler.com whose SEO product URLs are {vintage}-{slug}. The gzipped sitemap lists the whole range and contains exactly one 2024 Rüdesheim Ortswein: https://shop.wegeler.com/2024-ruedesheimer-riesling, headed '2024 Rüdesheimer Riesling', Weingüter Wegeler, Riesling, 2024, trocken. Its data block gives Alkoholgehalt 12,0 %, Restsüsse 4,2 g/l, Säure 8,1 g/l — Systembolaget 7915401 is the 2024 Rüdesheim Riesling Trocken at 12,0 % vol, 750 ml, so producer, cuvée, vintage and strength all agree to the decimal. THE VINTAGE RULE IS SATISFIED HERE AND IT STILL COMES TO NOTHING: the only label-adjacent statement the page carries is a checkbox row 'enthält Sulphite' (the shop's own spelling). The raw HTML of the product page contains no occurrence of Zutat, Nährwert, Brennwert, kcal, e-label, elabel or QR, no iframe, and no outbound link other than the shop's own account, category and legal pages. The marketing site's /weine overview is equally empty of all six terms. A web search for a Wegeler e-label returned only generic vendor and regulator pages. ALLERGEN WITHOUT AN INGREDIENT LIST IS THE COMMONEST NEAR-MISS IN THIS BATCH and it is not a declaration. This is the strongest 'not found' shape in the German pool: the producer clearly still sells our exact bottling and simply does not publish the mandated list on the web, or publishes it only behind a QR code that is never linked.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.wegeler.com/robots.txt (404 TYPO3 error page — no directives)",
+        "https://www.wegeler.com/",
+        "https://www.wegeler.com/weine",
+        "https://shop.wegeler.com/robots.txt (Shopware default: disallows /detail/, /widgets/, /account paths; the SEO product URLs are allowed)",
+        "https://shop.wegeler.com/sitemap.xml and the gzipped salesChannel sitemap it names",
+        "https://shop.wegeler.com/2024-ruedesheimer-riesling",
+        "web search for a Wegeler e-label URL (nothing producer-specific)"
+      ],
+      "checked_at": "2026-08-07T01:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "note": "Wegeler is a Shopware 6 shop with a per-wine detail page, per-vintage URLs and the current vintage on sale — every structural precondition for an e-label link — and it still links none. Structure predicts nothing here. Also worth recording for the next run: the shop keeps 2024 as the current release for its Ortsweine while most German estates in this batch had rolled to 2025, so Wegeler was one of the few producers in the 2024 pool where the vintage rule was never going to be the obstacle."
     }
   ],
-  "updated_at": "2026-08-07T00:50:00Z",
+  "updated_at": "2026-08-07T01:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
