@@ -13,8 +13,8 @@ free text into structured data, and publishes the result.
 
 | File | Contents |
 |---|---|
-| `data/wines.json` | The dataset: one record per wine, with parsed additives |
-| `data/wines.sqlite` | The same rows, for querying — built by `src.build`, not committed |
+| `data/wines.json` | The dataset: one record per wine, with parsed additives. Not in git — download [wines.json.gz](https://vindeklaration.se/data/wines.json.gz), mirrored on the [latest release](https://github.com/matalve/vindeklaration/releases/download/dataset-latest/wines.json.gz). Monthly snapshots live in their own releases. |
+| `data/wines.sqlite` | The same rows, for querying — built by `src.build` from `wines.json`, not committed |
 | `data/additives.yaml` | The substance dictionary — names, E-numbers, aliases |
 | `data/unknown.json` | Text the parser could not identify, ranked by impact |
 
@@ -139,19 +139,23 @@ It finishes by printing the one privileged command needed — `loginctl
 enable-linger` — without which user services stop when you log out.
 
 `deploy/update.sh` is the cycle itself: pull, catalog, declarations, build,
-tests, report, commit, push. Sundays re-fetch everything, but only once the
-first full pass has completed — there is no point refreshing what has never
+tests, report, publish, commit, push. Sundays re-fetch everything, but only once
+the first full pass has completed — there is no point refreshing what has never
 been fetched.
 
 After that first install, the two machines talk through GitHub rather than
 rsync, and each direction has one owner. Code and dictionaries travel out from
 your working copy, and `update.sh` pulls them before it crawls, so the runner
-never spends a night on a stale `additives.yaml`. The dataset travels back:
-the runner is the only machine that commits `wines.json`, `catalog.json` and
-`unknown.json`, which keeps its push a fast-forward instead of a merge conflict
-in a 16 MB file. Its git identity is `vindeklaration-bot`, and it never force
-pushes — a rejected push is retried once after a rebase, then left for the next
-run. The fetched declarations under `data/cache/` never travel at all.
+never spends a night on a stale `additives.yaml`. The dataset does not travel
+through git at all: a 16 MB JSON committed nightly costs its near-full size in
+history, forever, so the runner publishes it as build output instead — gzipped
+to the R2 bucket behind [vindeklaration.se/data/](https://vindeklaration.se/data/wines.json.gz)
+and to a rolling `dataset-latest` GitHub release, plus a frozen `dataset-YYYY-MM`
+snapshot on the first Sunday of each month. Only `unknown.json` and
+`quality-history.json` are still committed: both are small, and the quality gate
+needs its baseline versioned. That commit is also what triggers the site
+rebuild, so it happens after the R2 upload. The fetched declarations under
+`data/cache/` never travel at all.
 
 ```sh
 systemctl --user start vindeklaration.service      # run one cycle now
