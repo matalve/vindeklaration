@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 199,
+  "attempted": 201,
   "found": 18,
-  "not_found": 145,
+  "not_found": 147,
   "rejected": 36,
   "declarations": [
     {
@@ -5841,9 +5841,65 @@
       "vintage": "2024",
       "evidence": "THE SAME OUTCOME AS THE GENTIL AND IN THE OPPOSITE DIRECTION, WHICH IS WHY IT IS A REJECTION AND NOT A ROUNDING PROBLEM. Famille Hugel, Riquewihr; supplier Lively Wines Sweden AB. The disclosure page is headed 'Famille Hugel Classic Pinot Gris 2024' and reads 'Lot No. : L.CFHN | Alc. 14 % vol.' and 'Bottle (75 cl)'. Producer, cuvee, range, vintage and pack match Systembolaget 7704801. WHAT IT DECLARES: 'Ingredients: Grapes, Sulphites , Carboxymethyl cellulose'. Nutrition per 100 ml — Energy 328 kJ / 78 kcal, Fat 0 g of which saturates NC, Carbohydrate 0,1 g of which sugars 0,1 g, Protein 0 g, Salt 0 g (also per 125 ml). Full mandated set. IT IS NOT ATTACHED: 14 % vol against Systembolaget's 13,0 % is 1,0 pp, twice the 0,5 % vol tolerance, and the producer's own analysis of 14,07 % backs the e-label rather than the shelf. Note that the Gentil in the same batch is out by the same 1,0 pp in the other direction, so this is not a units or rounding artefact on one side; the two records genuinely disagree. The page is lot-specific ('L.CFHN'), a second reason the fill is not certainly ours. WORTH NOTICING FOR THE DICTIONARY: all three Hugel declarations read on this platform are the identical three-substance list, 'Grapes, Sulphites , Carboxymethyl cellulose', with the same double space before the comma — a house template rather than a per-wine formulation, unlike Rhonea's, whose two cuvees differed. THE PLATFORM: Famille Hugel's QR destination is m.hugel.com, which is VINCOD — the same vendor as m.rhonea.fr, now identified: the pages load images from cdn.vin.co and every short code is mirrored at vincod.com/{code}, so the vendor is vin.co, one of the French e-label names this project had listed as 'still unseen in the wild'. It is now seen. Its robots.txt on m.hugel.com is byte-for-byte the same shape as m.rhonea.fr's: a long bad-bot blocklist ending in Disallow: /, then a separate 'User-agent: *' group disallowing only /ajax, /admin, /manage, /create, /superadmin and /*/get/{qrcode,tablecard,embed}$. We are in none of the named groups and every page read here is allowed, so NO robots exception was needed or used. Everything is server-rendered plain HTML. THE STRUCTURE IS THREE LEVELS: a domaine page (/598DGMB3C4) listing ranges, a range page (/2498G1XEUE Gentil, /260G788JZT Classic) listing wines, and a per-wine PER-VINTAGE page whose <select id=millesime> is a vintage switcher naming the code for every vintage back to 2007 — which is how the 2024 codes below were obtained, from the producer's own published control and not by guessing. AND THE VINTAGE PAGE CAN CARRY A TRUE E-LABEL: a link 'Ingredients & nutrition >' to /{code}/n/{hash}/{lang}, which is a full mandated disclosure — wine, vintage, LOT NUMBER, labelled alcohol, bottle size, an Ingredients line and a nutrition table per 100 ml and per 125 ml. THIS CORRECTS THE PICTURE OF RHONEA: m.rhonea.fr was recorded as 'not an e-label' because its Passe Colline page had no ingredient list, and that observation stands, but the platform is capable of one — the link is per wine and per vintage and Rhonea simply had not filled it in. Hugel's deployment offers no language but English: the <ul class=nav-lang> is empty. Market EU, the producer's own site, no market selector.",
       "note": "Revisit candidate if the alcohol rule is ever relaxed."
+    },
+    {
+      "producer": "Vignerons Propriétés Associes",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://vigneronsproprietesassocies.fr/robots.txt (a Netalys WordPress file. Its 'User-agent: *' group disallows only /wp-admin/, /wp-includes/, plugin and theme paths, /wp-login.php, /xmlrpc.php, /trackback/ and a set of search and feed query strings — /produit/ is allowed. It ALSO names ClaudeBot, anthropic-ai, GPTBot, CCBot, Google-Extended, FacebookBot, Bytespider, Baiduspider, YandexBot and a row of SEO crawlers with Disallow: /. We are none of those: our User-Agent is the project's own vindeklaration/0.1 string from src/http.py, and the '*' group is what applies — the same reading already recorded at webshop.solera.se, cave-tavel-lirac.fr and gerard-bertrand.com)",
+        "https://vigneronsproprietesassocies.fr/sitemap_index.xml and /product-sitemap.xml (a WooCommerce catalogue with French and English mirrors; THREE Mr Paul products, mr-paul, mr-paul-2 and mr-paul-3, and FOUR Chapitre products, chapitre, chapitre-2, chapitre-3 and chapitre-magnum — one per colour and format, none per vintage)",
+        "https://vigneronsproprietesassocies.fr/produit/mr-paul-2/ (198 kB, server-rendered WooCommerce)",
+        "https://vigneronsproprietesassocies.fr/produit/chapitre-3/ (198 kB, same template)"
+      ],
+      "checked_at": "2026-08-07T14:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7564601",
+      "name": "Mr. Paul Rosé",
+      "vintage": "2024",
+      "evidence": "A GROWER GROUP WITH A REAL WEBSHOP, AND ITS PRODUCT PAGES CARRY NEITHER A DECLARATION NOR A VINTAGE. Vignerons Proprietes Associes, Rue Emile Bilhau, 30510 Generac — a 1994 association of 20 chateaux and estates across nine appellations, three winemaking sites; Systembolaget's producer field is 'Vignerons Proprietes Associes' and the supplier is Ex Terra Wines AB. This is the fifth cooperative-shaped producer of the batch and it fails the same way the small estates did. TWO PRODUCT PAGES WERE READ, ONE FROM EACH OF OUR TWO BRANDS, and both return ZERO hits for ingr, nutri, sulfit, allerg and kcal in 198 kB of server-rendered HTML. What the template holds is Terroir, Cepage, Vinification, Degustation and Conservation — a tasting note, with a price and an add-to-cart button. THE DECISIVE FACT IS THE MISSING VINTAGE. Neither page states one anywhere: the only four-digit years in the whole of chapitre-3 are WordPress's own article:modified_time and dateModified metadata (2024-07-02), and the catalogue is organised one product per colour and format — three Mr Paul products, four Chapitre products — rather than one per bottling. Under the rule already recorded for Denis Pere & Fils, Barraud and Vigneau-Chevreau, AN UNDATED CUVEE PAGE CANNOT BE MATCHED TO A BOTTLING however much text it carries, so this producer could not have yielded an attachable record even if a list appeared tomorrow. That is worth saying precisely because the site is otherwise well built. Also checked and absent: no QR platform, no vin.co or Vincod short code, no alliance-alsace link, no e-label vendor of any kind. FR (EU) pages used; an /en/ mirror exists and was not used. Systembolaget's bottle is the ROSE; the page read here, mr-paul-2, is the red ('D'une couleur pourpre avec des reflets vifs', 100 % Grenache). One of the other two Mr Paul products is presumably the rose, and it was deliberately not opened: all three share one template, none is dated, and opening more pages on a small estate's server to confirm an absence the template already settles is exactly the walking this project does not do.",
+      "note": null
+    },
+    {
+      "producer": "Vignerons Propriétés Associes",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://vigneronsproprietesassocies.fr/robots.txt (a Netalys WordPress file. Its 'User-agent: *' group disallows only /wp-admin/, /wp-includes/, plugin and theme paths, /wp-login.php, /xmlrpc.php, /trackback/ and a set of search and feed query strings — /produit/ is allowed. It ALSO names ClaudeBot, anthropic-ai, GPTBot, CCBot, Google-Extended, FacebookBot, Bytespider, Baiduspider, YandexBot and a row of SEO crawlers with Disallow: /. We are none of those: our User-Agent is the project's own vindeklaration/0.1 string from src/http.py, and the '*' group is what applies — the same reading already recorded at webshop.solera.se, cave-tavel-lirac.fr and gerard-bertrand.com)",
+        "https://vigneronsproprietesassocies.fr/sitemap_index.xml and /product-sitemap.xml (a WooCommerce catalogue with French and English mirrors; THREE Mr Paul products, mr-paul, mr-paul-2 and mr-paul-3, and FOUR Chapitre products, chapitre, chapitre-2, chapitre-3 and chapitre-magnum — one per colour and format, none per vintage)",
+        "https://vigneronsproprietesassocies.fr/produit/mr-paul-2/ (198 kB, server-rendered WooCommerce)",
+        "https://vigneronsproprietesassocies.fr/produit/chapitre-3/ (198 kB, same template)"
+      ],
+      "checked_at": "2026-08-07T14:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7936501",
+      "name": "Chapitre Rosé Côtes du Rhône",
+      "vintage": "2025",
+      "evidence": "A GROWER GROUP WITH A REAL WEBSHOP, AND ITS PRODUCT PAGES CARRY NEITHER A DECLARATION NOR A VINTAGE. Vignerons Proprietes Associes, Rue Emile Bilhau, 30510 Generac — a 1994 association of 20 chateaux and estates across nine appellations, three winemaking sites; Systembolaget's producer field is 'Vignerons Proprietes Associes' and the supplier is Ex Terra Wines AB. This is the fifth cooperative-shaped producer of the batch and it fails the same way the small estates did. TWO PRODUCT PAGES WERE READ, ONE FROM EACH OF OUR TWO BRANDS, and both return ZERO hits for ingr, nutri, sulfit, allerg and kcal in 198 kB of server-rendered HTML. What the template holds is Terroir, Cepage, Vinification, Degustation and Conservation — a tasting note, with a price and an add-to-cart button. THE DECISIVE FACT IS THE MISSING VINTAGE. Neither page states one anywhere: the only four-digit years in the whole of chapitre-3 are WordPress's own article:modified_time and dateModified metadata (2024-07-02), and the catalogue is organised one product per colour and format — three Mr Paul products, four Chapitre products — rather than one per bottling. Under the rule already recorded for Denis Pere & Fils, Barraud and Vigneau-Chevreau, AN UNDATED CUVEE PAGE CANNOT BE MATCHED TO A BOTTLING however much text it carries, so this producer could not have yielded an attachable record even if a list appeared tomorrow. That is worth saying precisely because the site is otherwise well built. Also checked and absent: no QR platform, no vin.co or Vincod short code, no alliance-alsace link, no e-label vendor of any kind. FR (EU) pages used; an /en/ mirror exists and was not used. Systembolaget's bottle is the ROSE; the page read here, chapitre-3, is the AOP Cotes du Rhone red (70 % Grenache, 30 % Syrah). The rose is one of chapitre, chapitre-2 or chapitre-magnum and was deliberately not opened, for the same reason.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-07T14:20:00Z",
+  "updated_at": "2026-08-07T14:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
