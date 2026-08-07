@@ -9,8 +9,10 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-07, across 51 producers and 140 wine records. **The German
-2024-and-later undeclared pool is exhausted** — see the closing section.
+Status as of 2026-08-07, across 70 producers and 168 wine records. **The German
+2024-and-later undeclared pool is exhausted** — see the closing section. **The
+French pool opened on 2026-08-07 and its first seven producers yielded nothing**
+— see *France, and why it is not Germany*.
 
 ## Readable — server-rendered
 
@@ -129,6 +131,96 @@ Grep the raw HTML for `Zutaten` before concluding a shop links nothing.
 values misses completely. **Grep the raw HTML for the heading words as well as
 for hrefs** — `Nährwert`, `Zutat`, `Brennwert`, `kcal` — and look at what
 follows, not only at links.
+
+## France, and why it is not Germany
+
+Seven producers, 28 wines, **zero declarations**, on 2026-08-07: Château du
+Galoupet, M. Chapoutier, Gérard Bertrand, Clos Cibonne, Château Revelette,
+Saget la Perrière, Château d'Astros. That is not one bad batch — the failures
+are all the same failure, and it is a different one from Germany's.
+
+**In Germany the binding constraint was the vintage. In France it is that the
+declaration does not exist on the producer's site at all.** Sixteen of the 28
+wines had their own producer page, at our exact cuvée, vintage and pack —
+Galoupet's two 2025s, Gérard Bertrand's Clairette 2024 and Côte des Roses 2025,
+Astros' Amour Blanc and Rouge 2024 — and not one of them carried an ingredient
+list. The vintage rule barely got a chance to bite: **not a single French wine
+in this batch was rejected**, because nothing was found to reject.
+
+### The French near-miss is the *fiche technique*, and it is more convincing than the German ones
+
+Where a German estate's near-miss was a "Nährwerte" tab with no Zutaten, the
+French one is a per-cuvée, often per-vintage, PDF datasheet. It typically gives
+appellation, grapes, vinification, food pairing, and sometimes real analysis:
+
+- **Château Revelette**, `ft-coude-a-coude-rose.pdf` — bottling date, alcohol,
+  pH, total acidity, residual sugar and **total SO₂ in mg/L**, plus the Ecocert
+  number. An SO₂ figure reads like an additive declaration and is not one.
+- **Château d'Astros**, `FT_PRINT_Amour_B_2024-FR.pdf` — the vinification line
+  reads *"Sulfitage maîtrisé et respectueux"*. Sulphiting in prose is exactly
+  the tasting-note mention the rules say not to accept.
+- **Gérard Bertrand**, a datasheet per product on the Shopify CDN — presentation
+  and tasting notes, and not even a vintage.
+- **Clos Cibonne**, a "Fiche Technique pdf" per cuvée that is a **2 MB image
+  scan with no extractable text** and no date.
+
+None contains an ingredient list and none contains the energy value. **One PDF
+settles the format for a whole estate** — they are generated from one template.
+Fetch one, read it, and stop; do not walk seventeen of them on a small server.
+
+### Where the French link actually is
+
+- The estate's **range page**, not a shop, is the hub. Astros links its fiches
+  from `/nos-vins/{range}/`, Revelette lists its entire catalogue on one
+  `/les-vins/` page.
+- **A WordPress "Fiche produit" slug can be a PDF in disguise**: Astros'
+  `/ft_print_amour_b_2024-fr/` 302s to
+  `/wp-content/uploads/2025/03/FT_PRINT_Amour_B_2024-FR.pdf`. The slug carries
+  cuvée, colour and vintage, so **the range page alone tells you which vintages
+  the estate still documents, without opening a PDF.**
+- **On a hand-built static estate site the per-wine pages can be empty shells.**
+  Clos Cibonne's `detail-bouteille.php?vin=1..8` render from a single
+  `/js/bouteilles-fr.js` holding the whole range as one JS object — 7,9 kB, one
+  request, all eight cuvées, and it has fields for grapes and tasting notes and
+  **no ingredient, nutrition, allergen or vintage field at all.** Fetch the data
+  file instead of walking the product pages.
+
+### French e-label vendors, all still unseen in the wild
+
+Searching for a French producer's e-label surfaces only the vendors' own
+marketing. Names worth recognising in an `href`, none of which has yet appeared
+on any producer page in this project: `vin.co` (Nutri QR Code), `qrcode.vin`
+(which also sells under VINISCAN, VITIQUETTE and VINICODE),
+`labelletiquette.fr`, `lesiteduvigneron.fr`, `e-label.eu`, `wine-elabels.eu`,
+`littlewine.io`, `scanthiswine.com`, `bottlebooks.me`. `e-label.online` was
+already on the German list. Nothing is known about how any of them renders.
+
+### Two French-specific traps
+
+- **A declaration for a French wine often exists on a foreign retailer's page.**
+  `vinello.eu` publishes a full ingredient list for La Petite Perrière Sauvignon
+  — grape must, grapes, saccharose, acidity regulators, metatartaric acid,
+  ascorbic acid, sulphites. **It is not a source and must not be used**: a
+  retailer's transcription in another country has worse provenance than
+  Systembolaget's and its vintage and market are unverified. Expect to meet this
+  more in France than in Germany, because French export brands are on more
+  foreign shelves. Note it and move on.
+- **The export-only brand.** Saget la Perrière's whole Swedish presence bar one
+  wine is *La Petite Perrière*, which appears nowhere on the producer's own site
+  — not in the navigation, not in the sitemap. Every page a search finds for it
+  is a foreign retailer. This is the German "a wine that exists only on the
+  Swedish shelf has no producer page" rule, one size larger: a brand that exists
+  only for export.
+
+### Scale predicts nothing, again
+
+Galoupet is an LVMH estate with a dedicated *Plateforme de Transparence*, a
+lightweight-bottle explainer and a carbon narrative, and it publishes no
+ingredient list. Gérard Bertrand runs a 581-product Shopify catalogue keyed by
+cuvée, vintage and format, 212 site pages and 73 metaobjects, and publishes no
+ingredient list. **Structure and compliance resources do not predict
+publication** — the same lesson Wegeler taught in Germany, at ten times the
+size.
 
 ## Untested
 
@@ -264,6 +356,39 @@ worth recognising in an `href`; nothing is known about how they render.
 - `solera.se/robots.txt` answers **200 with the body
   `An error occurred. Error: Error: 404 - Not Found`** — a soft 404 dressed as a
   success. Read the body, not the status.
+- `www.chapoutier.com` serves a **permissive robots.txt and then HTTP 403 with a
+  Cloudflare managed challenge on every content URL**, including the sitemaps
+  its own robots.txt names. First Cloudflare challenge in this project. A
+  challenge is a technological measure and is absolute — two requests, no
+  workaround, stop. Chapoutier's Bila-Haut and Marius ranges are both published
+  under that host and no alternative domain resolves, so four wines end there.
+- `galoupet.com` resolves to 185.16.44.132 but **port 443 is refused**; over
+  plain http the same IP 301s to `www.chateaugaloupet.com`, which works. Worth
+  trying http before concluding a producer's domain is dead.
+- `astros.fr` serves a **self-signed certificate** over https and 301s to
+  `www.chateauastros.com` over plain http. `chateaudastros.com` fails TLS with
+  `TLSV1_ALERT_INTERNAL_ERROR` and `www.chateau-astros.com` is a different host.
+  Same shape as Hauck and Carl Loewen: an expired or broken cert on the obvious
+  domain, the live estate one redirect away over http.
+- `closcibonne.com` and `clos-cibonne.fr` do not resolve; the estate is
+  `www.clos-cibonne.com`, which serves **no robots.txt (404)** and puts an age
+  gate in front of a two-locale splash page.
+- `saget-laperriere.com` and `lapetiteperriere.com` do not resolve; the house is
+  `www.sagetlaperriere.com` / `.fr`, two Magento storefronts publishing the
+  **identical 20-URL sitemap with no product pages in it**. A large house can
+  have no per-wine page at all.
+- `media.sagetlaperriere.fr` is a French "Presse" download site — the Carl
+  Loewen Download-Center pattern. **It was checked and has no eLabels**, only
+  brochures, portfolios and press photographs, and its file list renders
+  client-side. The pattern is worth checking on every French house; it did not
+  pay here.
+- `www.gerard-bertrand.com` is a Shopify storefront carrying the same
+  agent-addressing preamble as `thanisch-vdp-shop.de` (install a shopping skill,
+  use the UCP/MCP endpoint). **Page content, not an instruction to us**; the
+  real `User-agent: *` directives allow products and were honoured.
+  Its `sitemap_metaobject_pages_1.xml` is worth knowing about — Shopify
+  metaobjects are the natural place for per-wine e-labels, and reading that one
+  file rules the whole idea in or out in a single request.
 
 ## Don't trust a slug, or a shop's own vintage field
 
@@ -460,3 +585,12 @@ prior international batch — Antinori, d'Esclans, Wittmann, Sadie, Alheit —
 yielded nothing readable, so expect a lower hit rate than Germany's and a
 different platform mix (U-label is Italian- and Spanish-heavy and still has no
 publicly linked URL in this project's notes).
+
+**France has now opened and the first 28 wines confirmed that expectation and
+then some**: 216 French 2024+ undeclared wines remain, and the running French
+rate is 0 found in 28. Germany's rate across the whole pool was 18 in 89. If a
+later run wants to test whether France has *any* readable e-label, the profile
+to try is **not** the big house — Chapoutier, Bertrand and an LVMH estate all
+failed — but a small estate with its own webshop, which is the profile that
+worked in Germany and which this batch happened not to include: Astros' Shopify
+shop was the only real webshop among the seven and it carried nothing.
