@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 181,
+  "attempted": 183,
   "found": 18,
-  "not_found": 132,
+  "not_found": 134,
   "rejected": 31,
   "declarations": [
     {
@@ -5301,9 +5301,65 @@
       "vintage": "2024",
       "evidence": "THE ESTATE HAS A REAL WEBSHOP, THE PRODUCT PAGE IS SERVER-RENDERED, AND THERE IS NO INGREDIENT LIST ON IT. Domaines Bunan, 338 bis chemin de Fontanieu, La Cadière d'Azur (83), AOP Bandol; Systembolaget's supplier is Vingourmet Sweden AB and the producer field is the estate. The estate runs a WordPress marketing site (bunan.com) whose per-wine pages are empty grid placeholders, and a separate PrestaShop boutique (boutique.bunan.com) that is genuinely server-rendered. WHAT THE PRODUCT PAGE CARRIES IS A FEATURES TABLE — Terroir, Vinification, Cépages, Caractéristiques, Dégustation, Accord mets et vin, Temps de garde, Degré, Label — plus a description block reading in full: 'Contient des sulfites. La consommation de boissons alcoolisées pendant la grossesse, même en faible quantité, peut avoir des conséquences graves sur la santé de l'enfant.' THAT IS AN ALLERGEN STATEMENT AND A PREGNANCY WARNING, NOT AN INGREDIENT LIST: no list of substances, no nutrition table, no energy value, no e-label link and no QR destination anywhere on either host. A LOAD-BEARING TRAP HERE: THE PRESTASHOP SLUGS ARE STALE AND THE H1 IS NOT. Products are edited in place across vintages exactly as Thanisch's Shopify does, so ...12-bandol-moulin-des-costes-blanc-2019.html serves an H1 of 'MOULIN DES COSTES BLANC 2024' and ...3-20-...-blanc-2021.html serves 'CHATEAU LA ROUVIERE BLANC 2025'. Reading the slug would have given the wrong vintage for both wines. FR (EU) pages used; an /en/ mirror exists. FOR THIS WINE THE SHOP HAS ALREADY ROLLED FORWARD: its Château la Rouvière Blanc is the 2025 (H1), at 13° against Systembolaget's 13,5 % vol for our 2024, so the page is not about our bottle. That would have been a vintage rejection had there been anything to reject; there is not, so it is recorded as not found. The estate publishes no per-vintage archive and no older page for the 2024.",
       "note": null
+    },
+    {
+      "producer": "Domaine Vigneau-Chevreau",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.vigneau-chevreau.com/robots.txt (404, bare Apache page — no directives)",
+        "https://www.vigneau-chevreau.com/sitemap_index.xml (404; no sitemap of any name was found and the site is too small to need one)",
+        "https://www.vigneau-chevreau.com/ (4,2 kB home page — the ENTIRE site is index/vins/terroir/domaine plus an /en/ mirror, and there is no shop link, no 'boutique', no 'acheter')",
+        "https://www.vigneau-chevreau.com/vins.html (19 kB; the whole range on one page; greped for ingrédient/nutrition/allergène/e-label/étiquette/sulfite/kcal/énergie)"
+      ],
+      "checked_at": "2026-08-07T10:00:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "9262201",
+      "name": "Vouvray Cuvée Silex Vigneau Chevreau",
+      "vintage": "2024",
+      "evidence": "A FOUR-PAGE HAND-BUILT STATIC SITE, NO WEBSHOP, NO VINTAGE ANYWHERE. Domaine Vigneau-Chevreau, 4 rue du Clos Baglin, Vallée de Vaux, 37210 Chançay, 26 ha of Chenin in AOC Vouvray farmed biodynamically; Systembolaget's supplier is Tryffelsvinet AB, the producer field is the estate and Systembolaget flags both wines organic, which matches. The site is four pages of static HTML (accueil, vins, terroir, domaine) with an English mirror and no e-commerce of any kind — no 'boutique', no 'acheter', no outbound shop link. /vins.html carries the whole range as prose: cépage, terroir, vine age, harvest, residual sugar in g/l, tasting note and food pairings. IT NAMES BOTH OF OUR CUVÉES BY NAME — 'Silex, Vouvray sec' and 'Clos de Rougemont, Abbaye de Marmoutier' — so the producer and cuvée match is settled, and there is NO INGREDIENT LIST, NO NUTRITION TABLE, NO ENERGY VALUE, NO ALLERGEN LINE AND NO E-LABEL LINK on it. NO VINTAGE IS STATED FOR ANY WINE, so the page is a standing description of the cuvée rather than a per-bottle disclosure and could not have been vintage-matched even had it carried a list. The only additive-adjacent words on the site belong to a different wine: the Pet. Nat. is described as 'élaboré sans aucun additif (sans sulfites)' — prose about a cuvée Systembolaget does not stock from this estate. FR (EU) pages used throughout.",
+      "note": null
+    },
+    {
+      "producer": "Domaine Vigneau-Chevreau",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.vigneau-chevreau.com/robots.txt (404, bare Apache page — no directives)",
+        "https://www.vigneau-chevreau.com/sitemap_index.xml (404; no sitemap of any name was found and the site is too small to need one)",
+        "https://www.vigneau-chevreau.com/ (4,2 kB home page — the ENTIRE site is index/vins/terroir/domaine plus an /en/ mirror, and there is no shop link, no 'boutique', no 'acheter')",
+        "https://www.vigneau-chevreau.com/vins.html (19 kB; the whole range on one page; greped for ingrédient/nutrition/allergène/e-label/étiquette/sulfite/kcal/énergie)"
+      ],
+      "checked_at": "2026-08-07T10:00:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "9403301",
+      "name": "Domaine Vigneau-Chevreau Vouvray Clos de Rougemont",
+      "vintage": "2024",
+      "evidence": "A FOUR-PAGE HAND-BUILT STATIC SITE, NO WEBSHOP, NO VINTAGE ANYWHERE. Domaine Vigneau-Chevreau, 4 rue du Clos Baglin, Vallée de Vaux, 37210 Chançay, 26 ha of Chenin in AOC Vouvray farmed biodynamically; Systembolaget's supplier is Tryffelsvinet AB, the producer field is the estate and Systembolaget flags both wines organic, which matches. The site is four pages of static HTML (accueil, vins, terroir, domaine) with an English mirror and no e-commerce of any kind — no 'boutique', no 'acheter', no outbound shop link. /vins.html carries the whole range as prose: cépage, terroir, vine age, harvest, residual sugar in g/l, tasting note and food pairings. IT NAMES BOTH OF OUR CUVÉES BY NAME — 'Silex, Vouvray sec' and 'Clos de Rougemont, Abbaye de Marmoutier' — so the producer and cuvée match is settled, and there is NO INGREDIENT LIST, NO NUTRITION TABLE, NO ENERGY VALUE, NO ALLERGEN LINE AND NO E-LABEL LINK on it. NO VINTAGE IS STATED FOR ANY WINE, so the page is a standing description of the cuvée rather than a per-bottle disclosure and could not have been vintage-matched even had it carried a list. The only additive-adjacent words on the site belong to a different wine: the Pet. Nat. is described as 'élaboré sans aucun additif (sans sulfites)' — prose about a cuvée Systembolaget does not stock from this estate. FR (EU) pages used throughout.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-07T09:45:00Z",
+  "updated_at": "2026-08-07T10:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -5399,6 +5455,11 @@
       "at": "2026-08-07T09:45:00Z",
       "batch": "3h — Domaines Bunan, 2 wines (Château la Rouvière Blanc 2024, Moulin des Costes Blanc 2024)",
       "result": "2 attempted, 0 found, 2 not found, 0 rejected. FIRST FRENCH SMALL ESTATE IN THIS PROJECT WITH A REAL, SERVER-RENDERED WEBSHOP OF ITS OWN — a PrestaShop boutique on its own subdomain — and it publishes no ingredient list. One of the two wines is our exact vintage on that shop (Moulin des Costes Blanc 2024, 13.5°, bio, matching Systembolaget on every field), so the absence is the finding rather than a consequence of stale stock. What the product page does carry is 'Contient des sulfites' plus a pregnancy warning and a terroir/cépages/degré table. NEW TRAP: PrestaShop slugs here are stale where the H1 is current — /12-bandol-moulin-des-costes-blanc-2019.html is the 2024 and /3-20-...-2021.html is the 2025. Trust the H1, never the slug."
+    },
+    {
+      "at": "2026-08-07T10:00:00Z",
+      "batch": "3h — Domaine Vigneau-Chevreau, 2 wines (Vouvray Cuvée Silex 2024, Vouvray Clos de Rougemont 2024)",
+      "result": "2 attempted, 0 found, 2 not found, 0 rejected. A biodynamic 26 ha Vouvray estate whose entire web presence is four static pages and no shop. Its one range page names both of our cuvées and states residual sugar in g/l but no vintage and no ingredient list. Four requests. Third French estate in a row where the failure is that nothing is published, not that anything is unreadable."
     }
   ]
 }
