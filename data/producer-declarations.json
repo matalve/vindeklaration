@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — German producers with 2024+ undeclared wines (in progress; the 2025 slice is exhausted and the 2024 slice is down to the last handful)",
-  "attempted": 138,
+  "attempted": 139,
   "found": 18,
-  "not_found": 89,
+  "not_found": 90,
   "rejected": 31,
   "declarations": [
     {
@@ -3980,9 +3980,39 @@
       "robots_disallowed": false,
       "server_rendered": false,
       "note": "Two of the four German 2024 items whose producer field holds a Swedish importer. Both resolved the same way and both are recorded so the next run does not repeat the search. The general lesson is in the Even & Odd record: try the importer's own agency site for a 'Producent' field first, because that is the one cheap route from an importer name to an estate. It works when the importer is an agency that presents its growers, and fails when the importer is a private-label operation presenting its brands, which is what Solera is."
+    },
+    {
+      "product_number": "7262701",
+      "name": "Robusta Riesling",
+      "producer": "Rewine AB",
+      "country": "Tyskland",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE IMPORTER'S SITE WAS SEARCHED PROPERLY AND THE WINE IS NOT ON IT. Systembolaget 7262701 records the producer as 'Rewine AB', the Swedish importer at Generalsvägen 58A, Österskär; the wine is a Nahe Riesling, 2024, 750 ml, 12,0 % vol, organic, 179 kr, Ordervaror. Rewine runs a Wix site with a full store-products-sitemap.xml and a pages-sitemap.xml holding one page per producer — the best-structured importer site in this batch, and it makes the negative solid rather than a shrug. NEITHER SITEMAP CONTAINS 'ROBUSTA' IN ANY FORM. The store sitemap's Riesling products are Calles Riesling, Calles Sekt Riesling Brut, Nigl Riesling Urgestein, Nigl Ried Hochäker and Pauletts Polish Hill River — Rheingau, Kremstal and Clare Valley, no Nahe. The ~85 producer pages contain no Nahe estate. THE ONE GERMAN CONNECTION FOUND WAS CHECKED AND IS THE WRONG WINE AND THE WRONG REGION. https://www.rewine.se/calles names 'CALLES / WEINGUT BERNHARD MEHRLEIN', a collaboration between the Norwegian restaurateur Calle Feght and the Oestrich estate in the RHEINGAU — the same Mehrlein house that turned out to be behind Spring's 'Even & Odd' earlier in this batch. It is not the Nahe, and 'Robusta' is not among the three Calles products. Attaching it would be a two-step guess. A web search for a 'Robusta' Riesling returned nothing but unrelated Nahe estates. NO PRODUCER, NO PAGE, NO IDENTITY TEST. Recorded as not found on the strict reading: the four matching rules could not be attempted, not that the producer published nothing.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://rewine.se/robots.txt (Wix default: Allow: /, bar *?lightbox=)",
+        "https://rewine.se/sitemap.xml",
+        "https://www.rewine.se/store-products-sitemap.xml (no Robusta; five Riesling products, none from the Nahe)",
+        "https://www.rewine.se/pages-sitemap.xml (~85 producer pages, no Nahe estate)",
+        "https://www.rewine.se/calles (Weingut Bernhard Mehrlein, Rheingau — not the Nahe and not this cuvée)",
+        "web search for a Robusta Riesling (nothing; unrelated Nahe producers only)"
+      ],
+      "checked_at": "2026-08-07T02:10:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "note": "A coincidence worth recording rather than acting on: Weingut Bernhard Mehrlein, Oestrich, turns up as the estate behind two different Swedish importers' own-label Rieslings in the same batch — Spring's Even & Odd and Rewine's Calles range. That makes Mehrlein a name to recognise in this pool, and also a demonstration of why recognising it is not enough: the estate's own site publishes no product pages and no declaration at all, so identifying it does not produce one. Also worth reusing: a Wix importer site with store-products-sitemap.xml plus pages-sitemap.xml lets you rule a wine out in three requests, which is much cheaper than the Magento B2B shop at Solera that could not be searched within robots at all."
     }
   ],
-  "updated_at": "2026-08-07T02:00:00Z",
+  "updated_at": "2026-08-07T02:10:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
