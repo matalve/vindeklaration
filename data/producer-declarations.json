@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-07 Alsace run: 24 French producers, 65 wines, 0 found, 5 rejected, 179 French 2024+ wines untouched. THE ALSACE SLICE IS COMPLETE — all 13 Alsace 2024+ undeclared wines, 8 producers, are now attempted.",
-  "attempted": 205,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-07 Alsace run: 25 French producers, 69 wines, 0 found, 5 rejected, 175 French 2024+ wines untouched. THE ALSACE SLICE IS COMPLETE — all 13 Alsace 2024+ undeclared wines, 8 producers, are attempted.",
+  "attempted": 209,
   "found": 18,
-  "not_found": 151,
+  "not_found": 155,
   "rejected": 36,
   "declarations": [
     {
@@ -6009,9 +6009,129 @@
       "name": "Luc Faller Pétillant Naturel Muscat",
       "vintage": "2024",
       "evidence": "THE PRODUCER HAS NO WEBSITE, WHICH IS THE END OF THE TRAIL AND NOT A REASON TO KEEP LOOKING. E.A.R.L. Vignoble Luc Faller, 51 route des Vins, 67140 Itterswiller — 8,3 ha, Ecocert organic since 2009 and Demeter biodynamic, run by Luc and Myriam Faller; Systembolaget 5842001, supplier RekoVin Sverige AB, organic flag set, which matches. Six plausible domains were checked BY DNS ONLY and none resolves; the two directories that would carry a website field if there were one — the Vignerons Independants federation, of which the estate is a member, and the official Route des Vins d'Alsace — list none; and every page a search returns for the estate is a retailer, a guide or a certification register. The estate's only first-party web presence is a Facebook page. UNDER THE PROJECT'S RULES THERE IS NOTHING TO FETCH: a declaration may only come from an e-label or the producer's own site, and a retailer's transcription in another country has worse provenance than Systembolaget's. avenuedesvins.fr sells this exact wine and its listing was not used as a source, exactly as vinello.eu was not used for La Petite Perriere. THE SISTER-ESTATE TRAP WAS WALKED INTO AND STOPPED AT THE DOOR, AND IT IS WORTH RECORDING BECAUSE IT IS A GOOD ONE: vins-faller.fr resolves and serves a complete estate site with an online shop — and it is DOMAINE ANDRE FALLER, 2 route du Vin, 67140 ITTERSWILLER. Same surname, SAME VILLAGE, different street, different estate. Nothing on it may be attached to this wine, and a run in a hurry would have attached it. This is the Erbeldinger and Drathen rule in its purest form. 'Not found' here means the crawler found nothing. The bottle carries whatever it carries, and a QR code that is never linked from the web is invisible to this project — the estate may well have printed one."
+    },
+    {
+      "producer": "Les Grands Chais de France",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.gcfplanet.com/ and https://gcfplanet.com/ (TLS fails with a self-signed certificate in the chain; over plain http the same host serves a 134-byte meta-refresh to https://www.groupegcf.fr)",
+        "https://www.groupegcf.com/ and https://www.groupegcf.fr/ (both initially failed TLS with 'unable to get local issuer certificate'. THIS WAS OUR TRUST STORE, NOT THE SITE — see the evidence: the chain is a valid Let's Encrypt chain rooted in ISRG Root YR, a 2025 root that neither the Pi's ca-certificates nor certifi carries yet. Resolved properly by adding Let's Encrypt's own cross-signed root-yr-by-x1.pem, which verifies under ISRG Root X1, to the CA bundle for this session. No verification was disabled)",
+        "https://www.groupegcf.fr/robots.txt (a 'User-agent: *' group. It disallows the double-slash admin paths and, explicitly, four content pages including /nos-marques/decouvrez-nos-marques.html — the brands index. THAT PAGE WAS NOT FETCHED. This is an ordinary corporate marketing site, so its robots.txt is honoured in full, without exception)",
+        "https://www.groupegcf.fr/sitemap.xml (38 URLs; the per-brand pages /nos-marques/{brand}.html are listed and are NOT disallowed)",
+        "https://www.groupegcf.fr/nos-marques/grand-sud.html (the group's own page for the brand; its only outbound brand link is http://www.grandsud-wines.com)",
+        "http://www.grandsud-wines.com/robots.txt (WordPress, disallows only /wp-admin/ and /wp-includes/. The https side of this host serves a self-signed certificate; http is what the producer's own page links)",
+        "http://www.grandsud-wines.com/ , /en/ and /en/chose-your-language/ (every URL redirects to a country-and-age gate; /sitemap.xml is a soft 404 serving the same gate)"
+      ],
+      "checked_at": "2026-08-07T17:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7312301",
+      "name": "Grand Sud Rosé",
+      "vintage": "2025",
+      "evidence": "THE BRAND OWNER IS REACHABLE, THE BRAND SITE IS FROM 2012, AND THE ONLY INGREDIENT LISTS IN CIRCULATION ARE ON SOURCES THIS PROJECT MAY NOT USE. Les Grands Chais de France, Petersbach, Bas-Rhin — France's largest wine exporter, 1,3 bn EUR turnover, 80 % exported; Systembolaget's supplier for all four Grand Sud items is Derivino AB. GCF IS AN ALSACE COMPANY, which is why it was taken after the Alsace estate pool was exhausted: the working hypothesis from batch 3c is that platform adoption, not producer shape, predicts a French declaration, and both French platforms found so far are Alsatian. IT DOES NOT HOLD HERE. The group's corporate site is a small brochure — 38 URLs, one page per brand — and the Grand Sud page is a paragraph of copy whose single outbound link is http://www.grandsud-wines.com. THE BRAND SITE IS A DEAD ARTEFACT: WordPress with sitepress 2.4.3, flickr-mini-gallery and a joliprint button, and its own page metadata dates it 12 June 2012. Every URL on it redirects to a JavaScript country-and-age gate. A site last touched a decade before the obligation was not going to carry an e-label, and no vendor host is referenced anywhere on either site — no vincod.com, no alliance-alsace.com, no u-label, no m. subdomain (m.grandsud.fr resolves, but so does randomxyz123.grandsud.fr: it is wildcard DNS on an unrelated IPv6 host, not the Vincod pattern). AND THIS IS THE CLEAREST CASE YET OF THE TRAP THE RULES EXIST FOR. A full ingredient list for Grand Sud Chardonnay is in wide circulation — 'raisins, mouts concentres, sulfites, sorbate de potassium, acide tartrique, acide malique, gomme arabique, carboxymethylcellulose' — and every place it appears is a place this project may not take it from: Carrefour, Openfoodfacts, a Belgian wholesaler's tech sheet, vinello.eu. It is almost certainly right. IT IS NOT RECORDED, because a retailer's or a crowd database's transcription has worse provenance than Systembolaget's own, its vintage is unstated and its market and pack are unverified — and a record in this file OUTRANKS Systembolaget's text, so attaching an unsourced list here would override a correct absence with an unverifiable presence. This is the vinello.eu rule from the Saget la Perriere record, met again and refused again. PACK MATTERS HERE MORE THAN USUAL. Systembolaget's four Grand Sud items are four different fills — 250 ml, 1 L, and two 3 L bag-in-boxes — and an e-label is a per-pack disclosure. Even a genuine producer list for the 1 L bottle would not have carried to the BiB without the producer saying so. THIS RECORD IS THE 1 L ITEM."
+    },
+    {
+      "producer": "Les Grands Chais de France",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.gcfplanet.com/ and https://gcfplanet.com/ (TLS fails with a self-signed certificate in the chain; over plain http the same host serves a 134-byte meta-refresh to https://www.groupegcf.fr)",
+        "https://www.groupegcf.com/ and https://www.groupegcf.fr/ (both initially failed TLS with 'unable to get local issuer certificate'. THIS WAS OUR TRUST STORE, NOT THE SITE — see the evidence: the chain is a valid Let's Encrypt chain rooted in ISRG Root YR, a 2025 root that neither the Pi's ca-certificates nor certifi carries yet. Resolved properly by adding Let's Encrypt's own cross-signed root-yr-by-x1.pem, which verifies under ISRG Root X1, to the CA bundle for this session. No verification was disabled)",
+        "https://www.groupegcf.fr/robots.txt (a 'User-agent: *' group. It disallows the double-slash admin paths and, explicitly, four content pages including /nos-marques/decouvrez-nos-marques.html — the brands index. THAT PAGE WAS NOT FETCHED. This is an ordinary corporate marketing site, so its robots.txt is honoured in full, without exception)",
+        "https://www.groupegcf.fr/sitemap.xml (38 URLs; the per-brand pages /nos-marques/{brand}.html are listed and are NOT disallowed)",
+        "https://www.groupegcf.fr/nos-marques/grand-sud.html (the group's own page for the brand; its only outbound brand link is http://www.grandsud-wines.com)",
+        "http://www.grandsud-wines.com/robots.txt (WordPress, disallows only /wp-admin/ and /wp-includes/. The https side of this host serves a self-signed certificate; http is what the producer's own page links)",
+        "http://www.grandsud-wines.com/ , /en/ and /en/chose-your-language/ (every URL redirects to a country-and-age gate; /sitemap.xml is a soft 404 serving the same gate)"
+      ],
+      "checked_at": "2026-08-07T17:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7494408",
+      "name": "Grand Sud Merlot",
+      "vintage": "2025",
+      "evidence": "THE BRAND OWNER IS REACHABLE, THE BRAND SITE IS FROM 2012, AND THE ONLY INGREDIENT LISTS IN CIRCULATION ARE ON SOURCES THIS PROJECT MAY NOT USE. Les Grands Chais de France, Petersbach, Bas-Rhin — France's largest wine exporter, 1,3 bn EUR turnover, 80 % exported; Systembolaget's supplier for all four Grand Sud items is Derivino AB. GCF IS AN ALSACE COMPANY, which is why it was taken after the Alsace estate pool was exhausted: the working hypothesis from batch 3c is that platform adoption, not producer shape, predicts a French declaration, and both French platforms found so far are Alsatian. IT DOES NOT HOLD HERE. The group's corporate site is a small brochure — 38 URLs, one page per brand — and the Grand Sud page is a paragraph of copy whose single outbound link is http://www.grandsud-wines.com. THE BRAND SITE IS A DEAD ARTEFACT: WordPress with sitepress 2.4.3, flickr-mini-gallery and a joliprint button, and its own page metadata dates it 12 June 2012. Every URL on it redirects to a JavaScript country-and-age gate. A site last touched a decade before the obligation was not going to carry an e-label, and no vendor host is referenced anywhere on either site — no vincod.com, no alliance-alsace.com, no u-label, no m. subdomain (m.grandsud.fr resolves, but so does randomxyz123.grandsud.fr: it is wildcard DNS on an unrelated IPv6 host, not the Vincod pattern). AND THIS IS THE CLEAREST CASE YET OF THE TRAP THE RULES EXIST FOR. A full ingredient list for Grand Sud Chardonnay is in wide circulation — 'raisins, mouts concentres, sulfites, sorbate de potassium, acide tartrique, acide malique, gomme arabique, carboxymethylcellulose' — and every place it appears is a place this project may not take it from: Carrefour, Openfoodfacts, a Belgian wholesaler's tech sheet, vinello.eu. It is almost certainly right. IT IS NOT RECORDED, because a retailer's or a crowd database's transcription has worse provenance than Systembolaget's own, its vintage is unstated and its market and pack are unverified — and a record in this file OUTRANKS Systembolaget's text, so attaching an unsourced list here would override a correct absence with an unverifiable presence. This is the vinello.eu rule from the Saget la Perriere record, met again and refused again. PACK MATTERS HERE MORE THAN USUAL. Systembolaget's four Grand Sud items are four different fills — 250 ml, 1 L, and two 3 L bag-in-boxes — and an e-label is a per-pack disclosure. Even a genuine producer list for the 1 L bottle would not have carried to the BiB without the producer saying so. THIS RECORD IS THE 3 L bag-in-box ITEM."
+    },
+    {
+      "producer": "Les Grand Chais de France",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.gcfplanet.com/ and https://gcfplanet.com/ (TLS fails with a self-signed certificate in the chain; over plain http the same host serves a 134-byte meta-refresh to https://www.groupegcf.fr)",
+        "https://www.groupegcf.com/ and https://www.groupegcf.fr/ (both initially failed TLS with 'unable to get local issuer certificate'. THIS WAS OUR TRUST STORE, NOT THE SITE — see the evidence: the chain is a valid Let's Encrypt chain rooted in ISRG Root YR, a 2025 root that neither the Pi's ca-certificates nor certifi carries yet. Resolved properly by adding Let's Encrypt's own cross-signed root-yr-by-x1.pem, which verifies under ISRG Root X1, to the CA bundle for this session. No verification was disabled)",
+        "https://www.groupegcf.fr/robots.txt (a 'User-agent: *' group. It disallows the double-slash admin paths and, explicitly, four content pages including /nos-marques/decouvrez-nos-marques.html — the brands index. THAT PAGE WAS NOT FETCHED. This is an ordinary corporate marketing site, so its robots.txt is honoured in full, without exception)",
+        "https://www.groupegcf.fr/sitemap.xml (38 URLs; the per-brand pages /nos-marques/{brand}.html are listed and are NOT disallowed)",
+        "https://www.groupegcf.fr/nos-marques/grand-sud.html (the group's own page for the brand; its only outbound brand link is http://www.grandsud-wines.com)",
+        "http://www.grandsud-wines.com/robots.txt (WordPress, disallows only /wp-admin/ and /wp-includes/. The https side of this host serves a self-signed certificate; http is what the producer's own page links)",
+        "http://www.grandsud-wines.com/ , /en/ and /en/chose-your-language/ (every URL redirects to a country-and-age gate; /sitemap.xml is a soft 404 serving the same gate)"
+      ],
+      "checked_at": "2026-08-07T17:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7847604",
+      "name": "Grand Sud Chardonnay",
+      "vintage": "2024",
+      "evidence": "THE BRAND OWNER IS REACHABLE, THE BRAND SITE IS FROM 2012, AND THE ONLY INGREDIENT LISTS IN CIRCULATION ARE ON SOURCES THIS PROJECT MAY NOT USE. Les Grands Chais de France, Petersbach, Bas-Rhin — France's largest wine exporter, 1,3 bn EUR turnover, 80 % exported; Systembolaget's supplier for all four Grand Sud items is Derivino AB. GCF IS AN ALSACE COMPANY, which is why it was taken after the Alsace estate pool was exhausted: the working hypothesis from batch 3c is that platform adoption, not producer shape, predicts a French declaration, and both French platforms found so far are Alsatian. IT DOES NOT HOLD HERE. The group's corporate site is a small brochure — 38 URLs, one page per brand — and the Grand Sud page is a paragraph of copy whose single outbound link is http://www.grandsud-wines.com. THE BRAND SITE IS A DEAD ARTEFACT: WordPress with sitepress 2.4.3, flickr-mini-gallery and a joliprint button, and its own page metadata dates it 12 June 2012. Every URL on it redirects to a JavaScript country-and-age gate. A site last touched a decade before the obligation was not going to carry an e-label, and no vendor host is referenced anywhere on either site — no vincod.com, no alliance-alsace.com, no u-label, no m. subdomain (m.grandsud.fr resolves, but so does randomxyz123.grandsud.fr: it is wildcard DNS on an unrelated IPv6 host, not the Vincod pattern). AND THIS IS THE CLEAREST CASE YET OF THE TRAP THE RULES EXIST FOR. A full ingredient list for Grand Sud Chardonnay is in wide circulation — 'raisins, mouts concentres, sulfites, sorbate de potassium, acide tartrique, acide malique, gomme arabique, carboxymethylcellulose' — and every place it appears is a place this project may not take it from: Carrefour, Openfoodfacts, a Belgian wholesaler's tech sheet, vinello.eu. It is almost certainly right. IT IS NOT RECORDED, because a retailer's or a crowd database's transcription has worse provenance than Systembolaget's own, its vintage is unstated and its market and pack are unverified — and a record in this file OUTRANKS Systembolaget's text, so attaching an unsourced list here would override a correct absence with an unverifiable presence. This is the vinello.eu rule from the Saget la Perriere record, met again and refused again. PACK MATTERS HERE MORE THAN USUAL. Systembolaget's four Grand Sud items are four different fills — 250 ml, 1 L, and two 3 L bag-in-boxes — and an e-label is a per-pack disclosure. Even a genuine producer list for the 1 L bottle would not have carried to the BiB without the producer saying so. THIS RECORD IS THE 250 ml ITEM."
+    },
+    {
+      "producer": "Les Grands Chais de France",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.gcfplanet.com/ and https://gcfplanet.com/ (TLS fails with a self-signed certificate in the chain; over plain http the same host serves a 134-byte meta-refresh to https://www.groupegcf.fr)",
+        "https://www.groupegcf.com/ and https://www.groupegcf.fr/ (both initially failed TLS with 'unable to get local issuer certificate'. THIS WAS OUR TRUST STORE, NOT THE SITE — see the evidence: the chain is a valid Let's Encrypt chain rooted in ISRG Root YR, a 2025 root that neither the Pi's ca-certificates nor certifi carries yet. Resolved properly by adding Let's Encrypt's own cross-signed root-yr-by-x1.pem, which verifies under ISRG Root X1, to the CA bundle for this session. No verification was disabled)",
+        "https://www.groupegcf.fr/robots.txt (a 'User-agent: *' group. It disallows the double-slash admin paths and, explicitly, four content pages including /nos-marques/decouvrez-nos-marques.html — the brands index. THAT PAGE WAS NOT FETCHED. This is an ordinary corporate marketing site, so its robots.txt is honoured in full, without exception)",
+        "https://www.groupegcf.fr/sitemap.xml (38 URLs; the per-brand pages /nos-marques/{brand}.html are listed and are NOT disallowed)",
+        "https://www.groupegcf.fr/nos-marques/grand-sud.html (the group's own page for the brand; its only outbound brand link is http://www.grandsud-wines.com)",
+        "http://www.grandsud-wines.com/robots.txt (WordPress, disallows only /wp-admin/ and /wp-includes/. The https side of this host serves a self-signed certificate; http is what the producer's own page links)",
+        "http://www.grandsud-wines.com/ , /en/ and /en/chose-your-language/ (every URL redirects to a country-and-age gate; /sitemap.xml is a soft 404 serving the same gate)"
+      ],
+      "checked_at": "2026-08-07T17:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7862108",
+      "name": "Grand Sud Chardonnay",
+      "vintage": "2024",
+      "evidence": "THE BRAND OWNER IS REACHABLE, THE BRAND SITE IS FROM 2012, AND THE ONLY INGREDIENT LISTS IN CIRCULATION ARE ON SOURCES THIS PROJECT MAY NOT USE. Les Grands Chais de France, Petersbach, Bas-Rhin — France's largest wine exporter, 1,3 bn EUR turnover, 80 % exported; Systembolaget's supplier for all four Grand Sud items is Derivino AB. GCF IS AN ALSACE COMPANY, which is why it was taken after the Alsace estate pool was exhausted: the working hypothesis from batch 3c is that platform adoption, not producer shape, predicts a French declaration, and both French platforms found so far are Alsatian. IT DOES NOT HOLD HERE. The group's corporate site is a small brochure — 38 URLs, one page per brand — and the Grand Sud page is a paragraph of copy whose single outbound link is http://www.grandsud-wines.com. THE BRAND SITE IS A DEAD ARTEFACT: WordPress with sitepress 2.4.3, flickr-mini-gallery and a joliprint button, and its own page metadata dates it 12 June 2012. Every URL on it redirects to a JavaScript country-and-age gate. A site last touched a decade before the obligation was not going to carry an e-label, and no vendor host is referenced anywhere on either site — no vincod.com, no alliance-alsace.com, no u-label, no m. subdomain (m.grandsud.fr resolves, but so does randomxyz123.grandsud.fr: it is wildcard DNS on an unrelated IPv6 host, not the Vincod pattern). AND THIS IS THE CLEAREST CASE YET OF THE TRAP THE RULES EXIST FOR. A full ingredient list for Grand Sud Chardonnay is in wide circulation — 'raisins, mouts concentres, sulfites, sorbate de potassium, acide tartrique, acide malique, gomme arabique, carboxymethylcellulose' — and every place it appears is a place this project may not take it from: Carrefour, Openfoodfacts, a Belgian wholesaler's tech sheet, vinello.eu. It is almost certainly right. IT IS NOT RECORDED, because a retailer's or a crowd database's transcription has worse provenance than Systembolaget's own, its vintage is unstated and its market and pack are unverified — and a record in this file OUTRANKS Systembolaget's text, so attaching an unsourced list here would override a correct absence with an unverifiable presence. This is the vinello.eu rule from the Saget la Perriere record, met again and refused again. PACK MATTERS HERE MORE THAN USUAL. Systembolaget's four Grand Sud items are four different fills — 250 ml, 1 L, and two 3 L bag-in-boxes — and an e-label is a per-pack disclosure. Even a genuine producer list for the 1 L bottle would not have carried to the BiB without the producer saying so. THIS RECORD IS THE 3 L bag-in-box ITEM."
     }
   ],
-  "updated_at": "2026-08-07T17:00:00Z",
+  "updated_at": "2026-08-07T17:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -6134,9 +6254,9 @@
       "result": "12 attempted, 0 found, 9 not found, 3 rejected. THE COOPERATIVE HYPOTHESIS DID NOT HOLD: five co-ops (Turckheim, Pfaffenheim, Cellier des Dauphins, Les Quatre Tours, Vignerons Proprietes Associes) produced one declaration between them, and it was a vintage behind. BUT THE RUN FOUND TWO PLATFORMS. (1) ALLIANCE NUTRI, alliance-alsace.com/01/{gtin}/22/{variant} — the project's first GS1 Digital Link and its first third-party e-label vendor on a French producer's page, server-rendered, 11 EU languages including Svenska, honours Accept-Language, and states designation, sweetness, vintage, format and GTIN. Found via Cave de Turckheim's 'INGREDIENTS ET NUTRITION' button; rejected only because the shop had not rolled forward to our 2025. (2) VINCOD IS VIN.CO, and m.rhonea.fr and m.hugel.com are the same platform — images from cdn.vin.co, every short code mirrored at vincod.com. Its per-wine page carries a <select id=millesime> naming the code for every vintage back to 2007, so OUR vintage is reachable from the producer's own control, and the vintage page can link a true e-label at /{code}/n/{hash}/{lang} with lot number, labelled alcohol, ingredients and nutrition per 100 ml and per 125 ml. That corrects the earlier reading of Rhonea: the platform is capable of an ingredient list and Rhonea had not filled it in. TWO COMPLETE HUGEL DECLARATIONS FOR OUR EXACT 2024 BOTTLES WERE READ AND BOTH WERE REJECTED ON STRENGTH — 12 % vol against Systembolaget's 13,0 and 14 % vol against 13,0, each twice the 0,5 % vol tolerance and in opposite directions, so not a rounding artefact. The third Hugel, whose strength agrees exactly, is the one whose page carries no e-label link. Also first in this project: a GEOBLOCK — boutique.gustavelorentz.com answers 403 'This website is only authorised from France and Germany', treated as a technological measure and absolute."
     },
     {
-      "at": "2026-08-07T17:00:00Z",
-      "batch": "3d — the rest of the Alsace 2024+ undeclared pool. Dopff & Irion, Blanck Andre et ses Fils, SARL Etienne Simonis, Faller Henri et Luc — the four French producers left in Alsace after batch 3c, one wine each. Picked because both French e-label platforms found so far (Alliance Nutri, Vincod) were found in Alsace.",
-      "result": "IN PROGRESS. 4 producers, 4 wines, 0 found, 0 rejected. THE ALSACE POOL OF 2024+ UNDECLARED WINES IS NOW EXHAUSTED at 13 wines across 8 producers, and only the two already known — Cave de Turckheim and Hugel — publish anything. Dopff & Irion: our exact 2024 on its own Vinium shop, sulphite pictogram, alc 12.5 % vol, no list; per-vintage fiche PDF the same; same framework AND same owner as Pfaffenheim. Blanck Andre et ses Fils: own shop, one page per cuvee, ZERO hits for ingr/nutri/kcal/sulfit on two product pages, one of them at our exact 2024, so the absence is not staleness. Etienne Simonis: a per-wine per-vintage fiche PDF for our exact 2024 with sugars, acidity and alcohol and no ingredient list; its near-miss is a new shape, 'sans levurage, sans collage, sans chaptalisation ni acidification' — the negative of an ingredient list. Faller Henri et Luc: no producer website exists at all, confirmed by DNS, by the Vignerons Independants register and by the official Route des Vins d'Alsace directory; and vins-faller.fr is a DIFFERENT ESTATE in the same village (Domaine Andre Faller)."
+      "at": "2026-08-07T17:40:00Z",
+      "batch": "3d — the Alsace 2024+ undeclared pool to exhaustion, plus the one large Alsace-headquartered brand owner. Dopff & Irion, Blanck Andre et ses Fils, SARL Etienne Simonis, Faller Henri et Luc, Les Grands Chais de France — 8 wines.",
+      "result": "IN PROGRESS. 5 producers, 8 wines, 0 found, 0 rejected. THE ALSACE ESTATE POOL OF 2024+ UNDECLARED WINES IS EXHAUSTED at 13 wines across 8 producers, and only the two already known — Cave de Turckheim and Hugel — publish anything. Dopff & Irion: our exact 2024 on its own Vinium shop, sulphite pictogram, alc 12.5 % vol, no list; per-vintage fiche PDF the same; same framework AND same owner as Pfaffenheim. Blanck Andre et ses Fils: own shop, one page per cuvee, ZERO hits for ingr/nutri/kcal/sulfit on two product pages, one at our exact 2024, so the absence is not staleness. Etienne Simonis: a per-wine per-vintage fiche PDF for our exact 2024 with sugars, acidity and alcohol and no ingredient list; a new near-miss shape, 'sans levurage, sans collage, sans chaptalisation ni acidification' — the negative of an ingredient list. Faller Henri et Luc: no producer website exists at all, confirmed by DNS, the Vignerons Independants register and the official Route des Vins d'Alsace; vins-faller.fr is a DIFFERENT ESTATE in the same village. Les Grands Chais de France: France's largest exporter, Alsace-headquartered, four Grand Sud packs — its brand site dates itself 12 June 2012 and sits behind an age gate, and the full Grand Sud ingredient list that IS in circulation is only on Carrefour, Openfoodfacts and vinello.eu, which are not sources. ALSO SETTLED A TLS TRAP THAT WILL RECUR EVERYWHERE: groupegcf.fr's 'unable to get local issuer certificate' is ISRG Root YR, Let's Encrypt's 2025 root, missing from both the Pi's store and certifi — fixed honestly with Let's Encrypt's own cross-signed root-yr-by-x1.pem, no verification disabled."
     }
   ]
 }
