@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opens here with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1).",
-  "attempted": 190,
+  "attempted": 191,
   "found": 18,
-  "not_found": 138,
+  "not_found": 139,
   "rejected": 34,
   "declarations": [
     {
@@ -5571,9 +5571,38 @@
       "vintage": "2025",
       "evidence": "THE FIRST THIRD-PARTY E-LABEL PLATFORM FOUND ON A FRENCH PRODUCER'S PAGE, AND THE FIRST GS1 DIGITAL LINK IN THIS PROJECT — AND OUR BOTTLE IS A VINTAGE AHEAD OF IT. Cave Vinicole de Turckheim, 16 rue des Tuileries, 68230 Turckheim, the Alsace cooperative; Systembolaget's producer field is 'Cave de Turckheim' and the supplier is Nigab, so the producer matches. Its PrestaShop site puts a button labelled 'INGREDIENTS ET NUTRITION' at the foot of each product page, linking to https://alliance-alsace.com/01/{GTIN}/22/{variant} — a GS1 Digital Link URI (AI 01 = GTIN, AI 22 = consumer product variant) on a platform that titles itself 'Alliance Nutri'. The page is plain server-rendered HTML, about 6 kB, with an 11-language EU selector (Francais, English, Italiano, Dansk, Deutsch, Espanol, Suomalainen, Nederlands, Portugues, Romana, Svenska) driven by a POST, and it also honours the Accept-Language request header, which is how the French text below was read. IT IDENTIFIES ITSELF AS WELL AS WINESTRO DOES: designation, sweetness, vintage, format and Gencode are all on the page. AND WHAT IT SAYS IS 2024. 'Denomination: PINOT GRIS 2024 AOP ALSACE RESERVE / Sucrosite : DEMI-SEC / Millesime : 2024 / Format : 75cL / Gencode : 03274550732866'. Systembolaget 211901 is the 2025 at 12,5 %; the producer's own product page agrees with its e-label at 'Millesime : 2024' and 13 degrees. The shop keeps exactly one product per grape in the Reserve range and edits it forward, so there is no 2025 page and no 2025 e-label link. The bare GS1 root /01/03274550732866 returns 404, so the variant segment (008859) is required and there is no way to reach a 2025 variant without guessing it, which the rules forbid. THE 2024'S LIST, RECORDED ONLY AS EVIDENCE AND NOT ATTACHED, in French: 'Raisins, mout de raisins concentre, sucre, conservateur (SULFITES), regulateur d'acidite (acide tartrique [L(+)-]), agent stabilisateur (contient acide metatartrique et/ou mannoproteines de levures). Mis en bouteille sous atmosphere protectrice.' Nutrition per 100 ml: 330 kJ / 80 kcal, fats 0 g of which saturates 0 g, carbohydrate 1,8 g of which sugars 1,1 g, protein 0 g, salt 0 g. Note that it declares concentrated grape must and sugar — a chaptalised Alsace wine — which is exactly the kind of per-vintage detail that cannot be carried across a vintage boundary. FR (EU) reading used; an English default and a Svenska option exist.",
       "note": "Alliance Nutri (alliance-alsace.com) is a shared Alsace platform and is the best French lead this project has: look for the same 'INGREDIENTS ET NUTRITION' button on other Alsace cooperatives."
+    },
+    {
+      "producer": "La Cave des Vignerons de Pfaffenheim",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.pfaffenheim.com/robots.txt (a SemrushBot block, then 'User-Agent: *' disallowing /404/, /mobile/, some image directories and the /de/ /es/ /it/ /cn/ /jp/ locale trees. /fr/ is allowed and is what was used)",
+        "http://www.pfaffenheim.com/sitemap.php (694 URLs; 174 French /nos_vins/ pages, and the wine pages are PER VINTAGE — black-tie-by-pfaff-a-o-p-alsace-sec/2020 through /2024 all exist. No ingredients, nutrition or e-label URL anywhere in it)",
+        "https://www.pfaffenheim.com/fr/nos_vins/27/black-tie-by-pfaff-a-o-p-alsace-sec/2024 (the marketing site's per-vintage page for our exact bottle — renders CLIENT-SIDE; the server returns 30 kB of chrome, menu and filter counts, with the wine only in the <title>. Refetched once with X-Requested-With: XMLHttpRequest, which returns the identical shell)",
+        "https://www.pfaffenheim.com/fr/boutique (the webshop listing — this one IS server-rendered, and it names the product URL for our bottle)",
+        "https://www.pfaffenheim.com/fr/produit/00010000000748-specialites-black-tie-by-pfaff-aop-alsace-sec-2024-75cl (the shop product page, server-rendered, 34 kB)"
+      ],
+      "checked_at": "2026-08-07T13:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7623701",
+      "name": "Pfaff Black Tie Riesling Pinot Gris",
+      "vintage": "2024",
+      "evidence": "OUR EXACT BOTTLE IS ON THE COOPERATIVE'S OWN SHOP, CONFIRMED ON FOUR FIELDS, AND THERE IS NO DECLARATION ON IT. Cave des Vignerons de Pfaffenheim (Pfaff), the Alsace cooperative; Systembolaget's producer field is 'La Cave des Vignerons de Pfaffenheim', supplier Amka Vinimport AB. The shop product page is headed 'Black Tie by Pfaff A.O.P. Alsace SEC 2024' with 'Cepage Riesling/Pinot Gris', 'Degre d'alcool alc 12,5% vol.' and '75cl Bouteille' in its title — producer, cuvee, vintage, grape blend, strength and pack all match Systembolaget 7623701 (2024, 12,5 %, 750 ml) exactly. This is the strongest identity match of the batch and it makes the negative a real one. THE PAGE CONTAINS NO INGREDIENT LIST, NO NUTRITION TABLE AND NOT EVEN A SULPHITE STATEMENT: zero hits for ingr, nutri, sulfit, allerg and kcal in the raw HTML. Its content is Cepage, Degre, Terroir, Vendange, Vinification, Degustation, Accords Gourmands, Service — a tasting note with a vinification paragraph. The only off-site links on the whole page are info-calories-alcool.org (the French drinks industry's generic per-category calorie calculator, already recorded as a decoy), Facebook, the agency vinium.com and Google's policy pages. There is no QR platform and no e-label vendor. NOTE THE CONTRAST WITH CAVE DE TURCKHEIM IN THE SAME BATCH: another Alsace cooperative of similar size links a full GS1 Digital Link e-label from every product page. Alliance Nutri is therefore NOT a shared Alsace platform that every cooperative in the region uses — Pfaffenheim references it nowhere. TWO RENDERING FACTS WORTH KEEPING: the marketing site's /nos_vins/ pages are an AJAX shell (the Vinium framework; only the <title> is server-rendered) while the /fr/boutique/ and /fr/produit/ shop pages are fully server-rendered, so on this platform the shop is the readable surface and the marketing site is not. And the sitemap keeps ONE MARKETING PAGE PER VINTAGE for each cuvee, 2020 to 2024, which would have made this an ideal vintage match had the pages carried anything. FR (EU) pages used throughout.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-07T13:05:00Z",
+  "updated_at": "2026-08-07T13:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
