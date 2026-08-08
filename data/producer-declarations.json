@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 45 producers, 113 wines, 1 found, 8 rejected; 137 French 2024+ undeclared wines remain untouched.",
-  "attempted": 260,
+  "attempted": 261,
   "found": 19,
-  "not_found": 202,
+  "not_found": 203,
   "rejected": 39,
   "declarations": [
     {
@@ -7593,9 +7593,36 @@
       "checked_at": "2026-08-08T18:55:00Z",
       "robots_disallowed": false,
       "server_rendered": true
+    },
+    {
+      "product_number": "7060301",
+      "name": "Côtes du Rhône Artesis",
+      "producer": "Ogier",
+      "country": "Frankrike",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Maison Ogier (Chateauneuf-du-Pape, AdVini group) keeps a WordPress/WooCommerce marketing site with one page per CUVEE and no vintage anywhere. Our wine is identified on it — /produit/artesis-rouge-bio/, the organic red Artesis, and Systembolaget's 7060301 is flagged organic — but the page states no vintage, no alcohol and no pack, and its raw HTML matches 'ingred', 'nutri', 'kcal', 'sulfit', 'allerg', 'vincod', 'elabel' and 'e-label' zero times each, with no four-digit year 2023-2026 at all. There is no fiche technique and no QR link; the only outbound sales link is to clubfrancaisduvin.com, a third-party e-shop, which is a retailer and not a source. m.ogier.fr is NXDOMAIN with an NXDOMAIN control and ogier.fr itself resolves only under www. The group angle was tested and did not open: no AdVini-hosted e-label platform could be found for Ogier or any sister brand. Worth recording that Systembolaget itself already carries declarations for two other Ogier wines (221401 Lirac Le Petit Prince and 7006901 Artesis Blanc), so the house does supply the data through the trade channel while publishing none of it on its own site.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.ogier.fr/robots.txt — WooCommerce + Yoast, nothing relevant disallowed; no exception needed",
+        "https://www.ogier.fr/produit/artesis-rouge-bio/ — our cuvee's page, read and grepped in full",
+        "DNS: m.ogier.fr NXDOMAIN, randomxyz123.ogier.fr NXDOMAIN (wildcard control); vins-ogier.com does not resolve",
+        "web search for an AdVini group e-label or QR platform — no such platform found for any AdVini brand"
+      ],
+      "checked_at": "2026-08-08T19:10:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
     }
   ],
-  "updated_at": "2026-08-08T18:55:00Z",
+  "updated_at": "2026-08-08T19:10:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
