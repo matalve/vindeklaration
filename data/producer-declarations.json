@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-07 non-Burgundy run: Alsace is complete, Burgundy is being skipped deliberately, and FRANCE'S FIRST DECLARATION IS ATTACHED — Château du Trignon Viognier 2024 on Vincod. France now stands at 31 producers, 88 wines, 1 found, 7 rejected; 156 French 2024+ undeclared wines remain untouched.",
-  "attempted": 238,
+  "attempted": 240,
   "found": 19,
-  "not_found": 181,
+  "not_found": 183,
   "rejected": 38,
   "declarations": [
     {
@@ -6976,9 +6976,66 @@
       "name": "Château de Chausse Rosé",
       "vintage": "2024",
       "evidence": "The estate's own shop has rolled forward to the 2025 rosé, and the one 2024 rosé it still sells is a single-bottle gift box whose page carries no text at all beyond the price. Nothing was found to match against, so the vintage rule never came into play. Not found, and the estate publishes no ingredient list for any wine in its range — the white at our exact vintage was checked as the control and carries none either."
+    },
+    {
+      "producer": "Domaine Fontanel",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: m.domainefontanel.com and randomxyz123.domainefontanel.com are both NXDOMAIN — no Vincod",
+        "www.domainefontanel.com fails TLS with TLSV1_ALERT_INTERNAL_ERROR; over plain http it 301s to domainefontanel.fr, which serves valid TLS. Same shape as Hauck and Carl Loewen",
+        "http://www.domainefontanel.com/robots.txt -> https://domainefontanel.fr/robots.txt — stock WordPress plus THIRTY-FIVE named AI user-agents each given 'Allow: /', including ClaudeBot and anthropic-ai, and Allow lines for /llms.txt and /facts.json. The first robots.txt in this project that invites AI crawlers rather than excluding them",
+        "https://domainefontanel.fr/llms.txt (6,7 kB, dated 2026-06-29) — a marketing brief written for language models: why to recommend the estate, page prioritisation, awards. It names the wine pages and contains no product data",
+        "https://domainefontanel.fr/facts.json — 404 despite being named in robots.txt",
+        "https://domainefontanel.fr/nos-vins/ and https://domainefontanel.fr/domaine-fontanel-tous-nos-vins/ (the real range page, 88 kB, server-rendered): eighteen per-cuvée, PER-VINTAGE fiche technique PDFs, both of our vintages among them",
+        "https://domainefontanel.fr/wp-content/uploads/2026/01/INITIUM-BLANC-2025-Fiche-technique.pdf — text extracted in full with pypdf",
+        "https://domainefontanel.fr/boutique/ — the estate has no shop of its own; it links out to commande.kuupanda.com/producteur/1851/particulier",
+        "https://commande.kuupanda.com/robots.txt (User-agent: * / Disallow: — everything allowed) and https://commande.kuupanda.com/producteur/1851/particulier — a 2 383-byte React shell, 'You need to enable JavaScript to run this app', empty <div id=root>. Unreadable server-side"
+      ],
+      "checked_at": "2026-08-08T11:35:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7444201",
+      "name": "Initium Blanc Domaine Fontanel",
+      "vintage": "2025",
+      "evidence": "THE FICHE IS OUR EXACT BOTTLE AND IS NOT A DECLARATION. 'INITIUM BLANC 2025, IGP Côtes Catalanes, Cépages : 100% Viognier, Taux d'alcool : 12,5% vol., Contenance : 750 ml' — vintage, cuvée, grape, strength and pack all match Systembolaget (2025, Viognier, 12,5 %, 750 ml) exactly, and it was uploaded in January 2026, well after the obligation. What it contains is terroir, yield, HVE certification, pressing and fermentation, and a tasting note. NO INGREDIENT LIST, NO NUTRITION TABLE, NO ENERGY VALUE, not even a sulphite line. This is the French fiche-technique near-miss at its most convincing yet — per vintage, current, and still not a declaration. The estate's only sales channel is a Kuupanda storefront that renders client-side, so a declaration could exist there unseen; not found is not evidence of non-publication."
+    },
+    {
+      "producer": "Domaine Fontanel",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "Same producer surface as product 7444201",
+        "https://domainefontanel.fr/wp-content/uploads/2026/03/AMAE-2024-Fiche-technique.pdf — text extracted in full with pypdf"
+      ],
+      "checked_at": "2026-08-08T11:35:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7914201",
+      "name": "Amae Domaine Fontanel",
+      "vintage": "2024",
+      "evidence": "Same finding as 7444201 and an equally exact match: 'AMAE 2024, IGP Côtes Catalanes Blanc, Cépages: 50% Roussanne, 25% Grenache blanc, 25% Grenache gris, Taux d'alcool : 13 % vol., Contenance : 75 cl' against Systembolaget's 2024, Roussanne/Grenache gris/Grenache blanc, 13,0 %, 750 ml. Uploaded March 2026. The whole of the rest of the page is a Jancis Robinson tasting note. No ingredient list, no nutrition table, no energy value, no allergen line."
     }
   ],
-  "updated_at": "2026-08-08T11:05:00Z",
+  "updated_at": "2026-08-08T11:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
