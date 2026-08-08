@@ -9,14 +9,14 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-08, across 107 producers and 253 wine records. **The German
+Status as of 2026-08-08, across 116 producers and 265 wine records. **The German
 2024-and-later undeclared pool is exhausted** — see the closing section. **The
-French pool opened on 2026-08-07; forty-five producers and 113 wines in, and
+French pool opened on 2026-08-07; fifty-four producers and 125 wines in, and
 the first (and so far only) French declaration was attached on the fifth French
 batch** — see *France, and why it is not Germany* and *The first French find*.
 **The Alsace slice is now exhausted too** — see *Alsace, tested to exhaustion*.
-The most recent French batch is *The second French inline declaration*, below,
-and it names the biggest untried lead in the country.
+The most recent French batch is *The device-gated e-label*, below, which found
+a new French platform, `v9.lu`, and could not read it.
 
 ## Readable — server-rendered
 
@@ -45,6 +45,7 @@ and it names the biggest untried lead in the country.
 | **Dropbox folder** | `dropbox.com/scl/fo/…`, one folder per vintage | The folder *view* renders client-side: 309 kB of shell, no file names, and the page's own `&noscript=1` variant is no better. **But the same folder answers `&dl=1` with a zip**, and that is a server response. See *The Dropbox route* below — it is now a resolved find, not a dead end. |
 | **plugwine** | `{producer-slug}.plugwine.com/{fr,en}/vins/{range}/{cuvée-vintage}/{id}` | **A French wine-shop platform, Angular, and every URL on it returns one BYTE-IDENTICAL 67 kB shell with an empty `<pw-root>`** — listing, product and `sitemap.xml` alike (the sitemap is a soft 404). Recognise it by `<pw-root>`, by a `robots.txt` that carries `crawl-delay: 10`, `Disallow: /fr/*` and the ASP.NET pair `/WebResource.axd` + `/ApplicationError.aspx*`, and by a Cloudflare-managed Content-Signal preamble. **Domaine Roquefeuille's `www.domaineroquefeuille.fr` was this platform white-labelled** — same `<pw-root>`, same robots lines — so the two are one platform, not two producers. The product URL does carry cuvée and vintage, so a *range census* is possible from search results even though no page content is. Seen at Vignoble Hermouet and Domaine Roquefeuille. |
 | **Kuupanda** | `commande.kuupanda.com/producteur/{id}/particulier` | A French producer-direct ordering marketplace some estates use *instead of* their own shop (Domaine Fontanel links out to it from its `/boutique/` page). 2 383 bytes of React shell, `You need to enable JavaScript to run this app`, empty `<div id="root">`. `robots.txt` is `User-agent: *` / `Disallow:` — everything allowed and nothing readable. |
+| **v9.lu** | `v9.lu/v/{code}` | **A French e-label short host that is device-gated, not rendering-gated.** Every URL answers **HTTP 200 with fifteen bytes: the literal string `Smartphone only`**. No `robots.txt` at all (404), so nothing is disallowed — the page is simply refused to a client that does not present as a phone, and reading it would mean sending a user agent we are not. That is outside this project's identification discipline, so it stops the fetch the way a geoblock does. Found at Domaine Gassier, linked as a **QR-code image inside the Shopify product description**, one code per wine (`/v/dhoPn` for Embruns de Viognier, `/v/c07yu` for Viognier Gourmand). A new class: the declaration exists, the URL is held, the vintage and market are confirmed from the producer's SKU, and the disclosure is still unreadable. |
 | **devworlds e-label** | Shopware plugin, no public URL | The shop shows a "Zutaten & Nährwerte" **`<button>`, not a link**, opening a modal. All the server returns is a custom field `devworlds_elabel_fields_id` holding an opaque 24-hex id, plus `Allergene: Enthält Sulfite`. No devworlds host is linked anywhere and no e-label route appears in the sitemap, so **there is no URL to hold** and building one from the id would be guessing a pattern. Found via Von Winning. |
 
 ## The Dropbox route, which worked
@@ -584,7 +585,10 @@ sulphites, and the energy value is absent either way.
 ### French e-label vendors — two are now seen, the rest are not
 
 The 2026-08-07 cooperative run ended the "no third-party vendor in France"
-finding. Two are now documented in the readable table above:
+finding. Two are readable and documented in the table above; a third,
+**`v9.lu`**, was found at Domaine Gassier on 2026-08-08 and is in the
+*unreadable* table — it is device-gated rather than client-side, which is a new
+failure mode. The two readable ones:
 
 - **`vin.co` / Vincod** — `m.{producer}.{tld}/{code}`, mirrored at
   `vincod.com/{code}`, assets on `cdn.vin.co`. Seen at Hugel and, without its
@@ -734,6 +738,91 @@ exactly one product. The grapes Systembolaget lists (grenache gris, grenache
 blanc) match a *different* cuvée, L'Argile. That is close enough to be
 tempting and is a colour mismatch, which is a rejection of the identity, not an
 approximation of it.
+
+### The device-gated e-label, and nine producers that were the settled French shape
+
+**2026-08-08 (second run), nine producers, twelve wines: nothing attached, and
+one e-label found that could not be read.** Chai Berteaud Manceau, Domaine de
+Terres Blanches, Les Sablonnettes, Vignerons Ardéchois (UVICA), Ogier, Château
+la Gordonne, Domaine Saint Damien, Vignobles Diffonty, Domaine Gassier. The
+batch was picked to avoid Burgundy and to take the named non-Burgundy
+multi-wine producers first.
+
+| Producer | Region | Site | Our bottle on it? | Declaration? |
+|---|---|---|---|---|
+| Chai Berteaud Manceau | Loire | 4-page WP + 3-product WooCommerce | no, shop is on the 2023 | none, not even a sulphite line |
+| Domaine de Terres Blanches | Loire / Sancerre | WP multisite under Saget la Perrière | cuvée yes, **no vintage anywhere** | none |
+| Les Sablonnettes | Loire / Anjou | **one image and a mailto** | — | — |
+| Vignerons Ardéchois (UVICA) | Rhône | marketing site + own PrestaShop | no, shop rolled to the 2025 | none |
+| Ogier | Rhône | WordPress, cuvée pages, no vintage | cuvée yes | none |
+| Château la Gordonne | Provence | 6-page brochure site | no, four cuvées at 2025 | none |
+| Domaine Saint Damien | Rhône / Gigondas | Kadence WP, per-cuvée pages | cuvée yes, **no vintage** | none |
+| Vignobles Diffonty | Rhône / CdP | WP with a **per-vintage fiche archive back to 2001** | no, the cuvée is absent | none |
+| **Domaine Gassier** | Rhône / Gard | WP + **own Shopify** | **yes, exactly — SKU says 24 and EU** | **yes, at `v9.lu` — unreadable** |
+
+**Gassier is the finding.** Its own Shopify shop
+(`famillegassier.fr`, Château de Nages – Domaine Gassier) publishes a
+per-wine QR-code image inside the product description whose anchor is a
+`v9.lu/v/{code}` short URL, and the product's identity fields are the
+strongest of any French wine in this file: product JSON title
+`Embruns de Viognier 2024`, single-variant SKU **`MGVIBL24EU06CF`** — `24` the
+vintage, `EU` the market — and barcode `3760270931707`. The e-label answers
+`Smartphone only` in fifteen bytes. It is recorded `not_found`, not `rejected`,
+because nothing was read and therefore nothing was matched, and it is **the
+best revisit candidate in the French pool**.
+
+Three things worth carrying forward:
+
+- **A Shopify product description is a place a French e-label hides.** Not an
+  anchor with useful text, not an iframe, but an `<img>` of a QR code wrapped
+  in an `<a>`. An href scan finds it; a text scan does not, because the anchor
+  has no text at all. **Grep the raw HTML for `<a href` values pointing at
+  short hosts**, and read Shopify's embedded `ProductJson` for the title, SKU
+  and barcode while you are there — it is the cheapest strong identity check
+  in this project after Winestro.
+- **A "Teneur en SO₂ totale" rendered as a JPEG.** Gassier states the sulphur
+  figure as an image of a scale, per wine, on both products checked. It is an
+  analysis figure and not an ingredient list, and it is also invisible to every
+  grep. Add it to the near-miss list.
+- **The vintage stopped being the obstacle again.** Four of the nine producers
+  publish per-cuvée pages that state **no vintage at all** (Terres Blanches,
+  Ogier, Saint Damien, and Berteaud Manceau's range page dates only to 2023),
+  which closes a wine as soon as the range page is read. Two more had rolled
+  past our bottle. Only Gassier had our exact vintage identified on its own
+  page, and that is the one that had the e-label.
+
+And two ways the wine simply is not there, both already named and both seen
+again:
+
+- **Vignobles Diffonty keeps a genuine per-vintage fiche archive** — Château
+  Sixtine Rouge back to 2001, Blanc back to 2005, Cuvée du Vatican Rouge back
+  to 2015, one PDF per vintage including `ft_rge_sixtine_2024.pdf` and
+  `ft_blc_sixtine_2025.pdf` — and **our Côtes-du-Rhône rosé "Réserve de l'Abbé"
+  is not in it**, matching `abbé` and `rosé` zero times on the range page. The
+  Rectorie shape. The 2024 fiche was read to settle whether the estate's
+  per-vintage documents are declarations: appellation, grape percentages,
+  15 % vol, yield, terroir, total production in bottles, food pairings, ageing
+  potential, FR-BIO-01 — and no list, no table, no energy value.
+- **Les Sablonnettes has no website in any useful sense.** Seven candidate
+  domains are NXDOMAIN and the address the French directories publish,
+  `lessablonnettes.free.fr`, is **706 bytes: one background image, one image
+  map, one `mailto` area**. Not a missing site, not a broken one — a site with
+  no content. Two requests settle it. Its 2024s appear only on US retailers'
+  shelves, which are not a source.
+
+**UVICA closes the co-op question for good.** It is the Rhônea profile exactly
+— a growers' union with a first-party PrestaShop, per-vintage product slugs,
+one product per cuvée — and the only label-adjacent text on the product page is
+`Contient des Sulfites. 13% vol.` Its fiche technique (reached through
+`index.php?controller=attachment&id_attachment={n}`, a PrestaShop pattern worth
+recognising) is undated and lists nothing. Co-op, small estate, big house and
+now growers' union have each been tested and none of them predicts publication.
+
+**And a group parent does not open a group.** Ogier is AdVini and no AdVini
+e-label platform exists to find; Château la Gordonne is Vranken-Pommery and the
+same. Worth noting that Systembolaget itself already carries declarations for
+two other Ogier wines, so the house supplies the data through the trade channel
+while publishing none of it on its own site — the absence is editorial, again.
 
 ## Untested
 
@@ -1095,6 +1184,35 @@ worth recognising in an `href`; nothing is known about how they render.
   `/fr/{id}-{slug}` (e.g. `/fr/15-ventoux`) while its products are
   `/fr/{slug}/{id}-{slug}.html`. Fetch the category to get the product URLs
   rather than assembling them.
+- `v9.lu` serves **no `robots.txt` (404)** and answers every `/v/{code}` with
+  **HTTP 200 and fifteen bytes, `Smartphone only`**. Nothing is disallowed and
+  nothing is refused technologically — it is a device gate, and getting past it
+  means presenting as a phone. Out of scope for this project's identification
+  discipline. Keep the URL and record `not_found`.
+- `michelgassier.com` answers on **wildcard DNS**: `m.michelgassier.com` and
+  `randomxyz.michelgassier.com` resolve to the same address, and so do
+  `domainegassier.com` and `domaine-gassier.com`. Third sighting of the
+  `m.grandsud.fr` trap. Domaine Gassier's live sites are
+  `www.domainegassier.com` (WordPress) and `famillegassier.fr` (Shopify).
+- `www.domainegassier.com/robots.txt` opens with a bare `Crawl-delay: 10`
+  **before any `User-agent` line**, so it belongs to no group and binds nobody
+  under RFC 9309. Honour it anyway; it costs four extra pages of waiting.
+- `boutique.vignerons-ardechois.com` serves **no `robots.txt`** (a styled 404),
+  and its PrestaShop resolves a product by **id regardless of the slug**:
+  the marketing site's stale `…/68-syrah-basalte-du-coiron-rouge-2017-75cl.html`
+  302s to the `-2025-` URL. **That is a free one-request vintage census for a
+  single wine** — follow the producer's own old link and read where it lands.
+  Its fiches are served from `index.php?controller=attachment&id_attachment={n}`.
+- `chateausixtine.com` and `cuveeduvatican.com` are both NXDOMAIN; Vignobles
+  Diffonty is at `www.chateau-sixtine.com`.
+- `lessablonnettes.free.fr` is a producer's entire web presence in **706 bytes**
+  — one background image, one image map, one `mailto` area. Seven candidate
+  `.fr`/`.com` domains for the estate are NXDOMAIN. A free.fr personal page is
+  still worth the one request; it can be a complete answer.
+- `www.domaine-terres-blanches.com` is a **WordPress multisite under Saget la
+  Perrière** — its uploads live under `/wp-content/uploads/sites/2/`, which is
+  how to tell an estate site is really a group's. Its `wines-sitemap.xml` is a
+  custom post type worth knowing about: ten cuvée pages, no vintage on any.
 
 ## Don't trust a slug, or a shop's own vintage field
 
