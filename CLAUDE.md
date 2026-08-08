@@ -141,6 +141,21 @@ buys little where the folder view renders client-side, since a fetch may
 return an empty shell regardless of permission — that is a rendering problem,
 not a policy one, and does not reopen the question.
 
+**A named-crawler `robots.txt` with no `User-agent: *` group binds only the
+names it lists.** Decided 2026-08-08, on an ordinary marketing site
+(`bpdr.com`, Baron Philippe de Rothschild) with no e-label in play: fifteen
+groups, each naming a specific crawler (`ClaudeBot`, `GPTBot`, `CCBot`, …) with
+`Disallow: /`, and no fallback group for anyone else. `declaration-finder`
+identifies itself as `vindeklaration/…` (`src/http.py`), which matches none of
+the named groups, so under RFC 9309 no rule applies to it and nothing is
+disallowed — that reading holds as project policy, not just a one-off read.
+This is unrelated to the e-label exception above: there is no disclosure being
+read here, no third-party host being set aside, just a plain `robots.txt`
+parsed by its actual groups rather than its guessed intent. It does not
+license ignoring a group that *does* match our token, and it does not touch
+Systembolaget's own robots.txt or ToS question, which stands on its own
+grounds (§ above).
+
 ## Open decisions
 
 - ~~The quality gate is 2%.~~ Settled 2026-07-27: the gate watches drift, not a

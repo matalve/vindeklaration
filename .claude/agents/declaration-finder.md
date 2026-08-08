@@ -166,6 +166,26 @@ Many such folder views render client-side, so a permitted fetch can still come
 back an empty shell. That is a rendering limit, not a reason to revisit the
 policy — record it as `not_found` and say which it was.
 
+### A named-crawler `robots.txt` with no fallback group
+
+Decided 2026-08-08, on an ordinary marketing site with no e-label involved
+(`bpdr.com`). Some sites list only specific crawlers by name —
+`User-agent: ClaudeBot`, `User-agent: GPTBot`, `User-agent: CCBot`, each with
+`Disallow: /` — and have **no `User-agent: *` group** for anyone else. You
+identify as `vindeklaration/…` (`src/http.py`), which matches none of the
+named groups. Under RFC 9309, a group binds only the token(s) it names; with
+no matching group and no wildcard fallback, no rule applies to you and nothing
+is disallowed.
+
+That reading is project policy, not a one-off judgment call — apply it without
+re-litigating it site by site. Two things it does **not** license: a group
+that *does* match your token still binds you in full, and this has nothing to
+do with the e-label exceptions above — there is no disclosure page here and no
+third-party host being set aside, just an ordinary `robots.txt` read by its
+actual groups. Note it in the wine's record when you rely on it, the same as
+any other robots.txt reasoning, so a later run can see why the site was
+fetched.
+
 ## What to write, and where
 
 Write to **`data/producer-declarations.json`**, which is yours alone. Never
