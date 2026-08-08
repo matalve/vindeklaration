@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the ninth French batch (2026-08-08, fourth run of the day): France stands at 60 producers, 132 wines, 4 found, 8 rejected.",
-  "attempted": 271,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the ninth French batch (2026-08-08, fourth run of the day): France stands at 61 producers, 133 wines, 4 found, 8 rejected.",
+  "attempted": 272,
   "found": 22,
-  "not_found": 210,
+  "not_found": 211,
   "rejected": 39,
   "declarations": [
     {
@@ -7917,6 +7917,35 @@
       "checked_at": "2026-08-08T21:40:00Z",
       "robots_disallowed": false,
       "server_rendered": true
+    },
+    {
+      "product_number": "7282001",
+      "name": "Domaine Horgelus Rosé",
+      "producer": "Domaine Horgelus/Earl Haut Cassou",
+      "country": "Frankrike",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "A THIRTEEN-PAGE BROCHURE SITE WITH NO VINTAGE, NO SHOP AND NOTHING TO DECLARE ON. Domaine Horgelus (EARL Haut Cassou, Gondrin, Côtes de Gascogne) is at www.horgelus.com, built on the IONOS/1&1 MyWebsite builder — https fails with TLSV1_ALERT_INTERNAL_ERROR and the same host answers normally over plain http, the documented broken-certificate shape. Its robots.txt allows everything bar /c/ and /protected/, and its sitemap lists thirteen URLs in total. The entire range lives on ONE page, /welcome/horgelus-wines/, as a paragraph per cuvée. Ours is there — 'ROSE ... Varieties : 35% Merlot, 35% Cabernet, 30% Tannat ... Alcohol content : 11,5 %vol.', which is exactly Systembolaget's 11,5 % for 7282001 — but THE PAGE NAMES NO VINTAGE, for this or any cuvée, so it describes a wine and not a bottling and could not be matched to the 2025 even if it declared something. It declares nothing: 'ingr', 'nutrition', 'kcal', 'sulfit', 'elabel', 'vincod', 'v9.lu' and 'iviti' are all zero on the range page and on the order page. What it does state per cuvée is grape percentages, terroir, yield, harvest dates, alcohol and 'Natural sugar : 6,5 g/L' — an analysis figure, the French near-miss in its most compact form, with no ingredient list and no energy value. THERE IS NO SECOND SURFACE TO CHECK. /commander-nos-vins/ is not a shop: it says the estate ships from sixty bottles and asks the reader to phone or write, and points at unnamed distributors' websites, which are retailers and not a source. No PDF, no fiche, no QR image anywhere on the site. Vincod probe negative: m.horgelus.com NXDOMAIN with an NXDOMAIN control, and the 'vincod' grep of the range page returns nothing.",
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: horgelus.com 217.160.0.25, www.horgelus.com 217.160.0.117; m.horgelus.com and randomxyz123.horgelus.com NXDOMAIN; domaine-horgelus.fr does not resolve",
+        "https://www.horgelus.com — TLSV1_ALERT_INTERNAL_ERROR; the site answers over plain http",
+        "http://www.horgelus.com/robots.txt — Disallow: /c/ and /protected/ only",
+        "http://www.horgelus.com/sitemap.xml — thirteen URLs, the whole site",
+        "http://www.horgelus.com/welcome/horgelus-wines/ — the entire range on one page, no vintages, no declaration",
+        "http://www.horgelus.com/commander-nos-vins/ — no webshop; orders by phone or mail from sixty bottles"
+      ],
+      "checked_at": "2026-08-08T21:50:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
     }
   ],
   "updated_at": "2026-08-08T23:30:00Z",
@@ -8069,7 +8098,7 @@
     {
       "at": "2026-08-08T23:30:00Z",
       "batch": "3 — France, eighth French batch: non-Burgundy producers from the untouched pool, one commit per producer.",
-      "result": "IN PROGRESS. 6 attempted, 2 found (Vignobles Jerome Quiot / Vieux Lazaret Chateauneuf Blanc 2024 on Vincod; Andre Brunel / Cotes du Rhone Sommelongue 2024 on iviti.fr, a new ABSOMOD/VINISCAN host whose gate is a Referer check), 4 not found (Domaine de la Tour du Bon x2, Domaine de Cristia, Famille Lieubeau)."
+      "result": "IN PROGRESS. 7 attempted, 2 found (Vignobles Jerome Quiot / Vieux Lazaret Chateauneuf Blanc 2024 on Vincod; Andre Brunel / Cotes du Rhone Sommelongue 2024 on iviti.fr, a new ABSOMOD/VINISCAN host whose gate is a Referer check), 5 not found (Domaine de la Tour du Bon x2, Domaine de Cristia, Famille Lieubeau, Domaine Horgelus)."
     }
   ]
 }
