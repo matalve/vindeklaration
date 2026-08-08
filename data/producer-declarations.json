@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-07 non-Burgundy run: Alsace is complete, Burgundy is being skipped deliberately, and FRANCE'S FIRST DECLARATION IS ATTACHED — Château du Trignon Viognier 2024 on Vincod. France now stands at 31 producers, 88 wines, 1 found, 7 rejected; 156 French 2024+ undeclared wines remain untouched.",
-  "attempted": 228,
+  "attempted": 231,
   "found": 19,
-  "not_found": 171,
+  "not_found": 174,
   "rejected": 38,
   "declarations": [
     {
@@ -6701,9 +6701,88 @@
       "name": "Ravoire & Fils Manon Rosé",
       "vintage": "2025",
       "evidence": "BOTH OF OUR BOTTLES ARE ON THE PRODUCER'S OWN SHOP, AT OUR EXACT VINTAGE AND IN OUR EXACT PACK, AND NEITHER DECLARES ANYTHING. This is the strongest form of the French negative result so far: Ravoire & Fils' PrestaShop keeps a separate product for each format and both read '2025' — 'ROSÉ - 2025 - 75cl' on product 44 and 'ROSÉ - 2025 - 150 cl' on product 45 — so neither the vintage rule nor the pack rule got a chance to bite. A raw-HTML grep of both product pages returns ZERO for ingnutri, ingrédient, nutrition, kcal, énergie and sulfite. What the pages carry instead is the French near-miss in its purest form: Cépages, Nature de sols, Vinification, SUCRES RÉSIDUELS PAR LITRE ('< 3 grammes / litre'), notes de dégustation and serving temperature. A residual-sugar figure is analysis, not an ingredient list. THE RHONÉA TEST WAS THE REASON TO COME HERE AND IT FAILED: Rhonéa's PrestaShop puts the complete mandated set inline in a 'bloc_ingnutri' div, and this PrestaShop has no such block. One French PrestaShop declaring inline is not a platform pattern. NOR IS THE BRAND SITE ANY BETTER. manon.fr is the Manon brand's own site and its eight 'Ingrédients' headings are all COOKING RECIPES — 1 kg de filet de poisson, 2 carrés d'agneau, 800 g de courgettes — a food-pairing section, not a declaration. The estate's marketing page vins-manon.php is stuck on the 2019 in all three formats (37 cl, 75 cl, 1,5 l) and offers an augmented-reality label via the SnapPress app, which is a marketing gimmick and not an e-label. No QR platform is referenced on any of the five pages read: no m. subdomain (checked by DNS), no vincod.com, no alliance-alsace.com, no u-label, no qrcode.vin. THIS RECORD IS THE 1500 ml item, and the shop's matching product states that fill explicitly."
+    },
+    {
+      "producer": "Vignoble Hermouet",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: hermouet.fr resolves but is Hermouet Maconnerie, a masonry firm in Vendee — a same-surname trap, not the estate. The estate is vignobleshermouet.com (213.186.33.2, OVH)",
+        "DNS: m.vignobleshermouet.com is NXDOMAIN and randomxyz123.vignobleshermouet.com is NXDOMAIN, so there is no Vincod deployment and no wildcard catch-all faking one",
+        "https://www.vignobleshermouet.com/robots.txt — 404 served as the site's own styled WordPress 404 page. No directives",
+        "https://www.vignobleshermouet.com/fr/chateau-roc-meynard-blanc/ (the estate's page for the white; server-rendered WordPress 6.5.9, 39 kB). No ingredient list, no nutrition table, no vintage stated anywhere on it, and no e-label link. Its two fiches techniques are /fr/wp-content/uploads/2017/11/fiche-technique-RM-blanc-NW-ET.pdf and /fr/wp-content/uploads/2018/02/FT-RM-blanc-NW-ET-GC.pdf — upload paths of 2017 and 2018, which predate the 8 December 2023 obligation, so they were not fetched (the Tavel & Lirac rule)",
+        "https://vignobles-hermouet.plugwine.com/robots.txt — the estate's e-boutique, on the PLUGWINE platform. Two User-agent: * groups: a Cloudflare-managed block (Allow: /, Content-Signal search=yes,ai-train=no,use=reference) and the site's own (crawl-delay 10, Disallow /fr/*, /cart, /account*, /vins/recherche, /WebResource.axd, /ApplicationError.aspx*). /en/vins is allowed; the crawl-delay was honoured",
+        "https://vignobles-hermouet.plugwine.com/en/vins — 67 284 bytes of Angular shell, an empty <pw-root>, no product markup",
+        "https://vignobles-hermouet.plugwine.com/sitemap.xml — SOFT 404: HTTP 404 serving the same SPA shell",
+        "https://vignobles-hermouet.plugwine.com/en/vins/chateau-roc-meynard/bordeaux-blanc-2023/42566 (a real product URL) — returns a BYTE-IDENTICAL 67 284-byte shell to the listing page. The whole deployment renders client-side"
+      ],
+      "checked_at": "2026-08-08T09:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": false,
+      "product_number": "7930001",
+      "name": "Château Roc Meynard Bordeaux Blanc Grand Cuvée",
+      "vintage": "2024",
+      "evidence": "PLATFORM IDENTIFIED: the estate's webshop is PLUGWINE (vignobles-hermouet.plugwine.com), an Angular SPA whose every URL returns one byte-identical shell with an empty <pw-root>. That is the same signature as Domaine Roquefeuille's www.domaineroquefeuille.fr from the previous French batch — same <pw-root> element, same ASP.NET robots.txt lines (/WebResource.axd, /ApplicationError.aspx*), same crawl-delay 10 — so Roquefeuille was a plugwine white-label deployment too, and this is one platform, not two producers. The producer's own WordPress marketing site is fully server-rendered and carries no ingredient list, no nutrition table and no vintage for any wine; its only datasheets were uploaded in 2017 and 2018. NOT FOUND is a rendering limit on the shop plus an absence on the marketing site, and is NOT evidence that the producer publishes nothing — a plugwine product page may well carry a declaration that only a browser can see."
+    },
+    {
+      "producer": "Vignoble Hermouet",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "Same producer surface as product 7930001: www.vignobleshermouet.com (WordPress, server-rendered, no list, no vintage) and vignobles-hermouet.plugwine.com (Angular SPA, unreadable server-side). No further requests were spent on this wine"
+      ],
+      "checked_at": "2026-08-08T09:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": false,
+      "product_number": "7956501",
+      "name": "Vignoble Hermouet Château Roc Meynard Bordeaux Blanc Sec",
+      "vintage": "2024",
+      "evidence": "Second of the estate's three Swedish wines and the same Château Roc Meynard white range as 7930001 (Systembolaget sells a 'Grand Cuvée' at 226 kr and a plain 'Blanc Sec' at 176 kr, both 2024, both 12,5 %). The estate's own page for the white does not distinguish the two cuvées, states no vintage and carries no list; the shop that does keep per-cuvée, per-vintage URLs renders client-side. Rendering limit plus absence, not evidence of non-publication."
+    },
+    {
+      "producer": "Vignoble Hermouet",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "Same producer surface as product 7930001. No further requests were spent on this wine"
+      ],
+      "checked_at": "2026-08-08T09:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": false,
+      "product_number": "7981501",
+      "name": "Vignoble Hermouet Château Roc Meynard Bordeaux Clairet",
+      "vintage": "2025",
+      "evidence": "Third of the estate's Swedish wines, a 2025 Bordeaux Clairet. The estate's WordPress site has pages only for the Roc Meynard rouge and blanc and for Clos du Roy; there is no clairet page at all, so even the marketing surface does not cover this bottling. The plugwine shop is the only per-cuvée surface and is client-side."
     }
   ],
-  "updated_at": "2026-08-07T21:55:00Z",
+  "updated_at": "2026-08-08T09:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
