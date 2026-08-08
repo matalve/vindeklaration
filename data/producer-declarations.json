@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 41 producers, 106 wines, 1 found, 7 rejected; 144 French 2024+ undeclared wines remain untouched.",
-  "attempted": 246,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 42 producers, 108 wines, 1 found, 7 rejected; 142 French 2024+ undeclared wines remain untouched.",
+  "attempted": 248,
   "found": 19,
-  "not_found": 189,
+  "not_found": 191,
   "rejected": 38,
   "declarations": [
     {
@@ -7197,9 +7197,68 @@
         "https://francois-chidaine.com/les-vins/aoc-vouvray/clos-baudoin/ — the page is titled 'Baudoin' and links BAUDOIN-2023.pdf"
       ],
       "evidence": "Same producer surface and the same result. The Clos Baudoin page carries the identical terroir and vinification prose as Les Argiles and links only a 2023 fiche, against Systembolaget's 2024. The Argiles fiche was fetched and read to settle the format for the estate — a fiche technique with analysis figures and no substances — so the Baudoin PDF was not fetched: it is one vintage behind either way and one fiche settles the template."
+    },
+    {
+      "producer": "Baron Philippe de Rothschild",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "checked_at": "2026-08-08T15:10:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7134501",
+      "name": "Baron Philippe de Rothschild SA Mouton Cadet",
+      "vintage": "2024",
+      "sources_checked": [
+        "https://www.bpdr.com/robots.txt — fifteen named user-agent groups each Disallow: /, among them ClaudeBot, GPTBot and CCBot, and NO User-agent: * group at all. Our product token 'vindeklaration' matches no group, so under RFC 9309 nothing is disallowed to us. Noted rather than relied on quietly: the file's evident intent is to keep AI-operated crawlers out, and this is an ordinary marketing site where no e-label exception applies. Five pages were fetched in total.",
+        "https://www.bpdr.com/sitemap_index.xml and page-sitemap.xml — 77 pages, no per-wine product URLs and no e-label path",
+        "https://www.bpdr.com/fiche-produit-relative-aux-qualites-ou-caracteristiques-environnementales — the French AGEC environmental product sheet page, which is empty of content",
+        "https://www.labaronnie.fr — the group's own boutique. 193.169.65.167, unreachable from here: connection timeout over both httpx and curl -4, no TCP handshake. Not a 401, 403 or challenge; a network-level failure, so nothing was worked around and nothing was read.",
+        "https://www.moutoncadet.com/robots.txt — User-agent: * disallowing wp paths only; /fr/vins/ is allowed",
+        "https://www.moutoncadet.com/vins-sitemap.xml — 22 wines in three languages",
+        "https://www.moutoncadet.com/fr/vins/mouton-cadet-blanc/ — the brand's own page for this wine",
+        "mouton-cadet.com (with the hyphen) and www.mouton-cadet.com both time out; the live brand site is moutoncadet.com"
+      ],
+      "evidence": "The brand's own page is headed 'Mouton Cadet Blanc 2024' — Systembolaget's exact wine and exact vintage, French market, French language. It carries the HVE certification text, the blend (Sauvignon Blanc, Sémillon, Muscadelle), elevage, serving temperature, tasting notes and profiles of the three contract growers, and no ingredient list, no nutrition table, no energy value and no allergen line. The raw HTML's single 'u-label' hit is the CSS class 'menu-label'; on the stripped text it is zero. No QR, e-label, etiquette or ingredient path exists in either site's sitemap."
+    },
+    {
+      "producer": "Baron Philippe de Rothschild",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "checked_at": "2026-08-08T15:10:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7418501",
+      "name": "Cépages Pays d'Oc Pinot Noir",
+      "vintage": "2024",
+      "sources_checked": [
+        "https://www.bpdr.com/robots.txt — fifteen named user-agent groups each Disallow: /, among them ClaudeBot, GPTBot and CCBot, and NO User-agent: * group at all. Our product token 'vindeklaration' matches no group, so under RFC 9309 nothing is disallowed to us. Noted rather than relied on quietly: the file's evident intent is to keep AI-operated crawlers out, and this is an ordinary marketing site where no e-label exception applies. Five pages were fetched in total.",
+        "https://www.bpdr.com/sitemap_index.xml and page-sitemap.xml — 77 pages, no per-wine product URLs and no e-label path",
+        "https://www.bpdr.com/fiche-produit-relative-aux-qualites-ou-caracteristiques-environnementales — the French AGEC environmental product sheet page, which is empty of content",
+        "https://www.labaronnie.fr — the group's own boutique. 193.169.65.167, unreachable from here: connection timeout over both httpx and curl -4, no TCP handshake. Not a 401, 403 or challenge; a network-level failure, so nothing was worked around and nothing was read.",
+        "https://www.bpdr.com/les-vins-de-marques/pays-doc — the group's only Pays d'Oc page"
+      ],
+      "evidence": "No page for this wine exists on any reachable surface of the producer. The Pays d'Oc page is 1,7 kB of stripped text describing the range in the abstract, naming only the Cadet d'Oc brand and listing the grape varieties grown; there is no per-cuvee page, no vintage and no format anywhere on it. moutoncadet.com covers the Mouton Cadet brand only. The one surface that might have sold this wine, labaronnie.fr, does not answer at all from here."
     }
   ],
-  "updated_at": "2026-08-08T14:45:00Z",
+  "updated_at": "2026-08-08T15:10:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
