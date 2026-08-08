@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 43 producers, 110 wines, 1 found, 7 rejected; 140 French 2024+ undeclared wines remain untouched.",
-  "attempted": 250,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 44 producers, 112 wines, 1 found, 7 rejected; 138 French 2024+ undeclared wines remain untouched.",
+  "attempted": 252,
   "found": 19,
-  "not_found": 193,
+  "not_found": 195,
   "rejected": 38,
   "declarations": [
     {
@@ -7314,9 +7314,66 @@
         "https://www.annibals.com/fr_FR/products/suivez-moi-jeune-homme-rose-2025 and /fr_FR/products/cuvee-des-annibals-rose-2025 — both HTTP 500, and the en_US equivalents 404. A server error, not a refusal and not a challenge, so nothing was worked around"
       ],
       "evidence": "Same producer surface and the same two obstacles. Read as 'Cuvée des Annibals Rosé', the Vin de Pays du Var rosé described on the range page, whose only shop entry is the 2025. Nothing was found to reject: no page for any vintage of it could be rendered or fetched."
+    },
+    {
+      "producer": "Domaine de la Rectorie",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "checked_at": "2026-08-08T16:00:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "5136302",
+      "name": "Banyuls Cuvée Thérèse Reig",
+      "vintage": "2024",
+      "sources_checked": [
+        "https://www.rectorie.com/robots.txt — User-agent: * disallowing only /wp-admin/",
+        "DNS: m.rectorie.com is NXDOMAIN with a NXDOMAIN control; the raw HTML of four pages contains 'vincod' zero times",
+        "https://www.rectorie.com/les-vins/ — the range page, one paragraph per cuvee",
+        "https://www.rectorie.com/sitemap_index.xml and /product-sitemap.xml — the whole WooCommerce shop, 19 URLs of which 16 are wines",
+        "https://www.rectorie.com/produit/therese-reig-75cl-2/ — the only Thérèse Reig the shop sells"
+      ],
+      "evidence": "The estate's page for this cuvee is headed 'Thérèse Reig 2025 75cl' and its Informations complémentaires row reads 'Volume: Bouteille (75cl)'. Systembolaget's bottle is the 2024 in 50 cl, so both the vintage and the pack differ. Nothing was found to reject: the page is appellation, grapes, vinification, cellaring, serving note and 'Teneur en alcool : 17.5%', with no ingredient list, no nutrition table, no energy value and no sulphite line. The raw HTML matches none of ingr, nutri, kcal, kJ or allerg."
+    },
+    {
+      "producer": "Domaine de la Rectorie",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "checked_at": "2026-08-08T16:00:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "5138101",
+      "name": "Domaine de la Rectorie Barlande Blanc",
+      "vintage": "2024",
+      "sources_checked": [
+        "https://www.rectorie.com/robots.txt — User-agent: * disallowing only /wp-admin/",
+        "DNS: m.rectorie.com is NXDOMAIN with a NXDOMAIN control; the raw HTML of four pages contains 'vincod' zero times",
+        "https://www.rectorie.com/les-vins/ — the range page, one paragraph per cuvee",
+        "https://www.rectorie.com/sitemap_index.xml and /product-sitemap.xml — the whole WooCommerce shop, 19 URLs of which 16 are wines",
+        "https://www.rectorie.com/produit/barlande/ — 'Barlande 2024', AOC Collioure ROUGE, grenache noir 60% / carignan 40%",
+        "https://www.rectorie.com/categorie-produit/vins-blancs/ — 'Voici le seul résultat': L'Argile 2025 is the estate's only white"
+      ],
+      "evidence": "No Barlande Blanc exists on the producer's surface. The estate does sell a 'Barlande 2024' at our exact vintage, but it is a Collioure ROUGE of grenache noir and carignan, where Systembolaget's wine is white and its grapes are grenache gris and grenache blanc — a colour and grape mismatch, so it is a different wine and was not used. The estate's white-wine category returns exactly one product, L'Argile, whose grapes (grenache gris 90 % / grenache blanc 10 %) do match ours but whose cuvee name does not and whose shop vintage is the 2025. Neither page carries an ingredient list, a nutrition table or an energy value, so no declaration was reached under any reading of the identity."
     }
   ],
-  "updated_at": "2026-08-08T15:35:00Z",
+  "updated_at": "2026-08-08T16:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
