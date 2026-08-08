@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 45 producers, 113 wines, 1 found, 8 rejected; 137 French 2024+ undeclared wines remain untouched.",
-  "attempted": 262,
+  "attempted": 263,
   "found": 19,
-  "not_found": 204,
+  "not_found": 205,
   "rejected": 39,
   "declarations": [
     {
@@ -7648,9 +7648,38 @@
       "checked_at": "2026-08-08T19:25:00Z",
       "robots_disallowed": false,
       "server_rendered": true
+    },
+    {
+      "product_number": "5434101",
+      "name": "Côtes du Rhône \"Plan de Dieu\" Vieilles Vignes",
+      "producer": "Domaine Saint Damien",
+      "country": "Frankrike",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "The estate (Joel & Romain Saurel, Gigondas, organic since 2012) runs a Kadence WordPress site with a custom 'vin' post type: eight per-cuvee pages in wp-sitemap-posts-vin-1.xml, none per vintage. Our exact cuvee is /vins/756/, headed 'Saint Damien / Vieilles Vignes / Plan de Dieu', with terroir (argiles rouges caillouteuses), grapes (Grenache 80 %, Mourvedre 20 %), vine age, vinification and elevage — and no vintage, no alcohol, no pack and no substances. A sibling page (/vins/731/, Gigondas Les Souteyrades) was checked to settle the template and matches 'ingred', 'nutri', 'kcal', 'sulfit', 'allerg', 'vincod' and 'elabel' zero times in the raw HTML. The linked 'Telecharger la fiche technique' PDF for our cuvee (fiche_plan_de_dieu_vieilles_vignes.pdf, one page, extracted with pypdf) repeats the page word for word and adds the organic certification number FR-BIO-10 — undated, no ingredient list, no nutrition table, no energy value, not even a sulphite line. The French fiche-technique near-miss again. m.domainesaintdamien.com is NXDOMAIN with an NXDOMAIN control and no page references any e-label host.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.domainesaintdamien.com/robots.txt — disallows only /wp-admin/ and one plugin JSON; no exception needed",
+        "https://www.domainesaintdamien.com/wp-sitemap.xml and /wp-sitemap-posts-vin-1.xml — eight cuvee pages, no per-vintage URL",
+        "https://www.domainesaintdamien.com/vins/756/ — our exact cuvee, Plan de Dieu Vieilles Vignes",
+        "https://www.domainesaintdamien.com/vins/731/ — a sibling, read to settle the template",
+        "https://www.domainesaintdamien.com/wp-content/uploads/fiche_plan_de_dieu_vieilles_vignes.pdf — the fiche technique, text extracted in full",
+        "DNS: m.domainesaintdamien.com NXDOMAIN with NXDOMAIN control"
+      ],
+      "checked_at": "2026-08-08T19:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
     }
   ],
-  "updated_at": "2026-08-08T19:25:00Z",
+  "updated_at": "2026-08-08T19:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
