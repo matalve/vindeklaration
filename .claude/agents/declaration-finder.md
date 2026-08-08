@@ -186,6 +186,31 @@ actual groups. Note it in the wine's record when you rely on it, the same as
 any other robots.txt reasoning, so a later run can see why the site was
 fetched.
 
+### A device gate on an e-label page
+
+Decided 2026-08-08. Domaine Gassier's e-label sits behind a URL shortener
+(`v9.lu/v/{code}`) that answers a plain request with fifteen bytes:
+`Smartphone only`. No robots.txt exists on the host; it is not a
+401/403/429/challenge, so it is not the absolute kind of refusal — but it is
+also not something to work around silently.
+
+For **this narrow case only** — a device gate on a page that is itself the
+regulated disclosure — send a mobile-shaped `User-Agent` that still
+self-identifies:
+
+```
+Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile vindeklaration/0.1 (open dataset of declared wine additives; +https://github.com/matalve/vindeklaration)
+```
+
+The mobile tokens satisfy whatever check the gate makes; the trailing
+`vindeklaration/…` segment keeps the project's own identification in the
+string, so this is not impersonation — it names a device class, not a person
+or another piece of software. It does not extend to 401, 403, 429, login
+walls or bot challenges, which stay absolute refusals regardless of device
+framing, and it does not extend beyond e-label pages to a producer's ordinary
+site. Record the fact that a device-shaped UA was used in the wine's record,
+the same as any other exception.
+
 ## What to write, and where
 
 Write to **`data/producer-declarations.json`**, which is yours alone. Never
