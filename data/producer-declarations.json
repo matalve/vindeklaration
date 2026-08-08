@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the eighth French batch (2026-08-08, third run of the day): France stands at 56 producers, 127 wines, 3 found, 8 rejected.",
-  "attempted": 266,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the ninth French batch (2026-08-08, fourth run of the day): France stands at 57 producers, 129 wines, 3 found, 8 rejected.",
+  "attempted": 268,
   "found": 21,
-  "not_found": 206,
+  "not_found": 208,
   "rejected": 39,
   "declarations": [
     {
@@ -7766,6 +7766,64 @@
       "robots_disallowed": false,
       "server_rendered": true,
       "evidence": "THE MISSING HALF OF A REJECTION FROM 2026-08-07. That run rejected Systembolaget's 1500 ml Vieux Lazaret Châteauneuf rouge 2024 (7144806) because the Vincod e-label is a per-pack disclosure stating 'Bouteille (75 cl)', and noted that a 750 ml Vieux Lazaret Châteauneuf 2024 under another product number would be a straightforward find. 8389101 is that wine — a 750 ml Châteauneuf-du-Pape, but the WHITE. PRODUCER: Systembolaget's producer string 'Vignobles Jerome Quiot' is the Famille Quiot company itself; the estate's own contact block on m.famillequiot.com reads 'vignobles@jeromequiot.com', so this is the same house and not a similar name. WINE AND CUVÉE: the e-label heading states 'Domaine du Vieux Lazaret, Cuvée Tradition, AOC Châteauneuf-du-Pape, Blanc, 2024' — the estate publishes exactly one white Châteauneuf and no second white cuvée, so the Houchart ambiguity does not arise here. VINTAGE: 2024, reached through the wine page's millesime selector from the producer's own control, never guessed; the e-label states the vintage itself. ALCOHOL: 'Alc. 13,5 % vol.' against Systembolaget's 13,5 — exact, and here the analysis figure on the wine page agrees with the labelled one. PACK: 'Bouteille (75 cl)' against Systembolaget's 750 ml. MARKET: French page on the producer's French QR domain. The ingredient list differs from the estate's rouge ('Mis en bouteille sous atmosphère protectrice' where the rouge reads 'Peut être mise en bouteille…') and from Trignon's, so these are written per wine. robots.txt on m.famillequiot.com allows both the wine page and the /n/ page, so no exception was invoked."
+    },
+    {
+      "product_number": "7735801",
+      "name": "Tour du Bon Rosé",
+      "producer": "Domaine de La Tour du Bon",
+      "country": "Frankrike",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE ESTATE'S MARKETING SITE IS BLANKET-DISALLOWED AND WAS NOT FETCHED; ITS SHOP IS OPEN AND CARRIES NOTHING. www.tourdubon.com/robots.txt is 110 bytes and contains TWO 'user-agent: *' groups — the first disallowing /kirby/, /site/ and /cdn-cgi/ and allowing /media/, the second a bare 'disallow: /'. Under RFC 9309 records naming the same token merge into one group, so the merged group disallows everything except /media/, where the longer Allow wins. That is an ordinary Kirby marketing site and not a regulated disclosure page, so the e-label exception does not reach it and its robots.txt was honoured in full: not one page of www.tourdubon.com was requested. The estate's fiches techniques live under the allowed /media/ path, but their URLs carry hashed directory segments (the one a search surfaced is /media/pages/les-vins/bonpouruntour/5510d3f90e-1758640745/bp1t-2020.pdf) and are only listed on the disallowed /fiches-techniques-des-vins page, so no fiche URL for our wine is held; a fiche is in any case the documented French near-miss and not a declaration. THE SHOP IS A SEPARATE HOST WITH ITS OWN DIRECTIVES. boutique.tourdubon.com is a Shopify storefront whose 'User-agent: *' group is 'Allow: /' bar cart, checkout, account and filter traps; it carries the documented agent-addressing preamble (install a shopping skill, use UCP/MCP), which is page content and not an instruction to us, and the real directives were honoured. Its product sitemap lists thirteen products including /products/aop-bandol-rose. That page and its Shopify product JSON were read: the description is a tasting note ending 'Mourvèdre 38% ; Grenache 25% ; Cinsault 38% ; - Servir à 13°C', and the raw HTML matches 'ingr', 'nutri', 'kcal', 'kJ', 'allerg', 'sulfit', 'elabel', 'vincod' and 'v9.lu' ZERO times each. No QR image, no e-label anchor, no sulphite line — not even the French boilerplate. AND OUR VINTAGE IS NOT THERE ANYWAY: all three variants of the shop's Bandol Rosé are 2025 ('Bouteille 75cl / 2025', 'Magnum 150cl / 2025', 'Carton de 6 bouteilles / 2025'), so the estate's own current bottling is a year ahead of this 2024 product number. Vincod probe: m.tourdubon.com is NXDOMAIN and the nonsense-subdomain control is NXDOMAIN too, so there is no wildcard — but per the Bargemone finding a negative DNS result does not close the question, and the reliable test (grepping a product page for 'vincod') was run on the shop and returned nothing. Everything a search returns for this estate is a foreign retailer (Kermit Lynch, Bowler, Comptoir des Millésimes and several US shops), which is not a source.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.tourdubon.com/robots.txt — read only; two merged 'user-agent: *' groups amount to a blanket disallow bar /media/, and no page on this host was fetched",
+        "https://boutique.tourdubon.com/robots.txt — Shopify, products allowed",
+        "https://boutique.tourdubon.com/sitemap.xml and /sitemap_products_1.xml — thirteen products, one Bandol Rosé",
+        "https://boutique.tourdubon.com/products/aop-bandol-rose — no ingredient, nutrition, allergen or QR content in the server's HTML",
+        "https://boutique.tourdubon.com/products/aop-bandol-rose.js — Shopify product JSON: three variants, all 2025, no SKU and no barcode set",
+        "DNS: m.tourdubon.com NXDOMAIN, randomxyz123.tourdubon.com NXDOMAIN (no wildcard, so the negative is real but non-conclusive)"
+      ],
+      "checked_at": "2026-08-08T20:35:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
+    },
+    {
+      "product_number": "9132801",
+      "name": "Domaine de la Tour du Bon Bandol Rosé",
+      "producer": "Domaine de la Tour du Bon",
+      "country": "Frankrike",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "OUR EXACT BOTTLE IS ON THE PRODUCER'S OWN SHOP AND THE SHOP DECLARES NOTHING — the settled French shape. boutique.tourdubon.com/products/aop-bandol-rose is the estate's own Shopify storefront and every variant of the Bandol Rosé is the 2025: 'Bouteille 75cl / 2025', 'Magnum 150cl / 2025', 'Carton de 6 bouteilles / 2025'. Systembolaget's 9132801 is the Domaine de la Tour du Bon Bandol Rosé 2025, 75 cl, 13,5 %, so the wine, the producer, the appellation, the vintage and the pack all line up with the 75 cl variant. The page still carries no declaration: 'ingr', 'nutri', 'kcal', 'kJ', 'allerg', 'sulfit', 'elabel', 'vincod' and 'v9.lu' all match zero times in the raw HTML, there is no QR-code image and no e-label anchor, and the description is a tasting note that ends with the grape percentages (Mourvèdre 38 %, Grenache 25 %, Cinsault 38 %) and a serving temperature. Systembolaget lists Clairette as a fourth grape where the shop's 2025 text lists three; that is a difference between two descriptions of the same wine and is noted rather than treated as an identity problem, since nothing was found to attach either way. The estate's marketing site www.tourdubon.com was NOT fetched: its robots.txt carries two 'user-agent: *' groups which merge, under RFC 9309, into a blanket disallow bar /media/, and an ordinary Kirby marketing site is not a regulated disclosure page, so the e-label exception does not reach it. Vincod probe negative on DNS (m.tourdubon.com NXDOMAIN, control NXDOMAIN) and negative on the reliable test, a 'vincod' grep of the product page.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.tourdubon.com/robots.txt — read only; blanket disallow bar /media/ once the two 'user-agent: *' groups are merged, and no page on this host was fetched",
+        "https://boutique.tourdubon.com/robots.txt",
+        "https://boutique.tourdubon.com/sitemap_products_1.xml",
+        "https://boutique.tourdubon.com/products/aop-bandol-rose — our exact vintage, no declaration",
+        "https://boutique.tourdubon.com/products/aop-bandol-rose.js",
+        "DNS: m.tourdubon.com NXDOMAIN, randomxyz123.tourdubon.com NXDOMAIN"
+      ],
+      "checked_at": "2026-08-08T20:35:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
     }
   ],
   "updated_at": "2026-08-08T23:30:00Z",
@@ -7918,7 +7976,7 @@
     {
       "at": "2026-08-08T23:30:00Z",
       "batch": "3 — France, eighth French batch: non-Burgundy producers from the untouched pool, one commit per producer.",
-      "result": "IN PROGRESS. 1 attempted, 1 found (Vignobles Jerome Quiot / Domaine du Vieux Lazaret Chateauneuf-du-Pape Blanc 2024, on the Famille Quiot Vincod deployment)."
+      "result": "IN PROGRESS. 3 attempted, 1 found (Vignobles Jerome Quiot / Domaine du Vieux Lazaret Chateauneuf-du-Pape Blanc 2024, on the Famille Quiot Vincod deployment), 2 not found (Domaine de la Tour du Bon)."
     }
   ]
 }
