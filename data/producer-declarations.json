@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 42 producers, 108 wines, 1 found, 7 rejected; 142 French 2024+ undeclared wines remain untouched.",
-  "attempted": 248,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 43 producers, 110 wines, 1 found, 7 rejected; 140 French 2024+ undeclared wines remain untouched.",
+  "attempted": 250,
   "found": 19,
-  "not_found": 191,
+  "not_found": 193,
   "rejected": 38,
   "declarations": [
     {
@@ -7256,9 +7256,67 @@
         "https://www.bpdr.com/les-vins-de-marques/pays-doc — the group's only Pays d'Oc page"
       ],
       "evidence": "No page for this wine exists on any reachable surface of the producer. The Pays d'Oc page is 1,7 kB of stripped text describing the range in the abstract, naming only the Cadet d'Oc brand and listing the grape varieties grown; there is no per-cuvee page, no vintage and no format anywhere on it. moutoncadet.com covers the Mouton Cadet brand only. The one surface that might have sold this wine, labaronnie.fr, does not answer at all from here."
+    },
+    {
+      "producer": "Chateau des Annibals",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "checked_at": "2026-08-08T15:35:00Z",
+      "robots_disallowed": false,
+      "server_rendered": false,
+      "product_number": "7403101",
+      "name": "Chateau des Annibals Rosé",
+      "vintage": "2024",
+      "sources_checked": [
+        "https://www.annibals.com/robots.txt — 'User-agent: *' with no directives at all; everything allowed",
+        "DNS: chateaudesannibals.com and domaine-des-annibals.fr do not resolve; the estate is annibals.com. The raw HTML of four pages contains 'vincod' zero times",
+        "https://www.annibals.com/fr_FR/ and /fr_FR/les-vins — a Vinium/Sylius deployment ('Création Vinium' in the footer, www.vinium.com credit), CMS prose only; the seven cuvee names at the foot of the range page are plain text, not links",
+        "https://www.annibals.com/sitemap_index.xml and /sitemap/products.xml — the whole shop, eight products",
+        "https://www.annibals.com/fr_FR/taxons/categories/boutique — the shop listing, 604 characters of stripped text ending 'Loading...'; the product grid renders client-side",
+        "https://www.annibals.com/fr_FR/products/suivez-moi-jeune-homme-rose-2025 and /fr_FR/products/cuvee-des-annibals-rose-2025 — both HTTP 500, and the en_US equivalents 404. A server error, not a refusal and not a challenge, so nothing was worked around"
+      ],
+      "evidence": "Two things stop this independently. The shop's own sitemap names every product it sells and all three rosés are the 2025 — cuvee-des-annibals-rose-2025, suivez-moi-jeune-homme-rose-2025, grands-annibals-rose-2025 — against Systembolaget's 2024, so no page for our bottling exists. And the product pages cannot be read anyway: two of them answer HTTP 500 and the shop listing is a client-side grid. Read as the Château rosé 'Suivez-moi-jeune-homme'; that identification was never tested, because no 2024 page exists to test it against."
+    },
+    {
+      "producer": "Chateau des Annibals",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "checked_at": "2026-08-08T15:35:00Z",
+      "robots_disallowed": false,
+      "server_rendered": false,
+      "product_number": "7652701",
+      "name": "Annibal Cuvée Rose",
+      "vintage": "2024",
+      "sources_checked": [
+        "https://www.annibals.com/robots.txt — 'User-agent: *' with no directives at all; everything allowed",
+        "DNS: chateaudesannibals.com and domaine-des-annibals.fr do not resolve; the estate is annibals.com. The raw HTML of four pages contains 'vincod' zero times",
+        "https://www.annibals.com/fr_FR/ and /fr_FR/les-vins — a Vinium/Sylius deployment ('Création Vinium' in the footer, www.vinium.com credit), CMS prose only; the seven cuvee names at the foot of the range page are plain text, not links",
+        "https://www.annibals.com/sitemap_index.xml and /sitemap/products.xml — the whole shop, eight products",
+        "https://www.annibals.com/fr_FR/taxons/categories/boutique — the shop listing, 604 characters of stripped text ending 'Loading...'; the product grid renders client-side",
+        "https://www.annibals.com/fr_FR/products/suivez-moi-jeune-homme-rose-2025 and /fr_FR/products/cuvee-des-annibals-rose-2025 — both HTTP 500, and the en_US equivalents 404. A server error, not a refusal and not a challenge, so nothing was worked around"
+      ],
+      "evidence": "Same producer surface and the same two obstacles. Read as 'Cuvée des Annibals Rosé', the Vin de Pays du Var rosé described on the range page, whose only shop entry is the 2025. Nothing was found to reject: no page for any vintage of it could be rendered or fetched."
     }
   ],
-  "updated_at": "2026-08-08T15:10:00Z",
+  "updated_at": "2026-08-08T15:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
