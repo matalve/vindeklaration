@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-07 non-Burgundy run: Alsace is complete, Burgundy is being skipped deliberately, and FRANCE'S FIRST DECLARATION IS ATTACHED — Château du Trignon Viognier 2024 on Vincod. France now stands at 31 producers, 88 wines, 1 found, 7 rejected; 156 French 2024+ undeclared wines remain untouched.",
-  "attempted": 240,
+  "attempted": 242,
   "found": 19,
-  "not_found": 183,
+  "not_found": 185,
   "rejected": 38,
   "declarations": [
     {
@@ -7033,9 +7033,62 @@
       "name": "Amae Domaine Fontanel",
       "vintage": "2024",
       "evidence": "Same finding as 7444201 and an equally exact match: 'AMAE 2024, IGP Côtes Catalanes Blanc, Cépages: 50% Roussanne, 25% Grenache blanc, 25% Grenache gris, Taux d'alcool : 13 % vol., Contenance : 75 cl' against Systembolaget's 2024, Roussanne/Grenache gris/Grenache blanc, 13,0 %, 750 ml. Uploaded March 2026. The whole of the rest of the page is a Jancis Robinson tasting note. No ingredient list, no nutrition table, no energy value, no allergen line."
+    },
+    {
+      "producer": "Domaine de la Bouvaude",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: labouvaude.com, domainedelabouvaude.com, domaine-bouvaude.fr, labouvaude.fr and bouvaude.fr are all NXDOMAIN; the estate is bouvaude.com. m.bouvaude.com and randomxyz123.bouvaude.com are both NXDOMAIN — no Vincod",
+        "https://www.bouvaude.com/robots.txt — WooCommerce defaults, nothing relevant disallowed, sitemap named",
+        "https://www.bouvaude.com/sitemap.xml and /sitemap-post-type-product.xml — eighteen products, the whole range, with the vintage in most slugs",
+        "https://www.bouvaude.com/produit/rousset-les-vignes-fruiandise-rouge/ (1,3 MB Avada/WooCommerce page, server-rendered). Text-only grep after stripping script and style: 'ingrédient' 0, 'nutrition' 0, 'kcal' 0, 'kJ' 0, 'sulfite' 0, 'allerg' 0",
+        "https://www.bouvaude.com/produit/rousset-les-vignes-fruiandise-blanc/ — same, and the white has rolled to the 2025"
+      ],
+      "checked_at": "2026-08-08T12:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7442201",
+      "name": "Fruiandise Rouge Domaine de la Bouvaude",
+      "vintage": "2024",
+      "evidence": "OUR EXACT BOTTLE, ON THE ESTATE'S OWN SHOP, WITH NOTHING ON IT. The product heading reads 'Fruiandise rouge 2024 AOC Côtes du Rhône' — cuvée, colour and vintage all ours. The page carries a tasting note, a soil line, a vinification line and a serving suggestion, and no ingredient list, no nutrition table, no energy value and no allergen statement. Beware the grep here: the raw HTML matches 'ingr', 'nutri', 'allerg' and 'qr' six times over, and every one of them is Stripe's CSS variable names or a Font Awesome icon class (fa-nutritionix, fa-allergies, fa-qrcode). Strip script and style before grepping a 1,3 MB Avada page."
+    },
+    {
+      "producer": "Domaine de la Bouvaude",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "Same producer surface as product 7442201",
+        "https://www.bouvaude.com/produit/rousset-les-vignes-fruiandise-blanc/ — heading 'Fruiandise blanc 2025 AOC Côtes du Rhône'"
+      ],
+      "checked_at": "2026-08-08T12:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7167701",
+      "name": "Fruiandise Blanc Domaine de la Bouvaude",
+      "vintage": "2024",
+      "evidence": "The estate keeps one WooCommerce product per cuvée and edits it forward: the white has already rolled to the 2025 while Systembolaget's bottle is the 2024. Nothing was found to reject — the page carries no ingredient list for the 2025 either, as its sibling red at our own vintage confirms — so this is not found rather than a vintage rejection."
     }
   ],
-  "updated_at": "2026-08-08T11:35:00Z",
+  "updated_at": "2026-08-08T12:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
