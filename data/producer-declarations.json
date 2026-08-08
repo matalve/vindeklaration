@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-07 non-Burgundy run: Alsace is complete, Burgundy is being skipped deliberately, and FRANCE'S FIRST DECLARATION IS ATTACHED — Château du Trignon Viognier 2024 on Vincod. France now stands at 31 producers, 88 wines, 1 found, 7 rejected; 156 French 2024+ undeclared wines remain untouched.",
-  "attempted": 233,
+  "attempted": 236,
   "found": 19,
-  "not_found": 176,
+  "not_found": 179,
   "rejected": 38,
   "declarations": [
     {
@@ -6842,9 +6842,87 @@
       "name": "Bargemone Rosé Minuit",
       "vintage": "2025",
       "evidence": "NO MATCHING BOTTLING EXISTS ON THE PRODUCER'S SURFACE, so no declaration could have been attached even had one been published. Systembolaget's item is a STILL rosé, category Rosévin, IGP Méditerranée, 2025, 13,0 %. The only 'Minuit' the estate publishes anywhere — on its own shop and on both its Vincod pages — is a sparkling Vin de France, 'Extra Brut, Vin Mousseux de Qualité', 2023, 12 % vol. Different appellation, different style, different vintage, different strength; the four matching rules fail on three of them, so this is not a candidate and was not pursued further. Recorded not_found rather than rejected because nothing that could be called a declaration was found to reject. Note the estate's Vincod deployment carries no ingredient list for ANY of its wines."
+    },
+    {
+      "producer": "Alain Brumont",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: m.brumont.fr and randomxyz123.brumont.fr are both NXDOMAIN, so no Vincod on the estate's own domain. brumont.com resolves but REFUSES PORT 443, and m.brumont.com and randomxyz.brumont.com both resolve to the same address — WILDCARD DNS, the m.grandsud.fr trap, so that host says nothing either",
+        "DNS: torus.fr and lagascogne.fr both resolve to one Hetzner IPv6 host and are not linked from anywhere on the producer's site; toruswines.com, vinstorus.fr and la-gascogne.fr are NXDOMAIN",
+        "https://www.brumont.fr/robots.txt — SOFT 404: HTTP 200 serving the site's own 322 kB 404 page. Same for /sitemap.xml. There are no directives and no sitemap on this host",
+        "https://www.brumont.fr/ (324 kB; the whole site is eleven top-level pages)",
+        "https://www.brumont.fr/fr/NosVins (373 kB) — the complete range, SIXTEEN wines, all of them Château Montus or Château Bouscassé cuvées. Neither 'Torus' nor 'La Gascogne' appears anywhere in the HTML",
+        "https://www.brumont.fr/fr/vin/20/menhir (331 kB, the Côtes de Gascogne cuvée, fetched as a control on the wine-page template). Raw-HTML grep: 'ingr' 0, 'nutri' 0, 'kcal' 0, 'kJ' 0, 'sulfit' 0, 'allerg' 0, 'millésime' 0, 'e-label' 0, 'QR' 0",
+        "Web search for a Torus or La Gascogne site: every result is a foreign or French retailer (1jour1vin, lavignery, toulouvin, maisonlauze, cashvin, kindredvines). No producer surface for either brand"
+      ],
+      "checked_at": "2026-08-08T10:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7217501",
+      "name": "Alain Brumont Torus Blanc",
+      "vintage": "2024",
+      "evidence": "THE BRAND HAS NO PRODUCER PAGE. Vignobles Brumont's site is a Vinium build (footer credits www.vinium.com) and, unlike the Pfaffenheim deployment, it is fully server-rendered — 373 kB of readable HTML listing the entire range. That range is sixteen Château Montus and Château Bouscassé cuvées and does not contain Torus at all, although Torus is Brumont's own second brand. THE WINE-PAGE TEMPLATE CARRIES NO DECLARATION EITHER: the control page states cuvée, appellation, grapes, vine age, terroir and vinification, and STATES NO VINTAGE — which by itself makes any page on this site unmatchable to a bottling even if it did carry a list. Two independent reasons for not found, and neither is evidence that the producer publishes nothing behind a QR code."
+    },
+    {
+      "producer": "Alain Brumont",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "Same producer surface as product 7217501. 'La Gascogne' appears nowhere in the 373 kB range page; the only Côtes de Gascogne wine the estate publishes is Menhir, a Tannat-Merlot red, and its page states no vintage"
+      ],
+      "checked_at": "2026-08-08T10:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "288201",
+      "name": "La Gascogne par Alain Brumont Sauvignon Blanc Gros Manseng",
+      "vintage": "2025",
+      "evidence": "Second of three, same finding as 7217501. 'La Gascogne par Alain Brumont' is a Côtes de Gascogne IGP line that the producer's own website does not publish under any name — the range page names sixteen Madiran and Pacherenc cuvées and nothing else. A Sauvignon Blanc / Gros Manseng blend is not among them. No producer page means no page to carry a declaration."
+    },
+    {
+      "producer": "Alain Brumont",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "Same producer surface as product 7217501"
+      ],
+      "checked_at": "2026-08-08T10:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "8238501",
+      "name": "La Gascogne par Alain Brumont Tannat Merlot",
+      "vintage": "2024",
+      "evidence": "Third of three, same finding. Note the near-miss to avoid: the estate DOES publish a Tannat-Merlot called Menhir, but Menhir is an AOC-adjacent estate cuvée from the Madiran terroirs sold under the Côtes de Gascogne IGP, not the 'La Gascogne par Alain Brumont' line, and its page carries no vintage, no alcohol and no ingredient list. Matching this wine to that page would be exactly the sister-cuvée error the rules forbid."
     }
   ],
-  "updated_at": "2026-08-08T10:05:00Z",
+  "updated_at": "2026-08-08T10:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
