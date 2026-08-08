@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the ninth French batch (2026-08-08, fourth run of the day): France stands at 57 producers, 129 wines, 3 found, 8 rejected.",
-  "attempted": 268,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the ninth French batch (2026-08-08, fourth run of the day): France stands at 58 producers, 130 wines, 3 found, 8 rejected.",
+  "attempted": 269,
   "found": 21,
-  "not_found": 208,
+  "not_found": 209,
   "rejected": 39,
   "declarations": [
     {
@@ -7824,6 +7824,37 @@
       "checked_at": "2026-08-08T20:35:00Z",
       "robots_disallowed": false,
       "server_rendered": true
+    },
+    {
+      "product_number": "7287001",
+      "name": "Domaine Cristia Côtes du Rhône Blanc",
+      "producer": "Domaine de Cristia",
+      "country": "Frankrike",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "OUR EXACT BOTTLE IS ON THE ESTATE'S OWN SHOP AND THE PAGE DECLARES NOTHING; THE ONE DOCUMENT IT LINKS IS A PNG ON GOOGLE DRIVE. The Grangeon family's house at Courthézon publishes one Wix site, www.cristia.com, branded Château Cristia and carrying a /domaine-de-cristia page for the Châteauneuf estate — one shop for both names, and its store-products-sitemap.xml lists exactly one Côtes-du-Rhône Blanc. That product page is headed 'Côtes-du-Rhône Blanc 2025', which is Systembolaget's vintage for 7287001 (75 cl, 13,0 %). Wix is server-rendered, and the whole product description in the server's HTML is the wine name, the price, and two links labelled 'FICHE TECHNIQUE' and 'TECHNICAL SHEET'. The raw HTML matches 'ingr', 'Ingrédient', 'nutri', 'allerg', 'sulfit', 'elabel', 'vincod' and 'v9.lu' zero times each. It matches 'kJ' 25 times and 'QR' 14 times — EVERY ONE INSIDE BASE64 IMAGE DATA IN THE WIX BUNDLES, which is the documented lying-grep trap in a new dress; on the stripped text the count is zero. THE FICHE TECHNIQUE IS AN IMAGE FILE. Its link goes to drive.google.com/file/d/1YKeFfV-ClhsS9nqI_osbC90cdQ4L49fD/view, and drive.google.com's robots.txt allows /file, so that page was fetched normally: its title is 'Côtes du rhône.png - Google Drive'. A PNG carries no extractable text, and the bytes themselves live on drive.usercontent.google.com, whose robots.txt is a bare 'User-agent: * / Disallow: /'. THAT DISALLOW WAS HONOURED AND THE FILE WAS NOT FETCHED: the e-label exception reaches a page that is itself the regulated disclosure, and the 2026-08-06 widening reaches a file the producer's own page names as the declaration ('eLabels/Nährwerte & Zutaten' at Carl Loewen) — this file is named 'fiche technique', which is the documented French near-miss and has never once been a declaration in this project. Vincod probe negative both ways: m.cristia.com and m.domaine-cristia.com are NXDOMAIN with NXDOMAIN controls, and the reliable test, a 'vincod' grep of the product page, returns nothing. The footer's 'MENTIONS OBLIGATOIRES' link raises hopes and is the ordinary /mentions-légales notice.",
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: cristia.com resolves to Wix (185.230.63.x); m.cristia.com, m.domaine-cristia.com and both nonsense-subdomain controls are NXDOMAIN; domaine-cristia.com does not resolve at all",
+        "https://www.cristia.com/robots.txt — Wix default, 'User-agent: * / Allow: /' bar *?lightbox=",
+        "https://www.cristia.com/sitemap.xml, /pages-sitemap.xml, /store-products-sitemap.xml — 20 pages, 20 products, one Côtes-du-Rhône Blanc",
+        "https://www.cristia.com/product-page/côtes-du-rhône-blanc — 'Côtes-du-Rhône Blanc 2025', no declaration of any kind",
+        "https://www.cristia.com/domaine-de-cristia — the range, current vintages 2022-2024, no declaration",
+        "https://drive.google.com/robots.txt — '/file' is allowed",
+        "https://drive.google.com/file/d/1YKeFfV-ClhsS9nqI_osbC90cdQ4L49fD/view — the linked fiche technique is 'Côtes du rhône.png'",
+        "https://drive.usercontent.google.com/robots.txt — 'Disallow: /', honoured; the PNG bytes were not fetched"
+      ],
+      "checked_at": "2026-08-08T20:55:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
     }
   ],
   "updated_at": "2026-08-08T23:30:00Z",
@@ -7976,7 +8007,7 @@
     {
       "at": "2026-08-08T23:30:00Z",
       "batch": "3 — France, eighth French batch: non-Burgundy producers from the untouched pool, one commit per producer.",
-      "result": "IN PROGRESS. 3 attempted, 1 found (Vignobles Jerome Quiot / Domaine du Vieux Lazaret Chateauneuf-du-Pape Blanc 2024, on the Famille Quiot Vincod deployment), 2 not found (Domaine de la Tour du Bon)."
+      "result": "IN PROGRESS. 4 attempted, 1 found (Vignobles Jerome Quiot / Domaine du Vieux Lazaret Chateauneuf-du-Pape Blanc 2024, on the Famille Quiot Vincod deployment), 3 not found (Domaine de la Tour du Bon x2, Domaine de Cristia)."
     }
   ]
 }
