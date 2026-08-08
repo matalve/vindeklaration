@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 45 producers, 113 wines, 1 found, 8 rejected; 137 French 2024+ undeclared wines remain untouched.",
-  "attempted": 253,
+  "attempted": 255,
   "found": 19,
-  "not_found": 195,
+  "not_found": 197,
   "rejected": 39,
   "declarations": [
     {
@@ -7400,9 +7400,65 @@
       "name": "Côté Mas Sauvignon Vermentino",
       "vintage": "2024",
       "evidence": "DOMAINES PAUL MAS PUBLISHES THE COMPLETE MANDATED SET INLINE ON ITS OWN SHOP — FOR THE VINTAGE AFTER OURS. The page is server-rendered WooCommerce at www.cote-mas.fr, the group's own shop, and its Description tab ends with two blocks: 'Ingrédients / Raisin,  Sulfites , Carboxymethylcellulose, Mis en bouteille sous atmosphère protectrice' (double space before Sulfites as written), and 'Déclaration nutritionnelle / 100 ml — Energie 328 kJ / 79 kcal; Matières grasses 0 g, dont acides gras saturés 0 g; Glucides 0,9 g, dont sucres 0,2 g; Protéines 0 g; Sel 0 g'. Quoted here in full so that no refetch is needed if the vintage rule is ever revisited; raw_ingredients is deliberately left null because this text belongs to the 2025 and not to Systembolaget's bottle. Everything else matches: producer, cuvée (IGP Pays d'Oc, Sauvignon Blanc + Vermentino), pack (75 cl) and alcohol (12,5 % on the page against Systembolaget's 12,5). Only the vintage does not, and it is a rejection rather than an approximation. The lists are written per wine, not boilerplate: the Côté Mas Gewurztraminer on the same shop reads 'Raisin, Liqueur de tirage et Liqueur d'expédition,  Sulfites' with 1,6 g carbohydrate against 0,9."
+    },
+    {
+      "product_number": "7163801",
+      "name": "Chai Berteaud Manceau Courant",
+      "producer": "Chai Berteaud Manceau",
+      "country": "Frankrike",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "The producer's whole web surface is a four-page WordPress site with a small WooCommerce shop, and it is two vintages behind our bottle. Its product sitemap holds exactly three products, all 2023 — courant-chenin-b-vin-blanc-sec-igp-val-de-loire-2023-bio, reflet-gamay-... 2023 and source-melon-b-... 2023 (sitemap lastmod 2025-02-20) — and the range page /creations/ describes the same ten cuvees at 2023 or 2022. Our Courant is the 2025 and appears nowhere. The Courant 2023 product page was read in full (106 kB): stripped of script and style it contains 'ingred', 'nutri', 'kcal', 'kJ', 'sulfit' and 'allerg' zero times each, so there is no ingredient list, no nutrition table and not even an allergen line for any vintage. No QR platform is adopted: m.chai-berteaud-manceau.com is NXDOMAIN with an NXDOMAIN nonsense-subdomain control, and no page references vincod, alliance-alsace, plugwine or any other e-label host. This is a micro-negoce that buys grapes from partner growers; the site is a hospitality and workshop surface, the settled French shape.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://chai-berteaud-manceau.com/robots.txt — WooCommerce + Yoast, allows everything but /wp-admin/ and cart query strings; no exception needed",
+        "https://chai-berteaud-manceau.com/sitemap_index.xml and /product-sitemap.xml — three products, all vintage 2023",
+        "https://chai-berteaud-manceau.com/creations/ — the whole range on one page, every cuvee dated 2023 or 2022",
+        "https://chai-berteaud-manceau.com/produit/courant-chenin-b-vin-blanc-sec-igp-val-de-loire-2023-bio/ — read in full, no declaration of any kind",
+        "DNS: m.chai-berteaud-manceau.com NXDOMAIN, randomxyz123.chai-berteaud-manceau.com NXDOMAIN (wildcard control)",
+        "web search for an e-label or QR destination under this producer's name — nothing but generic French regulatory guidance"
+      ],
+      "checked_at": "2026-08-08T18:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
+    },
+    {
+      "product_number": "7564901",
+      "name": "Chai Berteaud Manceau Reflet",
+      "producer": "Chai Berteaud Manceau",
+      "country": "Frankrike",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same producer surface as 7163801 and the same result. The estate's only Reflet product is the Gamay 2023 (/produit/reflet-gamay-vin-rouge-igp-val-de-loire-2023-bio/, in the product sitemap, lastmod 2025-02-20) and the range page /creations/ also describes Reflet at 2023; Systembolaget's bottle is the 2024, which the producer does not publish. No ingredient list, nutrition table or allergen line exists anywhere on the site for any wine, and no QR or e-label platform is adopted. The sibling product page was not refetched — one product page settles the template for this three-product shop.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://chai-berteaud-manceau.com/robots.txt",
+        "https://chai-berteaud-manceau.com/product-sitemap.xml — the only Reflet is the 2023",
+        "https://chai-berteaud-manceau.com/creations/ — Reflet described at 2023",
+        "DNS: m.chai-berteaud-manceau.com NXDOMAIN with NXDOMAIN control"
+      ],
+      "checked_at": "2026-08-08T18:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
     }
   ],
-  "updated_at": "2026-08-08T16:30:00Z",
+  "updated_at": "2026-08-08T18:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
