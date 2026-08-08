@@ -156,6 +156,20 @@ license ignoring a group that *does* match our token, and it does not touch
 Systembolaget's own robots.txt or ToS question, which stands on its own
 grounds (§ above).
 
+**A device gate on an e-label page may be answered with a mobile-shaped
+User-Agent, decided 2026-08-08.** Domaine Gassier's e-label
+(`v9.lu/v/{code}`) answers `Smartphone only` to an ordinary request; no
+robots.txt exists on the host and it is not a 401/403/429/challenge. The
+owner's reasoning: naming a device class is not the same claim as naming a
+person, and a `User-Agent` that keeps `vindeklaration/…` and the project URL
+inside a mobile-shaped string is not hiding who is asking, only satisfying a
+rendering check — closer to enabling JavaScript than to impersonation. This
+does **not** touch the absolute rule on 401/403/429/login walls/bot
+challenges, which stay refusals with no workaround; it applies only to a
+same-content gate keyed on device class, and only on a page that is itself
+the regulated disclosure. See `.claude/agents/declaration-finder.md` for the
+exact string.
+
 ## Open decisions
 
 - ~~The quality gate is 2%.~~ Settled 2026-07-27: the gate watches drift, not a
