@@ -16,9 +16,9 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans and Domaine Billaud-Simon excepted, probed in batches 1 and 2). As of the second 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 54 producers, 125 wines, 1 found, 8 rejected; 125 French 2024+ undeclared wines remain untouched. The strongest open lead is Domaine Gassier's e-label at v9.lu, whose URL is held and whose vintage and market are confirmed, and which answers 'Smartphone only'.",
-  "attempted": 265,
-  "found": 20,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the eighth French batch (2026-08-08, third run of the day): France stands at 56 producers, 127 wines, 3 found, 8 rejected.",
+  "attempted": 266,
+  "found": 21,
   "not_found": 206,
   "rejected": 39,
   "declarations": [
@@ -7739,9 +7739,36 @@
       "checked_at": "2026-08-08T21:05:00Z",
       "robots_disallowed": false,
       "server_rendered": false
+    },
+    {
+      "product_number": "8389101",
+      "name": "Domaine du Vieux Lazaret Châteauneuf-du-Pape",
+      "producer": "Vignobles Jerome Quiot",
+      "country": "Frankrike",
+      "vintage": "2024",
+      "status": "found",
+      "source_url": "https://m.famillequiot.com/INA72F/n/685902018f039/fr",
+      "source_type": "e_label",
+      "raw_ingredients": "Raisins, Acide tartrique, Sulfites, MétaBisulfite de potassium, Acide métatartrique, Mis en bouteille sous atmosphère protectrice",
+      "raw_nutrition": "Déclaration nutritionnelle — Pour 100 ml: Énergie 331 kJ / 79 kcal; Matières grasses 0 g; dont acides gras saturés 0 g; Glucides 0,8 g; dont sucres 0 g; Protéines 0 g; Sel 0 g",
+      "raw_allergens": "Sulfites (bold in the ingredient list; the wine page adds \"Contient des sulfites.\")",
+      "language": "fr",
+      "vintage_on_source": "2024",
+      "market": "EU (French-language e-label on the producer's own Vincod QR domain, EU format: per 100 ml, kJ and kcal)",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://m.famillequiot.com/919DPJ3JYQ?l=fr (Domaine du Vieux Lazaret range page: Ventoux 2024, Châteauneuf-du-Pape Blanc 2025, Châteauneuf-du-Pape Rouge 2024, Cuvée Exceptionnelle Rouge 2022 — exactly one white Châteauneuf in the range)",
+        "https://m.famillequiot.com/QXV2NF?l=fr (Châteauneuf-du-Pape Blanc 2025; its <select id=\"millesime\"> names the 2024 as INA72F)",
+        "https://m.famillequiot.com/INA72F?l=fr (Domaine du Vieux Lazaret, Cuvée Tradition, AOC Châteauneuf-du-Pape, Blanc, 2024 — Bourboulenc, Clairette, Grenache blanc, Roussanne; Spécifications 'Teneur en alcool : 13.5 % vol.')",
+        "https://m.famillequiot.com/INA72F/n/685902018f039/fr (the e-label: Ingrédients + Déclaration nutritionnelle)"
+      ],
+      "checked_at": "2026-08-08T23:30:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "evidence": "THE MISSING HALF OF A REJECTION FROM 2026-08-07. That run rejected Systembolaget's 1500 ml Vieux Lazaret Châteauneuf rouge 2024 (7144806) because the Vincod e-label is a per-pack disclosure stating 'Bouteille (75 cl)', and noted that a 750 ml Vieux Lazaret Châteauneuf 2024 under another product number would be a straightforward find. 8389101 is that wine — a 750 ml Châteauneuf-du-Pape, but the WHITE. PRODUCER: Systembolaget's producer string 'Vignobles Jerome Quiot' is the Famille Quiot company itself; the estate's own contact block on m.famillequiot.com reads 'vignobles@jeromequiot.com', so this is the same house and not a similar name. WINE AND CUVÉE: the e-label heading states 'Domaine du Vieux Lazaret, Cuvée Tradition, AOC Châteauneuf-du-Pape, Blanc, 2024' — the estate publishes exactly one white Châteauneuf and no second white cuvée, so the Houchart ambiguity does not arise here. VINTAGE: 2024, reached through the wine page's millesime selector from the producer's own control, never guessed; the e-label states the vintage itself. ALCOHOL: 'Alc. 13,5 % vol.' against Systembolaget's 13,5 — exact, and here the analysis figure on the wine page agrees with the labelled one. PACK: 'Bouteille (75 cl)' against Systembolaget's 750 ml. MARKET: French page on the producer's French QR domain. The ingredient list differs from the estate's rouge ('Mis en bouteille sous atmosphère protectrice' where the rouge reads 'Peut être mise en bouteille…') and from Trignon's, so these are written per wine. robots.txt on m.famillequiot.com allows both the wine page and the /n/ page, so no exception was invoked."
     }
   ],
-  "updated_at": "2026-08-08T21:05:00Z",
+  "updated_at": "2026-08-08T23:30:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -7887,6 +7914,11 @@
       "at": "2026-08-08T21:05:00Z",
       "batch": "Domaine Gassier Embruns de Viognier revisit, under the new device-gate exception",
       "result": "1 attempted, 1 found (v9.lu/v/dhoPn read with a mobile-shaped User-Agent)"
+    },
+    {
+      "at": "2026-08-08T23:30:00Z",
+      "batch": "3 — France, eighth French batch: non-Burgundy producers from the untouched pool, one commit per producer.",
+      "result": "IN PROGRESS. 1 attempted, 1 found (Vignobles Jerome Quiot / Domaine du Vieux Lazaret Chateauneuf-du-Pape Blanc 2024, on the Famille Quiot Vincod deployment)."
     }
   ]
 }
