@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-07 non-Burgundy run: Alsace is complete, Burgundy is being skipped deliberately, and FRANCE'S FIRST DECLARATION IS ATTACHED — Château du Trignon Viognier 2024 on Vincod. France now stands at 31 producers, 88 wines, 1 found, 7 rejected; 156 French 2024+ undeclared wines remain untouched.",
-  "attempted": 236,
+  "attempted": 238,
   "found": 19,
-  "not_found": 179,
+  "not_found": 181,
   "rejected": 38,
   "declarations": [
     {
@@ -6920,9 +6920,65 @@
       "name": "La Gascogne par Alain Brumont Tannat Merlot",
       "vintage": "2024",
       "evidence": "Third of three, same finding. Note the near-miss to avoid: the estate DOES publish a Tannat-Merlot called Menhir, but Menhir is an AOC-adjacent estate cuvée from the Madiran terroirs sold under the Côtes de Gascogne IGP, not the 'La Gascogne par Alain Brumont' line, and its page carries no vintage, no alcohol and no ingredient list. Matching this wine to that page would be exactly the sister-cuvée error the rules forbid."
+    },
+    {
+      "producer": "Château de Chausse",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: m.chateaudechausse.com, m.chateaudechausse.fr and both nonsense-subdomain controls are NXDOMAIN — no Vincod deployment",
+        "chateaudechausse.com fails TLS with a HOSTNAME MISMATCH and over plain http serves OVHcloud's 'Site non installé' parking page. The estate is at chateaudechausse.fr",
+        "https://chateaudechausse.fr/robots.txt — stock WordPress: /wp-admin/ disallowed, admin-ajax allowed, plus one uploads JSON. Nothing relevant restricted",
+        "https://chateaudechausse.fr/sitemap_index.xml — five sitemaps and NO product sitemap; the WooCommerce products are not in Yoast's index at all",
+        "https://chateaudechausse.fr/portfolio-sitemap.xml and /documentation-sitemap.xml — one URL each, the archive page. 'Documentation' looked like the Carl Loewen download-centre pattern and is empty",
+        "https://chateaudechausse.fr/nos-vins/ (167 kB, server-rendered) — the full range, 27 product URLs with the vintage in every slug. Raw-HTML grep: 'ingr' 0, 'nutri' 0, 'kcal' 0, 'kJ' 0, 'sulfit' 0, 'e-label' 0, 'qr' 0",
+        "https://chateaudechausse.fr/produit/blanc-cotes-de-provence-2024-bio/ (OUR EXACT WINE AND VINTAGE, 105 kB). Same grep, same zero"
+      ],
+      "checked_at": "2026-08-08T11:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7781101",
+      "name": "Château de Chausse White",
+      "vintage": "2024",
+      "evidence": "OUR EXACT BOTTLE IS ON THE PRODUCER'S OWN SHOP AND CARRIES NO LIST. 'Blanc Château Côtes de Provence 2024', product_cat CHÂTEAU, SKU AOCB22---75: 100% Rolle against Systembolaget's Rolle, 'Vol % : 13' against Systembolaget's 13,0, 'Vignoble certifié Agriculture Biologique' against Systembolaget's organic flag, and the vintage is ours. The description gives soil, harvest, pressing, fermentation and ageing and stops there — no ingredient list, no nutrition table, not even an allergen line, and no QR or e-label link anywhere in the HTML. This is the commonest French shape: the wine is found, the declaration is not."
+    },
+    {
+      "producer": "Château de Chausse",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "sources_checked": [
+        "Same producer surface as product 7781101",
+        "https://chateaudechausse.fr/nos-vins/ — the estate's single-bottle rosé has rolled to 'Rosé Côtes de Provence 2025 BIO'; the only 2024 rosé still listed is the gift-box 'Edition Collector'",
+        "https://chateaudechausse.fr/produit/edition-collector-rose-cotes-de-provence-bio-2024-coffret-1-bouteille/ (the 2024 rosé, in its coffret). Raw-HTML grep for 'ingr', 'nutri', 'kcal', 'kJ', 'sulfit', 'allerg', 'e-label', 'vincod': ZERO matches of any kind — the page is a photograph and a price"
+      ],
+      "checked_at": "2026-08-08T11:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "7115101",
+      "name": "Château de Chausse Rosé",
+      "vintage": "2024",
+      "evidence": "The estate's own shop has rolled forward to the 2025 rosé, and the one 2024 rosé it still sells is a single-bottle gift box whose page carries no text at all beyond the price. Nothing was found to match against, so the vintage rule never came into play. Not found, and the estate publishes no ingredient list for any wine in its range — the white at our exact vintage was checked as the control and carries none either."
     }
   ],
-  "updated_at": "2026-08-08T10:40:00Z",
+  "updated_at": "2026-08-08T11:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
