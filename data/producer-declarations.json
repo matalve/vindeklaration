@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 39 producers, 102 wines, 1 found, 7 rejected; 148 French 2024+ undeclared wines remain untouched.",
-  "attempted": 242,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans excepted, probed in batch 1). As of the 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 40 producers, 104 wines, 1 found, 7 rejected; 146 French 2024+ undeclared wines remain untouched.",
+  "attempted": 244,
   "found": 19,
-  "not_found": 185,
+  "not_found": 187,
   "rejected": 38,
   "declarations": [
     {
@@ -7086,9 +7086,63 @@
       "name": "Fruiandise Blanc Domaine de la Bouvaude",
       "vintage": "2024",
       "evidence": "The estate keeps one WooCommerce product per cuvée and edits it forward: the white has already rolled to the 2025 while Systembolaget's bottle is the 2024. Nothing was found to reject — the page carries no ingredient list for the 2025 either, as its sibling red at our own vintage confirms — so this is not found rather than a vintage rejection."
+    },
+    {
+      "producer": "Pascal Jolivet",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "checked_at": "2026-08-08T14:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "5778701",
+      "name": "Pascal Jolivet Attitude Sauvignon Blanc",
+      "vintage": "2024",
+      "sources_checked": [
+        "https://pascaljolivet.com/robots.txt — bad-bot blocklist plus User-agent: * disallowing only /wp-admin/; the pages below are allowed",
+        "DNS: m.pascal-jolivet.com is NXDOMAIN; the raw HTML of two product pages contains the string 'vincod' zero times, so the estate is not on Vincod (the Bargemone test, not the DNS shortcut)",
+        "https://pascaljolivet.com/product-sitemap1.xml — 104 URLs, 26 products in four languages; no e-label, etiquette or ingredient path",
+        "https://pascaljolivet.com/produits/vins/attitude/sauvignon-blanc-attitude-igp-du-val-de-loire/ — the cuvee page, WooCommerce on Beaver Builder",
+        "https://pascaljolivet.com/page-sitemap1.xml and https://pascaljolivet.com/medias/ — the media page links press reviews and a 2019 brochure only, no eLabels download"
+      ],
+      "evidence": "The estate's own page for this exact cuvee exists and sells it, but the shop has rolled to the next vintage: the order block reads 'Commander « Attitude » Sauvignon Blanc 2025' while Systembolaget's bottle is the 2024. Nothing was found to reject — the 2025 page carries no ingredient list, no nutrition table and no allergen line either, only cepage, terroir, vinification, character, food pairing, serving temperature and cellaring. The raw HTML matches 'elabel' eight times and every hit is the Beaver Builder JavaScript identifier 'responsiveLabel'; on the stripped text the count is zero."
+    },
+    {
+      "producer": "Pascal Jolivet",
+      "country": "Frankrike",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "rejected_because": null,
+      "checked_at": "2026-08-08T14:20:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true,
+      "product_number": "8829601",
+      "name": "Sancerre Pascal Jolivet",
+      "vintage": "2024",
+      "sources_checked": [
+        "Same producer surface as product 5778701",
+        "https://pascaljolivet.com/produits/vins/signature/sancerre-blanc-signature-aop-sancerre/ — the plain Sancerre blanc, sold in 75 cl and 150 cl",
+        "https://pascaljolivet.com/wp-content/uploads/2025/04/jpgdsgn-pascaljolivet-ft2025-fr-signature-sb.pdf — the linked fiche technique, text extracted in full"
+      ],
+      "evidence": "Same shape as the Attitude: the order block reads 'Commander Sancerre blanc « Signature » 2025' against Systembolaget's 2024. The estate makes eight different Sancerre blancs, so the bare product name 'Sancerre Pascal Jolivet' was read as the house Signature cuvee — that identification was never needed, because no vintage of it carries a declaration. The fiche technique linked from the page is the French near-miss in its purest form: cepage, terroir, vinification, style, food pairing, serving temperature, cellaring, address, and no ingredient list, no nutrition table, no energy value and no sulphite line. It states no vintage at all beyond the 'ft2025' in its file name. One fiche settles the format for the estate."
     }
   ],
-  "updated_at": "2026-08-08T12:05:00Z",
+  "updated_at": "2026-08-08T14:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
