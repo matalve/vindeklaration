@@ -9,14 +9,14 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-08, across 116 producers and 265 wine records. **The German
+Status as of 2026-08-08, across 122 producers and 273 wine records. **The German
 2024-and-later undeclared pool is exhausted** — see the closing section. **The
-French pool opened on 2026-08-07; fifty-four producers and 125 wines in, and
-the first (and so far only) French declaration was attached on the fifth French
-batch** — see *France, and why it is not Germany* and *The first French find*.
-**The Alsace slice is now exhausted too** — see *Alsace, tested to exhaustion*.
-The most recent French batch is *The device-gated e-label*, below, which found
-a new French platform, `v9.lu`, and could not read it.
+French pool opened on 2026-08-07; sixty-two producers and 134 wines in, with
+four declarations attached and nine rejected** — see *France, and why it is not
+Germany* and *The first French find*. **The Alsace slice is now exhausted too**
+— see *Alsace, tested to exhaustion*. The most recent French batch is *A gate
+that was a Referer check*, below, which found a second host of the same French
+platform and read it.
 
 ## Readable — server-rendered
 
@@ -34,6 +34,7 @@ a new French platform, `v9.lu`, and could not read it.
 | **Alliance Nutri** | `alliance-alsace.com/01/{gtin}/22/{variant}` | **The project's first GS1 Digital Link** (AI 01 = GTIN, AI 22 = consumer product variant) and its **first third-party e-label vendor on a French producer's page**. About 6 kB of plain server-rendered HTML on a Laravel host: designation, sweetness, **vintage**, format, Gencode, an ingredient paragraph and a nutrition table per 100 ml. 11-language EU selector (fr, en, it, da, de, es, fi, nl, pt, ro, **sv**) driven by a POST with a CSRF token — **but it also honours the `Accept-Language` request header**, which is the cheap way to get French or Swedish. `robots.txt` is `User-agent: *` / `Disallow:` — an *empty* Disallow, everything allowed, no exception needed. **It identifies itself as well as Winestro does.** The bare GS1 root `/01/{gtin}` returns 404, so the variant segment is required and no vintage can be reached without the producer linking it. Found via Cave de Turckheim. |
 | **Vincod (vin.co)** | `m.{producer}.{tld}/{code}` and the mirror `vincod.com/{code}`; the e-label is `/{code}/n/{hash}/{lang}` | **The project's only source of a French declaration so far** (Famille Quiot, 2026-08-07) and its most productive French platform. **The `m.rhonea.fr` platform, now identified**: `m.hugel.com` is the same thing, images from `cdn.vin.co`, every short code mirrored at `vincod.com/{code}`, and byte-identical `robots.txt`. Three levels: domaine page → range page → **per-wine, per-vintage page**. The wine page's `<select id="millesime">` **names the short code for every vintage back to 2007**, so our vintage is reachable from the producer's own control and never by guessing — the only platform in this project that gives a vintage archive. The wine page itself is a tasting note plus a Spécifications block (alcohol *analysis*, residual sugar, acidity, pH, vine age, yield) and **is not a declaration**. The declaration, where the producer has filled it in, is a link **"Ingredients & nutrition ›"** to `/{code}/n/{hash}/{lang}`: wine, vintage, **lot number**, *labelled* alcohol, bottle size, an `Ingredients` line and a nutrition table **per 100 ml and per 125 ml**. `robots.txt` is a bad-bot blocklist ending `Disallow: /`, then a separate `User-agent: *` group disallowing only `/ajax`, `/admin`, `/manage`, `/create`, `/superadmin` and `/*/get/{qrcode,tablecard,embed}$` — **the wine and `/n/` pages are allowed, so no exception is needed.** The `/n/` page also states a **Contenance** (`Bouteille (75 cl)`) and the **labelled** alcohol, which is not always the alcohol in the wine page's Spécifications block — that one is the analysis. Match on the `/n/` figure. |
 | **Rhonéa's own QR platform** | `m.rhonea.fr/{code}` plus `/{code}/get/tech-sheet` | **This is Vincod — see the row above.** A producer-run QR destination on the producer's own subdomain, server-rendered, **one short code per wine per vintage** with a vintage switcher and a language selector. It states wine, appellation, colour and vintage in its own heading, so it identifies itself as well as Winestro does. On Rhonéa's deployment it carries no declaration: its "Spécifications" block holds residual sugar and "Contient des sulfites" and no ingredient list or nutrition table, and its downloadable fiche produit repeats the same fields. **That observation stands but the reason is now clear — the platform supports a full e-label at `/{code}/n/{hash}/{lang}` and Rhonéa had not filled it in.** On a Vincod page, look for an "Ingredients & nutrition" link inside the Spécifications block before concluding there is none. Its `robots.txt` is a long bad-bot blocklist ending in `Disallow: /`, then a separate `User-agent: *` group disallowing only `/ajax`, `/admin`, `/manage`, `/create` and `/*/get/{qrcode,tablecard,embed}$` — **the wine pages and `/get/tech-sheet` are allowed, so no exception is needed.** |
+| **VINISCAN (ABSOMOD)** | `v9.lu/v/{code}` and `iviti.fr/v/?q={token}` | **One French vendor, two hosts, two different gates, and both are readable.** Plain server-rendered HTML: a `Déclaration nutritionnelle` table per 100 mL and an `Ingrédients` paragraph, a 24-language EU selector including Svenska, `noindex`, and the footer `© 2026 VINISCAN by ABSOMOD GROUP`. Neither host serves a `robots.txt` (404 on both), so nothing is disallowed. **The page states no wine name, no vintage, no bottle size and no alcohol** — it is a bare template keyed by the URL, so identity rests entirely on the producer's own per-wine linking, the weakest provenance of any readable platform here. Both hosts refuse a plain request with a short 200-with-body, and **the two refusals are not the same thing**: `v9.lu` answers `Smartphone only` and yields to the mobile-shaped User-Agent from the 2026-08-08 device-gate decision, while **`iviti.fr` answers `Accès refusé...` to that same mobile UA and yields to nothing but a `Referer` header naming the producer page that published the link** — hotlink protection, and the Referer we send is simply true. Try the Referer before the mobile UA; it needs no exception at all. `iviti.fr`'s own root answers 403 to everything, which is absolute — one URL per wine and nothing else on the host. Seen at Domaine Gassier (v9.lu, QR image in a Shopify description) and Domaine André Brunel (iviti.fr, an anchor reading *"Cliquez ici pour retrouver la liste des ingrédients et informations nutritionnelles de cette cuvée"*). Tokens are per wine: Brunel's siblings share the trailing producer segment and differ in the prefix. |
 | **Producer's page itself** | no platform at all | Bastianshauser Hof – Erbeldinger puts the **complete mandated set inline** on its WooCommerce product page, inside a collapsed accordion whose panel is in the server's HTML: Jahrgang, Alk., Flasche, Bio-Hinweis, `Zutaten:`, `Ø Nährwerte pro 100 ml` and the Gutsabfüller. No link, no iframe, nothing for an href scan to find — only a raw-HTML grep for `Zutaten` finds it. |
 
 ## Unreadable — client-side rendering
@@ -45,7 +46,7 @@ a new French platform, `v9.lu`, and could not read it.
 | **Dropbox folder** | `dropbox.com/scl/fo/…`, one folder per vintage | The folder *view* renders client-side: 309 kB of shell, no file names, and the page's own `&noscript=1` variant is no better. **But the same folder answers `&dl=1` with a zip**, and that is a server response. See *The Dropbox route* below — it is now a resolved find, not a dead end. |
 | **plugwine** | `{producer-slug}.plugwine.com/{fr,en}/vins/{range}/{cuvée-vintage}/{id}` | **A French wine-shop platform, Angular, and every URL on it returns one BYTE-IDENTICAL 67 kB shell with an empty `<pw-root>`** — listing, product and `sitemap.xml` alike (the sitemap is a soft 404). Recognise it by `<pw-root>`, by a `robots.txt` that carries `crawl-delay: 10`, `Disallow: /fr/*` and the ASP.NET pair `/WebResource.axd` + `/ApplicationError.aspx*`, and by a Cloudflare-managed Content-Signal preamble. **Domaine Roquefeuille's `www.domaineroquefeuille.fr` was this platform white-labelled** — same `<pw-root>`, same robots lines — so the two are one platform, not two producers. The product URL does carry cuvée and vintage, so a *range census* is possible from search results even though no page content is. Seen at Vignoble Hermouet and Domaine Roquefeuille. |
 | **Kuupanda** | `commande.kuupanda.com/producteur/{id}/particulier` | A French producer-direct ordering marketplace some estates use *instead of* their own shop (Domaine Fontanel links out to it from its `/boutique/` page). 2 383 bytes of React shell, `You need to enable JavaScript to run this app`, empty `<div id="root">`. `robots.txt` is `User-agent: *` / `Disallow:` — everything allowed and nothing readable. |
-| **v9.lu** | `v9.lu/v/{code}` | **A French e-label short host that is device-gated, not rendering-gated.** Every URL answers **HTTP 200 with fifteen bytes: the literal string `Smartphone only`**. No `robots.txt` at all (404), so nothing is disallowed — the page is simply refused to a client that does not present as a phone, and reading it would mean sending a user agent we are not. That is outside this project's identification discipline, so it stops the fetch the way a geoblock does. Found at Domaine Gassier, linked as a **QR-code image inside the Shopify product description**, one code per wine (`/v/dhoPn` for Embruns de Viognier, `/v/c07yu` for Viognier Gourmand). A new class: the declaration exists, the URL is held, the vintage and market are confirmed from the producer's SKU, and the disclosure is still unreadable. |
+| ~~**v9.lu**~~ | `v9.lu/v/{code}` | **Moved to the readable table on 2026-08-08 — see VINISCAN (ABSOMOD).** It was listed here when a plain request returned fifteen bytes reading `Smartphone only`; the device-gate decision of the same day made it readable with a mobile-shaped, still self-identifying User-Agent, and its sibling host `iviti.fr` then showed the gate can be a `Referer` check instead. Kept as a row so the failure mode stays recognisable: **a short 200-with-body is a gate, not a rendering problem, and not every gate is the same gate.** |
 | **devworlds e-label** | Shopware plugin, no public URL | The shop shows a "Zutaten & Nährwerte" **`<button>`, not a link**, opening a modal. All the server returns is a custom field `devworlds_elabel_fields_id` holding an opaque 24-hex id, plus `Allergene: Enthält Sulfite`. No devworlds host is linked anywhere and no e-label route appears in the sitemap, so **there is no URL to hold** and building one from the id would be guessing a pattern. Found via Von Winning. |
 
 ## The Dropbox route, which worked
@@ -582,19 +583,25 @@ sulphites, and the energy value is absent either way.
   spending the fetch — a 2018 file cannot carry a declaration first required of
   wine produced after 8 December 2023.
 
-### French e-label vendors — two are now seen, the rest are not
+### French e-label vendors — three are now seen, and all three are readable
 
 The 2026-08-07 cooperative run ended the "no third-party vendor in France"
-finding. Two are readable and documented in the table above; a third,
-**`v9.lu`**, was found at Domaine Gassier on 2026-08-08 and is in the
-*unreadable* table — it is device-gated rather than client-side, which is a new
-failure mode. The two readable ones:
+finding. All three now in the readable table:
 
 - **`vin.co` / Vincod** — `m.{producer}.{tld}/{code}`, mirrored at
   `vincod.com/{code}`, assets on `cdn.vin.co`. Seen at Hugel and, without its
   e-label filled in, at Rhonéa. Server-rendered.
 - **Alliance Nutri**, `alliance-alsace.com` — a GS1 Digital Link resolver.
   Seen at Cave de Turckheim. Server-rendered.
+- **VINISCAN by ABSOMOD** — two hosts, `v9.lu/v/{code}` and
+  `iviti.fr/v/?q={token}`, sharing one stylesheet tree under
+  `v9.lu/commonfiles/`. Server-rendered behind a gate; see the table row.
+  **The vendor is identifiable from whois**: AFNIC gives `iviti.fr`'s registrar
+  as ABSOMOD Group, which is how the two hosts were tied together. ABSOMOD also
+  trades as `viniscan.com`, `qrcode.vin`, `vitiquette.com`, `vinicode` and
+  `steeqr.com`, so **expect more hostnames from one vendor** and recognise the
+  family by the `/v/` path, the `noindex`, the 24-language selector and the
+  ABSOMOD footer rather than by the domain.
 
 **Recognise Vincod by the `m.` subdomain**, which is how both deployments are
 reached, and note that Hugel has pointed `hugel.com` itself at its Vincod
@@ -741,8 +748,8 @@ approximation of it.
 
 ### The device-gated e-label, and nine producers that were the settled French shape
 
-**2026-08-08 (second run), nine producers, twelve wines: nothing attached, and
-one e-label found that could not be read.** Chai Berteaud Manceau, Domaine de
+**2026-08-08 (second run), nine producers, twelve wines: one e-label found,
+unreadable at the time and attached later the same day.** Chai Berteaud Manceau, Domaine de
 Terres Blanches, Les Sablonnettes, Vignerons Ardéchois (UVICA), Ogier, Château
 la Gordonne, Domaine Saint Damien, Vignobles Diffonty, Domaine Gassier. The
 batch was picked to avoid Burgundy and to take the named non-Burgundy
@@ -767,9 +774,12 @@ per-wine QR-code image inside the product description whose anchor is a
 strongest of any French wine in this file: product JSON title
 `Embruns de Viognier 2024`, single-variant SKU **`MGVIBL24EU06CF`** — `24` the
 vintage, `EU` the market — and barcode `3760270931707`. The e-label answers
-`Smartphone only` in fifteen bytes. It is recorded `not_found`, not `rejected`,
-because nothing was read and therefore nothing was matched, and it is **the
-best revisit candidate in the French pool**.
+`Smartphone only` in fifteen bytes. It was recorded `not_found` at first,
+because nothing had been read and therefore nothing had been matched; **later
+the same day the device-gate decision made it readable and the record became
+`found`.** It is the first wine in this project whose disclosure was reached by
+varying a request header, and the precedent it set is what unlocked
+`iviti.fr` — see *A gate that was a Referer check*.
 
 Three things worth carrying forward:
 
@@ -823,6 +833,77 @@ e-label platform exists to find; Château la Gordonne is Vranken-Pommery and the
 same. Worth noting that Systembolaget itself already carries declarations for
 two other Ogier wines, so the house supplies the data through the trade channel
 while publishing none of it on its own site — the absence is editorial, again.
+
+### A gate that was a Referer check, and a declaration written once for a whole estate
+
+**2026-08-08 (fourth run), six producers, eight wines: one declaration attached,
+one found and rejected, six not found.** Domaine de la Tour du Bon, Domaine de
+Cristia, Domaine André Brunel, Famille Lieubeau, Domaine Horgelus, Domaine du
+Salvard — all non-Burgundy, taken from the untouched pool.
+
+| Producer | Region | Site | Our bottle on it? | Declaration? |
+|---|---|---|---|---|
+| Domaine de la Tour du Bon | Provence / Bandol | Kirby site **blanket-disallowed** + open Shopify shop | yes, the 2025 rosé exactly | none on the readable side |
+| Domaine de Cristia | Rhône / CdP | Wix (Château Cristia) | **yes, CdR Blanc 2025** | none; the fiche is a **PNG on Google Drive** |
+| **Domaine André Brunel** | Rhône / CdP | bespoke PHP shop, one page per cuvée per vintage | **yes, Sommelongue 2024, 14,5 %, 75 cl** | **yes — VINISCAN at `iviti.fr`, attached** |
+| Famille Lieubeau | Loire / Muscadet | Avada WP; shop on a **disallowed** subdomain | cuvée yes, **no vintage** | none readable |
+| Domaine Horgelus | Sud-Ouest / Gascogne | 13-page IONOS brochure | cuvée yes, **no vintage** | none |
+| **Domaine du Salvard** | Loire / Cheverny | Shopify (`delaille.com`) | no, shop rolled to the 2025 | **yes, complete — and range-wide, rejected** |
+
+**The find is Brunel and the lesson is the gate.** His per-cuvée pages end with
+*">> Cliquez ici pour retrouver la liste des ingrédients et informations
+nutritionnelles de cette cuvée <<"*, linking `iviti.fr/v/?q=…`. A plain request
+returns sixteen bytes, `Accès refusé...`; **the mobile-shaped User-Agent from
+the device-gate decision changes nothing**; and two controlled requests then
+showed the check is a `Referer`. Sending the true Referer — the producer page
+that published the link and that we did in fact come from — returns the full
+disclosure **under the project's ordinary User-Agent**, so no exception, no
+device framing and no misrepresentation was involved. **When a 200-with-body
+refusal appears, test the Referer first.** It is the cheapest possibility and
+the only one that needs no policy at all.
+
+**The rejection is a new French shape and deserves a name: the range-wide
+declaration.** Domaine du Salvard's Shopify footer links `/pages/declaration
+-nutritionnelle`, which carries the complete mandated set — bilingual FR/EN,
+`Raisins/Grapes`, sulphites, metatartaric acid, protective-atmosphere bottling,
+328 kJ / 79 kcal per 100 ml — and names **no wine, no cuvée, no colour, no
+bottle size and no vintage**. The estate makes a white, a red, a rosé and a
+crémant; one list cannot be the per-bottling disclosure for all four. It is
+rejected on the matching rules' own words, and the vintage fails independently
+(the shop's product JSON says `Millésime : 2025` against our 2024). **Expect
+this shape wherever a small producer has understood the obligation and answered
+it in one page** — a footer link called *Déclaration nutritionnelle* or
+*Valeurs nutritionnelles* is worth one fetch on every French shop, and it is
+worth grepping the product page for it, since nothing on the product page
+itself hints that the page exists.
+
+Four smaller things this batch settles:
+
+- **HTML entities defeat the grep, and this nearly cost the find.** Brunel's
+  page matches `ingrédient` **zero** times in the raw HTML because it is written
+  `ingr&#233;dients`. The whole run's screening grep would have closed the one
+  producer that publishes. **Grep the stripped, entity-decoded text, not the raw
+  HTML** — the opposite of the Shopify-QR lesson, so do both.
+- **And tag-stripping eats a nutrition figure.** VINISCAN prints
+  `dont sucres  < 0.5 g`; a regex that removes `<[^>]+>` swallows `< 0.5 g` as
+  if it were a tag. Read the value out of the HTML, not out of the stripped
+  text.
+- **A fiche technique can be an image on a general file host.** Cristia's
+  "FICHE TECHNIQUE" link is `drive.google.com/file/d/…/view`, and the file is
+  `Côtes du rhône.png`. `drive.google.com/robots.txt` allows `/file`, so the
+  view page is fetchable and names the file; the bytes live on
+  `drive.usercontent.google.com`, which is `Disallow: /`. **The 2026-08-06
+  Dropbox widening does not reach it**, because that widening turns on the
+  producer naming the file as the *declaration* and this one is named as a
+  fiche. Honoured, not fetched, and recorded as such.
+- **A producer's marketing site and its shop are different hosts with different
+  directives, in both directions.** Tour du Bon's `www.tourdubon.com` merges two
+  `User-agent: *` groups into a blanket disallow while `boutique.tourdubon.com`
+  is an open Shopify; Lieubeau is the mirror image, an open WordPress and a
+  shop at `Disallow: /`. **Read robots.txt on the host you are about to fetch,
+  never on the one you found the link on** — and when the shop is the closed
+  one, say plainly that the shop is unknown rather than that the producer
+  declares nothing.
 
 ## Untested
 
@@ -1186,9 +1267,14 @@ worth recognising in an `href`; nothing is known about how they render.
   rather than assembling them.
 - `v9.lu` serves **no `robots.txt` (404)** and answers every `/v/{code}` with
   **HTTP 200 and fifteen bytes, `Smartphone only`**. Nothing is disallowed and
-  nothing is refused technologically — it is a device gate, and getting past it
-  means presenting as a phone. Out of scope for this project's identification
-  discipline. Keep the URL and record `not_found`.
+  nothing is refused technologically — it is a device gate, and the mobile-shaped
+  self-identifying User-Agent decided on 2026-08-08 gets past it.
+- `iviti.fr` is the same vendor (ABSOMOD/VINISCAN) with a **different gate**: it
+  serves no `robots.txt` (404), answers `/v/?q={token}` with sixteen bytes,
+  `Accès refusé...`, **ignores the mobile User-Agent entirely**, and returns the
+  full page as soon as a `Referer` naming the linking producer page is sent. Its
+  own root answers **403 to everything**, which is absolute — fetch the one URL
+  the producer published and nothing else.
 - `michelgassier.com` answers on **wildcard DNS**: `m.michelgassier.com` and
   `randomxyz.michelgassier.com` resolve to the same address, and so do
   `domainegassier.com` and `domaine-gassier.com`. Third sighting of the
@@ -1209,6 +1295,30 @@ worth recognising in an `href`; nothing is known about how they render.
   — one background image, one image map, one `mailto` area. Seven candidate
   `.fr`/`.com` domains for the estate are NXDOMAIN. A free.fr personal page is
   still worth the one request; it can be a complete answer.
+- `www.tourdubon.com/robots.txt` is 110 bytes holding **two `user-agent: *`
+  groups**: one disallowing `/kirby/`, `/site/`, `/cdn-cgi/` and allowing
+  `/media/`, then a second that is a bare `disallow: /`. RFC 9309 merges records
+  naming the same token, so the site is blanket-disallowed bar `/media/`. The
+  estate's shop is the separate host `boutique.tourdubon.com`, an ordinary
+  Shopify that allows `/products/`.
+- `boutique.lieubeau.com` is `Disallow: /` while `lieubeau.com` allows
+  everything but `xmlrpc.php`. `lieubeau.fr` and `famille-lieubeau.fr` both fail
+  TLS with `TLSV1_ALERT_INTERNAL_ERROR`; over plain http `lieubeau.fr` 301s to
+  `lieubeau.com`, and `lieubeau.com/sitemap_index.xml` is a **soft 404 that
+  returns the 590 kB home page** — read `/nos-vins/` instead.
+- `www.horgelus.com` fails TLS the same way and answers normally over plain
+  http. Its sitemap is the whole site: thirteen URLs.
+- `andrebrunel.com`, `domaine-andre-brunel.com` and `andre-brunel.fr` are one
+  site on **wildcard DNS**, so the `m.` Vincod probe is meaningless. Its
+  `robots.txt` is a bad-bot blocklist ending `Disallow: /` with **no
+  `User-agent: *` group**, preceded by five stray `Disallow: https://…` lines
+  that sit before any `User-agent` record and are discarded. Nothing binds us.
+- `delaille.com` is Domaine du Salvard; `domainedusalvard.com`,
+  `domaine-du-salvard.fr` and `salvard.fr` are all NXDOMAIN. It is Shopify, so
+  it answers on a wildcard and the `m.` probe proves nothing there either.
+- `drive.google.com/robots.txt` **allows `/file`** (so a shared file's view page
+  can be read and will at least give you its name) while
+  `drive.usercontent.google.com`, which serves the bytes, is `Disallow: /`.
 - `www.domaine-terres-blanches.com` is a **WordPress multisite under Saget la
   Perrière** — its uploads live under `/wp-content/uploads/sites/2/`, which is
   how to tell an estate site is really a group's. Its `wines-sitemap.xml` is a
@@ -1273,9 +1383,9 @@ alternative is inventing one.
 
 ## What the numbers say so far
 
-**Most producers publish nothing reachable.** Across 107 producers probed and
-253 wine records, 19 declarations are attached, 39 wines were rejected against
-a declaration that was found and read, and 195 came to nothing. Roughly a third
+**Most producers publish nothing reachable.** Across 122 producers probed and
+273 wine records, 22 declarations are attached, 40 wines were rejected against
+a declaration that was found and read, and 211 came to nothing. Roughly a third
 of producers have a readable e-label or an inline declaration; a handful have
 an unreadable one; the rest put no ingredient list anywhere this project can
 see. The binding constraint is not rendering — it is existence, discoverability
