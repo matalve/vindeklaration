@@ -16,11 +16,11 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the ninth French batch (2026-08-08, fourth run of the day): France stands at 61 producers, 133 wines, 4 found, 8 rejected.",
-  "attempted": 272,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the ninth French batch (2026-08-08, fourth run of the day): France stands at 62 producers, 134 wines, 4 found, 9 rejected.",
+  "attempted": 273,
   "found": 22,
   "not_found": 211,
-  "rejected": 39,
+  "rejected": 40,
   "declarations": [
     {
       "product_number": "5106001",
@@ -7946,6 +7946,34 @@
       "checked_at": "2026-08-08T21:50:00Z",
       "robots_disallowed": false,
       "server_rendered": true
+    },
+    {
+      "product_number": "7110601",
+      "name": "Domaine du Salvard Cheverny Blanc",
+      "producer": "Domaine du Salvard",
+      "country": "Frankrike",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://delaille.com/pages/declaration-nutritionnelle",
+      "source_type": "producer_site",
+      "raw_ingredients": "Liste des ingrédients/ Ingredients : Raisins/Grapes\nAllergénes/Allergens : Contient des sulfites/Contains sulphites\nacide métatartrique/metatartric acid\nMise en bouteille sous atmophère protectrice/ Bottling in a protective atmosphere",
+      "raw_nutrition": "Déclaration nutritionnelle/Nutrition declaration — Pour /per 100ml: Valeur énergétique /energy 328 KJ / 79 Kcal; Matieres grasses/fat 0 g, dont/of which Acides gras saturés/saturates 0 g; Glucide/carbohydrate 0,9 g, dont/of which Sucre/sugar 0,2 g; Protéine/protein 0 g; Sel/salt 0 g",
+      "raw_allergens": "Contient des sulfites/Contains sulphites",
+      "language": "fr + en (the page is written bilingually, French and English side by side, in one column)",
+      "vintage_on_source": null,
+      "market": "EU (per 100 ml, kJ and kcal, French-language producer page)",
+      "evidence": "A COMPLETE MANDATED SET, PUBLISHED ONCE FOR THE WHOLE ESTATE, NAMING NO WINE AND NO VINTAGE. Domaine du Salvard (Famille Delaille, Cheverny) sells from its own Shopify storefront at delaille.com — none of domainedusalvard.com, domaine-du-salvard.fr or salvard.fr resolves, and the Shopify host answers on a wildcard so the m-subdomain Vincod probe is meaningless. Its robots.txt is the standard Shopify file, products allowed, carrying the documented agent-addressing preamble that is page content and not an instruction to us. The product page /products/cheverny-blanc-domaine-du-salvard carries no declaration itself, but its footer and sidebar both link a site page, /pages/declaration-nutritionnelle, headed 'Déclaration nutritionnelle', and that page holds the full mandated set quoted above: an ingredient list ('Raisins/Grapes'), an allergen line, metatartaric acid, protective-atmosphere bottling, and a nutrition table per 100 ml with 328 kJ / 79 kcal. WHY IT IS REJECTED. The page names no wine, no cuvée, no appellation, no colour, no bottle size and no vintage — the strings 'Cheverny', 'Blanc', 'Rouge', 'Rosé' and 'Millésime' appear on it zero times. It is one declaration for the estate's entire range, which the matching rules exclude in terms: 'a generic one covering a producer's whole range is not this bottle's EU declaration'. That is not a technicality here, because the estate makes at least a white, a red, a rosé and a crémant, and a single ingredient list cannot be a per-wine disclosure for all of them. THE VINTAGE FAILS INDEPENDENTLY. Systembolaget's 7110601 is the Cheverny Blanc 2024; the producer's own product JSON gives 'Millésime : 2025', SKU 30000, 750 mL, 'Alcool : 12,5%', 85 % Sauvignon Blanc and 15 % Chardonnay. The strength and the pack agree with Systembolaget's 12,5 % and 750 ml and the grapes agree with its Sauvignon blanc/Chardonnay, but the shop has rolled a year past our bottle, and the declaration page is not dated either way — so there is nothing on this estate's surface that ties this text to the 2024 bottling. Recorded as rejected rather than not_found because a complete declaration was found and read; it is the match that fails, twice. IT IS STILL THE MOST PROMISING SHAPE SEEN IN THE LOIRE: a producer that has understood the obligation and answered it in the cheapest possible way, one page for everything. If a future run needs a rule for this shape, the question is whether a range-wide undated list may ever be attached to a specific bottling — and today's answer is no.",
+      "rejected_because": "the declaration is a single site-wide page naming no wine and no vintage (a generic range-wide list, which the matching rules exclude), and the producer's own product page has in any case rolled to the 2025 while Systembolaget's bottle is the 2024",
+      "sources_checked": [
+        "DNS: domainedusalvard.com, www.domainedusalvard.com, domaine-du-salvard.fr and salvard.fr all fail to resolve; delaille.com is Shopify (23.227.38.65) and answers on a wildcard, so m.delaille.com proves nothing",
+        "https://delaille.com/robots.txt — Shopify, /products/ and /pages/ allowed",
+        "https://delaille.com/products/cheverny-blanc-domaine-du-salvard — no declaration on the product page itself",
+        "https://delaille.com/products/cheverny-blanc-domaine-du-salvard.js — 'Millésime : 2025', 750 mL, 12,5 %, 85 % Sauvignon Blanc / 15 % Chardonnay, SKU 30000",
+        "https://delaille.com/pages/declaration-nutritionnelle — the estate's single, undated, range-wide declaration"
+      ],
+      "checked_at": "2026-08-08T22:05:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
     }
   ],
   "updated_at": "2026-08-08T23:30:00Z",
@@ -8098,7 +8126,7 @@
     {
       "at": "2026-08-08T23:30:00Z",
       "batch": "3 — France, eighth French batch: non-Burgundy producers from the untouched pool, one commit per producer.",
-      "result": "IN PROGRESS. 7 attempted, 2 found (Vignobles Jerome Quiot / Vieux Lazaret Chateauneuf Blanc 2024 on Vincod; Andre Brunel / Cotes du Rhone Sommelongue 2024 on iviti.fr, a new ABSOMOD/VINISCAN host whose gate is a Referer check), 5 not found (Domaine de la Tour du Bon x2, Domaine de Cristia, Famille Lieubeau, Domaine Horgelus)."
+      "result": "IN PROGRESS. 8 attempted, 2 found (Vignobles Jerome Quiot / Vieux Lazaret Chateauneuf Blanc 2024 on Vincod; Andre Brunel / Cotes du Rhone Sommelongue 2024 on iviti.fr, a new ABSOMOD/VINISCAN host whose gate is a Referer check), 5 not found (Domaine de la Tour du Bon x2, Domaine de Cristia, Famille Lieubeau, Domaine Horgelus), 1 rejected (Domaine du Salvard: a range-wide undated declaration page, and the shop has rolled to the 2025)."
     }
   ]
 }
