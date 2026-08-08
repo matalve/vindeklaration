@@ -9,12 +9,14 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-08, across 101 producers and 242 wine records. **The German
+Status as of 2026-08-08, across 107 producers and 253 wine records. **The German
 2024-and-later undeclared pool is exhausted** — see the closing section. **The
-French pool opened on 2026-08-07; thirty-nine producers and 102 wines in, and
+French pool opened on 2026-08-07; forty-five producers and 113 wines in, and
 the first (and so far only) French declaration was attached on the fifth French
 batch** — see *France, and why it is not Germany* and *The first French find*.
 **The Alsace slice is now exhausted too** — see *Alsace, tested to exhaustion*.
+The most recent French batch is *The second French inline declaration*, below,
+and it names the biggest untried lead in the country.
 
 ## Readable — server-rendered
 
@@ -637,6 +639,102 @@ ingredient list. **Structure and compliance resources do not predict
 publication** — the same lesson Wegeler taught in Germany, at ten times the
 size.
 
+### The second French inline declaration, and the best remaining French lead
+
+**2026-08-08, six producers, eleven wines: one declaration found and read, and
+rejected on vintage; ten not found.** Pascal Jolivet, François Chidaine, Baron
+Philippe de Rothschild, Château des Annibals, Domaine de la Rectorie, Domaines
+Paul Mas. The batch was picked to avoid Burgundy and to test the first-party
+non-Burgundy estate.
+
+| Producer | Region | Site | Our bottle on it? | Declaration? |
+|---|---|---|---|---|
+| Pascal Jolivet | Loire / Sancerre | WooCommerce + Beaver Builder | no, both cuvées rolled to the 2025 | none |
+| François Chidaine | Loire | WordPress, no shop, per-vintage fiches | no, fiches are the 2023 | none |
+| Baron Philippe de Rothschild | Bordeaux / Pays d'Oc | corporate WP + `moutoncadet.com` | **yes, Mouton Cadet Blanc 2024 exactly** | none |
+| Château des Annibals | Provence | **Vinium/Sylius, product pages HTTP 500** | no, all rosés are the 2025 | unreadable |
+| Domaine de la Rectorie | Roussillon | WooCommerce | no; and the Swedish cuvée does not exist | none |
+| **Domaines Paul Mas** | Languedoc | **WooCommerce, `cote-mas.fr`** | no, shop on the 2025 | **yes, complete and inline** — rejected |
+
+**Domaines Paul Mas is Rhonéa's pattern at ten times the size and is the best
+untried French lead in the file.** `www.cote-mas.fr` is the group's own shop
+for every one of its brands — Côté Mas, Paul Mas, Jean-Claude Mas, Arrogant
+Frog, Vignes de Nicole, La Forge Estate, Claude Val, Martinolles, Lauriga,
+Astelia — **271 products in one `product-sitemap.xml`**, and the product page
+prints the complete mandated set inline in the server's HTML at the end of the
+Description tab: an `Ingrédients` paragraph and a `Déclaration nutritionnelle`
+table per 100 ml with energy in kJ and kcal. **The lists are written per wine**
+(Sauvignon Vermentino: `Raisin,  Sulfites , Carboxymethylcellulose, Mis en
+bouteille sous atmosphère protectrice`; Gewurztraminer: `Raisin, Liqueur de
+tirage et Liqueur d'expédition,  Sulfites`), so this is not a house template.
+No robots.txt exists on the host at all (404), so nothing is disallowed.
+
+Three things about it worth knowing before spending a batch there:
+
+- **The H1 carries the vintage and the SKU confirms it.** `Côté Mas Sauvignon
+  Vermentino (75 cl) 2025`, `UGS : PCOT0054|25|CT6` — the `|25|` segment is the
+  vintage. That is a strong, cheap identity check.
+- **But not every product states a vintage.** The Gewurztraminer's H1 is just
+  `Côté Mas Gewurztraminer (75cl)`. A product with no vintage in the H1 and no
+  year in the UGS cannot be vintage-matched and should be closed at once.
+- **One product per cuvée, edited forward** — the Rhonéa failure exactly. Only
+  one Paul Mas wine is in the current 2024+ undeclared pool and it was rejected
+  on vintage. **Their other Swedish wines are mostly 2023 or undated**, so the
+  yield here will come from a future slice, not this one. Note also that
+  Systembolaget already carries declarations for eight Paul Mas wines, so the
+  group does supply the data when it supplies it.
+- `www.cotemas.com` serves a `robots.txt` but fails TLS with
+  `TLSV1_UNRECOGNIZED_NAME` on every content URL; `www.paulmas.com` is the
+  marketing site and `www.cote-mas.fr` is the shop. Reach the shop through
+  `paulmas.com/les-marques/cote-mas-2/`, whose one outbound product link is a
+  per-vintage shop URL.
+
+Four more things this batch settles:
+
+- **A Vinium deployment can be simply broken.** Château des Annibals is the
+  fourth Vinium site in the file: its Sylius product pages answer **HTTP 500**
+  on `fr_FR` and **404** on `en_US`, and the shop grid is a client-side
+  `Loading...`. A 500 is a server error, not a refusal and not a challenge —
+  record it as such. The `/sitemap/products.xml` still works and settled the
+  vintage question on its own, which is the cheapest possible close.
+- **`robots.txt` can name AI agents and no one else.** `www.bpdr.com` gives
+  `Disallow: /` to fifteen named tokens — ClaudeBot, GPTBot, OAI-SearchBot,
+  CCBot, Google-Extended among them — and has **no `User-agent: *` group at
+  all**, so under RFC 9309 an ordinary named crawler matches no group and
+  nothing is disallowed. That reading was taken, five pages were fetched, and
+  **it is written into the wine's record rather than left implicit**, because
+  the file's evident intent and its actual directives differ and the next run
+  should decide with its eyes open. This is the mirror image of the Fontanel
+  anti-pattern.
+- **Two hosts that do not answer at all.** `labaronnie.fr` and
+  `www.mouton-cadet.com` (both 193.169.65.167) time out at the TCP level over
+  httpx and over `curl -4`. Not a 401, 403 or challenge — a network failure,
+  and nothing to work around. The live Mouton Cadet site is `moutoncadet.com`
+  **without the hyphen**; the hyphenated domain is a separate dead host.
+- **The Beaver Builder false positive.** Pascal Jolivet's WooCommerce pages
+  match `elabel` eight times in the raw HTML and zero times in the stripped
+  text: every hit is the FLBuilderLayout JavaScript variable `responsiveLabel`.
+  Add it to the Stripe/Font Awesome list — **`e-label` and `elabel` are as
+  unsafe to grep raw as `ingr` and `nutri`.**
+
+The two Loire estates repeat the settled French shape and add one refinement.
+Both keep a per-cuvée page and a linked *fiche technique*, and **the fiche is
+the vintage marker**: Jolivet's file names are `…-ft2025-fr-…` and Chidaine's
+are `LES-ARGILES-2023.pdf`, so the range page alone tells you which vintage the
+estate documents before a single PDF is opened. Neither fiche is a declaration
+— Jolivet's states no vintage, no alcohol and no substances at all; Chidaine's
+gives residual sugar, total acidity, 13,5 % vol and the bottling month and
+still lists nothing. **One fiche settles the template for an estate; do not
+fetch the second.**
+
+And one more way the wine simply is not there: **Domaine de la Rectorie has no
+Barlande Blanc.** Systembolaget sells one; the estate's Barlande is a Collioure
+*rouge* of grenache noir and carignan, and its white-wine category returns
+exactly one product. The grapes Systembolaget lists (grenache gris, grenache
+blanc) match a *different* cuvée, L'Argile. That is close enough to be
+tempting and is a colour mismatch, which is a rejection of the identity, not an
+approximation of it.
+
 ## Untested
 
 **U-label** (`u-label.com`) has the widest EU footprint and no publicly linked
@@ -659,6 +757,19 @@ worth recognising in an `href`; nothing is known about how they render.
   redirects off-site. Neither is the producer.
 - `domaines-faiveley.com` fails TLS with a self-signed certificate;
   `domainefaiveley.com` does not resolve.
+- `www.cotemas.com` answers `robots.txt` but fails TLS with
+  `TLSV1_UNRECOGNIZED_NAME` on every content URL. Domaines Paul Mas' live shop
+  is `www.cote-mas.fr` and its marketing site is `www.paulmas.com`; neither
+  serves a `robots.txt` (both 404).
+- `www.mouton-cadet.com` and `labaronnie.fr` (both 193.169.65.167) do not
+  complete a TCP connection at all, under httpx or `curl -4`. The live brand
+  site is `moutoncadet.com`, **without the hyphen**, on a different address.
+- `www.bpdr.com/robots.txt` disallows fifteen *named* AI agents including
+  ClaudeBot and has no `User-agent: *` group, so a named project crawler
+  matches nothing. See the France section for how that was handled.
+- `www.annibals.com` is a Vinium/Sylius shop whose product pages return
+  **HTTP 500** while its `/sitemap/products.xml` works normally. Read the
+  sitemap first; it can close a producer without a readable product page.
 - Hällåkra's Wix site is genuinely server-rendered, so "no declaration" there is
   a real observation rather than a fetching artefact.
 - `p.f-label.eu/robots.txt` is **malformed**: the bytes are
@@ -1044,9 +1155,9 @@ alternative is inventing one.
 
 ## What the numbers say so far
 
-**Most producers publish nothing reachable.** Across 101 producers probed and
-242 wine records, 19 declarations are attached, 38 wines were rejected against
-a declaration that was found and read, and 185 came to nothing. Roughly a third
+**Most producers publish nothing reachable.** Across 107 producers probed and
+253 wine records, 19 declarations are attached, 39 wines were rejected against
+a declaration that was found and read, and 195 came to nothing. Roughly a third
 of producers have a readable e-label or an inline declaration; a handful have
 an unreadable one; the rest put no ingredient list anywhere this project can
 see. The binding constraint is not rendering — it is existence, discoverability
