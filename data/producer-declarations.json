@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the ninth French batch (2026-08-08, fourth run of the day): France stands at 59 producers, 131 wines, 4 found, 8 rejected.",
-  "attempted": 270,
+  "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the ninth French batch (2026-08-08, fourth run of the day): France stands at 60 producers, 132 wines, 4 found, 8 rejected.",
+  "attempted": 271,
   "found": 22,
-  "not_found": 209,
+  "not_found": 210,
   "rejected": 39,
   "declarations": [
     {
@@ -7888,6 +7888,35 @@
       "checked_at": "2026-08-08T21:20:00Z",
       "robots_disallowed": false,
       "server_rendered": true
+    },
+    {
+      "product_number": "5760001",
+      "name": "Clos de la Placelière Famille Lieubeau",
+      "producer": "Famille Lieubeau",
+      "country": "Frankrike",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "AN UNDATED CUVÉE PAGE, AND THE ONE SURFACE THAT MIGHT HAVE CARRIED A DECLARATION IS BLANKET-DISALLOWED. Famille Lieubeau's site is at lieubeau.com (lieubeau.fr fails TLS with TLSV1_ALERT_INTERNAL_ERROR and, over plain http, 301s there; famille-lieubeau.fr fails TLS the same way). It is an Avada WordPress with one page per cuvée, and ours exists: /vins/muscadet-sevre-et-maine-sur-lie-clos-de-la-placeliere/, AOP Muscadet Sèvre et Maine, Melon de Bourgogne, granite, 6-9 months on lees. THAT PAGE STATES NO VINTAGE ANYWHERE — it describes the cuvée, not a bottling — so even a declaration on it could not have been vintage-matched to Systembolaget's 2025, which is the profile the file already names as closable on sight. It carries no declaration in any case: 'ingrédient', 'nutrition', 'kcal', 'kJ', 'sulfit', 'elabel', 'vincod', 'v9.lu' and 'iviti' are all zero in the raw HTML, and the single 'qrcode' hit is the Font Awesome '.fa-qrcode' CSS rule, the documented lying grep. The 'Voir la fiche' links go to the sibling cuvée pages, not to PDFs — this estate publishes no fiche technique at all, so not even the usual French near-miss is here. THE SHOP WAS NOT FETCHED. The site's only 'Acheter nos vins' link points at http://boutique.lieubeau.com/, a separate host whose robots.txt is 27 bytes: 'User-agent: * / Disallow: /'. That is an ordinary webshop and not a regulated disclosure page, so the e-label exception does not reach it and the disallow was honoured in full; nothing on that host was requested beyond robots.txt. Whether the shop carries a declaration is therefore unknown and is stated as unknown. Vincod probe negative: m.lieubeau.fr is NXDOMAIN with an NXDOMAIN control, and the reliable 'vincod' grep of the cuvée page returns nothing. A web search for a Lieubeau e-label returns only generic French labelling-regulation articles and QR-platform vendors, no producer page.",
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: lieubeau.fr and www.lieubeau.fr 217.160.0.213, famille-lieubeau.fr 217.160.0.200; m.lieubeau.fr and randomxyz123.lieubeau.fr both NXDOMAIN",
+        "http://www.lieubeau.fr/robots.txt — 301s to lieubeau.com; 'User-agent: * / Disallow: /xmlrpc.php'",
+        "https://lieubeau.com/sitemap_index.xml — a soft 404 returning the home page; the range was read from /nos-vins/ instead",
+        "https://lieubeau.com/ and https://lieubeau.com/nos-vins/ — the full range, sixteen cuvées, no vintages",
+        "https://lieubeau.com/vins/muscadet-sevre-et-maine-sur-lie-clos-de-la-placeliere/ — our cuvée, no vintage, no declaration",
+        "http://boutique.lieubeau.com/robots.txt — 'Disallow: /', honoured; no page on the shop was fetched"
+      ],
+      "checked_at": "2026-08-08T21:40:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
     }
   ],
   "updated_at": "2026-08-08T23:30:00Z",
@@ -8040,7 +8069,7 @@
     {
       "at": "2026-08-08T23:30:00Z",
       "batch": "3 — France, eighth French batch: non-Burgundy producers from the untouched pool, one commit per producer.",
-      "result": "IN PROGRESS. 5 attempted, 2 found (Vignobles Jerome Quiot / Vieux Lazaret Chateauneuf Blanc 2024 on Vincod; Andre Brunel / Cotes du Rhone Sommelongue 2024 on iviti.fr, a new ABSOMOD/VINISCAN host whose gate is a Referer check), 3 not found (Domaine de la Tour du Bon x2, Domaine de Cristia)."
+      "result": "IN PROGRESS. 6 attempted, 2 found (Vignobles Jerome Quiot / Vieux Lazaret Chateauneuf Blanc 2024 on Vincod; Andre Brunel / Cotes du Rhone Sommelongue 2024 on iviti.fr, a new ABSOMOD/VINISCAN host whose gate is a Referer check), 4 not found (Domaine de la Tour du Bon x2, Domaine de Cristia, Famille Lieubeau)."
     }
   ]
 }
