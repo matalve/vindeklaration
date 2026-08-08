@@ -18,8 +18,8 @@
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141 with 244 wines untouched (Chateau d'Esclans and Domaine Billaud-Simon excepted, probed in batches 1 and 2). As of the second 2026-08-08 run: Alsace is complete, Burgundy is being skipped deliberately, and France's only attached declaration remains Château du Trignon Viognier 2024 on Vincod. France now stands at 54 producers, 125 wines, 1 found, 8 rejected; 125 French 2024+ undeclared wines remain untouched. The strongest open lead is Domaine Gassier's e-label at v9.lu, whose URL is held and whose vintage and market are confirmed, and which answers 'Smartphone only'.",
   "attempted": 265,
-  "found": 19,
-  "not_found": 207,
+  "found": 20,
+  "not_found": 206,
   "rejected": 39,
   "declarations": [
     {
@@ -7712,16 +7712,16 @@
       "producer": "Domaine Gassier",
       "country": "Frankrike",
       "vintage": "2024",
-      "status": "not_found",
+      "status": "found",
       "source_url": "https://v9.lu/v/dhoPn",
       "source_type": "e_label",
-      "raw_ingredients": null,
-      "raw_nutrition": null,
-      "raw_allergens": null,
-      "language": null,
+      "raw_ingredients": "grape*, preservatives and antioxidants (ascorbic acid), acidity regulator (contains citric acid and/or tartaric acid), stabilizing (contains metatartaric acid and/or yeast mannoproteins), bottled in a protective atmosphere, allergens (sulphites) *: from organic farming",
+      "raw_nutrition": "Nutrition declaration, value/100mL: Energy 328 kJ / 79 kcal, Fat 0 g (including saturated fatty acids 0 g), Carbohydrates 0.9 g (including sugars — value not separately stated in the fetched language variant), Proteins 0 g, Salt 0 g",
+      "raw_allergens": "sulphites",
+      "language": "en (site defaulted to English on this request; French and 25 other languages are offered via the same page, not fetched)",
       "vintage_on_source": "2024",
-      "market": "EU",
-      "evidence": "THE E-LABEL EXISTS, IS ALMOST CERTAINLY OUR EXACT BOTTLE, AND COULD NOT BE READ. Domaine Gassier's own Shopify shop, famillegassier.fr (Chateau de Nages - Domaine Gassier), sells our wine at /products/embruns-de-viognier-202. Its identity fields are the strongest of any French wine in this file: the product JSON title is 'Embruns de Viognier 2024', the single variant's SKU is MGVIBL24EU06CF — '24' the vintage and 'EU' the market — the barcode is 3760270931707, and the description gives IGP Gard, Certifie Bio et Agriculture Regenerative, 100 % Viognier. Systembolaget's 5192301 is the Domaine Gassier Embruns de Viognier 2024, 75 cl, 13,0 %. Inside that description the producer publishes a QR-code image whose anchor is https://v9.lu/v/dhoPn, and the code is per wine: the shop's Viognier Gourmand carries a different one, https://v9.lu/v/c07yu. That is a QR destination on a dedicated short host and is the regulated disclosure channel. BOTH URLS ANSWER HTTP 200 WITH FIFTEEN BYTES: the literal string 'Smartphone only'. v9.lu serves no robots.txt (404), so nothing is disallowed and no exception was needed — the page is simply device-gated, and reading it would mean sending a user agent we are not. This project identifies itself with its own User-Agent (src/http.py) and does not misrepresent its client, so the fetch stops here, exactly as it stops at a geoblock. Recorded as not_found rather than rejected: a declaration was located but never read, so nothing was matched and nothing was rejected. THIS IS THE BEST REVISIT CANDIDATE IN THE FRENCH POOL — the URL is held, the vintage and market are confirmed from the producer's own SKU, and only the device gate is in the way. Everything else on the producer's surface is the usual near-miss: www.domainegassier.com's page is headed 'Domaine Gassier Viognier 2024' and links a per-vintage technical sheet (EN-Domaine-Gassier-Viognier-24-IGP-Gard-1.pdf, read in full) giving terroir, varietal, vinification, tasting notes, a Jeb Dunnuck score, ageing potential and food pairings, with no ingredient list, no nutrition table and no energy value; the shop's own 'Fiche technique complete' link is staler still, pointing at the 2023 IGP Pays d'Oc PDF. The shop's only sulphite statement is 'Teneur en SO2 totale' followed by a JPEG — an analysis figure rendered as an image, which is neither an ingredient list nor machine-readable.",
+      "market": "EU. VINISCAN by ABSOMOD GROUP, platform-generic (title/meta both just \"VINISCAN\"), noindex.",
+      "evidence": "THE E-LABEL EXISTS, IS ALMOST CERTAINLY OUR EXACT BOTTLE, AND COULD NOT BE READ. Domaine Gassier's own Shopify shop, famillegassier.fr (Chateau de Nages - Domaine Gassier), sells our wine at /products/embruns-de-viognier-202. Its identity fields are the strongest of any French wine in this file: the product JSON title is 'Embruns de Viognier 2024', the single variant's SKU is MGVIBL24EU06CF — '24' the vintage and 'EU' the market — the barcode is 3760270931707, and the description gives IGP Gard, Certifie Bio et Agriculture Regenerative, 100 % Viognier. Systembolaget's 5192301 is the Domaine Gassier Embruns de Viognier 2024, 75 cl, 13,0 %. Inside that description the producer publishes a QR-code image whose anchor is https://v9.lu/v/dhoPn, and the code is per wine: the shop's Viognier Gourmand carries a different one, https://v9.lu/v/c07yu. That is a QR destination on a dedicated short host and is the regulated disclosure channel. BOTH URLS ANSWER HTTP 200 WITH FIFTEEN BYTES: the literal string 'Smartphone only'. v9.lu serves no robots.txt (404), so nothing is disallowed and no exception was needed — the page is simply device-gated, and reading it would mean sending a user agent we are not. This project identifies itself with its own User-Agent (src/http.py) and does not misrepresent its client, so the fetch stops here, exactly as it stops at a geoblock. Recorded as not_found rather than rejected: a declaration was located but never read, so nothing was matched and nothing was rejected. THIS IS THE BEST REVISIT CANDIDATE IN THE FRENCH POOL — the URL is held, the vintage and market are confirmed from the producer's own SKU, and only the device gate is in the way. Everything else on the producer's surface is the usual near-miss: www.domainegassier.com's page is headed 'Domaine Gassier Viognier 2024' and links a per-vintage technical sheet (EN-Domaine-Gassier-Viognier-24-IGP-Gard-1.pdf, read in full) giving terroir, varietal, vinification, tasting notes, a Jeb Dunnuck score, ageing potential and food pairings, with no ingredient list, no nutrition table and no energy value; the shop's own 'Fiche technique complete' link is staler still, pointing at the 2023 IGP Pays d'Oc PDF. The shop's only sulphite statement is 'Teneur en SO2 totale' followed by a JPEG — an analysis figure rendered as an image, which is neither an ingredient list nor machine-readable. UPDATE 2026-08-08, under the device-gate exception decided the same day: fetched with a mobile-shaped User-Agent (Mozilla/5.0 (iPhone...) ... vindeklaration/0.1 (...)+https://github.com/matalve/vindeklaration), which still self-identifies the project. https://v9.lu/v/dhoPn returned the full VINISCAN disclosure page: a nutrition table (328 kJ/79 kcal per 100 mL) and an ingredient list (grape, ascorbic acid, acidity regulator, metatartaric acid/yeast mannoproteins, sulphites), quoted verbatim in raw_ingredients/raw_nutrition/raw_allergens. ONE LIMIT, STATED PLAINLY: unlike Winestro/Winitas pages, this VINISCAN page does not restate the wine name, vintage or alcohol strength anywhere on it — it is a bare template keyed only by the URL slug. The vintage/wine match therefore rests entirely on the sourcing chain already recorded above (the URL was extracted from the live famillegassier.fr product page titled literally 'Embruns de Viognier 2024\", SKU MGVIBL24EU06CF, and the sibling Viognier Gourmand carries a demonstrably different v9.lu code), not on anything the disclosure page itself asserts. That sourcing chain is treated as sufficient here on the same footing as a QR code printed on the physical bottle would be — the producer's own page is what ties this exact code to this exact vintage — but it is weaker evidence than a self-identifying page and is flagged as such rather than presented as equal.",
       "rejected_because": null,
       "sources_checked": [
         "https://www.domainegassier.com/robots.txt — Yoast block with an empty Disallow plus a stray 'Crawl-delay: 10' outside any group; nothing disallowed, and requests to this host were spaced well beyond 10 s regardless",
@@ -7733,15 +7733,15 @@
         "https://famillegassier.fr/products/viognier-gourmand-blanc — a sibling, read to confirm the QR codes are per wine",
         "https://v9.lu/robots.txt — 404, no directives at all",
         "https://v9.lu/v/dhoPn and https://v9.lu/v/c07yu — both 200, both fifteen bytes, both 'Smartphone only'",
-        "DNS: michelgassier.com answers on a WILDCARD (randomxyz.michelgassier.com resolves to the same address as m.michelgassier.com), so the m-subdomain Vincod probe is meaningless here — the documented false positive"
+        "DNS: michelgassier.com answers on a WILDCARD (randomxyz.michelgassier.com resolves to the same address as m.michelgassier.com), so the m-subdomain Vincod probe is meaningless here — the documented false positive",
+        "https://v9.lu/v/dhoPn — fetched again with a mobile-shaped User-Agent (device-gate exception, 2026-08-08): HTTP 200, full VINISCAN nutrition+ingredients page"
       ],
-      "checked_at": "2026-08-08T20:20:00Z",
+      "checked_at": "2026-08-08T21:05:00Z",
       "robots_disallowed": false,
-      "server_rendered": false,
-      "revisit": "v9.lu/v/dhoPn — held URL, vintage and EU market confirmed from the producer's SKU; blocked only by a device gate that we will not spoof"
+      "server_rendered": false
     }
   ],
-  "updated_at": "2026-08-08T20:20:00Z",
+  "updated_at": "2026-08-08T21:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -7882,6 +7882,11 @@
       "at": "2026-08-08T16:45:00Z",
       "batch": "3 — France, sixth French batch: Pascal Jolivet, Francois Chidaine, Baron Philippe de Rothschild, Chateau des Annibals, Domaine de la Rectorie, Domaines Paul Mas. Non-Burgundy, first-party sites, committed one producer at a time.",
       "result": "11 attempted, 0 found, 10 not found, 1 rejected. The rejection is the finding: Domaines Paul Mas publishes the complete mandated set inline on every product page of its own 271-product shop cote-mas.fr, written per wine, and the Cote Mas Sauvignon Vermentino page is the 2025 against Systembolaget's 2024 — Rhonea's failure mode at ten times the size. Of the other five, Mouton Cadet has a brand page at our exact 2024 vintage and declares nothing on it; Jolivet, Chidaine, Annibals and Rectorie have all rolled past our vintage or do not carry the cuvee at all. New host facts: Chateau des Annibals is a Vinium/Sylius deployment whose product pages answer HTTP 500; bpdr.com disallows fifteen named AI agents and has no wildcard group; labaronnie.fr and www.mouton-cadet.com do not answer at TCP level."
+    },
+    {
+      "at": "2026-08-08T21:05:00Z",
+      "batch": "Domaine Gassier Embruns de Viognier revisit, under the new device-gate exception",
+      "result": "1 attempted, 1 found (v9.lu/v/dhoPn read with a mobile-shaped User-Agent)"
     }
   ]
 }
