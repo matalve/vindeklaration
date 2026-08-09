@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after two batches: 19 producers, 61 wines, 2 found, 54 not found, 5 rejected (three of the rejections are Marchesi Antinori's, from the 2026-07-28/30 reconnaissance). The second Italian batch — Cantina Terlan, Koefererhof, Hans Rottensteiner, Weingut Pranzegg, Cantina LaVis, Ca' dei Frati, Tenute Piccini — attached the project's FIRST TWO ITALIAN DECLARATIONS, both Ca' dei Frati, both inline on the estate's ordinary /vini/ marketing page with Annata, Bottiglia and Grado alcolico stated beside the list. 211 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 325,
+  "attempted": 328,
   "found": 24,
-  "not_found": 259,
+  "not_found": 262,
   "rejected": 42,
   "declarations": [
     {
@@ -9505,9 +9505,84 @@
       "robots_disallowed": false,
       "fetch_result": "200, maintenance placeholder; TLS hostname mismatch on the host",
       "note": "Revisit candidate once the rebuilt site is live."
+    },
+    {
+      "product_number": "5262501",
+      "name": "Marco Porello Roero Arneis",
+      "producer": "Marco Porello",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://porellovini.it/Arneis",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Azienda Agricola Marco Porello S.S., C.so Alba 71, Canale (CN), P.IVA 00711380048 — the estate's own site is porellovini.it (a hand-built static site, no shop, ten cuvee pages under /vini). Our wine has its own page, /Arneis = 'Roero Arneis Classico DOCG', Vitigno Arneis 100%, 'Capacita bottiglie: 0,75 lt. e 0,375 lt.' — and THE PAGE STATES NO VINTAGE AT ALL. It is the dominant Italian shape: a page about a cuvee, not about a bottling, running Nome, Tipologia, Nome del vigneto, Terreno, Vitigno, Resa, Metodo d'allevamento, Data di vendemmia, Metodo di vinificazione, Maturazione, Colore, Profumo, Sapore, Abbinamenti, Temperatura di servizio, Conservazione, Capacita bottiglie — and stopping. Zero matches, in raw HTML as well as in stripped text, for ingredien, nutrizion, solfit, kcal, kJ, energia, dichiarazion, allergen, annata, e-label, elabel, etichett, qrcode, u-label and vincod, on this page and on the two siblings. No declaration and no vintage to match one against.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://porellovini.it/",
+        "https://porellovini.it/robots.txt",
+        "https://porellovini.it/sitemap.xml",
+        "https://porellovini.it/vini",
+        "https://porellovini.it/Arneis",
+        "https://porellovini.it/pdf/Arneis.pdf (HEAD only)"
+      ],
+      "checked_at": "2026-08-09T21:35:00Z",
+      "robots_disallowed": false,
+      "note": "THE SCHEDA WAS CLOSED BY A HEAD REQUEST AND NOT DOWNLOADED. Each cuvee page links one 'Scheda prodotto' PDF at /pdf/{Cuvee}.pdf with no vintage in the file name; HEAD gives Last-Modified 'Wed, 06 Jun 2018' for both Arneis.pdf and Camestri.pdf and 'Wed, 03 Feb 2021' for Nebbiolo.pdf. All three predate the 8 December 2023 production date the obligation turns on, so none can carry a declaration for a 2024 or 2025 bottling. This is the WordPress-upload-path rule inverted and working: here the header confirms the file is old rather than contradicting the path. Three HEADs, no bodies fetched."
+    },
+    {
+      "product_number": "5268101",
+      "name": "Marco Porello Roero Arneis Camestri",
+      "producer": "Marco Porello",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://porellovini.it/Camestri",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same estate and same shape as product 5262501. /Camestri is 'Roero Arneis Camestri DOCG', single-vineyard Camestri in Vezza d'Alba, Arneis 100%, 'Capacita bottiglie: 0,75 lt. e 1,5 lt.' — cuvee and pack match Systembolaget, and the page states no vintage anywhere, so a 2024 bottling cannot be matched even if a list appeared. No ingredient list, no nutrition table, no energy value, not even a sulphite line: zero matches for ingredien, nutrizion, solfit, kcal, energia, dichiarazion and allergen in raw HTML and in stripped text. Its scheda, /pdf/Camestri.pdf, is Last-Modified 6 June 2018 and was not downloaded.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://porellovini.it/vini",
+        "https://porellovini.it/Camestri",
+        "https://porellovini.it/pdf/Camestri.pdf (HEAD only)"
+      ],
+      "checked_at": "2026-08-09T21:35:00Z",
+      "robots_disallowed": false,
+      "note": null
+    },
+    {
+      "product_number": "5545001",
+      "name": "Marco Porello Langhe Nebbiolo",
+      "producer": "Marco Porello",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://porellovini.it/Nebbiolo",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same estate and same shape as product 5262501. /Nebbiolo is 'Langhe Nebbiolo DOC', Nebbiolo 100%, 'Capacita bottiglie: 0,75 lt., 1,5 lt e 0,375 lt' — cuvee and pack match Systembolaget, no vintage stated anywhere on the page, no declaration markers in raw HTML or stripped text. Its scheda, /pdf/Nebbiolo.pdf, is Last-Modified 3 February 2021 and was not downloaded.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://porellovini.it/vini",
+        "https://porellovini.it/Nebbiolo",
+        "https://porellovini.it/pdf/Nebbiolo.pdf (HEAD only)"
+      ],
+      "checked_at": "2026-08-09T21:35:00Z",
+      "robots_disallowed": false,
+      "note": "HOST QUIRK: the estate is porellovini.it (80.88.87.65). The similarly named porello.it / www.porello.it (80.88.86.125) is a DIFFERENT host that presents a SELF-SIGNED certificate over HTTPS and answers HTTP 403 from Microsoft-IIS/10.0 over plain HTTP; it was not pursued, and nothing links the estate to it. marcoporello.com, www.marcoporello.com and marcoporello.it are all NXDOMAIN. On porellovini.it both /robots.txt and /sitemap.xml return a genuine Plesk/IIS HTTP 404, so there are no directives at all and no census; the ten cuvee URLs come from the site's own /vini index."
     }
   ],
-  "updated_at": "2026-08-09T21:20:00Z",
+  "updated_at": "2026-08-09T21:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
