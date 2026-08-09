@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after two batches: 19 producers, 61 wines, 2 found, 54 not found, 5 rejected (three of the rejections are Marchesi Antinori's, from the 2026-07-28/30 reconnaissance). The second Italian batch — Cantina Terlan, Koefererhof, Hans Rottensteiner, Weingut Pranzegg, Cantina LaVis, Ca' dei Frati, Tenute Piccini — attached the project's FIRST TWO ITALIAN DECLARATIONS, both Ca' dei Frati, both inline on the estate's ordinary /vini/ marketing page with Annata, Bottiglia and Grado alcolico stated beside the list. 211 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 322,
+  "attempted": 325,
   "found": 24,
-  "not_found": 256,
+  "not_found": 259,
   "rejected": 42,
   "declarations": [
     {
@@ -9429,9 +9429,85 @@
       "checked_at": "2026-08-09T19:58:00Z",
       "robots_disallowed": false,
       "note": "Recorded not_found rather than rejected because nothing was found to reject — no declaration was read for any candidate bottling. The identity failure is worth flagging separately for a later run: if Piccini ever publishes, this wine will still need the organic Chianti to appear on the producer's surface before anything can be attached to it."
+    },
+    {
+      "product_number": "236802",
+      "name": "Paolo Scavino Langhe Nebbiolo",
+      "producer": "Paolo Scavino",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.paoloscavino.com/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Azienda Agricola Paolo Scavino, Castiglione Falletto (CN), Piemonte. THE PRODUCER'S ENTIRE WEBSITE IS A MAINTENANCE PLACEHOLDER. www.paoloscavino.com serves a single 2,5 kB page reading 'Sito in manutenzione' / 'Sito in fase di aggiornamento — Updating our website' with a phone number and info@paoloscavino.com and nothing else; there is no navigation, no wine list and no per-wine page of any kind. /robots.txt and /sitemap.xml both return HTTP 404 (a real 404 page from the host, not a soft one), so there are no directives and no census to read. No second domain exists: paoloscavino.it and www.paoloscavino.it are both NXDOMAIN. An Italian-language web search for an e-label for this producer returned only generic vendor and trade-press pages about Regulation (EU) 2021/2117 and nothing naming Scavino. Nothing about this wine, its vintage or its ingredients is published on any producer surface reachable today.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.paoloscavino.com/",
+        "https://www.paoloscavino.com/robots.txt",
+        "https://www.paoloscavino.com/sitemap.xml",
+        "DNS: paoloscavino.it, www.paoloscavino.it (both NXDOMAIN)"
+      ],
+      "checked_at": "2026-08-09T21:20:00Z",
+      "robots_disallowed": false,
+      "fetch_result": "200, but the site is a maintenance placeholder; TLS certificate mismatch on the host (see note)",
+      "note": "HOST QUIRK: www.paoloscavino.com and paoloscavino.com both resolve to 146.59.214.79 (plskx-r5.sistnet.it, a Sistnet shared host) and serve a certificate whose CN and SANs are sistnet.it, *.sistnet.it and *.sistnet.cloud only — the producer's own hostname is not in it, so every verified HTTPS request fails with a hostname mismatch, and plain HTTP 301s to HTTPS. The maintenance page was read once with certificate verification disabled; that is a broken server configuration, not a refusal (no 401, 403, 429 or challenge), but it does weaken authentication, so NOTHING WOULD HAVE BEEN ATTACHED FROM THIS HOST WITHOUT NOTING IT. Moot here: the page carries no wine content at all. Revisit candidate — all three Scavino wines are 2024/2025 and the site is explicitly being rebuilt."
+    },
+    {
+      "product_number": "5662701",
+      "name": "Paolo Scavino Langhe Bianco Sorriso",
+      "producer": "Paolo Scavino",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://www.paoloscavino.com/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same producer and same single finding as product 236802: www.paoloscavino.com is a maintenance placeholder ('Sito in fase di aggiornamento'), robots.txt and sitemap.xml both 404, no .it domain exists, no per-wine page exists for any Scavino wine. Nothing to match against for Langhe Bianco Sorriso 2025, 750 ml, 13,5 % vol.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.paoloscavino.com/",
+        "https://www.paoloscavino.com/robots.txt",
+        "https://www.paoloscavino.com/sitemap.xml"
+      ],
+      "checked_at": "2026-08-09T21:20:00Z",
+      "robots_disallowed": false,
+      "fetch_result": "200, maintenance placeholder; TLS hostname mismatch on the host",
+      "note": "Revisit candidate once the rebuilt site is live."
+    },
+    {
+      "product_number": "7106301",
+      "name": "Barbera d'Alba Paolo Scavino",
+      "producer": "Paolo Scavino",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.paoloscavino.com/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same producer and same single finding as product 236802: the whole of www.paoloscavino.com is one maintenance page, robots.txt and sitemap.xml 404, no alternative domain. Nothing to match against for Barbera d'Alba 2024, 750 ml, 14,0 % vol.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.paoloscavino.com/",
+        "https://www.paoloscavino.com/robots.txt",
+        "https://www.paoloscavino.com/sitemap.xml"
+      ],
+      "checked_at": "2026-08-09T21:20:00Z",
+      "robots_disallowed": false,
+      "fetch_result": "200, maintenance placeholder; TLS hostname mismatch on the host",
+      "note": "Revisit candidate once the rebuilt site is live."
     }
   ],
-  "updated_at": "2026-08-09T19:58:00Z",
+  "updated_at": "2026-08-09T21:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
