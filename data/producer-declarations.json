@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after the first batch: 8 producers, 24 wines, 0 found, 22 not found, 2 rejected (counting Antinori, Tommasi and Vini Franchetti from the 2026-07-28/30 reconnaissance, Italy stands at 11 producers and 44 wines). 228 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 320,
+  "attempted": 322,
   "found": 24,
-  "not_found": 254,
+  "not_found": 256,
   "rejected": 42,
   "declarations": [
     {
@@ -9376,9 +9376,62 @@
       "checked_at": "2026-08-09T19:32:00Z",
       "robots_disallowed": false,
       "note": "The shop's sitemap is a cheap and unusually complete census: 2 503 URLs, one per product per market per language, the market segment being /{country}/{currency}/{lang}/ and the vintage being part of the product slug. One fetch tells you every vintage of every wine the house sells and in which markets — worth remembering for any producer on the same platform (support is at marchesidibarolo@wineplatform.it, so the vendor appears to be 'wineplatform.it')."
+    },
+    {
+      "product_number": "7165301",
+      "name": "Donna di Valiano Chardonnay",
+      "producer": "Tenute Piccini",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://shop.piccini1882.it/it/eur/it/prodotti/donna-di-valiano-toscana-chardonnay-igt-2024-valiano",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2024",
+      "market": "IT/EU",
+      "evidence": "Tenute Piccini S.p.A., Località Piazzole, Castellina in Chianti (SI), P.IVA 00368360525 — an eleven-brand Tuscan group (Piccini, Valiano, Torre Mora, Tenuta Moraia, Regio Cantina, Villa al Cortile, Geografico, Porta Rossa, Donna Gloria, Bastioni della Rocca) running its own first-party e-commerce at shop.piccini1882.it, which is exactly the shape the last Italian batch recommended starting from. OUR EXACT BOTTLING HAS ITS OWN PRODUCT PAGE AND DECLARES NOTHING. The page reads 'Donna di Valiano Toscana Chardonnay IGT 2024 - Valiano', 'Annata 2024', 'Vitigni Chardonnay, Sauvignon Blanc', 'Alcol 13%', 'Formato 0.75l', and under a heading 'Info' the single line 'CONTIENE SOLFITI - PRODOTTO IN ITALIA'. No ingredient list, no nutrition table, no energy value; zero matches for ingredien, nutrizion, kcal, energia and allergen in raw HTML and in text. Vintage and pack match Systembolaget exactly; the alcohol is 13 % against Systembolaget's 12,5 %, half a point, which is moot with nothing to attach. The corporate site www.piccini1882.it (WooCommerce, /catalogo/ and /prodotto/{slug}/) carries no declaration either and its product pages link out to this shop.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.tenutepiccini.it/robots.txt",
+        "https://www.piccini1882.it/robots.txt",
+        "https://www.piccini1882.it/sitemap_index.xml",
+        "https://www.piccini1882.it/page-sitemap.xml",
+        "https://www.piccini1882.it/catalogo/",
+        "https://shop.piccini1882.it/robots.txt",
+        "https://shop.piccini1882.it/sitemap.xml",
+        "https://shop.piccini1882.it/it/eur/it/prodotti/donna-di-valiano-toscana-chardonnay-igt-2024-valiano"
+      ],
+      "checked_at": "2026-08-09T19:55:00Z",
+      "robots_disallowed": false,
+      "note": "A PLATFORM IS NOW IDENTIFIED AND IT IS THE SAME ONE MARCHESI DI BAROLO USES. Both shops answer at {shop}.{producer}.it with the path /{country}/{currency}/{lang}/prodotti/{slug-with-vintage}, both name their sitemap from a permissive 'User-Agent: * / Allow: /' robots.txt, and both print the identical field set — Annata, Denominazione, Vitigni, Alcol, Formato, Temperatura di servizio, then 'Info: Contiene Solfiti - Prodotto in Italia'. Marchesi's customer-care address is marchesidibarolo@wineplatform.it, so the vendor is wineplatform.it. IT IS EXCELLENT FOR IDENTITY AND EMPTY OF DECLARATION: one product per vintage, the vintage in the slug and in the page, the pack and the strength stated — and an allergen line where the ingredient list should be. Two producers, four wines, the same near-miss. Recognise it and expect nothing. Its sitemap is a complete census (8 221 URLs here, 263 Italian-market products across all eleven brands) and is the cheapest possible vintage check. TRAP: the <title> is stale where the H1 is current — this page's title says 'IGT 2023' and the Collezione Oro's says '2022', while both H1s say 2024. Read the H1 and the Annata field, never the title."
+    },
+    {
+      "product_number": "2246701",
+      "name": "Piccini Collezione Oro Chianti Organic",
+      "producer": "Tenute Piccini",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE CUVÉE DOES NOT EXIST ON THE PRODUCER'S OWN SURFACE, WHICH WOULD BLOCK A FIND EVEN IF THERE WERE ONE. Systembolaget sells 'Piccini Collezione Oro Chianti Organic' 2024, 750 ml, 13,0 %, flagged organic, Sangiovese, in the fast assortment. Tenute Piccini's own shop lists 263 Italian-market products and its Collezione Oro range is Chianti Governo 2023, Chianti Riserva 2022, Chianti Superiore 2022/2023/2024, Rosso Toscana, Rosato, Orvieto Classico and a Gran Cuvée — AND NOT ONE OF THEM IS ORGANIC. The group does sell organic wines and labels them plainly, with 'bio' in the slug (Histrio Anfora, Scalunera, Calandrino, Primasso, Il Pacchia, Genesi, Casarossa, Valiano Chianti Classico bio), so the absence of a bio Collezione Oro is informative rather than an artefact of naming. The nearest sibling, Collezione Oro Chianti Superiore DOCG 2024, was read to be sure: same producer, same range, same vintage, 13 % vol and 0,75 l matching Systembolaget — and zero occurrences of bio, biologico or organic anywhere in its HTML. That is a different bottling, so it cannot stand in for ours. This is the export-only brand rule at the level of a single SKU: an organic bottling made for a foreign shelf and absent from the producer's own catalogue. Its page would have declared nothing in any case — every product on this shop carries only 'Contiene Solfiti - Prodotto in Italia'.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://shop.piccini1882.it/sitemap.xml",
+        "https://shop.piccini1882.it/it/eur/it/prodotti/collezione-oro-chianti-superiore-docg-2024-piccini",
+        "https://www.piccini1882.it/catalogo/"
+      ],
+      "checked_at": "2026-08-09T19:58:00Z",
+      "robots_disallowed": false,
+      "note": "Recorded not_found rather than rejected because nothing was found to reject — no declaration was read for any candidate bottling. The identity failure is worth flagging separately for a later run: if Piccini ever publishes, this wine will still need the organic Chianti to appear on the producer's surface before anything can be attached to it."
     }
   ],
-  "updated_at": "2026-08-09T19:32:00Z",
+  "updated_at": "2026-08-09T19:58:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
