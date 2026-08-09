@@ -17,8 +17,8 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after the first batch: 8 producers, 24 wines, 0 found, 22 not found, 2 rejected (counting Antinori, Tommasi and Vini Franchetti from the 2026-07-28/30 reconnaissance, Italy stands at 11 producers and 44 wines). 228 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 316,
-  "found": 22,
+  "attempted": 318,
+  "found": 24,
   "not_found": 252,
   "rejected": 42,
   "declarations": [
@@ -9267,9 +9267,65 @@
       "checked_at": "2026-08-09T18:42:00Z",
       "robots_disallowed": false,
       "note": "The shop lists a separate '\"RITRATTI\" Sauvignon' and a 'Sauvignon Trentino DOC' under prodotti-esclusivi; our wine is the I Classici bottling at 12,5 % vol, which is the one read here. Neither sibling declares anything either."
+    },
+    {
+      "product_number": "7163701",
+      "name": "Pratto Bianco del Garda Cà dei Frati",
+      "producer": "Cà dei Frati",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "found",
+      "source_url": "https://cadeifrati.it/vini/pratto/",
+      "source_type": "producer_site",
+      "raw_ingredients": "uva, mosto di uve concentrato, agenti stabilizzanti (acido citrico, gomma arabica, carbossimetilcellulosa), conservanti e antiossidanti (solfiti, acido L-ascorbico).\nImbottigliato in atmosfera protettiva.",
+      "raw_nutrition": "Dichiarazione nutrizionale per 100 ml\nEnergia: 337 kJ – 81 kcal\nGrassi: 0 g\ndi cui Acidi Grassi Saturi: 0 g\nCarboidrati: 1,5 g\ndi cui Zuccheri: 0,9 g\nProteine: 0 g\nSale: 0 g",
+      "raw_allergens": "PRODOTTO IN ITALIA – CONTIENE SOLFITI",
+      "language": "it",
+      "vintage_on_source": "2024",
+      "market": "IT/EU",
+      "evidence": "THE FIRST ITALIAN DECLARATION THIS PROJECT HAS ATTACHED TO A WINE, AND IT IS INLINE ON THE PRODUCER'S ORDINARY MARKETING PAGE. Az. Agr. Cà dei Frati, Via Frati 22, Lugana di Sirmione (BS), P.IVA 00631300985 — the Dal Cero family estate, Lombardia, which is Systembolaget's producer and region. https://cadeifrati.it/vini/pratto/ is the page for the cuvée Pratto and it states, in server-rendered HTML in a block of its own immediately above the ingredient heading: 'Annata: 2024', 'Bottiglia: 750 ml', 'Grado alcolico: 13 % vol', 'PRODOTTO IN ITALIA – CONTIENE SOLFITI'. ALL FIVE MATCHING TESTS PASS EXACTLY: producer Cà dei Frati; cuvée Pratto (the estate's only wine of that name — its range is I Frati, Brolettino, Pratto, Rosa dei Frati, Ronchedone, Tre Filer, Cuvée dei Frati and the Privilegio di Famiglia bottlings, none of them confusable); VINTAGE 2024 against Systembolaget's 2024; pack 750 ml against 750 ml; alcohol 13 % vol against 13,0 %, a difference of zero. The declaration itself is a proper 'Ingredienti' list — grapes, concentrated must, stabilisers (citric acid, gum arabic, CMC), preservatives and antioxidants (sulphites, L-ascorbic acid), bottled under protective atmosphere — followed by a 'Dichiarazione nutrizionale per 100 ml' table with energy in kJ and kcal and the full six rows. The page's 'Scarica la scheda tecnica' link is /wp-content/uploads/2026/07/pratto2024_ST.pdf, whose file name independently confirms the vintage the page is describing. THE LIST IS A HOUSE TEMPLATE BUT THE DECLARATIONS ARE PER WINE: Pratto and Rosa dei Frati carry a word-for-word identical ingredient line and DIFFERENT energy values (337 kJ / 81 kcal against 317 kJ / 76 kcal), which proves two disclosures rather than one boilerplate.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.cadeifrati.it/robots.txt",
+        "https://cadeifrati.it/sitemap_index.xml",
+        "https://cadeifrati.it/qr-code-promo-sitemap.xml",
+        "https://cadeifrati.it/qr-code-promo/pratto-landing/",
+        "https://cadeifrati.it/qr-code-promo/pratto-landing/pratto/",
+        "https://cadeifrati.it/page-sitemap.xml",
+        "https://cadeifrati.it/vini/pratto/"
+      ],
+      "checked_at": "2026-08-09T19:05:00Z",
+      "robots_disallowed": false,
+      "note": "THE DECLARATION IS NOT WHERE THE QR CODE POINTS, AND THAT IS THE LESSON. cadeifrati.it's sitemap index contains a custom post type sitemap, qr-code-promo-sitemap.xml, listing 96 URLs in a two-level shape — /qr-code-promo/{wine}-landing/ (a bare language chooser) and /qr-code-promo/{wine}-landing/{wine}/ in it/en/de. It is the most e-label-shaped URL tree seen in Italy so far and it is NOT an e-label: the leaf page is a tasting note, the estate's history and a Wine Experience booking pitch, with zero matches for ingredien, nutrizion, solfit, kcal, energia. The actual declaration sits on the ordinary /vini/{wine}/ marketing page, which no QR tree points at. An Italian producer can run QR landing pages for marketing and meet 2021/2117 somewhere else entirely — check /vini/ before concluding from a /qr-code-promo/ page. robots.txt is Yoast's permissive 'User-agent: * / Disallow:' and no exception was needed anywhere on this host. Same 'e-label' raw-HTML false positives as elsewhere in this batch: 18 hits, all 'slideLabel' and 'whitelabel' in JavaScript, zero in text."
+    },
+    {
+      "product_number": "7956001",
+      "name": "Rosa dei Frati Cà dei Frati",
+      "producer": "Cà dei Frati",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "found",
+      "source_url": "https://cadeifrati.it/vini/rosa-dei-frati/",
+      "source_type": "producer_site",
+      "raw_ingredients": "uva, mosto di uve concentrato, agenti stabilizzanti (acido citrico, gomma arabica, carbossimetilcellulosa), conservanti e antiossidanti (solfiti, acido L-ascorbico).\nImbottigliato in atmosfera protettiva.",
+      "raw_nutrition": "Dichiarazione nutrizionale per 100 ml\nEnergia: 317 kJ – 76 kcal\nGrassi: 0 g\ndi cui Acidi Grassi Saturi: 0 g\nCarboidrati: 1,5 g\ndi cui Zuccheri: 0,9 g\nProteine: 0 g\nSale: 0 g",
+      "raw_allergens": "PRODOTTO IN ITALIA – CONTIENE SOLFITI",
+      "language": "it",
+      "vintage_on_source": "2025",
+      "market": "IT/EU",
+      "evidence": "Same estate, same inline block, and our current release rather than a rolled-forward one. https://cadeifrati.it/vini/rosa-dei-frati/ states 'Annata: 2025', 'Bottiglia: 750 ml', 'Grado alcolico: 12,5 % vol' and 'PRODOTTO IN ITALIA – CONTIENE SOLFITI', against Systembolaget's Rosa dei Frati 2025, 750 ml, 12,5 % — VINTAGE, PACK AND ALCOHOL ALL EXACT. Rosa dei Frati is the estate's only rosé and the name is on the bottle, so the cuvée is unambiguous. The Ingredienti list and the Dichiarazione nutrizionale per 100 ml are present in full as text in the server's HTML; its 'Scarica la scheda tecnica' link is /wp-content/uploads/2026/07/rosadeifrati2025_ST.pdf, confirming the vintage a second way, and the page's Yoast article:modified_time is 2026-07-13. Its energy value (317 kJ / 76 kcal) differs from Pratto's (337 / 81) although the ingredient line is identical, so the two are separately maintained.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://cadeifrati.it/page-sitemap.xml",
+        "https://cadeifrati.it/vini/rosa-dei-frati/",
+        "https://cadeifrati.it/qr-code-promo-sitemap.xml"
+      ],
+      "checked_at": "2026-08-09T19:07:00Z",
+      "robots_disallowed": false,
+      "note": "Cà dei Frati declares for its whole range on the same template — the /vini/ sitemap holds fifteen products including the grappe and the olive oil, and each product page carries the same Annata / Bottiglia / Grado alcolico / Ingredienti / Dichiarazione nutrizionale block. Only these two are in the current Swedish 2024+ undeclared pool, but the estate is worth returning to on a later slice. Both declarations were read from the Italian page; the site also serves /en/ and /de/ versions of the qr-code-promo tree, which were not needed."
     }
   ],
-  "updated_at": "2026-08-09T18:42:00Z",
+  "updated_at": "2026-08-09T19:07:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
