@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after the first batch: 8 producers, 24 wines, 0 found, 22 not found, 2 rejected (counting Antinori, Tommasi and Vini Franchetti from the 2026-07-28/30 reconnaissance, Italy stands at 11 producers and 44 wines). 228 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 309,
+  "attempted": 311,
   "found": 22,
-  "not_found": 245,
+  "not_found": 247,
   "rejected": 42,
   "declarations": [
     {
@@ -9090,9 +9090,61 @@
       "checked_at": "2026-08-09T17:36:00Z",
       "robots_disallowed": false,
       "note": "Systembolaget's alcohol for both wines is 13,5 %, which agrees with the retailers' figure for the Kerner 2024 — noted only because it confirms the identity of the bottle, not because anything was found to attach to it."
+    },
+    {
+      "product_number": "7171301",
+      "name": "Hans Rottensteiner Alto Adige Sauvignon",
+      "producer": "Hans Rottensteiner SRL",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://rottensteiner.wine/it/products/sauvignon/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2025",
+      "market": "IT/EU",
+      "evidence": "Weingut Hans Rottensteiner Srl, Via Sarentino 1a, Bolzano — third generation, founded 1956. The estate's own site is rottensteiner.wine (WordPress, it/de/en), reached after www.rottensteiner-wein.com turned out not to resolve at all. Six range pages (Kitz, Classic, Cru, Select, Trigon, Passito) link one page per cuvée, and the page for our wine states 'Annata 2025' and '14,5 % vol' against Systembolaget's 2024 and 14,0 % — ONE PRODUCT PAGE PER CUVÉE, EDITED FORWARD, the Rhonéa/Paul Mas/GIV failure mode again. Our 2024 is not on the site as a bottling; it appears only in the Premi block, where six critics' scores are attributed to 'Vintage 2024'. The page's only outbound per-wine links are SHOP ONLINE and PRODUCT SHEET. NOTHING RESEMBLING A DECLARATION IS ON THE PAGE: zero raw-HTML and zero stripped-text matches for ingredien, nutrizion, solfit, allergen, energia, kcal, kJ, Zutat and Nährwert.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://rottensteiner.wine/robots.txt",
+        "https://www.shop.rottensteiner.wine/robots.txt",
+        "https://rottensteiner.wine/en/products/sauvignon/",
+        "https://rottensteiner.wine/it/products_categories/classic/",
+        "https://www.shop.rottensteiner.wine/en/sauvignon-sudtirol-doc-39"
+      ],
+      "checked_at": "2026-08-09T17:55:00Z",
+      "robots_disallowed": false,
+      "fetch_result": "shop product page HTTP 403",
+      "note": "THE SHOP IS A 403 AND WAS NOT WORKED AROUND. The marketing page's SHOP ONLINE link is https://www.shop.rottensteiner.wine/en/sauvignon-sudtirol-doc-39, a Magento store on a separate host; a single plain request returned HTTP 403 with a 5,8 kB body. That is a technological measure and absolute under the project's rules — no retry, no header games, recorded and left. Its robots.txt would have allowed the product URL (the Disallow list is Magento's stock directories plus about ninety '/*{brand}$' anchored brand-landing slugs, Crawl-Delay 10, sitemap named), so this is a refusal by the server and not by the directives. Worth knowing for later Italian work: those ninety brand slugs show the store sells far beyond Rottensteiner — antinori, zenato, ferrari, livio_felluga, tenuta_dell_ornellaia, angelo_negro and antonio_facchin among them, the last two also in this project's remaining Italian pool — but the host answers 403, so it is not a source for any of them. rottensteiner.wine itself sets Crawl-delay: 10 and every request to it in this run was spaced by at least nine seconds."
+    },
+    {
+      "product_number": "7633001",
+      "name": "Hans Rottensteiner Alto Adige Pinot Grigio",
+      "producer": "Hans Rottensteiner SRL",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://rottensteiner.wine/it/products/pinot-grigio/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2025",
+      "market": "IT/EU",
+      "evidence": "Same estate, same shape as product 7171301. The Pinot Grigio page reads 'Annata 2025' and 'Gradazione 13,4 % vol' against Systembolaget's 2024 and 14,0 %; our vintage survives only in the Premi block (Kerin O'Keefe 93, Jancis Robinson 16/20, James Suckling 90, Falstaff 90, Decanter and Wein Plus, all 'Annata 2024'). No ingredient list, no nutrition table, no energy value and no sulphite line anywhere in raw HTML or stripped text. AND THE SCHEDA TECNICA WAS FETCHED AND SETTLES THE TEMPLATE FOR THE WHOLE ESTATE: https://rottensteiner.wine/wp-content/uploads/2021/06/2025_Pinot_Grigio_it.pdf is a 192 kB one-pager giving annata 2025, grape 100 %, training system, soil, yield 6 000 l/ha, vessel, production 25 000 bottles, drinking window, serving temperature, total acidity 5,8 g/l, residual sugar 2,0 g/l and 13,4 % vol, then STORIA / PROVENIENZA / VINIFICAZIONE / DESCRIZIONE prose. Zero matches for ingredien, solfit, kcal, kJ, energia, nutrizion and allergen. It is the Italian scheda tecnica in its purest form and it is not a declaration. One PDF settles the estate; the Sauvignon's equivalent (2025_Sauvignon_eng.pdf) was not fetched.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://rottensteiner.wine/robots.txt",
+        "https://rottensteiner.wine/it/products_categories/classic/",
+        "https://rottensteiner.wine/it/products/pinot-grigio/",
+        "https://rottensteiner.wine/wp-content/uploads/2021/06/2025_Pinot_Grigio_it.pdf"
+      ],
+      "checked_at": "2026-08-09T17:58:00Z",
+      "robots_disallowed": false,
+      "note": "THE WORDPRESS UPLOAD-PATH TRAP, CONFIRMED A SECOND TIME. Both schede sit under /wp-content/uploads/2021/06/ and the Pinot Grigio's answers Last-Modified: Wed, 04 Mar 2026 16:27:35 GMT — a 2026 file at a 2021 path, exactly as Pico Maccario's 2019/06 schede did. The filename, not the path, carries the vintage here ('2025_Pinot_Grigio_it.pdf'), which makes the range page a cheap vintage census: the estate documents only its current release and no 2024 PDF is linked from anywhere on the site."
     }
   ],
-  "updated_at": "2026-08-09T17:36:00Z",
+  "updated_at": "2026-08-09T17:58:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
