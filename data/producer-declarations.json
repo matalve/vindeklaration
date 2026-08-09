@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the tenth French batch (2026-08-09): France stands at 63 producers, 135 wines, 4 found, 9 rejected.",
-  "attempted": 279,
+  "attempted": 280,
   "found": 22,
-  "not_found": 217,
+  "not_found": 218,
   "rejected": 40,
   "declarations": [
     {
@@ -8152,9 +8152,38 @@
       "checked_at": "2026-08-09T10:42:00Z",
       "robots_disallowed": false,
       "server_rendered": true
+    },
+    {
+      "product_number": "5317801",
+      "name": "Domaine Comte Peraldi Rosé",
+      "producer": "Domaine Comte Peraldi",
+      "country": "Frankrike",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "CORSICA'S FIRST PRODUCER IN THIS FILE, AND IT IS THE SETTLED FRENCH SHAPE. Domaine Comte Peraldi (AOC Ajaccio) runs a Wix site and Wix Stores shop at www.domaineperaldi.com; robots.txt is the Wix default, 'User-agent: * / Allow: /' with only '*?lightbox=' disallowed, and the sitemap index gives a nine-product store sitemap and a nineteen-page site sitemap. OUR EXACT BOTTLE IS ON IT. The product page's H1 and title both read 'Domaine Comte Peraldi Rose 2025' — SYSTEMBOLAGET'S VINTAGE EXACTLY — and the details give 'CEPAGES Sciaccarello (60%) - Cinsault (30%) - Nielluccio (10%)', terroir, vinification, elevage, tasting note, serving and cellaring advice. NO INGREDIENT LIST, NO NUTRITION TABLE, NO ENERGY VALUE AND NOT EVEN A SULPHITE LINE: 'sulfit', 'nutri', 'kcal', 'declaration nutritionnelle', 'elabel', 'vincod', 'v9.lu', 'iviti' and 'qrcode' are zero in raw HTML and zero in stripped text, and no alcohol is stated either, so Systembolaget's 13,5 % could not be checked. The page also has no fiche, no PDF and no QR image. A WIX TRAP FOR THE GREP LIST: the raw HTML matched 'ingr' fourteen times and 'kJ' fifty-three times and every hit is minified Wix bundle text or a feature-flag name; '13,5' matched twice and both are SVG path data ('d=\"M13,5 L13,12 ...\"'). On the entity-decoded, script-stripped text all three are zero. A 1,6 MB Wix product page needs the stripped text, exactly as the Bouvaude WooCommerce page did. NOTE ALSO A SLUG THAT LIES: the product URL is /product-page/domaine-comte-peraldi-rose-2020 and the product on it is the 2025 — Wix keeps the slug from first publication and the shop is edited forward, so a store sitemap's slugs are NOT a vintage census on Wix. Vincod probe negative: m.domaineperaldi.com NXDOMAIN with an NXDOMAIN control, and the 'vincod' grep is zero.",
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: domaineperaldi.com 185.230.63.107/.186 (Wix); peraldi.com is a separate Monaco host and not the estate; domaine-peraldi.com and comteperaldi.com NXDOMAIN; m.domaineperaldi.com and randomxyz123.domaineperaldi.com both NXDOMAIN",
+        "https://www.domaineperaldi.com/robots.txt — Wix default, Allow: / with only *?lightbox= disallowed",
+        "https://www.domaineperaldi.com/sitemap.xml — index of four child sitemaps",
+        "https://www.domaineperaldi.com/store-products-sitemap.xml — nine products, the whole shop",
+        "https://www.domaineperaldi.com/pages-sitemap.xml — nineteen pages; no declaration or nutrition page anywhere in the site tree",
+        "https://www.domaineperaldi.com/product-page/domaine-comte-peraldi-rosé-2020 — the product is the 2025, our exact vintage; grapes and vinification stated, nothing declared"
+      ],
+      "checked_at": "2026-08-09T11:00:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
     }
   ],
-  "updated_at": "2026-08-09T10:42:00Z",
+  "updated_at": "2026-08-09T11:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
