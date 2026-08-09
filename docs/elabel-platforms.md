@@ -9,14 +9,15 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-Status as of 2026-08-08, across 122 producers and 273 wine records. **The German
+Status as of 2026-08-09, across 129 producers and 281 wine records. **The German
 2024-and-later undeclared pool is exhausted** — see the closing section. **The
-French pool opened on 2026-08-07; sixty-two producers and 134 wines in, with
+French pool opened on 2026-08-07; sixty-nine producers and 142 wines in, with
 four declarations attached and nine rejected** — see *France, and why it is not
 Germany* and *The first French find*. **The Alsace slice is now exhausted too**
-— see *Alsace, tested to exhaustion*. The most recent French batch is *A gate
-that was a Referer check*, below, which found a second host of the same French
-platform and read it.
+— see *Alsace, tested to exhaustion*. The most recent French batch is *The
+estate that hosts its own e-labels and publishes them only for the 0,0 %*,
+below; the one before it, *A gate that was a Referer check*, found a second
+host of the same French platform and read it.
 
 ## Readable — server-rendered
 
@@ -905,6 +906,106 @@ Four smaller things this batch settles:
   one, say plainly that the shop is unknown rather than that the producer
   declares nothing.
 
+### The estate that hosts its own e-labels and publishes them only for the 0,0 %
+
+**2026-08-09, seven producers, eight wines: nothing found, nothing rejected.**
+Famille Roumieux, Domaine Saint Roch, Domaine Garon, Alain Jaume, Château de
+Tracy (two wines), Domaine Comte Peraldi, Domaine La Provenquière — the named
+non-Burgundy leads from the previous run, taken in order.
+
+| Producer | Region | Site | Our bottle on it? | Declaration? |
+|---|---|---|---|---|
+| Famille Roumieux | Rhône / CdP | Clos du Calvaire, 6-page WP | **no — the négociant brand is absent** | none |
+| Domaine Saint Roch | Rhône / Beaumes-de-Venise | 15-page site, no shop | cuvée yes, **no vintage** | none |
+| Domaine Garon | Rhône / Côte-Rôtie | 5-page Divi WP, no shop | cuvée yes, **no vintage** | none |
+| Alain Jaume | Rhône / Orange | own PrestaShop, five ranges | **yes, Bellissime Rosé 2025 exactly** | none but a sulphite line |
+| Château de Tracy | Loire / Pouilly-Fumé | **Soluxa** shop | no, shop rolled to the 2025 | none |
+| Domaine Comte Peraldi | **Corsica / Ajaccio** | Wix + Wix Stores | **yes, Rosé 2025 exactly** | none, not even a sulphite line |
+| **Domaine La Provenquière** | Languedoc / Capestang | WP + own PrestaShop | **yes, the magnum, 2024, 150 cl** | **its own e-labels exist — for other products** |
+
+**Five of the seven had our exact bottle or an exact cuvée match on the
+producer's own page, and not one declared anything on it.** The settled French
+shape, again, and the batch adds no new platform to the readable table.
+
+**The finding is La Provenquière, and it is the sharpest version yet of "the
+absence is editorial".** The estate hosts its *own* e-label pages —
+`provenquiere.com/label-qr/{slug}`, plain server-rendered WordPress, one per
+product, mirrored in `/en/` and `/de/`, linked from a hub page that says in so
+many words *"Retrouvez sur cette page tous les QR Code du domaine : – QR vin
+pour les valeurs Nutritionnel de nos vins ou vins sans alcool"*. The pages
+carry the complete mandated set; the one read gives
+
+```
+Ingrédients** Extrait de levure (eau, Levure), Jus de Raisin, Acidifiants
+(Acide Lactique, Acide Citrique), Conservateurs ( E220**, E202, E242),
+Arômes Naturels, Gaz Carbonique (CO2).
+```
+
+plus a nutrition table per 100 ml at 96 kJ / 23 kcal. **All four are 0,0 %
+products** — Péché Coquin Zéro, a spritz, a sauvignon and a blanc de blancs —
+and there is no page for any wine the estate makes as wine.
+
+That is not laziness, it is the law drawing a line: a drink under 1,2 % vol is
+an ordinary foodstuff whose ingredient list Regulation (EU) 1169/2011 requires
+on the label outright, while the estate's wines fall under 2021/2117, where the
+QR route is optional and the producer has taken none of it. **A producer can
+build the whole apparatus and point it only where the obligation is
+unambiguous.** Worth checking for on any French estate with an alcohol-free
+range: the `/label-qr/` tree may exist, and the wines may not be in it.
+
+Four more things this batch settles:
+
+- **The Soluxa shop skin ships a nutrition tab, unused.** Château de Tracy's
+  product pages (`tracy-et-cie.com/{slug}-s{id}.html`, also served under
+  `chateau-de-tracy.com/boutique/`) load a script binding `.tab-header`, whose
+  second tab pushes **`?nutrition`** onto the URL. The platform has the feature;
+  this deployment renders no tab markup at all. Soluxa is the same platform seen
+  at Etienne Simonis, so **look for a nutrition tab on the next Soluxa estate**
+  — recognise Soluxa by the shop being proxied from `ec1.soluxa.eu/{code}/`.
+- **A fiche can be older than the vintage it is hung on.** Tracy's "notice
+  technique" on the *2025* product is the **2023** — it names the vintage in
+  its body and describes the 2023 growing season. The file name gives nothing
+  away (`img/prod/125534-file1-1.pdf`). So the fiche is not a reliable vintage
+  marker in either direction: Jolivet's and Chidaine's file names were, this
+  one's is not. Read the body.
+- **A Wix product slug keeps the vintage it was first published under.**
+  Peraldi's URL is `/product-page/domaine-comte-peraldi-rosé-2020` and the
+  product on it is the **2025**. A Wix `store-products-sitemap.xml` is a
+  catalogue, **not a vintage census** — the opposite of Shopify and PrestaShop
+  slugs, which this file has been reading as vintage markers.
+- **The fiche technique can exist and simply not be published.** Domaine Garon
+  has no shop and no PDF anywhere; every button on its range page opens one
+  Divi overlay whose first option is *"Recevoir des informations sur le domaine
+  et nos vins (tarifs, fiches techniques)"*. Documents issued on request to a
+  named enquirer are not a public source, and writing to an estate is not in
+  this agent's remit. Close the producer there.
+
+#### Three greps and a DNS probe that lied, all in one batch
+
+- **`kJ` matches `checkJQuery`.** PrestaShop's product page defines a
+  `checkJQuery()` polling function, so a raw grep for the energy unit returns
+  three confident hits on a page with no nutrition table. Add it to the
+  Stripe/Font Awesome/`responsiveLabel` list.
+- **On a Wix page, `ingr` and `kJ` match only the bundle.** Peraldi's 1,6 MB
+  product page matches `ingr` fourteen times and `kJ` fifty-three, every hit a
+  minified identifier or a `specs.restaurants.*` feature flag. And **`13,5`
+  matched twice as SVG path data** — `d="M13,5 L13,12 …"` is a plus-sign icon,
+  not an alcohol figure. Strip scripts *and* be wary of matching a number.
+- **Wildcard DNS makes the Vincod probe say yes.** `mayard.fr` is a Dovendi
+  domain-for-sale page with a wildcard record, so `m.mayard.fr` resolves — and
+  so does `randomxyz123.mayard.fr`. **The nonsense-subdomain control is what
+  catches this and it is not optional.** Separately, Domaine Saint Roch's
+  `m.` subdomain is a real CNAME to the site's own apex rather than to
+  `domains.vincod.com`: an `m.` record existing is not the signal, a CNAME to
+  Vincod is.
+- **Two parked domains on one producer.** Roumieux's `roumieux.fr` resets the
+  TLS handshake and serves OVH's *Site en construction* over plain http;
+  `mayard.fr` is for sale. The live estate is `clos-du-calvaire.fr` — Vignobles
+  Mayard renamed itself Clos du Calvaire in 2021, so **the producer's historic
+  name can be the wrong search term**, and Systembolaget's "Famille Roumieux"
+  is the négociant arm whose brand appears nowhere on the estate's own site.
+  The export-brand rule, one more time.
+
 ## Untested
 
 **U-label** (`u-label.com`) has the widest EU footprint and no publicly linked
@@ -1383,9 +1484,9 @@ alternative is inventing one.
 
 ## What the numbers say so far
 
-**Most producers publish nothing reachable.** Across 122 producers probed and
-273 wine records, 22 declarations are attached, 40 wines were rejected against
-a declaration that was found and read, and 211 came to nothing. Roughly a third
+**Most producers publish nothing reachable.** Across 129 producers probed and
+281 wine records, 22 declarations are attached, 40 wines were rejected against
+a declaration that was found and read, and 219 came to nothing. Roughly a third
 of producers have a readable e-label or an inline declaration; a handful have
 an unreadable one; the rest put no ingredient list anywhere this project can
 see. The binding constraint is not rendering — it is existence, discoverability
