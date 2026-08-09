@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after two batches: 19 producers, 61 wines, 2 found, 54 not found, 5 rejected (three of the rejections are Marchesi Antinori's, from the 2026-07-28/30 reconnaissance). The second Italian batch — Cantina Terlan, Koefererhof, Hans Rottensteiner, Weingut Pranzegg, Cantina LaVis, Ca' dei Frati, Tenute Piccini — attached the project's FIRST TWO ITALIAN DECLARATIONS, both Ca' dei Frati, both inline on the estate's ordinary /vini/ marketing page with Annata, Bottiglia and Grado alcolico stated beside the list. 211 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 331,
+  "attempted": 334,
   "found": 26,
-  "not_found": 262,
+  "not_found": 265,
   "rejected": 43,
   "declarations": [
     {
@@ -9667,9 +9667,87 @@
       "elabel_platform": "IoAgri / Agriverse — app.ioagri.it/Qr/DL?id={token}",
       "elabel_uid": "25997106",
       "note": "REVISIT CANDIDATE. The IoAgri token appears to be keyed to the WooCommerce product rather than to the vintage — La Pruina keeps one product per cuvée and edits it forward, the Rhonéa / Paul Mas / GIV failure mode — so when the estate's Manduria page rolls to ANNATA 2024 the same token should carry the 2024 recipe and this wine becomes attachable in two fetches. Underlying rows verbatim from the payload: materiale grezzo / uve; additivi — conservanti / anidride solforosa (E220); additivi — conservanti / metabisolfito di potassio (E224); ShowBottledProtectiveAtmosphere true; ShowContainsSulphites true. Nutrition per 100 ml: Energia 331 kJ / 79 kcal; Grassi 0 g, saturi 0 g; Carboidrati 1,9 g, di cui zuccheri 1,0 g; Proteine 0 g; Sale 0 g."
+    },
+    {
+      "product_number": "7157401",
+      "name": "La Polda Spumante Rosé",
+      "producer": "Az.Agricola VIGNA 800",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vigna800.com/lapolda",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Az. Agr. VIGNA '800 di Elampini Gianfranco, Via Moron 46, Negrar di Valpolicella, P.IVA 03267950230 — a Squarespace marketing site (vigna800.com) plus a separate Squarespace shop (vigna800shop.com). Our wine has its own page, /lapolda, headed '\"LA POLDA\" ROSÉ Spumante Vino Spumante Rosato BRUT', 'Vitigni: 100% Corvina BIO', 'Analisi: alcol 12% vol; acidità totale 6,9 g/l; residuo zuccherino 8,2 g/l; pressione 5,5 atm' — cuvée, grape, organic status and strength all match Systembolaget, AND THE PAGE STATES NO VINTAGE. Its 'SCHEDA TECNICA' PDF, /s/schede_Spumante.pdf, was downloaded and read in full: bilingual IT/EN, soil, grape, yield, harvest, vinification, organoleptics, food pairing, then a data block giving Alcol 12% vol, Acidità totale 6,9 g/l, Residuo zuccherino 8,2 g/l, Pressione 5,5 atm — no ingredient list, no nutrition table, no energy value, no sulphite line and no vintage. The Italian scheda tecnica near-miss in its purest form. Neither the marketing page nor the shop page carries any of ingredien, nutrizion, solfit, kcal, energia or dichiarazione in raw HTML or in stripped text.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.vigna800.com/robots.txt",
+        "https://www.vigna800.com/sitemap.xml",
+        "https://www.vigna800.com/vino",
+        "https://www.vigna800.com/lapolda",
+        "https://www.vigna800.com/la-polda-eng",
+        "https://www.vigna800.com/s/schede_Spumante.pdf",
+        "https://www.vigna800.com/s/schedaAMARONE_2023_ITA_EN.pdf (HTTP 404)",
+        "https://vigna800shop.com/robots.txt",
+        "https://vigna800shop.com/sitemap.xml",
+        "https://vigna800shop.com/shop"
+      ],
+      "checked_at": "2026-08-09T22:30:00Z",
+      "robots_disallowed": false,
+      "note": "THE MOST EXPLICIT INTENTION TO PUBLISH SEEN IN ITALY, AND THE LINK IS DEAD. Every page of vigna800.com carries, in its site-wide footer, an anchor reading literally 'Ingredienti/smaltimento' — the two obligations named together — pointing at /s/schedaAMARONE_2023_ITA_EN.pdf. THAT URL RETURNS HTTP 404 (Squarespace's Italian 'Non è stato possibile trovare la pagina che stai cercando'), confirmed by HEAD and by GET, and it is the same dead link on the English pages ('/la-polda-eng' footer). So one PDF, named for the Amarone 2023, was meant to serve as the whole estate's ingredients-and-disposal document and is no longer there. No replacement URL is linked anywhere on either host, and guessing one is exactly what this agent must not do. Recorded as not found, with the broken link named so a later run can see it was looked for. Both hosts are Squarespace and both robots.txt files put 'User-agent: *' in the SAME group as the named AI crawlers, so the group binds us and no RFC 9309 reading arises (the Köfererhof shape, not the bpdr.com shape); only /config, /search, /account, /api, /static and a list of query-string forms are disallowed, none of which was fetched. Confirmed false positives on both hosts: 'e-label' matches Squarespace's 'event-date-label' and Iubenda's 'whitelabel', and 'kJ' matches base64 image data."
+    },
+    {
+      "product_number": "7354801",
+      "name": "La Cesolina Valpolicella Classico",
+      "producer": "Az.Agricola VIGNA 800",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vigna800.com/valpolicella",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same estate and same shape as product 7157401. /valpolicella is '\"LA CESOLINA\" VALPOLICELLA D.O.C. Classico', Corvina/Corvinone/Rondinella/Molinara, 'Dati analitici: alcol 12% vol; acidità totale 6,0 g/l; zuccheri residui 4,5 g/l' — cuvée matches Systembolaget exactly and the page states no vintage. THE ONE WINE OF THE THREE THAT ALSO HAS A SHOP PAGE, https://vigna800shop.com/shop/valpolicella-classico-vigna800 ('VALPOLICELLA DOC Classico - 750 ml - BIOLOGICO', 11,50 €), which repeats the same description word for word, states no vintage either and carries no ingredient list, no nutrition table and no energy value. Note the producer's own analysis says 12 % vol where Systembolaget says 12,5 % — moot, since there is nothing to attach, but it is the sort of half-point disagreement that would have mattered. Its scheda, /s/schede_Valpolicella.pdf, was not downloaded: the Spumante scheda was read in full and settles the template for the estate (analysis and prose, no substances, no energy, no vintage).",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.vigna800.com/valpolicella",
+        "https://vigna800shop.com/shop/valpolicella-classico-vigna800",
+        "https://www.vigna800.com/s/schede_Valpolicella.pdf (HEAD only)"
+      ],
+      "checked_at": "2026-08-09T22:30:00Z",
+      "robots_disallowed": false,
+      "note": null
+    },
+    {
+      "product_number": "7561601",
+      "name": "Mjsia Bianco Verona Garganega",
+      "producer": "Az.Agricola VIGNA 800",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vigna800.com/garganella",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same estate and same shape as product 7157401. /garganella is '\"MJSIA\" GARGANEGA VERONESE I.G.T.', 'Analisi: alcol 13 % Vol; Acidità totale 5,7 g/l; residuo zuccherino 6 g/l' — cuvée matches Systembolaget's 'Mjsia Bianco Verona Garganega' and the strength matches its 13,0 % exactly, and the page states no vintage anywhere. No ingredient list, no nutrition table, no energy value, no sulphite line, in raw HTML or in stripped text. Its scheda, /s/schede_Garganega.pdf, was not downloaded, the template having been settled by the Spumante's.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.vigna800.com/garganella",
+        "https://www.vigna800.com/s/schede_Garganega.pdf (HEAD only)"
+      ],
+      "checked_at": "2026-08-09T22:30:00Z",
+      "robots_disallowed": false,
+      "note": null
     }
   ],
-  "updated_at": "2026-08-09T22:05:00Z",
+  "updated_at": "2026-08-09T22:30:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
