@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after the first batch: 8 producers, 24 wines, 0 found, 22 not found, 2 rejected (counting Antinori, Tommasi and Vini Franchetti from the 2026-07-28/30 reconnaissance, Italy stands at 11 producers and 44 wines). 228 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 305,
+  "attempted": 307,
   "found": 22,
-  "not_found": 241,
+  "not_found": 243,
   "rejected": 42,
   "declarations": [
     {
@@ -8988,9 +8988,60 @@
       "checked_at": "2026-08-09T16:05:00Z",
       "robots_disallowed": false,
       "server_rendered": true
+    },
+    {
+      "product_number": "7041801",
+      "name": "Terlan Pinot Grigio",
+      "producer": "Cantina Terlan",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Cantina Terlano / Kellerei Terlan (Terlano, Alto Adige, a 143-grower co-op) runs one first-party site on two hostnames, www.cantina-terlano.com and www.kellerei-terlan.com, serving the same content in de/it/en. There is no webshop: /kontakt/onlinepartner/ links out to third-party retailers. IT IS THE SECOND ITALIAN PRODUCER WITH A REAL PER-VINTAGE ARCHIVE, after Ricasoli, and it still declares nothing. The Tradition range page links one page per wine (/weine/pinot-grigio-20/, the trailing number an internal id, not a vintage), and each wine page carries a 'Weitere Jahrgänge' list of 2025 2024 2023 2022 2021 2020 2019, each vintage a ?wine-id={n} query on the same slug. The default page is the current release. For the Pinot Grigio that is the 2025 (Jahrgang: 2025, Alkoholgehalt: 13,5 % vol) and NOT our 2024. The page carries Wein (origin, DOC, grape, vintage, yield, slope, altitude), Ausbau, Technische Daten (alcohol, residual sugar, total acidity), serving and food notes, a vintage report, and a 'Recyclinginformationen' block giving the capsule, cork and bottle materials with their Italian recycling codes — that is the ETICHETTATURA AMBIENTALE obligation, not 2021/2117, and it is the clearest case yet of a producer meeting one label obligation on the web and not the other. Zero matches for Zutat, Nährwert, Inhaltsstoff, kcal, kJ, Energie, ingredien, solfiti or Sulfit in raw HTML and in stripped text. The only 'etichetta' hit is the filename of the label photograph.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.cantina-terlano.com/robots.txt",
+        "https://www.kellerei-terlan.com/robots.txt",
+        "https://www.cantina-terlano.com/",
+        "https://www.cantina-terlano.com/weine/tradition/",
+        "https://www.cantina-terlano.com/weine/pinot-grigio-20/",
+        "https://www.cantina-terlano.com/sitemap.xml"
+      ],
+      "checked_at": "2026-08-09T17:20:00Z",
+      "robots_disallowed": false,
+      "note": "THE 2024 PAGE ITSELF WAS NOT FETCHED AND THIS IS A ROBOTS LIMIT, NOT AN OVERSIGHT. cantina-terlano.com/robots.txt is 'User-agent: *' with Disallow: /assets/, /logs/, /media/, /redaxo/, /usage/ and — the one that binds here — 'Disallow: /*?*', which disallows every query string. The vintage archive is reached only as /weine/pinot-grigio-20/?wine-id=192 (2024). This is an ordinary marketing site with no e-label on it, so the 2026-07-30 disclosure exception does not reach it and the directive was honoured in full. The template is identical across vintages and the readable 2025 page of the same wine carries no declaration, so the conclusion is safe on the evidence available, but the 2024 page was not read. The sitemap named in robots.txt answers HTTP 500 with a Laravel 'Ooops, something went wrong!' page. Two web searches for a Terlan e-label or QR destination returned only generic EU-regulation explainers and retailers."
+    },
+    {
+      "product_number": "7331601",
+      "name": "Terlan Pinot Noir",
+      "producer": "Cantina Terlan",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://www.cantina-terlano.com/weine/pinot-noir-25/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "de",
+      "vintage_on_source": "2025",
+      "market": "IT/EU",
+      "evidence": "OUR EXACT BOTTLING IS ON THE PRODUCER'S OWN PAGE AND IT DECLARES NOTHING. /weine/pinot-noir-25/ is the Tradition Blauburgunder and its default vintage is the current release, which is our 2025: 'Jahrgang: 2025', 'Sorte: 100% Blauburgunder', 'Alkoholgehalt: 13,5 % vol' against Systembolaget's 13,5 % — an exact match on producer, cuvée, vintage and strength, reached without a query string and so without touching the disallowed archive. The page gives origin, DOC, grape, vintage, yield, slope, altitude, vinification, residual sugar 0,9 g/l, total acidity 5,4 g/l, glass and serving temperature, food pairing, a vintage report and a Recyclinginformationen block (the Italian environmental-labelling decree, not 2021/2117). NO INGREDIENT LIST, NO NUTRITION TABLE, NO ENERGY VALUE, NOT EVEN A SULPHITE LINE — zero matches for Zutat, Nährwert, kcal, kJ, Energie, ingredien, solfiti and Sulfit in raw HTML as well as stripped text. This is the Ricasoli finding in Alto Adige: a producer with genuine per-vintage editorial control over its own wine pages, publishing the analysis and the recycling codes and not the ingredients.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.cantina-terlano.com/robots.txt",
+        "https://www.cantina-terlano.com/weine/tradition/",
+        "https://www.cantina-terlano.com/weine/pinot-noir-25/"
+      ],
+      "checked_at": "2026-08-09T17:22:00Z",
+      "robots_disallowed": false,
+      "note": "The only per-wine link that leaves the site is an 'Etikett' JPEG of the front label and a 'PDF Download' at /weinbrief/?w-id={wine}&l-id={lang} — a Weinbrief datasheet, and a query string, so disallowed by 'Disallow: /*?*' and not fetched. Nothing on the site describes it as an ingredient or nutrition disclosure, so the disclosure exception does not apply to it either."
     }
   ],
-  "updated_at": "2026-08-09T16:05:00Z",
+  "updated_at": "2026-08-09T17:22:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
