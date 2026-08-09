@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after the first batch: 8 producers, 24 wines, 0 found, 22 not found, 2 rejected (counting Antinori, Tommasi and Vini Franchetti from the 2026-07-28/30 reconnaissance, Italy stands at 11 producers and 44 wines). 228 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 307,
+  "attempted": 309,
   "found": 22,
-  "not_found": 243,
+  "not_found": 245,
   "rejected": 42,
   "declarations": [
     {
@@ -9039,9 +9039,60 @@
       "checked_at": "2026-08-09T17:22:00Z",
       "robots_disallowed": false,
       "note": "The only per-wine link that leaves the site is an 'Etikett' JPEG of the front label and a 'PDF Download' at /weinbrief/?w-id={wine}&l-id={lang} — a Weinbrief datasheet, and a query string, so disallowed by 'Disallow: /*?*' and not fetched. Nothing on the site describes it as an ingredient or nutrition disclosure, so the disclosure exception does not apply to it either."
+    },
+    {
+      "product_number": "7045701",
+      "name": "Köfererhof Pinot Grigio",
+      "producer": "Köfererhof Weingut",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Köfererhof (Kerschbaumer, Neustift/Varna, Valle Isarco — 6 ha, seven white varieties) has A THREE-PAGE SQUARESPACE BROCHURE SITE AND NO PER-WINE PAGE AT ALL. www.koefererhof.it serves one 116 kB document for /, /willkommen, /benvenuto and /welcome — the German, Italian and English versions of a single page about the estate, its 976 founding, its terraces at 650–700 m and its cellar. The complete set of internal links is /, /deutsch, /italiano, /english, /willkommen, /benvenuto, /welcome and /search: there is no range page, no product page, no shop and no vintage stated anywhere on the site. The words Kerner, Grigio, Ruländer, Sylvaner and Riesling appear zero times. Nothing to vintage-match even if a declaration existed, which is the Italian undated-page failure in its most extreme form — not an undated cuvée page but no cuvée page. A web search for a Köfererhof e-label or QR destination returned only foreign retailers (wine.com, Tannico, Pur Südtirol, Meraner Weinhaus).",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.koefererhof.it/robots.txt",
+        "https://koefererhof.it/robots.txt",
+        "https://www.koefererhof.it/",
+        "https://www.koefererhof.it/willkommen",
+        "https://www.koefererhof.it/sitemap.xml"
+      ],
+      "checked_at": "2026-08-09T17:35:00Z",
+      "robots_disallowed": false,
+      "note": "robots.txt is Squarespace's stock file: a long list of AI-crawler tokens AND 'User-agent: *' in ONE group, so unlike bpdr.com the group binds everyone and the 2026-08-08 RFC 9309 reading is not needed. Nothing it disallows is relevant (/config, /search, /account, /api/, /static/ and a set of query-string forms). The sitemap it names returns a VALID BUT EMPTY <urlset/>, 211 bytes with zero <loc> elements — a Squarespace site with no indexable collections, which is itself the finding. NEW FALSE POSITIVE: the homepage matches 'e-label' four times in raw HTML and zero in text, every hit a Squarespace CSS class — 'event-date-label' and 'Mobile-overlay-folder-item--toggle-label'. Add it to the responsiveLabel/Beaver Builder list."
+    },
+    {
+      "product_number": "7186201",
+      "name": "Köfererhof  Kerner",
+      "producer": "Köfererhof Weingut",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same estate and same close as product 7045701: www.koefererhof.it is a three-page Squarespace brochure with no per-wine page, no shop, no vintage and an empty sitemap, so there is no producer surface on which the Kerner 2024 exists, let alone a declaration. The wine itself is real and widely sold (Alto Adige Valle Isarco DOC, 100 % Kerner, 13,5 % vol) but every page a search returns for it is a foreign retailer — wine.com, Empire Wine, Tannico, Pur Südtirol, trentinoaltoadigewine.it — and a retailer's transcription is explicitly not a source for this project.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.koefererhof.it/robots.txt",
+        "https://www.koefererhof.it/",
+        "https://www.koefererhof.it/willkommen",
+        "https://www.koefererhof.it/sitemap.xml"
+      ],
+      "checked_at": "2026-08-09T17:36:00Z",
+      "robots_disallowed": false,
+      "note": "Systembolaget's alcohol for both wines is 13,5 %, which agrees with the retailers' figure for the Kerner 2024 — noted only because it confirms the identity of the bottle, not because anything was found to attach to it."
     }
   ],
-  "updated_at": "2026-08-09T17:22:00Z",
+  "updated_at": "2026-08-09T17:36:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
