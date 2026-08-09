@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — French producers with 2024+ undeclared wines. IN PROGRESS. The German slice of this pool closed at 140 records; France opened at 141. Alsace is complete and Burgundy is being skipped deliberately. As of the tenth French batch (2026-08-09): France stands at 63 producers, 135 wines, 4 found, 9 rejected.",
-  "attempted": 276,
+  "attempted": 277,
   "found": 22,
-  "not_found": 214,
+  "not_found": 215,
   "rejected": 40,
   "declarations": [
     {
@@ -8059,9 +8059,38 @@
       "checked_at": "2026-08-09T09:55:00Z",
       "robots_disallowed": false,
       "server_rendered": true
+    },
+    {
+      "product_number": "7387406",
+      "name": "Alain Jaume Bellissime Rosé Magnum",
+      "producer": "Alain Jaume",
+      "country": "Frankrike",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "raw_nutrition": null,
+      "raw_allergens": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "OUR EXACT VINTAGE IS ON THE PRODUCER'S OWN SHOP AND ALL IT DECLARES IS 'Contient des sulfites'. Vignobles Alain Jaume (Orange, Vaucluse) runs a first-party PrestaShop at www.vignobles-alain-jaume.com covering all five of the family's ranges, and Bellissime is a Domaine Grand Veneur cuvee on it: /fr/vin-cotes-du-rhone-domaine-grand-veneur/3-vin-cotes-du-rhone-rose-bellissime.html, H1 'Bellissime - Rose - 2025', product-details table 'Millesime 2025 / Appellation Cotes-du-Rhone / Nom de Cuvee Bellissime / Couleur Rose'. THAT IS OUR VINTAGE EXACTLY (Systembolaget 7387406 is the 2025 Cotes-du-Rhone rose). The page declares nothing: 'ingr', 'nutri', 'kcal', 'declaration nutritionnelle', 'elabel', 'e-label', 'vincod', 'v9.lu', 'iviti' and 'qrcode' are all zero in the raw HTML and zero in the entity-decoded text; the only label-adjacent string on the page is the bare allergen line 'Contient des sulfites', with no substances listed and no energy value. THE ONE DOCUMENT LINKED WAS FETCHED AND IS NOT A DECLARATION: 'Telecharger la Fiche vin' is /generated/pdf/fr/3-vin-cotes-du-rhone-rose-bellissime-fr.pdf, a 1,3 MB PrestaShop-generated PDF that reproduces the product page word for word — terroir, encepagement, vinification, degustation, serving advice, 'Contient des sulfites' — and adds nothing. No ingredient list, no nutrition table, no energy value. Note also that Systembolaget's item is the MAGNUM while the shop lists a single unnamed format, so even had a declaration been there the pack would have needed settling (the Vieux Lazaret precedent). robots.txt is the PrestaShop default: product pages and /generated/ are allowed, and '/*controller=attachment' and '/*controller=search' are disallowed and were not touched. Vincod probe negative: m.alainjaume.com NXDOMAIN with an NXDOMAIN control, and the 'vincod' grep is zero. Two domain notes: alainjaume.com and alain-jaume.com both reset the TLS handshake and alainjaume.com over plain http 302s to https://www.vignobles-alain-jaume.com/fr/, which is the live site; www.alainjaume.com does not resolve at all.",
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: alainjaume.com, alain-jaume.com and domaine-grand-veneur.com all 213.186.33.5 (OVH); www.alainjaume.com NXDOMAIN; m.alainjaume.com and randomxyz123.alainjaume.com both NXDOMAIN",
+        "http://alainjaume.com/ — 302 to https://www.vignobles-alain-jaume.com/fr/ (https on the short domains resets the connection)",
+        "https://www.vignobles-alain-jaume.com/robots.txt — PrestaShop default; product pages and /generated/ allowed, controller=attachment and controller=search disallowed",
+        "https://www.vignobles-alain-jaume.com/sitemap.xml — 404 (no sitemap; the product was reached from the home page links)",
+        "https://www.vignobles-alain-jaume.com/fr/vin-cotes-du-rhone-domaine-grand-veneur/3-vin-cotes-du-rhone-rose-bellissime.html — Bellissime Rose 2025, our exact vintage; only Contient des sulfites",
+        "https://www.vignobles-alain-jaume.com/generated/pdf/fr/3-vin-cotes-du-rhone-rose-bellissime-fr.pdf — the product page as a PDF, no declaration"
+      ],
+      "checked_at": "2026-08-09T10:15:00Z",
+      "robots_disallowed": false,
+      "server_rendered": true
     }
   ],
-  "updated_at": "2026-08-09T09:55:00Z",
+  "updated_at": "2026-08-09T10:15:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
