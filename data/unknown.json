@@ -6,6 +6,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
+   "token": "försumbar",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7010801/"
+  },
+  {
    "token": "muscat",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-2030541/"
