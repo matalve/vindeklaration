@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after three batches: 25 producers, 75 wines, 5 found, 62 not found, 8 rejected. The third batch (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe and Demarie Giovanni; it added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina, two found and one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie (one found, two rejected). 192 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 352,
+  "attempted": 354,
   "found": 27,
-  "not_found": 280,
+  "not_found": 282,
   "rejected": 45,
   "declarations": [
     {
@@ -10216,9 +10216,60 @@
       "robots_disallowed": false,
       "robots_reasoning": "www.ilfalchetto.com allows everything except /wp-admin/ (with admin-ajax.php explicitly allowed). shop.ilfalchetto.com is a standard Shopify robots.txt, 'User-agent: * / Allow: /'. No e-label host involved, no exception used.",
       "note": "A NEW FALSE POSITIVE, AND AN EXPENSIVE ONE: 'u-label' matches Shopify's default navigation markup, `site-nav__link-men` + `u-label` in the class `site-nav__link-menu-label`. U-label is the platform this project has been watching for since Germany, so a raw grep for `u-label` on any Shopify storefront will look like the find of the batch and is nothing. Add it to responsiveLabel, whitelabel, toggle-label, cm-cookie-label and slideLabel. Also worth noting: the Shopify 'Seleziona annata' variant selector is a genuine, cheap vintage statement on a platform that usually gives none — read it, and read the litre figure beside the title, because the two Falchetto products state 0,75 lt where Systembolaget's Moscato is a 375 ml."
+    },
+    {
+      "product_number": "5535601",
+      "name": "Azelia Dolcetto d'Alba Bricco dell'Oriolo",
+      "producer": "Azelia",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.azelia.it/vino/dolcetto-dalba-doc-bricco-dell-oriolo/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Azienda Agricola AZELIA di Luigi Scavino, Via Alba Barolo 143, Castiglione Falletto (CN), P.iva 01990880047 — WordPress (hellobarrio's theme again, the same agency as Michele Chiarlo and Tenuta il Falchetto), nine undated cuvee pages under /vino/ in IT and EN, no webshop. Our wine has its own page, /vino/dolcetto-dalba-doc-bricco-dell-oriolo/ = 'Dolcetto d'Alba BRICCO DELL'ORIOLO', zona Montelupo Albese, Dolcetto 100 %, 2,1 ha, esposizione sud / 600 m, terreno, Guyot, eta media delle viti, vinificazione, affinamento acciaio, produzione media 13.600 bottiglie — and THE PAGE STATES NO VINTAGE, no alcohol and no pack. Its scheda tecnica, /wp-content/uploads/2026/06/azelia_dolcetto-d-alba-bricco-dell-oriolo_IT.pdf (Last-Modified 24 June 2026, so squarely inside the obligation), was downloaded and read in full and repeats those same fields plus a tasting paragraph: no vintage, no alcohol, no substances, no nutrition table, no energy value, not even a sulphite line. Zero occurrences of ingredien, nutrizion, solfit, kcal, energia and dichiarazion in the page's raw HTML as well as its stripped text.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.azelia.it/robots.txt",
+        "https://www.azelia.it/sitemap_index.xml",
+        "https://www.azelia.it/vino-sitemap.xml",
+        "https://www.azelia.it/etichettatura-sitemap.xml",
+        "https://www.azelia.it/vino/dolcetto-dalba-doc-bricco-dell-oriolo/",
+        "https://www.azelia.it/wp-content/uploads/2026/06/azelia_dolcetto-d-alba-bricco-dell-oriolo_IT.pdf"
+      ],
+      "checked_at": "2026-08-11T07:25:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.azelia.it serves a bare Yoast robots.txt — 'User-agent: * / Disallow:' plus a sitemap line — so nothing is disallowed. No e-label host involved, no exception used.",
+      "note": "AN `etichettatura` POST TYPE WITH ITS OWN SITEMAP, AND IT IS THE PACKAGING DECREE AGAIN. azelia.it publishes etichettatura-sitemap.xml with nineteen URLs, and every one of them is a packaging component: /etichettatura/bottiglia-gl-70/, /bottiglia-gl-71/, /tappo-for-51/, /tappo-c-alu-90/, /capsula-c-pvc-90/, /gabbietta-fe-40/, /cartone-pap-20/, /cassa-for-50/ and so on — material code and recycling bin under the Italian etichettatura ambientale decree. EIGHTH ITALIAN PRODUCER TO MEET THAT OBLIGATION ON THE WEB AND NOT THE INGREDIENT ONE, and the second in this batch to have built a dedicated per-item WordPress post type for it. An `etichettatura` sitemap is not an e-label tree; recognise it and do not spend the fetches."
+    },
+    {
+      "product_number": "7189101",
+      "name": "Langhe Nebbiolo Azelia",
+      "producer": "Azelia",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.azelia.it/vino/langhe-doc-nebbiolo/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same estate and same template as product 5535601. /vino/langhe-doc-nebbiolo/ is 'Langhe DOC Nebbiolo' — cuvee matches Systembolaget exactly, the page states no vintage, no alcohol and no pack, and it carries no ingredient list, no nutrition table, no energy value and no sulphite line in raw HTML or in stripped text. Its scheda, /wp-content/uploads/2026/06/azelia_langhe-nebbiolo_IT.pdf, was left at the href: the Dolcetto's was read in full and the two are generated from one template.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.azelia.it/vino/langhe-doc-nebbiolo/"
+      ],
+      "checked_at": "2026-08-11T07:25:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.azelia.it serves a bare Yoast robots.txt — 'User-agent: * / Disallow:' plus a sitemap line — so nothing is disallowed. No e-label host involved, no exception used.",
+      "note": "A PER-VINTAGE ARTEFACT THAT IS NOT A SOURCE. Each Azelia wine page has an 'Etichetta' download block listing one JPEG per vintage back to 2013, and OUR 2024 IS THERE for both wines (LANGHE-NEBBIOLO-2024-AZELIA.jpg, Dolcetto-dAlba-2024.jpg). It is a photograph of the paper front label, published for the trade. It was NOT downloaded and NOT read: a declaration recovered by OCR from an image would be a transcription this project cannot verify, and reading substances off a picture is exactly the guessing CLAUDE.md forbids. Recording it because it is a shape that will recur — an Italian estate can publish a per-vintage label image and no per-vintage text."
     }
   ],
-  "updated_at": "2026-08-11T07:05:00Z",
+  "updated_at": "2026-08-11T07:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
