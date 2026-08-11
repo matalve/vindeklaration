@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after four batches: 31 producers, 93 wines, 5 found, 80 not found, 8 rejected. The third and fourth batches (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe, Demarie Giovanni, Castellani, Michele Chiarlo, Casa Vinicola Coppi, Ca' del Baio, Tenuta il Falchetto and Azelia. They added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina — two found, one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie's own shop (one found, two rejected). 178 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 358,
+  "attempted": 360,
   "found": 27,
-  "not_found": 286,
+  "not_found": 288,
   "rejected": 45,
   "declarations": [
     {
@@ -10372,9 +10372,60 @@
       "robots_disallowed": false,
       "robots_reasoning": "www.prunotto.it disallows only /de/; the query-string vintage URLs are allowed. No exception used.",
       "note": "A SECOND ITALIAN PER-VINTAGE ARCHIVE ON A PRODUCER'S OWN WORDPRESS, AND IT IS FREE. Prunotto's ?wineyear={year} parameter reaches eight vintages of every wine from the wine's own page, and unlike Cantina Terlan's ?wine-id= archive it is not blocked by robots.txt. After Ricasoli (808 per-vintage URLs) and Terlan and Michele Chiarlo's dated schede, that is the fourth Italian producer with real vintage machinery and no ingredient list — the archive tells you the year and then has nothing to attach to it. Note the corollary for future runs: THE DEFAULT PAGE IS NOT ALWAYS THE SAME VINTAGE FOR TWO WINES OF ONE ESTATE. Prunotto's Fiulot still shows the 2024 while its Moscato has rolled to the 2025, so read the year strip per wine rather than assuming the estate as a whole is on one release."
+    },
+    {
+      "product_number": "5751201",
+      "name": "High On Love Pink Bubbles Prosecco Extra Brut",
+      "producer": "Antonio Facchin & Figli",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://www.antoniofacchin.com/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Societa Agricola Antonio Facchin & Figli, Cimadolmo (TV), Veneto — two surfaces, and NEITHER COULD BE READ, for two different reasons, one of them absolute. (1) The webshop www.antoniofacchinshop.it is a Magento behind Cloudflare and answers its own robots.txt-declared sitemap (/sitemaps/antoniofacchin_shop_it_ita.xml) with HTTP 403 carrying the 'Just a moment...' interstitial, header cf-mitigated present, 'Enable JavaScript and cookies to continue'. That is a bot challenge and is absolute under this project's rules: it was not retried and not worked around, and no product URL on that host was requested. (2) The marketing site www.antoniofacchin.com serves robots.txt over Cloudflare but answers HTTP 522 (origin connection timed out) for the site root, and every subsequent path request hung until the wrapper killed it after four minutes. An origin outage, not a refusal. Separately, the Swedish brand HIGH ON LOVE has no surface of its own: it is a Systembolaget-only name (the Swedish supplier is literally 'High On Love Winery'), a web search for it returns Systembolaget and five Swedish resellers and nothing on any Italian domain, and no High On Love domain resolves.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.antoniofacchinshop.it/robots.txt",
+        "https://www.antoniofacchinshop.it/sitemaps/antoniofacchin_shop_it_ita.xml",
+        "https://www.antoniofacchin.com/robots.txt",
+        "https://www.antoniofacchin.com/"
+      ],
+      "checked_at": "2026-08-11T05:20:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.antoniofacchinshop.it is a stock Magento robots.txt with one 'User-agent: *' group, 'Crawl-Delay: 10' (honoured; only two requests were made to the host, minutes apart) and the sitemap explicitly named — the sitemap URL fetched was allowed, and it is the server that refused, not the file. www.antoniofacchin.com is Cloudflare-managed and has BOTH a 'User-agent: *' group with 'Allow: /' AND ten named AI-crawler groups with 'Disallow: /' (Amazonbot, Applebot-Extended, Bytespider, CCBot, ClaudeBot, CloudflareBrowserRenderingCrawler, Google-Extended, GPTBot, meta-externalagent). Unlike bpdr.com the wildcard group exists here, so no RFC 9309 reading is needed: we match '*', which allows everything. No e-label host involved, no exception used.",
+      "note": "THE PRODUCER'S OWN SHOP IS ALSO A THIRD-PARTY RETAILER, AND ITS robots.txt IS THE CATALOGUE. antoniofacchinshop.it disallows about thirty anchored '/*{brand}$' landing slugs — lorenzonetto, vigneti_zanatta, la_tordera, brugnano, pasqua, borga, la_frassina, tenuta_san_leonardo, ANGELO_NEGRO, chateau_marjosse, rene_bouvier, buzzinelli, degani, meran, cerulli_spinozzi, LE MORETTE, pietro_zanoni and more. That is the same shape as www.shop.rottensteiner.wine, and the same conclusion: the host sells far beyond its owner, two of the brands (Angelo Negro, Le Morette) are in this project's own remaining Italian pool, and it is a source for none of them — a producer's shop that resells is a retailer for everything but its own wine, and it is behind a Cloudflare challenge in any case."
+    },
+    {
+      "product_number": "5855901",
+      "name": "High On Love Bubbles Prosecco Extra dry",
+      "producer": "Antonio Facchin & Figli",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://www.antoniofacchin.com/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same producer, same two surfaces and the same two blocks as product 5751201: the shop answers a Cloudflare bot challenge (403, cf-mitigated) on the one URL its own robots.txt names, and the marketing site answers HTTP 522 on the root and then hangs. No further requests were made to either host. The brand itself has no Italian presence: 'High On Love' returns only Systembolaget and Swedish resellers, which are not sources.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.antoniofacchinshop.it/robots.txt",
+        "https://www.antoniofacchin.com/robots.txt",
+        "https://www.antoniofacchin.com/"
+      ],
+      "checked_at": "2026-08-11T05:20:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 5751201. Both hosts allow us; one refuses technologically and one is down.",
+      "note": "REVISIT CANDIDATE, WEAKLY. Both wines are 2025, so the obligation certainly covers them, and the marketing site's 522 is an outage that may clear. But the shop's Cloudflare challenge will not, and the brand looks export-only in the strongest form yet seen — Sweden-only, with the importer's own name registered as the 'producer' of the brand. Do not spend more than two fetches here on a later slice."
     }
   ],
-  "updated_at": "2026-08-11T05:00:00Z",
+  "updated_at": "2026-08-11T05:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
