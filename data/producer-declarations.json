@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after three batches: 25 producers, 75 wines, 5 found, 62 not found, 8 rejected. The third batch (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe and Demarie Giovanni; it added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina, two found and one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie (one found, two rejected). 192 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 348,
+  "attempted": 350,
   "found": 27,
-  "not_found": 276,
+  "not_found": 278,
   "rejected": 45,
   "declarations": [
     {
@@ -10107,9 +10107,61 @@
       "robots_disallowed": false,
       "robots_reasoning": "www.vinicoppi.it serves a plain WooCommerce robots.txt with one 'User-agent: *' group disallowing only wc-logs, woocommerce transient and upload folders, add-to-cart query forms and /wp-admin/. Product pages are allowed. No e-label host involved, no exception used.",
       "note": "HOST NOTE: cantinecoppi.it, www.cantinecoppi.it and coppi.it are all NXDOMAIN; the estate is vinicoppi.it, on Aruba, IPv6-only in this environment (2a00:6d40:4:2::c342:237) and it 301s the apex to www."
+    },
+    {
+      "product_number": "5276501",
+      "name": "Barbera d'Alba Paolina Ca' del Baio",
+      "producer": "Ca' del Baio",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://cadelbaio.com/vini/barbera-dalba-paolina-doc/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Societa semplice agricola Ca' del Baio di Giulio Grasso, Via Ferrere Sottano 33, Treiso (CN), P.iva 03875530044 — a bespoke 2016 WordPress theme with a `vini` post type (vini-sitemap.xml), sixteen wines, one undated page per cuvee in IT and EN, and no webshop of any kind. Our wine has its own page, /vini/barbera-dalba-paolina-doc/ = 'Barbera d'Alba Paolina', Denominazione Barbera d'Alba DOC, Vitigno Barbera 100 %, anno di impianto, terreno, esposizione, vendemmia, caratteri organolettici, abbinamenti, temperatura di servizio, conservazione — and THE PAGE STATES NO VINTAGE, no alcohol and no pack. Zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen and annata in raw HTML as well as in stripped text; the eight raw matches for 'etichett' are all the navigation and footer links to the estate's etichettatura ambientale page. The dominant Italian shape, and there is nothing here to vintage-match a 2024 at 13,5 % against.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://cadelbaio.com/robots.txt",
+        "https://cadelbaio.com/sitemap_index.xml",
+        "https://cadelbaio.com/vini-sitemap.xml",
+        "https://cadelbaio.com/vini/barbera-dalba-paolina-doc/",
+        "https://cadelbaio.com/area-download/schede-vino/",
+        "https://cadelbaio.com/area-download/etichette/"
+      ],
+      "checked_at": "2026-08-11T06:45:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "cadelbaio.com serves a bare Yoast robots.txt — 'User-agent: * / Disallow:' plus a sitemap line — so nothing is disallowed. No e-label host involved, no exception used.",
+      "note": "A DOWNLOAD AREA THAT LOOKS LIKE THE LOEWEN SIGNATURE AND IS EMPTY. Each wine page ends with a 'Download PDF' button and the navigation carries 'Download Area' with four sections — Schede Vino, Foto Bottiglie, Etichette, Foto Azienda. This is the closest an Italian producer has come to Carl Loewen's Download Center, and it yields nothing twice over. (1) EVERY DOWNLOAD ANCHOR ON /area-download/schede-vino/ IS href=\"\" — sixteen wines, sixteen empty hrefs, so no scheda tecnica exists for any wine and the per-wine 'Download PDF' link goes to the same empty list. (2) 'Etichette' is not e-labels: it is sixteen JPEG scans of the paper bottle labels under /wp-content/uploads/2016/, press assets. The Loewen recogniser needs the word 'eLabels' and it is absent here — this is the case that shows why."
+    },
+    {
+      "product_number": "7164201",
+      "name": "Dolcetto d'Alba Lodoli Ca' Del Baio",
+      "producer": "Ca' del Baio",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://cadelbaio.com/vini/dolcetto-dalba-lodoli-doc/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same estate and same shape as product 5276501. /vini/dolcetto-dalba-lodoli-doc/ is 'Dolcetto d'Alba Lodoli' — cuvee matches Systembolaget exactly and the page states no vintage, no alcohol and no pack. Byte-for-byte the same template as the Barbera: identical term counts, zero declaration markers in raw HTML and in stripped text, the same eight 'etichett' hits from the environmental-labelling nav link, and the same empty 'Download PDF' anchor.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://cadelbaio.com/vini/dolcetto-dalba-lodoli-doc/",
+        "https://cadelbaio.com/area-download/schede-vino/"
+      ],
+      "checked_at": "2026-08-11T06:45:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "cadelbaio.com serves a bare Yoast robots.txt — 'User-agent: * / Disallow:' plus a sitemap line — so nothing is disallowed. No e-label host involved, no exception used.",
+      "note": "The packaging obligation is met and the ingredient one is not, for the sixth Italian producer in this file: 'Etichettatura ambientale' has its own page and its own top-level navigation item and footer button on every page of the site."
     }
   ],
-  "updated_at": "2026-08-11T06:25:00Z",
+  "updated_at": "2026-08-11T06:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
