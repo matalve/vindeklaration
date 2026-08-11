@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after four batches: 31 producers, 93 wines, 5 found, 80 not found, 8 rejected. The third and fourth batches (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe, Demarie Giovanni, Castellani, Michele Chiarlo, Casa Vinicola Coppi, Ca' del Baio, Tenuta il Falchetto and Azelia. They added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina — two found, one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie's own shop (one found, two rejected). 178 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 354,
+  "attempted": 356,
   "found": 27,
-  "not_found": 282,
+  "not_found": 284,
   "rejected": 45,
   "declarations": [
     {
@@ -10267,9 +10267,61 @@
       "robots_disallowed": false,
       "robots_reasoning": "www.azelia.it serves a bare Yoast robots.txt — 'User-agent: * / Disallow:' plus a sitemap line — so nothing is disallowed. No e-label host involved, no exception used.",
       "note": "A PER-VINTAGE ARTEFACT THAT IS NOT A SOURCE. Each Azelia wine page has an 'Etichetta' download block listing one JPEG per vintage back to 2013, and OUR 2024 IS THERE for both wines (LANGHE-NEBBIOLO-2024-AZELIA.jpg, Dolcetto-dAlba-2024.jpg). It is a photograph of the paper front label, published for the trade. It was NOT downloaded and NOT read: a declaration recovered by OCR from an image would be a transcription this project cannot verify, and reading substances off a picture is exactly the guessing CLAUDE.md forbids. Recording it because it is a shape that will recur — an Italian estate can publish a per-vintage label image and no per-vintage text."
+    },
+    {
+      "product_number": "5726801",
+      "name": "Azienda Livon Livon Collio Pinot Grigio",
+      "producer": "Azienda Livon",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://livon.it/scheda-livon-classica-pinot-grigio/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Aziende Agricole Livon, Dolegna del Collio (UD), Friuli-Venezia Giulia — one WordPress/Elementor site covering four estates (Livon, Villa Chiopris, Borgo Salcetino, Fattoria Colsanto), no webshop of any kind (shop.livon.it and store.livon.it are NXDOMAIN, and the homepage carries no outbound commerce link at all). The sitemap index names only post, page and category sitemaps; there is no product post type. Our wine's own page is /scheda-livon-classica-pinot-grigio/ = 'LINEA Classica / Pinot Grigio D.O.C. Collio', vigneto Dolegna del Collio Ruttars, marne ed argilla, Guyot, vinificazione, caratteristiche organolettiche, abbinamenti, longevita, temperatura di servizio — and THE PAGE STATES NO VINTAGE, no alcohol, no pack. Zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen, ingredient-list, etichett, elabel and ioagri in the raw HTML as well as in the stripped text. The estate's Press Area lists a 'scheda pdf' per wine behind opaque /download/{id}/ ids; the Pinot Grigio's (id 4411) was downloaded and read in full and is the Italian scheda tecnica near-miss exactly — the same seven fields as the web page in Italian and English, no vintage, no alcohol, no substances, no nutrition table, no energy value, not even a sulphite line.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.livon.it/robots.txt",
+        "https://livon.it/sitemaps.xml",
+        "https://livon.it/page-sitemap1.xml",
+        "https://livon.it/scheda-livon-classica-pinot-grigio/",
+        "https://livon.it/press-area/",
+        "https://livon.it/download/4411/?tmstv=1733235429"
+      ],
+      "checked_at": "2026-08-11T04:55:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "livon.it serves a 67-byte robots.txt — 'User-agent: * / Disallow: /wp-admin/ / Allow: /wp-admin/admin-ajax.php' — so every content path is allowed. No e-label host involved, no exception used.",
+      "note": "THE VINTAGE IS ONLY IN THE DOWNLOAD'S Content-Disposition FILENAME. The /download/{id}/ URLs are opaque WordPress Download Monitor ids and the anchor text is just 'scheda pdf'; the served file announces itself as LIVON__Classica_1_pinot_grigio_2025.pdf. That is the current edition of the sheet and its PDF text names no year, so it cannot be read as a vintage statement — but it is a cheap probe worth repeating: one GET, read the Content-Disposition, and you learn what year the estate is currently documenting without opening a 1,4 MB file. Note also that the estate keeps a Livon Classica Sauvignon Blanc and a Villa Chiopris Sauvignon, two different estates' wines on one site, so the Press Area's flat list of wine names is ambiguous and must be read by the section heading above it."
+    },
+    {
+      "product_number": "7063801",
+      "name": "Livon Sauvignon Blanc",
+      "producer": "Azienda Livon",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://livon.it/scheda-livon-classica-sauvignon-blanc/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same estate and same site as product 5726801. Our wine's page is /scheda-livon-classica-sauvignon-blanc/ = 'LINEA Classica / Sauvignon Blanc D.O.C. Collio', vigneto Dolegna del Collio Ruttars, marne ed arenarie, Guyot, macerazione a freddo in pressa, vinificazione, caratteristiche organolettiche, abbinamenti — and again NO VINTAGE, no alcohol, no pack, and zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen, ingredient-list, etichett, elabel and ioagri in raw HTML and in stripped text. Its Press Area scheda pdf was not downloaded a second time: the sibling Pinot Grigio sheet, read in full, settles the template for the estate (one PDF settles the template, per this file's standing rule) and the two web pages are the same layout field for field.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://livon.it/scheda-livon-classica-sauvignon-blanc/",
+        "https://livon.it/page-sitemap1.xml"
+      ],
+      "checked_at": "2026-08-11T04:55:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "livon.it allows every content path; no exception used.",
+      "note": "Livon is the undated-cuvee-page failure in its purest form: a four-estate group with sixty per-wine pages, a full press area, per-wine technical sheets in two languages — and not one year, alcohol figure or substance anywhere on the surface."
     }
   ],
-  "updated_at": "2026-08-11T07:35:00Z",
+  "updated_at": "2026-08-11T04:55:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
