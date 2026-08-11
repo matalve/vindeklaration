@@ -18,14 +18,16 @@ rejected — see *France, and why it is not Germany* and *The first French find*
 French batch is *The estate that hosts its own e-labels and publishes them only
 for the 0,0 %*, below.
 
-**Italy opened on 2026-08-09** and has had four batches — thirty-one producers,
-ninety-three wines, **five declarations attached** and eight rejected. See
+**Italy opened on 2026-08-09** and has had five batches — thirty-seven
+producers, 105 wines, **five declarations attached** and eight rejected. See
 *Italy, where the page is undated*, the last major section of this file, and in
 particular its subsections *The first Italian declarations attached*, *Italy's
-first e-label vendor, and its second first-party shape* and *Where the remaining
-Italian work is*. Read them before touching an Italian producer: five different
-producer profiles have now been falsified there and the closing advice is a
-fixed probe, not a shape to select for.
+first e-label vendor, and its second first-party shape*, *The fifth Italian
+batch* and *Where the remaining Italian work is*. Read them before touching an
+Italian producer: five different producer profiles have now been falsified
+there and the closing advice is a fixed probe, not a shape to select for —
+starting with the question of whether the Swedish name is the producer's name
+at all.
 
 ## Readable — server-rendered
 
@@ -2260,17 +2262,158 @@ that the ingredient absence is editorial: these estates built something.
   not predict a declaration — none of the three publishes one — but it does
   predict the *shape* of the page, which makes the second and third cheap.
 
+### The fifth Italian batch: six producers, twelve wines, nothing to attach
+
+**2026-08-11: Azienda Livon, Prunotto, Antonio Facchin & Figli, Rallo, Olearia
+Vinicola Orsogna, Cantine Ermes — twelve wines, 0 found, 12 not found, 0
+rejected.** The first Italian batch with no declaration read at all, and the
+reason is worth stating plainly: **half the wines had no producer page to
+check, because the Swedish name is not the producer's name.**
+
+| Producer | Region | Site | Our bottle on it? | Declaration? |
+|---|---|---|---|---|
+| Azienda Livon | Friuli | WordPress, four estates, **no shop** | cuvée yes, **no vintage** | none |
+| **Prunotto** | Piemonte | Antinori's WordPress, **`?wineyear=` archive** | **yes, both, exactly** | none |
+| Antonio Facchin | Veneto | Magento shop + marketing site | **unreadable both ways** | unreadable |
+| Rallo | Sicilia | WordPress, no shop, per-vintage schede | **one, at 2024 and 13,5 %** | none — but see below |
+| Olearia Vinicola Orsogna | Abruzzo | WooCommerce, 276 products | cuvée yes, **no vintage** | none |
+| Cantine Ermes | Sicilia | WordPress, `brand` post type | **brand absent entirely** | none |
+
+#### The export-only brand is Italy's second failure shape, and it is bigger than expected
+
+Four of these twelve wines carry a name the producer does not use: Facchin's
+two *High On Love* Proseccos, Rallo's *Amber One* and *Nero Frizzante*, and
+Cantine Ermes' two *Ambleri* — six of twelve, across three producers. In each
+case the name returns Systembolaget, Vivino, wine-searcher and Swedish
+resellers and **nothing on any domain the producer controls**. Facchin's is the
+purest form: Systembolaget records the supplier as *High On Love Winery*, so
+the brand is the importer's.
+
+**Where the sitemap index names a `brand` post type, one fetch of it is a
+complete census of what the producer puts its own name on.** Cantine Ermes'
+`brand-sitemap.xml` names its seven consumer brands in fourteen URLs; *Ambleri*
+is not among them, and that closed two wines without opening a product page.
+Ermes is one of Italy's largest private-label producers, so **the private-label
+co-op is a shape to recognise and close fast** — the wine exists, the page never
+will.
+
+#### Rallo's scheda has the energy value and no ingredient list
+
+The first source in this file with the nutrition figure and no substances. The
+AV01 Catarratto 2024 sheet (`/wp-content/uploads/2026/06/AV01_ITA.pdf`) prints
+`ANNATA 2024`, `Grado alcolico: 13,5%`, `Zuccheri residui`, a
+**`Valori Nutrizionali / Energia (E) per 100 ml: 314 kj / 75 Kcal`** block,
+`Allergeni: Non contiene solfiti`, a full `Informazioni di Smaltimento`
+recycling table and the organic certification — and no `Ingredienti` line
+anywhere. That is exactly the set of particulars Regulation (EU) 2021/2117 lets
+**stay on the physical label**, published on the web with the one part that was
+supposed to move online left out. The usual Italian near-miss is the reverse
+(Demarie's list with no nutrition, or an allergen line alone), so **a
+`Valori Nutrizionali` heading is not a reason to stop reading**.
+
+Note also that the AV01 identification was never completed and did not need to
+be: *Amber One* matches AV01 on vintage, grape, pack and strength and disagrees
+on the organic flag, and no page names both. **When the sheet carries no
+ingredient list, do not spend fetches finishing an identity.**
+
+#### Prunotto: a fourth Italian per-vintage archive, free of charge
+
+`?wineyear={year}` on any `/it/vino/{wine}/` page reaches eight vintages back to
+2018, on Antinori's own WordPress theme, and `robots.txt` disallows only `/de/`
+— so unlike Cantina Terlan's `?wine-id=` archive there is nothing in the way.
+Both Swedish bottles were reachable at exactly 2024 and neither page carries a
+substance. After Ricasoli, Terlan and Chiarlo that is **the fourth Italian
+producer with real vintage machinery and no ingredient list to hang on it.**
+
+Two corollaries:
+
+- **The default page is not the same vintage for two wines of one estate.**
+  Prunotto's Fiulot still shows the 2024 while its Moscato has rolled to the
+  2025. Read the year strip per wine.
+- **The Antinori group shop does not cover Prunotto.** `26generazioni.com`'s
+  product sitemap holds 166 products, exactly two of them Prunotto (Barbaresco
+  2023, Barolo 2022), and no Barbera or Asti wine of any brand. The Scantrust
+  e-label route found in July is closed for this estate, and closing it cost
+  three fetches — **check the group shop's product sitemap before assuming a
+  group platform reaches a subsidiary's wines.**
+
+#### Italian hosts and greps, fifth batch
+
+- **`qodef-e-label` is a new `e-label` false positive.** The Qode/QODEF
+  WordPress theme family renders its membership widget with that class — nine
+  raw hits and zero text hits on every Orsogna product page. Add it to
+  `responsiveLabel`, `whitelabel`, `toggle-label`, `cm-cookie-label`,
+  `slideLabel`, `site-nav__link-menu-label`, `__VIEWSTATE` and `checkJQuery`.
+- **A `trusty.report` subdomain is a whistleblowing channel, not traceability.**
+  Orsogna's *Blockchain* page links `orsognacantina.trusty.report`, which under
+  a heading about tracing the bottle from the vineyard is Trusty AG's
+  confidential-reporting app. One fetch, recognise it, move on.
+- **"Etichetta ambientale DIGITALE" is still the packaging decree.** Orsogna
+  publishes `/etichetta-ambientale-digitale-zeropuro-pecorino/`: bottle GL 70,
+  cork FOR 51, label to landfill, and a link to the wine's own sheet. That is
+  the ninth Italian producer to meet that obligation and not this one, and it
+  is the most e-label-sounding name the decree has produced.
+- **A Demeter sulphite *limit* is not a declaration.** Orsogna prints
+  `SOLFITI Limite del vino biodinamico Demeter = vino rosso max 70 mg/lt` where
+  the ingredient list belongs, beside `STABILIZZAZIONE TARTARICA Solo
+  refrigerazione naturale` and `FILTRAZIONE Non ammessa la filtrazione
+  sterile`. A ceiling set by a certification scheme, plus the negative list.
+  Expect it on biodynamic estates.
+- **A `?gen_pdf=1` datasheet can be 200, `application/pdf` and zero bytes.**
+  Prunotto's "Scarica scheda tecnica" is exactly that, over curl and httpx
+  alike. Check `content-length` before parsing.
+- **WordPress Download Monitor hides the vintage in `Content-Disposition`.**
+  Livon's press area links opaque `/download/{id}/?tmstv=…` URLs whose anchor
+  text is just "scheda pdf"; the response names the file
+  `LIVON__Classica_1_pinot_grigio_2025.pdf`. One GET and a header read tells you
+  which year the estate currently documents without opening a 1,4 MB file — but
+  the PDF's own text names no year, so **the filename is an edition, not a
+  vintage statement.**
+- **A producer's own shop can be a third-party retailer, and its `robots.txt`
+  is the catalogue.** `antoniofacchinshop.it` disallows about thirty anchored
+  `/*{brand}$` slugs — la_tordera, pasqua, angelo_negro, le_morette, degani,
+  tenuta_san_leonardo and more. Same shape as `shop.rottensteiner.wine`, same
+  conclusion: **a shop that resells is a retailer for everything but its
+  owner's wine**, and two of those brands are in this project's own remaining
+  Italian pool.
+- **Antonio Facchin is blocked twice over.** The shop answers its own
+  robots-declared sitemap with HTTP 403 and Cloudflare's `Just a moment…`
+  interstitial (`cf-mitigated` header) — a bot challenge, absolute, not
+  retried. The marketing site `antoniofacchin.com` answers **HTTP 522** on the
+  root and then hangs on every subsequent path. Its `robots.txt` has both a
+  `User-agent: *` group with `Allow: /` **and** ten named AI-crawler groups
+  with `Disallow: /`; unlike `bpdr.com` the wildcard group exists, so no
+  RFC 9309 reading is needed.
+- **`biocantinaorsogna.it` disallows by file extension**, `/*.pdf` among them,
+  with `Crawl-delay: 2`. Ordinary marketing site, no e-label, so no exception
+  reaches it: HTML only, and no PDF was fetched.
+- **`cantinerallo.it` 301s the host to `rallo1860.it`** and answers
+  `robots.txt` with the site's own HTML — another Italian soft 404.
+  `orsognawinery.com` and `cantinaorsogna.it` both 301 to
+  `biocantinaorsogna.it` and 404 their robots.
+- **A WooCommerce with 276 products can date none of them.** Orsogna's shop
+  *is* its marketing site, one product per cuvée across sixteen brands, with no
+  vintage field in the template and two tabs (Descrizione, Premi) — no
+  `ingredient-list` class anywhere. The standing advice that the Italian shop
+  is the surface that declares has its counter-example here.
+
 ### Where the remaining Italian work is
 
-**178 Italian wines with vintage 2024+ and no declaration on Systembolaget
-remain untouched, after four batches.** By cluster size: Marchesi Antinori 9
+**166 Italian wines with vintage 2024+ and no declaration on Systembolaget
+remain untouched, after five batches** (37 producers and 105 wines attempted;
+5 found, 92 not found, 8 rejected). By cluster size: Marchesi Antinori 9
 (**already attempted, Scantrust, do not re-probe without a new lead**), Tommasi
 6 and Vini Franchetti 6 (both attempted), then a long tail of pairs and
-singles — Azienda Livon, Prunotto, Antonio Facchin & Figli, Rallo, Cantine
-Ermes, Orsogna, Mauro Sebaste, Gaja, Angelo Negro, Giovanni Almondo,
-Mastroberardino, Tagaro, Fattoria Pagano, Orion Wines, Giacosa Fratelli, Tralci
-Hirpini, MGM, Le Vigne di Zamo, Marramiero, Ciacci Piccolomini, Josetta
-Saffirio, Panizzi, Luigi Pira, Le Morette, and about 130 singles.
+singles — Mauro Sebaste, Gaja, Angelo Negro, Giovanni Almondo, Mastroberardino,
+Tagaro, Fattoria Pagano, Orion Wines, Giacosa Fratelli, Tralci Hirpini, MGM, Le
+Vigne di Zamo, Marramiero, Ciacci Piccolomini, Josetta Saffirio, Panizzi, Luigi
+Pira, Le Morette, and about 130 singles.
+
+**Add a step 0 to the probe below: is the Swedish name the producer's name?**
+Six of the last twelve wines were export-only or importer-owned labels, and the
+cheapest way to find out is the producer's own `brand`, `vino` or product
+sitemap — one fetch, and if the name is absent the wine is closed. On present
+evidence that will close something like a quarter of the Italian tail.
 
 **Do not pre-select by producer shape.** Four batches have now falsified the
 small-estate profile, the Alto Adige profile, the co-op profile, the
