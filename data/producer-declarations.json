@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after four batches: 31 producers, 93 wines, 5 found, 80 not found, 8 rejected. The third and fourth batches (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe, Demarie Giovanni, Castellani, Michele Chiarlo, Casa Vinicola Coppi, Ca' del Baio, Tenuta il Falchetto and Azelia. They added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina — two found, one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie's own shop (one found, two rejected). 178 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 360,
+  "attempted": 362,
   "found": 27,
-  "not_found": 288,
+  "not_found": 290,
   "rejected": 45,
   "declarations": [
     {
@@ -10423,9 +10423,64 @@
       "robots_disallowed": false,
       "robots_reasoning": "See product 5751201. Both hosts allow us; one refuses technologically and one is down.",
       "note": "REVISIT CANDIDATE, WEAKLY. Both wines are 2025, so the obligation certainly covers them, and the marketing site's 522 is an outage that may clear. But the shop's Cloudflare challenge will not, and the brand looks export-only in the strongest form yet seen — Sweden-only, with the importer's own name registered as the 'producer' of the brand. Do not spend more than two fetches here on a later slice."
+    },
+    {
+      "product_number": "7851401",
+      "name": "Amber One Catarratto",
+      "producer": "Rallo SpA soc. Agr",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.rallo1860.it/wp-content/uploads/2026/06/AV01_ITA.pdf",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "evidence": "Azienda Agricola Rallo, Via V. Florio 2, Marsala (TP) — www.rallo1860.it, WordPress, twenty per-wine pages in IT and EN, NO WEBSHOP OF ANY KIND (the only outbound host on a product page is a Brevo newsletter stylesheet). No wine on the site is named 'Amber One'; the estate's orange Catarratto from Pattipiccolo, Alcamo is AV01, and its 2024 scheda tecnica (/wp-content/uploads/2026/06/AV01_ITA.pdf, Last-Modified 18 June 2026) was downloaded and read in full. THE SHEET IS THE CLOSEST ITALIAN NEAR-MISS THIS PROJECT HAS SEEN AND IT IS STILL NOT A DECLARATION: it prints 'ANNATA 2024', 'Grado alcolico: 13,5%', 'Zuccheri residui: 1,6 g/100 ml', a 'Valori Nutrizionali / Energia (E) per 100 ml: 314 kj / 75 Kcal' block, 'Allergeni: Non contiene solfiti', a full 'Informazioni di Smaltimento' packaging table (Bottiglia vetro GL71, Capsula Gommalacca Indifferenziata, Tappo di Sughero FOR51), the organic certification IT-BIO-007 and a vintage report — AND NO INGREDIENT LIST. There is no 'Ingredienti' line, no list of substances, and the only additive statement is the negative one, 'Vino di matrice naturale privo di solfiti aggiunti'. Under this project's rules a producer page counts only where it presents an actual list of substances, so this is not a source. The two web pages checked (/av01-wine/ and /vini/) carry the same fields minus the nutrition block, and their raw-HTML hits for etichett, elabel and energia are all prose or Iubenda false positives.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.cantinerallo.it/robots.txt",
+        "https://www.rallo1860.it/robots.txt",
+        "https://www.rallo1860.it/sitemap_index.xml",
+        "https://www.rallo1860.it/page-sitemap.xml",
+        "https://www.rallo1860.it/post-sitemap.xml",
+        "https://www.rallo1860.it/vini/",
+        "https://www.rallo1860.it/av01-wine/",
+        "https://www.rallo1860.it/wp-content/uploads/2026/06/AV01_ITA.pdf"
+      ],
+      "checked_at": "2026-08-11T05:40:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.rallo1860.it serves a bare Yoast robots.txt — one 'User-agent: *' group with an empty 'Disallow:' plus a Sitemap line — so nothing is disallowed. www.cantinerallo.it 301s the whole host to www.rallo1860.it and answers robots.txt with the site's own HTML, a soft 404, so it carries no directives either. No e-label host involved, no exception used.",
+      "note": "THE IDENTIFICATION WAS NEVER COMPLETED, AND IT DID NOT NEED TO BE. Systembolaget's 'Amber One Catarratto' has no counterpart of that name on the producer's surface; AV01 is the only Catarratto orange wine Rallo makes, and it agrees with Systembolaget on vintage (2024), grape, pack (750 ml) and strength (13,5 % against 13,5) — but it disagrees on the organic flag (the sheet is certified IT-BIO-007 while Systembolaget's item is not marked organic), and 'Amber One' appears nowhere on any Italian domain, only on Vivino, CellarTracker and the Swedish importer Krut & Krut. The export-only-brand rule again. It changes nothing here because the sheet carries no ingredient list either way, but a later run should not treat AV01 as established to be this bottle. A RARE INVERSION WORTH RECOGNISING: this is the first source in the file with the ENERGY VALUE and no ingredient list. The usual Italian near-miss is the reverse (an allergen line, or Demarie's list with no nutrition). An energy figure plus 'Allergeni:' plus a smaltimento table is exactly the set of things Regulation (EU) 2021/2117 lets stay on the physical label, published on the web with the one part that was supposed to move online left out."
+    },
+    {
+      "product_number": "5880201",
+      "name": "Nero Frizzante",
+      "producer": "Rallo SpA soc. Agr",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.rallo1860.it/vini/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same producer and site as product 7851401. THE WINE IS NOT ON THE PRODUCER'S SURFACE AT ALL. Rallo's /vini/ page lists the complete range in four lines — Selezioni (AV01, Beleda, La Cuba, Ghibli), Monovarietali (Bianco Maggiore, La Maggiore, Al Qasar, Evro, Alba Rosea, Il Manto, Regnante, La Clarissa, Lucido), Classici (Il Principe, Carta D'Oro) and Fuori pasto (Soleras, Passito di Pantelleria, Mille, Est. 1969) — and the string 'frizzante' occurs ZERO times on it. The estate's only Nero d'Avola is Il Manto, whose page was read: DOP Sicilia Bio, still red, 'Grado alcolico 14%', against Systembolaget's frizzante at 13,0 %. That is a different wine, not an approximation of ours, so no scheda tecnica was fetched for it. A search for the name returns one Vivino entry and no Italian domain.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.rallo1860.it/vini/",
+        "https://www.rallo1860.it/il-manto/",
+        "https://www.rallo1860.it/page-sitemap.xml"
+      ],
+      "checked_at": "2026-08-11T05:40:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.rallo1860.it disallows nothing; no exception used.",
+      "note": "Second Rallo wine, second export-only name. Both of this producer's Swedish bottles carry names ('Amber One', 'Nero Frizzante') that exist on Vivino, on wine-searcher and on the Swedish importer's site and on no page the producer controls. Where Saget la Perriere had one export brand across its range, here the two Swedish SKUs are the whole Swedish presence and both are renamed."
     }
   ],
-  "updated_at": "2026-08-11T05:20:00Z",
+  "updated_at": "2026-08-11T05:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
