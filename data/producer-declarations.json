@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after four batches: 31 producers, 93 wines, 5 found, 80 not found, 8 rejected. The third and fourth batches (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe, Demarie Giovanni, Castellani, Michele Chiarlo, Casa Vinicola Coppi, Ca' del Baio, Tenuta il Falchetto and Azelia. They added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina — two found, one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie's own shop (one found, two rejected). 178 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 364,
+  "attempted": 366,
   "found": 27,
-  "not_found": 292,
+  "not_found": 294,
   "rejected": 45,
   "declarations": [
     {
@@ -10534,9 +10534,63 @@
       "robots_disallowed": false,
       "robots_reasoning": "See product 7099201. HTML pages allowed, PDFs disallowed and not fetched, Crawl-delay: 2 honoured.",
       "note": "A WooCommerce THAT SELLS 276 PRODUCTS AND DATES NONE OF THEM. This is the counter-example to the standing advice that an Italian producer's shop is the surface that declares: Orsogna's shop IS the marketing site, one product per cuvee across sixteen brands, and the product template has no vintage field at all. Where Demarie's WooCommerce had four tabs and an `ingredient-list` panel, this one has two (Descrizione, Premi) and no such class anywhere."
+    },
+    {
+      "product_number": "7169601",
+      "name": "Ambleri Bianco Bio",
+      "producer": "Cantine Ermes Soc. Coop Agr.",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://cantineermes.it/vino-sitemap.xml",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Cantine Ermes Soc. Coop. Agr., Santa Ninfa (TP), Sicilia, P.iva 01887690814 — a very large Sicilian co-op group, WordPress, with an unusually rich sitemap index: separate vino, brand, schede-tecniche, download, sede, territorio and categoria sitemaps. THE BRAND 'AMBLERI' DOES NOT EXIST ON IT. The vino sitemap holds 68 URLs (34 wines in IT and EN) and the brand sitemap names the group's seven consumer brands — Ca' Nomboli, Cademusa, Epicentro, Masseria delle Stelle, No Compromise, Quattro Quarti, Vento di Mare — with zero matches for 'ambleri' in the wine sitemap, the brand sitemap, the schede-tecniche sitemap (70 URLs) or the download sitemap (38 URLs). AND THE CO-OP DECLARES NOTHING FOR ITS OWN BRANDS EITHER: its nearest comparable wine, /brand/vento-di-mare-grillo-bio/ (Grillo Biologico, Sicilia DOC), prints an inline 'Scheda Tecnica' block — Vitigno, Gradazione 12,5%, Denominazione, periodo and tipo di vendemmia, allevamento, terreno, affinamento, chiusura, tasting note, abbinamenti — with NO VINTAGE and no ingredient list, and its /schede-tecniche/grillo/ page renders only navigation and footer. Zero occurrences of ingredien, nutrizion, solfit, kcal, energia, ingredient-list and ioagri in raw HTML and stripped text on both pages; the dichiarazion and etichett hits are the OneTap accessibility widget's 'Dichiarazione' string and a cookie banner's 'dati dei servizi etichettati'.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.cantineermes.it/robots.txt",
+        "https://cantineermes.it/sitemap_index.xml",
+        "https://cantineermes.it/vino-sitemap.xml",
+        "https://cantineermes.it/brand-sitemap.xml",
+        "https://cantineermes.it/schede-tecniche-sitemap.xml",
+        "https://cantineermes.it/download-sitemap.xml",
+        "https://cantineermes.it/brand/vento-di-mare-grillo-bio/",
+        "https://cantineermes.it/schede-tecniche/grillo/"
+      ],
+      "checked_at": "2026-08-11T06:20:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "cantineermes.it serves two 'User-agent: *' groups — a WPForms block disallowing /wp-content/uploads/wpforms/ and a Yoast block with an empty 'Disallow:' plus the sitemap line. Nothing fetched is in the disallowed path under either reading. No e-label host involved, no exception used.",
+      "note": "THE PRIVATE-LABEL CO-OP IS A DISTINCT ITALIAN FAILURE SHAPE AND IT CLOSES IN THREE FETCHES. Cantine Ermes is one of Italy's biggest contract and private-label producers; the Swedish importer Nigab's 'Ambleri' is a label the co-op fills, not a wine it markets, so there is no producer page for it and there never will be. The export-only-brand rule (Saget la Perriere, Rallo) at its logical end: the brand belongs to the importer, not the producer. WHERE THE SITEMAP INDEX NAMES A `brand` POST TYPE, ONE FETCH OF IT IS A COMPLETE CENSUS OF WHAT THE PRODUCER PUTS ITS OWN NAME ON — and if the Swedish name is not there, the wine is closed without opening a product page. Six of the seven Ermes brands (all but Cademusa) also appear on the Swedish shelf under other numbers, so the co-op is worth remembering as a supplier even though it declares nothing."
+    },
+    {
+      "product_number": "7390401",
+      "name": "Ambleri Rosso Bio",
+      "producer": "Cantine Ermes Soc. Coop Agr.",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://cantineermes.it/vino-sitemap.xml",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same co-op and same finding as product 7169601: 'Ambleri' occurs nowhere in Cantine Ermes' wine, brand, technical-sheet or download sitemaps, and the co-op's own branded wines carry an undated inline Scheda Tecnica with a gradazione and no ingredient list. No product page exists to check for this wine, so nothing further was fetched for it.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://cantineermes.it/vino-sitemap.xml",
+        "https://cantineermes.it/brand-sitemap.xml"
+      ],
+      "checked_at": "2026-08-11T06:20:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 7169601. Nothing disallowed, no exception used.",
+      "note": "Second of two importer-owned labels on this co-op. Both are marked organic on Systembolaget and the co-op does make organic wines under its own Vento di Mare brand, but there is no page and no sheet that could be matched to either Swedish bottle."
     }
   ],
-  "updated_at": "2026-08-11T06:05:00Z",
+  "updated_at": "2026-08-11T06:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
