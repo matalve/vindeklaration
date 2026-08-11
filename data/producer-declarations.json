@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after three batches: 25 producers, 75 wines, 5 found, 62 not found, 8 rejected. The third batch (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe and Demarie Giovanni; it added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina, two found and one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie (one found, two rejected). 192 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 340,
+  "attempted": 343,
   "found": 27,
-  "not_found": 268,
+  "not_found": 271,
   "rejected": 45,
   "declarations": [
     {
@@ -9901,9 +9901,90 @@
       "robots_disallowed": false,
       "robots_reasoning": "demarie.com and shop.demarie.com both carry a Cloudflare Managed Content block disallowing named AI crawlers (ClaudeBot, GPTBot, CCBot, Google-Extended, meta-externalagent) AND a Yoast 'User-agent: * / Disallow:' group. We identify as vindeklaration/0.1, which matches only the wildcard group, and that group disallows nothing. No exception was needed or used; no e-label host is involved.",
       "note": "The Swedish importer is Sigva AB. If 'Demarie Langhe Nebbiolo' is an export-only bottling it has no page on the producer's surface at all, which would make this the export-brand rule rather than a vintage failure; that could not be established either way, and the record is a rejection because a declaration was found and read on the nearest candidate product and did not match."
+    },
+    {
+      "product_number": "7846201",
+      "name": "Montefoscoli Vacevoli Costa Toscana",
+      "producer": "Castellani Spa",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.castelwine.com/tenuta-di-montefoscoli/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Castellani S.p.A., Via del Popolo 90, Santa Lucia, Pontedera (PI), P.IVA 00720510502 — a 59 M EUR Tuscan bottling house selling in 42 countries. Its group site is www.castelwine.com ('Famiglia Castellani'), a 96-URL Elementor WordPress with a page-sitemap and an e-landing-page-sitemap and NO product post type at all: one page per estate, each carrying two or three wines described only by denomination, grape and vinification prose. No vintage, no alcohol, no pack, no ingredient list and no nutrition table on any of them. THE ESTATE PAGE EXISTS AND THE CUVEE DOES NOT. /tenuta-di-montefoscoli/ carries exactly three wines — Sangiovese Costa Toscana IGT, Bianco Costa Toscana IGT (Vermentino, Viognier, Petit Manseng) and Vermentino Costa Toscana IGT — and the string 'Vacevoli' appears nowhere on the host. Systembolaget's bottle is a white Costa Toscana at 13,0 %, which fits either of the two whites, and nothing on the producer's surface names it or dates it. The page is 210 kB of Elementor for 3,9 kB of text and its only matches for our search terms are false positives: 'whitelabel' in the Iubenda cookie configuration, 'Dichiarazione di Accessibilita' in the footer, 'valori bloccati' in a canvas-animation code comment and 'sqrt' matching 'qr'. Zero real occurrences of ingredien, nutrizion, solfit, kcal, energia or annata.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://castellani.it/robots.txt",
+        "https://www.castelwine.com/robots.txt",
+        "https://www.castelwine.com/sitemap_index.xml",
+        "https://www.castelwine.com/page-sitemap.xml",
+        "https://www.castelwine.com/e-landing-page-sitemap.xml",
+        "https://www.castelwine.com/tenuta-di-montefoscoli/",
+        "https://www.castelwine.com/collezioni/"
+      ],
+      "checked_at": "2026-08-11T05:40:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "castelwine.com carries a Cloudflare Managed Content block disallowing named AI crawlers (ClaudeBot, GPTBot, CCBot, Amazonbot, Google-Extended, meta-externalagent) and TWO 'User-agent: *' groups, one 'Allow: /' with a Content-Signal line and one with an empty 'Disallow:'. We identify as vindeklaration/0.1 and match only the wildcard, which allows everything. villapucciniwine.com is a bare Yoast 'User-agent: * / Disallow:'. No exception used; no e-label host involved.",
+      "note": "HOST QUIRK, THE SURNAME TRAP AGAIN: castellani.it is a Joomla site for a Milanese bespoke tailor ('L'arte di vestire il classico', Piazza Filippo Meda 3, Milano), still carrying Joomla demo lorem ipsum from 2015, and www.castellani.it fails TLS on a hostname mismatch. The wine company is castelwine.com. Add it to sartori.it and hermouet.fr."
+    },
+    {
+      "product_number": "7529401",
+      "name": "Villa Puccini Governo",
+      "producer": "Castellani",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://villapucciniwine.com/governo-toscano/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "en",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Villa Puccini is a Castellani brand with its own single-language English site, villapucciniwine.com, whose footer gives 'castellani spa, via del popolo 90, 56025 pontedera pisa - italy' and info@castelwine.com, so the producer identification is certain. THE BRAND IS ABSENT FROM THE GROUP SITE — 'Puccini' occurs zero times on castelwine.com's collections page — and its own site is a ten-page Yoast WordPress brochure: home, vineyards, privacy, a collection index and one page per wine. Our wine's page, /governo-toscano/, is headed 'villa puccini governo all'uso toscano' and runs 1,5 kB of text: a paragraph on the governo method, a tasting note, a food pairing, the six-wine collection strip and a contact form. NO VINTAGE, no alcohol, no pack, no ingredient list, no nutrition table, no energy value, not even a sulphite line — zero matches for every search term in raw HTML as well as in stripped text. An undated cuvee page, the dominant Italian shape, in English.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://villapucciniwine.com/robots.txt",
+        "https://villapucciniwine.com/sitemap_index.xml",
+        "https://villapucciniwine.com/page-sitemap.xml",
+        "https://villapucciniwine.com/governo-toscano/",
+        "https://villapuccini.com/"
+      ],
+      "checked_at": "2026-08-11T05:40:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "castelwine.com carries a Cloudflare Managed Content block disallowing named AI crawlers (ClaudeBot, GPTBot, CCBot, Amazonbot, Google-Extended, meta-externalagent) and TWO 'User-agent: *' groups, one 'Allow: /' with a Content-Signal line and one with an empty 'Disallow:'. We identify as vindeklaration/0.1 and match only the wildcard, which allows everything. villapucciniwine.com is a bare Yoast 'User-agent: * / Disallow:'. No exception used; no e-label host involved.",
+      "note": "A DOMAIN THAT CHANGED HANDS. villapuccini.com — the obvious spelling — resolves to an AWS load balancer that 301s the whole host to www.winesu.com, the US site of a DIFFERENT Italian group (Varvaglione's '12 e Mezzo', Brilla!, Pinot Grigio). It serves no robots.txt and no sitemap and has nothing to do with Castellani. The live brand site is villapucciniwine.com. Worth recognising as a class: an old brand domain can now belong to somebody else's importer."
+    },
+    {
+      "product_number": "5067301",
+      "name": "Baffo Rosso Chianti",
+      "producer": "Castellani",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.castelwine.com/page-sitemap.xml",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE EXPORT-BRAND RULE, WITH NO SURFACE AT ALL. 'Baffo' occurs zero times in castelwine.com's page sitemap and zero times on its collections page, and baffowine.com, www.baffowine.com, baffo.wine and baffowines.com are all NXDOMAIN, as are montefoscoli.it and vacevoli.it. Every page a search returns for 'Castellani Baffo Rosso Chianti' is a retailer, an app or a trade directory. The brand has no producer page anywhere, so there is nothing to match a 2024 Chianti at 12,0 % against. Castellani is the third Italian producer in this file whose Swedish listing is a brand it does not put on its own website — after Saget's La Petite Perriere and Brumont's Torus in France.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.castelwine.com/page-sitemap.xml",
+        "https://www.castelwine.com/collezioni/",
+        "DNS: baffowine.com, www.baffowine.com, baffo.wine, baffowines.com, montefoscoli.it, vacevoli.it — all NXDOMAIN"
+      ],
+      "checked_at": "2026-08-11T05:40:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "castelwine.com carries a Cloudflare Managed Content block disallowing named AI crawlers (ClaudeBot, GPTBot, CCBot, Amazonbot, Google-Extended, meta-externalagent) and TWO 'User-agent: *' groups, one 'Allow: /' with a Content-Signal line and one with an empty 'Disallow:'. We identify as vindeklaration/0.1 and match only the wildcard, which allows everything. villapucciniwine.com is a bare Yoast 'User-agent: * / Disallow:'. No exception used; no e-label host involved.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-11T05:10:00Z",
+  "updated_at": "2026-08-11T05:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
