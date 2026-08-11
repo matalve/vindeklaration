@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after four batches: 31 producers, 93 wines, 5 found, 80 not found, 8 rejected. The third and fourth batches (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe, Demarie Giovanni, Castellani, Michele Chiarlo, Casa Vinicola Coppi, Ca' del Baio, Tenuta il Falchetto and Azelia. They added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina — two found, one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie's own shop (one found, two rejected). 178 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 362,
+  "attempted": 364,
   "found": 27,
-  "not_found": 290,
+  "not_found": 292,
   "rejected": 45,
   "declarations": [
     {
@@ -10478,9 +10478,65 @@
       "robots_disallowed": false,
       "robots_reasoning": "www.rallo1860.it disallows nothing; no exception used.",
       "note": "Second Rallo wine, second export-only name. Both of this producer's Swedish bottles carry names ('Amber One', 'Nero Frizzante') that exist on Vivino, on wine-searcher and on the Swedish importer's site and on no page the producer controls. Where Saget la Perriere had one export brand across its range, here the two Swedish SKUs are the whole Swedish presence and both are renamed."
+    },
+    {
+      "product_number": "7099201",
+      "name": "Ruminat Primitivo Lunaria Terre di Chieti",
+      "producer": "Soc Coop Ag Olearia Vinicola Orsogna",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.biocantinaorsogna.it/prodotto/lunaria-ruminat-primitivo/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "BIO Cantina {Sociale} Orsogna / Olearia Vinicola Orsogna, Via Ortonese 29, Orsogna (CH), Abruzzo — a large organic and biodynamic co-op with sixteen brands, and its site www.biocantinaorsogna.it is a WooCommerce whose product sitemap holds 276 products. OUR WINE HAS ITS OWN PRODUCT PAGE, /prodotto/lunaria-ruminat-primitivo/ = 'LUNARIA RUMINAT primitivo', MARCHIO Lunaria, DENOMINAZIONE PRIMITIVO Terre d'Abruzzo IGP, COLORE Rosso, FORMATO 750 ml (also 375 ml), Demeter and Biodiversity Friend, spontaneous fermentation, natural tartaric stabilisation — AND IT STATES NO VINTAGE, no alcohol and no ingredient list. What it does state where a declaration would go is a LIMIT, not a content: 'SOLFITI Limite del vino biodinamico Demeter = vino rosso max 70 mg/lt', plus 'STABILIZZAZIONE TARTARICA Solo refrigerazione naturale' and 'FILTRAZIONE Non ammessa la filtrazione sterile'. A maximum permitted by a certification scheme is not a declaration of what is in this bottle, and the other two lines are the negative-list near-miss (what was not done). Zero occurrences of ingredien, kcal, energia, dichiarazion and ioagri in raw HTML and stripped text; the nutrizion, etichett, elabel and e-label hits are all false positives (see note).",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.orsognawinery.com/robots.txt",
+        "https://cantinaorsogna.it/robots.txt",
+        "https://www.biocantinaorsogna.it/robots.txt",
+        "https://www.biocantinaorsogna.it/sitemap_index.xml",
+        "https://www.biocantinaorsogna.it/product-sitemap.xml",
+        "https://www.biocantinaorsogna.it/page-sitemap.xml",
+        "https://www.biocantinaorsogna.it/prodotto/lunaria-ruminat-primitivo/",
+        "https://www.biocantinaorsogna.it/blockchain/",
+        "https://orsognacantina.trusty.report/robots.txt",
+        "https://orsognacantina.trusty.report/",
+        "https://www.biocantinaorsogna.it/etichetta-ambientale-digitale-zeropuro-pecorino/"
+      ],
+      "checked_at": "2026-08-11T06:05:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.biocantinaorsogna.it has three named bad-bot groups (DomainCrawler, SemrushBot, AhrefsBot, each Disallow: /) and a 'User-agent: *' group that disallows only file extensions — /*.jpg, /*.png, /*.pdf, /*.PDF, /*.mp3, /*.mov, /*.avi, /*.csv, /*.data — with Crawl-delay: 2. We match '*', so every HTML page fetched is allowed and NO PDF WAS FETCHED ON THIS HOST; the crawl-delay was honoured. orsognacantina.trusty.report disallows /manage, /whistleblower-login and /password/reset; only the root and robots.txt were requested. www.orsognawinery.com and cantinaorsogna.it both 301 the whole host to www.biocantinaorsogna.it and answer robots.txt with a 404, so they carry no directives. No e-label host involved, no exception used.",
+      "note": "THREE THINGS THIS CO-OP TEACHES. (1) A NEW FALSE POSITIVE FOR THE `e-label` GREP: the Qode/QODEF WordPress theme family renders its membership widget with the class `qodef-e-label` — nine raw hits and zero text hits on every product page here. Add it to responsiveLabel, whitelabel, toggle-label, cm-cookie-label, slideLabel, site-nav__link-menu-label, __VIEWSTATE and checkJQuery. (2) A `trusty.report` SUBDOMAIN IS A WHISTLEBLOWING CHANNEL, NOT TRACEABILITY. The estate's Blockchain page links https://orsognacantina.trusty.report/, which under a heading about blockchain traceability looks exactly like a product-passport platform and is in fact Trusty AG's confidential-reporting application ('Benvenuti nel canale di segnalazione'). Recognise the host and do not spend a second fetch on it. (3) NINTH ITALIAN PRODUCER WITH THE PACKAGING OBLIGATION MET AND THE INGREDIENT ONE NOT — and here it is called by its full name: /etichetta-ambientale-digitale-zeropuro-pecorino/, one page per SKU giving BOTTIGLIA GL 70, TAPPO FOR 51, ETICHETTA raccolta indifferenziata and a 'SCHEDA DEL VINO' link, with zero occurrences of ingredien, kcal, energia and solfit. 'Etichetta ambientale DIGITALE' is the most e-label-sounding name the decree has produced yet and it is still the decree."
+    },
+    {
+      "product_number": "8016701",
+      "name": "Charisma Lunaria Trebbiano d`Abruzzo",
+      "producer": "Soc Coop Ag Olearia Vinicola Orsogna",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.biocantinaorsogna.it/prodotto/lunaria-charisma-trebbiano-dabruzzo-dop/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same co-op and same WooCommerce as product 7099201. Our wine's page is /prodotto/lunaria-charisma-trebbiano-dabruzzo-dop/ = 'LUNARIA CHARISMA trebbiano d'Abruzzo DOP non filtrato', MARCHIO Lunaria, COLORE Bianco, FORMATO 750 ml, Demeter, fermentazione spontanea, non filtrato. It was read in full and it is the same template as the Ruminat, field for field: NO VINTAGE, no alcohol, no ingredient list, the same Demeter sulphite LIMIT in place of a content, and the same marker profile (ingredien, kcal, energia, dichiarazion all zero in raw HTML and stripped text; the e-label hits are the Qode theme's `qodef-e-label` class).",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.biocantinaorsogna.it/prodotto/lunaria-charisma-trebbiano-dabruzzo-dop/"
+      ],
+      "checked_at": "2026-08-11T06:05:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 7099201. HTML pages allowed, PDFs disallowed and not fetched, Crawl-delay: 2 honoured.",
+      "note": "A WooCommerce THAT SELLS 276 PRODUCTS AND DATES NONE OF THEM. This is the counter-example to the standing advice that an Italian producer's shop is the surface that declares: Orsogna's shop IS the marketing site, one product per cuvee across sixteen brands, and the product template has no vintage field at all. Where Demarie's WooCommerce had four tabs and an `ingredient-list` panel, this one has two (Descrizione, Premi) and no such class anywhere."
     }
   ],
-  "updated_at": "2026-08-11T05:40:00Z",
+  "updated_at": "2026-08-11T06:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
