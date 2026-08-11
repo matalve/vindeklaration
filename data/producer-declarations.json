@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after four batches: 31 producers, 93 wines, 5 found, 80 not found, 8 rejected. The third and fourth batches (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe, Demarie Giovanni, Castellani, Michele Chiarlo, Casa Vinicola Coppi, Ca' del Baio, Tenuta il Falchetto and Azelia. They added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina — two found, one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie's own shop (one found, two rejected). 178 Italian wines with vintage 2024+ and declaration_status not_declared remain untouched.",
-  "attempted": 356,
+  "attempted": 358,
   "found": 27,
-  "not_found": 284,
+  "not_found": 286,
   "rejected": 45,
   "declarations": [
     {
@@ -10319,9 +10319,62 @@
       "robots_disallowed": false,
       "robots_reasoning": "livon.it allows every content path; no exception used.",
       "note": "Livon is the undated-cuvee-page failure in its purest form: a four-estate group with sixty per-wine pages, a full press area, per-wine technical sheets in two languages — and not one year, alcohol figure or substance anywhere on the surface."
+    },
+    {
+      "product_number": "5736201",
+      "name": "Prunotto Fiulot Barbera d'Asti",
+      "producer": "Prunotto",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.prunotto.it/it/vino/fiulot-barbera-d-asti-docg/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "evidence": "Prunotto, Alba (CN), Piemonte — a Marchesi Antinori estate, running Antinori's own WordPress theme (wp-content/themes/antinori) on its own domain. THE PAGE IS AT OUR EXACT VINTAGE: /it/vino/fiulot-barbera-d-asti-docg/ defaults to the 2024, its bottle shot is uploads/2018/06/Fiulot_2024.png, its Clima paragraph opens 'L'annata 2024 e iniziata con un inverno mite' and its Vendemmia line reads '17 settembre ... 2 ottobre 2024'. The page carries Clima, Vendemmia, Vinificazione, Dati Storici, Note Degustative and a 'Scarica scheda tecnica' button, and NOTHING ELSE — zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen, ingredient-list, elabel, e-label, etichett, u-label, ioagri, scantrust and qr in the raw HTML as well as in the stripped text. No alcohol figure and no pack size either. So this is a producer page that satisfies the vintage rule exactly and still declares nothing.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.prunotto.it/robots.txt",
+        "https://www.prunotto.it/sitemap.xml",
+        "https://www.prunotto.it/it/vino/fiulot-barbera-d-asti-docg/",
+        "https://www.prunotto.it/it/vino/fiulot-barbera-d-asti-docg/?gen_pdf=1",
+        "https://www.26generazioni.com/robots.txt",
+        "https://www.26generazioni.com/sitemap_index.xml",
+        "https://www.26generazioni.com/product-sitemap.xml"
+      ],
+      "checked_at": "2026-08-11T05:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.prunotto.it: 'Sitemap: .../sitemap.xml / User-agent: * / Disallow: /de/' — the German tree only; every Italian URL fetched is allowed, query strings included. www.26generazioni.com carries two 'User-agent: *' groups, the first disallowing four wp-content and wp-admin paths and the second (a Yoast block) an empty 'Disallow:'; the sitemaps fetched are outside the disallowed paths under either reading. No e-label host involved, no exception used.",
+      "note": "TWO DEAD ENDS WORTH RECORDING. (1) The 'Scarica scheda tecnica' button is /it/vino/{wine}/?gen_pdf=1, and it answers HTTP 200 with content-type application/pdf and a body of ZERO BYTES — over curl and over httpx alike. A producer's own PDF generator can be broken while returning 200; check the length before spending a parse. (2) THE ANTINORI GROUP SHOP DOES NOT COVER PRUNOTTO'S SWEDISH WINES. www.26generazioni.com is the group's WooCommerce and is where Marchesi Antinori's Scantrust e-label links were found on 2026-07-28; its product sitemap holds 166 products and exactly two are Prunotto (Barbaresco 2023, Barolo 2022). Neither Fiulot nor Moscato d'Asti exists there in any vintage, and no product of any brand in that sitemap is a Barbera or an Asti wine. The Antinori e-label route is therefore closed for Prunotto, and closing it cost three fetches."
+    },
+    {
+      "product_number": "5736301",
+      "name": "Prunotto Moscato d'Asti",
+      "producer": "Prunotto",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.prunotto.it/it/vino/moscato-d-asti-docg/?wineyear=2024",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "evidence": "Same estate and site as product 5736201. The Moscato page has rolled forward to the 2025, but PRUNOTTO KEEPS A PER-VINTAGE ARCHIVE and our year is on it: the page carries a year strip 2025 2024 2023 2022 2021 2020 2019 2018 whose links are /it/vino/moscato-d-asti-docg/?wineyear={year}. The ?wineyear=2024 page was fetched and read; like every other Prunotto page it gives Clima, Vendemmia, Vinificazione, Dati Storici and Note Degustative and stops. Zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen, ingredient-list, elabel, etichett and ioagri in raw HTML and in stripped text, for the 2024 page and the current 2025 page alike. The vinification paragraph does state '...fino a ottenere una gradazione di 5% di alcol', which matches Systembolaget's 5,0 % exactly, but a strength in prose is not a declaration.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.prunotto.it/it/vino/moscato-d-asti-docg/",
+        "https://www.prunotto.it/it/vino/moscato-d-asti-docg/?wineyear=2024"
+      ],
+      "checked_at": "2026-08-11T05:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.prunotto.it disallows only /de/; the query-string vintage URLs are allowed. No exception used.",
+      "note": "A SECOND ITALIAN PER-VINTAGE ARCHIVE ON A PRODUCER'S OWN WORDPRESS, AND IT IS FREE. Prunotto's ?wineyear={year} parameter reaches eight vintages of every wine from the wine's own page, and unlike Cantina Terlan's ?wine-id= archive it is not blocked by robots.txt. After Ricasoli (808 per-vintage URLs) and Terlan and Michele Chiarlo's dated schede, that is the fourth Italian producer with real vintage machinery and no ingredient list — the archive tells you the year and then has nothing to attach to it. Note the corollary for future runs: THE DEFAULT PAGE IS NOT ALWAYS THE SAME VINTAGE FOR TWO WINES OF ONE ESTATE. Prunotto's Fiulot still shows the 2024 while its Moscato has rolled to the 2025, so read the year strip per wine rather than assuming the estate as a whole is on one release."
     }
   ],
-  "updated_at": "2026-08-11T04:55:00Z",
+  "updated_at": "2026-08-11T05:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
