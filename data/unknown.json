@@ -11,9 +11,19 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7010801/"
   },
   {
+   "token": "generale",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-194101/"
+  },
+  {
    "token": "muscat",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-2030541/"
+  },
+  {
+   "token": "sorten",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-223701/"
   },
   {
    "token": "polygreen",
@@ -36,6 +46,26 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-259711/"
   },
   {
+   "token": "svart",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-260101/"
+  },
+  {
+   "token": "mourvedre",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-260101/"
+  },
+  {
+   "token": "torrt",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-261134/"
+  },
+  {
+   "token": "metaweinsäure",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-3028101/"
+  },
+  {
    "token": "syttegulatorer",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
@@ -44,6 +74,10 @@
  "fuzzy_matches": [
   {
    "match": "konserverings -> konserverings",
+   "wines": 1
+  },
+  {
+   "match": "kornserveringsmedel -> konserveringsmedel",
    "wines": 1
   },
   {
