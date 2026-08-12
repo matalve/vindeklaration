@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after four batches: 31 producers, 93 wines, 5 found, 80 not found, 8 rejected. The third and fourth batches (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe, Demarie Giovanni, Castellani, Michele Chiarlo, Casa Vinicola Coppi, Ca' del Baio, Tenuta il Falchetto and Azelia. They added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina — two found, one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie's own shop (one found, two rejected). The fifth batch (2026-08-11) ran Azienda Livon, Prunotto, Antonio Facchin & Figli, Rallo, Olearia Vinicola Orsogna and Cantine Ermes — twelve wines, 0 found, 12 not found, 0 rejected, the first Italian batch with nothing read. Its finding is that SIX OF THE TWELVE WINES CARRY A NAME THE PRODUCER DOES NOT USE (High On Love, Amber One, Nero Frizzante, Ambleri): export-only or importer-owned labels with no producer page in existence, closable in one fetch of the producer's own brand or product sitemap. Italy now stands at 37 producers and 105 wines, 5 found, 92 not found, 8 rejected, with 166 Italian wines of vintage 2024+ and declaration_status not_declared remaining untouched.",
-  "attempted": 386,
+  "attempted": 388,
   "found": 29,
-  "not_found": 312,
+  "not_found": 314,
   "rejected": 45,
   "declarations": [
     {
@@ -11136,6 +11136,56 @@
       "robots_disallowed": false,
       "robots_reasoning": "See product 7904001. Nothing disallowed, no exception used.",
       "note": "The estate's WooCommerce Annata attribute reads 2025 for this wine too, and its SKU (006.00.24) carries a '24' segment; neither was relied on, because the e-label states the year itself."
+    },
+    {
+      "product_number": "7740301",
+      "name": "Zamò Bianco",
+      "producer": "Le Vigne di Zamo",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.levignedizamo.com/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE ESTATE'S SITE DOES NOT ANSWER. Step 0 could not be run on the producer's own surface. www.zamo.it is not the estate — it is ZAMO Srl, a maker of hydraulic breakers in Basilicata, a Joomla catalogue of demolition hammers from 60 to 1300 kg — the surname trap again after sartori.it, castellani.it and hermouet.fr. The estate's own domain is levignedizamo.com, and it is unreachable from here in every form tried: the apex refuses the connection on 443 (213.186.33.5, an OVH address) and times out on 80, and www.levignedizamo.com (31.193.131.44) times out at the TCP level over httpx and over curl -4 with a 30 s limit. That is a network failure and not a technological refusal — no 401, 403, 429 or challenge was seen — so nothing was worked around and nothing further was fetched. No declaration could be looked for. Both Swedish Zamo wines are flagged as revisit candidates: the host may simply have been down.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.zamo.it/robots.txt",
+        "https://www.zamo.it/ (a hydraulic breaker manufacturer, not the estate)",
+        "https://levignedizamo.com/ (connection refused on 443, timeout on 80)",
+        "https://www.levignedizamo.com/ (TCP timeout over httpx and curl -4)"
+      ],
+      "checked_at": "2026-08-12T00:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "No robots.txt could be read on the estate's host because the host does not answer. zamo.it's robots.txt was read and disallows only Joomla framework directories, but that host is a different company and irrelevant.",
+      "note": "Revisit candidate. The estate is Le Vigne di Zamo, Rosazzo (UD), Colli Orientali del Friuli; its site was live enough to be indexed recently, so the outage may be temporary."
+    },
+    {
+      "product_number": "7891301",
+      "name": "Zamò Grigio",
+      "producer": "Le Vigne di Zamo",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.levignedizamo.com/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same producer and same finding as product 7740301: the estate's host does not answer on either name or either port, so no producer page exists to read. Revisit candidate.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://levignedizamo.com/",
+        "https://www.levignedizamo.com/"
+      ],
+      "checked_at": "2026-08-12T00:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 7740301.",
+      "note": "Revisit candidate."
     }
   ],
   "updated_at": "2026-08-12T00:00:00Z",
