@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after four batches: 31 producers, 93 wines, 5 found, 80 not found, 8 rejected. The third and fourth batches (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe, Demarie Giovanni, Castellani, Michele Chiarlo, Casa Vinicola Coppi, Ca' del Baio, Tenuta il Falchetto and Azelia. They added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina — two found, one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie's own shop (one found, two rejected). The fifth batch (2026-08-11) ran Azienda Livon, Prunotto, Antonio Facchin & Figli, Rallo, Olearia Vinicola Orsogna and Cantine Ermes — twelve wines, 0 found, 12 not found, 0 rejected, the first Italian batch with nothing read. Its finding is that SIX OF THE TWELVE WINES CARRY A NAME THE PRODUCER DOES NOT USE (High On Love, Amber One, Nero Frizzante, Ambleri): export-only or importer-owned labels with no producer page in existence, closable in one fetch of the producer's own brand or product sitemap. Italy now stands at 37 producers and 105 wines, 5 found, 92 not found, 8 rejected, with 166 Italian wines of vintage 2024+ and declaration_status not_declared remaining untouched.",
-  "attempted": 380,
+  "attempted": 382,
   "found": 27,
-  "not_found": 308,
+  "not_found": 310,
   "rejected": 45,
   "declarations": [
     {
@@ -10970,6 +10970,60 @@
       "robots_disallowed": false,
       "robots_reasoning": "www.tagaro.it serves a single User-agent: * group disallowing only /wp-admin/. vininardelli.it serves no robots.txt at all (404), so nothing is disallowed there. No exception used.",
       "note": "A correction to the export-only-brand rule: a name absent from the producer's own site and from its site search is NOT necessarily an importer's label — here the producer runs a second, older host for that brand, and the tie is visible only in a Facebook link in the footer. Check for a brand-owned domain before closing on absence. Note also that Nardelli's second Appassimento, 'Appassimento Edizione', exists on the same site; Systembolaget's plain 'Appassimento' matches the first, and the distinction did not have to be settled because neither carries a declaration. Tagaro's sibling Swedish wine, Nardelli Negroamaro 7471201, is a 2023 and outside this slice."
+    },
+    {
+      "product_number": "9323701",
+      "name": "Rosso di Montalcino Ciacci Piccolomini",
+      "producer": "Ciacci Piccolomini",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://ciaccipiccolomini.it/it/prodotti/prodotti/7/vini/28/rosso-di-montalcino-doc",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "evidence": "OUR EXACT VINTAGE IS ON THE PRODUCER'S OWN PAGE AND CARRIES NO DECLARATION. Step 0 passed: the estate's /it/prodotti/prodotti page lists ten own-name products including both Swedish wines. The Rosso di Montalcino page is a per-vintage archive of 39 years, 1987 to 2024, embedded as a JavaScript array named $schede in the server's HTML — one object per vintage with an 'annata' field and a 'voci' list of labelled fields. The 2024 object was parsed in full: Vigneti, Vitigno (100% Sangiovese), Vinificazione, Colore, Caratteristiche Organolettiche, Servizio, Abbinamento gastronomico and Note tecniche, and nothing else. No ingredient list, no nutrition table, no energy value, no sulphite line and no alcohol figure, for 2024 or any other year. Its only per-vintage document, /files/bottiglie_dowload_2016/ciacci-piccolomini-daragona-rosso-di-montalcino-2024.pdf, was downloaded and read: it is a one-page critic's review card ('90 PTS.') and not a datasheet. The estate's own PrestaShop, www.ciaccipiccolomini-shop.com, sells this exact bottle as product 206, 'Rosso di Montalcino 2024 DOC', reference RS24 — the right wine at the right vintage — and its Product Details holds one line, the grape. Nothing on either host matches ingredien, nutrizion, solfit, kcal, energia or dichiarazion in raw HTML or in stripped text.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.ciaccipiccolomini.com/robots.txt (301 to ciaccipiccolomini.it, 404)",
+        "https://ciaccipiccolomini.it/",
+        "https://ciaccipiccolomini.it/it/prodotti/prodotti",
+        "https://ciaccipiccolomini.it/it/prodotti/prodotti/7/vini/28/rosso-di-montalcino-doc",
+        "https://ciaccipiccolomini.it/files/bottiglie_dowload_2016/ciacci-piccolomini-daragona-rosso-di-montalcino-2024.pdf",
+        "https://www.ciaccipiccolomini-shop.com/robots.txt",
+        "https://www.ciaccipiccolomini-shop.com/",
+        "https://www.ciaccipiccolomini-shop.com/en/single-bottles-collection/206-rosso-di-montalcino-2024-doc.html"
+      ],
+      "checked_at": "2026-08-12T00:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "ciaccipiccolomini.it serves no robots.txt (404 with an Apache error page), so nothing is disallowed. The shop's PrestaShop robots.txt disallows account, cart, search and framework paths and query strings; the product URL and the storefront root fetched here are outside all of them. No exception used.",
+      "note": "A fifth Italian producer with real per-vintage machinery and nothing to hang on it, after Ricasoli, Terlan, Chiarlo and Prunotto — and the deepest archive of them all at 39 vintages. The estate also prints the Decreto Rifiuti packaging table inline on every wine page (bottle GL 71, cork FOR 51, capsule ALU 41), so it is another producer meeting the packaging obligation and not the ingredient one. The archive is worth knowing for its shape: the whole vintage series is in one JS array in one response, so a per-vintage question costs one fetch, not one per year."
+    },
+    {
+      "product_number": "8156301",
+      "name": "Toscana Rosso Ciacci Piccolomini",
+      "producer": "Ciacci Piccolomini",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://ciaccipiccolomini.it/it/prodotti/prodotti/7/vini/37/igt-toscana-rosso",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "evidence": "Same estate and same shape as product 9323701. The IGT Toscana Rosso page carries a vintage strip 2015 to 2025 driven by the same $schede array, so our 2024 is present on the producer's own surface, and the fields are Vigneti, Vitigno, Vinificazione, Affinamento, Colore, Caratteristiche Organolettiche, Servizio, Abbinamento and Note tecniche — no substances, no nutrition, no alcohol. Its only download is a JPEG of the paper label, which is not a source. The wine is absent from the estate's shop, whose catalogue is Brunello, Rosso di Montalcino, Fabivs, olive oil and grappa.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://ciaccipiccolomini.it/it/prodotti/prodotti/7/vini/37/igt-toscana-rosso",
+        "https://www.ciaccipiccolomini-shop.com/"
+      ],
+      "checked_at": "2026-08-12T00:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 9323701. Nothing disallowed, no exception used.",
+      "note": null
     }
   ],
   "updated_at": "2026-08-12T00:00:00Z",
