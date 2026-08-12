@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch, closed 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected, with 118 wines (117 producer strings) still untouched.",
-  "attempted": 412,
+  "attempted": 414,
   "found": 30,
-  "not_found": 335,
+  "not_found": 337,
   "rejected": 47,
   "declarations": [
     {
@@ -11862,9 +11862,61 @@
       "robots_disallowed": false,
       "robots_reasoning": "grattamacco.it/robots.txt is 'User-agent: * / Disallow: /admin/' plus a sitemap line; nothing fetched was under /admin/. grattamacco.com serves 403 for robots.txt and for everything else, which is a technological refusal: two requests, no retry loop, no workaround.",
       "note": "A fifth Italian per-vintage archive (after Ricasoli, Terlan, Prunotto and Vincod's French one) with nothing in it. Two ColleMassari estates, two websites, one per-vintage PDF and one per-vintage web page, both stating the 2024 and neither declaring."
+    },
+    {
+      "product_number": "7583601",
+      "name": "Sandis Sauvignon Marco Felluga",
+      "producer": "Marco Felluga",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://marcofelluga.com/prodotto/sandis-sauvignon-blanc/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "ONE HOUSE, TWO SYSTEMBOLAGET STRINGS, CONFIRMED: marcofelluga.com is titled 'Marco Felluga e Russiz Superiore', its menu has a Tenute entry for each, its 44-URL product sitemap carries both estates' wines side by side, and its footer reads '© 2026 Marco Felluga S.R.L. P. IVA 00382030310 / Società agricola Russiz Superiore S.S.' — so 'Marco Felluga' and 'Russiz Superiore-Marco Felluga' are the same producer and both Swedish wines sit on one shop. Cuvée confirmed: 'SANDIS SAUVIGNON BLANC Friuli DOC Marco Felluga', COD sandis-friuli_mf, Sauvignon, distinct from the estate's 'SAUVIGNON BLANC Collio DOC Russiz Superiore'. THE PAGE IS UNDATED — the dominant Italian failure. It gives denominazione, vineyard communes, vitigno, terreno, training, harvest, vinification, tasting note, 'Formato bottiglie 0,375 l – 0,75 l' and 'Gradazione alcolica 12% ca.' (approximate, and against Systembolaget's 12,5), and states no vintage; the only years on it are in a 'Premi ricevuti' award list (91/100 Vintage 2024, 90/100 Vintage 2023, 90/100 Vintage 2022), which is a list of awards and not a bottling declaration. The WooCommerce product has two tabs, Descrizione and Premi ricevuti, and no Ingredienti panel — the Demarie shape is absent. Zero real matches in raw HTML and stripped text for ingredien, nutrizion, solfit, sulfit, kcal, energia, dichiarazion, valori, allergen, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, vincod, scantrust and .pdf.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.marcofelluga.it/robots.txt",
+        "https://marcofelluga.com/robots.txt",
+        "https://marcofelluga.com/sitemap.xml",
+        "https://marcofelluga.com/product-sitemap.xml",
+        "https://marcofelluga.com/prodotto/sandis-sauvignon-blanc/",
+        "https://russizsuperiore.it/"
+      ],
+      "checked_at": "2026-08-12T14:35:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "marcofelluga.com/robots.txt is the stock WooCommerce group — 'User-agent: *' disallowing /wp-admin/ and three /wp-content/uploads/woocommerce* paths, with Allow: /wp-admin/admin-ajax.php — and names two sitemaps. Nothing fetched was under a disallowed path, so no exception was needed. The estate's other two hosts never served a robots.txt: marcofelluga.it answers Cloudflare 522 (origin connection timed out) on every path, and russizsuperiore.it resolves to 128.140.48.173 but does not complete a TCP connection. Both are outages, not refusals, and neither was retried in a loop.",
+      "note": "FALSE-POSITIVE GREPS, two new ones on the same page: 'elabel' matches four times inside a Simple Custom CSS and JS snippet that manipulates a WooCommerce checkout field via the variable phoneLabel, and 'etichett' matches once in that snippet's Italian comment 'Aggiorna etichetta e placeholder'. Add phoneLabel to the checkJQuery list."
+    },
+    {
+      "product_number": "7875601",
+      "name": "Just Molamatta Bianco Marco Felluga",
+      "producer": "Russiz Superiore-Marco Felluga",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://marcofelluga.com/prodotto/just-molamatta-bianco-friuli/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Sibling of 7583601 on the same shop; see that record for the proof that Marco Felluga and Russiz Superiore are one house. Cuvée confirmed: 'FRIULI BIANCO DOC JUST MOLAMATTA Marco Felluga', COD just-molamatta_mf, distinct from the estate's Col Disôre and from the Collio Bianco line. THE PAGE IS UNDATED, exactly as the Sandis one: denominazione, terreno, allevamento, raccolta, vinificazione, tasting note, 'Formato bottiglie 0,75 l – 1,5 l', 'Gradazione alcolica 12% ca.' (Systembolaget says 12,0, so the strength is consistent) and no vintage anywhere except an awards list (90/100 Vintage 2024, 90/100 Vintage 2018). Two WooCommerce tabs, Descrizione and Premi ricevuti, no Ingredienti panel. Same zero matches for every declaration and vendor marker; the only 'elabel' and 'etichett' hits are the phoneLabel checkout script noted on the sibling record.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://marcofelluga.com/product-sitemap.xml",
+        "https://marcofelluga.com/prodotto/just-molamatta-bianco-friuli/"
+      ],
+      "checked_at": "2026-08-12T14:40:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "Same host and same stock WooCommerce robots.txt as 7583601; nothing disallowed was fetched.",
+      "note": "Alcohol stated as '12% ca.' — approximate rather than a range, a softer form of the Fattoria Pagano / Montalbera signal that the page describes a wine and not a bottling."
     }
   ],
-  "updated_at": "2026-08-12T20:09:30Z",
+  "updated_at": "2026-08-12T20:14:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
