@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch opened 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after six batches: 49 producers, 129 wines, 7 found, 114 not_found, 8 rejected.",
-  "attempted": 403,
+  "attempted": 405,
   "found": 30,
-  "not_found": 326,
+  "not_found": 328,
   "rejected": 47,
   "declarations": [
     {
@@ -11615,9 +11615,61 @@
       "robots_disallowed": false,
       "robots_reasoning": "See product 9271601. Nothing disallowed, no exception used.",
       "note": null
+    },
+    {
+      "product_number": "7288201",
+      "name": "Planeta Chardonnay",
+      "producer": "Aziende Agricole Planeta s.s.",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.planeta.it/vini/chardonnay/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2024",
+      "market": null,
+      "evidence": "OUR EXACT VINTAGE IS DOCUMENTED, IN A PER-VINTAGE DATASHEET, AND THERE IS NO INGREDIENT LIST IN IT. Step 0: Planeta is Systembolaget's producer and planeta.it is its own WordPress; its sitemap index names eight post types — post, page, experience, oil, territory, wine, category, wine_cellar — and NO label or etichette tree, which closes the vendor question at one fetch. The 60-URL wine-sitemap holds /vini/chardonnay/ (and its /en/ twin), and the estate makes exactly one wine called Chardonnay plus a separate 'Didacus Chardonnay', so the cuvée is unambiguous. The page is the ordinary undated Italian cuvée page — denominazione Menfi D.O.C., varietà 100% Chardonnay, vigneti Ulmo and Maroccoli, 'Prima Annata 1994' (the estate's first vintage, not this bottling), Vino bio and SOStain badges — plus a full 'Come smaltire gli imballaggi' packaging block (bottle GL71, capsule TIN 42, cork FOR 51). Its one per-wine document is 'Download scheda tecnica' → storage1368.cdn-immedia.net/wp-content/uploads/2024/02/Planeta_Chardonnay-2024-BIO-2.pdf, LAST-MODIFIED 6 March 2026, and its file name carries our exact vintage and the organic designation. Downloaded and its text extracted in full (4 687 characters): soil, altitude, yield per hectare, training system, planting density, organic method, harvest dates, vinification, 'AFFINAMENTO', 'IMBOTTIGLIAMENTO: agosto 2025', 'GRADAZIONE ALCOLICA: 13% vol.' (matching Systembolaget's 13,0 exactly), total acidity 5,50 g/l, pH 3,33, ageing potential, the four bottle formats including 0,75 l, the bottle weight and the cork — and zero occurrences of ingredien, nutrizion, kcal, energia, solfit, allergen or dichiarazion. This is the Italian scheda tecnica near-miss in its most complete form: it settles the vintage, the strength and the pack and declares no substance at all.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.planeta.it/robots.txt",
+        "https://www.planeta.it/sitemap_index.xml",
+        "https://www.planeta.it/wine-sitemap.xml",
+        "https://www.planeta.it/vini/chardonnay/",
+        "https://storage1368.cdn-immedia.net/robots.txt",
+        "https://storage1368.cdn-immedia.net/wp-content/uploads/2024/02/Planeta_Chardonnay-2024-BIO-2.pdf"
+      ],
+      "checked_at": "2026-08-12T11:25:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "planeta.it/robots.txt is 'User-agent: * / Disallow: /wp-admin/ / Allow: /wp-admin/admin-ajax.php'; the asset host storage1368.cdn-immedia.net serves a byte-similar file naming the same sitemap. /vini/ and /wp-content/uploads/ are allowed on both. No exception used.",
+      "note": "The thirteenth Italian producer to meet the 2023 packaging decree on the web and not the ingredient obligation."
+    },
+    {
+      "product_number": "5144702",
+      "name": "Planeta Planeta Passito di Noto",
+      "producer": "Planeta",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.planeta.it/vini/passito-di-noto/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2025",
+      "market": null,
+      "evidence": "Same estate as product 7288201 — Systembolaget carries it as both 'Planeta' and 'Aziende Agricole Planeta s.s.' — and the same template with the vintage the other way round. /vini/passito-di-noto/ is an undated cuvée page (denominazione Noto D.O.C., 100% Moscato Bianco, vigneti Buonivini and Agliastro, 'Prima Annata 2003', the same packaging block), and its 'Download scheda tecnica' is Planeta_Passito-Di-Noto-2025-BIO.pdf — THE 2025, a vintage ahead of Systembolaget's 2024. It was not downloaded: the estate's schede are generated from one template, and the Chardonnay's, read in full in this batch, contains no ingredient list, no nutrition table, no allergen line and no energy value. Even if it did, the file name is the wrong year and the wine would be rejected rather than attached. Recorded as not_found and not as rejected, because no declaration was found to reject.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.planeta.it/wine-sitemap.xml",
+        "https://www.planeta.it/vini/passito-di-noto/"
+      ],
+      "checked_at": "2026-08-12T11:25:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 7288201. Nothing disallowed, no exception used.",
+      "note": "Systembolaget's item is the 500 ml bottle; the estate's Passito is bottled in 0,375 l and 0,5 l. Not tested further, since the wine closes on the absence of any declaration."
     }
   ],
-  "updated_at": "2026-08-12T11:00:00Z",
+  "updated_at": "2026-08-12T11:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -11809,6 +11861,11 @@
       "at": "2026-08-12T11:00:00Z",
       "batch": "3 — Italy, seventh batch: Le Battistelle (2 wines, listed under 'Azienda Agricola Le Battistelle' and 'Le Battistelle')",
       "result": "2 attempted, 0 found, 2 not found. An eight-wine Soave Classico estate on Joomla with no shop, no sitemap and no vendor of any kind: both wines sit on undated cuvée pages whose inline 'Scheda Tecnica' block gives the grape, the vinification and the alcohol (12,50 %, matching Systembolaget exactly) and no year and no substances. Twenty-two-term raw-HTML grep returns zero hits on both pages."
+    },
+    {
+      "at": "2026-08-12T11:25:00Z",
+      "batch": "3 — Italy, seventh batch: Planeta (2 wines, listed under 'Planeta' and 'Aziende Agricole Planeta s.s.')",
+      "result": "2 attempted, 0 found, 2 not found. A large, modern, certified-sustainable Sicilian estate with a per-vintage scheda tecnica for our exact 2024 Chardonnay — bottling month, 13 % vol, acidity, pH, four formats, bottle weight, cork — and not one substance in it. Its sitemap index names eight post types and no label tree, so the vendor question closed in one fetch. The Passito's current scheda is the 2025, a vintage ahead. Planeta also prints a full packaging-decree block on every wine page, making it the thirteenth Italian producer to meet the 2023 packaging obligation on the web and not the ingredient one."
     }
   ]
 }
