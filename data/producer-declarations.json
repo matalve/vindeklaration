@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch opened 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after six batches: 49 producers, 129 wines, 7 found, 114 not_found, 8 rejected.",
-  "attempted": 405,
+  "attempted": 407,
   "found": 30,
-  "not_found": 328,
+  "not_found": 330,
   "rejected": 47,
   "declarations": [
     {
@@ -11667,9 +11667,63 @@
       "robots_disallowed": false,
       "robots_reasoning": "See product 7288201. Nothing disallowed, no exception used.",
       "note": "Systembolaget's item is the 500 ml bottle; the estate's Passito is bottled in 0,375 l and 0,5 l. Not tested further, since the wine closes on the absence of any declaration."
+    },
+    {
+      "product_number": "1243801",
+      "name": "Pasqua Mucchietto Chardonnay Grillo Organic",
+      "producer": "Pasqua",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://pasqua.it/sitemap.xml",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "STEP 0 CLOSED THIS WINE: the brand is the producer's own but is published nowhere on the producer's own surface. Pasqua Vigneti e Cantine SpA, Verona, is Systembolaget's producer and pasqua.it is its site. Its 220-URL sitemap holds 37 /it/vini/ pages — the whole range, Veneto and one Washington collaboration — and there is no Mucchietto among them and no Sicilian wine of any kind: Smith Pinot Noir, the Black Label and Limited Edition series, Villa Borghetti, Morago, Famiglia Pasqua, Cascina San Vincenzo, Passione Sentimento, 11 Minutes, Mai Dire Mai, Hey French, Lui, Brasa Coerta. The estate's own shop, shop.pasqua.it, is no better: 59 products covering Pasqua, Cecilia Beretta, DLZ and R&J, and no Mucchietto, no Grillo and no Nero d'Avola. THE BRAND-OWNED SECOND DOMAIN WAS CHECKED, per the Tagaro/Nardelli correction, AND THERE IS NONE: mucchietto.it 301s to www.mucchieto.it, an agriturismo and olive-oil producer with one letter's difference in the name and no connection to wine; www.mucchietto.com answers 404 with a 47-byte body; mucchiettowines.com does not resolve. Third-party listings (a German retailer, Vivino) attribute the wine to 'Pasqua Vigneti e Cantine — Famiglia Pasqua Mucchietto Edizione Speciale', so this is a Pasqua-owned export label rather than a different winery, but there is no page on any host the producer controls, so the matching rules never got a chance to run and no declaration could be looked for. Nothing was taken from the retailers: their transcription has worse provenance than ours.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://pasqua.it/robots.txt",
+        "https://pasqua.it/sitemap.xml",
+        "https://shop.pasqua.it/robots.txt",
+        "https://shop.pasqua.it/sitemap.xml",
+        "https://shop.pasqua.it/it/eur/it/prodotti/famiglia-pasqua-valpolicella-doc",
+        "DNS: mucchietto.it, mucchietto.com, mucchiettowines.com",
+        "https://mucchietto.it/ (an unrelated agriturismo)",
+        "https://www.mucchietto.com/ (404)"
+      ],
+      "checked_at": "2026-08-12T11:50:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "pasqua.it/robots.txt is 'User-agent: * / Disallow: / Allow: /' — an empty Disallow, everything allowed. shop.pasqua.it is 'User-Agent: * / Allow: /'. No exception used.",
+      "note": "shop.pasqua.it is a FIFTH wineplatform.it deployment (after Marchesi di Barolo, Tenute Piccini and Masi's enotecamasi.it), and it shows the platform's default behaviour: an 'Annata' field with the year, and an 'Info' field reading 'Contiene Solfiti - Prodotto in Italia' where the ingredient list would be. That confirms Masi's 'u-Label' QR field is a per-deployment customisation and not something the platform ships."
+    },
+    {
+      "product_number": "7084001",
+      "name": "Pasqua Mucchietto Nero d'Avola Shiraz",
+      "producer": "Pasqua Vigneti e Cantine SpA",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://pasqua.it/sitemap.xml",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same producer, same brand and the same finding as product 1243801 — Systembolaget carries the house as both 'Pasqua' and 'Pasqua Vigneti e Cantine SpA'. 'Mucchietto' appears nowhere in the producer's 220-URL sitemap or its 59-product shop, and there is no Sicilian wine, no Nero d'Avola and no Shiraz on either surface. No brand-owned domain exists. Nothing to match against.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://pasqua.it/sitemap.xml",
+        "https://shop.pasqua.it/sitemap.xml"
+      ],
+      "checked_at": "2026-08-12T11:50:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 1243801. Nothing disallowed, no exception used.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-12T11:25:00Z",
+  "updated_at": "2026-08-12T11:50:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -11866,6 +11920,11 @@
       "at": "2026-08-12T11:25:00Z",
       "batch": "3 — Italy, seventh batch: Planeta (2 wines, listed under 'Planeta' and 'Aziende Agricole Planeta s.s.')",
       "result": "2 attempted, 0 found, 2 not found. A large, modern, certified-sustainable Sicilian estate with a per-vintage scheda tecnica for our exact 2024 Chardonnay — bottling month, 13 % vol, acidity, pH, four formats, bottle weight, cork — and not one substance in it. Its sitemap index names eight post types and no label tree, so the vendor question closed in one fetch. The Passito's current scheda is the 2025, a vintage ahead. Planeta also prints a full packaging-decree block on every wine page, making it the thirteenth Italian producer to meet the 2023 packaging obligation on the web and not the ingredient one."
+    },
+    {
+      "at": "2026-08-12T11:50:00Z",
+      "batch": "3 — Italy, seventh batch: Pasqua (2 wines, listed under 'Pasqua' and 'Pasqua Vigneti e Cantine SpA')",
+      "result": "2 attempted, 0 found, 2 not found, both closed at step 0. Mucchietto is a Pasqua-owned export label absent from the producer's own 220-URL sitemap AND from its own 59-product shop, and the brand-owned-second-domain check came back negative in a way worth recording: mucchietto.it is an agriturismo called Mucchieto, one letter away — the near-name trap in a domain rather than a cuvée. One platform fact: shop.pasqua.it is a fifth wineplatform.it deployment, and its default 'Info: Contiene Solfiti - Prodotto in Italia' confirms that Masi's u-Label QR field on the same software is a customisation, not a platform feature."
     }
   ]
 }
