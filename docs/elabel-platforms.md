@@ -18,16 +18,16 @@ rejected — see *France, and why it is not Germany* and *The first French find*
 French batch is *The estate that hosts its own e-labels and publishes them only
 for the 0,0 %*, below.
 
-**Italy opened on 2026-08-09** and has had five batches — thirty-seven
-producers, 105 wines, **five declarations attached** and eight rejected. See
-*Italy, where the page is undated*, the last major section of this file, and in
-particular its subsections *The first Italian declarations attached*, *Italy's
-first e-label vendor, and its second first-party shape*, *The fifth Italian
-batch* and *Where the remaining Italian work is*. Read them before touching an
-Italian producer: five different producer profiles have now been falsified
-there and the closing advice is a fixed probe, not a shape to select for —
-starting with the question of whether the Swedish name is the producer's name
-at all.
+**Italy opened on 2026-08-09** and has had six batches — forty-nine producers,
+129 wines, **seven declarations attached** and eight rejected. See *Italy, where
+the page is undated*, the last major section of this file, and in particular its
+subsections *The first Italian declarations attached*, *Italy's first e-label
+vendor, and its second first-party shape*, *The fifth Italian batch*, *The sixth
+Italian batch: the vendor that publishes one list per vintage* and *Where the
+remaining Italian work is*. Read them before touching an Italian producer: five
+different producer profiles have now been falsified there and the closing advice
+is a fixed probe, not a shape to select for — starting with the question of
+whether the Swedish name is the producer's name at all.
 
 ## Readable — server-rendered
 
@@ -47,6 +47,7 @@ at all.
 | **Rhonéa's own QR platform** | `m.rhonea.fr/{code}` plus `/{code}/get/tech-sheet` | **This is Vincod — see the row above.** A producer-run QR destination on the producer's own subdomain, server-rendered, **one short code per wine per vintage** with a vintage switcher and a language selector. It states wine, appellation, colour and vintage in its own heading, so it identifies itself as well as Winestro does. On Rhonéa's deployment it carries no declaration: its "Spécifications" block holds residual sugar and "Contient des sulfites" and no ingredient list or nutrition table, and its downloadable fiche produit repeats the same fields. **That observation stands but the reason is now clear — the platform supports a full e-label at `/{code}/n/{hash}/{lang}` and Rhonéa had not filled it in.** On a Vincod page, look for an "Ingredients & nutrition" link inside the Spécifications block before concluding there is none. Its `robots.txt` is a long bad-bot blocklist ending in `Disallow: /`, then a separate `User-agent: *` group disallowing only `/ajax`, `/admin`, `/manage`, `/create` and `/*/get/{qrcode,tablecard,embed}$` — **the wine pages and `/get/tech-sheet` are allowed, so no exception is needed.** |
 | **VINISCAN (ABSOMOD)** | `v9.lu/v/{code}` and `iviti.fr/v/?q={token}` | **One French vendor, two hosts, two different gates, and both are readable.** Plain server-rendered HTML: a `Déclaration nutritionnelle` table per 100 mL and an `Ingrédients` paragraph, a 24-language EU selector including Svenska, `noindex`, and the footer `© 2026 VINISCAN by ABSOMOD GROUP`. Neither host serves a `robots.txt` (404 on both), so nothing is disallowed. **The page states no wine name, no vintage, no bottle size and no alcohol** — it is a bare template keyed by the URL, so identity rests entirely on the producer's own per-wine linking, the weakest provenance of any readable platform here. Both hosts refuse a plain request with a short 200-with-body, and **the two refusals are not the same thing**: `v9.lu` answers `Smartphone only` and yields to the mobile-shaped User-Agent from the 2026-08-08 device-gate decision, while **`iviti.fr` answers `Accès refusé...` to that same mobile UA and yields to nothing but a `Referer` header naming the producer page that published the link** — hotlink protection, and the Referer we send is simply true. Try the Referer before the mobile UA; it needs no exception at all. `iviti.fr`'s own root answers 403 to everything, which is absolute — one URL per wine and nothing else on the host. Seen at Domaine Gassier (v9.lu, QR image in a Shopify description) and Domaine André Brunel (iviti.fr, an anchor reading *"Cliquez ici pour retrouver la liste des ingrédients et informations nutritionnelles de cette cuvée"*). Tokens are per wine: Brunel's siblings share the trailing producer segment and differ in the prefix. |
 | **wineplatform.it** | `shop.{producer}.{tld}/{country}/{currency}/{lang}/prodotti/{slug-with-vintage}` | An Italian shop platform, plain server-rendered, **one product per vintage with the vintage in the slug and in an `Annata` field** — the best identity in Italy (Annata, Denominazione, Vitigni, Alcol, Formato) and **never a declaration**: where the ingredient list belongs it prints `Info: Contiene Solfiti - Prodotto in Italia`. Permissive `robots.txt` naming a sitemap that is a complete per-market census. Seen at Marchesi di Barolo and Tenute Piccini, four wines, same near-miss each time. The `<title>` carries a stale vintage; read the H1. |
+| **Giunko ED (ead-qr)** | `ead-qr.com/p/{numeric id}` | **The best-behaved e-label platform in this file, and the only one anywhere that solves the vintage problem.** Giunko Srl, Bologna, sells it as *ED etichetta digitale* (`etichettaambientaledigitale.it`). ~38 kB of plain server-rendered HTML carrying the environmental label and the ingredient declaration on one page, and **a SEPARATE, EXPLICITLY YEAR-LABELLED nutrition and ingredient block for every vintage still on the market** — `Valori Nutrizionali 2024` / `Ingredienti 2024` beside `… 2025`, with genuinely different recipes. It states the wine, the line and the pack in its heading (`Prima Linea Cerasuolo d'Abruzzo DOC 0,75`) and names the responsible company, and it links the producer's own product card, which supplies the alcohol. 25-language EU selector including Svenska, **driven by the `Accept-Language` header on the same URL** — no new URL needed. **No `robots.txt` at all** (a genuine 404 with a plain-text body). Ids are per product and consecutive across a range (1890568, 1890569); that is not a licence to enumerate. Reached from an anchor reading **`Valori nutrizionali`**, class `btn-nutrizionale`, on the producer's WooCommerce. Found via Azienda Marramiero — both Swedish wines attached. |
 | **IoAgri** | `app.ioagri.it/Qr/DL?id={token}` | **The first Italian third-party e-label vendor seen in an `href`** (La Pruina, Puglia, 2026-08-09). Server-rendered; the payload names `CompanyName`, `ProductName`, `AlcoholPercentage`, an ingredient line, a nutrition table per 100 ml and an environmental-labelling block. **It states no vintage — `Year` is null** — so the vintage rests entirely on the producer's own linking page, which is where La Pruina's Manduria was rejected. Tokens look product-keyed, not vintage-keyed, so a producer that edits one WooCommerce product forward should carry the new recipe under the same token. Reached from a WooCommerce anchor reading *"VALORI NUTRIZIONALI E INGREDIENTI \| SMALTIMENTO — CLICCA QUI"*. |
 | **A WooCommerce `Ingredienti` tab** | `shop.{producer}.{tld}/prodotto/{slug}` | **Not a platform — a product tab, and Italy's second first-party publisher shape.** Demarie's shop renders a fourth WooCommerce panel, `<div class="ingredient-list"><p class="ingredient-list__body">Ingredienti: uva. Conservanti: <strong class="ingredient-list__allergen">solfiti</strong></p></div>`, in the server's HTML. The H1 carries the vintage. **It is an ingredient list and not the complete mandated set** — no nutrition table, no energy value — and the same line appears on every product, so it is a house template. Coppi runs the identical software with only two tabs. **Count the tabs; the platform supports it and the estate decides.** |
 | **Producer's page itself** | no platform at all | Bastianshauser Hof – Erbeldinger puts the **complete mandated set inline** on its WooCommerce product page, inside a collapsed accordion whose panel is in the server's HTML: Jahrgang, Alk., Flasche, Bio-Hinweis, `Zutaten:`, `Ø Nährwerte pro 100 ml` and the Gutsabfüller. No link, no iframe, nothing for an href scan to find — only a raw-HTML grep for `Zutaten` finds it. |
@@ -61,6 +62,7 @@ at all.
 | **plugwine** | `{producer-slug}.plugwine.com/{fr,en}/vins/{range}/{cuvée-vintage}/{id}` | **A French wine-shop platform, Angular, and every URL on it returns one BYTE-IDENTICAL 67 kB shell with an empty `<pw-root>`** — listing, product and `sitemap.xml` alike (the sitemap is a soft 404). Recognise it by `<pw-root>`, by a `robots.txt` that carries `crawl-delay: 10`, `Disallow: /fr/*` and the ASP.NET pair `/WebResource.axd` + `/ApplicationError.aspx*`, and by a Cloudflare-managed Content-Signal preamble. **Domaine Roquefeuille's `www.domaineroquefeuille.fr` was this platform white-labelled** — same `<pw-root>`, same robots lines — so the two are one platform, not two producers. The product URL does carry cuvée and vintage, so a *range census* is possible from search results even though no page content is. Seen at Vignoble Hermouet and Domaine Roquefeuille. |
 | **Kuupanda** | `commande.kuupanda.com/producteur/{id}/particulier` | A French producer-direct ordering marketplace some estates use *instead of* their own shop (Domaine Fontanel links out to it from its `/boutique/` page). 2 383 bytes of React shell, `You need to enable JavaScript to run this app`, empty `<div id="root">`. `robots.txt` is `User-agent: *` / `Disallow:` — everything allowed and nothing readable. |
 | ~~**v9.lu**~~ | `v9.lu/v/{code}` | **Moved to the readable table on 2026-08-08 — see VINISCAN (ABSOMOD).** It was listed here when a plain request returned fifteen bytes reading `Smartphone only`; the device-gate decision of the same day made it readable with a mobile-shaped, still self-identifying User-Agent, and its sibling host `iviti.fr` then showed the gate can be a `Referer` check instead. Kept as a row so the failure mode stays recognisable: **a short 200-with-body is a gate, not a rendering problem, and not every gate is the same gate.** |
+| **i-wine (discover-iwine)** | `d.i-wine.app:8444/01/{producer-uuid}-p{8-digit id}` → `qr.i-wine.app/…` | An Italian vendor whose `/01/` path imitates a **GS1 Digital Link and is not one** — the value is a UUID, not a GTIN. 730-byte Vite/React shell, empty `<div id="root">`, one module bundle; `Accept: application/json` on the same URL returns the identical shell. Both hosts answer `/robots.txt` with the SPA's own HTML — a **soft 404**, so no directives exist and no exception is needed; there is simply nothing to read. The token is **product-keyed and shared across pack variations** (one wine's 375 ml and 750 ml WooCommerce variations carry the same href). Found via Mastroberardino, reached from a shop block reading *"Scansiona per: Valori nutrizionali, Ingredienti, Raccolta differenziata"* wrapping a QR image in an anchor. |
 | **devworlds e-label** | Shopware plugin, no public URL | The shop shows a "Zutaten & Nährwerte" **`<button>`, not a link**, opening a modal. All the server returns is a custom field `devworlds_elabel_fields_id` holding an opaque 24-hex id, plus `Allergene: Enthält Sulfite`. No devworlds host is linked anywhere and no e-label route appears in the sitemap, so **there is no URL to hold** and building one from the id would be guessing a pattern. Found via Von Winning. |
 
 ## The Dropbox route, which worked
@@ -2397,31 +2399,237 @@ Two corollaries:
   `ingredient-list` class anywhere. The standing advice that the Italian shop
   is the surface that declares has its counter-example here.
 
+### The sixth Italian batch: the vendor that publishes one list per vintage
+
+**2026-08-12: Mauro Sebaste, Gaja, Angelo Negro, Mastroberardino, Panizzi, Luigi
+Pira, Tagaro, Ciacci Piccolomini, MGM S.r.l. (Enzo Bartoli), Azienda Marramiero,
+Le Vigne di Zamò, Giacosa Fratelli — twenty-four wines, 2 found, 22 not found,
+0 rejected.** The batch took the named multi-wine leads in order and applied
+step 0 first to every one of them.
+
+| Producer | Region | Site | Our bottle on it? | Declaration? |
+|---|---|---|---|---|
+| Mauro Sebaste | Piemonte | WordPress, 16 wines, no shop | cuvée yes, **no vintage** | none; scheda predates the rule |
+| Gaja | Piemonte | **a one-page non-site** | no page exists | none |
+| Angelo Negro | Piemonte | WordPress, no shop | cuvée yes, **no vintage** | none; **whole-range packaging page** |
+| Mastroberardino | Campania | WordPress + WooCommerce | cuvée yes, no vintage | **i-wine e-label — unreadable** |
+| Panizzi | Toscana | WordPress, no shop | cuvée yes, **no vintage** | none |
+| Luigi Pira | Piemonte | WordPress, no shop | cuvée yes, **no vintage** | none; **packaging subdomain** |
+| Tagaro | Puglia | brand on a second host | cuvée yes, **no vintage** | none |
+| Ciacci Piccolomini | Toscana | bespoke CMS, **39-vintage archive** | **yes, 2024, both** | none |
+| MGM / Enzo Bartoli | Piemonte | brand site + **Argea group shop** | **yes, Annata 2024, 12 %, 0,75** | none, an allergen line |
+| **Azienda Marramiero** | Abruzzo | WooCommerce + **ead-qr** | **yes, both, by year** | **yes, both — attached** |
+| Le Vigne di Zamò | Friuli | **host does not answer** | unreachable | unreachable |
+| Giacosa Fratelli | Piemonte | WordPress + Shopify | **neither cuvée exists** | none |
+
+#### Giunko's ead-qr is the answer to the vintage problem
+
+Marramiero's WooCommerce product pages carry an anchor reading **`Valori
+nutrizionali`** (class `btn-nutrizionale`) pointing at `ead-qr.com/p/{id}`, and
+that page does something no other platform in this project does: it prints
+**one ingredient list and one nutrition table per vintage, each labelled with
+its year**, side by side.
+
+```
+Valori Nutrizionali 2024 … Energia 306 kJ 73 kcal …
+Ingredienti 2024  uve, mosto di uve concentrato, Conservanti e antiossidanti
+( solfiti ), Antiossidanti (acido L-ascorbico), Imbottigliato in atmosfera protettiva
+Valori Nutrizionali 2025 … Ingredienti 2025  uve, Agenti stabilizzanti (acido citrico),
+Conservanti e antiossidanti ( solfiti ), Imbottigliato in atmosfera protettiva
+```
+
+That matters out of all proportion to one producer. **The single commonest
+reason this project throws a found declaration away is that the producer's shop
+has rolled forward a vintage** — Rhonéa, Turckheim, Paul Mas, GIV, La Pruina's
+Manduria, Demarie's two. Marramiero's own shop *has* rolled: its WooCommerce
+`Annata` attribute reads 2025 for both wines. The 2024 was attachable only
+because the e-label keeps both years. **When an Italian producer turns out to
+be on ead-qr, a vintage behind is no longer a rejection — read the year-labelled
+block.**
+
+Two more things about the platform, both good for provenance:
+
+- **The identity comes from three places that agree.** The e-label heading
+  names the line, the wine and the pack (`Prima Linea Cerasuolo d'Abruzzo DOC
+  0,75`); it names `Azienda Marramiero S.R.L.` as responsible; and it links the
+  producer's own product card PDF, which supplies the alcohol the e-label
+  omits — `12,50% vol.` for the Cerasuolo, `11% vol.` for the Sessanta Passi,
+  both matching Systembolaget exactly. The Pecorino's 11 % is an odd enough
+  figure to be a strong check on its own.
+- **The lists are per wine**: the two 2024 ingredient lines happen to coincide,
+  but the energy differs (306 kJ against 268), so they are two disclosures.
+
+`etichettaambientaledigitale.it` is Giunko's own product page for it. Worth
+recognising the vendor name in an `href` and worth asking of any Italian
+producer whose shop shows a *Valori nutrizionali* button.
+
+#### The second new vendor is a React shell
+
+Mastroberardino's shop carries the block *"Scansiona per: Valori nutrizionali,
+Ingredienti, Raccolta differenziata"* around a QR image linking
+`d.i-wine.app:8444/01/{uuid}-p{id}`. It is in the unreadable table above. Two
+details to recognise: the **non-standard port 8444** on the link the producer
+publishes, and a `/01/` path that **looks like a GS1 Digital Link and is not**
+— the value after `/01/` is the producer's UUID, not a GTIN, so nothing about
+GS1 resolution applies. Its `robots.txt` is a soft 404 serving the SPA shell.
+
+#### Step 0 worked, and it cut both ways
+
+Four of the twenty-four wines were closed or nearly closed on the name alone,
+and the two failure modes are opposite:
+
+- **Giacosa Fratelli's *Busije* and *Leunin* do not exist on the producer's own
+  surface** — not in its 21-wine sitemap, not among its 21 schede, not in its
+  30-product Shopify catalogue, and its own site search returns nothing. The
+  wines are attributed to the estate by third parties, so these are export-only
+  cuvée names, not another winery. **And the trap is sharp: the estate does make
+  a Barbera d'Alba *Bussia*, one letter from *Busije*.** A near-name is not a
+  match.
+- **Tagaro's *Nardelli* is absent from tagaro.it and its site search says so —
+  and the brand is still the producer's.** It lives on its own older host,
+  `vininardelli.it`, and the only thing tying the two together is a Facebook
+  link in the footer pointing at `facebook.com/TeamTagaro`. **A name absent from
+  the producer's own site is not automatically an importer's label: check for a
+  brand-owned domain before closing.** That is a correction to the fifth batch's
+  rule, not a reversal of it — Ermes' *Ambleri* and Facchin's *High On Love*
+  still have no producer host anywhere.
+
+#### The packaging asymmetry now has a subdomain
+
+Two more producers join the nine already recorded, and they are the most
+elaborate yet:
+
+- **Luigi Pira runs a whole subdomain for it**, `etichettatura.piraluigi.it`,
+  linked from every wine page — one section per wine and one table per format
+  (0,75 l, magnum, jeroboam), with bottle GL 71, cork FOR 51, capsule C/ALU 90,
+  wooden case FOR 50 and the cardboard divider PAP 20/21 — and publishes no
+  ingredient list for any wine.
+- **Angelo Negro publishes one page covering its entire range**, grouped by
+  closure type, naming all three Swedish wines. Same absence.
+- Ciacci Piccolomini prints a *Decreto Rifiuti* block inline on every wine page.
+
+That is **twelve Italian producers** meeting the 2023 packaging obligation on
+the web and not the ingredient one. And note the agency pattern holds: Pira is
+a fourth `hellobarrio` `barriotheme` site after Chiarlo, Falchetto and Azelia,
+all four with the packaging machinery and none with a list; Angelo Negro and
+Giacosa Fratelli are both built by **blulab**, same story.
+
+#### Three more Italian archives with nothing in them
+
+Ciacci Piccolomini's is the deepest seen anywhere: **39 vintages, 1987 to 2024,
+delivered as a single JavaScript array named `$schede` in one response**, one
+object per year with a `voci` list of labelled fields. Parse the array and the
+whole vintage question costs one fetch. Our 2024 is in it, and its fields are
+vineyard, grape, vinification, colour, sensory notes, service, pairing and a
+note about the anti-counterfeiting hologram. No substances, no alcohol.
+
+That is now the fifth Italian producer with real per-vintage machinery and no
+ingredient list, after Ricasoli, Terlan, Chiarlo and Prunotto.
+
+#### Argea's group shop is the counter-example to GIV's
+
+`shop.argea.com` is a 185-product first-party WooCommerce covering the group's
+brands — Botter, Mondo del Vino, Zaccagnini, Ricossa, Cuvage, Poderi dal
+Nespoli, Barone Montalto, Enzo Bartoli, Mosketto, Asio Otus, Brilla. Its
+product table is **excellent identity and no declaration**: Tipo di vino,
+**Annata**, Appellazione, Varietà, **Gradazione alcolica**, **Formato**,
+`Allergeni: Contiene Solfiti`, `Provenienza: Prodotto in Italia`. Our Enzo
+Bartoli Gavi was there at exactly 2024, 12 % vol and 0,75 L and still could not
+be attached. Argea supplies a large share of the Italian volume on the Swedish
+shelf, so **that one fetch settles the group**: expect the two-particular
+near-miss, and do not spend a batch on their brands hoping otherwise.
+
+#### Italian hosts and greps, sixth batch
+
+- **`u-label` matches `menu-label`.** Mastroberardino's theme renders
+  `.responsive-menu-label`, seven raw hits and zero text hits on every page of
+  both its hosts. U-label is still the platform this file has been watching for
+  since Germany; **any class ending `menu-label` will look like it.** Add it to
+  `responsiveLabel`, `whitelabel`, `toggle-label`, `cm-cookie-label`,
+  `slideLabel`, `site-nav__link-menu-label`, `qodef-e-label`, `__VIEWSTATE` and
+  `checkJQuery`.
+- **`gaja.com` is a 2 404-byte black placeholder** — logo, address, phone,
+  `mailto:`, eight hrefs, all of them CSS and favicons — and no robots.txt and
+  no sitemap (both 404). `gaja.it` and `gajawines.com` 301 to it. **A producer
+  can deliberately have no website**, which is a different thing from having no
+  page for a wine and is answerable in three fetches.
+- **A producer's distribution arm is a multi-brand importer.**
+  `gajadistribuzione.it` is an 871-product WooCommerce of Champagne houses and
+  Burgundy domaines; the two slugs that look like Gaja's Swedish wines,
+  `sito-moresco-4` and `rossj-bass-4`, are the *grappas* of those names. Same
+  shape as Facchin and Rottensteiner: **a producer's own shop can be a retailer
+  for everything but its owner's wine.**
+- **`levignedizamo.com` does not answer at all** — connection refused on 443 at
+  the apex (an OVH address) and TCP timeout on `www` (31.193.131.44), over
+  httpx and over `curl -4` with a 30 s limit. Not a refusal, a dead host; both
+  Zamò wines are revisit candidates. And **`zamo.it` is ZAMO Srl, a maker of
+  hydraulic demolition breakers** — the surname trap for the fourth time after
+  `sartori.it`, `castellani.it` and `hermouet.fr`.
+- **`giacosafratelli.com` fails TLS** (incomplete chain, no local issuer) and
+  answers over plain HTTP with an 82-byte page whose entire body is
+  `<script>window.location='http://www.giacosa.it'</script>`. **A JavaScript
+  redirect is invisible to a redirect-following fetch**; read the body.
+- **`ciaccipiccolomini.com` 301s to `ciaccipiccolomini.it`**, which serves no
+  robots.txt and no sitemap under any of the three usual names, and whose
+  product URLs are `/it/prodotti/prodotti/{cat}/vini/{id}/{slug}`.
+- **`mastroberardino.com/robots.txt` names ten sitemaps and eight of them are
+  fabrications** (`/wp-admin/shop.php/sitemap84.xml` among them, and the one it
+  advertises first, `sitemapindex.xml`, 404s). The real one is the ordinary
+  `sitemap_index.xml`. **Read the robots.txt, then ignore what it claims and
+  try the standard names.**
+- **A WordPress upload path older than the rule still closes a wine, cheaply.**
+  Five schede in this batch were closed on a HEAD alone: Mauro Sebaste's two
+  (Jun 2023), Mastroberardino's two (Nov 2019) and Luigi Pira's two (**24 Nov
+  2023, two weeks before 8 December**). The converse also held — Panizzi's,
+  Angelo Negro's and Tagaro's are post-obligation, were downloaded and read in
+  full, and contain no substances.
+- **A post-obligation scheda can still state no vintage and no alcohol.**
+  Panizzi's January 2025 sheets give vineyard, grape, density, vine age, yield,
+  vinification and pairing and neither a year nor a strength; the only years on
+  the estate's whole surface are an `ANNATE PREMIATE` critics' list that stops
+  at 2022. **An award list is not a vintage statement.**
+
 ### Where the remaining Italian work is
 
-**166 Italian wines with vintage 2024+ and no declaration on Systembolaget
-remain untouched, after five batches** (37 producers and 105 wines attempted;
-5 found, 92 not found, 8 rejected). By cluster size: Marchesi Antinori 9
-(**already attempted, Scantrust, do not re-probe without a new lead**), Tommasi
-6 and Vini Franchetti 6 (both attempted), then a long tail of pairs and
-singles — Mauro Sebaste, Gaja, Angelo Negro, Giovanni Almondo, Mastroberardino,
-Tagaro, Fattoria Pagano, Orion Wines, Giacosa Fratelli, Tralci Hirpini, MGM, Le
-Vigne di Zamo, Marramiero, Ciacci Piccolomini, Josetta Saffirio, Panizzi, Luigi
-Pira, Le Morette, and about 130 singles.
+**140 Italian wines with vintage 2024+ and no declaration on Systembolaget
+remain untouched, after six batches** (49 producers and 129 wines attempted;
+7 found, 114 not found, 8 rejected). The named clusters are gone: what is left
+is 136 producer strings for 140 wines — four pairs (**Fattoria Pagano, Orion
+Wines, Tralci Hirpini, Josetta Saffirio**) and 132 singles. Marchesi Antinori 9,
+Tommasi 6 and Vini Franchetti 6 were attempted in the first batches and should
+not be re-probed without a new lead.
 
-**Add a step 0 to the probe below: is the Swedish name the producer's name?**
-Six of the last twelve wines were export-only or importer-owned labels, and the
-cheapest way to find out is the producer's own `brand`, `vino` or product
-sitemap — one fetch, and if the name is absent the wine is closed. On present
-evidence that will close something like a quarter of the Italian tail.
+**The economics have therefore changed.** Every batch until now could lean on
+one producer covering several wines; from here each producer is one wine, so
+the fixed probe below has to close fast. The two cheapest closes are step 0
+(the name) and step 2 (the undated page), and between them they closed
+seventeen of this batch's twenty-four wines.
+
+**The one thing worth selecting for is a vendor.** Nothing about an Italian
+producer's shape predicts publication — six batches have falsified the
+small-estate, Alto Adige, co-op, own-e-commerce and per-vintage-archive
+profiles — but **every Italian declaration this project holds came from a
+producer that had adopted something**: GIV's own shop software, Cà dei Frati's
+inline block, La Pruina's IoAgri, Demarie's WooCommerce tab, Marramiero's
+ead-qr. The question to ask a new Italian producer is still *has it adopted a
+platform*, and the cheapest way to ask is a raw-HTML grep of one product page
+for `ead-qr`, `ioagri`, `i-wine`, `ingredient-list` and `btn-nutrizional`.
+
+**Step 0 stays first: is the Swedish name the producer's name?** Six of the
+fifth batch's twelve wines and four of this batch's twenty-four were export-only
+or importer-owned labels. The cheapest way to find out is the producer's own
+`brand`, `vino` or product sitemap — one fetch, and if the name is absent the
+wine is close to closed. **But check for a brand-owned second domain before
+closing** (Tagaro/Nardelli), and never accept a near-name (Busije/Bussia).
 
 **Do not pre-select by producer shape.** Four batches have now falsified the
 small-estate profile, the Alto Adige profile, the co-op profile, the
 own-e-commerce profile and the has-a-per-vintage-archive profile in Italy. The
-five wines attached came from a Lombard estate with no shop, a Puglian
-WooCommerce with a vendor QR, and a Piedmontese estate whose marketing site's
-e-label slot is empty and whose shop has the list. What is cheap and works is a
-fixed probe:
+seven wines attached came from a Lombard estate with no shop, a Puglian
+WooCommerce with a vendor QR, a Piedmontese estate whose marketing site's
+e-label slot is empty and whose shop has the list, and an Abruzzese
+WooCommerce whose vendor publishes a list per year. What is cheap and works is
+a fixed probe:
 
 1. `robots.txt`, then the sitemap index — an Italian producer's sitemap usually
    names the per-wine post type outright (`wine-sitemap`, `vino-sitemap`,
@@ -2430,12 +2638,16 @@ fixed probe:
    e-label tree.**
 2. **Does the producer's own page for the exact wine state a vintage at all?**
    An undated cuvée page is the dominant Italian failure and closes the wine
-   immediately. It closed seven of the twelve producers in these two batches.
+   immediately. It closed seven of the twelve producers in the third and fourth
+   batches and six of the twelve in the sixth. **One exception, new in the sixth
+   batch: an undated page that links a vendor e-label does not close the wine**
+   — ead-qr states the year itself, so do step 3 before giving up on the date.
 3. **One per-wine page, grepped raw as well as stripped**, for `ingredien`,
-   `nutrizion`, `solfit`, `kcal`, `energia`, `dichiarazione`, `ingredient-list`
-   and `ioagri`. GIV hid it in a GraphQL payload, Cà dei Frati printed it as
-   plain text, Demarie put it in a collapsed WooCommerce panel; each was missed
-   by one of the greps.
+   `nutrizion`, `solfit`, `kcal`, `energia`, `dichiarazione`, `ingredient-list`,
+   `ioagri`, `ead-qr`, `i-wine` and `btn-nutrizional`. GIV hid it in a GraphQL
+   payload, Cà dei Frati printed it as plain text, Demarie put it in a collapsed
+   WooCommerce panel, Marramiero put it behind an anchor the stripped text
+   renders as two words; each was missed by one of the greps.
 4. **If there is a shop, it is a separate surface and usually the one that
    declares** — and it is often not linked correctly from the marketing site.
    Reach it through its own sitemap.
@@ -2443,9 +2655,18 @@ fixed probe:
    before closing on the vintage. A file modified before 8 December 2023 cannot
    carry a declaration and closes without a download.
 
-Cà dei Frati, Gruppo Italiano Vini and La Pruina are all worth revisiting on a
-later slice — each declares for its whole catalogue, and only the vintage stood
-in the way of GIV's two and La Pruina's Manduria. **La Pruina's is the cheapest
-revisit in the file**: the IoAgri token looks product-keyed, so when the
-estate's Manduria page rolls to `ANNATA 2024` the same URL should carry the
-2024 recipe, in two fetches.
+Cà dei Frati, Gruppo Italiano Vini, La Pruina and now Marramiero are all worth
+revisiting on a later slice — each declares for its whole catalogue, and only
+the vintage stood in the way of GIV's two and La Pruina's Manduria. **La
+Pruina's is the cheapest revisit in the file**: the IoAgri token looks
+product-keyed, so when the estate's Manduria page rolls to `ANNATA 2024` the
+same URL should carry the 2024 recipe, in two fetches.
+
+Two revisits added by the sixth batch:
+
+- **Le Vigne di Zamò**, two 2024 wines, closed only because the estate's host
+  did not answer on either name or either port. That is an outage, not a
+  finding.
+- **Mastroberardino**, two wines, closed only because the i-wine e-label
+  renders client-side. If that vendor ever server-renders, the URLs are already
+  held in the wines' records.
