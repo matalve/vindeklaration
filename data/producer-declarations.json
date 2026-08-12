@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch, closed 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected, with 118 wines (117 producer strings) still untouched.",
-  "attempted": 414,
+  "attempted": 416,
   "found": 30,
-  "not_found": 337,
+  "not_found": 339,
   "rejected": 47,
   "declarations": [
     {
@@ -11914,9 +11914,65 @@
       "robots_disallowed": false,
       "robots_reasoning": "Same host and same stock WooCommerce robots.txt as 7583601; nothing disallowed was fetched.",
       "note": "Alcohol stated as '12% ca.' — approximate rather than a range, a softer form of the Fattoria Pagano / Montalbera signal that the page describes a wine and not a bottling."
+    },
+    {
+      "product_number": "7027901",
+      "name": "Poggio Stella Vermentino",
+      "producer": "Societa Cooperativa Vecchia Cantina di Montepulciano Societa Agricola",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vecchiacantinashop.com/it/shop/poggio-stella/vini-bianchi/vermentino-toscana-poggio-stella/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "ONE PRODUCER, TWO SYSTEMBOLAGET STRINGS, CONFIRMED: 'Societa Cooperativa Vecchia Cantina di Montepulciano Societa Agricola' (this wine) and 'Vecchia Cantina di Montepulciano' (7062801) are one co-op — both product pages' footers read 'Soc. Coop. Vecchia Cantina di Montepulciano Soc. Agr. | Via Provinciale, 7, 53045 Montepulciano (SI) | P.IVA IT 00108760521' — and both Swedish wines carry the same Poggio Stella brand and the same Swedish importer. NO DECLARATION EXISTS ON EITHER OF THE CO-OP'S TWO HOSTS. The marketing site vecchiacantinadimontepulciano.com has a twelve-page sitemap with no per-wine pages at all: /vini/ is a brand overview of four lines (Cantina del Redi, Poggio Stella, Astorre Noti, Vecchia Cantina) whose only years are in a Ninja Tables awards table with VINO/ANNATA/ETICHETTA/PREMIO columns running 2018-2022, and its two catalogue PDFs are image-only scans with no extractable text. The co-op's own shop vecchiacantinashop.com is the product surface, and its Poggio Stella category prints the Italian near-miss in its purest form: 'Tutti i vini Poggio Stella sono prodotti in Italia e Contengono Solfiti'. The single-bottle product page for this wine is 'Vermentino Toscana Poggio Stella Bianco IGT - 2025' and its whole description is 'MADE IN ITALY - CONTAINS SULPHITES - 14% vol / PRODOTTO IN ITALIA - CONTIENE SOLFITI - 14% vol' plus colour, aroma, taste and food pairings. Systembolaget's bottle is the 2024 at 12,0 %, so the shop has rolled past it on both counts, and there is nothing to reject against because no ingredient list or nutrition table exists anywhere: zero matches for ingredien, nutrizion, kcal, energia, dichiarazion, valori, ead-qr, ioagri, carmaqrcode, ingredient-list, btn-nutrizional, u-label, vincod and scantrust on every page fetched.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.vecchiacantinadimontepulciano.com/robots.txt",
+        "https://vecchiacantinadimontepulciano.com/wp-sitemap.xml",
+        "https://vecchiacantinadimontepulciano.com/wp-sitemap-posts-page-1.xml",
+        "https://vecchiacantinadimontepulciano.com/vini/",
+        "https://vecchiacantinadimontepulciano.com/wp-content/uploads/2025/02/catalogo-GDO.pdf",
+        "https://www.vecchiacantinashop.com/robots.txt",
+        "https://www.vecchiacantinashop.com/it/shop/poggio-stella/",
+        "https://www.vecchiacantinashop.com/it/shop/poggio-stella/vini-bianchi/vermentino-toscana-poggio-stella/",
+        "https://www.vecchiacantinashop.com/it/shop/poggio-stella/vini-bianchi/vermentino-toscana-poggio-stella-bianco-igt/"
+      ],
+      "checked_at": "2026-08-12T15:05:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "vecchiacantinadimontepulciano.com/robots.txt is fourteen bytes, the single line 'User-agent: *' with no directives under it — the masi.it shape, nothing disallowed. www.vecchiacantinashop.com answers robots.txt with HTTP 404 and the shop's own HTML, so no directives exist there either. No exception was needed on either host.",
+      "note": "A SHOP THAT CONTRADICTS ITSELF ABOUT ITS OWN WINE. The same Vermentino has two listings in the same category: the single bottle says 'Bianco IGT - 2025 … 14% vol' and the six-bottle case says 'Grado Alcolico: 12% / Solfiti: Contiene solfiti / Origine: Italia' with no vintage. Systembolaget's 12,0 % matches the stale case listing and not the current one. Where a shop lists pack variations as separate products, they can carry different vintages and different strengths — read the one that names a year."
+    },
+    {
+      "product_number": "7062801",
+      "name": "Poggio Stella Chianti Colli Senesi",
+      "producer": "Vecchia Cantina di Montepulciano",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vecchiacantinashop.com/it/shop/poggio-stella/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same producer as 7027901 (see that record for the proof that the two Systembolaget strings are one co-op). STEP 0 FAILS ON THE CUVÉE: Poggio Stella Chianti Colli Senesi is absent from the co-op's own shop. The shop's Poggio Stella category lists six products — Vermentino Toscana IGT (two pack listings), Vin Santo di Montepulciano, Cortona Syrah, Rosso di Montepulciano, Vino Nobile di Montepulciano and Vino Nobile Riserva — and no Chianti of any kind; the string 'chianti' does not appear on the marketing site's /vini/ page either. A search surfaces the wine only at Italian and American retailers and at the Consorzio Vino Chianti's member directory, none of which is an admissible source here. The one producer-side URL a search offered, vecchiacantinadimontepulciano.com/category/poggiostellarosso/, answers HTTP 404 with the site's 'Nessun risultato' page, so the per-wine post type it once held is gone. No declaration exists on either host for any wine of this co-op — see the sibling record for the full grep list — so this wine is not found on both counts: the cuvée has no producer page and the producer publishes nothing.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://vecchiacantinadimontepulciano.com/vini/",
+        "https://www.vecchiacantinashop.com/it/shop/poggio-stella/",
+        "https://vecchiacantinadimontepulciano.com/category/poggiostellarosso/"
+      ],
+      "checked_at": "2026-08-12T15:10:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "Same two hosts and same reasoning as 7027901: a bare 'User-agent: *' with no directives on the marketing site, a 404 for robots.txt on the shop.",
+      "note": "The export-only-label shape again, on a co-op that sells the sibling wine at home: the Vermentino is in the shop and the Chianti Colli Senesi is not."
     }
   ],
-  "updated_at": "2026-08-12T20:14:00Z",
+  "updated_at": "2026-08-12T20:18:10Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
