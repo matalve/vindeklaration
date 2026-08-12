@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch, closed 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected, with 118 wines (117 producer strings) still untouched.",
-  "attempted": 416,
+  "attempted": 418,
   "found": 30,
-  "not_found": 339,
+  "not_found": 341,
   "rejected": 47,
   "declarations": [
     {
@@ -11970,9 +11970,66 @@
       "robots_disallowed": false,
       "robots_reasoning": "Same two hosts and same reasoning as 7027901: a bare 'User-agent: *' with no directives on the marketing site, a 404 for robots.txt on the shop.",
       "note": "The export-only-label shape again, on a co-op that sells the sibling wine at home: the Vermentino is in the shop and the Chianti Colli Senesi is not."
+    },
+    {
+      "product_number": "7439601",
+      "name": "Cadia Chardonnay",
+      "producer": "Colli Vicentint, Vitevis Cantine Società Cooperativa Agricol",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vitevis.com/vini/colli-vicentini/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE TWO SYSTEMBOLAGET STRINGS ARE ONE PRODUCER: 'Colli Vicentint, Vitevis Cantine Società Cooperativa Agricol' (this wine) and 'Cadia' (7453001) both sell a wine called Cadia through the same Swedish importer, and Cantine Vitevis Società Cooperativa Agricola (Reg. Imprese VI, P.IVA 03972320240) is the 2015 merger of Cantina di Gambellara, Cantina Colli Vicentini and Cantina Valleogra — the group whose Colli Vicentini cellar makes the Cadia wines. STEP 0 FAILS: THE CADIA BRAND IS ABSENT FROM THE PRODUCER'S ENTIRE SITE. www.vitevis.com's page sitemap is 58 URLs covering every cellar, every line (Torre dei Vescovi, Romeo & Juliet, Thelys, Ca' Vegar, Terre di Castelnuovo, Monopolio, Edizioni Speciali) and a full schede-tecniche tree, and the string 'cadia' appears zero times on the group page, the Colli Vicentini cellar page, the Colli Vicentini and Edizioni Speciali data-sheet indexes and the wine index. The Colli Vicentini schede are nine PDFs for its home-market range (Cabernet Vicenza, Merlot Vicenza, Tai Rosso, Garganego, Pinot Bianco, Durello, Recioto, Rosé) and none is a Veneto IGT Cadia. The group has no e-commerce with product pages: its 'shop on-line' is a registration form that sends a price list by e-mail. There is therefore no producer surface for this bottling at all, and no declaration and no vendor signature anywhere on the host.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.vitevis.com/robots.txt",
+        "https://www.vitevis.com/sitemap_index.xml",
+        "https://www.vitevis.com/page-sitemap.xml",
+        "https://www.vitevis.com/vini/colli-vicentini/",
+        "https://www.vitevis.com/vini/colli-vicentini/vini-edizioni-speciali-colli-vicentini/",
+        "https://www.vitevis.com/schede-tecniche/schede-tecniche-colli-vicentini/colli-vicentini/",
+        "https://www.vitevis.com/schede-tecniche/schede-tecniche-colli-vicentini/edizioni-speciali/",
+        "https://www.vitevis.com/contatti/ordinionline/",
+        "https://cadia.it/",
+        "https://cadia.it/vini/"
+      ],
+      "checked_at": "2026-08-12T15:35:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "vitevis.com/robots.txt is a Yoast block with 'User-agent: *' and an EMPTY 'Disallow:' — everything allowed — plus a sitemap line. cadia.it serves a 404 for robots.txt (a hosting-panel 404 page), so no directives exist there; only two pages were fetched on it and both were needed to establish that it is a different producer.",
+      "note": "THE DOMAIN NEAR-NAME TRAP, THIRD INSTANCE, after Busije/Bussia in the cuvée and mucchietto.it in the domain. cadia.it resolves and is a real wine producer — but it is 'Azienda Agricola Cadia, CADIA Società Semplice Agricola, Strada Roddi-Verduno 58', a Barolo and hazelnut estate in Roddi in the Langhe, named after the Cadia hill. It has nothing to do with the Veneto IGT Cadia Chardonnay and Merlot of Colli Vicentini. Its root serves a 91-byte page whose only content is a setTimeout redirect to /vini/, so a naive fetch of the root looks empty rather than wrong."
+    },
+    {
+      "product_number": "7453001",
+      "name": "Cadia Merlot",
+      "producer": "Cadia",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vitevis.com/vini/colli-vicentini/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Sibling of 7439601 and the same finding: Cadia is a Colli Vicentini / Cantine Vitevis export brand that appears nowhere on the producer's own site — zero occurrences of the string on the 58-URL page sitemap, the cellar pages, the two Colli Vicentini data-sheet indexes and the wine index — so there is no producer page for this bottling to carry a vintage or a declaration. Brand ownership is corroborated only by third parties (a Czech retailer and a wine database list the Cadia Chardonnay and Cabernet as 'Colli Vicentini, VITEVIS'), which is enough to identify the producer but is not an admissible source for a declaration, and none was offered. The brand-owned-second-domain check was run and is a trap: see the sibling record's note. No ingredient list, no nutrition table, no allergen line and no vendor signature (ead-qr, ioagri, i-wine, carmaqrcode, u-label, ingredient-list, btn-nutrizional, vincod, scantrust) anywhere on vitevis.com.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.vitevis.com/page-sitemap.xml",
+        "https://www.vitevis.com/vini/colli-vicentini/",
+        "https://www.vitevis.com/schede-tecniche/schede-tecniche-colli-vicentini/colli-vicentini/",
+        "https://cadia.it/vini/"
+      ],
+      "checked_at": "2026-08-12T15:38:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "Same hosts and same reasoning as 7439601: vitevis.com allows everything, cadia.it has no robots.txt."
     }
   ],
-  "updated_at": "2026-08-12T20:18:10Z",
+  "updated_at": "2026-08-12T20:21:19Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
