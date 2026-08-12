@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch, closed 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected, with 118 wines (117 producer strings) still untouched.",
-  "attempted": 410,
+  "attempted": 412,
   "found": 30,
-  "not_found": 333,
+  "not_found": 335,
   "rejected": 47,
   "declarations": [
     {
@@ -11805,9 +11805,66 @@
       "robots_disallowed": false,
       "robots_reasoning": "THE NAMED-CRAWLER CASE, second time in this project after bpdr.com. cantinevolpi.it/robots.txt is a four-line '#Simple Robots.txt 0.1' file containing only two groups — 'User-agent: MSNBot / Crawl-delay: 5' and 'User-agent: bingbot / Crawl-delay: 5' — and NO 'User-agent: *' group. Our token, vindeklaration/0.1, matches neither named group; under RFC 9309 a group binds only the tokens it names, so with no matching group and no wildcard fallback no rule applies and nothing is disallowed. This is the policy set out in the agent's brief, applied without re-litigating it. Note that even the two groups that do match set only a crawl-delay, not a disallow.",
       "note": "A WooCommerce product post type that holds no products. Cantine Volpi's product-sitemap.xml lists five /eventi/ URLs — tasting slots and a gift card — while the wines are plain pages reachable only from /i-vini/. An empty or irrelevant product sitemap does not mean the wines are absent; read the range page."
+    },
+    {
+      "product_number": "7679601",
+      "name": "Melacce Maremma",
+      "producer": "Collemassari",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://collemassari.it/prodotti/melacce",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2024",
+      "market": null,
+      "evidence": "Producer and cuvée confirmed: the estate page's own footer reads 'ColleMassari SpA Società Agricola, Loc. Poggi del Sasso, 58044 Cinigiano (GR)', which is Systembolaget's producer string, and MELACCE Vermentino Maremma Toscana DOC is its own wine. THE VINTAGE IS CONFIRMED AND THERE IS STILL NO DECLARATION. The product page is undated but links a per-vintage scheda tecnica, 'IT_2024_Melacce Vermentino Maremma Toscana DOC ColleMassari.pdf' (Last-Modified 17 Oct 2025), whose first line is 'ANNATA 2024' and which gives UVAGGIO 100% Vermentino, COLORE, ALCOOL 13% — matching Systembolaget's 13,0 % exactly — bottling month (January 2025), vineyard altitude, vinification and a vintage report. It contains no ingredient list, no nutrition table, no energy value and not even an allergen line: zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion and allergen in the extracted text. The web page itself is equally bare (only three .pdf matches, all of them the scheda, a whistleblowing policy and a certificate index) with zero matches for every vendor signature checked: ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, vincod, scantrust, elabel. The 33-URL sitemap holds nine product pages and no etichetta, valori or nutrizionali path. The group site www.collemassariestates.com is six pages (about and contacts, in two languages) with no declaration surface at all.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.collemassari.it/robots.txt",
+        "https://collemassari.it/sitemap.xml",
+        "https://collemassari.it/prodotti/melacce",
+        "https://cdn.prod.website-files.com/68ee324274d0eff38a23404f/68f2420061ec1d263a4f923a_IT_2024_Melacce%20Vermentino%20Maremma%20Toscana%20DOC%20ColleMassari.pdf",
+        "https://www.collemassariestates.com/robots.txt",
+        "https://www.collemassariestates.com/sitemap.xml",
+        "https://www.collemassariestates.com/"
+      ],
+      "checked_at": "2026-08-12T14:05:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "collemassari.it/robots.txt is a single Sitemap: line with no user-agent group at all, so nothing is disallowed. collemassariestates.com is the same. The scheda tecnica sits on the Webflow asset host cdn.prod.website-files.com, whose /robots.txt answers 403 with an S3 AccessDenied XML body — that is the bucket's response for a key it will not list, i.e. no robots.txt exists, the same shape as the Azure 400 OutOfRangeInput noted for qrlabelinfo. The PDF itself answered 200 and is the producer's own asset linked from the producer's own page; no exception was needed or used.",
+      "note": "A per-vintage Italian scheda tecnica that settles the vintage AND the strength for our exact bottle and carries no substance — the Planeta near-miss again, on a Webflow site."
+    },
+    {
+      "product_number": "5076401",
+      "name": "Grattamacco Bolgheri Rosso",
+      "producer": "ColleMassari Spa Società Agricola",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.grattamacco.it/it/vini/2024/bolgheri-rosso",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2024",
+      "market": null,
+      "evidence": "SIBLING OF 7679601: Systembolaget's producer string is 'ColleMassari Spa Società Agricola' for this wine and 'Collemassari' for Melacce, and both are the same company — Podere Grattamacco, Castagneto Carducci, has belonged to the ColleMassari group since 2002 and grattamacco.it's own page footer reads 'COLLEMASSARI S.p.A. Società Agricola - Via Di Porta Pinciana 6, 00187 Roma'. Confirmed as one estate before treating them as siblings. THE ESTATE HAS A PER-VINTAGE ARCHIVE AND OUR 2024 IS ON IT: /it/vini/2024/bolgheri-rosso, H1 'BOLGHERI ROSSO / BOLGHERI DOC ROSSO 2024', the Bolgheri DOC Rosso and not the Grattamacco Bolgheri Superiore or the Bianco, so the cuvée is unambiguous. The page carries a description, the blend (Merlot, Cabernet franc, Cabernet sauvignon, Petit verdot, Sangiovese — matching Systembolaget's grape list) and the vinification, and NO ingredient list, no nutrition table, no allergen line and no alcohol figure. Raw-HTML grep is zero for ingredien, nutrizion, solfit, sulfit, kcal, energia, dichiarazion, allergen, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, vincod, scantrust and elabel; the only 'etichett' hit is the marketing sentence 'QUESTA ETICHETTA SCHIETTA E DIRETTA…' and the only PDFs are a whistleblowing policy, a certificate index and a video-surveillance notice. Its 'Verifica Autenticità' page — the most e-label-shaped URL on the site — is an anti-counterfeiting page with the same zero matches. The group site collemassariestates.com has no product pages at all. NOTE the near-domain: www.grattamacco.COM is a different host that answers 403 Forbidden (openresty) to every request including robots.txt; that is a technological refusal and was not worked around. The estate's real site is grattamacco.IT.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.grattamacco.com/robots.txt",
+        "https://www.grattamacco.com/",
+        "https://www.grattamacco.it/robots.txt",
+        "https://www.grattamacco.it/it/vini/2024/bolgheri-rosso",
+        "https://www.grattamacco.it/it/verifica-autenticita",
+        "https://www.collemassariestates.com/"
+      ],
+      "checked_at": "2026-08-12T14:15:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "grattamacco.it/robots.txt is 'User-agent: * / Disallow: /admin/' plus a sitemap line; nothing fetched was under /admin/. grattamacco.com serves 403 for robots.txt and for everything else, which is a technological refusal: two requests, no retry loop, no workaround.",
+      "note": "A fifth Italian per-vintage archive (after Ricasoli, Terlan, Prunotto and Vincod's French one) with nothing in it. Two ColleMassari estates, two websites, one per-vintage PDF and one per-vintage web page, both stating the 2024 and neither declaring."
     }
   ],
-  "updated_at": "2026-08-12T13:00:00Z",
+  "updated_at": "2026-08-12T20:09:30Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
