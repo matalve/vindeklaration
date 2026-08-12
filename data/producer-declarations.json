@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, opened 2026-08-09. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after four batches: 31 producers, 93 wines, 5 found, 80 not found, 8 rejected. The third and fourth batches (2026-08-09/11) ran Paolo Scavino, Marco Porello, La Pruina, Az. Agr. VIGNA '800, Le Fraghe, Demarie Giovanni, Castellani, Michele Chiarlo, Casa Vinicola Coppi, Ca' del Baio, Tenuta il Falchetto and Azelia. They added a NEW ITALIAN E-LABEL PLATFORM (IoAgri, app.ioagri.it/Qr/DL?id={token}, at La Pruina — two found, one rejected on vintage) and a WooCommerce 'Ingredienti' PRODUCT TAB at Demarie's own shop (one found, two rejected). The fifth batch (2026-08-11) ran Azienda Livon, Prunotto, Antonio Facchin & Figli, Rallo, Olearia Vinicola Orsogna and Cantine Ermes — twelve wines, 0 found, 12 not found, 0 rejected, the first Italian batch with nothing read. Its finding is that SIX OF THE TWELVE WINES CARRY A NAME THE PRODUCER DOES NOT USE (High On Love, Amber One, Nero Frizzante, Ambleri): export-only or importer-owned labels with no producer page in existence, closable in one fetch of the producer's own brand or product sitemap. Italy now stands at 37 producers and 105 wines, 5 found, 92 not found, 8 rejected, with 166 Italian wines of vintage 2024+ and declaration_status not_declared remaining untouched.",
-  "attempted": 377,
+  "attempted": 379,
   "found": 27,
-  "not_found": 305,
+  "not_found": 307,
   "rejected": 45,
   "declarations": [
     {
@@ -10884,6 +10884,60 @@
       "robots_disallowed": false,
       "robots_reasoning": "See product 9212501. Nothing disallowed, no exception used.",
       "note": "Panizzi makes two Pinot Neros — the San Gimignano DOC and the Ermius selection. Systembolaget's plain 'Panizzi Pinot Nero' matches the former; the distinction was not decisive here because neither page carries a declaration."
+    },
+    {
+      "product_number": "9601101",
+      "name": "Langhe Nebbiolo Luigi Pira",
+      "producer": "Luigi Pira",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.piraluigi.it/vino/langhe-doc-nebbiolo/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Step 0 passed: the estate's vino-sitemap.xml holds seven wines in two languages and both Swedish bottles are among them under the estate's own names. /vino/langhe-doc-nebbiolo/ is an undated cuvee page — comune, varieta, planting year 1999, hectares, soil, altitude, exposure, yield, 9 000 bottles, sensory profile — with no vintage, no alcohol and no pack. Zero matches for ingredien, nutrizion, solfit, kcal, energia, dichiarazion and ingredient-list in raw HTML and in stripped text. Its 'Scarica scheda tecnica' is /wp-content/uploads/2023/06/Langhe-doc-Nebbiolo-ita_eng.pdf, Last-Modified 24 Nov 2023 by HEAD — two weeks before 8 December 2023, so it cannot carry a 2021/2117 declaration and was not downloaded. The estate has no webshop. Note the domain: luigipira.it, luigipira.com and pirawines.it are all NXDOMAIN; the estate is www.piraluigi.it, surname first.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.piraluigi.it/robots.txt",
+        "https://www.piraluigi.it/sitemap_index.xml",
+        "https://www.piraluigi.it/vino-sitemap.xml",
+        "https://www.piraluigi.it/vino/langhe-doc-nebbiolo/",
+        "https://www.piraluigi.it/wp-content/uploads/2023/06/Langhe-doc-Nebbiolo-ita_eng.pdf (HEAD only)",
+        "https://etichettatura.piraluigi.it/robots.txt",
+        "https://etichettatura.piraluigi.it/"
+      ],
+      "checked_at": "2026-08-12T00:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.piraluigi.it and etichettatura.piraluigi.it both serve a single User-agent: * group disallowing only /wp-admin/. Everything fetched was allowed and no exception was used.",
+      "note": "The strongest form of the Italian packaging-versus-ingredients asymmetry yet: Pira has built a WHOLE SUBDOMAIN for the environmental label, etichettatura.piraluigi.it, linked from every wine page — one section per wine and one table per format (0,75 l, magnum, jeroboam) giving bottle GL 71, cork FOR 51, capsule C/ALU 90, wooden case FOR 50 and the cardboard divider PAP 20/21 — and publishes no ingredient list for any wine. It runs hellobarrio's barriotheme, the same Piedmont agency behind Michele Chiarlo, Tenuta il Falchetto and Azelia, all four of which publish the packaging table and none of which publishes an ingredient list."
+    },
+    {
+      "product_number": "9601901",
+      "name": "Dolcetto d'Alba Luigi Pira",
+      "producer": "Luigi Pira",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.piraluigi.it/vino/dolcetto-dalba-doc/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same estate and same shape as product 9601101. /vino/dolcetto-dalba-doc/ is an undated cuvee page with zero declaration markers raw and stripped, links the same environmental-label subdomain, and its scheda /wp-content/uploads/2023/06/Dolcetto-d-Alba-doc-ita_eng.pdf is Last-Modified 24 Nov 2023 — before the obligation, so not downloaded.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.piraluigi.it/vino/dolcetto-dalba-doc/",
+        "https://www.piraluigi.it/wp-content/uploads/2023/06/Dolcetto-d-Alba-doc-ita_eng.pdf (HEAD only)",
+        "https://etichettatura.piraluigi.it/"
+      ],
+      "checked_at": "2026-08-12T00:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 9601101. Nothing disallowed, no exception used.",
+      "note": null
     }
   ],
   "updated_at": "2026-08-12T00:00:00Z",
