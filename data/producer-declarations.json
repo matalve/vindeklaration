@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch opened 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after six batches: 49 producers, 129 wines, 7 found, 114 not_found, 8 rejected.",
-  "attempted": 401,
+  "attempted": 403,
   "found": 30,
-  "not_found": 324,
+  "not_found": 326,
   "rejected": 47,
   "declarations": [
     {
@@ -11566,9 +11566,58 @@
       "robots_reasoning": "See product 699701. Nothing disallowed, no exception used.",
       "note": null,
       "revisit": "Low value, same reason."
+    },
+    {
+      "product_number": "9271601",
+      "name": "Roccolo del Durlo Soave Classico",
+      "producer": "Azienda Agricola Le Battistelle",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.lebattistelle.it/i-vini/soave-classico-roccolo-del-durlo.html",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Step 0 confirms the producer and the cuvée: Le Battistelle, Brognoligo di Monteforte d'Alpone (VR), is a real Soave Classico estate and lebattistelle.it is its own site (Joomla, yoo_eat template, no shop and no sitemap.xml — a genuine 404). The home page links a complete eight-wine range — Settembrino, Montesei, Battistelle, Roccolo del Durlo, I Rasoli, Passito della Gloria, Sacripante — so both Swedish wines are its own and neither is an importer's label. THE PAGE IS THE DOMINANT ITALIAN FAILURE: an undated cuvée page with an inline 'Scheda Tecnica' block giving TIPOLOGIA, VITIGNO (Garganega 100%), a vineyard description, organoleptic notes, vinification, 'GRADO ALCOLICO: 12,50%' (matching Systembolaget's 12,5 exactly), TIPO CHIUSURA, serving temperature and food pairings — and no vintage anywhere on the page or the site, no ingredient list, no nutrition table and no allergen line. Zero raw-HTML matches for ingredien, nutrizion, nutrition, solfit, sulphit, sulfit, kcal, energia, dichiarazion, ingredient-list, ioagri, ead-qr, i-wine, btn-nutrizional, carmaqrcode, u-label, annata, vintage, etichett, allergen, qrcode and vincod — no vendor adopted and no declaration of any kind. The estate publishes no PDF datasheet either; the scheda is the HTML block itself.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.lebattistelle.it/robots.txt",
+        "https://www.lebattistelle.it/sitemap.xml (404)",
+        "https://www.lebattistelle.it/",
+        "https://www.lebattistelle.it/i-vini/soave-classico-roccolo-del-durlo.html"
+      ],
+      "checked_at": "2026-08-12T11:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "Stock Joomla robots.txt: 'User-agent: *' disallowing /administrator/, /bin and the other Joomla system folders. /i-vini/ is allowed. No exception used.",
+      "note": null
+    },
+    {
+      "product_number": "9481001",
+      "name": "Soave Classico Montesei",
+      "producer": "Le Battistelle",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.lebattistelle.it/i-vini/soave-classico-montesei.html",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same estate as product 9271601 — Systembolaget carries it under two producer strings, 'Azienda Agricola Le Battistelle' and 'Le Battistelle', and they are one producer. /i-vini/soave-classico-montesei.html is the identical Joomla template: TIPOLOGIA, VITIGNO Garganega 100%, description, organoleptic notes, vinification and affinamento, and again no vintage, no ingredient list, no nutrition table and no allergen line. Zero raw-HTML matches for the same twenty-two ingredient, nutrition and vendor terms. Nothing to match against and nothing to record.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.lebattistelle.it/i-vini/soave-classico-montesei.html"
+      ],
+      "checked_at": "2026-08-12T11:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 9271601. Nothing disallowed, no exception used.",
+      "note": null
     }
   ],
-  "updated_at": "2026-08-12T10:40:00Z",
+  "updated_at": "2026-08-12T11:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -11755,6 +11804,11 @@
       "at": "2026-08-12T10:40:00Z",
       "batch": "3 — Italy, seventh batch: Masi Agricola (2 wines, listed under 'Masi' and 'Masi Agricola')",
       "result": "2 attempted, 0 found, 2 not found. Masi is the first ITALIAN Scantrust deployment in this file and the first producer anywhere in the project to publish its e-label URL only as a QR IMAGE inside its own shop's product data — a field labelled 'u-Label' whose text value is empty and whose icon is the QR. Decoded offline it reads label.masi.it/qr/{slug}, a first-party vanity host that redirects into elabel.scantrust.com with the uid and api_key in the URL fragment, which is unreadable by construction. Two more facts for the file: the QR slug is per wine and NOT per vintage (the 2024 and 2025 Levarìe product pages carry the identical image), and 'i-wine' matches 'masi-wine-experience' fifteen times in the marketing site's menu JSON — a new false positive for the vendor grep."
+    },
+    {
+      "at": "2026-08-12T11:00:00Z",
+      "batch": "3 — Italy, seventh batch: Le Battistelle (2 wines, listed under 'Azienda Agricola Le Battistelle' and 'Le Battistelle')",
+      "result": "2 attempted, 0 found, 2 not found. An eight-wine Soave Classico estate on Joomla with no shop, no sitemap and no vendor of any kind: both wines sit on undated cuvée pages whose inline 'Scheda Tecnica' block gives the grape, the vinification and the alcohol (12,50 %, matching Systembolaget exactly) and no year and no substances. Twenty-two-term raw-HTML grep returns zero hits on both pages."
     }
   ]
 }
