@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch opened 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after six batches: 49 producers, 129 wines, 7 found, 114 not_found, 8 rejected.",
-  "attempted": 392,
+  "attempted": 394,
   "found": 29,
-  "not_found": 318,
+  "not_found": 320,
   "rejected": 45,
   "declarations": [
     {
@@ -11297,6 +11297,59 @@
       "checked_at": "2026-08-12T00:00:00Z",
       "robots_disallowed": false,
       "robots_reasoning": "See product 9258101. Nothing disallowed was fetched, no exception used.",
+      "note": null
+    },
+    {
+      "product_number": "7382601",
+      "name": "Fattoria Pagano Aglianico",
+      "producer": "Fattoria Pagano",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.shopfattoriapagano.com/products/campania-aglianico-igt",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "The producer is real and the wine exists on its own Shopify shop, but the page is undated and carries no declaration. fattoriapagano.it and fattoriapagano.com both currently serve Aruba's 'Sito in costruzione' parking page over http and https (and 404 every path, robots.txt included), so the marketing site is unreadable -- an outage, not a refusal. The estate's own shop www.shopfattoriapagano.com (Shopify) has a 28-product sitemap holding 'campania-aglianico-igt', a bilingual IT/EN cuvee page with Denominazione, Uvaggio, training, plants per hectare, yield, barrique and bottle ageing and 'Grado alcolico: 13,00% - 14,00% in vol.' -- a range, not this bottling's strength -- and NO vintage anywhere. Zero raw-HTML matches for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, ingredient-list, ioagri, ead-qr, i-wine, btn-nutrizional and annata on both product pages read. The only dated Aglianico in the catalogue is 'aglianico-campania-igt-2018-biologico', which is six vintages away and organic where Systembolaget's Aglianico is not.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.fattoriapagano.it/robots.txt",
+        "https://www.fattoriapagano.it/",
+        "https://www.fattoriapagano.com/",
+        "https://www.shopfattoriapagano.com/robots.txt",
+        "https://www.shopfattoriapagano.com/sitemap.xml",
+        "https://www.shopfattoriapagano.com/sitemap_products_1.xml",
+        "https://www.shopfattoriapagano.com/products/campania-aglianico-igt"
+      ],
+      "checked_at": "2026-08-12T00:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "fattoriapagano.it serves a 404 for robots.txt (Aruba parking), so no directives exist. shopfattoriapagano.com is a stock Shopify robots.txt: 'User-agent: * / Allow: /' with the usual cart, checkout, account and filter disallows; /products/ and the sitemaps are allowed. No exception used.",
+      "note": "Revisit candidate: the marketing site fattoriapagano.it is parked at the moment and search engines still index /i-vini/ and per-wine pages from it, so a later run may find a readable producer site."
+    },
+    {
+      "product_number": "7425401",
+      "name": "Falanghina Campania",
+      "producer": "Fattoria Pagano",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.shopfattoriapagano.com/products/campania-falanghina-igt",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same producer, same shop, same shape as product 7382601. 'campania-falanghina-igt' is an undated cuvee page giving Denominazione, Uvaggio Falanghina 100%, Guyot, 5'200 ceppi/ha, 70-80 ql/ha, two months' bottle ageing and 'Grado alcolico: 12,50% - 13,00% in vol.' (a range), with no vintage, no ingredient list, no nutrition table and no vendor e-label link. Systembolaget's bottle is organic; the shop's only organic Falanghina is 'falanghina-biologica-campania-igt-2019', five vintages away, and it too would have to be matched against a page that declares nothing.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.shopfattoriapagano.com/sitemap_products_1.xml",
+        "https://www.shopfattoriapagano.com/products/campania-falanghina-igt"
+      ],
+      "checked_at": "2026-08-12T00:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 7382601. Stock Shopify robots.txt, /products/ allowed, no exception used.",
       "note": null
     }
   ],
