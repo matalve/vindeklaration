@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch opened 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after six batches: 49 producers, 129 wines, 7 found, 114 not_found, 8 rejected.",
-  "attempted": 408,
+  "attempted": 409,
   "found": 30,
-  "not_found": 331,
+  "not_found": 332,
   "rejected": 47,
   "declarations": [
     {
@@ -11750,9 +11750,36 @@
       "robots_reasoning": "www.ciuciuvini.it/robots.txt is 'User-agent: * / Disallow: /wp-admin/' and allows everything else. Nothing disallowed was fetched and no exception was used.",
       "note": "A HOST THAT SERVES robots.txt AND 503s EVERYTHING ELSE IS A NEW FAILURE SHAPE IN THIS FILE — different from Le Vigne di Zamò, where the host did not answer at all. Whether it is maintenance or a WAF that lets static files through and rejects PHP could not be determined from one pass, and determining it would have meant repeated requests.",
       "revisit": "Yes. This is an outage, not a finding, and the estate is a large certified-organic Marche producer of exactly the profile that has yielded elsewhere."
+    },
+    {
+      "product_number": "7603701",
+      "name": "Laccento Ruché di Castagnole Monferrato",
+      "producer": "Montalbera",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.montalbera.it/vini/laccento-ruche-di-castagnole-monferrato-docg/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Step 0 confirms producer and cuvée: Montalbera, Castagnole Monferrato (AT), is Systembolaget's producer and montalbera.it is its own site; its /vini/ index lists eighteen products and Laccento® Ruché di Castagnole Monferrato DOCG is one of them, distinct from the estate's other three Ruché (La Tradizione, Il Fondatore Riserva, Franco Morando Riserva) and from Laccento di uve stramature. THE PAGE IS UNDATED AND THE ALCOHOL IS A RANGE. It gives zona di produzione, training system, grape, harvest, vinification, ageing, colour, nose, palate, bottle type, cork, five available formats (0,375 / 0,75 / 1,5 / 3 / 5 L) and 'Gradazione alcolica: Da 13,50 a 15,50 gradi in base all'annata' — an explicit statement that the strength varies by vintage, with no vintage stated. No ingredient list, no nutrition table, no allergen line. Zero raw-HTML matches for ingredien, nutrizion, nutrition, solfit, sulphit, kcal, energia, dichiarazion, ingredient-list, ioagri, ead-qr, i-wine, btn-nutrizional, carmaqrcode, u-label, etichett, allergen, qrcode and vincod; the single 'annata' hit is the alcohol sentence. The estate has no webshop. Its one per-wine document, 'Scarica la scheda tecnica della brochure in .pdf' → /pdf_vini.php?id=75, was downloaded (227 kB) and its text extracted in full: it is a typeset copy of the same web page, word for word, and contains no ingredient, nutrition, allergen or energy line and no year.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.montalbera.it/robots.txt",
+        "https://www.montalbera.it/",
+        "https://www.montalbera.it/vini/",
+        "https://www.montalbera.it/vini/laccento-ruche-di-castagnole-monferrato-docg/",
+        "https://www.montalbera.it/pdf_vini.php?id=75&l="
+      ],
+      "checked_at": "2026-08-12T12:25:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "montalbera.it/robots.txt has a 'User-agent: *' group disallowing only /new/ and /admin/, then three named-crawler groups (aipbot, BecomeBot, psbot) with 'Disallow: /'. Our token matches none of the three named groups, and the wildcard group binds us: /vini/ and /pdf_vini.php are allowed. No exception used.",
+      "note": "A TRAP IN THE PDF LINK WORTH RECORDING: the anchor's href is the bare relative 'pdf_vini.php?id=75&l=', and the site is a catch-all router — requesting it relative to the product path returns the 118 kB /vini/ listing page with a 200 and a text/html content type, not a 404. The real document is at the site root, /pdf_vini.php?id=75. A 200 that is the wrong page is easy to mistake for a fetched PDF; check the content type and the byte count."
     }
   ],
-  "updated_at": "2026-08-12T12:05:00Z",
+  "updated_at": "2026-08-12T12:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -11959,6 +11986,11 @@
       "at": "2026-08-12T12:05:00Z",
       "batch": "3 — Italy, seventh batch: Ciù Ciù di Bartolomei (1 wine)",
       "result": "1 attempted, 0 found, 1 not found — and nothing was read. www.ciuciuvini.it serves robots.txt with a 200 and answers 503 on its home page and on both sitemaps it advertises. Not a refusal and not a dead host: a third shape, and it was not retried. Revisit candidate."
+    },
+    {
+      "at": "2026-08-12T12:25:00Z",
+      "batch": "3 — Italy, seventh batch: Montalbera (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found. An eighteen-wine Piedmontese estate with no shop and no vendor: the Laccento page is undated and states its alcohol as a RANGE, 'Da 13,50 a 15,50 gradi in base all'annata' — the clearest statement yet that an Italian cuvée page describes a wine rather than a bottling. Its scheda tecnica PDF is a typeset copy of the same page with no substances and no year."
     }
   ]
 }
