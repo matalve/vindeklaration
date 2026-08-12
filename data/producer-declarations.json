@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch opened 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after six batches: 49 producers, 129 wines, 7 found, 114 not_found, 8 rejected.",
-  "attempted": 407,
+  "attempted": 408,
   "found": 30,
-  "not_found": 330,
+  "not_found": 331,
   "rejected": 47,
   "declarations": [
     {
@@ -11721,9 +11721,38 @@
       "robots_disallowed": false,
       "robots_reasoning": "See product 1243801. Nothing disallowed, no exception used.",
       "note": null
+    },
+    {
+      "product_number": "233401",
+      "name": "Ciù Ciù di Bartolomei Grande Sangiovese",
+      "producer": "Ciù Ciù di Bartolomei",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.ciuciuvini.it/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "THE PRODUCER'S HOST WOULD NOT SERVE ANY CONTENT, SO STEP 0 COULD NOT BE RUN. Ciù Ciù di Bartolomei is an Offida (AP) organic estate in the Marche and www.ciuciuvini.it is its site. Its robots.txt answered 200 and named two sitemaps — /sitemapindex.xml and /sitemap.xml.gz — and BOTH answered HTTP 503 'Service Unavailable' with a 468-byte Apache error page, as did the home page (503, 339 bytes). So the host is alive and answering robots.txt while refusing every content path. That is a server-side error, not a technological refusal: no 401, 403 or 429 and no bot challenge was seen, so nothing was worked around and, per the crawling rules, the host was not retried in a loop. Two alternative hosts were tried once each and neither exists: www.ciuciu.it and shop.ciuciuvini.it both fail at connection level. No producer page could be read, no vendor grep could be run and no declaration could be looked for.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.ciuciuvini.it/robots.txt (200)",
+        "https://www.ciuciuvini.it/sitemapindex.xml (503)",
+        "https://www.ciuciuvini.it/sitemap.xml.gz (503)",
+        "https://www.ciuciuvini.it/ (503)",
+        "https://www.ciuciu.it/ (connection refused)",
+        "https://shop.ciuciuvini.it/ (connection refused)"
+      ],
+      "checked_at": "2026-08-12T12:05:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.ciuciuvini.it/robots.txt is 'User-agent: * / Disallow: /wp-admin/' and allows everything else. Nothing disallowed was fetched and no exception was used.",
+      "note": "A HOST THAT SERVES robots.txt AND 503s EVERYTHING ELSE IS A NEW FAILURE SHAPE IN THIS FILE — different from Le Vigne di Zamò, where the host did not answer at all. Whether it is maintenance or a WAF that lets static files through and rejects PHP could not be determined from one pass, and determining it would have meant repeated requests.",
+      "revisit": "Yes. This is an outage, not a finding, and the estate is a large certified-organic Marche producer of exactly the profile that has yielded elsewhere."
     }
   ],
-  "updated_at": "2026-08-12T11:50:00Z",
+  "updated_at": "2026-08-12T12:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -11925,6 +11954,11 @@
       "at": "2026-08-12T11:50:00Z",
       "batch": "3 — Italy, seventh batch: Pasqua (2 wines, listed under 'Pasqua' and 'Pasqua Vigneti e Cantine SpA')",
       "result": "2 attempted, 0 found, 2 not found, both closed at step 0. Mucchietto is a Pasqua-owned export label absent from the producer's own 220-URL sitemap AND from its own 59-product shop, and the brand-owned-second-domain check came back negative in a way worth recording: mucchietto.it is an agriturismo called Mucchieto, one letter away — the near-name trap in a domain rather than a cuvée. One platform fact: shop.pasqua.it is a fifth wineplatform.it deployment, and its default 'Info: Contiene Solfiti - Prodotto in Italia' confirms that Masi's u-Label QR field on the same software is a customisation, not a platform feature."
+    },
+    {
+      "at": "2026-08-12T12:05:00Z",
+      "batch": "3 — Italy, seventh batch: Ciù Ciù di Bartolomei (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found — and nothing was read. www.ciuciuvini.it serves robots.txt with a 200 and answers 503 on its home page and on both sitemaps it advertises. Not a refusal and not a dead host: a third shape, and it was not retried. Revisit candidate."
     }
   ]
 }
