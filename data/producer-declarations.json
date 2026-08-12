@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch, closed 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected, with 118 wines (117 producer strings) still untouched.",
-  "attempted": 418,
+  "attempted": 420,
   "found": 30,
-  "not_found": 341,
+  "not_found": 343,
   "rejected": 47,
   "declarations": [
     {
@@ -12027,9 +12027,56 @@
       "checked_at": "2026-08-12T15:38:00Z",
       "robots_disallowed": false,
       "robots_reasoning": "Same hosts and same reasoning as 7439601: vitevis.com allows everything, cadia.it has no robots.txt."
+    },
+    {
+      "product_number": "7677401",
+      "name": "Tommasi Le Fornaci Lugana",
+      "producer": "Tommasi Viticoltori",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://tommasiwine.it/prodotto/le-fornacibr-luganabr-doc/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "A WINE OF A PRODUCER ALREADY CLOSED, surfaced by normalising the producer string: Tommasi Viticoltori was worked on 2026-07-30 (five wines, all not_found) and this sixth wine was missed. The producer-level finding stands and is confirmed for this exact cuvée by one fetch: the WooCommerce product page 'Le Fornaci Lugana DOC' (SKU A2LC, categories Tommasi Viticoltori / Le Fornaci) carries a description, a sensory note, an awards list and a 'Scarica la scheda tecnica' link to the UNDATED TommasiLuganaLeFornaciITA.pdf, and states no vintage. Zero occurrences in the raw HTML of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, ingredient-list, ead-qr, ioagri, carmaqrcode, u-label, btn-nutrizional, vincod and scantrust. The only 'allergeni' string on the site is a sustainability claim under a 'Produzione' heading ('Non impieghiamo prodotti di derivazione animale o contenenti allergeni nel processo di produzione del vino'), which is a process statement and not a declaration.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://tommasiwine.it/prodotto/le-fornaci-lugana/",
+        "https://tommasiwine.it/product-sitemap.xml",
+        "https://tommasiwine.it/prodotto/le-fornacibr-luganabr-doc/"
+      ],
+      "checked_at": "2026-08-12T15:55:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "tommasiwine.it's robots.txt was read on 2026-07-30 and allows crawling; nothing fetched now was under a disallowed path.",
+      "note": "A SLUG THAT 301s ONTO THE WRONG CUVÉE. /prodotto/le-fornaci-lugana/ — the obvious guess and the shape the other Le Fornaci wines use — answers 301 to /prodotto/le-fornaci-lugana-riserva-doc/, the RISERVA, whose Annata attribute reads '2013, 2015, 2016'. The base wine's real slug is the malformed /prodotto/le-fornacibr-luganabr-doc/ (an HTML <br> that leaked into the permalink). Take the slug from the product sitemap, not from the pattern, and check the H1 after any redirect: this one would have attached a Riserva's data to the base wine."
+    },
+    {
+      "product_number": "7257301",
+      "name": "Cantina Lavis Pinot Nero",
+      "producer": "Cantina Lavis",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://la-vis.com/i-nostri-vini/i-classici/pinot-nero",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "it",
+      "vintage_on_source": "2024 (file name only)",
+      "market": null,
+      "evidence": "A WINE OF A PRODUCER ALREADY CLOSED, surfaced by normalising the producer string ('Cantina Lavis' here against 'Cantina LaVis' on the two wines worked on 2026-08-09). The producer-level finding stands and is confirmed for this cuvée by one fetch: the I Classici Pinot Nero Trentino DOC page is the same undated template as the Riesling and the Sauvignon — vitigno, zona di produzione, esposizione e altimetria, terreno, allevamento, densità, vinificazione, tasting note — with no vintage, and its scheda tecnica is 'Classici_Pinot-Nero_Lavis_vintage24.pdf', one vintage behind Systembolaget's 2025. The Riesling's sheet was fetched in the earlier batch and settles the template for the estate (analysis and prose, no ingredient list, no nutrition table, no energy value), so this one was not downloaded. Zero occurrences on the page of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, ingredient-list, ead-qr, ioagri, carmaqrcode, u-label, btn-nutrizional, vincod and scantrust; the 35 raw 'e-label' matches are the documented cm-cookie-label false positive.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://la-vis.com/i-nostri-vini/i-classici/pinot-nero"
+      ],
+      "checked_at": "2026-08-12T15:58:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "la-vis.com's robots.txt was read on 2026-08-09 — Yoast's 'User-agent: * / Disallow:', everything allowed."
     }
   ],
-  "updated_at": "2026-08-12T20:21:19Z",
+  "updated_at": "2026-08-12T20:23:26Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
