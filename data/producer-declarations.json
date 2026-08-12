@@ -17,8 +17,8 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch opened 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after six batches: 49 producers, 129 wines, 7 found, 114 not_found, 8 rejected.",
-  "attempted": 398,
-  "found": 29,
+  "attempted": 399,
+  "found": 30,
   "not_found": 322,
   "rejected": 47,
   "declarations": [
@@ -11474,9 +11474,37 @@
       "robots_disallowed": false,
       "robots_reasoning": "See product 7465901. Nothing disallowed, no exception used.",
       "note": null
+    },
+    {
+      "product_number": "7821901",
+      "name": "Lugana I Frati Cà dei Frati",
+      "producer": "CA' DEI FRATI",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "found",
+      "source_url": "https://cadeifrati.it/vini/i-frati-lugana/",
+      "source_type": "producer_site",
+      "raw_ingredients": "uva, mosto di uve concentrato, agenti stabilizzanti (acido citrico, gomma arabica, carbossimetilcellulosa), conservanti e antiossidanti (solfiti, acido L-ascorbico).\nImbottigliato in atmosfera protettiva.",
+      "raw_nutrition": "Dichiarazione nutrizionale per 100 ml\nEnergia: 322 kJ – 78 kcal\nGrassi: 0 g\ndi cui Acidi Grassi Saturi: 0 g\nCarboidrati: 1,1 g\ndi cui Zuccheri: 0,6 g\nProteine: 0 g\nSale: 0 g",
+      "raw_allergens": "PRODOTTO IN ITALIA – CONTIENE SOLFITI",
+      "language": "it",
+      "vintage_on_source": "2025",
+      "market": "IT/EU",
+      "evidence": "THE SAME ESTATE AS PRODUCTS 7163701 AND 7956001, REACHED THROUGH A SECOND SYSTEMBOLAGET SPELLING OF ITS NAME. Systembolaget carries this producer both as 'Cà dei Frati' (the two wines already attached) and as 'CA' DEI FRATI' (this one), so the producer string alone made it look untouched; it is Az. Agr. Cà dei Frati, Via Frati 22, Lugana di Sirmione (BS), P.IVA 00631300985, the same estate. https://cadeifrati.it/vini/i-frati/ 301s to /vini/i-frati-lugana/, which carries the estate's standard inline block in server-rendered HTML: 'Annata: 2025', 'Bottiglia: 750 ml', 'Grado alcolico: 13 % vol', 'PRODOTTO IN ITALIA – CONTIENE SOLFITI', an 'Ingredienti' list and a 'Dichiarazione nutrizionale per 100 ml' table. ALL FIVE MATCHING TESTS PASS EXACTLY: producer Cà dei Frati; cuvée I Frati, the estate's flagship Lugana DOC and the only wine of that name in its range (I Frati, Brolettino, Pratto, Rosa dei Frati, Ronchedone, Tre Filer, Cuvée dei Frati, Privilegio di Famiglia); VINTAGE 2025 against Systembolaget's 2025; pack 750 ml against 750 ml; alcohol 13 % vol against 13,0 %, a difference of zero. The page's 'Scarica la scheda tecnica' link is /wp-content/uploads/2026/07/frati2025_ST.pdf, whose file name confirms the vintage a second way. The ingredient line is the estate's house template, word for word the same as Pratto's and Rosa dei Frati's, but the nutrition is per wine: 322 kJ / 78 kcal here against 337 / 81 for Pratto and 317 / 76 for Rosa dei Frati, and the carbohydrate and sugar rows differ too (1,1 g and 0,6 g against 1,5 g and 0,9 g), so this is a separate disclosure and not boilerplate.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://cadeifrati.it/robots.txt",
+        "https://cadeifrati.it/vini/i-frati/ (301)",
+        "https://cadeifrati.it/vini/i-frati-lugana/"
+      ],
+      "checked_at": "2026-08-12T10:00:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "cadeifrati.it/robots.txt is a Yoast block with 'User-agent: *' and an empty 'Disallow:' — everything allowed. No exception used, and none needed: this is the producer's ordinary marketing page, not an e-label host.",
+      "note": "A PRODUCER CAN APPEAR TWICE IN THE POOL UNDER TWO SPELLINGS. 'Cà dei Frati' and 'CA' DEI FRATI' are one estate; the accent and the case are the only difference, and a producer-string diff of the untouched pool treats them as two. Worth normalising the producer string (case-fold and strip diacritics) before deciding an Italian producer is untouched.",
+      "revisit": "The estate declares for its whole /vini/ range on this template. No other Cà dei Frati wine is in the current Swedish 2024+ undeclared pool under either spelling."
     }
   ],
-  "updated_at": "2026-08-12T00:00:00Z",
+  "updated_at": "2026-08-12T10:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -11653,6 +11681,11 @@
       "at": "2026-08-11T06:30:00Z",
       "batch": "3e — Italy, fifth batch: Azienda Livon, Prunotto, Antonio Facchin & Figli, Rallo SpA soc. Agr, Soc Coop Ag Olearia Vinicola Orsogna, Cantine Ermes Soc. Coop Agr. (12 wines, all vintage 2024+, all not_declared on Systembolaget)",
       "result": "12 attempted, 0 found, 12 not found, 0 rejected. NOTHING WAS READ, AND THE REASON IS NEW: six of the twelve wines are export-only or importer-owned brands (High On Love x2, Amber One, Nero Frizzante, Ambleri x2) with no page anywhere on the producer's own surface, so the matching rules never got a chance to run. Of the six that do have a producer page, Prunotto's two were at our exact vintage on a free per-vintage archive (?wineyear=2024 on Antinori's WordPress) and carried no substances; Livon's and Orsogna's four were undated cuvee pages. Rallo's AV01 2024 scheda tecnica is the closest near-miss in the Italian file — vintage, alcohol, an energy value of 314 kJ / 75 kcal per 100 ml, an Allergeni line and a full packaging table, and no ingredient list. One producer, Antonio Facchin, was unreadable on both surfaces: a Cloudflare bot challenge (403, cf-mitigated) on the shop's own robots-declared sitemap, treated as absolute and not worked around, and HTTP 522 on the marketing site."
+    },
+    {
+      "at": "2026-08-12T10:00:00Z",
+      "batch": "3 — Italy, seventh batch. One commit per producer.",
+      "result": "IN PROGRESS. Cà dei Frati under its second Systembolaget spelling: 1 attempted, 1 found."
     }
   ]
 }
