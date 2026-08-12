@@ -16,7 +16,7 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — Italy, seventh batch opened 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after six batches: 49 producers, 129 wines, 7 found, 114 not_found, 8 rejected.",
+  "batch": "3 — Italy, seventh batch, closed 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected, with 118 wines (117 producer strings) still untouched.",
   "attempted": 410,
   "found": 30,
   "not_found": 333,
@@ -11807,7 +11807,7 @@
       "note": "A WooCommerce product post type that holds no products. Cantine Volpi's product-sitemap.xml lists five /eventi/ URLs — tasting slots and a gift card — while the wines are plain pages reachable only from /i-vini/. An empty or irrelevant product sitemap does not mean the wines are absent; read the range page."
     }
   ],
-  "updated_at": "2026-08-12T12:45:00Z",
+  "updated_at": "2026-08-12T13:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12024,6 +12024,11 @@
       "at": "2026-08-12T12:45:00Z",
       "batch": "3 — Italy, seventh batch: Cantine Volpi (1 wine)",
       "result": "1 attempted, 0 found, 1 not found. A Tortona organic house whose Timorasso page is the barest undated cuvée page in the Italian file so far — it does not even state an alcohol figure. No vendor, no shop of its own (its 'E-commerce' link goes to a third-party marketplace), and its WooCommerce product sitemap holds tasting-room events rather than wines. Its robots.txt is the second named-crawler-only file in the project after bpdr.com: two groups, MSNBot and bingbot, both crawl-delay and no disallow, and no wildcard fallback."
+    },
+    {
+      "at": "2026-08-12T13:00:00Z",
+      "batch": "3 — Italy, seventh batch CLOSED. Second half: Ca' dei Frati (again, under a second Systembolaget spelling), Masi Agricola, Le Battistelle, Planeta, Pasqua, Ciu Ciu di Bartolomei, Montalbera, Cantine Volpi. One commit per producer.",
+      "result": "Second half: 10 attempted, 1 found, 9 not found, 0 rejected. Whole batch with the first half (Josetta Saffirio, Fattoria Pagano, Tralci Hirpini, Orion Wines): 12 producers, 18 wines, 1 found, 15 not found, 2 rejected. THE FIND IS A PRODUCER THAT HAD ALREADY BEEN DONE: Systembolaget carries the Lugana estate as both 'Ca dei Frati' and 'CA' DEI FRATI', so a producer-string diff left Lugana I Frati 2025 looking untouched; it was on the estate's ordinary /vini/ page under the same inline block as the two already attached, Annata 2025, 750 ml, 13 % vol, all exact, in one request. Normalise the producer string before choosing Italian work. Two new platform facts. MASI is the first producer anywhere in this project whose e-label URL is nowhere in the HTML as text: its wineplatform shop renders a field labelled 'u-Label' whose value is empty and whose icon is a QR PNG, which decodes offline (OpenCV, after adding a quiet zone and downscaling) to label.masi.it/qr/{slug} and from there into Scantrust — unreadable by construction, and the slug is shared between the 2024 and the 2025, so it could not have been attached anyway. CARMAQRCODE, from the first half, is Italy's third e-label vendor and its page is an empty 3D FlipBook div whose PDF URL exists only inside a script. Of the rest: Planeta has a per-vintage scheda for our exact 2024 carrying bottling month, 13 % vol, acidity, pH, formats, bottle weight and cork and not one substance; Pasqua's Mucchietto is absent from the house's own sitemap AND its own shop, and the brand-owned-domain check found mucchietto.it to be an agriturismo one letter away; Le Battistelle, Montalbera and Cantine Volpi are undated cuvee pages, two of them stating alcohol as a range or not at all; Ciu Ciu's host served robots.txt with a 200 and 503'd its home page and both its sitemaps, which is an outage and a revisit, not a finding."
     }
   ]
 }
