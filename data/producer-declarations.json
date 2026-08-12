@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch opened 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after six batches: 49 producers, 129 wines, 7 found, 114 not_found, 8 rejected.",
-  "attempted": 399,
+  "attempted": 401,
   "found": 30,
-  "not_found": 322,
+  "not_found": 324,
   "rejected": 47,
   "declarations": [
     {
@@ -11502,9 +11502,73 @@
       "robots_reasoning": "cadeifrati.it/robots.txt is a Yoast block with 'User-agent: *' and an empty 'Disallow:' — everything allowed. No exception used, and none needed: this is the producer's ordinary marketing page, not an e-label host.",
       "note": "A PRODUCER CAN APPEAR TWICE IN THE POOL UNDER TWO SPELLINGS. 'Cà dei Frati' and 'CA' DEI FRATI' are one estate; the accent and the case are the only difference, and a producer-string diff of the untouched pool treats them as two. Worth normalising the producer string (case-fold and strip diacritics) before deciding an Italian producer is untouched.",
       "revisit": "The estate declares for its whole /vini/ range on this template. No other Cà dei Frati wine is in the current Swedish 2024+ undeclared pool under either spelling."
+    },
+    {
+      "product_number": "699701",
+      "name": "Masi Levarìe Soave Classico",
+      "producer": "Masi",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://label.masi.it/qr/LevarieMasi",
+      "source_type": "e_label",
+      "elabel_platform": "Scantrust, on the producer's own vanity host label.masi.it — /qr/{slug} 302s to elabel.scantrust.com/default/#/?uid=…&api_key=…&qr={slug}",
+      "server_rendered": false,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "MASI HAS ADOPTED AN E-LABEL PLATFORM, THE E-LABEL IS FOR EXACTLY THIS BOTTLE, AND IT CANNOT BE READ. Step 0: Masi Agricola S.p.A., Via Monteleone 26, Gargagnago di Valpolicella (VR), P.IVA 03546810239 — Systembolaget's 'Masi', and Levarìe is its own Soave Classico DOC. The marketing page https://www.masi.it/it/vini/levarie-soave-classico-doc-vino-bianco/ is the usual undated Italian cuvée page, but its JSON payload carries a 'wine_shoplink' to the estate's own shop www.enotecamasi.it, which is the wineplatform.it software already in this file — one product per vintage, with the vintage in the slug. https://www.enotecamasi.it/it/eur/it/prodotti/levarie-2024-soave-classico-doc-0-75-l states 'DOC 2024', 'Garganega, Trebbiano di Soave', '12%' and a 0,75 l format, against Systembolaget's 2024, 12,0 % and 750 ml — producer, cuvée, vintage, pack and alcohol all exact. THE DECLARATION IS BEHIND A QR IMAGE, NOT A LINK: the product page renders a field labelled 'u-Label' whose text value is empty and whose icon is https://www.datocms-assets.com/50627/1715770531-levarie.png, a 1902×1904 QR code with an 'i' badge over the centre. Decoded offline with OpenCV (no network; the image needed a white quiet-zone border and a downscale before it would detect) it reads https://label.masi.it/qr/LevarieMasi. That host answers 200 with a 1 590-byte shell that redirects into elabel.scantrust.com/default/#/?uid=8d51b18e-b22e-4c88-a2ff-eb6efa4fc93a&api_key=…&qr=LevarieMasi. Scantrust is already recorded in this project as unreadable by construction: the uid and api_key sit in the URL FRAGMENT, which a browser never sends to the server, so no server response can contain the declaration, and the api_key is a per-request signed token — an issued token, which the agent's rules treat as absolute. Nothing was worked around and no JS bundle was mined. No declaration was read, so nothing is recorded.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.masi.it/robots.txt",
+        "https://media.masi.it/media/sitemap/masi/sitemap.xml",
+        "https://media.masi.it/media/sitemap/masi/pages_it.xml",
+        "https://www.masi.it/it/vini/levarie-soave-classico-doc-vino-bianco/",
+        "https://www.enotecamasi.it/robots.txt",
+        "https://www.enotecamasi.it/sitemap.xml",
+        "https://www.enotecamasi.it/it/eur/it/prodotti/levarie-2024-soave-classico-doc-0-75-l",
+        "https://www.enotecamasi.it/it/eur/it/prodotti/levarie-2025-soave-classico-doc-0-75-l",
+        "https://www.datocms-assets.com/50627/1715770531-levarie.png",
+        "https://label.masi.it/robots.txt",
+        "https://label.masi.it/qr/LevarieMasi"
+      ],
+      "checked_at": "2026-08-12T10:40:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "masi.it/robots.txt disallows only /umbraco*; enotecamasi.it is 'User-Agent: * / Allow: /'; label.masi.it serves a robots.txt whose entire body is the line 'User-agent: *' with no directives under it, so nothing is disallowed. No exception was needed anywhere, and the Scantrust fetch was a single request to a URL the producer's own product page publishes.",
+      "note": "AND THE QR IS NOT PER VINTAGE. The 2025 Levarìe product page carries the IDENTICAL icon URL (1715770531-levarie.png) and therefore the identical Scantrust destination, so one e-label serves both vintages. Even if Scantrust ever became readable, this wine could not be attached on the producer's linking alone — the page would have to state its own year. Recorded so a later run does not spend the fetch twice.",
+      "revisit": "Low value. The platform cannot serve the declaration from the server, and the slug is shared across vintages."
+    },
+    {
+      "product_number": "7217201",
+      "name": "Rosa Dei Masi",
+      "producer": "Masi Agricola",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://label.masi.it/qr/RosaMasi",
+      "source_type": "e_label",
+      "elabel_platform": "Scantrust, via label.masi.it/qr/RosaMasi",
+      "server_rendered": false,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "evidence": "Same producer and same outcome as product 699701 — Systembolaget carries this estate under two producer strings, 'Masi' and 'Masi Agricola', and they are one company. https://www.enotecamasi.it/it/eur/it/prodotti/rosa-dei-masi-2024-rosato-trevenezie-igt-0-75-l states 'IGT 2024', '100% Merlot', '12%' and 0,75 l against Systembolaget's Rosa Dei Masi 2024, 12,0 %, 750 ml — an exact match on all five tests, and the estate makes only one wine of that name. Its 'U-label' field's icon is https://www.datocms-assets.com/50627/1715772682-rosa-dei-masi.png, a separate QR image decoding offline to https://label.masi.it/qr/RosaMasi, which redirects to the same Scantrust SPA (uid ff9ff87b-45d8-4180-b60f-2049f669c0d3, a different uid from Levarìe's, so the e-labels are per wine). Unreadable by construction, for the reason given on 699701. The only other per-wine document is a scheda tecnica PDF, https://media.masi.it/media/media/l21lbo1k/masi_rosadeimasi_it.pdf, whose file name carries no vintage; it was not downloaded, since a scheda tecnica has not once in this project contained an ingredient list and the wine is already closed on the platform.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.enotecamasi.it/it/eur/it/prodotti/rosa-dei-masi-2024-rosato-trevenezie-igt-0-75-l",
+        "https://www.datocms-assets.com/50627/1715772682-rosa-dei-masi.png",
+        "https://label.masi.it/qr/RosaMasi"
+      ],
+      "checked_at": "2026-08-12T10:40:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "See product 699701. Nothing disallowed, no exception used.",
+      "note": null,
+      "revisit": "Low value, same reason."
     }
   ],
-  "updated_at": "2026-08-12T10:00:00Z",
+  "updated_at": "2026-08-12T10:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -11686,6 +11750,11 @@
       "at": "2026-08-12T10:00:00Z",
       "batch": "3 — Italy, seventh batch. One commit per producer.",
       "result": "IN PROGRESS. Cà dei Frati under its second Systembolaget spelling: 1 attempted, 1 found."
+    },
+    {
+      "at": "2026-08-12T10:40:00Z",
+      "batch": "3 — Italy, seventh batch: Masi Agricola (2 wines, listed under 'Masi' and 'Masi Agricola')",
+      "result": "2 attempted, 0 found, 2 not found. Masi is the first ITALIAN Scantrust deployment in this file and the first producer anywhere in the project to publish its e-label URL only as a QR IMAGE inside its own shop's product data — a field labelled 'u-Label' whose text value is empty and whose icon is the QR. Decoded offline it reads label.masi.it/qr/{slug}, a first-party vanity host that redirects into elabel.scantrust.com with the uid and api_key in the URL fragment, which is unreadable by construction. Two more facts for the file: the QR slug is per wine and NOT per vintage (the 2024 and 2025 Levarìe product pages carry the identical image), and 'i-wine' matches 'masi-wine-experience' fifteen times in the marketing site's menu JSON — a new false positive for the vendor grep."
     }
   ]
 }
