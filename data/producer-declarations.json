@@ -17,8 +17,8 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, seventh batch, closed 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected, with 118 wines (117 producer strings) still untouched.",
-  "attempted": 420,
-  "found": 30,
+  "attempted": 421,
+  "found": 31,
   "not_found": 343,
   "rejected": 47,
   "declarations": [
@@ -12074,9 +12074,37 @@
       "checked_at": "2026-08-12T15:58:00Z",
       "robots_disallowed": false,
       "robots_reasoning": "la-vis.com's robots.txt was read on 2026-08-09 — Yoast's 'User-agent: * / Disallow:', everything allowed."
+    },
+    {
+      "product_number": "7448901",
+      "name": "Ca’ Bianca Moscato d'Asti",
+      "producer": "Ca’ Bianca",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "found",
+      "source_url": "https://www.vinicum.com/i-vini/moscato-asti-docg-60182-06.html",
+      "source_type": "producer_site",
+      "raw_ingredients": "Uve, regolatori dell'acidità (contiene acido malico e/o acido tartarico), conservanti (solfiti), stabilizzanti (gomma arabica). Imbottigliato in atmosfera protettiva.",
+      "language": "it",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "PRODUCER: Ca' Bianca is one of the fifteen historic cellars of Gruppo Italiano Vini — it is named on GIV's own brand page (gruppoitalianovini.it/it/brand, alongside Nino Negri, Santi, Bolla, Melini, Lamberti, Bigi, Fontana Candida and the rest) and the product record on GIV's own shop carries \"cantina\":{\"nome\":\"Ca' Bianca\",\"slug\":\"tenimenti-ca-bianca\"}. Systembolaget's producer string is 'Ca’ Bianca'. CUVÉE: Moscato d'Asti DOCG, the cellar's only Moscato d'Asti, article 60182; the attributes give vitigno 'Il vino è ottenuto esclusivamente da uve Moscato Bianco', regione Piemonte, denominazione DOCG, colore Bianco, and the provenance text names 'Il Moscato Cà Bianca … dall'Alto Monferrato'. VINTAGE: the page states \"annata\":\"2025\" twice — once in the GraphQL attributes and once rendered in the dato-prodotto-main block as 'Annata / 2025' — against Systembolaget's 2025. EXACT. PACK: \"formato\":\"Bottiglia 750 ml\" against Systembolaget's 750 ml. ALCOHOL: \"gradazione\":\"5% Vol.\" against Systembolaget's 5,0 %. Exact, 0,0 pp. MARKET: GIV's Italian-language consumer shop, Italian text, EU market; no market or language selector was needed. THE DECLARATION, verbatim and complete, from the DescrizioneAggiuntivaProdottoType with chiave 'allergeni' and titolo 'Informazioni Nutrizionali': 'INGREDIENTI\\nUve, regolatori dell'acidità (contiene acido malico e/o acido tartarico), conservanti (solfiti), stabilizzanti (gomma arabica). Imbottigliato in atmosfera protettiva.\\n\\nALLERGENI\\nSolfiti\\n\\nVALORI NUTRIZIONALI (PER 100 ML)\\nEnergia: 319 kJ / 76 kcal\\nGrassi: 0 g\\ndi cui acidi grassi saturi: 0 g\\nCarboidrati: 13 g\\ndi cui zuccheri: 12 g\\nProteine: 0 g\\nSale: 0 g'. The URL's trailing -06 is GIV's six-bottle case code for article 60182; the format field is the bottle, so the pack matched is the 750 ml bottle and not the case.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.gruppoitalianovini.it/robots.txt",
+        "https://www.gruppoitalianovini.it/it/brand",
+        "https://www.vinicum.com/robots.txt",
+        "https://www.vinicum.com/d/sitemap.xml",
+        "https://www.vinicum.com/d/sitemap-prodotti.xml",
+        "https://www.vinicum.com/i-vini/moscato-asti-docg-60182-06.html"
+      ],
+      "checked_at": "2026-08-12T16:20:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "vinicum.com/robots.txt is 'User-agent: *' disallowing only /account/* and /*?o= and naming /d/sitemap.xml; the product page and the sitemaps are allowed. gruppoitalianovini.it disallows only search and faceted-query paths. No exception was needed or used on either host.",
+      "note": "THE FIRST GIV BRAND WHOSE VINTAGE MATCHES. Two GIV wines were rejected on 2026-08-09 because vinicum keeps one product per cuvée and had rolled from our 2024 to the 2025; this wine's Systembolaget vintage IS the 2025, so the same behaviour that lost those two won this one. The lesson generalises: on a shop that edits one product forward, prefer the pool's newest vintages. This list also differs from the Bardolino's and the Soave's read in that batch — acidity regulators (malic and/or tartaric) plus gum arabic here, gum arabic alone on the Bardolino, L-ascorbic acid on the Soave — so GIV writes them per wine, and the 'e/o' in 'acido malico e/o acido tartarico' is the producer's own hedge and is quoted as written."
     }
   ],
-  "updated_at": "2026-08-12T20:23:26Z",
+  "updated_at": "2026-08-12T20:26:44Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
