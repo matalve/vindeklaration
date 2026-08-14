@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — Italy, seventh batch, closed 2026-08-12. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected, with 118 wines (117 producer strings) still untouched.",
-  "attempted": 421,
+  "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
+  "attempted": 422,
   "found": 31,
-  "not_found": 343,
+  "not_found": 344,
   "rejected": 47,
   "declarations": [
     {
@@ -12102,9 +12102,35 @@
       "robots_disallowed": false,
       "robots_reasoning": "vinicum.com/robots.txt is 'User-agent: *' disallowing only /account/* and /*?o= and naming /d/sitemap.xml; the product page and the sitemaps are allowed. gruppoitalianovini.it disallows only search and faceted-query paths. No exception was needed or used on either host.",
       "note": "THE FIRST GIV BRAND WHOSE VINTAGE MATCHES. Two GIV wines were rejected on 2026-08-09 because vinicum keeps one product per cuvée and had rolled from our 2024 to the 2025; this wine's Systembolaget vintage IS the 2025, so the same behaviour that lost those two won this one. The lesson generalises: on a shop that edits one product forward, prefer the pool's newest vintages. This list also differs from the Bardolino's and the Soave's read in that batch — acidity regulators (malic and/or tartaric) plus gum arabic here, gum arabic alone on the Bardolino, L-ascorbic acid on the Soave — so GIV writes them per wine, and the 'e/o' in 'acido malico e/o acido tartarico' is the producer's own hedge and is quoted as written."
+    },
+    {
+      "product_number": "5083601",
+      "name": "Cannonau Le Bombarde Santa Maria La Palma",
+      "producer": "Cantina Santa Maria La Palma",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "evidence": "A FOURTH WINE FROM A PRODUCER ALREADY CLOSED ON 2026-08-09, AND THE HOUSE TEMPLATE HELD. The producer string normalises to the same estate as products 5155201, 5295001 and 7452901 (Cantina Santa Maria La Palma, Alghero, Sardinia), all recorded not_found on 2026-08-09; both of its hosts allow crawling in full and the robots.txt reasoning from those records stands unchanged. STEP 0: 'Le Bombarde' is the estate's own range and not an importer's label — the marketing site's own page calls it 'la gamma di rossi piu conosciuta a livello nazionale e internazionale della Cantina Santa Maria La Palma' and the shop files it under Vini / I grandi classici / Rossi. TWO SURFACES WERE READ FOR THIS EXACT WINE. (1) www.santamarialapalma.it/i-nostri-vini/le-bombarde/ — the same near-miss as the three earlier wines, ending 'Allergeni : contiene solfiti' and 'Origine : Prodotto in Italia' after colour, nose, palate, pairing and service temperature, with no vintage, no alcohol and no substances; raw and stripped greps for ingredien, nutrizion, kcal, energia, dichiarazion, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label and btn-nutrizional are all zero, and its three .pdf hrefs are two competition certificates and an organic certificate from 2017-2018. (2) shop.santamarialapalma.it/le-bombarde-cannonau — the nopCommerce product page, and THIS ONE CARRIES OUR EXACT VINTAGE: 'Capienza bottiglia * 75cl', 'Annata 2024', 'Cod: AABO24P', against Systembolaget's 2024 and 750 ml. Its strength is given as a range, 'Alcool: 13% - 13,5% vol.', which contains Systembolaget's 13,5. And under that the page ends in the identical two lines: 'Allergeni: Contiene Solfiti' and 'Origine: prodotto in Italia'. VERDICT: the producer sells our exact bottling on its own shop, states its vintage and pack, and declares an allergen and a country of origin and nothing else. An allergen statement and a country of origin are mandatory label particulars and are not the ingredient list or the nutrition declaration — no substances, no energy value. Not found, and not a vintage miss.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.santamarialapalma.it/i-nostri-vini/le-bombarde/",
+        "https://shop.santamarialapalma.it/sitemap.xml",
+        "https://shop.santamarialapalma.it/le-bombarde-cannonau-di-sardegna-doc (the 37,5 cl, no Annata field)",
+        "https://shop.santamarialapalma.it/le-bombarde-cannonau"
+      ],
+      "checked_at": "2026-08-14T09:20:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "Both hosts were read on 2026-08-09 and re-used here: www.santamarialapalma.it serves the Yoast block, 'User-agent: *' with an EMPTY Disallow, so nothing is disallowed; shop.santamarialapalma.it disallows only /login, /register and /boards/ and blanket-blocks AhrefsBot and SemrushBot, which we are not. No exception was needed or used.",
+      "note": "THE SHOP HAS TWO PRODUCTS FOR ONE WINE AND ONLY ONE OF THEM IS DATED. /le-bombarde-cannonau-di-sardegna-doc is the 37,5 cl half bottle and has no Annata field at all; /le-bombarde-cannonau is the 75 cl and carries Annata 2024. On a nopCommerce shop that splits packs into separate products, check both before concluding the estate states no vintage. The 2026-08-09 record for this producer said the shop's Annata selector made those three wines clean not_founds rather than vintage misses; this wine is the fourth instance and the first where the year in the field is a 2024 rather than a 2025."
     }
   ],
-  "updated_at": "2026-08-12T20:26:44Z",
+  "updated_at": "2026-08-14T09:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12326,6 +12352,11 @@
       "at": "2026-08-12T13:00:00Z",
       "batch": "3 — Italy, seventh batch CLOSED. Second half: Ca' dei Frati (again, under a second Systembolaget spelling), Masi Agricola, Le Battistelle, Planeta, Pasqua, Ciu Ciu di Bartolomei, Montalbera, Cantine Volpi. One commit per producer.",
       "result": "Second half: 10 attempted, 1 found, 9 not found, 0 rejected. Whole batch with the first half (Josetta Saffirio, Fattoria Pagano, Tralci Hirpini, Orion Wines): 12 producers, 18 wines, 1 found, 15 not found, 2 rejected. THE FIND IS A PRODUCER THAT HAD ALREADY BEEN DONE: Systembolaget carries the Lugana estate as both 'Ca dei Frati' and 'CA' DEI FRATI', so a producer-string diff left Lugana I Frati 2025 looking untouched; it was on the estate's ordinary /vini/ page under the same inline block as the two already attached, Annata 2025, 750 ml, 13 % vol, all exact, in one request. Normalise the producer string before choosing Italian work. Two new platform facts. MASI is the first producer anywhere in this project whose e-label URL is nowhere in the HTML as text: its wineplatform shop renders a field labelled 'u-Label' whose value is empty and whose icon is a QR PNG, which decodes offline (OpenCV, after adding a quiet zone and downscaling) to label.masi.it/qr/{slug} and from there into Scantrust — unreadable by construction, and the slug is shared between the 2024 and the 2025, so it could not have been attached anyway. CARMAQRCODE, from the first half, is Italy's third e-label vendor and its page is an empty 3D FlipBook div whose PDF URL exists only inside a script. Of the rest: Planeta has a per-vintage scheda for our exact 2024 carrying bottling month, 13 % vol, acidity, pH, formats, bottle weight and cork and not one substance; Pasqua's Mucchietto is absent from the house's own sitemap AND its own shop, and the brand-owned-domain check found mucchietto.it to be an agriturismo one letter away; Le Battistelle, Montalbera and Cantine Volpi are undated cuvee pages, two of them stating alcohol as a range or not at all; Ciu Ciu's host served robots.txt with a 200 and 503'd its home page and both its sitemaps, which is an outage and a revisit, not a finding."
+    },
+    {
+      "at": "2026-08-14T09:20:00Z",
+      "batch": "3 — Italy, eighth batch: Cantina Santa Maria La Palma (1 wine, a fourth from a producer already closed)",
+      "result": "1 attempted, 0 found, 1 not found. The producer-string normalisation pass over the remaining Italian pool surfaced three wines belonging to producers already worked; this is the first. Le Bombarde Cannonau 2024 is on the estate's own nopCommerce shop with 'Annata 2024', 75cl and 'Alcool: 13% - 13,5% vol.' — our exact bottling — and the declaration under it is 'Allergeni: Contiene Solfiti' and 'Origine: prodotto in Italia' and nothing more, the same house template the three 2026-08-09 wines ended in. The 37,5 cl is a separate product with no Annata field."
     }
   ]
 }
