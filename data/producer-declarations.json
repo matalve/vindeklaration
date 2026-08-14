@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, ninth batch, open 2026-08-14. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after eight batches: 78 producers, 174 wines, 9 found, 154 not_found, 11 rejected, with 103 wines untouched and no producer pairs left — every remaining Italian wine is its own producer.",
-  "attempted": 438,
+  "attempted": 439,
   "found": 31,
-  "not_found": 359,
+  "not_found": 360,
   "rejected": 48,
   "declarations": [
     {
@@ -12561,9 +12561,40 @@
       "note": "DOMAIN NEAR-NAME TRAP, a new variant: bertani.it AND bertani.com both belong to a Verona BATHROOM-FIXTURES retailer (Sylius shop, 6 478 product URLs of washbasins and mixers, robots.txt byte-identical on both hosts). The wine house is at bertani.net. Two wasted fetches, one of them a 4,2 MB sitemap. ALSO A CORPORATE-OWNERSHIP PAIR THE STRING NORMALISATION COULD NOT SEE: bertani.net's own footer names 'Angelini Wines & Estates Societa Agricola a r.l., Via Roma 117, Castelplanio (AN)' as the responsible company, and Systembolaget lists a second remaining Italian wine under the producer string 'Angelini Wines & Estates' (7134401, Val di Suga Rosso di Montalcino 2024). Same owner, so the two are one probe, not two.",
       "rejected_because": null,
       "checked_at": "2026-08-14T17:05:00Z"
+    },
+    {
+      "product_number": "7134401",
+      "name": "Val di Suga Rosso di Montalcino Angelini Wines & Estates",
+      "producer": "Angelini Wines & Estates",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.valdisuga.com/it/i-vini/rosso-di-montalcino-doc/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.valdisuga.it/robots.txt (301 to valdisuga.com)",
+        "https://shop.valdisuga.it/robots.txt",
+        "https://shop.valdisuga.it/sitemap.xml",
+        "https://www.valdisuga.com/sitemap_index.xml",
+        "https://www.valdisuga.com/wine-sitemap.xml",
+        "https://www.valdisuga.com/page-sitemap.xml",
+        "https://www.valdisuga.com/it/i-vini/rosso-di-montalcino-doc/"
+      ],
+      "server_rendered": true,
+      "elabel_platform": "wineplatform.it (fourth deployment; shop.valdisuga.it, same group shop software as shop.bertani.net)",
+      "robots_disallowed": false,
+      "robots_reasoning": "valdisuga.com serves the stock WordPress 'Disallow: /wp-admin/' with 'Allow: /wp-admin/admin-ajax.php'; shop.valdisuga.it answers 'User-Agent: * / Allow: /'. Everything fetched here is allowed and no exception was needed.",
+      "evidence": "SAME OWNER AS BERTANI, SAME TWO SURFACES, SAME SILENCE. bertani.net's footer names Angelini Wines & Estates Societa Agricola a r.l. as the responsible company and Val di Suga is that group's Montalcino estate, so this producer string and Bertani are one probe. (1) The GROUP SHOP, shop.valdisuga.it, is the same wineplatform.it build as shop.bertani.net down to the /it/eur/it/prodotti/ path — 859 sitemap URLs across nine markets, twenty Italian products — and ITS NEWEST ROSSO DI MONTALCINO IS THE 2020. There is no 2024 product page at all, so the platform's per-vintage identity cannot even be brought to bear; and wineplatform.it has never carried a declaration in four deployments now, printing only 'Contiene Solfiti - Prodotto in Italia'. (2) The MARKETING SITE, valdisuga.com, is the dominant Italian failure: /it/i-vini/rosso-di-montalcino-doc/ is an UNDATED cuvee page with no annata, no alcohol and no vintage anywhere in its text, and its thirteen-URL wine sitemap holds one page per cuvee and none per vintage. Raw-HTML grep of that page: ZERO hits for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional and tab-ingredienti; the single .pdf hit is a scheda tecnica at storage1328.cdn-immedia.net/wp-content/uploads/2022/12/, published a year before 8 December 2023 and so incapable of carrying the mandated declaration — closed on the file name without a download, per the fixed probe's step 5. The 22-URL page sitemap holds no etichetta, e-label, transparency or ingredient page.",
+      "note": "The Angelini group runs a marketing WordPress per estate plus one shared wineplatform.it shop per estate. Neither surface declares. If a later run meets another Angelini estate (Bertani, Val di Suga, Trerose, Puiatti, San Leonino), the answer is already known and the two fetches are the shop sitemap and one cuvee page.",
+      "rejected_because": null,
+      "checked_at": "2026-08-14T17:20:00Z"
     }
   ],
-  "updated_at": "2026-08-14T17:05:00Z",
+  "updated_at": "2026-08-14T17:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12855,6 +12886,11 @@
       "at": "2026-08-14T17:05:00Z",
       "batch": "3 — Italy, ninth batch: Bertani (1 wine)",
       "result": "1 attempted, 0 found, 1 not found. Third wineplatform.it deployment (shop.bertani.net) and the third time it has produced perfect identity and no declaration: 'Annata 2024 / Alcol 12% / Formato 0.75l' matching Systembolaget exactly, with 'Info: Contiene Solfiti - Prodotto in Italia' where the ingredient list belongs. The marketing site's cuvee page is undated and its scheda PDF is from 2022, before the requirement. Two host lessons: bertani.it and bertani.com are a BATHROOM-FIXTURES retailer, not the winery (which is bertani.net); and bertani.net's footer names Angelini Wines & Estates as the responsible company, which is the producer string on another remaining Italian wine — a corporate-ownership pair the producer-string normalisation pass could not have found."
+    },
+    {
+      "at": "2026-08-14T17:20:00Z",
+      "batch": "3 — Italy, ninth batch: Angelini Wines & Estates / Val di Suga (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found. The corporate-ownership pair Bertani's footer revealed: Val di Suga is Angelini's Montalcino estate and runs the identical pair of surfaces — a WordPress marketing site with UNDATED cuvee pages and a 2022 scheda PDF, and a wineplatform.it shop (shop.valdisuga.it, fourth deployment) whose newest Rosso di Montalcino is the 2020 while Systembolaget sells the 2024. Zero declaration terms on either. Worth recording that the string-normalisation pass cannot see ownership: two of the 103 remaining Italian producer strings turned out to be one company."
     }
   ]
 }
