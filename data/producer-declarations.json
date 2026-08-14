@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
-  "attempted": 432,
+  "attempted": 433,
   "found": 31,
-  "not_found": 353,
+  "not_found": 354,
   "rejected": 48,
   "declarations": [
     {
@@ -12405,9 +12405,36 @@
       "robots_disallowed": false,
       "robots_reasoning": "www.sfiziosalentino.it serves 'User-agent: *' with 'Allow: /' and names three sitemaps; everything fetched is allowed. www.paololeo.it answers /robots.txt with a Laravel 'Page Not Found' HTML page — a soft 404, so no directives exist on that host either. No exception was needed or used.",
       "note": "ITALY'S THIRD FIRST-PARTY PUBLISHER SHAPE, AND THE FIRST STRUCTURED ONE. After Cà dei Frati's inline block and Demarie's WooCommerce ingredient-list panel, this is a WooCommerce theme with THREE dedicated declaration tabs — Valori Nutrizionali, Ingredienti and Smaltimento — rendered as label/value tables with the class 'nutritional-list', server-side, on every product. It is the first Italian deployment seen that discharges the ingredient, the nutrition AND the packaging obligation in one place. THE TABS ARE PRESENT EVEN WHEN EMPTY, which makes the shop diagnosable in one fetch: look for 'tab-ingredienti' in the HTML and then read whether the panel exists. Cantine PaoloLeo is worth a full revisit — it has 400+ products of its own and Systembolaget carries several of its wines; only the vintage stood in the way here. Note also that paololeo.wine, the Passitivo brand's own domain linked from the estate's own home page, no longer resolves: a producer's own outbound brand link can be dead."
+    },
+    {
+      "product_number": "7659601",
+      "name": "Cecchi Chianti",
+      "producer": "Casa Vinicola Luigi Cecchi & Figli",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.cecchi.net/it/vini/chianti-docg/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "evidence": "THE STRONGEST ITALIAN IDENTITY MATCH IN THIS BATCH AND STILL NO DECLARATION. Casa Vinicola Luigi Cecchi e Figli srl, P.I. 00117840520 — in the site footer. STEP 0: /it/vini/ lists 28 wines and 'Chianti DOCG' is one of them, distinct from the house's 'Chianti Riserva DOCG'; Systembolaget's 'Cecchi Chianti' is the plain Chianti DOCG. THE PAGE IS WRITTEN FOR OUR EXACT VINTAGE. Unlike almost every Italian producer page this project has read, it is not a cuvee page — it is the 2024 bottling's page: a 'Note di vendemmia' paragraph that narrates the 2024 growing season month by month, a tasting note opening 'Il Chianti 2024 alla vista si presenta di un rosso rubino vivace', and 'Gradazione alcolica 12,5% vol.' against Systembolaget's 12,5. VINTAGE EXACT, ALCOHOL EXACT (0,0 pp). AND THE SCHEDA IS PER VINTAGE TOO: the page's single download, 'Scarica scheda tecnica', is /media/file//66/Chianti-DOCG-2024-IT.pdf — the year is IN THE FILE NAME. It was fetched (Last-Modified 18 June 2026, 153 325 bytes, one page) and its text extracted with pypdf: it is the web page word for word, headed 'CHIANTI DOCG 2024', and it contains zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen and annata. Not even a sulphite line. The wine page's own greps for ingredien, nutrizion, solfit, energia, dichiarazion, valori, conservant, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label and btn-nutrizional are zero, raw and stripped. THE HOUSE HAS THE MACHINERY TO DECLARE PER VINTAGE — a per-vintage page and a per-vintage, year-named datasheet, refreshed two months ago — AND USES IT FOR THE WEATHER AND THE TASTING NOTE.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.cecchi.net/robots.txt — 404, an HTML error page (soft 404), so no directives exist",
+        "https://www.cecchi.net/it/ ",
+        "https://www.cecchi.net/it/vini/ — 28 wines",
+        "https://www.cecchi.net/it/vini/chianti-docg/",
+        "https://www.cecchi.net/media/file//66/Chianti-DOCG-2024-IT.pdf"
+      ],
+      "checked_at": "2026-08-14T13:30:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.cecchi.net answers /robots.txt with a 404 carrying an HTML body — a soft 404 — so no robots directives exist on the host and nothing is disallowed. No exception was needed or used.",
+      "note": "A NEW GREP LIE, AND IT DEGRADES ONE OF THE STANDARD TERMS. 'kJ' matched 60-65 times raw on every Cecchi page and EVERY hit is inside inline base64 (images and fonts) — 'wTCb+Jqso4qpKj2uH1WBiMMI', 'oPOqF+jHkI0HkJr0mXMag60R' and so on. Base64 is a 64-symbol alphabet, so a two-character sequence turns up roughly once per 4 000 characters; any page with an inline data URI will show dozens of raw kJ hits. Treat a raw-only 'kJ' count as noise unless the stripped text shows it too. (This is a second, independent reason after CleanTalk's ct_checkjs.) Also worth recording: the page's HTML still carries the theme's placeholder text 'fasdfasdf' and 'dfasdf' in two content slots — a live production page on a large house's site, which is a reminder that these pages are hand-edited and incomplete, not generated from a product database."
     }
   ],
-  "updated_at": "2026-08-14T13:05:00Z",
+  "updated_at": "2026-08-14T13:30:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12669,6 +12696,11 @@
       "at": "2026-08-14T13:05:00Z",
       "batch": "3 — Italy, eighth batch: Cantine Paolo Leo (1 wine)",
       "result": "1 attempted, 0 found, 0 not found, 1 REJECTED against a complete declaration that was found and read. The estate's own shop, sfiziosalentino.it ('proprieta di Cantine Paololeo srl'), is a WooCommerce whose theme gives every product three declaration tabs — Valori Nutrizionali, Ingredienti and Smaltimento — as server-rendered label/value tables. Italy's third first-party publisher shape and the first structured one, discharging the ingredient, nutrition and packaging obligations in one place. THE DOUBLE MISS: Systembolaget's bottle is organic (its product page says Ekologiskt), which selects the 'Passitivo Organico' — whose Annata is 2023 and whose alcohol is 14,5 against our 14,0 — while the sibling 'Passitivo Appassimento', whose Annata IS 2024, has the same three tabs and they are EMPTY. The declaration is quoted in full so the wine attaches without a refetch if the shop rolls forward. Revisit candidate: the shop has 427 products."
+    },
+    {
+      "at": "2026-08-14T13:30:00Z",
+      "batch": "3 — Italy, eighth batch: Casa Vinicola Luigi Cecchi & Figli (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found. The strongest Italian identity match of the batch and nothing to attach: the Chianti DOCG page is written for the 2024 specifically — a month-by-month account of the 2024 season, a tasting note naming 'Il Chianti 2024', 'Gradazione alcolica 12,5% vol.' matching Systembolaget exactly — and its download is a year-named per-vintage scheda, Chianti-DOCG-2024-IT.pdf, refreshed June 2026, which is the web page typeset and contains no ingredient list, no nutrition table and not even a sulphite line. New grep lie that degrades a standard term: 'kJ' matched 60+ times raw on every page and every hit is inside inline base64."
     }
   ]
 }
