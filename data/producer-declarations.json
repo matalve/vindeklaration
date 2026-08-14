@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
-  "attempted": 430,
+  "attempted": 431,
   "found": 31,
-  "not_found": 352,
+  "not_found": 353,
   "rejected": 47,
   "declarations": [
     {
@@ -12348,9 +12348,36 @@
       "robots_disallowed": false,
       "robots_reasoning": "Same host and same empty Yoast Disallow as product 7854301. No exception was needed or used.",
       "note": "A NEW GREP LIE: 'kJ' matched raw on four Ascheri pages and every hit is CleanTalk's anti-spam field name ct_checkjs / checkJS. 'checkjs' contains 'kj', so any WordPress running CleanTalk will look like it states an energy value. Add it beside the existing checkJQuery note. The estate's third Swedish wine in this slice, and the sixteen-wine press area at /press-trade-kit/schede-vini/, mean one more Ascheri wine can be closed on the schede alone: all sixteen are the same one-page template."
+    },
+    {
+      "product_number": "7121801",
+      "name": "Fontanafredda Dolcetto d´Alba Pilone dei Canta",
+      "producer": "Fontanafredda",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.fontanafredda.it/vino/dolcetto-dalba-doc-pilone-dei-canta/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "evidence": "A LARGE, MODERN, SUSTAINABILITY-FORWARD PIEDMONTESE HOUSE WITH A 207-WINE SITEMAP AND NO DECLARATION ON ANY SURFACE IT RUNS. Fontanafredda srl / Casa E. di Mirafiore & Fontanafredda S.r.l., Via Alba 15, Serralunga d'Alba (CN), P.IVA 01197120528 — in the footer. STEP 0: the 'vino' post type holds 207 URLs in Italian and English and our wine is there under its exact name, /vino/dolcetto-dalba-doc-pilone-dei-canta/, distinct from the house's three other Dolcettos (Parpan, the plain Dolcetto d'Alba DOC and the Piemonte DOC Dolcetto) — the cuvee was picked on the 'Pilone dei Canta' segment, which is unique in the range. THE PAGE STATES NO VINTAGE. It gives uve Dolcetto, zona Treiso, soil, exposure, 'Guyot 4.600 ceppi/ha', 'Vendemmia II decade di settembre', 'Gradazione 12,5% vol', service temperature, 'Formato bottiglia 0,75 L', vinification, ageing, tasting note and food pairing, and no substance list, no allergen line and no energy value. The declared strength on the page, 12,5 % vol, differs from Systembolaget's 13,0 by 0,5 pp — but with no vintage on the page that test was never reached. THE SCHEDA TECNICA WAS FETCHED AND READ IN FULL: /wp-content/uploads/2021/01/Dolcetto_dAlba_Pilone_dei_canta.pdf, Last-Modified 25 March 2025 — after the obligation — 1 310 342 bytes, two pages, bilingual it/en, text extracted with pypdf. It repeats the web page and adds only '0,375 - 0,75 L' and '13% vol' (which is a THIRD strength figure, disagreeing with the page's own 12,5 %), with zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen, annata and qr. THE HOUSE HAS NO SHOP OF ITS OWN: the wine page's 'Acquista' button points out to www.101vini.it, a third-party Italian retailer, whose URL slug does name our 2024 — that is a retailer and was NOT read as a source. Greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, valori, conservant, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label and btn-nutrizional are zero on the wine page, raw and stripped.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.fontanafredda.it/robots.txt",
+        "https://www.fontanafredda.it/sitemap_index.xml",
+        "https://www.fontanafredda.it/vino-sitemap1.xml and /vino-sitemap2.xml — 207 wine URLs, it and en",
+        "https://www.fontanafredda.it/vino/dolcetto-dalba-doc-pilone-dei-canta/",
+        "HEAD and GET https://www.fontanafredda.it/wp-content/uploads/2021/01/Dolcetto_dAlba_Pilone_dei_canta.pdf"
+      ],
+      "checked_at": "2026-08-14T12:15:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.fontanafredda.it serves the stock WordPress block: 'User-agent: *', 'Disallow: /wp-admin/', 'Allow: /wp-admin/admin-ajax.php', naming sitemap_index.xml. The wine page, the sitemaps and the uploads directory are all allowed. No exception was needed or used.",
+      "note": "TWO NEW GREP LIES ON ONE PAGE, BOTH WORTH CARRYING. (1) 'elabel' matched raw three times and every hit is the CSS class 'titleLabel' on the Contact Form 7 newsletter fields — titl+eLabel. Any WordPress theme with a titleLabel class will look like it has an e-label. (2) 'qr-code' matched raw twice and both are '<div class=\"qr-code\">' wrapping an SVG icon beside 'Scarica la brochure' in the site footer — a QR graphic for the institutional catalogue, on every page of the site, pointing at a 2026 sales brochure and not at a disclosure. Also worth noting: the page and its own scheda disagree about the alcohol, 12,5 % against 13 % vol, which is a reminder that a producer's own two surfaces are not always one figure."
     }
   ],
-  "updated_at": "2026-08-14T11:45:00Z",
+  "updated_at": "2026-08-14T12:15:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12602,6 +12629,11 @@
       "at": "2026-08-14T11:45:00Z",
       "batch": "3 — Italy, eighth batch: Matteo Ascheri Azienda Agricola (2 wines)",
       "result": "2 attempted, 0 found, 2 not found. A Bra estate whose E-Shop page is a price list stating 'Annata e % Vol' for every wine — 'LANGHE DOC NEBBIOLO 2024 - 13,5' matches Systembolaget's vintage AND strength exactly, and 'GAVI DOCG DEL COMUNE DI GAVI 2025 - 12,5' has rolled a vintage past ours. Neither the undated wine pages, nor the sixteen press-area schede (one fetched per wine, both the web page typeset), nor the e-shop carries anything but 'Prodotto in Italia - Contiene solfiti'. THE ASYMMETRY AGAIN, AND SHARPER THAN USUAL: /etichettatura-ambientale/ discharges the packaging decree carefully, per wine group, naming both our wines with GL 71 / FOR 51 / C/ALU 90 tables, on the same site that publishes no ingredient list at all. New grep lie: CleanTalk's ct_checkjs field makes 'kJ' match raw on every page of a WordPress running it."
+    },
+    {
+      "at": "2026-08-14T12:15:00Z",
+      "batch": "3 — Italy, eighth batch: Fontanafredda (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found. The batch's first deliberately-chosen large house, picked on the only predictor that has ever worked in Italy (has it adopted anything). It has not: 207 wine URLs, an undated cuvee page, a scheda tecnica refreshed in March 2025 that adds nothing but a second, contradictory alcohol figure, and an 'Acquista' button that leaves the site for the retailer 101vini.it — the house runs no shop of its own. Two grep lies added: 'titleLabel' contains eLabel, and a footer '<div class=qr-code>' is the brochure download icon."
     }
   ]
 }
