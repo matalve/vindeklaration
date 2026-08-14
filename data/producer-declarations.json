@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, ninth batch, open 2026-08-14. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after eight batches: 78 producers, 174 wines, 9 found, 154 not_found, 11 rejected, with 103 wines untouched and no producer pairs left — every remaining Italian wine is its own producer.",
-  "attempted": 437,
+  "attempted": 438,
   "found": 31,
-  "not_found": 358,
+  "not_found": 359,
   "rejected": 48,
   "declarations": [
     {
@@ -12527,9 +12527,43 @@
       "evidence": "NO PRODUCER SOURCE — AND THE DECLARATION ALREADY EXISTS UPSTREAM FOR THE SIBLING PACK, WHICH IS THE REAL FINDING HERE. Systembolaget's 231002 is the 375 ml of Ruffino Chianti 2025, organic, 12,5 %. Its 750 ml twin, 231001, is the SAME wine, SAME vintage, SAME strength and SAME organic flag and IS declared on Systembolaget's own page ('Druvor, stabiliseringsmedel (gummi arabicum), surhetsreglerande medel (vinsyra (L(+)-)), konserveringsmedel (SULFITER)...'). That text is Systembolaget's transcription of another product number and is deliberately NOT copied into this file — this file only holds producer sources, and a pack-sibling gap belongs to the nightly pipeline to close, not to a hand-matched second source. Recorded as not_found so a later run does not re-probe the producer. STEP 0 FAILS ON THE PRODUCER'S OWN SITE ANYWAY: ruffino.com 301s to ruffino.it, a Shopify storefront whose Italian product sitemap holds nineteen wines, and the only Chianti DOCG among them is /it/products/chianti — which is the '1877' Chianti, an undated cuvee page ('la cui prima annata risale al 1877', no Annata, no vintage, no alcohol figure) whose only download is an image-only PDF from which no text can be extracted. The estate's own search returns ZERO results for both 'biologico' and 'organic' across the whole catalogue, so Ruffino's Italian site does not catalogue an organic Chianti at all and the Swedish bottle cannot be matched to any page on it. NO DECLARATION SURFACE ON THE HOST: the product page has zero raw hits for ingredien, nutrizion, solfit, kcal, dichiarazion, u-label, ead-qr, ioagri, i-wine, carmaqrcode, ingredient-list, btn-nutrizional and tab-ingredienti, and the 45-URL page sitemap holds no etichetta, e-label, transparency or ingredient page. robots.txt is Shopify's stock storefront file: products, collections and pages explicitly Allow, only cart, checkout, account and filter traps disallowed.",
       "rejected_because": null,
       "checked_at": "2026-08-14T16:20:00Z"
+    },
+    {
+      "product_number": "7955001",
+      "name": "Sereole Soave",
+      "producer": "Bertani",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://shop.bertani.net/it/eur/it/prodotti/soave-sereole-2024",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.bertani.it/robots.txt (WRONG COMPANY — bathroom fixtures, see note)",
+        "https://www.bertani.com/robots.txt (same host as bertani.it)",
+        "https://www.bertani.net/robots.txt",
+        "https://www.bertani.net/wines/territory/sereole/",
+        "https://www.bertani.net/sitemap_index.xml",
+        "https://www.bertani.net/page-sitemap.xml",
+        "https://www.bertani.net/product-sitemap.xml",
+        "https://shop.bertani.net/robots.txt",
+        "https://bertani.netlify.app/sitemap.xml",
+        "https://shop.bertani.net/it/eur/it/prodotti/soave-sereole-2024"
+      ],
+      "server_rendered": true,
+      "elabel_platform": "wineplatform.it (third deployment seen; shop.bertani.net, customer-care address bertani@wineplatform.it)",
+      "robots_disallowed": false,
+      "robots_reasoning": "bertani.net serves three merged 'User-agent: *' groups (WooCommerce upload paths, a wpo JSON, and a Yoast group with an empty Disallow); under RFC 9309 records for the same token merge, so only the wp-admin and wp-content/uploads paths are disallowed and every page fetched here is allowed. shop.bertani.net answers 'User-Agent: * / Allow: /' plus a Host: line pointing at bertani.netlify.app, which is the same Netlify build serving the shop — the sitemap was read there because that is the URL robots.txt itself names. No exception was needed anywhere on this producer.",
+      "evidence": "PERFECT IDENTITY, NO DECLARATION — the wineplatform.it near-miss for the third time. shop.bertani.net/it/eur/it/prodotti/soave-sereole-2024 is a per-vintage product page whose spec block reads 'Annata 2024 / Denominazione Soave Doc / Vitigni 100% Garganega / Alcol 12% / Formato 0.75l', matching Systembolaget's 7955001 Sereole Soave 2024, 750 ml, 12,0 % exactly, on the Italian/EU market and currency (it/eur/it). Where the ingredient list belongs the page prints only 'Info: Contiene Solfiti - Prodotto in Italia' — an allergen line, no ingredient list, no nutrition table, no energy value. Raw-HTML grep of the product page: two hits for 'solfit' and ZERO for ingredien, nutrizion, kcal, energia, dichiarazion, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti and .pdf. The marketing site's own cuvee page (bertani.net/wines/territory/sereole/) is the dominant Italian failure shape — UNDATED, no annata, no alcohol, and its only download is a scheda tecnica filed under /wp-content/uploads/2022/07/, i.e. published before 8 December 2023 and therefore incapable of carrying the mandated declaration. The 89-URL page sitemap holds no etichetta, e-label, transparency or ingredient page, and the WooCommerce product sitemap sells only tasting experiences and gift vouchers, not wine.",
+      "note": "DOMAIN NEAR-NAME TRAP, a new variant: bertani.it AND bertani.com both belong to a Verona BATHROOM-FIXTURES retailer (Sylius shop, 6 478 product URLs of washbasins and mixers, robots.txt byte-identical on both hosts). The wine house is at bertani.net. Two wasted fetches, one of them a 4,2 MB sitemap. ALSO A CORPORATE-OWNERSHIP PAIR THE STRING NORMALISATION COULD NOT SEE: bertani.net's own footer names 'Angelini Wines & Estates Societa Agricola a r.l., Via Roma 117, Castelplanio (AN)' as the responsible company, and Systembolaget lists a second remaining Italian wine under the producer string 'Angelini Wines & Estates' (7134401, Val di Suga Rosso di Montalcino 2024). Same owner, so the two are one probe, not two.",
+      "rejected_because": null,
+      "checked_at": "2026-08-14T17:05:00Z"
     }
   ],
-  "updated_at": "2026-08-14T16:20:00Z",
+  "updated_at": "2026-08-14T17:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12816,6 +12850,11 @@
       "at": "2026-08-14T16:20:00Z",
       "batch": "3 — Italy, ninth batch: Ruffino (1 wine)",
       "result": "1 attempted, 0 found, 1 not found — and a pipeline observation worth more than the wine. Systembolaget's 231002 (Ruffino Chianti 2025, 375 ml, organic) is undeclared while 231001, the 750 ml of the identical wine and vintage, is fully declared on Systembolaget's own page. That is a pack-sibling gap in the primary dataset, not a producer's silence, and it is left for the nightly pipeline: nothing was copied across. On the producer's side, ruffino.com 301s to a Shopify storefront whose nineteen-wine Italian catalogue contains no organic Chianti at all (0 site-search results for both 'biologico' and 'organic'), and whose one Chianti DOCG page is the undated 1877 cuvee with an image-only PDF. No e-label surface anywhere in the 45-URL page sitemap. NEW METHOD NOTE: before probing an Italian producer, check whether the same wine exists in wines.json under another pack — a declared sibling closes the wine without a single fetch."
+    },
+    {
+      "at": "2026-08-14T17:05:00Z",
+      "batch": "3 — Italy, ninth batch: Bertani (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found. Third wineplatform.it deployment (shop.bertani.net) and the third time it has produced perfect identity and no declaration: 'Annata 2024 / Alcol 12% / Formato 0.75l' matching Systembolaget exactly, with 'Info: Contiene Solfiti - Prodotto in Italia' where the ingredient list belongs. The marketing site's cuvee page is undated and its scheda PDF is from 2022, before the requirement. Two host lessons: bertani.it and bertani.com are a BATHROOM-FIXTURES retailer, not the winery (which is bertani.net); and bertani.net's footer names Angelini Wines & Estates as the responsible company, which is the producer string on another remaining Italian wine — a corporate-ownership pair the producer-string normalisation pass could not have found."
     }
   ]
 }
