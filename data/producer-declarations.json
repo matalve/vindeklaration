@@ -12385,6 +12385,11 @@
       "at": "2026-08-14T09:20:00Z",
       "batch": "3 — Italy, eighth batch: Cantina Santa Maria La Palma (1 wine, a fourth from a producer already closed)",
       "result": "1 attempted, 0 found, 1 not found. The producer-string normalisation pass over the remaining Italian pool surfaced three wines belonging to producers already worked; this is the first. Le Bombarde Cannonau 2024 is on the estate's own nopCommerce shop with 'Annata 2024', 75cl and 'Alcool: 13% - 13,5% vol.' — our exact bottling — and the declaration under it is 'Allergeni: Contiene Solfiti' and 'Origine: prodotto in Italia' and nothing more, the same house template the three 2026-08-09 wines ended in. The 37,5 cl is a separate product with no Annata field."
+    },
+    {
+      "at": "2026-08-14T09:45:00Z",
+      "batch": "3 — Italy, eighth batch: Gaja / IDDA (1 wine, a third from a producer already closed)",
+      "result": "1 attempted, 0 found, 1 not found. The second of the three normalisation hits. IDDA, Gaja's Etna partnership with Graci, has its own domains — idda.wine 301s to idda.it — and idda.it is gaja.com's placeholder page reused for the brand, HTML comment and all. The only Gaja host with content, the family's WooCommerce distribution arm, holds two Idda products and the white's page is undated ('Prima annata prodotta 2018' is the first vintage ever made) with no declaration markers at all; its single raw 'elabel' hit is the substring in iubenda's 'whitelabel':false."
     }
   ]
 }
