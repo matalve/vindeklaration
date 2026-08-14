@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
-  "attempted": 431,
+  "attempted": 432,
   "found": 31,
   "not_found": 353,
-  "rejected": 47,
+  "rejected": 48,
   "declarations": [
     {
       "product_number": "5106001",
@@ -12375,9 +12375,39 @@
       "robots_disallowed": false,
       "robots_reasoning": "www.fontanafredda.it serves the stock WordPress block: 'User-agent: *', 'Disallow: /wp-admin/', 'Allow: /wp-admin/admin-ajax.php', naming sitemap_index.xml. The wine page, the sitemaps and the uploads directory are all allowed. No exception was needed or used.",
       "note": "TWO NEW GREP LIES ON ONE PAGE, BOTH WORTH CARRYING. (1) 'elabel' matched raw three times and every hit is the CSS class 'titleLabel' on the Contact Form 7 newsletter fields — titl+eLabel. Any WordPress theme with a titleLabel class will look like it has an e-label. (2) 'qr-code' matched raw twice and both are '<div class=\"qr-code\">' wrapping an SVG icon beside 'Scarica la brochure' in the site footer — a QR graphic for the institutional catalogue, on every page of the site, pointing at a 2026 sales brochure and not at a disclosure. Also worth noting: the page and its own scheda disagree about the alcohol, 12,5 % against 13 % vol, which is a reminder that a producer's own two surfaces are not always one figure."
+    },
+    {
+      "product_number": "330001",
+      "name": "Passitivo Primitivo",
+      "producer": "Cantine Paolo Leo",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://www.sfiziosalentino.it/eshop/vini-cantine-paololeo/vini-rossi/passitivo-organico-paololeo-primitivo-bio-igp-salento/",
+      "source_type": "producer_site",
+      "raw_ingredients": "Materia Prima: Uva\nRegolatori di Acidità: 0\nConservanti Antiossidanti: Solfiti\nAgenti Chiarificanti: 0\nAgenti Stabilizzanti: Acido Metatartarico\nGas e Gas di Imballaggio: Imbottigliamento in Atmosfera protetiva\nAltro: 0\nPrestare attenzione agli Allergeni riportati in grassetto rosso.",
+      "language": "it",
+      "vintage_on_source": "2023",
+      "market": "EU",
+      "evidence": "A COMPLETE DECLARATION WAS FOUND AND READ ON THE PRODUCER'S OWN SHOP AND IT IS FOR THE WRONG YEAR. PRODUCER: Cantine PaoloLeo, San Donaci (BR), P.IVA 01897140743. Its marketing site www.paololeo.it names a shop in its SHOP menu, www.sfiziosalentino.it, whose footer reads '© Sfizio Salentino proprietà di Cantine Paololeo srl - C.S. 119.000€ - REA BR-64905 - P. IVA 01897140743' — the shop is the producer's own property, so this is first-party publishing and not a retailer. THE CUVÉE TOOK WORK, AND THE ORGANIC FLAG DECIDED IT. Systembolaget's product page for 330001 reads 'Passitivo Primitivo, 2024' and carries 'Odling & Produktion: Ekologiskt'. The shop's 427-product sitemap holds three still Passitivo Primitivo reds: 'Passitivo Appassimento Primitivo Puglia IGP' (not organic, Annata 2024, 14,5 % vol), 'Passitivo Organico Primitivo Puglia IGP BIO' (ICEA-certified organic, Annata 2023, 14,5 % vol) and 'Passitivo Primitivo Alcohol free' (0 %). The Swedish bottle is organic, so it is the Organico. AND THAT IS THE ONE WITH THE WRONG VINTAGE. The Organico's product page states 'Formato: 75 cl - Annata: 2023' against Systembolaget's 2024, and 'GRADO ALCOLICO 14,5% vol' / 'GRADAZIONE ALCOLICA: 14,5%' against Systembolaget's 14,0 — a 0,5 pp gap, at the tolerance boundary, on top of the vintage. The pack agrees (75 cl against 750 ml). THE DECLARATION IS COMPLETE AND STRUCTURED. The WooCommerce product carries four tabs — Scheda Tecnica, Valori Nutrizionali, Ingredienti, Smaltimento — all server-rendered. The Ingredienti panel is a label/value table quoted verbatim in raw_ingredients; the '0' values are the shop's empty-field default and mean the category is not used, and 'Solfiti' is wrapped in <span class=\"attenzione\"> because the panel's footnote says allergens are printed in red bold. The nutrition panel gives, per 100 ml: Energia 83,5/349,5 Kcal/KJ, Grassi 0 g, Di cui acidi grassi saturi 0 g, Carboidrati 2,7 g, Di cui zuccheri 0 g, Fibre 0 g, Proteine 0 g, Sale 0 g. The Smaltimento panel gives Vetro GL71, Tappo FOR51 / O07, Capsula Alluminio C/ALU90. THE DOUBLE MISS IS THE POINT: the sibling product whose Annata IS 2024 — the non-organic Passitivo Appassimento — has the SAME four tabs and they are EMPTY, its nutrition rows reading bare ' Kcal/KJ', ' g', ' g' with no numbers and its Ingredienti and Smaltimento panels absent from the HTML entirely. So the estate has one wine with our vintage and no declaration, and one wine with a declaration and not our vintage. A vintage mismatch is a rejection, not an approximation; the declaration is quoted in full here so that if the shop's Organico rolls to the 2024 the wine attaches without a refetch.",
+      "rejected_because": "the Passitivo Organico's page states 'Annata: 2023' where Systembolaget's bottle is the 2024, and its alcohol is 14,5 % vol against Systembolaget's 14,0",
+      "sources_checked": [
+        "https://www.paololeo.it/robots.txt (404, a Laravel HTML error page — a soft 404, so no directives exist)",
+        "https://www.paololeo.it/ and /vini — the estate's line tiles; the Passitivo line's own tile links https://paololeo.wine/passitivo, which is NXDOMAIN",
+        "https://www.sfiziosalentino.it/robots.txt — 'User-agent: *' / 'Allow: /'",
+        "https://www.sfiziosalentino.it/wp-sitemap.xml and /product-sitemap.xml — 427 products",
+        "https://www.sfiziosalentino.it/eshop/vini-cantine-paololeo/vini-rossi/passitivo-paololeo-primitivo-puglia-igp/ — Annata 2024, declaration tabs EMPTY",
+        "https://www.sfiziosalentino.it/eshop/vini-cantine-paololeo/vini-rossi/passitivo-organico-paololeo-primitivo-bio-igp-salento/ — Annata 2023, declaration tabs FILLED",
+        "https://www.sfiziosalentino.it/eshop/vini-cantine-paololeo/vini-rossi/passitivo-primitivo/ — the 0 % Alcohol free, tabs empty",
+        "https://www.systembolaget.se/produkt/vin/x-330001/ — confirmed 'Passitivo Primitivo, 2024' and 'Ekologiskt'"
+      ],
+      "checked_at": "2026-08-14T13:05:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.sfiziosalentino.it serves 'User-agent: *' with 'Allow: /' and names three sitemaps; everything fetched is allowed. www.paololeo.it answers /robots.txt with a Laravel 'Page Not Found' HTML page — a soft 404, so no directives exist on that host either. No exception was needed or used.",
+      "note": "ITALY'S THIRD FIRST-PARTY PUBLISHER SHAPE, AND THE FIRST STRUCTURED ONE. After Cà dei Frati's inline block and Demarie's WooCommerce ingredient-list panel, this is a WooCommerce theme with THREE dedicated declaration tabs — Valori Nutrizionali, Ingredienti and Smaltimento — rendered as label/value tables with the class 'nutritional-list', server-side, on every product. It is the first Italian deployment seen that discharges the ingredient, the nutrition AND the packaging obligation in one place. THE TABS ARE PRESENT EVEN WHEN EMPTY, which makes the shop diagnosable in one fetch: look for 'tab-ingredienti' in the HTML and then read whether the panel exists. Cantine PaoloLeo is worth a full revisit — it has 400+ products of its own and Systembolaget carries several of its wines; only the vintage stood in the way here. Note also that paololeo.wine, the Passitivo brand's own domain linked from the estate's own home page, no longer resolves: a producer's own outbound brand link can be dead."
     }
   ],
-  "updated_at": "2026-08-14T12:15:00Z",
+  "updated_at": "2026-08-14T13:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12634,6 +12664,11 @@
       "at": "2026-08-14T12:15:00Z",
       "batch": "3 — Italy, eighth batch: Fontanafredda (1 wine)",
       "result": "1 attempted, 0 found, 1 not found. The batch's first deliberately-chosen large house, picked on the only predictor that has ever worked in Italy (has it adopted anything). It has not: 207 wine URLs, an undated cuvee page, a scheda tecnica refreshed in March 2025 that adds nothing but a second, contradictory alcohol figure, and an 'Acquista' button that leaves the site for the retailer 101vini.it — the house runs no shop of its own. Two grep lies added: 'titleLabel' contains eLabel, and a footer '<div class=qr-code>' is the brochure download icon."
+    },
+    {
+      "at": "2026-08-14T13:05:00Z",
+      "batch": "3 — Italy, eighth batch: Cantine Paolo Leo (1 wine)",
+      "result": "1 attempted, 0 found, 0 not found, 1 REJECTED against a complete declaration that was found and read. The estate's own shop, sfiziosalentino.it ('proprieta di Cantine Paololeo srl'), is a WooCommerce whose theme gives every product three declaration tabs — Valori Nutrizionali, Ingredienti and Smaltimento — as server-rendered label/value tables. Italy's third first-party publisher shape and the first structured one, discharging the ingredient, nutrition and packaging obligations in one place. THE DOUBLE MISS: Systembolaget's bottle is organic (its product page says Ekologiskt), which selects the 'Passitivo Organico' — whose Annata is 2023 and whose alcohol is 14,5 against our 14,0 — while the sibling 'Passitivo Appassimento', whose Annata IS 2024, has the same three tabs and they are EMPTY. The declaration is quoted in full so the wine attaches without a refetch if the shop rolls forward. Revisit candidate: the shop has 427 products."
     }
   ]
 }
