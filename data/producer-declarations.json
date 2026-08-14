@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
-  "attempted": 424,
+  "attempted": 426,
   "found": 31,
-  "not_found": 346,
+  "not_found": 348,
   "rejected": 47,
   "declarations": [
     {
@@ -12182,9 +12182,63 @@
       "robots_disallowed": false,
       "robots_reasoning": "vininardelli.it serves no robots.txt (404, read on 2026-08-12), so nothing is disallowed. No exception was needed or used. www.tagaro.it was not fetched again this run.",
       "note": "THE ESTATE'S PDF FORMAT IS SETTLED AT TWO OF TWO. The Appassimento's datasheet and the Primitivo's are the same template with the same fields and the same silence, so a third Nardelli wine can be closed on the web page alone. The estate's ten wines are nine static hand-built pages with no shop, no QR link and no e-label host; Tagaro's third Swedish wine, Nardelli Negroamaro 7471201, is a 2023 and outside this slice."
+    },
+    {
+      "product_number": "7049601",
+      "name": "Dolcetto d'Alba Biologico Terre del Barolo",
+      "producer": "Terre del Barolo",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://terredelbarolo.com/vini/dolcetto-dalba-doc-bio/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "evidence": "OUR EXACT VINTAGE IS ON THE PRODUCER'S OWN PAGE, STATED IN A FIELD BUILT FOR IT, AND THE PAGE DECLARES NOTHING. Cantina Terre del Barolo (Castiglione Falletto, P.IVA 00186030045, a Langhe cooperative; Systembolaget spells it both 'Terre del Barolo' and 'Cantina Terre del Barolo' and they are one producer). STEP 0: the site's own /i-vini/biologico/ line holds a 'Dolcetto d'Alba DOC Bio' and the portfolio sitemap gives it a page of its own, so the Swedish name is the producer's. THE PAGE: 'Annata disponibile: 2024' — against Systembolaget's 2024, exact — then vitigno Dolcetto, zona Roddi, soil, training, 100 % hand harvest, harvest window, maximum yield, vinification, malolactic, ageing, then tasting notes and 'Grado alcolico: 11.5% vol (Min).'. That figure is the denomination's minimum and not a bottling strength, which is why no alcohol test was applied. Raw and stripped greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen, valori, conservant, e-label, elabel, qr, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label and btn-nutrizional are ALL ZERO. ITS SCHEDA WAS FETCHED AND READ IN FULL. The page's one .pdf href is the button 'Scarica la scheda vino' pointing at /wp-content/uploads/2025/05/DOLCETTOALBA_BIO_TerredelBarolo.pdf, Last-Modified 16 May 2025 — well after the obligation. One page, 167 530 bytes, text extracted with pypdf: the web page's fields plus a 'CARATTERISTICHE DEL VINO' block giving 'Grado alcolico (minimo): 11,50% vol.', 'Acidita totale (minima): 4,5 g/l' and 'Estratto secco netto (minimo): 21 g/l', and a radar chart of sensory axes. Zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen and annata. Analysis minima are not a declaration: no substances, no energy value, not even a sulphite line.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.terredelbarolo.com/robots.txt — Yoast block, 'User-agent: *' with an EMPTY Disallow, naming sitemap_index.xml",
+        "https://terredelbarolo.com/sitemap_index.xml",
+        "https://terredelbarolo.com/portfolio_page-sitemap.xml — 71 URLs, the whole range, it and en",
+        "https://terredelbarolo.com/page-sitemap.xml — 66 URLs",
+        "https://terredelbarolo.com/vini/dolcetto-dalba-doc-bio/",
+        "HEAD and GET https://terredelbarolo.com/wp-content/uploads/2025/05/DOLCETTOALBA_BIO_TerredelBarolo.pdf"
+      ],
+      "checked_at": "2026-08-14T10:35:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "terredelbarolo.com serves the Yoast block: 'User-agent: *' followed by an empty 'Disallow:', which disallows nothing, and it names the sitemap index. Everything fetched here is allowed. No exception was needed or used.",
+      "note": "THE HOST SERVES AN INCOMPLETE TLS CHAIN. www.terredelbarolo.com and terredelbarolo.com present the leaf certificate (CN=terredelbarolo.com, Sectigo DV R36) WITHOUT the intermediate, so an ordinary verifying client fails with 'unable to get local issuer certificate'. That is a server misconfiguration and not a refusal — no 401, 403, 429 or challenge — so the pages were fetched with chain verification disabled and nothing else was changed. Worth recording as a host quirk: a TLS failure of this shape is not a technological measure and should not be read as one."
+    },
+    {
+      "product_number": "5368501",
+      "name": "Gheppio Roero Arneis",
+      "producer": "Cantina Terre del Barolo",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "evidence": "STEP 0 CLOSED THIS ONE: GHEPPIO IS AN IMPORTER'S LABEL AND THE PRODUCER'S OWN SURFACE DOES NOT KNOW THE NAME. Cantina Terre del Barolo's portfolio sitemap lists all 71 per-wine URLs in Italian and English and NOT ONE contains 'gheppio'; the site's own search, https://terredelbarolo.com/?s=gheppio, returns no results at all. THE WINE IS NOT THERE EITHER, INDEPENDENTLY OF THE BRAND NAME: the co-op's white Arneis is 'Langhe DOC Arneis' (and 'Rondini Langhe DOC Arneis'), a different denomination from Roero Arneis DOCG, and a search for 'roero' returns only 2018 news items about concerts in the Langhe e Roero. THE BRAND BELONGS TO THE SWEDISH IMPORTER. Systembolaget's supplier for this item is Budbreak AB, and Budbreak's own public Facebook page announces 'Nya Gheppio-viner! Barolo 2016 och Roero Arneis 2020' — the importer launching vintages of its own line. Le Rondini is the co-op's own bird-named line and appears throughout its site; Gheppio is a second bird-named line that appears nowhere on it. There is therefore no producer page, no e-label and no vintage to match: a 2025 Roero Arneis under a name its bottler does not publish. NOTHING WAS ACCEPTED FROM A RETAILER OR A WINE DATABASE — the Vivino and wine-searcher entries returned by the search were used only to confirm that the brand exists and were not read as a source.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://terredelbarolo.com/portfolio_page-sitemap.xml — 71 per-wine URLs, zero matching 'gheppio' or 'roero'",
+        "https://terredelbarolo.com/?s=gheppio — no results",
+        "https://terredelbarolo.com/?s=roero — news items only",
+        "web search establishing Gheppio as the Swedish importer Budbreak's line"
+      ],
+      "checked_at": "2026-08-14T10:35:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "Same host and same empty Yoast Disallow as product 7049601. The ?s= search URL is not disallowed. No exception was needed or used.",
+      "note": "TWO WINES, ONE PRODUCER, TWO DIFFERENT FAILURES, AND THE SECOND IS THE CHEAPER. The Dolcetto Bio has a dated producer page that declares nothing; the Gheppio Arneis has no producer page at all because the name is the importer's. Systembolaget's own data already carries a declaration for two other Gheppio wines (7548401 Gheppio Verduno Pelaverga 2024 and 7489001 P.Lex Langhe Nebbiolo 2023), so the importer does supply declarations for some of this line through the ordinary channel — which is a reason to expect the gap here to close upstream rather than to be findable on the producer's site."
     }
   ],
-  "updated_at": "2026-08-14T10:05:00Z",
+  "updated_at": "2026-08-14T10:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12421,6 +12475,11 @@
       "at": "2026-08-14T10:05:00Z",
       "batch": "3 — Italy, eighth batch: Tagaro / Nardelli (1 wine, the third from a producer already closed)",
       "result": "1 attempted, 0 found, 1 not found. The last of the three normalisation hits. Nardelli's Primitivo page on Tagaro's brand host is the undated cuvee page with no alcohol either, and three of the estate's ten wines are Primitivos, so the cuvee had to be picked before anything else. Its per-wine PDF was fetched rather than assumed from the sibling — Last-Modified 28 Feb 2024, so it post-dates the obligation — and it is the web page typeset, with zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen and annata. The estate's datasheet format is now settled at two of two."
+    },
+    {
+      "at": "2026-08-14T10:35:00Z",
+      "batch": "3 — Italy, eighth batch: Cantina Terre del Barolo / Terre del Barolo (2 wines, one producer under two Systembolaget strings)",
+      "result": "2 attempted, 0 found, 2 not found. The Dolcetto d'Alba DOC Bio page states 'Annata disponibile: 2024' — our exact vintage, in a field built for it — and carries no declaration marker of any kind; its 'Scarica la scheda vino' PDF (May 2025) adds only minimum alcohol, minimum acidity and minimum dry extract. The Gheppio Roero Arneis closed on step 0: 'gheppio' returns nothing from the co-op's 71-URL portfolio sitemap or its own site search, the co-op makes Langhe Arneis and not Roero Arneis, and the Swedish importer Budbreak announces Gheppio vintages as its own line. HOST QUIRK: terredelbarolo.com serves its leaf certificate without the Sectigo intermediate, so a verifying client fails with 'unable to get local issuer certificate' — a misconfiguration, not a refusal."
     }
   ]
 }
