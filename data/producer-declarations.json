@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
-  "attempted": 423,
+  "attempted": 424,
   "found": 31,
-  "not_found": 345,
+  "not_found": 346,
   "rejected": 47,
   "declarations": [
     {
@@ -12156,9 +12156,35 @@
       "robots_disallowed": false,
       "robots_reasoning": "gaja.com and idda.it serve no robots.txt (404), and neither has anything beyond the one placeholder page. www.gajadistribuzione.it's robots.txt was read on 2026-08-12 and allows the product pages and the sitemap. No exception was needed or used.",
       "note": "A BRAND-OWNED SECOND DOMAIN CAN CONFIRM THE OWNERSHIP AND STILL BE EMPTY. The Tagaro/Nardelli lesson says to check for a brand's own domain before closing on absence; here the check succeeded — idda.it is unmistakably Gaja's, down to the 'saved from url=https://gaja.com/' comment — and the domain turned out to be the same one-page non-site. Finding the brand's site is not the same as finding a surface that could carry a declaration."
+    },
+    {
+      "product_number": "7377701",
+      "name": "Nardelli Primitivo",
+      "producer": "Tagaro",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "http://vininardelli.it/vini/primitivo/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "evidence": "A SECOND NARDELLI WINE, ON THE SITE THE 2026-08-12 RUN ESTABLISHED IS TAGARO'S. Step 0 was settled then and is not re-argued: Nardelli is absent from www.tagaro.it and from that site's own search, but the brand runs its own host, vininardelli.it, whose only social link is facebook.com/TeamTagaro — so it is the producer's brand on a second domain, not an importer's private label. THE CUVEE HAD TO BE DISAMBIGUATED. The /vini index names ten wines and three of them are Primitivo: /vini/primitivo/, /vini/primitivo-di-manduria/ and /vini/primitivo1961/. Systembolaget's item is the plain 'Nardelli Primitivo', Apulien, Primitivo, 750 ml, 13,0 %, which is the first; the Manduria is a different DOP and the 1961 is the reserve line. THE PAGE IS THE ITALIAN UNDATED CUVEE PAGE IN ITS PUREST FORM: zona di produzione, terreno, vitigno, vine age, training, vinificazione, affinamento, colour, nose, palate, pairing and serving temperature — NO VINTAGE AND NO ALCOHOL — and raw as well as stripped greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label and btn-nutrizional are all zero. The nine raw 'etichett' hits are the CSS class named etichetta on the bottle thumbnails, exactly as on the Appassimento page. ITS PER-WINE PDF WAS FETCHED AND READ IN FULL rather than assumed from the sibling: http://vininardelli.it/pdf/primitivo-it.pdf, Last-Modified 28 Feb 2024 — after 8 December 2023, so it could have carried a declaration — 260 679 bytes, text extracted with pypdf. It is a typeset copy of the web page plus one extra line, 'Piante per ettaro: 4000', and it contains zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen and annata. No vintage, no alcohol, no substances, no energy value. Neither the page nor the datasheet could be vintage-matched even if one of them had declared.",
+      "rejected_because": null,
+      "sources_checked": [
+        "http://vininardelli.it/vini",
+        "http://vininardelli.it/vini/primitivo/",
+        "HEAD http://vininardelli.it/pdf/primitivo-it.pdf — 200, Last-Modified 28 Feb 2024, 260 679 bytes, application/pdf",
+        "http://vininardelli.it/pdf/primitivo-it.pdf — downloaded, text extracted"
+      ],
+      "checked_at": "2026-08-14T10:05:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "vininardelli.it serves no robots.txt (404, read on 2026-08-12), so nothing is disallowed. No exception was needed or used. www.tagaro.it was not fetched again this run.",
+      "note": "THE ESTATE'S PDF FORMAT IS SETTLED AT TWO OF TWO. The Appassimento's datasheet and the Primitivo's are the same template with the same fields and the same silence, so a third Nardelli wine can be closed on the web page alone. The estate's ten wines are nine static hand-built pages with no shop, no QR link and no e-label host; Tagaro's third Swedish wine, Nardelli Negroamaro 7471201, is a 2023 and outside this slice."
     }
   ],
-  "updated_at": "2026-08-14T09:45:00Z",
+  "updated_at": "2026-08-14T10:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12390,6 +12416,11 @@
       "at": "2026-08-14T09:45:00Z",
       "batch": "3 — Italy, eighth batch: Gaja / IDDA (1 wine, a third from a producer already closed)",
       "result": "1 attempted, 0 found, 1 not found. The second of the three normalisation hits. IDDA, Gaja's Etna partnership with Graci, has its own domains — idda.wine 301s to idda.it — and idda.it is gaja.com's placeholder page reused for the brand, HTML comment and all. The only Gaja host with content, the family's WooCommerce distribution arm, holds two Idda products and the white's page is undated ('Prima annata prodotta 2018' is the first vintage ever made) with no declaration markers at all; its single raw 'elabel' hit is the substring in iubenda's 'whitelabel':false."
+    },
+    {
+      "at": "2026-08-14T10:05:00Z",
+      "batch": "3 — Italy, eighth batch: Tagaro / Nardelli (1 wine, the third from a producer already closed)",
+      "result": "1 attempted, 0 found, 1 not found. The last of the three normalisation hits. Nardelli's Primitivo page on Tagaro's brand host is the undated cuvee page with no alcohol either, and three of the estate's ten wines are Primitivos, so the cuvee had to be picked before anything else. Its per-wine PDF was fetched rather than assumed from the sibling — Last-Modified 28 Feb 2024, so it post-dates the obligation — and it is the web page typeset, with zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen and annata. The estate's datasheet format is now settled at two of two."
     }
   ]
 }
