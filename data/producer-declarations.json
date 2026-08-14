@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
-  "attempted": 434,
+  "attempted": 435,
   "found": 31,
-  "not_found": 355,
+  "not_found": 356,
   "rejected": 48,
   "declarations": [
     {
@@ -12464,9 +12464,38 @@
       "robots_disallowed": false,
       "robots_reasoning": "www.lunadoro.it serves the stock WordPress block ('User-agent: *', 'Disallow: /wp-admin/', 'Allow: /wp-admin/admin-ajax.php'). www.schenkitalia.it serves two consecutive 'User-agent: *' groups — the first disallowing /wordpress/wp-admin/, the second the Yoast block with an EMPTY Disallow. Under RFC 9309 the records of groups with the same user-agent token are merged, so the effective rule set is '/wordpress/wp-admin/ disallowed, everything else allowed'; nothing fetched here is under that path. No exception was needed or used.",
       "note": "TWO THINGS WORTH CARRYING. (1) A WORDPRESS CUSTOM POST TYPE CAN BE IN THE SITEMAP AND RENDER NOTHING: lunadoro.it's four 'wine' posts each return a complete page with header, menu and footer and no content whatsoever — the range page /i-vini/ holds all four descriptions instead. A near-empty per-wine page is not necessarily client-side rendering; check the range page before concluding the site is unreadable. (2) The group's estate brand is the third Italian case in this file where the Swedish item names a bottling absent from the producer's catalogue — but this one is not an export label. It is the same wine with an organic certification and a different strength, which is a subtler version of the same problem and just as fatal to matching."
+    },
+    {
+      "product_number": "9518001",
+      "name": "Terrazze della Luna Pinot Grigio Rosato",
+      "producer": "Cavit",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://www.cavit.it/vini/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "evidence": "THE BRAND IS THE PRODUCER'S BEYOND DOUBT AND THE PRODUCER'S OWN CATALOGUE DOES NOT CONTAIN IT. Cavit s.c. (Cantina Viticoltori del Trentino, Trento) is one of Italy's largest cooperative groups. STEP 0, RUN BOTH WAYS: its 'vino' sitemap holds 110 per-wine URLs in Italian and English and its 'linea' sitemap holds all fourteen of its lines — Altemasi, Il Maso, Trentini Premium, Bottega Vinai, Mastri Vernacoli, Spumanti Charmat, Vini Dolci — and NONE of them is Terrazze della Luna. The brand is nonetheless unmistakably Cavit's: the co-op's own site search returns five of its own news and event posts naming it in the first person, including 'Trentodoc Altemasi Millesimato 2021, Bottega Vinai Trentino DOC Sauvignon Blanc 2024 e Terrazze della Luna Trentino DOC Pinot Grigio 2024 hanno ottenuto la medaglia d'argento' and 'abbiamo ottenuto la medaglia d'ORO per i nostri Trentino DOC Pinot Grigio 2021 Mastri Vernacoli e Trentino DOC Pinot Grigio 2021 Terrazze della Luna'. So this is not an importer's label and not a near-name — it is a Cavit brand that the co-op advertises and does not catalogue. THE BRAND HAS NO DOMAIN OF ITS OWN: terrazzedellaluna.it, www.terrazzedellaluna.it and terrazzedellaluna.com are all NXDOMAIN, so the Tagaro/Nardelli check was run and came back empty. AND THERE IS NO DECLARATION SURFACE ANYWHERE ON THE HOST. The page sitemap is twenty Italian URLs — company, viticulture, sustainability, Trentodoc, events, the enoteca, careers, four privacy notices, a login and a web-accessibility statement — and not one is a transparency, etichetta, e-label or ingredient page. There is no product page for any Terrazze della Luna wine, let alone for a Pinot Grigio Rosato 2025, so no vintage, no pack and no strength could be matched even if a declaration existed.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.cavit.it/robots.txt — Yoast block, 'User-agent: *' with an EMPTY Disallow",
+        "https://www.cavit.it/sitemap_index.xml — thirteen sub-sitemaps",
+        "https://www.cavit.it/vino-sitemap.xml — 110 per-wine URLs, zero matching 'terrazze' or 'luna'",
+        "https://www.cavit.it/linea-sitemap.xml — fourteen line pages, no Terrazze della Luna",
+        "https://www.cavit.it/page-sitemap.xml — twenty Italian pages, no declaration surface",
+        "https://www.cavit.it/?s=terrazze — five first-person news and event posts naming the brand",
+        "DNS: terrazzedellaluna.it, www.terrazzedellaluna.it, terrazzedellaluna.com all NXDOMAIN"
+      ],
+      "checked_at": "2026-08-14T14:35:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.cavit.it serves the Yoast block: 'User-agent: *' followed by an empty 'Disallow:', which disallows nothing, and names sitemap_index.xml. The ?s= search URL is not disallowed. No exception was needed or used.",
+      "note": "A FOURTH VARIANT OF THE ITALIAN STEP-0 FAILURE, AND THE CLEANEST STATEMENT OF IT YET. Until now a Swedish name absent from the producer's catalogue meant one of three things: an importer's private label (Gheppio/Budbreak), an export-only brand the house does not sell at home (Pasqua's Mucchietto), or a brand on a second domain (Tagaro's Nardelli). This is a fourth: a brand the producer OWNS AND PUBLICLY CLAIMS in its own news, on the same site, while giving it no product page. The co-op's site search is what settles it, and it cost one request — run '?s={brand}' before concluding a name is not the producer's, because the sitemap alone would have said the opposite of the truth here."
     }
   ],
-  "updated_at": "2026-08-14T14:05:00Z",
+  "updated_at": "2026-08-14T14:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12738,6 +12767,11 @@
       "at": "2026-08-14T14:05:00Z",
       "batch": "3 — Italy, eighth batch: Schenk Italia / Lunadoro (1 wine)",
       "result": "1 attempted, 0 found, 1 not found. A multi-estate group with two first-party hosts and 112 Italian wines, and no ingredient or nutrition declaration on either — its whole group page sitemap is ten URLs and none of them is a transparency or e-label page. Step 0 is also the finding: Systembolaget's item is an ORGANIC Rosso di Montepulciano at 13,0 %, and neither the estate's four-wine range nor the group's six Montepulciano wines contains an organic Rosso; the nearest, Prugnanello, is 14 % on both surfaces and is nowhere described as organic. New shape: a WordPress 'wine' post type whose four posts are in the sitemap and render header and footer only — 15 kB of HTML, 373 bytes of text — with the actual descriptions on the range page instead. That is not client-side rendering and should not be read as such."
+    },
+    {
+      "at": "2026-08-14T14:35:00Z",
+      "batch": "3 — Italy, eighth batch: Cavit (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found. One of Italy's largest co-ops, 110 per-wine URLs and fourteen line pages, and Terrazze della Luna is in none of them — while five of the co-op's own news and event posts name the brand in the first person ('i nostri ... Terrazze della Luna'). A fourth variant of the Italian step-0 failure: a brand the producer owns and publicly claims and does not catalogue. The brand has no domain of its own (three NXDOMAIN) and the co-op's twenty-page site sitemap holds no transparency, etichetta or e-label page. Procedure note: run '?s={brand}' on the producer's own site before concluding a name is not theirs — the sitemap alone said the opposite of the truth here."
     }
   ]
 }
