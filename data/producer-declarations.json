@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
-  "attempted": 422,
+  "attempted": 423,
   "found": 31,
-  "not_found": 344,
+  "not_found": 345,
   "rejected": 47,
   "declarations": [
     {
@@ -12128,9 +12128,37 @@
       "robots_disallowed": false,
       "robots_reasoning": "Both hosts were read on 2026-08-09 and re-used here: www.santamarialapalma.it serves the Yoast block, 'User-agent: *' with an EMPTY Disallow, so nothing is disallowed; shop.santamarialapalma.it disallows only /login, /register and /boards/ and blanket-blocks AhrefsBot and SemrushBot, which we are not. No exception was needed or used.",
       "note": "THE SHOP HAS TWO PRODUCTS FOR ONE WINE AND ONLY ONE OF THEM IS DATED. /le-bombarde-cannonau-di-sardegna-doc is the 37,5 cl half bottle and has no Annata field at all; /le-bombarde-cannonau is the 75 cl and carries Annata 2024. On a nopCommerce shop that splits packs into separate products, check both before concluding the estate states no vintage. The 2026-08-09 record for this producer said the shop's Annata selector made those three wines clean not_founds rather than vintage misses; this wine is the fourth instance and the first where the year in the field is a 2024 rather than a 2025."
+    },
+    {
+      "product_number": "7070201",
+      "name": "Idda Etna Bianco Gaja",
+      "producer": "Gaja",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "http://idda.it/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "evidence": "A THIRD GAJA WINE, AND THE BRAND HAS ITS OWN DELIBERATE NON-SITE. Products 9264501 and 7252701 were closed on 2026-08-12 on the finding that Gaja has no wine website — www.gaja.com is a 2 404-byte single-page black placeholder with a logo, the Barbaresco address and a mailto, no navigation, no sitemap and no robots.txt. STEP 0: IDDA is a Gaja brand, the Etna partnership with the Graci family, so the Swedish name is the producer's own. IT HAS ITS OWN DOMAIN AND ITS OWN DOMAIN IS THE SAME PLACEHOLDER. idda.wine 301s to idda.it; idda.it returns 2 052 bytes whose HTML opens with the comment '<!-- saved from url=(0017)https://gaja.com/ -->' and whose head carries '<title>IDDA</title>', a Description of 'Via Torino 5, 12050 Barbaresco Italia +39.0173635158' and Keywords 'GAJA, IDDA, GAJA Wines, Winery, Azienda Vitivinicola, Vinicola, Sicilia, Etna, Graci, Vino, Vini'. The body is a background image and a mailto:info@idda.it in the footer. It is gaja.com's page reused for the brand — same construction, same emptiness, and it confirms the ownership at the same time. No robots.txt exists on either host and neither serves anything to crawl; both were fetched over http because idda.wine's certificate does not match its own name. THE ONLY GAJA HOST WITH CONTENT REMAINS www.gajadistribuzione.it, and its 872-product sitemap holds exactly two Idda URLs: /prodotto/idda-sicilia-dop/ and /prodotto/idda-etna-rosso-dop/. The white's page is an undated cuvee page — grapes, altitude, vinification, tasting note, and 'Prima annata prodotta 2018', which is the first vintage ever made and not a bottling year. Raw and stripped greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional and .pdf are all zero; the single raw 'elabel' hit is the substring inside the iubenda cookie-banner setting 'whitelabel':false. NOTE ALSO THAT THE DENOMINATION DIFFERS: the distribution page is 'Idda Bianco Sicilia DOP' where Systembolaget's wine is 'Idda Etna Bianco', so even had it declared, that page would have had to be matched with care.",
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: idda.wine 46.37.17.211, idda.it 151.11.83.21; iddavini.it, iddagaja.com, gajaidda.com, vinidda.it and the nonsense-subdomain controls randomxyz123.idda.wine and randomxyz123.idda.it all NXDOMAIN",
+        "https://idda.wine/ — TLS certificate does not match the hostname",
+        "http://idda.it/ (idda.wine 301s here) — the gaja.com placeholder reused for the brand",
+        "https://www.gajadistribuzione.it/product-sitemap.xml — 872 URLs, two of them Idda",
+        "https://www.gajadistribuzione.it/prodotto/idda-sicilia-dop/",
+        "web search for an Idda e-label or QR destination — nothing but retailers"
+      ],
+      "checked_at": "2026-08-14T09:45:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "gaja.com and idda.it serve no robots.txt (404), and neither has anything beyond the one placeholder page. www.gajadistribuzione.it's robots.txt was read on 2026-08-12 and allows the product pages and the sitemap. No exception was needed or used.",
+      "note": "A BRAND-OWNED SECOND DOMAIN CAN CONFIRM THE OWNERSHIP AND STILL BE EMPTY. The Tagaro/Nardelli lesson says to check for a brand's own domain before closing on absence; here the check succeeded — idda.it is unmistakably Gaja's, down to the 'saved from url=https://gaja.com/' comment — and the domain turned out to be the same one-page non-site. Finding the brand's site is not the same as finding a surface that could carry a declaration."
     }
   ],
-  "updated_at": "2026-08-14T09:20:00Z",
+  "updated_at": "2026-08-14T09:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
