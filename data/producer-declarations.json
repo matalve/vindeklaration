@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
-  "attempted": 426,
+  "attempted": 428,
   "found": 31,
-  "not_found": 348,
+  "not_found": 350,
   "rejected": 47,
   "declarations": [
     {
@@ -12236,9 +12236,62 @@
       "robots_disallowed": false,
       "robots_reasoning": "Same host and same empty Yoast Disallow as product 7049601. The ?s= search URL is not disallowed. No exception was needed or used.",
       "note": "TWO WINES, ONE PRODUCER, TWO DIFFERENT FAILURES, AND THE SECOND IS THE CHEAPER. The Dolcetto Bio has a dated producer page that declares nothing; the Gheppio Arneis has no producer page at all because the name is the importer's. Systembolaget's own data already carries a declaration for two other Gheppio wines (7548401 Gheppio Verduno Pelaverga 2024 and 7489001 P.Lex Langhe Nebbiolo 2023), so the importer does supply declarations for some of this line through the ordinary channel — which is a reason to expect the gap here to close upstream rather than to be findable on the producer's site."
+    },
+    {
+      "product_number": "7422101",
+      "name": "Roero Arneis Bricco delle Ciliegie",
+      "producer": "Giovanni Almondo",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://giovannialmondo.com/prodotto/roero-arneis-docg-bricco-delle-ciliegie-ita/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "evidence": "THE UNDATED CUVEE PAGE, ON AN ESTATE THAT KEEPS A PER-VINTAGE ARCHIVE OF SOMETHING ELSE. Azienda Agricola Giovanni Almondo Societa Agricola Semplice, Via San Rocco 26, 12046 Monta (CN), P.IVA 03799690049 — named in the site footer, so the producer is beyond doubt. STEP 0: the estate publishes a WordPress custom post type 'vino' with exactly ten wines, and both Swedish cuvees are among them under their own names — /prodotto/roero-arneis-docg-bricco-delle-ciliegie-ita/ and /prodotto/roero-arneis-docg-vigne-sparse-ita/. The Swedish name is the producer's own. THE PAGE STATES NO VINTAGE AND NO ALCOHOL. It gives the vineyard (390 m, the highest in the Roero Arneis denomination), soil composition, altitude 340-370 m, exposure, 'AFFINAMENTO in acciaio 7 mesi, 5% barrique francese non tostata', service temperature 10 C, the organic mark IT-BIO-015, and a tasting note. Raw and stripped greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen, valori, conservant, annata, e-label, elabel, qr, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional and .pdf are ALL ZERO — the page carries no PDF at all, so there is not even a scheda tecnica to read. Its only download is 'SCARICA IMMAGINE', a PNG packshot. THE ESTATE DOES KEEP A PER-VINTAGE PAGE AND IT IS A CRITICS' ARCHIVE: /bricco-ciliegie-th-ita/, 'Bricco delle Ciliegie Roero Arneis DOCG Tasting History', is Antonio Galloni scores and notes by year — 2020, 2018, 2017 and back — with no 2024 and no declaration marker of any kind. A producer can maintain a vintage-indexed page and index it on reviews rather than on recipes.",
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: almondo.it, www.almondo.it, giovannialmondo.it, www.giovannialmondo.it and almondovini.it all NXDOMAIN; the estate is on giovannialmondo.com",
+        "https://giovannialmondo.com/robots.txt",
+        "https://giovannialmondo.com/wp-sitemap.xml",
+        "https://giovannialmondo.com/wp-sitemap-posts-vino-1.xml — the full range, 10 wines",
+        "https://giovannialmondo.com/wp-sitemap-posts-page-1.xml — 16 pages, no e-label, no download centre, no shop",
+        "https://giovannialmondo.com/prodotto/roero-arneis-docg-bricco-delle-ciliegie-ita/",
+        "https://giovannialmondo.com/bricco-ciliegie-th-ita/"
+      ],
+      "checked_at": "2026-08-14T11:05:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "giovannialmondo.com serves a two-group robots.txt: 'User-agent: TermlyBot / Allow: /' and 'User-agent: * / Disallow: /wp-admin/ / Allow: /wp-admin/admin-ajax.php', naming wp-sitemap.xml. We fall under the wildcard group and touched nothing under /wp-admin/. No exception was needed or used.",
+      "note": "The estate has no shop and no 'Stampa'/download centre holding files — its press menu is a page of critics' reviews. The whole site is 16 pages plus 10 wine pages in Italian and the same in English."
+    },
+    {
+      "product_number": "7268001",
+      "name": "Roero Arneis Vigne Sparse",
+      "producer": "Giovanni Almondo",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://giovannialmondo.com/prodotto/roero-arneis-docg-vigne-sparse-ita/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "evidence": "THE SECOND OF THE ESTATE'S TWO SWEDISH ARNEIS, AND THE SAME PAGE TEMPLATE WITH THE SAME SILENCE. STEP 0 is satisfied as for 7422101: 'Roero Arneis DOCG Vigne Sparse' is one of the ten wines in the estate's own 'vino' sitemap. THE CUVEE HAD TO BE PICKED WITH CARE — the estate makes THREE Roero Arneis (Vigne Sparse, Bricco delle Ciliegie and Le Rive del Bricco delle Ciliegie) and Systembolaget carries two of them separately, so the distinction is real and was made on the cuvee name in both directions. THE PAGE STATES NO VINTAGE AND NO ALCOHOL: soil in three named types with percentages of sand, silt and clay, pH 5,5, altitude 310-370 m, exposure, 'AFFINAMENTO in acciaio 6 mesi', service temperature 8 C, the organic mark IT-BIO-015 and a tasting note. Raw and stripped greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen, valori, conservant, annata, e-label, elabel, qr, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional and .pdf are ALL ZERO, and again there is no PDF on the page to read. Nothing on the estate's surface dates any bottling, so this wine could not have been vintage-matched even against a declaration.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://giovannialmondo.com/wp-sitemap-posts-vino-1.xml",
+        "https://giovannialmondo.com/prodotto/roero-arneis-docg-vigne-sparse-ita/"
+      ],
+      "checked_at": "2026-08-14T11:05:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "Same host and same wildcard group as product 7422101. No exception was needed or used.",
+      "note": "Systembolaget lists nine Giovanni Almondo wines in all; the other seven are 2023 or older, or undated, and are outside this slice."
     }
   ],
-  "updated_at": "2026-08-14T10:35:00Z",
+  "updated_at": "2026-08-14T11:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12480,6 +12533,11 @@
       "at": "2026-08-14T10:35:00Z",
       "batch": "3 — Italy, eighth batch: Cantina Terre del Barolo / Terre del Barolo (2 wines, one producer under two Systembolaget strings)",
       "result": "2 attempted, 0 found, 2 not found. The Dolcetto d'Alba DOC Bio page states 'Annata disponibile: 2024' — our exact vintage, in a field built for it — and carries no declaration marker of any kind; its 'Scarica la scheda vino' PDF (May 2025) adds only minimum alcohol, minimum acidity and minimum dry extract. The Gheppio Roero Arneis closed on step 0: 'gheppio' returns nothing from the co-op's 71-URL portfolio sitemap or its own site search, the co-op makes Langhe Arneis and not Roero Arneis, and the Swedish importer Budbreak announces Gheppio vintages as its own line. HOST QUIRK: terredelbarolo.com serves its leaf certificate without the Sectigo intermediate, so a verifying client fails with 'unable to get local issuer certificate' — a misconfiguration, not a refusal."
+    },
+    {
+      "at": "2026-08-14T11:05:00Z",
+      "batch": "3 — Italy, eighth batch: Giovanni Almondo (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found. A Monta d'Alba estate with a WordPress 'vino' post type holding its whole ten-wine range, both Swedish cuvees on it under their own names, and both pages undated: soil, altitude, exposure, ageing, service temperature, tasting note, and zero hits for every ingredient, nutrition and vendor term, raw and stripped, with no PDF on the page at all. NEW SHAPE WORTH THE NAME: the estate DOES keep a vintage-indexed page — /bricco-ciliegie-th-ita/, a 'Tasting History' of Antonio Galloni scores by year — so a per-vintage archive can exist and be indexed on reviews rather than on recipes. The estate's .it domains do not resolve; it is on giovannialmondo.com."
     }
   ]
 }
