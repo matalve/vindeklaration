@@ -69,6 +69,11 @@
    "token": "syttegulatorer",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
+  },
+  {
+   "token": "förpackningsbar",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9216301/"
   }
  ],
  "fuzzy_matches": [
