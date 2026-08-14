@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
-  "attempted": 433,
+  "attempted": 434,
   "found": 31,
-  "not_found": 354,
+  "not_found": 355,
   "rejected": 48,
   "declarations": [
     {
@@ -12432,9 +12432,41 @@
       "robots_disallowed": false,
       "robots_reasoning": "www.cecchi.net answers /robots.txt with a 404 carrying an HTML body — a soft 404 — so no robots directives exist on the host and nothing is disallowed. No exception was needed or used.",
       "note": "A NEW GREP LIE, AND IT DEGRADES ONE OF THE STANDARD TERMS. 'kJ' matched 60-65 times raw on every Cecchi page and EVERY hit is inside inline base64 (images and fonts) — 'wTCb+Jqso4qpKj2uH1WBiMMI', 'oPOqF+jHkI0HkJr0mXMag60R' and so on. Base64 is a 64-symbol alphabet, so a two-character sequence turns up roughly once per 4 000 characters; any page with an inline data URI will show dozens of raw kJ hits. Treat a raw-only 'kJ' count as noise unless the stripped text shows it too. (This is a second, independent reason after CleanTalk's ct_checkjs.) Also worth recording: the page's HTML still carries the theme's placeholder text 'fasdfasdf' and 'dfasdf' in two content slots — a live production page on a large house's site, which is a reminder that these pages are hand-edited and incomplete, not generated from a product database."
+    },
+    {
+      "product_number": "2011201",
+      "name": "Lunadoro Rosso di Montepulciano Organic",
+      "producer": "Schenk Italia Spa",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.schenkitalia.it/it/vini/prugnanello-rosso-di-montepulciano-doc/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "evidence": "A LARGE MULTI-ESTATE GROUP, TWO FIRST-PARTY SURFACES, 112 WINES, AND NO DECLARATION ON EITHER — PLUS A CUVÉE THAT DOES NOT QUITE EXIST ON THEM. Schenk Italia S.p.A., Via Stazione 43, I-39040 Ora (Bolzano), P.IVA 00122400211, owns the Lunadoro estate at Valiano di Montepulciano (Società Agricola Lunadoro S.r.l., P.I. 01425800529), and lunadoro.it's own footer links schenkitalia.it, so the two hosts are one company's. STEP 0 IS THE FINDING. Systembolaget's item is 'Lunadoro Rosso di Montepulciano Organic', organic, 13,0 % vol. Lunadoro's own /i-vini/ page lists exactly four wines — Prugnanello Rosso di Montepulciano, Pagliareto, Gran Pagliareto and Quercione — and Schenk's 112-URL Italian wine sitemap holds six Montepulciano wines and adds only Doppio Lustro. THERE IS NO ORGANIC ROSSO DI MONTEPULCIANO ON EITHER SURFACE. The nearest match, Prugnanello Rosso di Montepulciano DOC, is described on both hosts with 'Alcohol 14%' against Systembolaget's 13,0 — 1,0 pp, twice the tolerance — and neither page nor its datasheet mentions organic certification at all (zero matches for 'biolog' and 'organic'). So the Swedish bottling could not have been matched even against a declaration. AND THERE IS NO DECLARATION TO MATCH IT AGAINST. Lunadoro's per-wine pages are empty single-post templates rendering only header and footer (15 kB of HTML, 373 bytes of text); the range page /i-vini/ carries four undated cuvée descriptions with a PDF each. The Prugnanello techsheet was fetched and read in full — /wp-content/uploads/2016/08/prugnanello-rosso-di-montepulciano-doc-techsheet-1.pdf, Last-Modified 18 February 2026, 416 186 bytes, one page, bilingual it/en — and it gives vinification, characteristics, pairings, 'Sangiovese', 'Toscana', '16-18 °C', 'Alcol: 14%' and an EMPTY 'Zuccheri: g/l', with zero occurrences of ingredien, nutrizion, solfit, kcal, energia, dichiarazion, allergen and annata. Schenk's own wine page repeats it. THE GROUP'S PAGE SITEMAP IS TEN URLs — home, origins, contacts, zero-alcohol and sustainability in two languages — so there is no transparency or e-label hub anywhere on the group host either. Greps on both hosts for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode and btn-nutrizional are zero.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.lunadoro.it/robots.txt",
+        "https://www.lunadoro.it/wp-sitemap.xml and /wp-sitemap-posts-wine-1.xml — four wines",
+        "https://www.lunadoro.it/wine/rosso/ — an empty single-post template",
+        "https://www.lunadoro.it/i-vini/",
+        "https://www.lunadoro.it/wp-content/uploads/2016/08/prugnanello-rosso-di-montepulciano-doc-techsheet-1.pdf",
+        "https://www.schenkitalia.it/robots.txt",
+        "https://www.schenkitalia.it/it/sitemap_index.xml",
+        "https://www.schenkitalia.it/wine-sitemap.xml — 222 URLs, 112 in Italian",
+        "https://www.schenkitalia.it/page-sitemap.xml — ten URLs, no transparency or e-label page",
+        "https://www.schenkitalia.it/it/vini/prugnanello-rosso-di-montepulciano-doc/"
+      ],
+      "checked_at": "2026-08-14T14:05:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.lunadoro.it serves the stock WordPress block ('User-agent: *', 'Disallow: /wp-admin/', 'Allow: /wp-admin/admin-ajax.php'). www.schenkitalia.it serves two consecutive 'User-agent: *' groups — the first disallowing /wordpress/wp-admin/, the second the Yoast block with an EMPTY Disallow. Under RFC 9309 the records of groups with the same user-agent token are merged, so the effective rule set is '/wordpress/wp-admin/ disallowed, everything else allowed'; nothing fetched here is under that path. No exception was needed or used.",
+      "note": "TWO THINGS WORTH CARRYING. (1) A WORDPRESS CUSTOM POST TYPE CAN BE IN THE SITEMAP AND RENDER NOTHING: lunadoro.it's four 'wine' posts each return a complete page with header, menu and footer and no content whatsoever — the range page /i-vini/ holds all four descriptions instead. A near-empty per-wine page is not necessarily client-side rendering; check the range page before concluding the site is unreadable. (2) The group's estate brand is the third Italian case in this file where the Swedish item names a bottling absent from the producer's catalogue — but this one is not an export label. It is the same wine with an organic certification and a different strength, which is a subtler version of the same problem and just as fatal to matching."
     }
   ],
-  "updated_at": "2026-08-14T13:30:00Z",
+  "updated_at": "2026-08-14T14:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12701,6 +12733,11 @@
       "at": "2026-08-14T13:30:00Z",
       "batch": "3 — Italy, eighth batch: Casa Vinicola Luigi Cecchi & Figli (1 wine)",
       "result": "1 attempted, 0 found, 1 not found. The strongest Italian identity match of the batch and nothing to attach: the Chianti DOCG page is written for the 2024 specifically — a month-by-month account of the 2024 season, a tasting note naming 'Il Chianti 2024', 'Gradazione alcolica 12,5% vol.' matching Systembolaget exactly — and its download is a year-named per-vintage scheda, Chianti-DOCG-2024-IT.pdf, refreshed June 2026, which is the web page typeset and contains no ingredient list, no nutrition table and not even a sulphite line. New grep lie that degrades a standard term: 'kJ' matched 60+ times raw on every page and every hit is inside inline base64."
+    },
+    {
+      "at": "2026-08-14T14:05:00Z",
+      "batch": "3 — Italy, eighth batch: Schenk Italia / Lunadoro (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found. A multi-estate group with two first-party hosts and 112 Italian wines, and no ingredient or nutrition declaration on either — its whole group page sitemap is ten URLs and none of them is a transparency or e-label page. Step 0 is also the finding: Systembolaget's item is an ORGANIC Rosso di Montepulciano at 13,0 %, and neither the estate's four-wine range nor the group's six Montepulciano wines contains an organic Rosso; the nearest, Prugnanello, is 14 % on both surfaces and is nowhere described as organic. New shape: a WordPress 'wine' post type whose four posts are in the sitemap and render header and footer only — 15 kB of HTML, 373 bytes of text — with the actual descriptions on the range page instead. That is not client-side rendering and should not be read as such."
     }
   ]
 }
