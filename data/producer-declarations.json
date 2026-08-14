@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, eighth batch, in progress from 2026-08-14. France set aside at 69 producers/142 wines; Germany exhausted. Italy after seven batches: 61 producers, 149 wines, 8 found, 131 not_found, 10 rejected.",
-  "attempted": 428,
+  "attempted": 430,
   "found": 31,
-  "not_found": 350,
+  "not_found": 352,
   "rejected": 47,
   "declarations": [
     {
@@ -12289,9 +12289,68 @@
       "robots_disallowed": false,
       "robots_reasoning": "Same host and same wildcard group as product 7422101. No exception was needed or used.",
       "note": "Systembolaget lists nine Giovanni Almondo wines in all; the other seven are 2023 or older, or undated, and are outside this slice."
+    },
+    {
+      "product_number": "7854301",
+      "name": "Ascheri Langhe Nebbiolo Langhe",
+      "producer": "Matteo Ascheri Azienda Agricola",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.matteoascheri.it/vini/langhe-nebbiolo/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "evidence": "THE PACKAGING OBLIGATION IS MET IN FULL, PER WINE GROUP, AND THE INGREDIENT ONE IS NOT MET AT ALL. Azienda Agricola Ascheri Matteo, Via G. Piumati 25, 12042 Bra (CN), P.IVA 02277690042 — in the footer of every page. ascherivini.it 301s to www.matteoascheri.it, which is the estate's only site. STEP 0: the 'vini' post type holds sixteen wines in Italian and English and 'Langhe Nebbiolo' is one of them under its own name. THE ESTATE STATES OUR EXACT VINTAGE AND OUR EXACT STRENGTH — on its E-Shop page, not on the wine page. /e-shop/ is a price list whose every row is 'Annata e % Vol': 'LANGHE DOC NEBBIOLO 2024 - 13,5' against Systembolaget's 2024 and 13,5 %. Exact on both, 0,0 pp. THE WINE PAGE ITSELF IS UNDATED and ends in the Italian near-miss: vitigno 'almeno 85% Nebbiolo', harvest window, fermentation, tasting note, service temperature, ageing potential, 'Formati disponibili: 0,75 l e 1,5 l', and the single line 'Prodotto in Italia - Contiene solfiti'. A country of origin and an allergen line are two mandatory label particulars and neither is the ingredient list or the nutrition declaration. ITS SCHEDA WAS FETCHED AND READ IN FULL: /wp-content/uploads/ascheri-scheda-vino-langhe-nebbiolo.pdf, Last-Modified 12 June 2025, 1 999 645 bytes, one page, text extracted with pypdf — it is the web page typeset, down to the book and record pairing, and it ends on the same 'Prodotto in Italia - Contiene solfiti'. Zero occurrences of ingredien, nutrizion, kcal, energia, dichiarazion, allergen and annata. AND THE ESTATE PUBLISHES THE OTHER DECREE IN FULL. /etichettatura-ambientale/ gives, for each of three wine groups, a component table with Bottiglia GL 71 or GL 72 Vetro, Tappo FOR 51 Sughero, Capsula C/ALU 90 Metallo and the disposal instruction — the packaging-labelling obligation discharged carefully, on the same site, while the ingredient and nutrition obligation is absent from every surface the estate runs. Greps across the wine page, the e-shop, the press area and the environmental page for ingredien, nutrizion, kcal, energia, dichiarazion, valori, conservant, e-label, elabel, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label and btn-nutrizional are all zero, raw and stripped.",
+      "rejected_because": null,
+      "sources_checked": [
+        "DNS: ascherivini.it 35.214.234.104 (301s to www.matteoascheri.it), ascheri.it and ascheri.eu are other parties",
+        "https://www.matteoascheri.it/robots.txt — Yoast block, 'User-agent: *' with an EMPTY Disallow",
+        "https://www.matteoascheri.it/sitemap_index.xml — page, vini, vigneti, vendemmie, recensioni",
+        "https://www.matteoascheri.it/vini-sitemap.xml — 16 wines, it and en",
+        "https://www.matteoascheri.it/vendemmie-sitemap.xml — 34 harvest pages, 1993 to 2025",
+        "https://www.matteoascheri.it/page-sitemap.xml",
+        "https://www.matteoascheri.it/vini/langhe-nebbiolo/",
+        "https://www.matteoascheri.it/e-shop/",
+        "https://www.matteoascheri.it/press-trade-kit/schede-vini/ — 16 schede for 16 wines",
+        "HEAD and GET https://www.matteoascheri.it/wp-content/uploads/ascheri-scheda-vino-langhe-nebbiolo.pdf",
+        "https://www.matteoascheri.it/etichettatura-ambientale/"
+      ],
+      "checked_at": "2026-08-14T11:45:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "www.matteoascheri.it serves the Yoast block: 'User-agent: *' followed by an empty 'Disallow:', which disallows nothing, and it names sitemap_index.xml. Everything fetched is allowed. No exception was needed or used. (ascherivini.it/robots.txt is a soft 404 — it 302s to the new site's home page — which is why the directives were read on the destination host.)",
+      "note": "THE ESTATE HAS A VINTAGE-INDEXED POST TYPE AND IT IS ABOUT THE WEATHER. /vendemmie/ runs 1993 to 2025 with a page per harvest; it is the season's account, not a per-bottling disclosure. That is the second Italian producer in this batch with a real per-vintage archive indexed on something other than the recipe (Giovanni Almondo's is critics' scores). A per-vintage archive is not a predictor of a declaration and has now failed as one five times."
+    },
+    {
+      "product_number": "7773401",
+      "name": "Ascheri Gavi di Gavi Gavi",
+      "producer": "Matteo Ascheri Azienda Agricola",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.matteoascheri.it/vini/gavi-del-comune-di-gavi/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "evidence": "SAME PRODUCER, SAME SILENCE, AND THIS ONE IS A VINTAGE BEHIND AS WELL. STEP 0: 'Gavi del comune di Gavi' is one of the estate's sixteen wines, filed under its 'Bianchi di Cristina' line, and Systembolaget's 'Ascheri Gavi di Gavi Gavi' is that wine. THE E-SHOP PRICE LIST HAS ROLLED PAST US: 'GAVI DOCG DEL COMUNE DI GAVI 2025 - 12,5' where Systembolaget's item is the 2024 (the strength, 12,5, agrees). That is recorded as vintage_on_source and it is not a rejection, because NO DECLARATION WAS FOUND ANYWHERE TO REJECT. The wine page is undated and ends 'Prodotto in Italia - Contiene solfiti' after vitigno 100% Cortese, harvest window, fermentation, tasting note, service temperature, ageing potential and 'Formati disponibili: 0,75 l'. Its scheda, /wp-content/uploads/ascheri-scheda-vino-gavi.pdf, Last-Modified 12 June 2025, 1 978 288 bytes, one page, was downloaded and its text extracted: the web page typeset, ending on the same origin-and-sulphites line, with zero occurrences of ingredien, nutrizion, kcal, energia, dichiarazion, allergen and annata. The estate's environmental-labelling page covers this wine explicitly — GAVI D.O.C.G. DEL COMUNE DI GAVI is named in the 'VINI CLASSICI' group with its Bottiglia GL 71, Tappo FOR 51 and Capsula C/ALU 90 — so the producer has discharged the packaging decree for this exact wine and published no ingredient list for it.",
+      "rejected_because": null,
+      "sources_checked": [
+        "https://www.matteoascheri.it/vini/gavi-del-comune-di-gavi/",
+        "https://www.matteoascheri.it/e-shop/",
+        "HEAD and GET https://www.matteoascheri.it/wp-content/uploads/ascheri-scheda-vino-gavi.pdf",
+        "https://www.matteoascheri.it/etichettatura-ambientale/"
+      ],
+      "checked_at": "2026-08-14T11:45:00Z",
+      "robots_disallowed": false,
+      "robots_reasoning": "Same host and same empty Yoast Disallow as product 7854301. No exception was needed or used.",
+      "note": "A NEW GREP LIE: 'kJ' matched raw on four Ascheri pages and every hit is CleanTalk's anti-spam field name ct_checkjs / checkJS. 'checkjs' contains 'kj', so any WordPress running CleanTalk will look like it states an energy value. Add it beside the existing checkJQuery note. The estate's third Swedish wine in this slice, and the sixteen-wine press area at /press-trade-kit/schede-vini/, mean one more Ascheri wine can be closed on the schede alone: all sixteen are the same one-page template."
     }
   ],
-  "updated_at": "2026-08-14T11:05:00Z",
+  "updated_at": "2026-08-14T11:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -12538,6 +12597,11 @@
       "at": "2026-08-14T11:05:00Z",
       "batch": "3 — Italy, eighth batch: Giovanni Almondo (2 wines)",
       "result": "2 attempted, 0 found, 2 not found. A Monta d'Alba estate with a WordPress 'vino' post type holding its whole ten-wine range, both Swedish cuvees on it under their own names, and both pages undated: soil, altitude, exposure, ageing, service temperature, tasting note, and zero hits for every ingredient, nutrition and vendor term, raw and stripped, with no PDF on the page at all. NEW SHAPE WORTH THE NAME: the estate DOES keep a vintage-indexed page — /bricco-ciliegie-th-ita/, a 'Tasting History' of Antonio Galloni scores by year — so a per-vintage archive can exist and be indexed on reviews rather than on recipes. The estate's .it domains do not resolve; it is on giovannialmondo.com."
+    },
+    {
+      "at": "2026-08-14T11:45:00Z",
+      "batch": "3 — Italy, eighth batch: Matteo Ascheri Azienda Agricola (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found. A Bra estate whose E-Shop page is a price list stating 'Annata e % Vol' for every wine — 'LANGHE DOC NEBBIOLO 2024 - 13,5' matches Systembolaget's vintage AND strength exactly, and 'GAVI DOCG DEL COMUNE DI GAVI 2025 - 12,5' has rolled a vintage past ours. Neither the undated wine pages, nor the sixteen press-area schede (one fetched per wine, both the web page typeset), nor the e-shop carries anything but 'Prodotto in Italia - Contiene solfiti'. THE ASYMMETRY AGAIN, AND SHARPER THAN USUAL: /etichettatura-ambientale/ discharges the packaging decree carefully, per wine group, naming both our wines with GL 71 / FOR 51 / C/ALU 90 tables, on the same site that publishes no ingredient list at all. New grep lie: CleanTalk's ct_checkjs field makes 'kJ' match raw on every page of a WordPress running it."
     }
   ]
 }
