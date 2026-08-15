@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, ninth batch, open 2026-08-14. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after eight batches: 78 producers, 174 wines, 9 found, 154 not_found, 11 rejected; the ninth batch continues from a pool of 101 untouched wines, one producer each.",
-  "attempted": 442,
+  "attempted": 443,
   "found": 32,
-  "not_found": 362,
+  "not_found": 363,
   "rejected": 48,
   "declarations": [
     {
@@ -12689,9 +12689,38 @@
       "evidence": "THE RANGE PAGE DECIDED WHICH WINE THIS IS, AND THEN THE VINTAGE CLOSED IT — but there was nothing to reject, because the estate declares nothing anywhere. STEP 0 AND THE CUVEE: 'Selezione' in Systembolaget's name is not a cuvee word, it is Elena Walch's own entry line. The range page /it-IT/vini groups the catalogue under SELEZIONE, FAVORITES, KRISTALLBERG, SINGLE VINEYARD VIGNA 'KASTELAZ', SINGLE VINEYARD VIGNA 'CASTEL RINGBERG' and GRANDE CUVEE, and SELEZIONE holds eleven wines including a plain 'Pinot Bianco, Alto Adige DOC'. The estate makes exactly two Pinot Biancos and THE OTHER ONE IS A TRAP: 'Pinot Bianco \"Kristallberg\"' has its own single-vineyard tier named after itself, is a 600 m mountain selection at 25,80 EUR against the Selezione's 14,70 EUR, and — awkwardly — IT is the one currently on the 2024 while the Selezione is on the 2025. Taking the wine that matched the vintage would have been the wrong bottle. VINTAGE: /prodotto/Pinot-Bianco states 'Annata 2025' in its own spec table; Systembolaget sells the 2024. The site keeps one page per cuvee, edited forward, and it has rolled past our bottling — no 2024 Selezione Pinot Bianco page exists on the site and the awards list confirms the 2024 has already been reviewed and superseded. NO DECLARATION ON ANY SURFACE, so this is not_found and not a rejection. Raw and stripped greps on both product pages for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti and vincod are all zero. The only two PDFs a product page links are a per-wine 'Scarica scheda prodotto' and a company-wide 'Raccolta differenziata'. THE SCHEDA IS PER VINTAGE AND IS STILL NOT A DECLARATION: the Kristallberg one is headed 'Pinot Bianco \"Kristallberg\" 2024', carries a VENDEMMIA 2024 paragraph about the weather, and its data block gives Alcool 13,5% Vol., Acidita totale 5,9 g/L, Zucchero residuo 1,4 g/L, Varieta 100% Pinot Bianco, Bottiglie da 0,75 l, Invecchiamento and Denominazione — no ingredient list, no energy value, not even a sulphite line. One template, so one PDF settles the format for all 34 wines. THE DOWNLOAD CENTRE WAS CHECKED FOR THE LOEWEN PATTERN AND HAS NO eLABELS: /it-IT/downloads lists every wine in the catalogue with exactly two documents each, 'Scheda tecnica' and 'Fotografie', and nothing else. The site's only regulated disclosure is the packaging one — raccolta-differenziata-elena-walch.pdf, one file for the whole company — which is the Italian packaging asymmetry again, now at a large Alto Adige house.",
       "rejected_because": null,
       "checked_at": "2026-08-15T09:55:00Z"
+    },
+    {
+      "product_number": "5929201",
+      "name": "Damilano Barbera d'Asti",
+      "producer": "Damilano",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "DNS: damilanovini.com does not resolve; damilano.com resolves to 23.227.38.65 (Shopify)",
+        "https://damilano.com/robots.txt and https://www.damilano.com/sitemap_products_1.xml — a different Damilano, see below",
+        "https://cantinedamilano.it/robots.txt (500)",
+        "https://www.cantinedamilano.it/robots.txt (500)",
+        "http://cantinedamilano.it/robots.txt (500)",
+        "web search, which identified cantinedamilano.it as the estate's site and showed it makes two Barbera d'Asti"
+      ],
+      "server_rendered": null,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "NOT FETCHED, AND THIS IS THE REASON. cantinedamilano.it answers /robots.txt with a 500 Internal Server Error — an Apache default error body, identically on the apex, on www and over plain http, so it is not a transient blip on one edge. RFC 9309 section 2.3.1.4, 'Unreachable Status': 'If the robots.txt file is unreachable due to server or network errors, this means the robots.txt file is undefined and the crawler MUST assume complete disallow', with 500-599 named as the HTTP case. No page on the host was requested. The 2026-07-30 e-label exception does not reach this: it covers a page that is itself the regulated disclosure, and no e-label URL for this producer is held — an ordinary marketing site keeps its robots.txt in full, and an undefined robots.txt is stricter than a permissive one, not looser. This is a policy question worth the owner's attention rather than a finder's: a 5xx robots.txt is a misconfiguration and not a refusal, but the RFC's requirement is unambiguous and inventing an exception is not this agent's to make.",
+      "evidence": "CLOSED WITHOUT FETCHING A PAGE, ON ROBOTS.TXT ALONE — see robots_reasoning. What was established before that point is worth recording so a later run does not repeat it. THE DOMAIN IS A NEAR-NAME TRAP OF THE KIND THE SEVENTH BATCH FOUND AT MUCCHIETTO.IT: damilano.com resolves and is a live Shopify storefront, and it is a LEATHER GOODS BRAND — its product sitemap's first thousand URLs are wallets, belts, card cases and luggage tags ('cognac-signato-ladies-wallet', 'croco-leather-coaster-black'). Not one wine. damilanovini.com does not resolve at all. The winery is cantinedamilano.it, the Barolo estate at Cannubi founded 1890 as Borgogno and renamed for Giacomo Damilano in 1935. THE CUVEE WOULD ALSO HAVE NEEDED CARE: the estate makes TWO Barbera d'Asti DOCG, a plain one and a 'ZeroSette', with separate pages (/en/wines/barbera-dasti-docg/ and /en/wines/barbera-dasti-docg-zerosette/). Systembolaget's item is the plain 'Damilano Barbera d'Asti', 14,5 % vol, 750 ml, 2024, so the ZeroSette would have been the wrong bottle. Nothing is known about whether either page carries a declaration and nothing should be assumed: this is not_found because the host could not be read, not because the producer publishes nothing.",
+      "rejected_because": null,
+      "checked_at": "2026-08-15T10:15:00Z"
     }
   ],
-  "updated_at": "2026-08-15T09:55:00Z",
+  "updated_at": "2026-08-15T10:15:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
