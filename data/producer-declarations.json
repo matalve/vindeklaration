@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, tenth batch, open 2026-08-15. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after nine batches: 90 producers, 186 wines, 10 found, 164 not_found, 12 rejected; the tenth batch continues from a pool of 93 untouched wines, one producer each.",
-  "attempted": 451,
+  "attempted": 452,
   "found": 32,
-  "not_found": 370,
+  "not_found": 371,
   "rejected": 49,
   "declarations": [
     {
@@ -12961,9 +12961,37 @@
       "evidence": "THE RIGHT WINE AND THE RIGHT VINTAGE, AND NO DECLARATION ANYWHERE ON EITHER SURFACE. The estate is Azienda Agricola G.D. Vajra, Vergne di Barolo, P.IVA 00624560041, and its site has one page per wine. Barbera d'Alba DOC Superiore is a distinct wine from the plain Barbera d'Alba DOC — the sitemap lists both, /it/barbera-dalba-doc and /it/barbera-dalba-doc-superiore — so the cuvée is right and it is not the sister bottling. THE PAGE HAS A REAL VINTAGE CONTROL, which is rare in Italy: a `div class=annata` select naming 2024, 2023, 2022, 2021 and 2016, each with its own scheda tecnica PDF, so our 2024 is the producer's own current release and is reachable without guessing. RAW AND STRIPPED GREPS ARE SILENT: ingredien, nutrizion, solfit, kcal, energia, dichiarazion, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti and goalstec are all zero on the wine page, in the raw HTML as well as the stripped text. The only outbound hosts in the page are Google, Facebook, Twitter, Instagram, YouTube, Cookiebot, bootstrapcdn, a Divinea booking widget and the site's own agency — no e-label vendor. `qualita` matched once and it is the Equalitas sustainability logo, not a Rocca-delle-Macìe-style dedicated domain; add Equalitas to the false-positive list. THE 2024 SCHEDA WAS READ IN FULL AND IS THE ITALIAN NEAR-MISS AGAIN: 'SUPERIORE 2024', description, VARIETÀ 100% Barbera, vineyards, cultivation, the vintage report, harvest dates, vinification, 'Imbottigliato il 18 agosto 2025', tasting note and 'FORMATO: 0,75'. No ingredient list, no nutrition table, no energy value — and it does not even state the alcohol, so it could not have been alcohol-matched either. NO OTHER SURFACE: the product page's 'Aggiungi al carrello' leads to /it/login, a reserved trade area, which is a login wall and absolute; no shop or e-label subdomain exists in DNS and the wildcard control confirms it. The trade page's 'Etichette vini' accordion is the Italian press-kit pattern the ninth batch identified — undated front-label PNGs named '…-nv' for no vintage, not back labels and not a compliance surface.",
       "rejected_because": null,
       "checked_at": "2026-08-15T13:00:00Z"
+    },
+    {
+      "product_number": "7499401",
+      "name": "Le Creete",
+      "producer": "Ottella",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.ottella.it/vini/lugana-doc-le-creete/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.ottella.it/robots.txt (200, the stock WordPress /wp-admin/ rule)",
+        "https://www.ottella.it/sitemap_index.xml (five children) and page-sitemap.xml (31 Italian URLs, one per wine under /vini/) and product-sitemap.xml (17 URLs, all of them cellar-door tastings, not wines)",
+        "https://www.ottella.it/vini/lugana-doc-le-creete/ (200, 3,82 MB)",
+        "https://www.ottella.it/sim/shop/ (200, 3,72 MB, an empty WooCommerce listing)",
+        "https://www.ottella.it/wp-content/uploads/2025/05/OTTELLA-scheda-ITA-LE-CREETE-1.pdf — HEAD then read in full and text-extracted"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "ottella.it serves the stock WordPress 'Disallow: /wp-admin/' with 'Allow: /wp-admin/admin-ajax.php'. Everything fetched is outside it; no exception was needed.",
+      "evidence": "THE CUVÉE IS RIGHT, THE PAGE IS UNDATED, AND NOTHING IS DECLARED. Ottella di Francesco e Michele Montresor S.S.A., San Benedetto di Lugana, P.IVA 03867510236, makes three Luganas — the base Lugana DOC, Le Creete and the Riserva Molceo — and each has its own page, so Le Creete is the cuvée and not a sister bottling. Systembolaget files the wine under Lombardia and the estate is on the Veronese side of the lake; Lugana DOC straddles the border, so that is not a mismatch. STEP 2 CLOSES IT: the wine page states no vintage anywhere. It gives Vitigno, Zona di produzione, Vendemmia, Metodo di produzione, Descrizione sensoriale and a list of awards by year — a page about a wine, not about a bottling. THE GREPS ARE SILENT. The page is 3,82 MB, almost all of it inline base64 images, and the four raw `kcal` hits are inside those data URIs — the documented base64 false positive. With the data URIs removed the page is 291 kB and ingredien, nutrizion, solfit, kcal, energia, dichiarazion, annata, etichett, allergen, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti, goalstec and qualita are ALL ZERO. The only third-party hosts are Google, Facebook, Instagram, iubenda, cdnjs and the site's agency. THE SCHEDA IS THE ITALIAN NEAR-MISS AND IT IS UNDATED TOO: the single per-wine document, uploaded under /2025/05/, is a one-page datasheet giving vitigni, zone, training system, yield (90 q.li/ha), harvest, vinification, sensory description and food pairing — no vintage, no alcohol, no ingredient list, no nutrition table. THERE IS NO SHOP: the /sim/ subsite is a WooCommerce whose shop page lists no products at all, and the main site's only WooCommerce products are cellar-door tasting experiences. So there is no second surface of the kind that produced both of the ninth batch's finds.",
+      "rejected_because": null,
+      "checked_at": "2026-08-15T13:25:00Z"
     }
   ],
-  "updated_at": "2026-08-15T13:00:00Z",
+  "updated_at": "2026-08-15T13:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
