@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, ninth batch, open 2026-08-14. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after eight batches: 78 producers, 174 wines, 9 found, 154 not_found, 11 rejected; the ninth batch continues from a pool of 101 untouched wines, one producer each.",
-  "attempted": 445,
+  "attempted": 446,
   "found": 32,
   "not_found": 365,
-  "rejected": 48,
+  "rejected": 49,
   "declarations": [
     {
       "product_number": "5106001",
@@ -12778,9 +12778,42 @@
       "evidence": "THE FILE NAME CLOSED IT, WHICH IS THE FIXED PROBE'S STEP 5 WORKING EXACTLY AS INTENDED. STEP 0: Systembolaget's supplier string is 'Sella & Mosca Commerciale Srl' and its product name spells the house 'Sella y Mosca', but the estate is Sella&Mosca of Alghero, P.IVA IT00072180904, now part of Terra Moretti Vino, and Medeus is its Cannonau di Sardegna DOC — a wine with its own page in the estate's own catalogue, so the name is the producer's own and the cuvee is right. It is also NOT the estate's other Cannonau, the 'Cannonau di Sardegna Riserva' (id_28), which is a separate wine on the same site. THE WINE PAGE IS UNDATED: 13 kB of HTML, 1,2 kB of text — name, denomination, one paragraph, Vitigno 100 % Cannonau, Posizione Sardegna, four colour descriptors, Profumo, Gusto. No vintage, no alcohol, no bottle size, no ingredient list, no nutrition. Raw and stripped greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti and vincod are all zero. THE ONE PER-WINE DOCUMENT IS THE WRONG VINTAGE AND SAYS SO IN ITS OWN NAME: the 'Scheda PDF' anchor points at /public/210225-162156-sellamoscamedeus2023.pdf. The trailing 2023 is the vintage and the leading 210225-162156 is a publication timestamp; Systembolaget sells the 2024. Even if that datasheet carried an ingredient list — and no Italian scheda in this file ever has — it would be a rejection on vintage, so the download was not worth a request against a Disallow. NO OTHER SURFACE: the whole sitemap is 51 URLs, all of them the estate, the terroir, the people and the cellar door; there is no shop, no e-label tree and no shop subdomain in DNS. The group site the footer links, terramorettivino.com, is not a surface either — it is a single line of HTML, '<script>window.location=...terramoretti.it</script>', with no robots.txt.",
       "rejected_because": null,
       "checked_at": "2026-08-15T10:45:00Z"
+    },
+    {
+      "product_number": "5083501",
+      "name": "Caruso & Minini Lillo Grillo",
+      "producer": "Caruso & Minini Srl",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://sel.goalstec.it/?codArt=LILLO&codDitta=CARUSO",
+      "source_type": "e_label",
+      "raw_ingredients": "Uva biologica\nConservanti e Antiossidanti:\nAcido L-ascorbico\nANIDRIDE SOLFOROSA\nAgenti Stabilizzanti:\nGomma arabica\nProdotto in Italia",
+      "language": "it",
+      "vintage_on_source": null,
+      "market": "EU",
+      "nutrition_per_100ml": "Valore energetico 309 kJ; Valore energetico 74 kcal; Quantita grassi 0 g; - di cui Acidi Grassi Saturi 0 g; Carboidrati 2,5 g; - di cui Zuccheri 0,6 g; Proteine 0 g; Sale 0 g",
+      "sources_checked": [
+        "https://www.carusoeminini.it/robots.txt (301 to carusoeminini.com)",
+        "https://carusoeminini.com/sitemap_index.xml and /product-sitemap.xml (34 products)",
+        "https://carusoeminini.com/product/lillo-grillo/",
+        "https://sel.goalstec.it/robots.txt (403, an S3-style 'AccessDenied' body)",
+        "https://sel.goalstec.it/?codArt=LILLO&codDitta=CARUSO (the e-label shell)",
+        "https://sel.goalstec.it/js/index.js (to learn where the shell loads its data from)",
+        "https://api.sel.goalstec.it/robots.txt (403, API Gateway's 'Missing Authentication Token')",
+        "https://api.sel.goalstec.it/label/ingr?codArt=LILLO&codAz=CARUSO",
+        "https://api.sel.goalstec.it/label/nutr?codArt=LILLO&codAz=CARUSO"
+      ],
+      "server_rendered": false,
+      "elabel_platform": "SEL by Goals Tec (goalstec.it) — a new Italian e-label vendor, sel.goalstec.it, 5,4 kB Bootstrap shell with empty tbody elements filled from https://api.sel.goalstec.it/label/{ingr,nutr,env}?codArt={art}&codAz={company}",
+      "robots_disallowed": false,
+      "robots_reasoning": "Both goalstec hosts answer /robots.txt with a 403 and no directives — sel.goalstec.it with an S3 'AccessDenied' body, api.sel.goalstec.it with API Gateway's 'Missing Authentication Token', which is that service's response to a route that does not exist. Under RFC 9309 section 2.3.1.3 a 4xx on robots.txt is 'Unavailable' status: the file does not exist, no rules apply and the crawler may access the resources. That is the opposite of the 5xx case (see product 5929201, Damilano, where an 'Unreachable' 500 means the crawler MUST assume complete disallow), and the distinction matters. Note also that the 403s are on /robots.txt only: both target URLs answered 200, so no technological measure was met and none was worked around. The three URLs fetched on these hosts are the ones the producer's own product page links and the ones that page's own script requests for this one article — no traversal, no enumeration, no other codArt tried. carusoeminini.com serves two merging 'User-agent: *' groups (WooCommerce plus an empty Yoast Disallow) and nothing fetched there is disallowed.",
+      "evidence": "A COMPLETE DECLARATION, FOUND AND READ, AND REJECTED BECAUSE THE VINTAGE CANNOT BE ESTABLISHED FROM ANY SURFACE. THE IDENTITY IS OTHERWISE EXACT. Producer: Caruso & Minini S.r.l., Corso Piersanti Mattarella 1/3, Marsala (TP), P.IVA 01898280811, named in its own site's footer; the e-label is keyed codAz=CARUSO and its payload returns 'Codice Azienda': 'CARUSO'. Cuvee: the shop product is 'Lillo Grillo' and the e-label's own 'Descrizione Articolo' reads 'LILLO GRILLO BIOLOGICO' — Systembolaget's item is 'Caruso & Minini Lillo Grillo' and is flagged organic, and the ingredient list opens 'Uva biologica', so the organic status agrees too. The estate's other Grillo, 'Tagos Vendemmia Tardiva Grillo', is a separate product and not this one. Alcohol: the shop page states 'Gradazione alcolica 12,5% Vol.' against Systembolaget's 12,5 — exact. Market: an Italian vendor writing Italian, and the shell's own script geo-gates the page to EU member states plus GB and KR, so this is the EU disclosure. THE VINTAGE IS NOWHERE. The e-label token is codArt=LILLO, an ARTICLE code and not a vintage code, and the payload's 'InfoProdotto' object holds exactly one field, 'Prodotto in': 'Prodotto in Italia'. The vendor's own script shows the platform supports 'Capacita', 'Gradazione', 'Imbottigliato da', 'Classificazione' and a commented-out 'Lotti' block — Caruso & Minini has populated none of them. The only date in the payload is 'Data Ultima Trasmissione': '2026/01/22 10:35', a transmission timestamp, not a vintage. The producer's own linking page states no annata either; its only vintage-shaped datum is the WooCommerce SKU, 'COD: LILL2501', whose 25 points at the 2025 and not at Systembolaget's 2024. So the one clue that exists points AWAY from our bottle. Recorded as rejected rather than not_found on the Houchart principle: a complete mandated set was found and read, and it is the match that failed. THE DECLARATION IS QUOTED IN FULL ABOVE so that if the vintage is ever settled — a Lotti block, an Annata field, or a producer page that dates itself — this attaches with no refetch. NOTE FOR THE VENDOR PROFILE: unlike IoAgri, whose token is also product-keyed, this one at least states the company and the article description, so it can identify its producer and its wine; only the year is missing.",
+      "rejected_because": "The e-label states no vintage: its token is an article code (codArt=LILLO), its payload's only date is a transmission timestamp of 2026-01-22, and the producer's own linking page states no annata. Systembolaget sells the 2024, and the only vintage-shaped evidence anywhere — the shop's SKU LILL2501 — points at the 2025. A vintage that cannot be established is a rejection, not an approximation.",
+      "checked_at": "2026-08-15T11:10:00Z"
     }
   ],
-  "updated_at": "2026-08-15T10:45:00Z",
+  "updated_at": "2026-08-15T11:10:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
