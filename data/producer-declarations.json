@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, tenth batch, open 2026-08-15. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after nine batches: 90 producers, 186 wines, 10 found, 164 not_found, 12 rejected; the tenth batch continues from a pool of 93 untouched wines, one producer each.",
-  "attempted": 452,
+  "attempted": 453,
   "found": 32,
-  "not_found": 371,
+  "not_found": 372,
   "rejected": 49,
   "declarations": [
     {
@@ -12989,9 +12989,41 @@
       "evidence": "THE CUVÉE IS RIGHT, THE PAGE IS UNDATED, AND NOTHING IS DECLARED. Ottella di Francesco e Michele Montresor S.S.A., San Benedetto di Lugana, P.IVA 03867510236, makes three Luganas — the base Lugana DOC, Le Creete and the Riserva Molceo — and each has its own page, so Le Creete is the cuvée and not a sister bottling. Systembolaget files the wine under Lombardia and the estate is on the Veronese side of the lake; Lugana DOC straddles the border, so that is not a mismatch. STEP 2 CLOSES IT: the wine page states no vintage anywhere. It gives Vitigno, Zona di produzione, Vendemmia, Metodo di produzione, Descrizione sensoriale and a list of awards by year — a page about a wine, not about a bottling. THE GREPS ARE SILENT. The page is 3,82 MB, almost all of it inline base64 images, and the four raw `kcal` hits are inside those data URIs — the documented base64 false positive. With the data URIs removed the page is 291 kB and ingredien, nutrizion, solfit, kcal, energia, dichiarazion, annata, etichett, allergen, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti, goalstec and qualita are ALL ZERO. The only third-party hosts are Google, Facebook, Instagram, iubenda, cdnjs and the site's agency. THE SCHEDA IS THE ITALIAN NEAR-MISS AND IT IS UNDATED TOO: the single per-wine document, uploaded under /2025/05/, is a one-page datasheet giving vitigni, zone, training system, yield (90 q.li/ha), harvest, vinification, sensory description and food pairing — no vintage, no alcohol, no ingredient list, no nutrition table. THERE IS NO SHOP: the /sim/ subsite is a WooCommerce whose shop page lists no products at all, and the main site's only WooCommerce products are cellar-door tasting experiences. So there is no second surface of the kind that produced both of the ninth batch's finds.",
       "rejected_because": null,
       "checked_at": "2026-08-15T13:25:00Z"
+    },
+    {
+      "product_number": "7469401",
+      "name": "Abbazia di Novacella Kerner Valle Isarco",
+      "producer": "Abbazia di Novacella",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.kloster-neustift.it/it/tenuta/vini/kerner/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.abbazianovacella.it/robots.txt — 302s to https://www.kloster-neustift.it/it/, so the two names are one site",
+        "https://www.kloster-neustift.it/robots.txt (200, Allow: / with /t3lib/, /typo3/, /typo3conf/, /*?id=*, /*tx_powermail_pi1 and /*tx_form_formframework disallowed)",
+        "https://www.kloster-neustift.it/it/sitemapPages.xml — 200 but 53 bytes and empty",
+        "https://www.kloster-neustift.it/it/ (200, 74,9 kB) — the nav gave /it/tenuta/vini/ and the shop host",
+        "https://www.kloster-neustift.it/it/tenuta/vini/ (200, 34 wines, one page each)",
+        "https://www.kloster-neustift.it/it/tenuta/vini/kerner/ (200, 72 kB)",
+        "https://www.kloster-neustift.it/it/tenuta/vini/kerner/?tx_extwines_detailview[action]=pdf&…&year=349 — the 2024 Scheda del Vino, a POST form, submitted once and text-extracted",
+        "https://onlineshop.kloster-neustift.it/robots.txt (200) , /it_sitemap.xml (101 URLs) and /it/vini-e-distillati/ (200, the wine category listing)",
+        "NOT fetched: https://onlineshop.kloster-neustift.it/it/catalog/product/view/id/27/s/sudtirol-eisacktaler-kerner-doc/category/3/ — see robots_reasoning"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "The shop host onlineshop.kloster-neustift.it serves TWO 'User-agent: *' groups, which RFC 9309 merges: 'Allow: /' together with 'Disallow: /catalog/', 'Disallow: /*/catalog/', 'Disallow: /*?' and the usual Magento paths. EVERY wine product page on that shop is under /it/catalog/product/view/id/{n}/, so the whole wine catalogue is disallowed to us, and THE KERNER PRODUCT PAGE WAS NOT FETCHED. The 2026-07-30 e-label exception does not reach it: a Magento product page is an ordinary commerce surface, not the regulated disclosure, and no e-label URL was ever held here. The allowed category listing /it/vini-e-distillati/ was read instead and is the source of the product URL quoted above. On the marketing host kloster-neustift.it nothing relevant is disallowed — the scheda's form action carries tx_extwines_detailview parameters, which is neither the /*?id=* nor the tx_form_formframework rule.",
+      "evidence": "THE EXACT BOTTLE IS ON THE PRODUCER'S PAGE, WITH A PER-VINTAGE ANALYSIS, AND THERE IS STILL NO DECLARATION. Abbazia di Novacella / Kloster Neustift, Varna (BZ) — abbazianovacella.it and kloster-neustift.it are the same site, the first redirecting to the second. THE CUVÉE IS THE CLASSIC LINE, NOT THE PRAEPOSITUS: the estate lists /it/tenuta/vini/kerner/, /it/tenuta/vini/kerner-praepositus/ and /it/tenuta/vini/kerner-passito-praepositus/ as three separate wines, and Systembolaget's 'Kerner Valle Isarco' with no tier word is the first — the range-tier check the ninth batch called for. THE VINTAGE AND THE STRENGTH BOTH MATCH EXACTLY. The page carries a `select id=vintage` naming 2025, 2024, 2023, 2022 and 2021, each with its own Dati analitici block; the 2024 block (year-349) reads 'Alcool svolto: 13,50% vol. / Acidità: 6,50 g/l / Estratto secco netto: 19,80 g/l / Zuccheri residui: 3,00 g/l' against Systembolaget's 13,5 % — exact. This is one of the few Italian producers in the file with a real vintage control, alongside Ricasoli, Vajra and La Spinetta. THE GREPS ARE SILENT ON EVERY READABLE SURFACE: ingredien, nutrizion, solfit, kcal, energia, dichiarazion, annata, etichett, allergen, elabel, zutat, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti, goalstec and qr are all zero on the wine page, and all zero on the shop's wine category listing too. THE PER-VINTAGE SCHEDA WAS OBTAINED AND READ AND IS THE NEAR-MISS: submitting the 2024 'Scheda del Vino' form returns a PDF headed with the wine, the sensory note, Zona di produzione, Proposte di servizio, Produzione, the Dati analitici and a 'Report Annata' narrative for 2024. Zero hits for ingredien, Zutat, nutrizion, solfit, kcal, energia and allergen. No ingredient list, no nutrition table, no energy value. WHAT REMAINS UNKNOWN AND IS RECORDED AS SUCH: the estate's Magento shop is disallowed to us in full for product pages, so if a declaration is printed inline there — the shape that produced both of the ninth batch's finds — this run could not see it. That is a limit of what was read, not a finding about the producer.",
+      "rejected_because": null,
+      "checked_at": "2026-08-15T13:55:00Z"
     }
   ],
-  "updated_at": "2026-08-15T13:25:00Z",
+  "updated_at": "2026-08-15T13:55:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
