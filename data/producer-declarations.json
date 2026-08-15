@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, ninth batch, open 2026-08-14. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after eight batches: 78 producers, 174 wines, 9 found, 154 not_found, 11 rejected; the ninth batch continues from a pool of 101 untouched wines, one producer each.",
-  "attempted": 446,
+  "attempted": 447,
   "found": 32,
-  "not_found": 365,
+  "not_found": 366,
   "rejected": 49,
   "declarations": [
     {
@@ -12811,9 +12811,40 @@
       "evidence": "A COMPLETE DECLARATION, FOUND AND READ, AND REJECTED BECAUSE THE VINTAGE CANNOT BE ESTABLISHED FROM ANY SURFACE. THE IDENTITY IS OTHERWISE EXACT. Producer: Caruso & Minini S.r.l., Corso Piersanti Mattarella 1/3, Marsala (TP), P.IVA 01898280811, named in its own site's footer; the e-label is keyed codAz=CARUSO and its payload returns 'Codice Azienda': 'CARUSO'. Cuvee: the shop product is 'Lillo Grillo' and the e-label's own 'Descrizione Articolo' reads 'LILLO GRILLO BIOLOGICO' — Systembolaget's item is 'Caruso & Minini Lillo Grillo' and is flagged organic, and the ingredient list opens 'Uva biologica', so the organic status agrees too. The estate's other Grillo, 'Tagos Vendemmia Tardiva Grillo', is a separate product and not this one. Alcohol: the shop page states 'Gradazione alcolica 12,5% Vol.' against Systembolaget's 12,5 — exact. Market: an Italian vendor writing Italian, and the shell's own script geo-gates the page to EU member states plus GB and KR, so this is the EU disclosure. THE VINTAGE IS NOWHERE. The e-label token is codArt=LILLO, an ARTICLE code and not a vintage code, and the payload's 'InfoProdotto' object holds exactly one field, 'Prodotto in': 'Prodotto in Italia'. The vendor's own script shows the platform supports 'Capacita', 'Gradazione', 'Imbottigliato da', 'Classificazione' and a commented-out 'Lotti' block — Caruso & Minini has populated none of them. The only date in the payload is 'Data Ultima Trasmissione': '2026/01/22 10:35', a transmission timestamp, not a vintage. The producer's own linking page states no annata either; its only vintage-shaped datum is the WooCommerce SKU, 'COD: LILL2501', whose 25 points at the 2025 and not at Systembolaget's 2024. So the one clue that exists points AWAY from our bottle. Recorded as rejected rather than not_found on the Houchart principle: a complete mandated set was found and read, and it is the match that failed. THE DECLARATION IS QUOTED IN FULL ABOVE so that if the vintage is ever settled — a Lotti block, an Annata field, or a producer page that dates itself — this attaches with no refetch. NOTE FOR THE VENDOR PROFILE: unlike IoAgri, whose token is also product-keyed, this one at least states the company and the article description, so it can identify its producer and its wine; only the year is missing.",
       "rejected_because": "The e-label states no vintage: its token is an article code (codArt=LILLO), its payload's only date is a transmission timestamp of 2026-01-22, and the producer's own linking page states no annata. Systembolaget sells the 2024, and the only vintage-shaped evidence anywhere — the shop's SKU LILL2501 — points at the 2025. A vintage that cannot be established is a rejection, not an approximation.",
       "checked_at": "2026-08-15T11:10:00Z"
+    },
+    {
+      "product_number": "7501401",
+      "name": "Toscana Vermentino Casanova della Spinetta",
+      "producer": "La Spinetta",
+      "country": "Italien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://www.la-spinetta.com/prodotto/toscana-vermentino-igt/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.la-spinetta.com/robots.txt",
+        "https://www.la-spinetta.com/sitemap_index.xml (five children)",
+        "https://www.la-spinetta.com/prodotto-sitemap.xml (57 URLs, it and en)",
+        "https://www.la-spinetta.com/page-sitemap.xml (42 URLs)",
+        "https://www.la-spinetta.com/prodotto/toscana-vermentino-igt/",
+        "https://www.la-spinetta.com/wp-content/uploads/2020/02/6_Vermentino_2025.pdf (the 2025 scheda tecnica)",
+        "https://www.la-spinetta.com/wp-content/uploads/2020/01/etichetta-la-spinetta-toscana-vermentino-igt.pdf (the label artwork)",
+        "https://www.la-spinetta.com/area-download/"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "la-spinetta.com serves the stock WordPress 'User-agent: * / Disallow: /wp-admin/ / Allow: /wp-admin/admin-ajax.php' with a Sitemap line. Nothing fetched here is disallowed and no exception was needed.",
+      "evidence": "OUR EXACT BOTTLING IS DOCUMENTED, PER VINTAGE, BY THE PRODUCER, AND THE DOCUMENT IS STILL NOT A DECLARATION — the strongest form of the Italian near-miss so far, because for once the vintage is not the obstacle. STEP 0: La Spinetta is the Rivetti family's estate, P.iva 01231050053, and Casanova della Spinetta is its Tuscan property at Terricciola (Pisa), named in the site's own footer with its own address; Systembolaget's 'Toscana Vermentino Casanova della Spinetta' is that estate's Toscana Vermentino IGT and has its own product page. THE ESTATE PUBLISHES A PER-VINTAGE ARCHIVE — Italy's fifth in this file: the product page's 'Scheda tecnica (Seleziona l'annata)' select names one PDF per year for 2025, 2024, 2023, 2022, 2021, 2020 and 2019, so the vintage is reachable from the producer's own control and never by guessing. Systembolaget sells the 2025 and the 2025 sheet exists: 6_Vermentino_2025.pdf, headed 'Toscana Vermentino 2025'. WHAT IS ON IT: Denominazione vino, Varieta uva 100% Vermentino, 'Formati disponibili: 750 ml e Magnum', spontaneous fermentation with indigenous yeasts, four months on lees in steel, three tasting paragraphs, 'Grado alcolico: 13% vol', 'Acidita: 6.2 g/l', and the vineyard's comune, aspect, area, altitude and soil. NO INGREDIENT LIST, NO NUTRITION TABLE, NO ENERGY VALUE, no sulphite line. Note the strength: the sheet says 13 % vol where Systembolaget says 12,5 — 0,5 pp, at the tolerance, and moot here since there is nothing to attach. NO E-LABEL ANYWHERE. Raw and stripped greps on the product page for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti and vincod are all zero; the 19 raw '.pdf' hits are the seven vintage schede, the still-life image, the label, the critic scores and a /zip.php form that bundles them. THE DOWNLOAD CENTRE WAS CHECKED FOR THE LOEWEN PATTERN AND HAS NO eLABELS: /area-download/ offers exactly five content types — Foto alta risoluzione, Schede tecniche, Still life bottiglie, Etichette, Valutazione della critica — one ZIP per wine, and nothing regulatory. This is the second Italian estate in this batch (with Elena Walch) whose Download Center is explicitly a press kit and not a compliance surface, which is worth knowing: the German 'Download Center + eLabels' signature does not transfer to Italy on the words alone. AND THE 'ETICHETTA' DOWNLOAD IS NOT THE BACK LABEL: etichetta-la-spinetta-toscana-vermentino-igt.pdf is a single-page PDF with ZERO extractable text — pure artwork — and its Last-Modified is 2022-11-04, more than a year before the 8 December 2023 obligation, so it cannot carry the mandated list. Worth remembering the next time an Italian product page offers an 'Etichette' download: check the Last-Modified before spending the read.",
+      "rejected_because": null,
+      "checked_at": "2026-08-15T11:30:00Z"
     }
   ],
-  "updated_at": "2026-08-15T11:10:00Z",
+  "updated_at": "2026-08-15T11:30:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
