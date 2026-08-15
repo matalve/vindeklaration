@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, ninth batch, open 2026-08-14. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after eight batches: 78 producers, 174 wines, 9 found, 154 not_found, 11 rejected; the ninth batch continues from a pool of 101 untouched wines, one producer each.",
-  "attempted": 443,
+  "attempted": 444,
   "found": 32,
-  "not_found": 363,
+  "not_found": 364,
   "rejected": 48,
   "declarations": [
     {
@@ -12718,9 +12718,39 @@
       "evidence": "CLOSED WITHOUT FETCHING A PAGE, ON ROBOTS.TXT ALONE — see robots_reasoning. What was established before that point is worth recording so a later run does not repeat it. THE DOMAIN IS A NEAR-NAME TRAP OF THE KIND THE SEVENTH BATCH FOUND AT MUCCHIETTO.IT: damilano.com resolves and is a live Shopify storefront, and it is a LEATHER GOODS BRAND — its product sitemap's first thousand URLs are wallets, belts, card cases and luggage tags ('cognac-signato-ladies-wallet', 'croco-leather-coaster-black'). Not one wine. damilanovini.com does not resolve at all. The winery is cantinedamilano.it, the Barolo estate at Cannubi founded 1890 as Borgogno and renamed for Giacomo Damilano in 1935. THE CUVEE WOULD ALSO HAVE NEEDED CARE: the estate makes TWO Barbera d'Asti DOCG, a plain one and a 'ZeroSette', with separate pages (/en/wines/barbera-dasti-docg/ and /en/wines/barbera-dasti-docg-zerosette/). Systembolaget's item is the plain 'Damilano Barbera d'Asti', 14,5 % vol, 750 ml, 2024, so the ZeroSette would have been the wrong bottle. Nothing is known about whether either page carries a declaration and nothing should be assumed: this is not_found because the host could not be read, not because the producer publishes nothing.",
       "rejected_because": null,
       "checked_at": "2026-08-15T10:15:00Z"
+    },
+    {
+      "product_number": "7033301",
+      "name": "Lucchine Valpolicella Tedeschi",
+      "producer": "Tedeschi",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://tedeschiwines.com/bottiglia/lucchine/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.tedeschiwines.com/robots.txt (301 to the apex)",
+        "https://tedeschiwines.com/sitemap_index.xml (three children: page, bottiglia, visita)",
+        "https://tedeschiwines.com/bottiglia-sitemap.xml (32 URLs, sixteen wines in it and en)",
+        "https://tedeschiwines.com/page-sitemap.xml (36 URLs)",
+        "https://tedeschiwines.com/bottiglia/lucchine/",
+        "https://tedeschiwines.com/wp-content/uploads/2025/12/IT_Valpolicella-Lucchine.pdf (the scheda tecnica)",
+        "web search for a Tedeschi e-label or QR destination — retailers only"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "tedeschiwines.com serves a Yoast block, 'User-agent: *' with an empty Disallow and one Sitemap line. Everything is allowed and no exception was needed.",
+      "evidence": "STEP 0 PASSES CLEANLY AND STEP 2 CLOSES IT. The producer is Soc. Agricola F.lli Tedeschi Srl, P.IVA 00559980230, Pedemonte di Valpolicella, named in the site's own footer, and Lucchine is its Valpolicella DOC — a wine with its own page in the estate's 'bottiglia' post type, so the Swedish name is the producer's own name and its own cuvee. THE PAGE STATES NO VINTAGE. It gives the wine's name, the denomination, a sensory wheel, one paragraph of vinification and food pairing, and a Premi block whose most recent entry is headed 'Annata 2024' — which is a review of a vintage, not a statement that the page describes it, and the same block carries 2023 and 2022. There is one page per cuvee, edited forward, so no per-vintage disclosure exists here to match against. THE SCHEDA TECNICA IS THE ITALIAN NEAR-MISS AGAIN, AND UNDATED: IT_Valpolicella-Lucchine.pdf gives soil, planting density, vine age, training, pruning, yield, harvest timing, destemming, an 8-day maceration at 28 C, malolactic, fining and stabilisation in tank, two months in bottle, then a 'Dati chimici' block — Alcol 12,5 %, Zuccheri 0,5 g/l, Acidita totale 6,2 g/l, Estratto netto 29 g/l — a Formati line reading '750 ml', a cellaring note and the blend (25 % Corvina, 25 % Corvinone, 30 % Rondinella, 10 % Molinara, 10 % altre varieta tradizionali). NO INGREDIENT LIST, NO ENERGY VALUE, not even a sulphite line. The alcohol and the format both agree exactly with Systembolaget's 12,5 % and 750 ml, so this is a producer surface that identifies the bottling correctly and simply does not declare. NO OTHER SURFACE EXISTS: the sitemap index has exactly three children and between them they hold 36 pages, 32 bottle URLs and the cellar-door visits. There is no webshop, no /etichetta tree, no e-label post type. Raw and stripped greps on the wine page for ingredien, nutrizion, solfit, kcal, energia, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti and vincod are all zero; the single raw 'dichiarazion' hit is the footer link 'dichiarazione-di-accessibilita', the accessibility statement — a new false positive worth knowing, since 'dichiarazione' is on the standard Italian grep list. The page's other two PDFs are a sustainability information sheet and a VIT-VIVE text, neither per wine.",
+      "rejected_because": null,
+      "checked_at": "2026-08-15T10:30:00Z"
     }
   ],
-  "updated_at": "2026-08-15T10:15:00Z",
+  "updated_at": "2026-08-15T10:30:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
