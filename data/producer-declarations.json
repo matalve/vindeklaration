@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, tenth batch, open 2026-08-15. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after nine batches: 90 producers, 186 wines, 10 found, 164 not_found, 12 rejected; the tenth batch continues from a pool of 93 untouched wines, one producer each.",
-  "attempted": 453,
+  "attempted": 454,
   "found": 32,
-  "not_found": 372,
+  "not_found": 373,
   "rejected": 49,
   "declarations": [
     {
@@ -12863,13 +12863,14 @@
         "https://sonovino.com/robots.txt (200, 'User-agent: * / Allow: /'), https://sonovino.com/sitemap.xml (one URL, the home page) and https://sonovino.com/ — an unrelated product",
         "http://mgmwine.com/ — 301s to mgmwineandspirits.com, a US drinks distributor, not the producer",
         "DNS only, no HTTP: mgmmondodelvino.it, mgmmondodelvino.com, mondodelvinogroup.com, mondodelvino.wine, mgmwinegroup.com and mondodelvino.it are all NXDOMAIN",
-        "web search for a Sonovino or Mondodelvino e-label — trade press only"
+        "web search for a Sonovino or Mondodelvino e-label — trade press only",
+        "ADDED LATER IN THE SAME BATCH, via Poderi dal Nespoli: https://shop.argea.com/robots.txt, /sitemap_index.xml and /product-sitemap.xml — the Argea group's own WooCommerce, to which shop.mondodelvino.com 301s. 185 products, and no Sonovino among them."
       ],
       "server_rendered": null,
       "elabel_platform": null,
       "robots_disallowed": false,
       "robots_reasoning": "Both of the producer's own domains answer /robots.txt with a 404 over http, which under RFC 9309 §2.3.1.3 is Unavailable status: no rules exist and nothing is disallowed. Over https they present the Plesk self-signed default certificate, which is a misconfiguration rather than a refusal; no certificate verification was disabled and no https page was fetched. sonovino.com allows everything. No technological measure was met anywhere.",
-      "evidence": "THE PRODUCER HAS NO REACHABLE WEBSITE. MGM Mondodelvino SpA (Priocca, CN) is a real and large producer, but both domains it is known by serve a parked Plesk box: mondodelvino.com and mgm.wine each answer / with the identical 1 658-byte 'Web Server's Default Page' over http and each fails TLS on Plesk's own self-signed certificate. There is no wine catalogue, no sitemap, no shop and therefore no per-wine page to grep and no e-label link to hold. STEP 0, THE BRAND DOMAIN, IS THE mucchietto.it TRAP AGAIN: sonovino.com resolves, is live, is server-rendered and has a permissive robots.txt — and it belongs to 'SonoVino', an ultrasonic wine-aerating carafe launching on Kickstarter ('Pour your wine into the SonoVino Caraffe, power on for one minute'). Its sitemap holds exactly one URL. It is not the wine. mgmwine.com is likewise not the producer: it 301s to mgmwineandspirits.com, a US wine and spirits distributor. Six further plausible domains were checked by DNS alone and are all NXDOMAIN. WHAT IS KNOWN AND IS NOT EVIDENCE: Italian trade press names Mondodelvino among the pilot companies for the U-Label platform. That is a claim about the company, not a URL for this bottle, and U-Label tokens cannot be guessed; the exception of 2026-07-30 explicitly does not license constructing one. NOT FOUND means not found: nothing here shows whether a declaration for Sonovino Zinfandel 2024 exists behind a QR code on the carton.",
+      "evidence": "THE PRODUCER HAS NO REACHABLE WEBSITE. MGM Mondodelvino SpA (Priocca, CN) is a real and large producer, but both domains it is known by serve a parked Plesk box: mondodelvino.com and mgm.wine each answer / with the identical 1 658-byte 'Web Server's Default Page' over http and each fails TLS on Plesk's own self-signed certificate. There is no wine catalogue, no sitemap, no shop and therefore no per-wine page to grep and no e-label link to hold. STEP 0, THE BRAND DOMAIN, IS THE mucchietto.it TRAP AGAIN: sonovino.com resolves, is live, is server-rendered and has a permissive robots.txt — and it belongs to 'SonoVino', an ultrasonic wine-aerating carafe launching on Kickstarter ('Pour your wine into the SonoVino Caraffe, power on for one minute'). Its sitemap holds exactly one URL. It is not the wine. mgmwine.com is likewise not the producer: it 301s to mgmwineandspirits.com, a US wine and spirits distributor. Six further plausible domains were checked by DNS alone and are all NXDOMAIN. WHAT IS KNOWN AND IS NOT EVIDENCE: Italian trade press names Mondodelvino among the pilot companies for the U-Label platform. That is a claim about the company, not a URL for this bottle, and U-Label tokens cannot be guessed; the exception of 2026-07-30 explicitly does not license constructing one. NOT FOUND means not found: nothing here shows whether a declaration for Sonovino Zinfandel 2024 exists behind a QR code on the carton. AMENDED LATER IN THE SAME BATCH: the producer's parent group was identified from another wine in this batch. MGM Mondodelvino belongs to ARGEA, and Argea runs one group WooCommerce for all its brands at shop.argea.com — shop.mondodelvino.com 301s straight to it. That shop DOES publish e-labels: every product page carries a 'qr-wrap' block headed 'Informazioni sul prodotto' with the energy value inline and a Scantrust short URL behind both an anchor and a QR image. TWO THINGS STOP IT SHORT OF A FIND HERE. First, Sonovino is not among the shop's 185 products, so no e-label URL exists for this bottle. Second, Argea's platform is Scantrust, whose uid and api_key live in the URL fragment and are never sent to the server, so it is unreadable by construction — see the Poderi dal Nespoli record in this file, where the same URL shape was fetched and read as a 1 590-byte shell. The status stays not_found and the reasoning is now on the record rather than only in the docs.",
       "rejected_because": null,
       "checked_at": "2026-08-15T12:00:00Z"
     },
@@ -13021,9 +13022,40 @@
       "evidence": "THE EXACT BOTTLE IS ON THE PRODUCER'S PAGE, WITH A PER-VINTAGE ANALYSIS, AND THERE IS STILL NO DECLARATION. Abbazia di Novacella / Kloster Neustift, Varna (BZ) — abbazianovacella.it and kloster-neustift.it are the same site, the first redirecting to the second. THE CUVÉE IS THE CLASSIC LINE, NOT THE PRAEPOSITUS: the estate lists /it/tenuta/vini/kerner/, /it/tenuta/vini/kerner-praepositus/ and /it/tenuta/vini/kerner-passito-praepositus/ as three separate wines, and Systembolaget's 'Kerner Valle Isarco' with no tier word is the first — the range-tier check the ninth batch called for. THE VINTAGE AND THE STRENGTH BOTH MATCH EXACTLY. The page carries a `select id=vintage` naming 2025, 2024, 2023, 2022 and 2021, each with its own Dati analitici block; the 2024 block (year-349) reads 'Alcool svolto: 13,50% vol. / Acidità: 6,50 g/l / Estratto secco netto: 19,80 g/l / Zuccheri residui: 3,00 g/l' against Systembolaget's 13,5 % — exact. This is one of the few Italian producers in the file with a real vintage control, alongside Ricasoli, Vajra and La Spinetta. THE GREPS ARE SILENT ON EVERY READABLE SURFACE: ingredien, nutrizion, solfit, kcal, energia, dichiarazion, annata, etichett, allergen, elabel, zutat, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti, goalstec and qr are all zero on the wine page, and all zero on the shop's wine category listing too. THE PER-VINTAGE SCHEDA WAS OBTAINED AND READ AND IS THE NEAR-MISS: submitting the 2024 'Scheda del Vino' form returns a PDF headed with the wine, the sensory note, Zona di produzione, Proposte di servizio, Produzione, the Dati analitici and a 'Report Annata' narrative for 2024. Zero hits for ingredien, Zutat, nutrizion, solfit, kcal, energia and allergen. No ingredient list, no nutrition table, no energy value. WHAT REMAINS UNKNOWN AND IS RECORDED AS SUCH: the estate's Magento shop is disallowed to us in full for product pages, so if a declaration is printed inline there — the shape that produced both of the ninth batch's finds — this run could not see it. That is a limit of what was read, not a finding about the producer.",
       "rejected_because": null,
       "checked_at": "2026-08-15T13:55:00Z"
+    },
+    {
+      "product_number": "7261001",
+      "name": "Nespolino Sangiovese Merlot",
+      "producer": "Poderi dal Nespoli",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.poderidalnespoli.com/vino/nespolino-rubicone-igt-sangiovese-merlot/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.poderidalnespoli.com/robots.txt (200, stock WordPress) and sitemap_index.xml → vino-sitemap.xml (44 URLs, 22 wines in it and en)",
+        "https://www.poderidalnespoli.com/vino/nespolino-rubicone-igt-sangiovese-merlot/ (200, 71 kB)",
+        "https://www.poderidalnespoli.com/wp-content/uploads/sites/4/2025/08/nespolino_rosso_ita_nat.pdf — HEAD (1,6 MB, last-modified 2025-08-21) then read and text-extracted",
+        "https://shop.argea.com/robots.txt (200) — shop.mondodelvino.com 301s to the same host",
+        "https://shop.argea.com/sitemap_index.xml and product-sitemap.xml (185 products, 24 of them Poderi dal Nespoli)",
+        "https://shop.argea.com/vino/26bc5bfc-poderi-dal-nespoli-nespolino-sangiovese-rubicone-igt-10l-bib/ (200, 145 kB) — the nearest sibling the group shop sells",
+        "https://b7vr.st4.ch/robots.txt (200, 'User-agent: * / Disallow: /')",
+        "https://b7vr.st4.ch/FQQgu7rMYPVt — the e-label the shop links for that sibling; fetched under the 2026-07-30 exception, see robots_reasoning"
+      ],
+      "server_rendered": false,
+      "elabel_platform": "Scantrust (b7vr.st4.ch → elabel.scantrust.com)",
+      "robots_disallowed": true,
+      "robots_reasoning": "b7vr.st4.ch answers robots.txt with 'User-agent: * / Disallow: /' and the page behind it was fetched anyway, once, under the owner's decision of 2026-07-30: that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing bottles. The URL was not guessed — it came from an anchor and a QR image on Argea's own shop page — and exactly one request was made on that host besides robots.txt, with no traversal and no enumeration. It made no difference: the page is a client-side shell. poderidalnespoli.com and shop.argea.com both serve stock WordPress robots.txt and nothing fetched there was disallowed.",
+      "evidence": "THE ESTATE BELONGS TO ARGEA, THE GROUP RUNS ONE SHOP FOR ALL ITS BRANDS, THAT SHOP DOES PUBLISH E-LABELS — AND OUR BOTTLE IS NOT ON IT. Poderi dal Nespoli, Civitella di Romagna, P.IVA 00170120406, footer 'Proudly part of Argea'. THE MARKETING PAGE IS THE UNDATED ITALIAN CUVÉE PAGE: /vino/nespolino-rubicone-igt-sangiovese-merlot/ states Alcool 13,5 % vol, Vitigno Sangiovese-Merlot, area, glass, colour, tasting note, food pairing and vinification, and NO VINTAGE. Raw greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, annata, etichett, allergen, elabel, qr, st4.ch, scantrust and every vendor token are zero on it. Its scheda PDF (uploaded 2025-08) is the same content plus 'Il grado alcolico può variare in base alle annate' — undated by the producer's own admission, and with no ingredient list and no nutrition table. THE GROUP SHOP IS A REAL PUBLISHER AND IT IS THE FIND THAT MATTERS FOR LATER RUNS: every product page on shop.argea.com (to which shop.mondodelvino.com redirects) carries a `div class=qr-wrap` headed 'Informazioni sul prodotto' reading 'Ingredienti, informazione nutrizionale, indicazioni per lo smaltimento 100ml: 324 kJ/77 kcal', an anchor 'Leggi di più' and a QR SVG, both pointing at a Scantrust short URL. It also states Annata, Gradazione alcolica, Formato, Allergeni and Provenienza inline, so it identifies itself. OUR WINE IS NOT AMONG ITS 185 PRODUCTS. The only Nespolino on the shop is 'Nespolino Sangiovese Rubicone IGT 10L BIB' — 10 litres against our 750 ml, 12.5 % vol against 13,0, Sangiovese against Sangiovese-Merlot, and Annata 'No Vintage'. Four independent mismatches; it is a different product, not a different listing of ours. AND THE PLATFORM IS UNREADABLE ANYWAY. b7vr.st4.ch/FQQgu7rMYPVt 302s to elabel.scantrust.com/default/#/?uid=a0ecae27-…&api_key=eyJjYW1wYWlnbl9pZCI6Mzc0NTN9%3A…&qr=FQQgu7rMYPVt — a 1 590-byte shell, byte-for-byte the Masi deployment, with the uid and the signed api_key in the URL FRAGMENT, which is never sent to the server. That host cannot serve the declaration by construction and the api_key is an issued token, which the project's rules make absolute. Recorded not_found rather than rejected: no declaration was ever read, so there was nothing to reject.",
+      "rejected_because": null,
+      "checked_at": "2026-08-15T14:25:00Z"
     }
   ],
-  "updated_at": "2026-08-15T13:55:00Z",
+  "updated_at": "2026-08-15T14:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
