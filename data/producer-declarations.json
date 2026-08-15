@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, tenth batch, open 2026-08-15. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after nine batches: 90 producers, 186 wines, 10 found, 164 not_found, 12 rejected; the tenth batch continues from a pool of 93 untouched wines, one producer each.",
-  "attempted": 450,
+  "attempted": 451,
   "found": 32,
-  "not_found": 369,
+  "not_found": 370,
   "rejected": 49,
   "declarations": [
     {
@@ -12932,9 +12932,38 @@
       "evidence": "STEP 0 RESOLVED THE NAME AND THE HOST THEN REFUSED TO BE READ. Systembolaget's producer string 'Felice & Armando Mergè Viticoltori' is the Mergè family firm — the same acronym that gives Femar Vini its name (FElice Mergè ARmando) — and Baglio Onuri is a brand the group registered in 2021. The group's site is I Viticoltori: poggiolevolpi.com 301s to iviticoltori.it, and a search returns the exact wine's page as iviticoltori.it/en/product/nerello-mascalese/. THE HOST SERVES OBFUSCATED BYTES. Every URL requested there — robots.txt and the product page — returns HTTP 200, content-type text/html, and a body of high-entropy binary beginning with the identical 200-byte prefix at three different lengths (1 631 B, 136 308 B, 196 848 B). It is not a compression mis-declaration: gzip, zlib, raw deflate, Brotli and Zstandard were all tried against the bytes and all fail, and the server sends no Content-Encoding header. A 200 with a scrambled body served to a self-identifying non-browser client is a bot-mitigation layer, which the project treats as a refusal: it was not worked around, no browser or device-shaped User-Agent was tried, and the host was left after two requests. The device-gate decision of 2026-08-08 does not reach this — it is narrow to a page that is itself the regulated disclosure, and this is an ordinary marketing site. NO SECOND SURFACE: there is no shop subdomain on either domain and the wildcard control confirms the NXDOMAINs are real. NOT FOUND means not found: nothing here shows whether the Mergè group publishes a declaration for the 2025 Baglio Onuri.",
       "rejected_because": null,
       "checked_at": "2026-08-15T12:40:00Z"
+    },
+    {
+      "product_number": "2307101",
+      "name": "Barbera d'Alba Superiore",
+      "producer": "G.D. Vajra",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.gdvajra.it/it/barbera-dalba-doc-superiore",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.gdvajra.it/robots.txt (200, 'User-agent: * / Disallow: /amministrazione')",
+        "https://www.gdvajra.it/sitemap.xml (200, 33 URLs — fifteen wines, six stories, the trade page and the login pages)",
+        "https://www.gdvajra.it/it/barbera-dalba-doc-superiore (200, 18,8 kB)",
+        "https://www.gdvajra.it/uploads/public/3788_scheda-2024-barbera-superiore-ita.pdf — HEAD (350 kB, last-modified 2026-04-10) then read in full and text-extracted",
+        "https://www.gdvajra.it/it/trade (200, the press and asset area)",
+        "DNS only, no HTTP: shop., qr., etichetta., elabel., m. and the control randomxyz123.gdvajra.it are all NXDOMAIN"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "gdvajra.it disallows only /amministrazione. Everything fetched is outside it, so the 2026-07-30 exception was not needed and was not used.",
+      "evidence": "THE RIGHT WINE AND THE RIGHT VINTAGE, AND NO DECLARATION ANYWHERE ON EITHER SURFACE. The estate is Azienda Agricola G.D. Vajra, Vergne di Barolo, P.IVA 00624560041, and its site has one page per wine. Barbera d'Alba DOC Superiore is a distinct wine from the plain Barbera d'Alba DOC — the sitemap lists both, /it/barbera-dalba-doc and /it/barbera-dalba-doc-superiore — so the cuvée is right and it is not the sister bottling. THE PAGE HAS A REAL VINTAGE CONTROL, which is rare in Italy: a `div class=annata` select naming 2024, 2023, 2022, 2021 and 2016, each with its own scheda tecnica PDF, so our 2024 is the producer's own current release and is reachable without guessing. RAW AND STRIPPED GREPS ARE SILENT: ingredien, nutrizion, solfit, kcal, energia, dichiarazion, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti and goalstec are all zero on the wine page, in the raw HTML as well as the stripped text. The only outbound hosts in the page are Google, Facebook, Twitter, Instagram, YouTube, Cookiebot, bootstrapcdn, a Divinea booking widget and the site's own agency — no e-label vendor. `qualita` matched once and it is the Equalitas sustainability logo, not a Rocca-delle-Macìe-style dedicated domain; add Equalitas to the false-positive list. THE 2024 SCHEDA WAS READ IN FULL AND IS THE ITALIAN NEAR-MISS AGAIN: 'SUPERIORE 2024', description, VARIETÀ 100% Barbera, vineyards, cultivation, the vintage report, harvest dates, vinification, 'Imbottigliato il 18 agosto 2025', tasting note and 'FORMATO: 0,75'. No ingredient list, no nutrition table, no energy value — and it does not even state the alcohol, so it could not have been alcohol-matched either. NO OTHER SURFACE: the product page's 'Aggiungi al carrello' leads to /it/login, a reserved trade area, which is a login wall and absolute; no shop or e-label subdomain exists in DNS and the wildcard control confirms it. The trade page's 'Etichette vini' accordion is the Italian press-kit pattern the ninth batch identified — undated front-label PNGs named '…-nv' for no vintage, not back labels and not a compliance surface.",
+      "rejected_because": null,
+      "checked_at": "2026-08-15T13:00:00Z"
     }
   ],
-  "updated_at": "2026-08-15T12:40:00Z",
+  "updated_at": "2026-08-15T13:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
