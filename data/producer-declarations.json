@@ -17,8 +17,8 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, ninth batch, open 2026-08-14. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after eight batches: 78 producers, 174 wines, 9 found, 154 not_found, 11 rejected; the ninth batch continues from a pool of 101 untouched wines, one producer each.",
-  "attempted": 440,
-  "found": 31,
+  "attempted": 441,
+  "found": 32,
   "not_found": 361,
   "rejected": 48,
   "declarations": [
@@ -12622,9 +12622,45 @@
       "evidence": "A FOURTH GAJA BRAND AND A FOURTH DELIBERATE NON-SITE. Products 9264501, 7252701 and 7070201 were closed on the finding that Gaja publishes no wine website: gaja.com and idda.it are 2 kB single-page placeholders carrying a logo, an address and a mailto. Ca' Marcanda is the family's Bolgheri estate and Magari is its second wine, so step 0 passes — the Swedish name is the producer's own. CA' MARCANDA'S OWN DOMAIN IS THE SAME PLACEHOLDER: camarcanda.com returns 2 446 bytes whose <title> is \"CA' MARCANDA\", whose Description is the Castagneto Carducci address and whose Keywords are 'CA MARCANDA, Bolgheri, Castagneto Carducci, Gaja, Toscana'. The whole body renders as 129 characters of address text and the only anchor on the page is mailto:info@camarcanda.com. Same construction as gaja.com and idda.it, same IP, and it confirms the ownership at the same time. magari.wine resolves to that host too and is not a separate site. THE DISTRIBUTION ARM DOES CARRY THE WINE THIS TIME, and it still declares nothing — a correction to the earlier Gaja records, which found only grappe: www.gajadistribuzione.it's 872-product sitemap holds /prodotto/magari-bolgheri-dop/ alongside /prodotto/camarcanda-bolgheri-dop/ and /prodotto/grappa-magari/, and the Magari page is the wine. IT IS THE ITALIAN UNDATED CUVEE PAGE IN ITS PUREST FORM: breadcrumb 'Vini > Italia > Toscana > Ca' Marcanda > Magari Bolgheri DOP', then Denominazione, Varieta, Vigneti, Vinificazione, Caratteristiche and a DETTAGLI TECNICI block of exactly three rows — Tipologia 'Rosso Tranquillo', Zona di produzione 'Italia Toscana Bolgheri', Denominazione d'origine 'DOP Bolgheri'. NO VINTAGE, no alcohol, no bottle size, no price, no cart: this is a trade catalogue entry, not a consumer disclosure, so even a declaration on it could not have been vintage-matched to the 2024. Raw and stripped greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti, .pdf and vincod are all zero; the single raw 'elabel' hit is iubenda's cookie-banner field '\"whitelabel\":false', the known false positive.",
       "rejected_because": null,
       "checked_at": "2026-08-15T09:05:00Z"
+    },
+    {
+      "product_number": "7170401",
+      "name": "Rocca delle Macie Chianti Classico",
+      "producer": "Rocca delle Macie",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "found",
+      "source_url": "https://qualitaroccadellemacie.it/chianti-classico-docg/",
+      "source_type": "e_label",
+      "raw_ingredients": "Uva/Grape\nAntiossidanti/ antioxidants: metabisolfito di potassio/ Potassium metabisulphite\nAgenti stabilizzanti/ Stabilising agents: tannini/ tannins, gomma arabica/ arabic gum\nImbottigliato in atmosfera protettiva/Bottling under controlled atmosphere",
+      "language": "it (the page is written bilingually it/en throughout, Italian first in every line; quoted as served, both languages included, because separating them would be editing the source)",
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "nutrition_per_100ml": "Valore energetico/Energy value 317Kj / 76 Kcal; Grassi/Fats 0 g; Carboidrati/Total carbhohydrate 1,1 g; Zuccheri/Sugar 0,2 g; Proteine/Proteins 0 g; Sale/Salt 0 g. The table's first column is headed 'Anno' and its single value, rowspan=5, is 2024.",
+      "sources_checked": [
+        "https://www.roccadellemacie.com/robots.txt (301 to the apex; Yoast block, 'User-agent: *' with an empty Disallow)",
+        "https://roccadellemacie.com/sitemap_index.xml (one child only)",
+        "https://roccadellemacie.com/page-sitemap.xml (39 URLs, no per-wine post type)",
+        "https://roccadellemacie.com/tutti-i-prodotti/",
+        "https://roccadellemacie.com/vini/chianti-classico-2022/ (302 to /vini/chianti-classico/)",
+        "https://roccadellemacie.com/uloomeeh/2026/04/Chianti_Classico_Docg_2024_it.pdf (the 2024 scheda tecnica)",
+        "https://wineclub.roccadellemacie.com/robots.txt (soft 404: an HTML 'Pagina Non Trovata' body, so no directives exist)",
+        "https://wineclub.roccadellemacie.com/sitemap.xml and /sitemap-it.xml (107 URLs)",
+        "https://wineclub.roccadellemacie.com/it/shop/rocca-delle-macie/chianti-classico-docg/",
+        "https://qualitaroccadellemacie.it/robots.txt",
+        "https://qualitaroccadellemacie.it/chianti-classico-docg/",
+        "DNS: shop.roccadellemacie.com, store.roccadellemacie.com and the control randomxyz123.roccadellemacie.com are all NXDOMAIN"
+      ],
+      "server_rendered": true,
+      "elabel_platform": "the producer's own dedicated e-label host, qualitaroccadellemacie.it — WordPress with Elementor and TablePress, one page per wine, sections 'Lista ingredienti', 'Valori nutrizionali' and 'Etichettatura ambientale', bilingual it/en, footer '(c)2026 Rocca delle Macie S.p.A. | P.iva 00209800523'",
+      "robots_disallowed": false,
+      "robots_reasoning": "qualitaroccadellemacie.it serves the stock WordPress 'User-agent: * / Disallow: /wp-admin/ / Allow: /wp-admin/admin-ajax.php'. The e-label page is allowed outright, so the 2026-07-30 exception was NOT used here. roccadellemacie.com's Yoast robots.txt has an empty Disallow. wineclub.roccadellemacie.com answers /robots.txt with a soft 404 carrying the shop's own HTML, so no directives exist there either.",
+      "evidence": "ITALY'S FOURTH FIRST-PARTY PUBLISHER SHAPE AND THE FIRST DEDICATED E-LABEL DOMAIN SEEN IN ITALY. All four matching tests pass. (1) PRODUCER: the e-label host's footer reads 'Rocca delle Macie S.p.A. | P.iva 00209800523', the same VAT number printed in the wineclub shop's own footer, and the page's Quality Manager contact is gorelli@roccadellemacie.com. It is the producer's own publication, not a vendor's and not a retailer's. (2) WINE: the page is /chianti-classico-docg/ and its H1 is 'Chianti Classico DOCG' — the base bottling, distinct from the estate's Chianti Classico Riserva, Chianti Classico Gran Selezione, Riserva di Fizzano, Sergio Zingarelli Gran Selezione and Trinita, each of which is a separate product on the same shop. Systembolaget's item is 'Rocca delle Macie Chianti Classico', the base wine. (3) VINTAGE: the nutrition table's first column is headed 'Anno' and carries exactly one value, 2024, spanning all five rows — the declaration names its own year, which almost no Italian source in this file does. It is corroborated on two other surfaces: the marketing site's vintage selector lists 2024, 2023, 2022 and 2011 and its current scheda tecnica is /uloomeeh/2026/04/Chianti_Classico_Docg_2024_it.pdf under the anchor 'SCHEDA TECNICA 2024'; and the wineclub shop's product carries an 'Anno' selector offering 2022 and 2024, with the 2024 product image filed as 'Chianti Classico 2024_WineClub'. Systembolaget's vintage is 2024. (4) MARKET AND PACK: an Italian producer's own .it host writing Italian first and English second, no market selector, so this is the EU declaration. The environmental table lists 0.750 L, 1,5 L and 5 L formats and Systembolaget's item is the 750 ml; there is one ingredient list covering the wine, not one per format. HOW IT WAS REACHED, which is the reusable part: the estate's page-sitemap.xml names no per-wine post type at all, and the /vini/ pages are only linked from /tutti-i-prodotti/. The wine page itself carries no declaration and no e-label link — the pointer is on the SHOP, in the product description's last paragraph, as plain text and not an anchor: 'Per informazioni su Etichetta ambientale, lista ingredienti e tabella nutrizionale clicca qui: https://qualitaroccadellemacie.it/chianti-classico-docg/'. An href scan finds nothing; only a raw grep for 'ingredien' does. ONE DISCREPANCY, RECORDED AND NOT WAVED AWAY: the 2024 scheda tecnica states 'Grad. Alcolica: 13,5% vol.' where Systembolaget says 13,0 — exactly 0,5 pp, at the tolerance and not over it, and within the EU labelling tolerance of +/- 0,5 % vol. The e-label page itself states no alcohol, so the figure comes from a different surface of the same producer; Fontanafredda has already shown two producer surfaces disagreeing about strength. Not treated as a rejection, but a later run should know the two numbers are not identical.",
+      "rejected_because": null,
+      "checked_at": "2026-08-15T09:35:00Z"
     }
   ],
-  "updated_at": "2026-08-15T09:05:00Z",
+  "updated_at": "2026-08-15T09:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
