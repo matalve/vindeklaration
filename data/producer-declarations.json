@@ -16,10 +16,10 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — Italy, ninth batch, open 2026-08-14. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after eight batches: 78 producers, 174 wines, 9 found, 154 not_found, 11 rejected, with 103 wines untouched and no producer pairs left — every remaining Italian wine is its own producer.",
-  "attempted": 439,
+  "batch": "3 — Italy, ninth batch, open 2026-08-14. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after eight batches: 78 producers, 174 wines, 9 found, 154 not_found, 11 rejected; the ninth batch continues from a pool of 101 untouched wines, one producer each.",
+  "attempted": 440,
   "found": 31,
-  "not_found": 360,
+  "not_found": 361,
   "rejected": 48,
   "declarations": [
     {
@@ -12592,9 +12592,39 @@
       "note": "The Angelini group runs a marketing WordPress per estate plus one shared wineplatform.it shop per estate. Neither surface declares. If a later run meets another Angelini estate (Bertani, Val di Suga, Trerose, Puiatti, San Leonino), the answer is already known and the two fetches are the shop sitemap and one cuvee page.",
       "rejected_because": null,
       "checked_at": "2026-08-14T17:20:00Z"
+    },
+    {
+      "product_number": "8308901",
+      "name": "Gaja Ca'Marcanda Magari",
+      "producer": "Gaja",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.gajadistribuzione.it/prodotto/magari-bolgheri-dop/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "DNS: camarcanda.com, www.camarcanda.com, camarcanda.it and magari.wine all resolve to 46.37.17.211 (the same host as idda.wine and gaja.com); ca-marcanda.com and the control randomxyz123.camarcanda.com are NXDOMAIN",
+        "https://www.camarcanda.com/ — TLS certificate does not match the hostname, so fetched over http",
+        "http://camarcanda.com/robots.txt (404)",
+        "http://camarcanda.com/",
+        "https://www.gajadistribuzione.it/robots.txt",
+        "https://www.gajadistribuzione.it/product-sitemap.xml (872 URLs)",
+        "https://www.gajadistribuzione.it/prodotto/magari-bolgheri-dop/"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "camarcanda.com serves no robots.txt (404 with an HTML body). gajadistribuzione.it serves two 'User-agent: *' groups that merge under RFC 9309 — a WooCommerce group disallowing /wp-content/uploads/wc-logs/, /woocommerce_transient_files/, /woocommerce_uploads/, /*?add-to-cart=, /wp-admin/ (with Allow: /wp-admin/admin-ajax.php) and a Yoast group with an empty Disallow. Nothing fetched here is disallowed and no exception was needed.",
+      "evidence": "A FOURTH GAJA BRAND AND A FOURTH DELIBERATE NON-SITE. Products 9264501, 7252701 and 7070201 were closed on the finding that Gaja publishes no wine website: gaja.com and idda.it are 2 kB single-page placeholders carrying a logo, an address and a mailto. Ca' Marcanda is the family's Bolgheri estate and Magari is its second wine, so step 0 passes — the Swedish name is the producer's own. CA' MARCANDA'S OWN DOMAIN IS THE SAME PLACEHOLDER: camarcanda.com returns 2 446 bytes whose <title> is \"CA' MARCANDA\", whose Description is the Castagneto Carducci address and whose Keywords are 'CA MARCANDA, Bolgheri, Castagneto Carducci, Gaja, Toscana'. The whole body renders as 129 characters of address text and the only anchor on the page is mailto:info@camarcanda.com. Same construction as gaja.com and idda.it, same IP, and it confirms the ownership at the same time. magari.wine resolves to that host too and is not a separate site. THE DISTRIBUTION ARM DOES CARRY THE WINE THIS TIME, and it still declares nothing — a correction to the earlier Gaja records, which found only grappe: www.gajadistribuzione.it's 872-product sitemap holds /prodotto/magari-bolgheri-dop/ alongside /prodotto/camarcanda-bolgheri-dop/ and /prodotto/grappa-magari/, and the Magari page is the wine. IT IS THE ITALIAN UNDATED CUVEE PAGE IN ITS PUREST FORM: breadcrumb 'Vini > Italia > Toscana > Ca' Marcanda > Magari Bolgheri DOP', then Denominazione, Varieta, Vigneti, Vinificazione, Caratteristiche and a DETTAGLI TECNICI block of exactly three rows — Tipologia 'Rosso Tranquillo', Zona di produzione 'Italia Toscana Bolgheri', Denominazione d'origine 'DOP Bolgheri'. NO VINTAGE, no alcohol, no bottle size, no price, no cart: this is a trade catalogue entry, not a consumer disclosure, so even a declaration on it could not have been vintage-matched to the 2024. Raw and stripped greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti, .pdf and vincod are all zero; the single raw 'elabel' hit is iubenda's cookie-banner field '\"whitelabel\":false', the known false positive.",
+      "rejected_because": null,
+      "checked_at": "2026-08-15T09:05:00Z"
     }
   ],
-  "updated_at": "2026-08-14T17:20:00Z",
+  "updated_at": "2026-08-15T09:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
