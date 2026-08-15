@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, ninth batch, open 2026-08-14. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after eight batches: 78 producers, 174 wines, 9 found, 154 not_found, 11 rejected; the ninth batch continues from a pool of 101 untouched wines, one producer each.",
-  "attempted": 444,
+  "attempted": 445,
   "found": 32,
-  "not_found": 364,
+  "not_found": 365,
   "rejected": 48,
   "declarations": [
     {
@@ -12748,9 +12748,39 @@
       "evidence": "STEP 0 PASSES CLEANLY AND STEP 2 CLOSES IT. The producer is Soc. Agricola F.lli Tedeschi Srl, P.IVA 00559980230, Pedemonte di Valpolicella, named in the site's own footer, and Lucchine is its Valpolicella DOC — a wine with its own page in the estate's 'bottiglia' post type, so the Swedish name is the producer's own name and its own cuvee. THE PAGE STATES NO VINTAGE. It gives the wine's name, the denomination, a sensory wheel, one paragraph of vinification and food pairing, and a Premi block whose most recent entry is headed 'Annata 2024' — which is a review of a vintage, not a statement that the page describes it, and the same block carries 2023 and 2022. There is one page per cuvee, edited forward, so no per-vintage disclosure exists here to match against. THE SCHEDA TECNICA IS THE ITALIAN NEAR-MISS AGAIN, AND UNDATED: IT_Valpolicella-Lucchine.pdf gives soil, planting density, vine age, training, pruning, yield, harvest timing, destemming, an 8-day maceration at 28 C, malolactic, fining and stabilisation in tank, two months in bottle, then a 'Dati chimici' block — Alcol 12,5 %, Zuccheri 0,5 g/l, Acidita totale 6,2 g/l, Estratto netto 29 g/l — a Formati line reading '750 ml', a cellaring note and the blend (25 % Corvina, 25 % Corvinone, 30 % Rondinella, 10 % Molinara, 10 % altre varieta tradizionali). NO INGREDIENT LIST, NO ENERGY VALUE, not even a sulphite line. The alcohol and the format both agree exactly with Systembolaget's 12,5 % and 750 ml, so this is a producer surface that identifies the bottling correctly and simply does not declare. NO OTHER SURFACE EXISTS: the sitemap index has exactly three children and between them they hold 36 pages, 32 bottle URLs and the cellar-door visits. There is no webshop, no /etichetta tree, no e-label post type. Raw and stripped greps on the wine page for ingredien, nutrizion, solfit, kcal, energia, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti and vincod are all zero; the single raw 'dichiarazion' hit is the footer link 'dichiarazione-di-accessibilita', the accessibility statement — a new false positive worth knowing, since 'dichiarazione' is on the standard Italian grep list. The page's other two PDFs are a sustainability information sheet and a VIT-VIVE text, neither per wine.",
       "rejected_because": null,
       "checked_at": "2026-08-15T10:30:00Z"
+    },
+    {
+      "product_number": "216201",
+      "name": "Cannonau di Sardegna Medeus Sella y Mosca",
+      "producer": "Sella & Mosca Commerciale Srl",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.sellaemosca.com/site/it/il_vino/id_72_wine_medeus.html",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.sellaemosca.com/robots.txt",
+        "https://www.sellaemosca.com/sitemap.xml (51 URLs, nineteen wines in it and en)",
+        "https://www.sellaemosca.com/site/it/il_vino/id_72_wine_medeus.html",
+        "http://www.terramorettivino.com/robots.txt (404) and / (a one-line JavaScript redirect to terramoretti.it)",
+        "DNS: shop.sellaemosca.com, store.sellaemosca.com and the control randomxyz123.sellaemosca.com are all NXDOMAIN",
+        "web search for a Sella & Mosca e-label or QR destination — retailers only",
+        "NOT fetched: https://www.sellaemosca.com/public/210225-162156-sellamoscamedeus2023.pdf — see robots_reasoning"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "sellaemosca.com serves 'User-agent: * / Disallow: public/ / Sitemap: ...'. The rule is written without a leading slash, which RFC 9309 requires, but the plain intent is /public/ and it was honoured as written intended: the wine's scheda tecnica lives at /public/210225-162156-sellamoscamedeus2023.pdf and WAS NOT FETCHED. It did not need to be — see the evidence; the file name settles the vintage on its own. The 2026-07-30 exception does not reach it: an ordinary marketing site's PDF datasheet is not the regulated disclosure. Everything else fetched here is outside /public/.",
+      "evidence": "THE FILE NAME CLOSED IT, WHICH IS THE FIXED PROBE'S STEP 5 WORKING EXACTLY AS INTENDED. STEP 0: Systembolaget's supplier string is 'Sella & Mosca Commerciale Srl' and its product name spells the house 'Sella y Mosca', but the estate is Sella&Mosca of Alghero, P.IVA IT00072180904, now part of Terra Moretti Vino, and Medeus is its Cannonau di Sardegna DOC — a wine with its own page in the estate's own catalogue, so the name is the producer's own and the cuvee is right. It is also NOT the estate's other Cannonau, the 'Cannonau di Sardegna Riserva' (id_28), which is a separate wine on the same site. THE WINE PAGE IS UNDATED: 13 kB of HTML, 1,2 kB of text — name, denomination, one paragraph, Vitigno 100 % Cannonau, Posizione Sardegna, four colour descriptors, Profumo, Gusto. No vintage, no alcohol, no bottle size, no ingredient list, no nutrition. Raw and stripped greps for ingredien, nutrizion, solfit, kcal, energia, dichiarazion, valori, ingredient-list, ioagri, ead-qr, i-wine, carmaqrcode, u-label, btn-nutrizional, tab-ingredienti and vincod are all zero. THE ONE PER-WINE DOCUMENT IS THE WRONG VINTAGE AND SAYS SO IN ITS OWN NAME: the 'Scheda PDF' anchor points at /public/210225-162156-sellamoscamedeus2023.pdf. The trailing 2023 is the vintage and the leading 210225-162156 is a publication timestamp; Systembolaget sells the 2024. Even if that datasheet carried an ingredient list — and no Italian scheda in this file ever has — it would be a rejection on vintage, so the download was not worth a request against a Disallow. NO OTHER SURFACE: the whole sitemap is 51 URLs, all of them the estate, the terroir, the people and the cellar door; there is no shop, no e-label tree and no shop subdomain in DNS. The group site the footer links, terramorettivino.com, is not a surface either — it is a single line of HTML, '<script>window.location=...terramoretti.it</script>', with no robots.txt.",
+      "rejected_because": null,
+      "checked_at": "2026-08-15T10:45:00Z"
     }
   ],
-  "updated_at": "2026-08-15T10:30:00Z",
+  "updated_at": "2026-08-15T10:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
