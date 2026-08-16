@@ -1,14 +1,14 @@
 {
  "unknown_tokens": [
   {
+   "token": "försumbar",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7010801/"
+  },
+  {
    "token": "kaliumsyra",
    "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
-  },
-  {
-   "token": "försumbar",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7010801/"
   },
   {
    "token": "generale",
@@ -74,6 +74,11 @@
    "token": "förpackningsbar",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9216301/"
+  },
+  {
+   "token": "genergi",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9251701/"
   }
  ],
  "fuzzy_matches": [
@@ -90,7 +95,15 @@
    "wines": 1
   },
   {
+   "match": "konserveringsmeel -> konserveringsmedel",
+   "wines": 1
+  },
+  {
    "match": "askorbinsyra -> askorbinsyra",
+   "wines": 1
+  },
+  {
+   "match": "dimetyledikarbonat -> dimetyldikarbonat",
    "wines": 1
   }
  ]
