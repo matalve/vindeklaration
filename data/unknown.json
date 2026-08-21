@@ -66,9 +66,29 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-3028101/"
   },
   {
+   "token": "kalium",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-3465901/"
+  },
+  {
    "token": "syttegulatorer",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
+  },
+  {
+   "token": "oloroso",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9031801/"
+  },
+  {
+   "token": "ca74%",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9031801/"
+  },
+  {
+   "token": "moscatel",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9031801/"
   },
   {
    "token": "förpackningsbar",
