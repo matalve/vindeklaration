@@ -94,11 +94,6 @@
    "token": "förpackningsbar",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9216301/"
-  },
-  {
-   "token": "genergi",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9251701/"
   }
  ],
  "fuzzy_matches": [
@@ -116,6 +111,10 @@
   },
   {
    "match": "konserveringsmeel -> konserveringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "sabiliseringsmedel -> stabiliseringsmedel",
    "wines": 1
   },
   {
