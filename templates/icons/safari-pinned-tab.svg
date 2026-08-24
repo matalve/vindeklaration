@@ -1,12 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 27">
   <title>vindeklaration</title>
-  <style>
-    /* Wine on a light tab strip, lightened wine on a dark one. Firefox and
-       Chrome honour this in an SVG favicon; Safari falls back to the PNG. */
-    :root { stroke: rgb(107, 39, 55); }
-    @media (prefers-color-scheme: dark) { :root { stroke: rgb(232, 160, 173); } }
-  </style>
-  <g fill="none" stroke-width="3.375"
+  <g fill="none" stroke="#000" stroke-width="3.375"
      stroke-linecap="round" stroke-linejoin="round"
      transform="rotate(-18 13.5 13.5) translate(-0.5 -3.4)">
     <path d="M4 5C4 17 7 24 14 26C21 24 24 17 24 5"/>

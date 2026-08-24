@@ -491,18 +491,58 @@ def test_the_icon_ink_matches_the_stylesheet_accent() -> None:
     assert inks == accents, f"icon {sorted(inks)} vs stylesheet {sorted(accents)}"
 
 
-def test_the_icon_is_drawn_on_whole_pixels_at_tab_size() -> None:
-    """16 px is the size a browser tab shows, and every edge has to land on a
-    pixel boundary there — the first two drafts blurred into a smear below
-    32 px because they did not."""
-    icon = (ROOT / "tools" / "make_icons.py").read_text(encoding="utf-8")
-    shapes = re.findall(r"\((\d+), (\d+), (\d+), (\d+)\),\s+#", icon)
+def test_the_favicon_is_the_header_glass_and_not_a_copy_of_it() -> None:
+    """The mark in the tab has to be the same drawing as the one in the page.
 
-    assert len(shapes) == 5, "expected the five rectangles of the mark"
-    for x, y, w, h in shapes:
-        for value in (x, y, w, h):
-            assert int(value) == float(value), "a rectangle left the integer grid"
-        assert int(y) + int(h) <= 16 and int(x) + int(w) <= 16, "a rectangle left the grid"
+    Replaces an older test that checked the five rectangles landed on whole
+    pixels at 16 px. That guarantee is deliberately gone: the mark is curves
+    now, decided 2026-08-24, and a curve at tab size is antialiased. What
+    replaced it is exactness — the favicon is one window onto the header
+    glass, `viewBox="0.5 3.4 27 27"` turned -18 degrees, so the two can never
+    drift. This test is what makes that claim checkable: hand-edit either SVG,
+    or change a curve without re-running the tool, and it fails.
+    """
+    import tools.make_icons as icons
+
+    for name in ("favicon.svg", "safari-pinned-tab.svg"):
+        committed = (ROOT / "templates" / "icons" / name).read_text(encoding="utf-8")
+        drawn = icons.svg(themed=(name == "favicon.svg"))
+        assert committed == drawn, f"{name} is not what make_icons.py draws"
+
+        paths = re.findall(r'<path d="([^"]+)"', committed)
+        assert paths == list(icons.GLASS), f"{name} carries a different glass"
+
+    # The raster set has to exist for the tags in base.html to resolve. Sizes
+    # are a floor, not a fingerprint: a truncated or empty file is the failure
+    # worth catching, not a byte count that changes with zlib.
+    for name, floor in (
+        ("favicon-32.png", 200),
+        ("apple-touch-icon.png", 800),
+        ("favicon.ico", 400),
+        ("opengraph.png", 2000),
+    ):
+        blob = (ROOT / "templates" / "icons" / name).read_bytes()
+        assert len(blob) > floor, f"{name} looks truncated"
+
+
+def test_every_page_carries_a_canonical_and_the_pair_points_both_ways() -> None:
+    """Nothing else on the page says /tackning and /en/coverage are the same
+    page. Wine pages are the exception on purpose: built in Swedish only, so
+    they get a canonical and no alternates rather than a promise of an English
+    page that was never written."""
+    from src.site import ORIGIN, page_urls
+
+    sv = page_urls("sv", "/tackning/", "/en/coverage/")
+    en = page_urls("en", "/tackning/", "/en/coverage/")
+    assert sv["canonical"] == f"{ORIGIN}/tackning/"
+    assert en["canonical"] == f"{ORIGIN}/en/coverage/"
+    assert sv["alternates"] == en["alternates"], "the pair must agree from both sides"
+    assert [a["lang"] for a in sv["alternates"]] == ["sv", "en", "x-default"]
+    assert sv["alternates"][2]["href"] == f"{ORIGIN}/tackning/", "x-default is Swedish"
+
+    wine = page_urls("sv", "/vin/12345-nagot/", None)
+    assert wine["canonical"] == f"{ORIGIN}/vin/12345-nagot/"
+    assert wine["alternates"] == [], "a Swedish-only page claims no translation"
 
 
 # --- the vintage figure ------------------------------------------------------

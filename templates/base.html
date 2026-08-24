@@ -6,12 +6,51 @@
 <title>{% block title %}{{ s.site_name }}{% endblock %}</title>
 <meta name="description" content="{% block description %}{{ s.tagline }}{% endblock %}">
 <meta name="color-scheme" content="dark light">
-{# Drawn by tools/make_icons.py on a 16-unit grid so the tab-strip size lands
-   on whole pixels. The SVG carries its own prefers-color-scheme; the PNG is
-   for browsers that will not take an SVG icon. #}
+{# Two values, not one: the reader has three theme states and the un-stamped
+   one is the common case, so the OS decides here. An explicit choice cannot be
+   expressed in markup at all — the script below inserts a third tag ahead of
+   these, because the browser takes the first one whose media matches. #}
+<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171614" media="(prefers-color-scheme: dark)">
+
+{# One page in two languages, and they have to point at each other: nothing
+   else on the page says /tackning and /en/coverage are the same page. Wine
+   pages are built in Swedish only (see WINE_PAGE_LANGUAGES), so they get a
+   canonical and no alternates — one page in one language is not a translation
+   of anything. #}
+{% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
+{% for alt in alternates %}
+<link rel="alternate" hreflang="{{ alt.lang }}" href="{{ alt.href }}">
+{%- endfor %}
+
+{# Sharing. og:title and og:description call the two blocks above back rather
+   than restating them, so an unfurl card can never drift from the page it
+   quotes — and docs/site-plan.md binds share text to the same wording rules as
+   a heading. No twitter:* tags: X falls back to og:*, which is why the sibling
+   site carries none either. The image URL must be absolute; most scrapers will
+   not resolve a relative one. #}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ s.site_name }}">
+<meta property="og:title" content="{{ self.title() }}">
+<meta property="og:description" content="{{ self.description() }}">
+{% if canonical %}<meta property="og:url" content="{{ canonical }}">{% endif %}
+<meta property="og:image" content="{{ origin }}/opengraph.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:locale" content="{{ 'sv_SE' if lang == 'sv' else 'en_GB' }}">
+{% if alternates %}<meta property="og:locale:alternate" content="{{ 'en_GB' if lang == 'sv' else 'sv_SE' }}">{% endif %}
+
+{# Drawn by tools/make_icons.py from the header glass — the favicon is one
+   window onto that same geometry, not a second drawing of it. The SVG carries
+   its own prefers-color-scheme; the PNG is for browsers that will not take an
+   SVG icon; the mask icon is Safari's pinned tab, which wants a silhouette and
+   supplies its own tint. /favicon.ico is deliberately not linked and
+   deliberately exists: browsers that ignore these tags request it anyway, and
+   wrangler.jsonc answers a miss with the whole 404 page. #}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#6b2737">
 {# No fonts and no third-party requests from these templates. Two reach the
    browser anyway and /metod names both: the bottle photograph on a wine page,
    and Cloudflare's analytics beacon, which they inject at the edge for
@@ -23,9 +62,29 @@
    written unless they chose — with no stored value the stylesheet's
    prefers-color-scheme rule decides, which is the default. #}
 <script>
+  // Shared with the theme control at the end of the body. An explicit choice
+  // has to win over the two media-scoped tags above, and the browser takes the
+  // first matching tag — so this one goes in front of them, not after.
+  window.paintChrome = function (mode) {
+    var tag = document.getElementById("theme-color");
+    if (mode !== "light" && mode !== "dark") {
+      if (tag) tag.remove();
+      return;
+    }
+    if (!tag) {
+      tag = document.createElement("meta");
+      tag.id = "theme-color";
+      tag.name = "theme-color";
+      document.head.insertBefore(tag, document.head.firstChild);
+    }
+    tag.content = mode === "dark" ? "#171614" : "#faf8f5";
+  };
   try {
     var t = localStorage.getItem("theme");
-    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    if (t === "light" || t === "dark") {
+      document.documentElement.dataset.theme = t;
+      window.paintChrome(t);
+    }
   } catch (e) {}
 </script>
 </head>
@@ -155,6 +214,7 @@
         root.dataset.theme = mode;
         if (remember) { try { localStorage.setItem("theme", mode); } catch (e) {} }
       }
+      if (window.paintChrome) window.paintChrome(mode);
       for (var i = 0; i < buttons.length; i++) {
         var on = buttons[i].dataset.mode === mode;
         buttons[i].setAttribute("aria-checked", on ? "true" : "false");
