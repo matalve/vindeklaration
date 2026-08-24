@@ -457,7 +457,12 @@ def test_no_hard_coded_theme_colour_survives_in_the_stylesheet() -> None:
     inputs and the block that quotes a supplier's own declaration.
     """
     css = (TEMPLATE_DIR / "site.css").read_text(encoding="utf-8")
-    palette = {"--ink", "--muted", "--line", "--paper", "--accent", "--field"}
+    palette = {
+        "--ink", "--muted", "--line", "--paper", "--accent", "--field",
+        # The header slab carries its own four: it is dark in both themes, so
+        # what reads against it is not what reads against the page.
+        "--wine-slab", "--wine-hoist", "--on-wine", "--on-wine-lift",
+    }
     # A hex literal, not an id selector: `#filters` is a selector and fine.
     hex_colour = re.compile(r"#[0-9a-fA-F]{3,8}\b")
 
@@ -523,6 +528,36 @@ def test_the_favicon_is_the_header_glass_and_not_a_copy_of_it() -> None:
     ):
         blob = (ROOT / "templates" / "icons" / name).read_bytes()
         assert len(blob) > floor, f"{name} looks truncated"
+
+
+def test_the_header_draws_the_same_glass_the_favicon_is_cut_from() -> None:
+    """One mark, two places, and neither may be edited alone.
+
+    tools/make_icons.py cuts the favicon out of these four paths; base.html
+    draws them in the header. If they were separate copies the first careless
+    edit would leave the tab showing a glass the page no longer draws — which
+    is the whole reason the favicon was rebuilt in the first place.
+    """
+    import tools.make_icons as icons
+
+    header = (TEMPLATE_DIR / "base.html").read_text(encoding="utf-8")
+    block = header[header.index('class="hoist-glass"'):header.index("</svg>", header.index('class="hoist-glass"'))]
+    drawn = re.findall(r'<path d="([^"]+)"', block)
+
+    assert drawn, "the header has no glass"
+    assert drawn == list(icons.GLASS), "header glass and favicon geometry differ"
+
+
+def test_the_navigation_says_which_of_the_four_you_are_standing_on() -> None:
+    """Four links and, until now, nothing marking the current one.
+
+    A class would be enough to draw the underline; aria-current is what carries
+    the same fact to a reader who cannot see it.
+    """
+    header = (TEMPLATE_DIR / "base.html").read_text(encoding="utf-8")
+    for section in ("find", "substances", "coverage", "method"):
+        assert f'section == "{section}"' in header, f"nothing marks {section}"
+    assert header.count('aria-current="page"') == 4
 
 
 def test_every_page_carries_a_canonical_and_the_pair_points_both_ways() -> None:

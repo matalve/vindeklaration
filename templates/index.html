@@ -10,7 +10,7 @@
   <label class="visually-hidden" for="q">{{ s.search }}</label>
   <div class="searchbox">
     <svg class="i" aria-hidden="true"><use href="#i-search"/></svg>
-    <input type="search" id="q" placeholder="{{ s.search }}" autocomplete="off"
+    <input type="search" id="q" name="q" data-search placeholder="{{ s.search }}" autocomplete="off"
            autocapitalize="off" spellcheck="false" enterkeyhint="search">
   </div>
   <p id="hint" class="hint">{{ s.search_hint }}</p>

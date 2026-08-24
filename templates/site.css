@@ -20,6 +20,13 @@
   --paper: #faf8f5;
   --accent: #6b2737; /* wine: links, rules, and the bars on /tackning */
   --field: #fff;     /* inputs and quoted source text */
+  /* The header slab and the glass standing in its hoist. Darker than
+     --accent on purpose: the accent has to read as a link against paper,
+     this has to carry white text. */
+  --wine-slab: #5b2130;
+  --wine-hoist: #b06b79;
+  --on-wine: #f8f3f1;
+  --on-wine-lift: #fff;   /* the same in both themes: the slab is dark in both */
   --measure: 40rem;
 }
 
@@ -31,6 +38,10 @@
     --paper: #171614;
     --accent: #e8a0ad; /* lightened for contrast on dark */
     --field: #201e1b;
+    --wine-slab: #38151e;
+    --wine-hoist: #e8a0ad;
+    --on-wine: #f4ece9;
+    --on-wine-lift: #fff;   /* the same in both themes: the slab is dark in both */
   }
 }
 
@@ -41,6 +52,10 @@
   --paper: #171614;
   --accent: #e8a0ad;
   --field: #201e1b;
+  --wine-slab: #38151e;
+  --wine-hoist: #e8a0ad;
+  --on-wine: #f4ece9;
+  --on-wine-lift: #fff;   /* the same in both themes: the slab is dark in both */
 }
 
 * { box-sizing: border-box; }
@@ -63,14 +78,70 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* Header ------------------------------------------------------------- */
 
+/* A filled slab rather than a hairline, and a wine glass standing where a
+   flag's hoist would be — the idea is borrowed from the sibling site, where
+   the stripe means something because the subject is flags. It means nothing
+   for wine, so the stripe was replaced by the thing the site is about.
+
+   Two rows, because five things on one row is a mess: identity and navigation
+   above, tools below. Grid rather than flex for one reason — a phone needs a
+   different ORDER, not just a different width, and three lines of area names
+   move the navigation under the search field without touching the markup.
+
+   Wider than the 40rem measure the content keeps: this is chrome, and when it
+   docks it goes edge to edge. Capped anyway, so a wide screen does not get a
+   metre of wine. */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  padding: 1.25rem 0 1rem;
-  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  overflow: hidden;
+  max-width: 64rem;
+  margin: 0.9rem auto;
+  padding: 1rem 1.25rem;
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  grid-template-areas:
+    "glass brand  nav    tools"
+    "glass search search count";
+  align-items: center;
+  column-gap: 1rem;
+  row-gap: 0.7rem;
+  border-radius: 16px;
+  background: var(--wine-slab);
+  color: var(--on-wine);
+  box-shadow: 0 10px 25px -5px rgba(91, 33, 48, 0.35);
+  transition: margin 0.18s ease, padding 0.18s ease, border-radius 0.18s ease,
+              box-shadow 0.18s ease, row-gap 0.18s ease;
 }
+
+/* The same four paths tools/make_icons.py cuts the favicon from, and a test
+   asserts they are identical — the tab and the header cannot drift. A placed
+   grid item spanning both rows: no absolute positioning, no percentage
+   height, and no padding to keep in sync with its width. */
+.hoist-glass {
+  grid-area: glass;
+  align-self: stretch;
+  justify-self: start;
+  width: 1.9rem;
+  margin-right: 0.3rem;
+  fill: none;
+  stroke: var(--wine-hoist);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform-origin: 50% 86%;
+  transition: transform 0.22s ease, stroke 0.22s ease, width 0.18s ease;
+}
+/* It tips the way someone lifting it would tip it. Never a fill: a glass that
+   fills reads as a gauge, and docs/site-plan.md forbids a grade even when it
+   is made without words. */
+header:hover .hoist-glass,
+header:focus-within .hoist-glass {
+  transform: rotate(-7deg);
+  stroke: var(--on-wine-lift);
+}
+
 /* The one place the site uses a serif, and it uses the reader's own. A web
    font would be the first bytes this project has ever asked a browser to fetch
    for decoration, on a page whose whole point is loading on a shop's signal —
@@ -79,16 +150,149 @@ header {
    every branch resolves to something with real stroke contrast, which is what
    separates it from the body text. */
 .wordmark {
+  grid-area: brand;
   font-family: "Iowan Old Style", "Hoefler Text", "Palatino Linotype", Palatino,
                Constantia, Cambria, "Noto Serif", "Liberation Serif", Georgia, serif;
   font-size: 1.35rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   text-decoration: none;
-  color: var(--ink);
+  color: var(--on-wine);
   line-height: 1;
+  transition: font-size 0.18s ease;
 }
-.wordmark:hover { color: var(--accent); }
+.wordmark:hover { color: var(--on-wine-lift); }
+
+/* Flat text and one marker. An earlier draft gave the links pills as well as
+   an underline, which is two markers for the same fact and read as clutter.
+   No icon either: on a filled slab, icon and underline and label together is
+   more chrome than the four words need. */
+header nav {
+  grid-area: nav;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0 1rem;
+}
+header nav a {
+  position: relative;
+  padding-bottom: 0.18rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+}
+header nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transition: transform 0.14s ease;
+}
+header nav a:hover::after,
+header nav a:focus-visible::after,
+header nav a[aria-current="page"]::after { transform: scaleX(1); }
+/* Until now the header did not say where the reader was. aria-current carries
+   the same fact to a screen reader, so this is orientation, not decoration. */
+header nav a[aria-current="page"] { color: var(--on-wine-lift); }
+header nav a[aria-current="page"]::after { background: var(--wine-hoist); }
+
+.header-tools {
+  grid-area: tools;
+  display: flex;
+  align-items: center;
+  gap: 0 0.6rem;
+}
+
+/* Search in the chrome, with the shortcut shown rather than explained. It is a
+   real form: with scripting off it lands on the front page with the query in
+   the box, and no page but that one pays for the 2 MB index. */
+.hsearch {
+  grid-area: search;
+  justify-self: start;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  max-width: 26rem;
+}
+header .hsearch input {
+  font: inherit;
+  font-size: 0.85rem;
+  width: 100%;
+  min-width: 0;
+  height: 2.15rem;
+  padding: 0 2.1rem 0 1.85rem;
+  color: var(--ink);
+  background: var(--field);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  transition: height 0.18s ease, border-color 0.18s ease;
+}
+header .hsearch input::placeholder { color: var(--muted); }
+header .hsearch input:focus {
+  outline: none;
+  border-color: var(--on-wine-lift);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.45);
+}
+header .hsearch input:focus ~ kbd { opacity: 0; }
+.hsearch .search-icon {
+  position: absolute;
+  left: 0.62rem;
+  width: 0.9em;
+  height: 0.9em;
+  margin: 0;
+  color: var(--muted);
+  pointer-events: none;
+}
+.hsearch kbd {
+  position: absolute;
+  right: 0.45rem;
+  min-width: 1.2rem;
+  height: 1.2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--muted);
+  font: 600 0.72rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  pointer-events: none;
+  transition: opacity 0.16s ease;
+}
+
+/* A count of matches and nothing more — a number is shown as a number, never
+   as a verdict. tabular-nums so the figure does not jump sideways as it
+   changes, which is the difference between reading as steady and as restless. */
+.header-count {
+  grid-area: count;
+  justify-self: end;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.72);
+  font-variant-numeric: tabular-nums;
+}
+.header-count b { color: var(--on-wine-lift); font-weight: 600; }
+
+/* Docked. A slab that only gets shorter looks like a bug; one that lies flat
+   against the edge — corners squared, margin gone, shadow reduced to a line —
+   reads as a state someone meant. */
+header[data-stuck] {
+  margin: 0 -1.25rem;
+  max-width: none;
+  border-radius: 0;
+  padding: 0.55rem 1.25rem;
+  row-gap: 0.45rem;
+  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.85);
+}
+header[data-stuck] .wordmark { font-size: 1.1rem; }
+header[data-stuck] .hsearch input { height: 1.75rem; }
+header[data-stuck] .hoist-glass { width: 1.5rem; }
 
 /* Wine page ---------------------------------------------------------- */
 
@@ -488,16 +692,6 @@ dl.facts.inline dd { margin: 0.1rem 0 0; }
   flex: none;
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 0 1rem;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-header nav { display: flex; align-items: center; flex-wrap: wrap; gap: 0 1rem; }
-header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
-
 /* The theme control: three segments and a thumb that slides between them.
    All three states are visible at once, so "follow my device" is a thing the
    reader can see rather than something they reach by clicking twice. */
@@ -547,20 +741,20 @@ header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
 
 @media (prefers-reduced-motion: reduce) {
   .themer .thumb { transition: none; }
+  .hoist-glass,
+  header,
+  header nav a::after { transition: none; }
 }
 
-/* Language and theme, always hard right. `margin-left: auto` rather than the
-   parent's justify-content, because these two wrap onto their own line on a
-   narrow screen and space-between puts a lone item at the start of a line —
-   which is why the theme control sat left on a phone. An auto margin follows
-   the group onto whatever line it lands on. */
-.header-tools {
-  display: flex;
-  align-items: center;
-  gap: 0 0.6rem;
-  margin-left: auto;
-  flex: none;
-}
+/* On the slab the control cannot borrow the page's palette: --field and
+   --accent are chosen to read against paper. Translucent white instead, which
+   works on both the light and the dark slab. */
+header .themer { background: rgba(255, 255, 255, 0.18); border-color: transparent; }
+header .themer button { color: rgba(255, 255, 255, 0.7); }
+header .themer .thumb { background: rgba(255, 255, 255, 0.92); }
+header .themer button:hover { color: var(--on-wine-lift); }
+header .themer button[aria-checked="true"] { color: var(--wine-slab); }
+header .themer button:focus-visible { outline-color: var(--on-wine-lift); }
 
 .lang {
   display: inline-flex;
@@ -573,19 +767,63 @@ header nav a { margin-left: 0; font-size: 0.9rem; white-space: nowrap; }
   height: 1rem;
   border-radius: 2px;
   /* The flags are the only saturated colour on the page, so they get a hairline
-     rather than floating against the paper — and the white in the Union Jack
-     needs an edge in light mode to stop the flag melting into the background. */
-  box-shadow: 0 0 0 1px var(--line);
+     rather than floating against the slab. Faint at rest and firmer on hover:
+     an earlier pass had it the other way round, and in the light theme the
+     hover ring landed on almost the slab's own colour, so hovering appeared to
+     erase it. */
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
   object-fit: cover;
+  transition: box-shadow 0.16s ease;
 }
-.lang:hover .flag { box-shadow: 0 0 0 1px var(--accent); }
-.lang:focus-visible .flag { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lang:hover .flag,
+.lang:focus-visible .flag { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.55); }
+.lang:focus-visible .flag { outline: 2px solid var(--on-wine-lift); outline-offset: 2px; }
 
+/* The phone. C — the docking — is what gets sacrificed: three rows stuck to
+   the top eats a third of a phone screen, and that screen is the one this site
+   was built for, someone standing in a shop. The navigation becomes a strip
+   that scrolls sideways rather than wrapping to a third row, so the slab keeps
+   its height however many entries the nav grows. */
 @media (max-width: 34rem) {
-  /* The wordmark keeps its line; the nav and the tools share the next one. */
-  header { flex-wrap: wrap; }
-  .header-right { width: 100%; }
-  header nav { gap: 0 0.85rem; }
+  header,
+  header[data-stuck] {
+    position: static;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "glass brand  tools"
+      "glass search count"
+      "nav   nav    nav";
+    margin: 0.75rem 0;
+    padding: 0.8rem 0.9rem;
+    border-radius: 12px;
+    column-gap: 0.6rem;
+    row-gap: 0.6rem;
+    box-shadow: 0 10px 25px -5px rgba(91, 33, 48, 0.35);
+  }
+  /* Wordmark and tools together are wider than the slab at 22rem, so both
+     step down. Cheaper than clipping the name. */
+  .wordmark { font-size: 1.15rem; }
+  .hoist-glass { width: 1.5rem; }
+  header nav {
+    justify-self: stretch;
+    /* A grid item's automatic minimum is its min-content width, so without
+       this the four nowrap links would widen the slab instead of scrolling
+       inside it. Not reachable at the widths tested — the links still fit at
+       485 px — but it is what makes overflow-x mean anything here, and a
+       fifth entry or a longer translation would reach it. */
+    min-width: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 0 1rem;
+    padding-bottom: 0.15rem;
+  }
+  header nav::-webkit-scrollbar { display: none; }
+  .header-count { font-size: 0.75rem; }
+  .themer button, .themer .thumb { width: 1.6rem; }
+  .themer[data-at="1"] .thumb { transform: translateX(1.6rem); }
+  .themer[data-at="2"] .thumb { transform: translateX(3.2rem); }
+  .flag { width: 1.3rem; height: 0.87rem; }
 }
 
 /* Front page --------------------------------------------------------- */

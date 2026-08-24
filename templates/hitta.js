@@ -360,6 +360,18 @@ var FIXED_RANGE = "Fast sortiment";
     if (buried) lines.push(S.optionsHidden.replace("{n}", buried));
     status.textContent = lines.join(" ");
 
+    // The same figure in the chrome, where it stays visible while the reader
+    // scrolls the results. A count and nothing else — the lines above are what
+    // explain it, and they stay where they are.
+    var badge = document.getElementById("header-count");
+    if (badge) {
+      badge.innerHTML = "";
+      var n = document.createElement("b");
+      n.textContent = s.kept.length.toLocaleString(S.lang === "sv" ? "sv-SE" : "en-GB");
+      badge.appendChild(n);
+      badge.appendChild(document.createTextNode(" " + S.winesWord));
+    }
+
     out.innerHTML = "";
     if (!s.kept.length) {
       out.appendChild(el("p", "explain", S.noResults));

@@ -141,4 +141,14 @@ function loadIndex(onReady, onProgress) {
   // a shop's signal.
   input.addEventListener("focus", go, { once: true });
   input.addEventListener("input", go);
+
+  // The header on every other page is a plain form pointing here, so a reader
+  // who searched from a wine page arrives with ?q= and expects to see results
+  // rather than an empty box. This is also what makes that form work with
+  // scripting off: without this it still lands here with the query visible.
+  var q = new URLSearchParams(window.location.search).get("q");
+  if (q) {
+    input.value = q;
+    go();
+  }
 })();
