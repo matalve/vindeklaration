@@ -25,6 +25,7 @@ import shutil
 import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
+from xml.sax.saxutils import escape
 
 import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -36,6 +37,11 @@ LEXICON_PATH = DATA_DIR / "lexicon.yaml"
 ADDITIVES_PATH = DATA_DIR / "additives.yaml"
 TEMPLATE_DIR = ROOT / "templates"
 OUTPUT_DIR = ROOT / "site"
+
+# Where this site is served from. Needed absolute rather than relative in
+# three places that a relative URL breaks outright: og:image (most scrapers
+# will not resolve one), rel=canonical, and the sitemap.
+ORIGIN = "https://vindeklaration.se"
 
 SITE_URL = "https://www.systembolaget.se"
 # The catalog gives a template, not a fetchable URL: it needs a size and a
@@ -93,6 +99,26 @@ def state_of(wine: dict) -> str:
     if wine["declaration_status"] != "declared":
         return "silent"
     return "partial" if wine["parse_status"] == "partial" else "declared"
+
+
+def page_urls(lang: str, sv_path: str, en_path: str | None) -> dict:
+    """canonical and hreflang for one page, in the shape base.html expects.
+
+    `en_path` is None for a page built in Swedish only — the wine pages, see
+    WINE_PAGE_LANGUAGES. Those get a self-referential canonical and no
+    alternate pair: one page in one language is not a translation of anything,
+    and saying otherwise would promise an English reader a page that does not
+    exist.
+    """
+    here = sv_path if lang == "sv" else en_path
+    alternates: list[dict] = []
+    if en_path is not None:
+        alternates = [
+            {"lang": "sv", "href": ORIGIN + sv_path},
+            {"lang": "en", "href": ORIGIN + en_path},
+            {"lang": "x-default", "href": ORIGIN + sv_path},
+        ]
+    return {"origin": ORIGIN, "canonical": ORIGIN + here, "alternates": alternates}
 
 
 def wine_path(wine: dict) -> str:
@@ -923,6 +949,11 @@ def build(output: Path, limit: int | None = None) -> None:
     coverage_template = env.get_template("coverage.html")
     importer_template = env.get_template("importer.html")
 
+    # Slugs differ per language, so an alternate cannot be derived by sticking
+    # /en in front of the current path — both sets are needed at once.
+    sv_s, en_s = strings("sv"), strings("en")
+    sitemap: list[str] = []
+
     for lang in LANGUAGES:
         s = strings(lang)
         prefix = output if lang == "sv" else output / "en"
@@ -931,6 +962,12 @@ def build(output: Path, limit: int | None = None) -> None:
         # both languages because only Swedish wine pages are built.
         lang_root = "" if lang == "sv" else "/en"
         facets = facet_labels(lang)
+
+        def urls(sv_path: str, en_path: str | None = None) -> dict:
+            """Record the page in the sitemap and hand back its URL block."""
+            meta = page_urls(lang, sv_path, en_path)
+            sitemap.append(meta["canonical"])
+            return meta
 
         def heading_for(sl: dict) -> str:
             label = (facets.get("category", {}).get(sl["category"]) or sl["category"])
@@ -961,6 +998,7 @@ def build(output: Path, limit: int | None = None) -> None:
                         substance_ids=substance_ids,
                         stock=findability(wine),
                         source_url=wine["source_url"],
+                        **urls(f"/{wine_path(wine)}/"),
                         lang=lang,
                         s=s,
                         base=base,
@@ -973,6 +1011,7 @@ def build(output: Path, limit: int | None = None) -> None:
         prefix.mkdir(parents=True, exist_ok=True)
         (prefix / "index.html").write_text(
             index_template.render(
+                **urls("/", "/en/"),
                 stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED, lists=list_links,
                 additive_names=additive_names(wines, lang),
@@ -983,6 +1022,7 @@ def build(output: Path, limit: int | None = None) -> None:
         find.mkdir(parents=True, exist_ok=True)
         (find / "index.html").write_text(
             find_template.render(
+                **urls(f"/{sv_s['find_url']}/", f"/en/{en_s['find_url']}/"),
                 lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
                 additive_names=additive_names(wines, lang),
@@ -1003,6 +1043,8 @@ def build(output: Path, limit: int | None = None) -> None:
             ]
             (page / "index.html").write_text(
                 list_template.render(
+                    **urls(f"/{sv_s['list_url']}/{sl['slug']}/",
+                           f"/en/{en_s['list_url']}/{sl['slug']}/"),
                     sl=sl, heading=heading_for(sl), other_lists=others,
                     lang=lang, s=s, base=base, lang_root=lang_root,
                     generated=generated, cdn_checked=CDN_CHECKED,
@@ -1019,6 +1061,7 @@ def build(output: Path, limit: int | None = None) -> None:
         substance_root.mkdir(parents=True, exist_ok=True)
         (substance_root / "index.html").write_text(
             substances_template.render(
+                **urls(f"/{sv_s['substance_url']}/", f"/en/{en_s['substance_url']}/"),
                 substances=substances, stats=stats,
                 undefined_substances=undefined_substances,
                 lang=lang, s=s, base=base, lang_root=lang_root,
@@ -1031,6 +1074,8 @@ def build(output: Path, limit: int | None = None) -> None:
             page.mkdir(parents=True, exist_ok=True)
             (page / "index.html").write_text(
                 substance_template.render(
+                    **urls(f"/{sv_s['substance_url']}/{substance['id']}/",
+                           f"/en/{en_s['substance_url']}/{substance['id']}/"),
                     sub=substance, stats=stats, allergen_labels=allergens,
                     lang=lang, s=s, base=base, lang_root=lang_root,
                     generated=generated, cdn_checked=CDN_CHECKED,
@@ -1042,6 +1087,7 @@ def build(output: Path, limit: int | None = None) -> None:
         cover.mkdir(parents=True, exist_ok=True)
         (cover / "index.html").write_text(
             coverage_template.render(
+                **urls(f"/{sv_s['coverage_url']}/", f"/en/{en_s['coverage_url']}/"),
                 stats=stats, covered=covered, breakdowns=breakdowns,
                 lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
@@ -1062,6 +1108,8 @@ def build(output: Path, limit: int | None = None) -> None:
                 page.mkdir(parents=True, exist_ok=True)
                 (page / "index.html").write_text(
                     importer_template.render(
+                        **urls(f"/{sv_s['importer_url']}/{imp['slug']}/",
+                               f"/en/{en_s['importer_url']}/{imp['slug']}/"),
                         imp=imp, covered=covered, mean=covered["share"],
                         lang=lang, s=s, base=base, lang_root=lang_root,
                         generated=generated, cdn_checked=CDN_CHECKED,
@@ -1076,6 +1124,7 @@ def build(output: Path, limit: int | None = None) -> None:
         method.mkdir(parents=True, exist_ok=True)
         (method / "index.html").write_text(
             method_template.render(
+                **urls(f"/{sv_s['method_url']}/", f"/en/{en_s['method_url']}/"),
                 stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
                 repo_public=REPO_PUBLIC,
@@ -1087,13 +1136,48 @@ def build(output: Path, limit: int | None = None) -> None:
     # this site will serve, so it says so and offers a way back in.
     (output / "404.html").write_text(
         notfound_template.render(
+            origin=ORIGIN, canonical=None, alternates=[],
             lang="sv", s=strings("sv"), base="", lang_root="",
             generated=generated, cdn_checked=CDN_CHECKED,
         ),
         encoding="utf-8",
     )
 
+    # Generated rather than committed, and that is the point: the sibling site
+    # keeps a hand-written sitemap whose lastmod is three years stale. At 15 000
+    # URLs there is no hand to write this one, and the generator already knows
+    # every page it wrote. lastmod is the dataset's own build date — a real one
+    # or none at all, never a guess.
+    entries = "\n".join(
+        f"  <url><loc>{escape(url)}</loc><lastmod>{generated}</lastmod></url>"
+        for url in sitemap
+    )
+    (output / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{entries}\n</urlset>\n",
+        encoding="utf-8",
+    )
+
+    # Minimal on purpose. This project reads other people's robots.txt every
+    # night and reasons about them under RFC 9309, so what it serves should be
+    # something it would be content to have parsed by its own rules: allow
+    # everything, name the sitemap, and no performative crawler groups.
+    (output / "robots.txt").write_text(
+        "User-agent: *\n"
+        "Allow: /\n"
+        "\n"
+        "# The search index is a data file, not a page: it has nothing to show in\n"
+        "# a result. Kept out of the index rather than hidden — it stays public,\n"
+        "# and the licence in LICENSES.md still applies to it.\n"
+        "Disallow: /sok-index.json\n"
+        "\n"
+        f"Sitemap: {ORIGIN}/sitemap.xml\n",
+        encoding="utf-8",
+    )
+
     print(f"wrote {len(wines)} wines x {len(LANGUAGES)} languages to {output}")
+    print(f"sitemap: {len(sitemap)} URLs")
     print(f"substance pages: {len(substances)} x {len(LANGUAGES)} languages")
     print(f"search index: {(output / 'sok-index.json').stat().st_size / 1e6:.1f} MB")
 
