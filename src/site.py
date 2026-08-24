@@ -1012,6 +1012,9 @@ def build(output: Path, limit: int | None = None) -> None:
         (prefix / "index.html").write_text(
             index_template.render(
                 **urls("/", "/en/"),
+                # Its own search box is the first thing on the page; a second
+                # one in the chrome would be one too many.
+                header_search=False,
                 stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED, lists=list_links,
                 additive_names=additive_names(wines, lang),
@@ -1022,6 +1025,7 @@ def build(output: Path, limit: int | None = None) -> None:
         find.mkdir(parents=True, exist_ok=True)
         (find / "index.html").write_text(
             find_template.render(
+                section="find", live_count=True,
                 **urls(f"/{sv_s['find_url']}/", f"/en/{en_s['find_url']}/"),
                 lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,
@@ -1043,6 +1047,7 @@ def build(output: Path, limit: int | None = None) -> None:
             ]
             (page / "index.html").write_text(
                 list_template.render(
+                    section="find",
                     **urls(f"/{sv_s['list_url']}/{sl['slug']}/",
                            f"/en/{en_s['list_url']}/{sl['slug']}/"),
                     sl=sl, heading=heading_for(sl), other_lists=others,
@@ -1061,6 +1066,7 @@ def build(output: Path, limit: int | None = None) -> None:
         substance_root.mkdir(parents=True, exist_ok=True)
         (substance_root / "index.html").write_text(
             substances_template.render(
+                section="substances",
                 **urls(f"/{sv_s['substance_url']}/", f"/en/{en_s['substance_url']}/"),
                 substances=substances, stats=stats,
                 undefined_substances=undefined_substances,
@@ -1074,6 +1080,7 @@ def build(output: Path, limit: int | None = None) -> None:
             page.mkdir(parents=True, exist_ok=True)
             (page / "index.html").write_text(
                 substance_template.render(
+                    section="substances",
                     **urls(f"/{sv_s['substance_url']}/{substance['id']}/",
                            f"/en/{en_s['substance_url']}/{substance['id']}/"),
                     sub=substance, stats=stats, allergen_labels=allergens,
@@ -1087,6 +1094,7 @@ def build(output: Path, limit: int | None = None) -> None:
         cover.mkdir(parents=True, exist_ok=True)
         (cover / "index.html").write_text(
             coverage_template.render(
+                section="coverage",
                 **urls(f"/{sv_s['coverage_url']}/", f"/en/{en_s['coverage_url']}/"),
                 stats=stats, covered=covered, breakdowns=breakdowns,
                 lang=lang, s=s, base=base, lang_root=lang_root,
@@ -1108,6 +1116,7 @@ def build(output: Path, limit: int | None = None) -> None:
                 page.mkdir(parents=True, exist_ok=True)
                 (page / "index.html").write_text(
                     importer_template.render(
+                        section="coverage",
                         **urls(f"/{sv_s['importer_url']}/{imp['slug']}/",
                                f"/en/{en_s['importer_url']}/{imp['slug']}/"),
                         imp=imp, covered=covered, mean=covered["share"],
@@ -1124,6 +1133,7 @@ def build(output: Path, limit: int | None = None) -> None:
         method.mkdir(parents=True, exist_ok=True)
         (method / "index.html").write_text(
             method_template.render(
+                section="method",
                 **urls(f"/{sv_s['method_url']}/", f"/en/{en_s['method_url']}/"),
                 stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED,

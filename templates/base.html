@@ -144,24 +144,32 @@
 </svg>
 
 <header>
-  <a class="wordmark" href="{{ lang_root }}/">{{ s.site_name }}</a>
-  <div class="header-right">
-    <nav>
-      <a href="{{ lang_root }}/{{ s.find_url }}/"><svg class="i"><use href="#i-filter"/></svg>{{ s.find }}</a>
-      <a href="{{ lang_root }}/{{ s.substance_url }}/"><svg class="i"><use href="#i-tag"/></svg>{{ s.substances }}</a>
-      <a href="{{ lang_root }}/{{ s.coverage_url }}/"><svg class="i"><use href="#i-chart"/></svg>{{ s.coverage }}</a>
-      <a href="{{ lang_root }}/{{ s.method_url }}/"><svg class="i"><use href="#i-book"/></svg>{{ s.method }}</a>
-    </nav>
+  {# The same four paths tools/make_icons.py cuts the favicon from. A test
+     asserts they match, so the mark in the tab and the mark in the page can
+     never become two different drawings. #}
+  <svg class="hoist-glass" viewBox="0 0 28 54" aria-hidden="true" focusable="false">
+    <path d="M4 5C4 17 7 24 14 26C21 24 24 17 24 5"/>
+    <path d="M4 5Q14 9 24 5"/>
+    <path d="M14 26V45"/>
+    <path d="M6.5 48Q14 43.5 21.5 48"/>
+  </svg>
 
-    {# Language and theme together, pushed right by margin-left:auto on the
-       group rather than by the parent's justify-content. When the nav wraps to
-       its own line a space-between parent leaves these at the start of the
-       next one, which is what the theme control was doing on a phone. #}
-    <div class="header-tools">
-      <a class="lang" href="{{ s.other_lang_url }}" title="{{ s.other_lang }}">
-        <svg class="flag" aria-hidden="true"><use href="{{ s.other_lang_flag }}"/></svg>
-        <span class="visually-hidden">{{ s.other_lang }}</span>
-      </a>
+  <a class="wordmark" href="{{ lang_root }}/">{{ s.site_name }}</a>
+
+  {# aria-current rather than a class: the reader who cannot see the underline
+     still needs to know which of the four they are standing on. #}
+  <nav>
+    <a href="{{ lang_root }}/{{ s.find_url }}/"{% if section == "find" %} aria-current="page"{% endif %}>{{ s.find }}</a>
+    <a href="{{ lang_root }}/{{ s.substance_url }}/"{% if section == "substances" %} aria-current="page"{% endif %}>{{ s.substances }}</a>
+    <a href="{{ lang_root }}/{{ s.coverage_url }}/"{% if section == "coverage" %} aria-current="page"{% endif %}>{{ s.coverage }}</a>
+    <a href="{{ lang_root }}/{{ s.method_url }}/"{% if section == "method" %} aria-current="page"{% endif %}>{{ s.method }}</a>
+  </nav>
+
+  <div class="header-tools">
+    <a class="lang" href="{{ s.other_lang_url }}" title="{{ s.other_lang }}">
+      <svg class="flag" aria-hidden="true"><use href="{{ s.other_lang_flag }}"/></svg>
+      <span class="visually-hidden">{{ s.other_lang }}</span>
+    </a>
     {# A segmented control, revealed by JS only: without it it would offer a
        switch that cannot happen, and what it switches away from — the OS's own
        setting — is what a no-JS reader already gets. The three states are shown
@@ -178,9 +186,30 @@
       <button type="button" role="radio" data-mode="dark" title="{{ s.theme_dark }}">
         <svg class="i"><use href="#i-moon"/></svg><span class="visually-hidden">{{ s.theme_dark }}</span>
       </button>
-      </div>
     </div>
   </div>
+
+  {# A real form, not a scripted box. The index is a couple of megabytes, and
+     only the front page should pay for it — so this navigates there with the
+     query and sok.js picks it up. With scripting off it still works, which a
+     live field would not. The front page suppresses it: its own search box is
+     the first thing on the page, and two fields would be one too many. #}
+  {% if header_search | default(true) %}
+  <form class="hsearch" role="search" method="get" action="{{ lang_root }}/">
+    <svg class="i search-icon" aria-hidden="true"><use href="#i-search"/></svg>
+    <label class="visually-hidden" for="hq">{{ s.search }}</label>
+    <input type="search" id="hq" name="q" data-search placeholder="{{ s.search }}"
+           autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
+    <kbd aria-hidden="true">/</kbd>
+  </form>
+  {% endif %}
+
+  {# Only where something is being counted. On a wine page or /metod there is
+     nothing to count, and a counter standing still is worse than none. #}
+  {% if live_count | default(false) %}
+  <span class="header-count" id="header-count" role="status" aria-live="polite"
+        aria-atomic="true"></span>
+  {% endif %}
 </header>
 
 <main>
@@ -198,6 +227,37 @@
 </footer>
 
 <script>
+  // The slab docks when it reaches the top: no scroll listener and no work per
+  // frame, just the ratio of a sticky element dropping below 1 as it is
+  // clipped by the root's shifted top edge. On a phone the header is static
+  // (see the 34rem block in site.css), so the attribute lands and does
+  // nothing.
+  (function () {
+    var head = document.querySelector("header");
+    if (!head || !window.IntersectionObserver) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        head.toggleAttribute("data-stuck", entry.intersectionRatio < 1);
+      });
+    }, { threshold: [1], rootMargin: "-1px 0px 0px 0px" }).observe(head);
+  })();
+
+  // "/" jumps to whichever search field the page has — the header's on most
+  // pages, the front page's own box where that one is suppressed. Never while
+  // the reader is already typing somewhere.
+  (function () {
+    var field = document.querySelector("[data-search]");
+    if (!field) return;
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "/" || event.metaKey || event.ctrlKey || event.altKey) return;
+      var tag = (document.activeElement || {}).tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      event.preventDefault();
+      field.focus();
+      field.select();
+    });
+  })();
+
   (function () {
     var group = document.getElementById("theme");
     if (!group) return;
