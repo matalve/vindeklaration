@@ -152,23 +152,21 @@ header {
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  /* rotate and scale as their own properties rather than one `transform`, so
-     the tip and the docked size can be animated independently without either
-     having to restate the other. */
   transform-origin: 50% 89%;
-  rotate: 0deg;
-  scale: 1;
-  /* The tip eases; the docked size does not. Scale is composited and would
-     be smooth on its own, but easing it against a header that resizes in
-     one step just puts the glass out of time with everything around it. */
-  transition: rotate 0.22s ease, stroke 0.22s ease;
+  /* Only the tip is animated, and only the transform. The stroke colour used
+     to ease alongside it, which meant the vector had to be re-rasterised on
+     every frame of the rotation — the strokes crawled rather than glided.
+     The colour now changes at once and the rotation is left to the
+     compositor, which `will-change` asks it to prepare for. */
+  will-change: transform;
+  transition: transform 0.22s ease;
 }
 /* It tips the way someone lifting it would tip it. Never a fill: a glass that
    fills reads as a gauge, and docs/site-plan.md forbids a grade even when it
    is made without words. */
 header:hover .hoist-glass,
 header:focus-within .hoist-glass {
-  rotate: -7deg;
+  transform: rotate(-7deg);
   stroke: var(--on-wine-lift);
 }
 
@@ -321,9 +319,7 @@ header[data-stuck] {
 }
 header[data-stuck] .wordmark { font-size: 1.1rem; }
 header[data-stuck] .hsearch input { height: 1.75rem; }
-/* Scale, not width: the box stays put and only its painting shrinks, so
-   nothing is re-laid out mid-animation. 0.79 is 1.5rem of 1.9rem. */
-header[data-stuck] .hoist-glass { scale: 0.79; }
+header[data-stuck] .hoist-glass { width: 1.5rem; }
 
 /* Wine page ---------------------------------------------------------- */
 

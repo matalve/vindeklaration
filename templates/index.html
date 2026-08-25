@@ -7,12 +7,10 @@
      field and no statement of what it searches, which asks the reader to
      already know. #}
   <p class="lede intro">{{ s.intro }}</p>
-  <label class="visually-hidden" for="q">{{ s.search }}</label>
-  <div class="searchbox">
-    <svg class="i" aria-hidden="true"><use href="#i-search"/></svg>
-    <input type="search" id="q" name="q" data-search placeholder="{{ s.search }}" autocomplete="off"
-           autocapitalize="off" spellcheck="false" enterkeyhint="search">
-  </div>
+  {# No box of its own any more: the header carries the search on every page,
+     and two fields with the same placeholder a few rows apart read as one
+     control shown twice. Results still land here, under the statement of what
+     the site is for — sok.js binds to whichever field the page has. #}
   <p id="hint" class="hint">{{ s.search_hint }}</p>
 {% if s.wine_pages_note %}
   <p class="hint note">{{ s.wine_pages_note }}</p>
