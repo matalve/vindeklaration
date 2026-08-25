@@ -105,11 +105,16 @@ header {
   top: 0;
   z-index: 10;
   overflow: hidden;
-  /* The measure plus its own padding, so the header's CONTENT column lines up
-     with the page's. It stays that width docked as well: a slab that snapped
-     from a card to the full width of a wide screen was the loudest thing on
-     the page, and docking reads perfectly well without it. */
-  max-width: calc(var(--measure) + 2.5rem);
+  /* Wider than the measure, because the top row does not fit inside it: the
+     wordmark, four navigation labels and the two controls need 651 px in
+     English against the 640 px the measure allows, and the theme control was
+     pushed into the padding. The card therefore runs a little past the text
+     column on each side rather than lining up with it exactly — the point of
+     the cap is that the header stays centred over the content instead of
+     reaching for the corners of a wide screen, and 48rem still does that.
+     It stays this width docked as well: a slab that snapped from a card to
+     the full width of a wide screen was the loudest thing on the page. */
+  max-width: calc(var(--measure) + 8rem);
   margin: 0 auto 0.9rem;
   padding: 1rem 1.25rem;
   display: grid;
@@ -200,7 +205,15 @@ header nav {
   display: flex;
   align-items: center;
   gap: 0 1rem;
+  /* If a platform's font is wider still, the navigation scrolls rather than
+     shoving the language and theme controls out of the slab. There is 77 px of
+     room in English before this is reached, so it is a floor and not a
+     layout. */
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+header nav::-webkit-scrollbar { display: none; }
 header nav a {
   position: relative;
   padding-bottom: 0.18rem;
@@ -831,21 +844,13 @@ header .themer button:focus-visible { outline-color: var(--on-wine-lift); }
      step down. Cheaper than clipping the name. */
   .wordmark { font-size: 1.15rem; }
   .hoist-glass { width: 1.5rem; }
+  /* The strip itself is set up on the base rule; here it only changes shape. */
   header nav {
     justify-self: stretch;
-    /* A grid item's automatic minimum is its min-content width, so without
-       this the four nowrap links would widen the slab instead of scrolling
-       inside it. Not reachable at the widths tested — the links still fit at
-       485 px — but it is what makes overflow-x mean anything here, and a
-       fifth entry or a longer translation would reach it. */
-    min-width: 0;
     flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
     gap: 0 1rem;
     padding-bottom: 0.15rem;
   }
-  header nav::-webkit-scrollbar { display: none; }
   .header-count { font-size: 0.75rem; }
   .themer button, .themer .thumb { width: 1.6rem; }
   .themer[data-at="1"] .thumb { transform: translateX(1.6rem); }
