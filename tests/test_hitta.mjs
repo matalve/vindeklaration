@@ -38,7 +38,10 @@ if (data.wines[0].length !== COLUMNS) {
 // the IIFE from running while still defining COL and the helpers.
 const context = vm.createContext({
   window: { SITE: {} },
-  document: { getElementById: () => null },
+  // Every lookup yields nothing, whichever way a file asks: sok.js finds its
+  // field with querySelector now that the field lives in the header rather
+  // than at a known id on the front page.
+  document: { getElementById: () => null, querySelector: () => null },
 });
 for (const file of ["templates/sok.js", "templates/hitta.js"]) {
   vm.runInContext(readFileSync(file, "utf8"), context);
@@ -172,6 +175,7 @@ function fakeSelect(...values) {
 function makePrune(select, focused = null) {
   const document = {
     getElementById: () => select,
+    querySelector: () => null,
     activeElement: focused,
     createElement: () => ({ value: "", textContent: "" }),
     createDocumentFragment: () => ({
@@ -286,7 +290,7 @@ test("a declared row names its substances, not just how many", () => {
       stateDeclared: "Deklarerar",
       stateDeclaredZero: "Deklarerar inga tillsatser",
     } },
-    document: { getElementById: () => null },
+    document: { getElementById: () => null, querySelector: () => null },
   });
   vm.runInContext(readFileSync("templates/sok.js", "utf8"), ctx);
 
@@ -310,7 +314,7 @@ test("a wine declaring nothing is never given a substance list", () => {
       stateSilent: "Deklarerar inga ingredienser",
       statePartial: "Deklarerar, men all text kunde inte tolkas",
     } },
-    document: { getElementById: () => null },
+    document: { getElementById: () => null, querySelector: () => null },
   });
   vm.runInContext(readFileSync("templates/sok.js", "utf8"), ctx);
 
