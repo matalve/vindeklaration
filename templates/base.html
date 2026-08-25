@@ -193,9 +193,14 @@
   {# A real form, not a scripted box. The index is a couple of megabytes, and
      only the front page should pay for it — so this navigates there with the
      query and sok.js picks it up. With scripting off it still works, which a
-     live field would not. The front page suppresses it: its own search box is
-     the first thing on the page, and two fields would be one too many. #}
-  {% if header_search | default(true) %}
+     live field would not.
+
+     On every page including the front one. An earlier pass suppressed it there
+     on the grounds that the hero box was two rows below, which left the one
+     page a reader lands on first as the one page whose chrome was missing a
+     control — the field looked like it had disappeared. On the front page the
+     form points at the page it is already on, so a search from the header
+     lands in the hero results. #}
   <form class="hsearch" role="search" method="get" action="{{ lang_root }}/">
     <svg class="i search-icon" aria-hidden="true"><use href="#i-search"/></svg>
     <label class="visually-hidden" for="hq">{{ s.search }}</label>
@@ -203,7 +208,6 @@
            autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search">
     <kbd aria-hidden="true">/</kbd>
   </form>
-  {% endif %}
 
   {# Only where something is being counted. On a wine page or /metod there is
      nothing to count, and a counter standing still is worse than none. #}

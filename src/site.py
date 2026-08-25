@@ -1012,9 +1012,6 @@ def build(output: Path, limit: int | None = None) -> None:
         (prefix / "index.html").write_text(
             index_template.render(
                 **urls("/", "/en/"),
-                # Its own search box is the first thing on the page; a second
-                # one in the chrome would be one too many.
-                header_search=False,
                 stats=stats, lang=lang, s=s, base=base, lang_root=lang_root,
                 generated=generated, cdn_checked=CDN_CHECKED, lists=list_links,
                 additive_names=additive_names(wines, lang),
