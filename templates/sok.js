@@ -69,10 +69,14 @@ function loadIndex(onReady, onProgress) {
 }
 
 (function () {
-  var input = document.getElementById("q");
-  if (!input) return;
+  // Whichever field this page has — the header's on every page, and it is the
+  // only one now that the front page's own box is gone. All three parts have to
+  // be present: /hitta loads this script and has the header field but no
+  // results list, and binding there would throw on the first keystroke.
+  var input = document.querySelector("[data-search]");
   var list = document.getElementById("results");
   var hint = document.getElementById("hint");
+  if (!input || !list || !hint) return;
 
   function render(rows, total) {
     list.innerHTML = "";
