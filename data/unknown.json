@@ -98,6 +98,10 @@
  ],
  "fuzzy_matches": [
   {
+   "match": "svavekdioxid -> svaveldioxid",
+   "wines": 2
+  },
+  {
    "match": "konserverings -> konserverings",
    "wines": 1
   },
