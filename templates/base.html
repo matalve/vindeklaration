@@ -143,6 +143,7 @@
   </symbol>
 </svg>
 
+<div class="sticky-sentinel" aria-hidden="true"></div>
 <header>
   {# The same four paths tools/make_icons.py cuts the favicon from. A test
      asserts they match, so the mark in the tab and the mark in the page can
@@ -227,19 +228,36 @@
 </footer>
 
 <script>
-  // The slab docks when it reaches the top: no scroll listener and no work per
-  // frame, just the ratio of a sticky element dropping below 1 as it is
-  // clipped by the root's shifted top edge. On a phone the header is static
-  // (see the 34rem block in site.css), so the attribute lands and does
-  // nothing.
+  // The slab docks when it reaches the top. No scroll listener and no work per
+  // frame: a sentinel of exactly the header's top gap sits above it, and when
+  // that leaves the viewport the header has arrived at the top. Watching the
+  // header itself did not work — docking changed its own geometry, which
+  // changed what the observer saw, and it never read as un-stuck again.
   (function () {
     var head = document.querySelector("header");
-    if (!head || !window.IntersectionObserver) return;
-    new IntersectionObserver(function (entries) {
+    var mark = document.querySelector(".sticky-sentinel");
+    if (!head || !mark || !window.IntersectionObserver) return;
+
+    var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        head.toggleAttribute("data-stuck", entry.intersectionRatio < 1);
+        head.toggleAttribute("data-stuck", !entry.isIntersecting);
       });
-    }, { threshold: [1], rootMargin: "-1px 0px 0px 0px" }).observe(head);
+    }, { threshold: 0 });
+
+    // Only where the header is actually sticky. Below 34rem it is static, so a
+    // docked attribute there would shrink a header that has already scrolled
+    // away — invisible, but it would still be a lie about the state.
+    var wide = window.matchMedia("(min-width: 34.0625rem)");
+    function sync() {
+      if (wide.matches) {
+        observer.observe(mark);
+      } else {
+        observer.unobserve(mark);
+        head.removeAttribute("data-stuck");
+      }
+    }
+    sync();
+    wide.addEventListener("change", sync);
   })();
 
   // "/" jumps to whichever search field the page has — the header's on most
