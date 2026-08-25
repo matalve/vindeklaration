@@ -124,7 +124,11 @@ header {
   background: var(--wine-slab);
   color: var(--on-wine);
   box-shadow: 0 10px 25px -5px rgba(91, 33, 48, 0.35);
-  transition: padding 0.18s ease, box-shadow 0.18s ease, row-gap 0.18s ease;
+  /* Only the shadow eases. Docking changes padding, row-gap and a font
+     size — layout properties, which cannot be interpolated smoothly: the
+     header was re-laid out every frame and the glass stepped with it. A
+     crisp switch reads better than a 180 ms stutter. */
+  transition: box-shadow 0.18s ease;
 }
 
 /* The same four paths tools/make_icons.py cuts the favicon from, and a test
@@ -148,15 +152,23 @@ header {
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  /* rotate and scale as their own properties rather than one `transform`, so
+     the tip and the docked size can be animated independently without either
+     having to restate the other. */
   transform-origin: 50% 89%;
-  transition: transform 0.22s ease, stroke 0.22s ease, width 0.18s ease;
+  rotate: 0deg;
+  scale: 1;
+  /* The tip eases; the docked size does not. Scale is composited and would
+     be smooth on its own, but easing it against a header that resizes in
+     one step just puts the glass out of time with everything around it. */
+  transition: rotate 0.22s ease, stroke 0.22s ease;
 }
 /* It tips the way someone lifting it would tip it. Never a fill: a glass that
    fills reads as a gauge, and docs/site-plan.md forbids a grade even when it
    is made without words. */
 header:hover .hoist-glass,
 header:focus-within .hoist-glass {
-  transform: rotate(-7deg);
+  rotate: -7deg;
   stroke: var(--on-wine-lift);
 }
 
@@ -177,7 +189,6 @@ header:focus-within .hoist-glass {
   text-decoration: none;
   color: var(--on-wine);
   line-height: 1;
-  transition: font-size 0.18s ease;
 }
 .wordmark:hover { color: var(--on-wine-lift); }
 
@@ -250,7 +261,7 @@ header .hsearch input {
   background: var(--field);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 999px;
-  transition: height 0.18s ease, border-color 0.18s ease;
+  transition: border-color 0.18s ease;
 }
 header .hsearch input::placeholder { color: var(--muted); }
 header .hsearch input:focus {
@@ -310,7 +321,9 @@ header[data-stuck] {
 }
 header[data-stuck] .wordmark { font-size: 1.1rem; }
 header[data-stuck] .hsearch input { height: 1.75rem; }
-header[data-stuck] .hoist-glass { width: 1.5rem; }
+/* Scale, not width: the box stays put and only its painting shrinks, so
+   nothing is re-laid out mid-animation. 0.79 is 1.5rem of 1.9rem. */
+header[data-stuck] .hoist-glass { scale: 0.79; }
 
 /* Wine page ---------------------------------------------------------- */
 
