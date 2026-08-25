@@ -829,9 +829,14 @@ header .themer button:focus-visible { outline-color: var(--on-wine-lift); }
   header[data-stuck] {
     position: static;
     grid-template-columns: auto 1fr auto;
+    /* The search spans to the right edge. It used to sit in the middle column
+       with `count` beside it, and a grid column is as wide as its widest row —
+       so the search was giving up the ~130 px the language and theme controls
+       need on the row above, whether or not anything was counted below. On a
+       phone that squeezed the placeholder to "Sök på namn el". */
     grid-template-areas:
       "glass brand  tools"
-      "glass search count"
+      "glass search search"
       "nav   nav    nav";
     margin: 0.75rem 0;
     padding: 0.8rem 0.9rem;
@@ -844,6 +849,11 @@ header .themer button:focus-visible { outline-color: var(--on-wine-lift); }
      step down. Cheaper than clipping the name. */
   .wordmark { font-size: 1.15rem; }
   .hoist-glass { width: 1.5rem; }
+  /* The shortcut badge goes: there is no key to press on a phone, so it was
+     holding 34 px of the field's padding for a hint nobody there can act on.
+     Reclaiming it is what makes the placeholder fit at 360 px. */
+  header .hsearch kbd { display: none; }
+  header .hsearch input { padding-right: 0.9rem; }
   /* The strip itself is set up on the base rule; here it only changes shape. */
   header nav {
     justify-self: stretch;
@@ -851,7 +861,10 @@ header .themer button:focus-visible { outline-color: var(--on-wine-lift); }
     gap: 0 1rem;
     padding-bottom: 0.15rem;
   }
-  .header-count { font-size: 0.75rem; }
+  /* And the count goes. There is no room for it beside a full-width field,
+     and /hitta already states the same figure in its own status line directly
+     below the filters — on a phone the header repeating it is what gets cut. */
+  .header-count { display: none; }
   .themer button, .themer .thumb { width: 1.6rem; }
   .themer[data-at="1"] .thumb { transform: translateX(1.6rem); }
   .themer[data-at="2"] .thumb { transform: translateX(3.2rem); }
