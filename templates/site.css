@@ -877,33 +877,45 @@ header .themer button:focus-visible { outline-color: var(--on-wine-lift); }
   .flag { width: 1.3rem; height: 0.87rem; }
 }
 
-/* Under 24rem the field can no longer share its row with the glass. The
-   English placeholder wants 214 px and the column leaves it 207 at 360 px, so
-   the field takes the whole row and the glass keeps only the brand line. The
-   four links wrap here for the same reason: the English strip is 307 px wide
-   and a 360 px phone has 291 to give it. Wrapping costs a second line; the
-   alternative was running off the slab, which `overflow: hidden` would cut. */
+/* Under 24rem the brand line keeps the glass and the name and nothing else.
+
+   The name is set in a serif the platform chooses, so how wide "vindeklaration"
+   is depends on the reader's machine, and the row it shared with the language
+   and theme controls had no slack at any phone width: the middle column is
+   `1fr`, so above the width where it all fits the column simply stretches, and
+   below it the controls are pushed off the slab and cut. Measured here the
+   cutting ran from 329 to about 350 px, and reported from a phone it ran to
+   355 — the same edge, a slightly wider font. Hiding the controls under a
+   number picked from one machine's fonts is guessing at the other machine's,
+   so they get a line of their own instead and the number stops mattering:
+   the brand line now needs 152 px of the 268 a 320 px phone has.
+
+   The field takes a whole row for the older reason — the English placeholder
+   wants 214 px and the column left it 207 at 360 px — and the four links wrap
+   because the English strip is 307 px wide against the 291 a 360 px phone can
+   give it. Both cost a line; both alternatives were cut text. */
 @media (max-width: 24rem) {
   header,
   header[data-stuck] {
     grid-template-areas:
-      "glass  brand  tools"
+      "glass  brand  brand"
       "search search search"
-      "nav    nav    nav";
+      "nav    nav    nav"
+      "tools  tools  tools";
   }
   header nav { flex-wrap: wrap; gap: 0.15rem 0.7rem; }
+  .header-tools { justify-self: end; }
 }
 
-/* 320 px is the narrowest width the site is meant to work at, and everything
-   above still leaves it about 20 px short. So the theme switch goes: it is the
-   only control in the header that is a preference rather than a way through
-   the site, and without it the page still follows the system theme, which is
-   what it does on a first visit anyway. The margins come in with it. */
-@media (max-width: 20.5rem) {
+/* 320 px is the narrowest width the site is meant to work at, and the rows
+   above still leave the search field short of its English placeholder below
+   about 345 px — 10 px short at 320, 1 px at 330. So the margins come in to
+   find them, on the page and inside the field both. Nothing is dropped:
+   every control the header has at 1440 px is still here at 320. */
+@media (max-width: 21.5rem) {
   body { padding: 0 0.85rem; }
   header,
   header[data-stuck] { padding: 0.8rem 0.75rem; }
-  .themer { display: none; }
   header .hsearch input { padding-left: 1.6rem; }
   .hsearch .search-icon { left: 0.5rem; }
 }
