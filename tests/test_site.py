@@ -548,6 +548,30 @@ def test_the_header_draws_the_same_glass_the_favicon_is_cut_from() -> None:
     assert drawn == list(icons.GLASS), "header glass and favicon geometry differ"
 
 
+def test_the_phone_breakpoint_is_the_same_number_in_the_css_and_the_script() -> None:
+    """The stylesheet lays the header out; the script decides where it docks.
+
+    Below the breakpoint the header is static, so the docking observer is
+    disconnected — two files holding the same number. Move one and the other
+    keeps observing a header that cannot stick, which reads as the docking
+    latching on and never letting go. The script's bound is one pixel above
+    the stylesheet's, since one is min-width and the other max-width.
+    """
+    css = (TEMPLATE_DIR / "site.css").read_text(encoding="utf-8")
+    script = (TEMPLATE_DIR / "base.html").read_text(encoding="utf-8")
+
+    phone = css.index("position: static")
+    query = css.rindex("@media (max-width: ", 0, phone)
+    lays_out = float(re.match(r"@media \(max-width: ([\d.]+)rem\)", css[query:]).group(1))
+    docks = float(
+        re.search(r'matchMedia\("\(min-width: ([\d.]+)rem\)"\)', script).group(1)
+    )
+
+    assert docks == lays_out + 1 / 16, (
+        f"the phone layout ends at {lays_out}rem but docking starts at {docks}rem"
+    )
+
+
 def test_the_navigation_says_which_of_the_four_you_are_standing_on() -> None:
     """Four links and, until now, nothing marking the current one.
 

@@ -248,10 +248,10 @@
       });
     }, { threshold: 0 });
 
-    // Only where the header is actually sticky. Below 34rem it is static, so a
+    // Only where the header is actually sticky. Below 35rem it is static, so a
     // docked attribute there would shrink a header that has already scrolled
     // away — invisible, but it would still be a lie about the state.
-    var wide = window.matchMedia("(min-width: 34.0625rem)");
+    var wide = window.matchMedia("(min-width: 35.0625rem)");
     function sync() {
       if (wide.matches) {
         observer.observe(mark);

@@ -823,8 +823,14 @@ header .themer button:focus-visible { outline-color: var(--on-wine-lift); }
    the top eats a third of a phone screen, and that screen is the one this site
    was built for, someone standing in a shop. The navigation becomes a strip
    that scrolls sideways rather than wrapping to a third row, so the slab keeps
-   its height however many entries the nav grows. */
-@media (max-width: 34rem) {
+   its height however many entries the nav grows.
+
+   The boundary is 35rem rather than 34: between 545 and 554 px the two-column
+   layout gave the English placeholder 204 px of the 214 it wants, because the
+   column is as wide as the English nav strip above it leaves it. Ten pixels of
+   clipped placeholder is not worth a rule of its own — the phone layout simply
+   starts ten pixels later. `base.html` matches this in matchMedia. */
+@media (max-width: 35rem) {
   header,
   header[data-stuck] {
     position: static;
@@ -869,6 +875,37 @@ header .themer button:focus-visible { outline-color: var(--on-wine-lift); }
   .themer[data-at="1"] .thumb { transform: translateX(1.6rem); }
   .themer[data-at="2"] .thumb { transform: translateX(3.2rem); }
   .flag { width: 1.3rem; height: 0.87rem; }
+}
+
+/* Under 24rem the field can no longer share its row with the glass. The
+   English placeholder wants 214 px and the column leaves it 207 at 360 px, so
+   the field takes the whole row and the glass keeps only the brand line. The
+   four links wrap here for the same reason: the English strip is 307 px wide
+   and a 360 px phone has 291 to give it. Wrapping costs a second line; the
+   alternative was running off the slab, which `overflow: hidden` would cut. */
+@media (max-width: 24rem) {
+  header,
+  header[data-stuck] {
+    grid-template-areas:
+      "glass  brand  tools"
+      "search search search"
+      "nav    nav    nav";
+  }
+  header nav { flex-wrap: wrap; gap: 0.15rem 0.7rem; }
+}
+
+/* 320 px is the narrowest width the site is meant to work at, and everything
+   above still leaves it about 20 px short. So the theme switch goes: it is the
+   only control in the header that is a preference rather than a way through
+   the site, and without it the page still follows the system theme, which is
+   what it does on a first visit anyway. The margins come in with it. */
+@media (max-width: 20.5rem) {
+  body { padding: 0 0.85rem; }
+  header,
+  header[data-stuck] { padding: 0.8rem 0.75rem; }
+  .themer { display: none; }
+  header .hsearch input { padding-left: 1.6rem; }
+  .hsearch .search-icon { left: 0.5rem; }
 }
 
 /* Front page --------------------------------------------------------- */
