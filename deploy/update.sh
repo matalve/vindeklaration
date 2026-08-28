@@ -62,9 +62,15 @@ gzip -kf data/wines.json data/catalog.json
 
 # Needs CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in the timer's
 # environment; see "The dataset lives in R2, not git" in docs/deploy-site.md.
-wrangler r2 object put vindeklaration-data/wines.json.gz \
+#
+# --remote is load-bearing: without it wrangler writes to the local simulator,
+# prints "Resource location: local" and exits 0, so the bucket would stay
+# empty while every run reported success. On this machine it fails louder —
+# the local path starts workerd, which cannot allocate against ARM64's address
+# space and dies with EPIPE — but do not rely on the crash to catch it.
+wrangler r2 object put vindeklaration-data/wines.json.gz --remote \
   --file data/wines.json.gz --content-type application/gzip
-wrangler r2 object put vindeklaration-data/catalog.json.gz \
+wrangler r2 object put vindeklaration-data/catalog.json.gz --remote \
   --file data/catalog.json.gz --content-type application/gzip
 echo "=== published to R2"
 

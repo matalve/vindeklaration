@@ -34,11 +34,19 @@ bootstrapped before the build command may point at it:
    ```sh
    wrangler r2 bucket create vindeklaration-data
    gzip -kf data/wines.json data/catalog.json
-   wrangler r2 object put vindeklaration-data/wines.json.gz \
+   wrangler r2 object put vindeklaration-data/wines.json.gz --remote \
      --file data/wines.json.gz --content-type application/gzip
-   wrangler r2 object put vindeklaration-data/catalog.json.gz \
+   wrangler r2 object put vindeklaration-data/catalog.json.gz --remote \
      --file data/catalog.json.gz --content-type application/gzip
    ```
+
+   **`--remote` is not optional.** Without it wrangler writes to the local
+   simulator and prints `Resource location: local` — the bucket stays empty
+   and the command still exits 0. On the Pi it does not even get that far:
+   the local path starts `workerd`, which dies allocating against ARM64's
+   address space (`TCMalloc ... 48-bit virtual address space`), surfacing as
+   `write EPIPE`. The same flag is needed on `r2 object get`, or a check
+   reads back the local copy and confirms nothing.
 
    **Answer no when `bucket create` offers to add the binding for you.** It
    proposes `vindeklaration_data`, but `worker/index.js` reads `env.DATA`, so
