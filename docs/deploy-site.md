@@ -34,9 +34,19 @@ bootstrapped before the build command may point at it:
    ```sh
    wrangler r2 bucket create vindeklaration-data
    gzip -kf data/wines.json data/catalog.json
-   wrangler r2 object put vindeklaration-data/wines.json.gz --file data/wines.json.gz
-   wrangler r2 object put vindeklaration-data/catalog.json.gz --file data/catalog.json.gz
+   wrangler r2 object put vindeklaration-data/wines.json.gz \
+     --file data/wines.json.gz --content-type application/gzip
+   wrangler r2 object put vindeklaration-data/catalog.json.gz \
+     --file data/catalog.json.gz --content-type application/gzip
    ```
+
+   **Answer no when `bucket create` offers to add the binding for you.** It
+   proposes `vindeklaration_data`, but `worker/index.js` reads `env.DATA`, so
+   accepting silently breaks every `/data/` request — and the fix is a
+   binding name, which is not where anyone looks first. Saying yes also
+   reserialises the whole file: it reindented it from spaces to tabs and
+   dropped the trailing newline. The `r2_buckets` block below is already
+   correct; wrangler has nothing to add.
 
 2. **Bootstrap-deploy the Worker once by hand**, from a checkout with `site/`
    already built:
