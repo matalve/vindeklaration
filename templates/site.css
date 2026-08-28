@@ -168,9 +168,18 @@ header {
 }
 /* It tips the way someone lifting it would tip it. Never a fill: a glass that
    fills reads as a gauge, and docs/site-plan.md forbids a grade even when it
-   is made without words. */
+   is made without words.
+
+   `:has(:focus-visible)` rather than `:focus-within`, because the theme switch
+   is the only control in the header that does not navigate: tapping it left
+   the focus sitting on the button, and the glass stayed tipped until the
+   reader tapped somewhere else. The links never showed it — the page they load
+   arrives with the glass upright. What the tip is for is the reader moving
+   through the header by keyboard, and that is what `:focus-visible` means; a
+   pointer tap on a button is not it. A browser without `:has()` simply never
+   tips on focus, which is the old behaviour minus the fault. */
 header:hover .hoist-glass,
-header:focus-within .hoist-glass {
+header:has(:focus-visible) .hoist-glass {
   transform: rotate(-7deg);
   stroke: var(--on-wine-lift);
 }

@@ -548,6 +548,25 @@ def test_the_header_draws_the_same_glass_the_favicon_is_cut_from() -> None:
     assert drawn == list(icons.GLASS), "header glass and favicon geometry differ"
 
 
+def test_the_glass_tips_on_visible_focus_and_not_on_a_tap() -> None:
+    """A tap on the theme switch used to leave the glass tipped.
+
+    It is the one control in the header that does not navigate, so with
+    `:focus-within` the focus stayed on the button after the tap and the glass
+    stayed leaning until the reader touched something else. The links never
+    showed the fault, because the page they load arrives upright.
+    `:focus-visible` is the same promise to a keyboard and no promise at all to
+    a fingertip, which is what was wanted.
+    """
+    css = (TEMPLATE_DIR / "site.css").read_text(encoding="utf-8")
+    tip = css[css.index(".hoist-glass {"):css.index("transform: rotate(-7deg)")]
+    # The comment above the rule names the selector it replaced.
+    tip = re.sub(r"/\*.*?\*/", "", tip, flags=re.S)
+
+    assert "header:has(:focus-visible) .hoist-glass" in tip
+    assert ":focus-within" not in tip, "a tap will leave the glass tipped"
+
+
 def test_the_phone_breakpoint_is_the_same_number_in_the_css_and_the_script() -> None:
     """The stylesheet lays the header out; the script decides where it docks.
 
