@@ -76,9 +76,25 @@ is not a bootstrap alternative while the repository is private — release
 assets of a private repo need an `Authorization` header, and the build image
 has none.
 
-The Pi's timer needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in its
-environment (the systemd unit) for `wrangler r2 object put`, and a logged-in
-`gh` for the release upload.
+The Pi's timer needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` for
+`wrangler r2 object put`, and a logged-in `gh` for the release upload. The unit
+reads the two secrets from a file outside git:
+
+```sh
+mkdir -p ~/.config/vindeklaration
+printf 'CLOUDFLARE_API_TOKEN=%s\nCLOUDFLARE_ACCOUNT_ID=%s\n' TOKEN ACCOUNT \
+  > ~/.config/vindeklaration/env
+chmod 600 ~/.config/vindeklaration/env
+systemctl --user daemon-reload
+```
+
+The token needs **Workers R2 Storage: Edit**. `update.sh` checks for both
+variables, for `gh`, and for `gh` being logged in *before* it starts crawling —
+publishing is the last thing it does, and a missing tool discovered there costs
+a three-and-a-half-hour pass that is then thrown away undelivered. Note that
+neither `wrangler` nor `gh` is found through `PATH` under systemd, which is
+minimal: the script resolves both itself and falls back to `npx wrangler@4`
+where no global install exists.
 
 ## The build
 

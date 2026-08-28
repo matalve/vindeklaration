@@ -10,6 +10,17 @@ Environment=UV=__UV__
 # Without this, progress sits in Python's stdout buffer and the journal stays
 # silent for hours.
 Environment=PYTHONUNBUFFERED=1
+# CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID for the R2 upload. Kept in a
+# file rather than here, because this unit is in git and those are secrets:
+#
+#   mkdir -p ~/.config/vindeklaration
+#   printf 'CLOUDFLARE_API_TOKEN=%s\nCLOUDFLARE_ACCOUNT_ID=%s\n' TOKEN ACCOUNT \
+#     > ~/.config/vindeklaration/env
+#   chmod 600 ~/.config/vindeklaration/env
+#
+# The leading `-` keeps the unit loadable when the file is absent; update.sh
+# checks for the variables itself and stops before crawling if they are unset.
+EnvironmentFile=-%h/.config/vindeklaration/env
 ExecStart=__REPO__/deploy/update.sh
 # A full pass is roughly three and a half hours of deliberately slow, sequential
 # requests. This ceiling only catches a genuinely stuck run.

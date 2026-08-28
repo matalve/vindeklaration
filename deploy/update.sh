@@ -8,6 +8,32 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 UV="${UV:-$(command -v uv)}"
 
+# Publishing happens at the very end, after roughly three and a half hours of
+# crawling. Resolve everything it needs now, so a missing tool costs a second
+# instead of a night's work that is then thrown away undelivered.
+#
+# systemd's PATH is minimal — that is why UV is an absolute path above — so
+# bare `wrangler` and `gh` are not enough. Wrangler falls back to npx because
+# the crawler has no global install; the major version is pinned so a release
+# cannot change the upload behaviour unannounced.
+WRANGLER="${WRANGLER:-$(command -v wrangler || echo "npx --yes wrangler@4")}"
+GH="${GH:-$(command -v gh || true)}"
+
+if [ -z "$GH" ]; then
+  echo "=== gh not found — it uploads the dataset release. Install it, or set GH." >&2
+  exit 1
+fi
+if ! $GH auth status >/dev/null 2>&1; then
+  echo "=== gh is not logged in — run 'gh auth login' on this machine." >&2
+  exit 1
+fi
+if [ -z "${CLOUDFLARE_API_TOKEN:-}" ] || [ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]; then
+  echo "=== CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID must be set for the" >&2
+  echo "    R2 upload; see \"The dataset lives in R2, not git\" in" >&2
+  echo "    docs/deploy-site.md for where the timer reads them from." >&2
+  exit 1
+fi
+
 echo "=== $(date -Is) starting update"
 
 # Code arrives from GitHub, data leaves for R2 and Releases. Pull before
@@ -68,19 +94,19 @@ gzip -kf data/wines.json data/catalog.json
 # empty while every run reported success. On this machine it fails louder —
 # the local path starts workerd, which cannot allocate against ARM64's address
 # space and dies with EPIPE — but do not rely on the crash to catch it.
-wrangler r2 object put vindeklaration-data/wines.json.gz --remote \
+$WRANGLER r2 object put vindeklaration-data/wines.json.gz --remote \
   --file data/wines.json.gz --content-type application/gzip
-wrangler r2 object put vindeklaration-data/catalog.json.gz --remote \
+$WRANGLER r2 object put vindeklaration-data/catalog.json.gz --remote \
   --file data/catalog.json.gz --content-type application/gzip
 echo "=== published to R2"
 
 # Rolling release: same asset names, overwritten nightly, so the download URL
 # is stable. --clobber is the point. Needs `gh auth login` on the runner.
-gh release view dataset-latest >/dev/null 2>&1 \
-  || gh release create dataset-latest \
+$GH release view dataset-latest >/dev/null 2>&1 \
+  || $GH release create dataset-latest \
        --title "Latest dataset" \
        --notes "Nightly build, overwritten every night. Monthly snapshots live in their own releases."
-gh release upload dataset-latest data/wines.json.gz data/catalog.json.gz --clobber
+$GH release upload dataset-latest data/wines.json.gz data/catalog.json.gz --clobber
 echo "=== published to the dataset-latest release"
 
 # Frozen snapshot on the first Sunday of the month, for reproducibility —
@@ -88,8 +114,8 @@ echo "=== published to the dataset-latest release"
 # assortment look like in spring".
 if [ "$(date +%u)" = "7" ] && [ "$(date +%d)" -le 7 ]; then
   tag="dataset-$(date -u +%Y-%m)"
-  gh release view "$tag" >/dev/null 2>&1 \
-    || gh release create "$tag" data/wines.json.gz data/catalog.json.gz \
+  $GH release view "$tag" >/dev/null 2>&1 \
+    || $GH release create "$tag" data/wines.json.gz data/catalog.json.gz \
          --title "Dataset $(date -u +%Y-%m)" --notes "Monthly snapshot."
 fi
 
