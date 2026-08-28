@@ -13,6 +13,12 @@ data/cache/
 data/wines.json
 data/catalog.json
 
+# The gzipped copies update.sh uploads to R2 and the release. Written next to
+# the originals on every run, so without this the crawler's tree never looks
+# clean again.
+data/wines.json.gz
+data/catalog.json.gz
+
 # Rebuilt from wines.json by src/build.py in seconds. Committing it costs its
 # full 4 MB every night, because git cannot delta a binary the way it deltas
 # the JSON. It is published as a release asset instead.
