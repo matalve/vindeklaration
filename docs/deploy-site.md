@@ -107,7 +107,11 @@ carries two copies of the site. This is a build, not a crawler: it reads
 `data/wines.json` — downloaded from the R2 bucket by the step below — and
 makes no request to Systembolaget.
 
-**Build command**, confirmed working on Cloudflare's image:
+**Build command.** This is a field in the Cloudflare dashboard — the Worker's
+Settings, under Build — not something to run locally. It executes in
+Cloudflare's build image, where `pip install uv` works; on Debian and
+Raspberry Pi OS the same line stops at PEP 668's
+`externally-managed-environment`, which says nothing about the build:
 
 ```sh
 mkdir -p data && \
