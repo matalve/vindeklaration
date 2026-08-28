@@ -874,6 +874,22 @@ def strings(lang: str) -> dict:
 
 
 def build(output: Path, limit: int | None = None) -> None:
+    # The dataset is not in git, so its absence is an ordinary state on a fresh
+    # checkout rather than a broken one. A bare FileNotFoundError here reads as
+    # a missing file and sends the reader looking for what deleted it; on
+    # Cloudflare it cost a build before anyone thought to check the build
+    # command. Say where the file comes from instead.
+    if not WINES_PATH.exists():
+        raise SystemExit(
+            f"{WINES_PATH} is missing. The dataset is not kept in git — the "
+            "build downloads it:\n\n"
+            "  mkdir -p data && curl -fsSL "
+            "https://vindeklaration.se/data/wines.json.gz | gunzip "
+            "> data/wines.json\n\n"
+            "On the crawler, `uv run python -m src.build` rebuilds it from "
+            "data/cache instead. See \"The dataset lives in R2, not git\" in "
+            "docs/deploy-site.md."
+        )
     payload = json.loads(WINES_PATH.read_text(encoding="utf-8"))
     wines = payload["wines"]
     if limit:
