@@ -40,6 +40,7 @@ counted. This file is about how to work here.
 | `data/unknown.json` | what the parser could not read, ranked by wines blocked |
 | `deploy/` | running it unattended on the Raspberry Pi |
 | `src/site.py`, `templates/` | the static site — `uv run python -m src.site` |
+| `worker/index.js` | serves the dataset from R2 at `/data/*`; assets handle the rest |
 | `docs/state-of-play.md` | **read this second** — what is live, what is next, what is open |
 | `docs/deploy-site.md` | Cloudflare and the DNS move, step by step |
 | `docs/elabel-platforms.md` | which e-label platforms can be read, and which cannot |
@@ -80,15 +81,18 @@ downward.** A single `rsync --delete` of the whole tree once destroyed 11 148
 fetched declarations. If the cache is ever lost again,
 `deploy/rebuild-cache.py` re-derives it from `wines.json` instead of refetching.
 
-**Everything but the cache travels through GitHub, and each direction has one
-owner.** Code and the dictionaries go laptop → GitHub → Pi: `update.sh` pulls
-before it crawls, so the Pi never spends a night on a stale `additives.yaml`.
-The dataset goes Pi → GitHub → laptop: **only the Pi commits `data/wines.json`,
-`data/catalog.json` and `data/unknown.json`.** Rebuild them here to check
-something by all means, then throw the result away —
-`git checkout -- data/wines.json` — because committing it from two machines is
-what turns a fast-forward into a merge conflict in a 16 MB file. `wines.sqlite`
-is gitignored; it is regenerated from `wines.json`.
+**Code and the dictionaries travel through GitHub; the dataset does not.**
+They go laptop → GitHub → Pi: `update.sh` pulls before it crawls, so the Pi
+never spends a night on a stale `additives.yaml`. The dataset left git because
+a nightly 16 MB commit costs its near-full size in history, forever. The Pi
+publishes `wines.json.gz` and `catalog.json.gz` to the R2 bucket behind
+vindeklaration.se/data/ and to the rolling `dataset-latest` release, **before**
+pushing anything — the push is what triggers the site rebuild, and the rebuild
+downloads the dataset from the bucket. The Pi still commits
+`data/unknown.json` and `data/quality-history.json`, the gate's baseline,
+which must stay versioned. Both data files are gitignored and rebuilt by
+`src/build.py`, so rebuilding them here to check something needs no cleanup.
+`wines.sqlite` likewise; it is regenerated from `wines.json`.
 
 `deploy/push-to-pi.sh` is for the first install only, when there is no clone on
 the far end yet. After that, use git.
@@ -175,11 +179,10 @@ exact string.
 - ~~The quality gate is 2%.~~ Settled 2026-07-27: the gate watches drift, not a
   level. `DRIFT_LIMIT` in `src/report.py` fails the run when the `partial`
   share rises more than one percentage point since the previous recorded run.
-  The baseline lives in `data/quality-history.json`, which the Pi commits with
-  the rest of the dataset — **lose that file and the next run has no baseline
-  and silently passes.** Only `update.sh` passes `--record`; a manual
-  `src.report` compares but never writes. Do not reintroduce an absolute
-  threshold without being asked.
+  The baseline lives in `data/quality-history.json`, which the Pi commits —
+  **lose that file and the next run has no baseline and silently passes.**
+  Only `update.sh` passes `--record`; a manual `src.report` compares but never
+  writes. Do not reintroduce an absolute threshold without being asked.
 - Declaration coverage is 19.3% today and rises on its own as stock rotates to
   2024-and-later vintages. Expect the numbers in `README.md` to age.
 

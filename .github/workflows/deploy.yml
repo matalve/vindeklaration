@@ -26,6 +26,16 @@ jobs:
         with:
           enable-cache: true
 
+      # The dataset is not in git. The site's own R2 bucket serves it; the
+      # rolling release is the fallback if the bucket is unreachable.
+      - name: Fetch the dataset
+        run: |
+          mkdir -p data
+          curl -fsSL --retry 3 https://vindeklaration.se/data/wines.json.gz \
+            | gunzip > data/wines.json \
+            || curl -fsSL --retry 3 https://github.com/matalve/vindeklaration/releases/download/dataset-latest/wines.json.gz \
+            | gunzip > data/wines.json
+
       - name: Build the site
         # Unset in a fork or a local run, which renders no beacon at all.
         env:

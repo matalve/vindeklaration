@@ -63,10 +63,27 @@ jobs:
           path: data/cache
           key: declarations-${{ github.run_id }}
 
-      - name: Commit dataset
+      # The dataset is build output, not a commit. The rolling release keeps
+      # a stable download URL; --clobber overwrites the previous night.
+      - name: Publish the dataset to the rolling release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gzip -kf data/wines.json data/catalog.json
+          gh release view dataset-latest >/dev/null 2>&1 \
+            || gh release create dataset-latest \
+                 --title "Latest dataset" \
+                 --notes "Nightly build, overwritten every night. Monthly snapshots live in their own releases."
+          gh release upload dataset-latest data/wines.json.gz data/catalog.json.gz --clobber
+      # The site's R2 copy is left to the Pi: this standby workflow has no
+      # Cloudflare secrets, and the next Pi run closes the gap.
+
+      # quality-history.json is not touched here (no --record above), so only
+      # unknown.json can have changed.
+      - name: Commit the small files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/wines.json data/catalog.json data/unknown.json
-          git diff --staged --quiet || git commit -m "Update dataset $(date -u +%Y-%m-%d)"
+          git add data/unknown.json
+          git diff --staged --quiet || git commit -m "Update unknown tokens $(date -u +%Y-%m-%d)"
           git push

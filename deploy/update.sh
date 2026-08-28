@@ -10,9 +10,10 @@ UV="${UV:-$(command -v uv)}"
 
 echo "=== $(date -Is) starting update"
 
-# Code arrives from GitHub, data leaves for it. Pull before crawling: a machine
-# left behind on an old additives.yaml spends the whole night producing
-# declarations it cannot read, which is exactly what happened on 2026-07-26.
+# Code arrives from GitHub, data leaves for R2 and Releases. Pull before
+# crawling: a machine left behind on an old additives.yaml spends the whole
+# night producing declarations it cannot read, which is exactly what happened
+# on 2026-07-26.
 if git rev-parse --git-dir >/dev/null 2>&1; then
   if git pull --ff-only --quiet 2>/dev/null; then
     echo "=== pulled, now at $(git rev-parse --short HEAD)"
@@ -52,19 +53,53 @@ else
   echo "=== quality gate FAILED — the unread share rose; see data/unknown.json"
 fi
 
+# The dataset no longer travels through git: a 16 MB JSON committed nightly
+# costs its near-full size in history, forever. It is published as build
+# output instead — to the site's R2 bucket, and to a rolling GitHub release
+# for everyone else. Publish BEFORE pushing: the push is what triggers the
+# site rebuild, and the rebuild downloads the dataset from the bucket.
+gzip -kf data/wines.json data/catalog.json
+
+# Needs CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in the timer's
+# environment; see "The dataset lives in R2, not git" in docs/deploy-site.md.
+wrangler r2 object put vindeklaration-data/wines.json.gz \
+  --file data/wines.json.gz --content-type application/gzip
+wrangler r2 object put vindeklaration-data/catalog.json.gz \
+  --file data/catalog.json.gz --content-type application/gzip
+echo "=== published to R2"
+
+# Rolling release: same asset names, overwritten nightly, so the download URL
+# is stable. --clobber is the point. Needs `gh auth login` on the runner.
+gh release view dataset-latest >/dev/null 2>&1 \
+  || gh release create dataset-latest \
+       --title "Latest dataset" \
+       --notes "Nightly build, overwritten every night. Monthly snapshots live in their own releases."
+gh release upload dataset-latest data/wines.json.gz data/catalog.json.gz --clobber
+echo "=== published to the dataset-latest release"
+
+# Frozen snapshot on the first Sunday of the month, for reproducibility —
+# with the dataset out of git, history no longer answers "what did the
+# assortment look like in spring".
+if [ "$(date +%u)" = "7" ] && [ "$(date +%d)" -le 7 ]; then
+  tag="dataset-$(date -u +%Y-%m)"
+  gh release view "$tag" >/dev/null 2>&1 \
+    || gh release create "$tag" data/wines.json.gz data/catalog.json.gz \
+         --title "Dataset $(date -u +%Y-%m)" --notes "Monthly snapshot."
+fi
+
+# quality-history.json stays in git because the gate compares against it:
+# lose it and the next run has no baseline and silently passes. unknown.json
+# is small and worth reading in diffs. quality-history.json changes on every
+# recorded run, so this commit is also what triggers the nightly site rebuild
+# — which is why it must come after the R2 upload above.
 if git rev-parse --git-dir >/dev/null 2>&1; then
-  # wines.sqlite is deliberately absent: it is a binary that git cannot delta,
-  # and src/build.py regenerates it from wines.json in seconds.
-  # quality-history.json is here because the gate compares against it: lose it
-  # and the next run has no baseline and silently passes.
-  git add data/wines.json data/catalog.json data/unknown.json \
-          data/quality-history.json
+  git add data/unknown.json data/quality-history.json
   if git diff --staged --quiet; then
-    echo "=== dataset unchanged"
+    echo "=== nothing to commit"
   else
     git -c user.name="vindeklaration-bot" \
         -c user.email="vindeklaration-bot@localhost" \
-        commit -q -m "Update dataset $(date -u +%Y-%m-%d)"
+        commit -q -m "Update quality history $(date -u +%Y-%m-%d)"
     echo "=== committed $(git rev-parse --short HEAD)"
 
     # A rejected push means code was pushed while we were fetching. Rebase this

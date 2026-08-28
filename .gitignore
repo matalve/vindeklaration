@@ -6,6 +6,13 @@ __pycache__/
 # Raw upstream responses: large, regenerable, not part of the published dataset.
 data/cache/
 
+# The published dataset: ~16 MB of JSON whose nightly commit would cost its
+# near-full size in git history, forever. Published as build output instead —
+# to the R2 bucket behind vindeklaration.se/data/ and to the rolling
+# dataset-latest GitHub release. Rebuilt locally by src/build.py.
+data/wines.json
+data/catalog.json
+
 # Rebuilt from wines.json by src/build.py in seconds. Committing it costs its
 # full 4 MB every night, because git cannot delta a binary the way it deltas
 # the JSON. It is published as a release asset instead.

@@ -1,20 +1,32 @@
 {
-  // Static assets only — there is no Worker script. src/site.py generates
-  // everything at build time and Cloudflare serves the directory as files.
+  // Static assets plus a small Worker script. src/site.py generates the
+  // pages at build time; worker/index.js serves the dataset out of R2 at
+  // /data/* and passes everything else to the assets binding.
   //
-  // Added 2026-07-29 for `not_found_handling`. Without it a stale /vin/ URL
-  // gets Cloudflare's default 404 with an empty body instead of the project's
-  // own 404 page, and a link to a wine that left the assortment is the most
-  // likely 404 this site will ever serve.
+  // `not_found_handling` keeps a stale /vin/ URL on the project's own 404
+  // page instead of an empty body — a link to a wine that left the
+  // assortment is the most likely 404 this site will ever serve.
   //
-  // If a build fails after this file appeared, this file is the first suspect:
-  // the dashboard's build settings and a wrangler config can disagree about
-  // the output directory. `git revert` is the whole rollback.
+  // The R2 bucket is created once by hand (`wrangler r2 bucket create
+  // vindeklaration-data`) and populated by deploy/update.sh on the crawler;
+  // see "The dataset lives in R2, not git" in docs/deploy-site.md.
+  //
+  // If a build fails after this file changes, this file is the first
+  // suspect: the dashboard's build settings and a wrangler config can
+  // disagree about the output directory. `git revert` is the whole rollback.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "vindeklaration",
   "compatibility_date": "2026-07-29",
+  "main": "worker/index.js",
   "assets": {
     "directory": "./site",
+    "binding": "ASSETS",
     "not_found_handling": "404-page"
-  }
+  },
+  "r2_buckets": [
+    {
+      "binding": "DATA",
+      "bucket_name": "vindeklaration-data"
+    }
+  ]
 }
