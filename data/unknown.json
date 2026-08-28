@@ -7,7 +7,7 @@
   },
   {
    "token": "kaliumsyra",
-   "wines": 3,
+   "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
@@ -127,6 +127,10 @@
   },
   {
    "match": "dimetyledikarbonat -> dimetyldikarbonat",
+   "wines": 1
+  },
+  {
+   "match": "antioxidationsmdele -> antioxidationsmdel",
    "wines": 1
   }
  ]
