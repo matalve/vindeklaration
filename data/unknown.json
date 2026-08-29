@@ -1,13 +1,8 @@
 {
  "unknown_tokens": [
   {
-   "token": "försumbar",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7010801/"
-  },
-  {
    "token": "kaliumsyra",
-   "wines": 2,
+   "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
@@ -76,6 +71,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
   },
   {
+   "token": "försumbar",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7491101/"
+  },
+  {
    "token": "oloroso",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9031801/"
@@ -97,10 +97,6 @@
   }
  ],
  "fuzzy_matches": [
-  {
-   "match": "svavekdioxid -> svaveldioxid",
-   "wines": 2
-  },
   {
    "match": "konserverings -> konserverings",
    "wines": 1
