@@ -41,6 +41,7 @@ counted. This file is about how to work here.
 | `deploy/` | running it unattended on the Raspberry Pi |
 | `src/site.py`, `templates/` | the static site — `uv run python -m src.site` |
 | `worker/index.js` | serves the dataset from R2 at `/data/*`; assets handle the rest |
+| `cf-build.sh` | what Cloudflare's build runs — the dashboard only calls it |
 | `docs/state-of-play.md` | **read this second** — what is live, what is next, what is open |
 | `docs/deploy-site.md` | Cloudflare and the DNS move, step by step |
 | `docs/elabel-platforms.md` | which e-label platforms can be read, and which cannot |

@@ -26,38 +26,18 @@ jobs:
         with:
           enable-cache: true
 
-      # The dataset is not in git. The site's own R2 bucket serves it; the
-      # rolling release is the fallback if the bucket is unreachable.
-      - name: Fetch the dataset
-        run: |
-          mkdir -p data
-          curl -fsSL --retry 3 https://vindeklaration.se/data/wines.json.gz \
-            | gunzip > data/wines.json \
-            || curl -fsSL --retry 3 https://github.com/matalve/vindeklaration/releases/download/dataset-latest/wines.json.gz \
-            | gunzip > data/wines.json
-
+      # The same script Cloudflare's own build runs: fetch the dataset, build,
+      # and check the file count. Keeping both paths on one definition is the
+      # point — the dashboard held a stale copy of these steps for a day.
       - name: Build the site
-        # Unset in a fork or a local run, which renders no beacon at all.
-        env:
-          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
-        run: uv run python -m src.site
+        run: bash cf-build.sh
 
-      # Cloudflare Pages rejects a deployment over 20 000 files, and the build
-      # grows with the assortment. Failing here with the number is far cheaper
-      # than a rejected upload with a generic message. See "Bilingual" in
-      # docs/site-plan.md for what to do when this trips.
-      - name: Check the file count against the Pages limit
-        run: |
-          count=$(find site -type f | wc -l)
-          echo "$count files"
-          if [ "$count" -gt 19000 ]; then
-            echo "::error::$count files — Cloudflare Pages allows 20 000."
-            exit 1
-          fi
-
-      - name: Publish to Cloudflare Pages
+      # This is a Worker with static assets, not a Pages project: Cloudflare
+      # absorbed Pages into Workers, and `pages deploy` would look for a Pages
+      # project that does not exist. See docs/deploy-site.md.
+      - name: Publish
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy site --project-name=vindeklaration --branch=main
+          command: deploy

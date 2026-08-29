@@ -123,18 +123,30 @@ carries two copies of the site. This is a build, not a crawler: it reads
 `data/wines.json` — downloaded from the R2 bucket by the step below — and
 makes no request to Systembolaget.
 
-**Build command.** This is a field in the Cloudflare dashboard — the Worker's
-Settings, under Build — not something to run locally. It executes in
-Cloudflare's build image, where `pip install uv` works; on Debian and
-Raspberry Pi OS the same line stops at PEP 668's
-`externally-managed-environment`, which says nothing about the build:
+**Build command.** A field in the Cloudflare dashboard — the Worker's Settings,
+under Build. It holds one line and nothing else:
 
 ```sh
-mkdir -p data && \
-  curl -fsSL https://vindeklaration.se/data/wines.json.gz | gunzip > data/wines.json && \
-  pip install uv && uv run python -m src.site && \
-  test $(find site -type f | wc -l) -le 19000
+bash cf-build.sh
 ```
+
+The steps themselves live in `cf-build.sh`, at the repository root, because a
+dashboard field is not versioned, does not appear in a diff, and cannot be
+tested. On 2026-08-28 that field still held the pre-R2 command after the
+dataset left git, and three builds failed against a repository that no longer
+carried `data/wines.json`. Anything the build does belongs in the script;
+change the field only to point somewhere else.
+
+The script fetches the dataset from the bucket, falls back to the rolling
+release, builds, and checks the file count. `DATA_URL`, `RELEASE_URL` and
+`ASSET_LIMIT` are overridable, so a fork or a local run can build against its
+own copy. It installs `uv` only where none is present — on Cloudflare's image
+`pip install uv` works, while on Debian and Raspberry Pi OS the same line stops
+at PEP 668's `externally-managed-environment`, which says nothing about the
+build.
+
+The script sits at the root, not in `deploy/`, because the build's watch paths
+exclude `/deploy`: a fix to it must trigger the build that tests it.
 
 If the bucket is ever unreachable the release is the fallback once the
 repository is public:
