@@ -1023,17 +1023,16 @@ open, not that the site is nice.
    misspellings. `/tackning` carries the whole-shelf share, the share over the
    certainly-covered vintages, and breakdowns by category, country and vintage,
    with groups under 40 wines aggregated into a counted, unnamed row.
-   **The importer table is not built yet, and the reason is now timing rather
-   than design.** The rule in *Naming importers* requires every row to be
-   "dated, and corrigible" — a way to report an error, with a stated response
-   time. The site's only error channel is the GitHub issue tracker linked from
-   `/metod`, and the repository is private, so a reader cannot open it today.
-   **Decided by the owner 2026-08-02: the issue tracker is the right channel,
-   and the repository becomes public closer to a real launch.** So the table
-   is buildable, and what remains is that it must not go live while its own
-   correction route is a 404. Ship it with the repository's flip to public, or
-   after it, never before. 19 importers clear the 40-wine threshold today, and
-   the mean over the qualifying vintages is 66.0%.
+   **The importer table went live on 2026-08-29.** The rule in *Naming
+   importers* requires every row to be "dated, and corrigible" — a way to
+   report an error, with a stated response time. The site's only error channel
+   is the GitHub issue tracker linked from `/metod`, which resolved for the
+   first time the day the repository went public; `CORRECTION_DAYS` is 14,
+   confirmed by the owner. The condition that held the table back was never
+   design, only that it must not go live while its own correction route is a
+   404 — so if the repository ever closes again, `REPO_PUBLIC` goes back to
+   `False` and the table comes down with it. 21 importers clear the 40-wine
+   threshold today.
 4. **Trends.** The nightly commits are a time series: coverage by month,
    substances appearing and disappearing, suppliers who started declaring.
    It costs nothing to keep and cannot be recreated later if the history is
@@ -1050,8 +1049,8 @@ repeating it here only lets the two drift apart.
 | | |
 |---|---|
 | Undeclared wines are listed | 2026-07-27, in their own block with the reason |
-| Importers are named | 2026-07-27; table built 2026-08-02, gated on `REPO_PUBLIC` |
-| Dataset stays private for now | 2026-07-27, written throughout as if public |
+| Importers are named | 2026-07-27; table built 2026-08-02, live 2026-08-29 when the repository went public and the correction route started resolving |
+| ~~Dataset stays private for now~~ | 2026-07-27, written throughout as if public — superseded 2026-08-29: the repository is public and the dataset is a published download, under no licence (`LICENSES.md`) |
 | The quality gate watches drift, not a level | 2026-07-27; `/metod` states and dates it |
 | Labelling responsibility is the producer's for EU wine | 2026-07-28, §1 — Article 8(1) of Regulation (EU) No 1169/2011. The importer limb fires only for third-country wine, and the dataset cannot tell which applies, so the table's claim is factual rather than one about responsibility |
 | The requirement covers wine **produced** after 8 December 2023 | 2026-07-28, §1f–1g. Not "the 2024 harvest". Vintage is a proxy and every page using it says so |

@@ -181,28 +181,33 @@ catalogue is a protected database; whether publishing a compliance statistic
 about a sole trader reaches förtal. All in `docs/legal-notes.md`, all recorded
 as decisions rather than oversights.
 
-**The repository is private, and one flag knows it.** `REPO_PUBLIC` in
-`src/site.py` is `False`. `/metod` used to tell readers everything was public on
-GitHub and linked there three times; all three 404 for anyone but the owner, on
-the page whose job is to say what the site cannot show. It now states plainly
-that there is no way to report an error yet. **Decided by the owner 2026-08-02:
-the issue tracker is the right channel and the repository opens closer to a real
-launch.** Flip the flag that day and every sentence becomes the stronger one.
+**The repository went public on 2026-08-29 and `REPO_PUBLIC` is `True`.**
+`/metod` links GitHub three times and all three now resolve for everyone, on
+the page whose job is to say what the site cannot show. The flag stays in
+`src/site.py` rather than being deleted: it is the one switch that pulls the
+importer table back if the repository ever closes again, and the table must
+never outlive its own error channel. `CORRECTION_DAYS` is 14, confirmed by the
+owner the same day — the one figure published as a promise rather than a
+measurement, which is why it was asked rather than decided.
 
-**The importer table is built, and waits on that same flip.** Rules are in
-*Naming importers*; `importer_rows()` and `templates/importer.html` implement
-them and are tested. It renders only when `REPO_PUBLIC` is on, because a named
-compliance statistic whose correction route is a 404 is the one part of the
-design that is not optional. Verified with the flag on: 19 importers clear the
-40-wine threshold, all aktiebolag, plus one counted row of 1 608 wines from 239
-unnamed suppliers. The share is over covered vintages only — published raw the
-table would put Johan Lidby, who declares on 97 of every 100 covered bottles,
-near the bottom at 29.2%, because that column measures how old the stock is.
+**The importer table is live.** Rules are in *Naming importers*;
+`importer_rows()` and `templates/importer.html` implement them and are tested.
+As built on 2026-08-29: **21** importers clear the 40-wine threshold, every one
+an aktiebolag, plus one counted row of 1 628 wines from 241 unnamed suppliers
+at 57.5%. The Wine Team Global leads at 98.7%, Tryffelsvinet trails at 18.2%.
+The share is over covered vintages only — published raw the table would put
+Johan Lidby, who declares on 97 of every 100 covered bottles, near the bottom
+at 33.6%, because that column measures how old the stock is.
 
-**`CORRECTION_DAYS` has its answer: 14, confirmed by the owner 2026-08-29.**
-It is the one figure the site publishes as a promise rather than a
-measurement, which is why it needed asking rather than deciding. Nothing else
-now stands between the flag and the flip except the flip itself.
+**Nothing in the code stops a natural person being named — the threshold does
+it by accident.** `importer_rows()` filters on `IMPORTER_MINIMUM` and nothing
+else. The sole traders Systembolaget publishes under their own names sit at 3
+covered wines each, so they are nowhere near 40, and the highest supplier with
+no corporate marker in its name is the trade name *Iconic Wines* at 38. That is
+two wines of margin on a figure that rises as stock rotates. `CLAUDE.md` and
+*Naming importers* both turn on förtal reaching a natural person where it does
+not reach a company, so the protection being incidental rather than explicit is
+worth knowing before the next stock rotation, not after.
 
 **Advertising is intended eventually.** Today the site takes no income, and
 that fact is what keeps five separate regimes out of scope. *When the site takes

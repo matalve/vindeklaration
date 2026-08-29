@@ -411,21 +411,22 @@ def test_a_wine_with_no_supplier_is_left_out_entirely() -> None:
     assert rows["thin"]["wines"] == 0
 
 
-def test_the_table_is_not_rendered_while_the_correction_route_is_a_404() -> None:
-    """The gate itself, since it is the whole reason the table is not live.
+def test_every_named_row_keeps_its_correction_route() -> None:
+    """What the old REPO_PUBLIC gate was protecting, now that the table ships.
 
-    Naming 19 companies in a compliance statistic whose "report an error" link
-    404s is the one part of the design that is not optional, so the build must
-    not be one edited constant away from doing it by accident.
+    docs/site-plan.md, "Naming importers": a compliance statistic about a real
+    company is only publishable while it is corrigible. The gate could be
+    retired once the repository went public (2026-08-29), but the sentence it
+    was guarding cannot — a translation that quietly drops {link} or {n} would
+    leave 19 named companies with no stated way to answer back.
     """
-    import src.site
+    strings = json.loads((TEMPLATE_DIR / "strings.json").read_text("utf-8"))
 
-    assert src.site.REPO_PUBLIC is False, (
-        "REPO_PUBLIC is on: the importer table and /metod's claim that the "
-        "repository is public will both ship. Confirm the repository is "
-        "actually public, then delete this test. CORRECTION_DAYS is settled: "
-        "the owner confirmed 14 on 2026-08-29."
-    )
+    for lang in ("sv", "en"):
+        sentence = strings[lang]["importer_correction"]
+        assert "{link}" in sentence, f"{lang}: no route to report an error"
+        assert "{n}" in sentence, f"{lang}: no stated turnaround"
+        assert strings[lang]["importer_issues"], f"{lang}: the link has no text"
 
 
 # --- theme -------------------------------------------------------------------

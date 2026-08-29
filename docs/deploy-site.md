@@ -72,9 +72,10 @@ bootstrapped before the build command may point at it:
 Do not point the build command at `/data/` before step 2: the request happens
 during the build, *before* the Worker that would serve it has been deployed,
 and the 404 fails the very deployment that creates the route. The release URL
-is not a bootstrap alternative while the repository is private — release
-assets of a private repo need an `Authorization` header, and the build image
-has none.
+*is* a bootstrap alternative now that the repository is public (2026-08-29) and
+its assets need no `Authorization` header. It was not one before, which is why
+`cf-build.sh` reaches for `/data/` first and the release only as a fallback —
+that order is now a preference rather than a necessity.
 
 The Pi's timer needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` for
 `wrangler r2 object put`, and a logged-in `gh` for the release upload. The unit

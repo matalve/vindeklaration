@@ -56,13 +56,14 @@ IMAGE_WIDTH, IMAGE_HEIGHT = 400, 400
 # technological measure is published on /metod rather than kept in a commit.
 CDN_CHECKED = "2026-07-29"
 
-# The repository is private until closer to a real launch (owner, 2026-08-02),
-# so /metod may not tell a reader that the code and the data are already there
-# to check — both links 404 for anyone but the owner. Flip this the same day
-# the repository goes public and the page starts making the stronger claim.
-# The importer table waits on the same flip: docs/site-plan.md, "Naming
-# importers", requires every row to have a correction route that works.
-REPO_PUBLIC = False
+# The repository went public on 2026-08-29, so /metod may now tell a reader
+# that the code and the data are there to check, and the importer table may
+# name companies: docs/site-plan.md, "Naming importers", requires every row to
+# have a correction route that works, and the issue tracker is now that route.
+# Kept as a flag rather than deleted because it is the switch that would put
+# the table back behind a working correction route if the repository ever
+# closes again — the table must never outlive its own error channel.
+REPO_PUBLIC = True
 
 # Cloudflare injects its own analytics beacon at the edge, with its own token,
 # for browser-like requests — confirmed by reading a served page 2026-07-29.
