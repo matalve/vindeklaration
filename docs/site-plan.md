@@ -1100,6 +1100,6 @@ stage.**
   loops back to the first question above. §4c, §4f.
 - **Who owns the bottle photographs**, and whether the CJEU's Article 3(1) case
   law reaches the purely Swedish neighbouring right in 49 a § URL. §2.
-- **`CORRECTION_DAYS` in `src/site.py` is 14 and unconfirmed.** It is the one
-  number the site would publish as a promise rather than a measurement, and the
-  importer table states it. Settle it before `REPO_PUBLIC` flips.
+- ~~**`CORRECTION_DAYS` in `src/site.py` is 14 and unconfirmed.**~~ Settled
+  2026-08-29: the owner confirmed 14. It is the one number the site publishes
+  as a promise rather than a measurement, so it stays the owner's to change.

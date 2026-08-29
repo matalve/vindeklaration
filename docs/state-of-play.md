@@ -183,9 +183,10 @@ unnamed suppliers. The share is over covered vintages only — published raw the
 table would put Johan Lidby, who declares on 97 of every 100 covered bottles,
 near the bottom at 29.2%, because that column measures how old the stock is.
 
-**Before the flag flips, `CORRECTION_DAYS` needs an answer.** It is 14 and the
-owner has not confirmed it. It is the one figure the site would publish as a
-promise rather than a measurement, and a test guards the flag saying so.
+**`CORRECTION_DAYS` has its answer: 14, confirmed by the owner 2026-08-29.**
+It is the one figure the site publishes as a promise rather than a
+measurement, which is why it needed asking rather than deciding. Nothing else
+now stands between the flag and the flip except the flip itself.
 
 **Advertising is intended eventually.** Today the site takes no income, and
 that fact is what keeps five separate regimes out of scope. *When the site takes

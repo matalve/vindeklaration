@@ -423,8 +423,8 @@ def test_the_table_is_not_rendered_while_the_correction_route_is_a_404() -> None
     assert src.site.REPO_PUBLIC is False, (
         "REPO_PUBLIC is on: the importer table and /metod's claim that the "
         "repository is public will both ship. Confirm the repository is "
-        "actually public, and confirm CORRECTION_DAYS with the owner, then "
-        "delete this test."
+        "actually public, then delete this test. CORRECTION_DAYS is settled: "
+        "the owner confirmed 14 on 2026-08-29."
     )
 
 

@@ -418,9 +418,9 @@ IMPORTER_MINIMUM = 40
 
 # How long an error report is promised to take. The plan requires the table to
 # be "dated, and corrigible", and a correction route with no stated turnaround
-# is a suggestion box. **The owner has not confirmed this number** — it is the
-# one thing here that is a promise on their behalf rather than a measurement,
-# and it must be settled before REPO_PUBLIC flips and the table ships.
+# is a suggestion box. Unlike everything else on the page this is a promise
+# rather than a measurement, so it is the owner's to make: **confirmed at 14 by
+# the owner on 2026-08-29**, and not to be changed without asking again.
 CORRECTION_DAYS = 14
 
 
