@@ -7,6 +7,12 @@ Wants=network-online.target
 Type=oneshot
 WorkingDirectory=__REPO__
 Environment=UV=__UV__
+# systemd gives a user service a minimal PATH that excludes ~/.local/bin, where
+# both uv and gh are installed. That is why UV is resolved above — and on
+# 2026-08-29 it cost a run: gh was installed and working in a login shell, but
+# update.sh could not find it and stopped before crawling. Naming the directory
+# fixes it for every tool at once rather than one variable per binary.
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin:/bin
 # Without this, progress sits in Python's stdout buffer and the journal stays
 # silent for hours.
 Environment=PYTHONUNBUFFERED=1

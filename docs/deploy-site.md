@@ -91,10 +91,26 @@ systemctl --user daemon-reload
 The token needs **Workers R2 Storage: Edit**. `update.sh` checks for both
 variables, for `gh`, and for `gh` being logged in *before* it starts crawling —
 publishing is the last thing it does, and a missing tool discovered there costs
-a three-and-a-half-hour pass that is then thrown away undelivered. Note that
-neither `wrangler` nor `gh` is found through `PATH` under systemd, which is
-minimal: the script resolves both itself and falls back to `npx wrangler@4`
-where no global install exists.
+a three-and-a-half-hour pass that is then thrown away undelivered.
+
+**The unit sets its own `PATH`.** systemd gives a user service a minimal one
+that excludes `~/.local/bin`, where both `uv` and `gh` live — which is why `UV`
+is substituted as an absolute path at install time, and why the first nightly
+run after this change stopped on `gh not found` while `gh` worked perfectly in
+a login shell. The `Environment=PATH=` line in `vindeklaration.service` names
+that directory. Change where a tool is installed and that line is the first
+thing to check. `update.sh` still falls back to `npx wrangler@4` where no
+global wrangler exists.
+
+Editing the unit in git does not change the running one: it is a template, and
+`bootstrap.sh` substitutes `__REPO__` and `__UV__` into
+`~/.config/systemd/user/`. After pulling a change to it, reinstall and reload:
+
+```sh
+sed "s|__REPO__|$PWD|g; s|__UV__|$(command -v uv)|g" deploy/vindeklaration.service \
+  > ~/.config/systemd/user/vindeklaration.service
+systemctl --user daemon-reload
+```
 
 ## The build
 
