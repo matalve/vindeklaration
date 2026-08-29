@@ -158,6 +158,16 @@ repository is public:
 | Framework preset, root directory | none |
 | `PYTHON_VERSION` | `3.11.5` — insurance against the image changing its default |
 
+**Build watch paths are configured**: include `*`, exclude `/docs`, `/deploy`,
+`.claude/` and `*.md`, so a documentation commit does not rebuild 15 000 pages.
+Two consequences worth keeping in mind before editing that list:
+
+- **`data/` must stay on the trigger list.** The nightly rebuild rides on the
+  Pi's post-publish commit — `data/quality-history.json` changes on every
+  recorded run — so excluding `data/` would stop the rebuild firing, silently.
+- **`/deploy` is excluded**, which is why `cf-build.sh` lives at the repository
+  root. A change to the build script has to trigger the build that tests it.
+
 **The file-count test is not decoration.** A Worker rejects more than 20 000
 static assets on the free plan, the build grows with the assortment, and
 failing with the count visible beats a rejected upload with a generic message.
@@ -234,12 +244,6 @@ documentation:
   date, and condition 2 of `docs/legal-notes.md` §2j says the images come down
   the day a technological measure appears on Systembolaget's CDN. Nothing
   automates the check. A real gap, not an oversight to inherit quietly.
-- **Build watch paths are not configured.** Excluding `docs/`, `deploy/`,
-  `.claude/` and `*.md` would stop a documentation commit rebuilding 15 000
-  pages. Harmless either way — but the nightly rebuild rides on the Pi's
-  post-publish commit (`data/quality-history.json` changes on every recorded
-  run), so if watch paths are ever configured, **`data/` must stay on the
-  trigger list** or the rebuild stops firing, silently.
 - **No Content-Security-Policy.** A `_headers` file naming
   `product-cdn.systembolaget.se` as the only image source and
   `static.cloudflareinsights.com` as the only script source would turn the
