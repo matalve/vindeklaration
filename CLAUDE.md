@@ -38,11 +38,14 @@ counted. This file is about how to work here.
 | `data/additives.yaml` | the substance dictionary — the heart of the project |
 | `data/lexicon.yaml` | labels, processing notes, stopwords |
 | `data/unknown.json` | what the parser could not read, ranked by wines blocked |
+| `data/producer-declarations.json` | the second source — e-label finds, never merged into the dataset |
 | `deploy/` | running it unattended on the Raspberry Pi |
 | `src/site.py`, `templates/` | the static site — `uv run python -m src.site` |
 | `worker/index.js` | serves the dataset from R2 at `/data/*`; assets handle the rest |
 | `cf-build.sh` | what Cloudflare's build runs — the dashboard only calls it |
 | `docs/state-of-play.md` | **read this second** — what is live, what is next, what is open |
+| `docs/site-plan.md` | what the site may and may not say, and why |
+| `docs/legal-notes.md` | what was researched, quoted and cited, with the decisions |
 | `docs/deploy-site.md` | Cloudflare and the DNS move, step by step |
 | `docs/elabel-platforms.md` | which e-label platforms can be read, and which cannot |
 | `.claude/agents/` | lexicon-curator, declaration-auditor, upstream-scout, domain-scout, legal-scout, declaration-finder, site-auditor |
@@ -184,7 +187,7 @@ exact string.
   **lose that file and the next run has no baseline and silently passes.**
   Only `update.sh` passes `--record`; a manual `src.report` compares but never
   writes. Do not reintroduce an absolute threshold without being asked.
-- Declaration coverage is 19.3% today and rises on its own as stock rotates to
+- Declaration coverage is 20.4% today and rises on its own as stock rotates to
   2024-and-later vintages. Expect the numbers in `README.md` to age.
 
 ## Reporting to the owner

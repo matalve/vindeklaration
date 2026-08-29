@@ -242,7 +242,7 @@ since left it:
 | Assortment | `assortmentText` | 100% | 71% of the fixed range declares, 10% of order-only |
 | Grape | catalog `grapes` | **57.4%** | 433 distinct, already normalised upstream |
 | Food pairing | catalog `tasteSymbols` | **26.6%** | 16 values — a closed vocabulary, ideal for a facet, but thin |
-| Additives | the declaration | **19.3%** | The scarce one, and the point of the site |
+| Additives | the declaration | **20.4%** | The scarce one, and the point of the site |
 | Sugar and energy | detail `nutrition` | ≈ declared | Arrives with the declaration |
 | Vegan, organic | `isVeganFriendly`, `isOrganic` | 100% | Supplier's own flag, not derived from the declaration — and unset means unmarked, not disqualified |
 | Gluten-free | `isGlutenFree` | **useless for wine** | Verified 2026-08-03 against the live API: the field works — it is `true` on beers sold as glutenfri — but Systembolaget sets it on no wine at all, `false` on all 14 858 fetched. Never show it. `false` here means *not marked*, not *contains gluten* |
@@ -908,7 +908,7 @@ that changes when it is.
 
 A Worker on the free plan rejects more than 20 000 static assets, and the build
 fails on purpose above 19 000 — the mechanics are in `docs/deploy-site.md`.
-Today's build is 15 309 files, of which 15 124 are wine pages. **The way past it
+The build on 2026-08-29 is 15 345 files, of which 15 146 are wine pages. **The way past it
 is architecture, not a paid plan. Decided 2026-08-03.**
 
 The count does not come from the dataset. `wines.json` is a single file and is
@@ -925,7 +925,7 @@ to give.
 
 **Give up (1): sharded HTML behind a Worker script.** The build renders wine
 pages exactly as it does now — Jinja stays the only renderer — but packs them
-into 64–256 shard files instead of writing 15 124 directories. The Worker is a
+into 64–256 shard files instead of writing one directory per wine. The Worker is a
 lookup and nothing more: slug → shard id → `env.ASSETS.fetch(shard)` → return
 the stored HTML verbatim. No second renderer in JavaScript means no template
 drift to discover months later, which is the trap that makes most
@@ -945,7 +945,7 @@ What it costs, so that nobody has to rediscover it:
 
 - **Every wine page view becomes a billable Worker request.** Static assets are
   free and unlimited; Worker requests are 100 000 a day on the free plan. A full
-  search-engine crawl of 15 124 pages fits inside one day with margin rather
+  search-engine crawl of every wine page fits inside one day with margin rather
   than with room to spare.
 - **`not_found_handling: "404-page"` stops covering `/vin/`.** The Worker has to
   serve the 404 page itself for a slug it cannot find — which is exactly the

@@ -17,6 +17,9 @@ free text into structured data, and publishes the result.
 | `data/wines.sqlite` | The same rows, for querying — built by `src.build` from `wines.json`, not committed |
 | `data/additives.yaml` | The substance dictionary — names, E-numbers, aliases |
 | `data/unknown.json` | Text the parser could not identify, ranked by impact |
+| `data/producer-declarations.json` | A second source: declarations found at the producer's own e-label where Systembolaget carries none. Kept separate and never merged into the dataset |
+| `src/site.py`, `templates/` | The site — a static build, `uv run python -m src.site` |
+| `worker/index.js`, `cf-build.sh` | What serves the dataset at `/data/*`, and what Cloudflare's build runs |
 
 ## Caveats worth reading before using this
 
@@ -30,12 +33,12 @@ happened later, is covered without carrying a 2024 vintage.
 **The dataset has no production date, and Systembolaget publishes none**, so
 vintage is used as a stand-in throughout. The error runs one way: every wine of
 vintage 2024 or later was necessarily produced after the cutoff, so nothing is
-counted as covered when it is not. But 33.4% of the catalogue carries vintage
+counted as covered when it is not. But 33.2% of the catalogue carries vintage
 2023 or none at all, and an unknown share of that sits inside the requirement
 while a vintage filter cannot see it. Any figure here computed "over the wines
 the requirement covers" means *the wines it certainly covers*.
 
-**19.3% of the assortment currently carries a declaration**, rising to 66%
+**20.4% of the assortment currently carries a declaration**, rising to 66%
 among wines of vintage 2024 or later. Coverage improves on its own as stock
 rotates. See `docs/legal-notes.md` §1f for the sources.
 
@@ -163,9 +166,12 @@ journalctl --user -u vindeklaration -f             # watch it
 systemctl --user list-timers vindeklaration.timer  # when is the next run
 ```
 
-The GitHub Actions workflow in `.github/workflows/` does the same job in the
-cloud. Use one or the other, not both — two crawlers is twice the load on
-Systembolaget for the same data.
+The two workflows in `.github/workflows/` are **manual-only standbys** for the
+days the machines above are unavailable: `update.yml` runs the crawl,
+`deploy.yml` builds and publishes the site. Neither runs on a schedule or on
+push, deliberately — two crawlers is twice the load on Systembolaget for the
+same data, and Cloudflare already builds the site on every push to `main`.
+Start them by hand or not at all.
 
 ## Improving the parser
 
@@ -193,9 +199,21 @@ they are not under one licence. `LICENSES.md` has the full picture.
 ## Being a good guest
 
 Requests are sequential, spaced 0.4 s apart, and identify themselves. Nothing
-here is behind a login or disallowed by `robots.txt`. Data belongs to
-Systembolaget and the suppliers who entered it; this repository is a derived
-work published for consumer transparency.
+is fetched from behind a login, and a 401, 403, 429 or bot challenge stops the
+fetch with no workaround attempted. Data belongs to Systembolaget and the
+suppliers who entered it; this repository is a derived work published for
+consumer transparency.
+
+**One `robots.txt` is deliberately set aside, and only one.** Where a wine
+declares nothing on Systembolaget, the project looks for the EU e-label the
+bottle's QR code points at — and it fetches that page even where the host
+disallows crawling, because that page *is* the disclosure Regulation (EU)
+2021/2117 requires, and a blanket `Disallow: /` on it makes mandated consumer
+information unreadable to anyone comparing two bottles. It rests on not
+crawling: one request per wine, at a URL the producer's own site already links,
+with no traversal and no enumeration. It does not extend to producers'
+ordinary marketing sites, which are honoured in full. The reasoning and its
+limits are in `CLAUDE.md`.
 
 **`robots.txt` is not the whole picture, and saying so is part of being a good
 guest.** Systembolaget's Allmänna användarvillkor (version 2026-04-21) clause
