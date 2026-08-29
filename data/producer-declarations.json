@@ -9655,13 +9655,14 @@
       "language": "it",
       "vintage_on_source": "2023",
       "market": "IT/EU",
-      "evidence": "A COMPLETE DECLARATION WAS FOUND AND READ, AND IT IS THE MATCH THAT FAILED. https://www.lapruinavini.com/product/primitivo-manduria/ is 'La Pruina Primitivo di Manduria DOP', 'Titolo alcolometrico: 14%' (Systembolaget says 14,0 %), 'E/100 ML: 331 kJ / 79 kcal', and it links the IoAgri e-label id 25997106, whose CompanyName is 'La Pruina Vini', ProductName 'La Pruina Primitivo di Manduria DOP' and whose nutrition — 331 kJ / 79 kcal, Carboidrati 1,9 g, zuccheri 1,0 g — matches that page. Producer, cuvée and alcohol all match Systembolaget exactly. THE VINTAGE DOES NOT: the producer's page states 'ANNATA 2023' and Systembolaget's bottle is the 2024. The e-label itself states no year at all (Year null, Description.Year null), so there is no second opinion to appeal to and no per-vintage variant of the token; the only vintage anywhere in the chain is 2023. Its ingredient list is also demonstrably a different one from the 2024 Sole Range wines' — two preservatives and no stabilisers, and 'Imbottigliato in atmosfera protettiva' as a statement of fact rather than the Sole Range's 'può avvenire' — which is exactly why a vintage mismatch cannot be waved through. Recorded rejected, not not_found.",
+      "evidence": "A COMPLETE DECLARATION WAS FOUND AND READ, AND IT IS THE MATCH THAT FAILED. https://www.lapruinavini.com/product/primitivo-manduria/ is 'La Pruina Primitivo di Manduria DOP', 'Titolo alcolometrico: 14%' (Systembolaget says 14,0 %), 'E/100 ML: 331 kJ / 79 kcal', and it links the IoAgri e-label id 25997106, whose CompanyName is 'La Pruina Vini', ProductName 'La Pruina Primitivo di Manduria DOP' and whose nutrition — 331 kJ / 79 kcal, Carboidrati 1,9 g, zuccheri 1,0 g — matches that page. Producer, cuvée and alcohol all match Systembolaget exactly. THE VINTAGE DOES NOT: the producer's page states 'ANNATA 2023' and Systembolaget's bottle is the 2024. The e-label itself states no year at all (Year null, Description.Year null), so there is no second opinion to appeal to and no per-vintage variant of the token; the only vintage anywhere in the chain is 2023. Its ingredient list is also demonstrably a different one from the 2024 Sole Range wines' — two preservatives and no stabilisers, and 'Imbottigliato in atmosfera protettiva' as a statement of fact rather than the Sole Range's 'può avvenire' — which is exactly why a vintage mismatch cannot be waved through. Recorded rejected, not not_found. RE-CHECKED 2026-08-29 (tenth Italian batch): the estate's Primitivo di Manduria product page still reads 'ANNATA 2023' and still links the identical IoAgri token (https://app.ioagri.it:443/Qr/DL?id=25997106, under the anchor 'VALORI NUTRIZIONALI E INGREDIENTI | SMALTIMENTO'), so the rejection stands unchanged and the e-label was not refetched. ONE THING HAS CHANGED ON THE PAGE AND IT IS WORTH RECORDING: the product description now prints the physical-label particulars inline, centred between rules — 'E/100 ML: 331 kJ / 79 kcal', 'PRODOTTO IN ITALIA', 'CONTIENE SOLFITI' — above the e-label link. That is exactly the split Regulation (EU) 2021/2117 prescribes: energy value and allergen on the label, the rest behind the QR. It is not itself an ingredient list, and it does not date the wine.",
       "rejected_because": "the only vintage stated for this wine on the producer's surface is 2023 (the linking product page's 'ANNATA 2023'); the Systembolaget bottle is the 2024, and the e-label carries no year of its own to override it",
       "sources_checked": [
         "https://www.lapruinavini.com/product/primitivo-manduria/",
-        "https://app.ioagri.it/Qr/DL?id=25997106"
+        "https://app.ioagri.it/Qr/DL?id=25997106",
+        "https://www.lapruinavini.com/product/primitivo-manduria/ re-fetched 2026-08-29 in the tenth batch: STILL 'ANNATA 2023', and still linking the same IoAgri token id=25997106. The precondition for the revisit does not hold."
       ],
-      "checked_at": "2026-08-09T22:05:00Z",
+      "checked_at": "2026-08-29T10:20:00Z",
       "robots_disallowed": false,
       "robots_exception": false,
       "elabel_platform": "IoAgri / Agriverse — app.ioagri.it/Qr/DL?id={token}",
@@ -13286,7 +13287,7 @@
       "checked_at": "2026-08-29T09:55:00Z"
     }
   ],
-  "updated_at": "2026-08-29T10:10:00Z",
+  "updated_at": "2026-08-29T10:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -13598,6 +13599,11 @@
       "at": "2026-08-29T10:10:00Z",
       "batch": "3 — Italy, tenth batch: Damilano revisit (1 wine, already recorded)",
       "result": "0 new wines. The ninth batch's revisit precondition was that cantinedamilano.it/robots.txt might have been fixed. IT HAS NOT: still 500, still the Apache default error body, two weeks later. RFC 9309 §2.3.1.4 makes an unreachable robots.txt a complete disallow, so no page on the host was requested and the existing not_found record stands, with the recheck noted in it. A 5xx that persists for two weeks is a standing misconfiguration rather than an outage; whether that should be read as a refusal is the owner's question, not a finder run's."
+    },
+    {
+      "at": "2026-08-29T10:20:00Z",
+      "batch": "3 — Italy, tenth batch: La Pruina revisit (1 wine, already recorded)",
+      "result": "0 new wines, and the file's cheapest revisit did not pay. The Primitivo di Manduria page still reads 'ANNATA 2023' against Systembolaget's 2024, and still carries the same IoAgri token id=25997106, so the rejection stands and the e-label was not refetched — one request, not two. WORTH CARRYING FORWARD: the page has since added the physical-label particulars inline above the e-label link — 'E/100 ML: 331 kJ / 79 kcal', 'PRODOTTO IN ITALIA', 'CONTIENE SOLFITI' — which is the first Italian producer page seen to reproduce the label/QR split of Regulation (EU) 2021/2117 explicitly. An energy value printed beside a QR link is a SIGNAL THAT THE E-LABEL IS REAL, not a declaration in itself. The revisit remains open on the same terms: when the page rolls to ANNATA 2024 the same token should carry the 2024 recipe."
     }
   ]
 }
