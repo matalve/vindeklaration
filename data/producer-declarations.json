@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, tenth batch, open 2026-08-15. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after nine batches: 90 producers, 186 wines, 10 found, 164 not_found, 12 rejected; the tenth batch continues from a pool of 93 untouched wines, one producer each.",
-  "attempted": 459,
+  "attempted": 461,
   "found": 32,
-  "not_found": 378,
+  "not_found": 380,
   "rejected": 49,
   "declarations": [
     {
@@ -13216,9 +13216,76 @@
       "evidence": "Systembolaget sells this as a 1,5 L bag-in-box at 12,5 % vol, vintage 2025. The EU shop's page for this exact wine is the closest surface that exists and it declares no ingredients. Note that the EU shop prints 'Alcohol: 13.5%' on all four wines while Systembolaget records 13,5 / 12,5 / 12,0 / 12,5 — a shop template, not a per-wine figure, so the page could not have been strength-matched either. It states no vintage anywhere. THE EU CHANNEL EXISTS AND CARRIES ONLY THE ALLERGEN LINE. Systembolaget's producer string names Azienda Vitivinicola Tola Girolamo S.A.S. and the supplier is Bemakers ApS. Both resolve: Alileo Wines is a boxed-wine brand vinified by Tola in western Sicily, and its EU distribution runs through Bemakers, whose own footer text on the shop reads 'The Alileo Wines shop is powered by Bemakers to ensure professional and compliant distribution across Europe'. THE PRODUCER'S OWN SITE DOES NOT CARRY THE BRAND: vinitola.com's catalogue lists 17 wines (Chimaera, Cru di Venti, Granduca, Black Label, White Label, Domi, Costa Rosa, Festa d'Agosto, Grysos, Lavinaro) and zero matches for 'alileo', so step 0 has no first-party surface to offer. THE US STOREFRONT alileowines.com IS THE WRONG MARKET and carries nothing anyway — not one declaration term in 210 kB of raw HTML, no vintage, and a US locale selector. THE EU SHOP IS THE RIGHT MARKET AND IS THE NEAR-MISS: each product page has a collapsed 'Allergens' panel whose whole content is the single word 'Sulfites', followed by the organic control-body code DE-OKO-007. No ingredient list, no nutrition table, no energy value, no vintage. That is the Italian two-particular near-miss in English, on a Danish compliance platform. THE PACK PHOTOGRAPH'S QR CODE WAS DECODED AND LEADS TO SCANTRUST, WHICH IS UNREADABLE AND IS THE WRONG PACK: the product gallery's back-panel image was decoded offline with OpenCV (4x upscale of a crop, no network) to https://eega.st4.ch/01/00860008955708/10/23S01 — a GS1 Digital Link, GTIN 00860008955708, lot 23S01. That URL 302s to https://elabel.scantrust.com/default/#/?uid=...&api_key=...&qr=01%2F00860008955708%2F10%2F23S01, the same 1 590-byte empty-<div id=app> shell documented for Masi, so the GS1 path form is no more readable than the fragment form. And the panel it came from is the US pack: 'ALILEO ELEVATED DIST. LLC GLOUCESTER MA', a US GOVERNMENT WARNING block, 'ALC. 13% BY VOL' and the wording 'SCAN QR CODE TO LEARN MORE'. Wrong market, wrong strength, and a 2023-looking lot. No EU pack photograph is published on either shop.",
       "rejected_because": null,
       "checked_at": "2026-08-29T09:20:00Z"
+    },
+    {
+      "product_number": "7296201",
+      "name": "Poggio ai Ginepri Argentiera",
+      "producer": "Argentiera",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.argentiera.eu/it/i-vini/poggio-ai-ginepri/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2022",
+      "market": "EU",
+      "sources_checked": [
+        "http://argentiera.it/ (301 chain into https://www.argentiera.eu/it/ — the estate's live host; https on argentiera.it and on argentiera.com both time out)",
+        "https://www.argentiera.eu/robots.txt (404 with the site's own 296 kB HTML body — a soft 404, so no directives exist; RFC 9309 §2.3.1.3 Unavailable Status, nothing disallowed)",
+        "https://www.argentiera.eu/it/ (200, 354 kB) — the embedded page JSON lists the whole site: 18 pages, one of them etichettatura-ambientale",
+        "https://www.argentiera.eu/it/i-vini/ (200) — seven wines: argentiera, eco-di-mare, i-pianali, poggio-ai-ginepri, scenario-2, ventaglio, villa-donoratico",
+        "https://www.argentiera.eu/it/i-vini/poggio-ai-ginepri/ (200, 316 kB)",
+        "https://www.argentiera.eu/it/i-vini/scenario-2/ (200, 297 kB)",
+        "https://www.argentiera.eu/it/shop/ (200) — nine products only, all old Argentiera and Ventaglio vintages behind the Ambassadors membership; neither Swedish wine is sold there",
+        "https://www.argentiera.eu/it/etichettatura-ambientale/ (200) — a per-product index of eight environmental-labelling pages",
+        "https://www.argentiera.eu/it/etichettatura-ambientale/poggio-ai-ginepri/ (200)",
+        "https://www.argentiera.eu/it/documenti/ (200) — GDPR notices only"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "www.argentiera.eu answers /robots.txt with HTTP 404 and the site's own HTML body — a soft 404. A 4xx is RFC 9309 §2.3.1.3 Unavailable Status: the file does not exist, no rules apply, the host is open. That is the opposite of the 5xx case at cantinedamilano.it, which closes a host. No exception was needed.",
+      "evidence": "STEP 2 CLOSES IT ON THE VINTAGE AND THERE IS NOTHING TO REJECT ANYWAY. Systembolaget sells the 2024 at 13,0 % in 75 cl. The estate's page for this exact cuvee is dated and is on an older vintage: its narrative sections are headed 'Clima 2021' and 'Vendemmia 2021', and its per-vintage scheda tecnica selector runs 2022, 2021, 2020 ... back to 2003, so 2022 is the newest year the estate documents at all and 2024 is absent. The page gives grapes (40 % Cabernet Sauvignon, 30 % Merlot, 20 % Cabernet Franc, 10 % Petit Verdot), altitude, soil, exposure, planting density, yield, vinification and critics' scores, and states no alcohol. THE PACKAGING OBLIGATION IS DISCHARGED IN FULL AND THE INGREDIENT ONE NOWHERE. Argentiera Srl, P.IVA 04964100483, Via Aurelia 412/A, Castagneto Carducci (LI) — the producer is right and both cuvees are on its own range page. The estate has built a dedicated /it/etichettatura-ambientale/ tree with one page per product for all eight products (Villa Donoratico, Ventaglio, Poggio ai Ginepri, I Pianali, Eco di Mare, Argentiera, Olio, Scenario), each a bilingual it/en table of bottle GL 71 / capsule C/ALU9O / cork FOR 51 with material and bin. That is the Italian environmental-labelling decree, a different obligation, and there is no counterpart anywhere on the site for ingredients or nutrition: across five pages totalling ~1,5 MB, the raw HTML and the stripped text both give zero matches for ingredien, nutrizion, solfit, dichiarazione, valori, and for the vendor tokens ioagri, ead-qr, i-wine, carmaqrcode, u-label, goalstec, btn-nutrizional and tab-ingredienti. THE SHOP IS NOT A CONSUMER SHOP: /it/shop/ carries nine products, all of them old Argentiera and Ventaglio vintages (2010-2019, magnums and jeroboams) sold to Ambassadors club members, and neither Swedish wine appears in it — so step 4, the surface that produced the ninth batch's two finds, does not exist here. TWO GREPS THAT LIE, BOTH NEW: 'Energia vibrante e fotosintesi di un piccolo vigneto' opens Scenario's philosophy paragraph, so `energia` matches a tasting note; and the Documenti page's inline base64 produced the single `kcal` hit on the site.",
+      "rejected_because": null,
+      "checked_at": "2026-08-29T09:55:00Z"
+    },
+    {
+      "product_number": "9126401",
+      "name": "Argentiera Scenario Bolgheri",
+      "producer": "Argentiera",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.argentiera.eu/it/i-vini/scenario-2/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2022",
+      "market": "EU",
+      "sources_checked": [
+        "http://argentiera.it/ (301 chain into https://www.argentiera.eu/it/ — the estate's live host; https on argentiera.it and on argentiera.com both time out)",
+        "https://www.argentiera.eu/robots.txt (404 with the site's own 296 kB HTML body — a soft 404, so no directives exist; RFC 9309 §2.3.1.3 Unavailable Status, nothing disallowed)",
+        "https://www.argentiera.eu/it/ (200, 354 kB) — the embedded page JSON lists the whole site: 18 pages, one of them etichettatura-ambientale",
+        "https://www.argentiera.eu/it/i-vini/ (200) — seven wines: argentiera, eco-di-mare, i-pianali, poggio-ai-ginepri, scenario-2, ventaglio, villa-donoratico",
+        "https://www.argentiera.eu/it/i-vini/poggio-ai-ginepri/ (200, 316 kB)",
+        "https://www.argentiera.eu/it/i-vini/scenario-2/ (200, 297 kB)",
+        "https://www.argentiera.eu/it/shop/ (200) — nine products only, all old Argentiera and Ventaglio vintages behind the Ambassadors membership; neither Swedish wine is sold there",
+        "https://www.argentiera.eu/it/etichettatura-ambientale/ (200) — a per-product index of eight environmental-labelling pages",
+        "https://www.argentiera.eu/it/etichettatura-ambientale/poggio-ai-ginepri/ (200)",
+        "https://www.argentiera.eu/it/documenti/ (200) — GDPR notices only",
+        "https://www.argentiera.eu/it/etichettatura-ambientale/scenario/ (listed, not fetched — the Poggio page settled what the tree contains)"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "Same host as the sibling record: www.argentiera.eu answers /robots.txt with a soft 404 (HTTP 404, HTML body), which under RFC 9309 §2.3.1.3 means no rules exist and the host is open. No exception was needed.",
+      "evidence": "STEP 2 CLOSES IT ON THE VINTAGE. Systembolaget sells Scenario 2024, Bolgheri DOC Bianco, 100 % Vermentino, 12,5 %, 75 cl. The estate's page is the right cuvee — 'Scenario / Bolgheri DOC Bianco / 100 % Vermentino', under a hectare on north-facing Flysch soils above Villa Donoratico — and it is on the 2022: the narrative sections are 'Clima 2022' and 'Vendemmia 2022' and the only per-wine document is /media/file//92/Data sheet - Scenario 2022 - DE.pdf. It states no alcohol. THE PACKAGING OBLIGATION IS DISCHARGED IN FULL AND THE INGREDIENT ONE NOWHERE. Argentiera Srl, P.IVA 04964100483, Via Aurelia 412/A, Castagneto Carducci (LI) — the producer is right and both cuvees are on its own range page. The estate has built a dedicated /it/etichettatura-ambientale/ tree with one page per product for all eight products (Villa Donoratico, Ventaglio, Poggio ai Ginepri, I Pianali, Eco di Mare, Argentiera, Olio, Scenario), each a bilingual it/en table of bottle GL 71 / capsule C/ALU9O / cork FOR 51 with material and bin. That is the Italian environmental-labelling decree, a different obligation, and there is no counterpart anywhere on the site for ingredients or nutrition: across five pages totalling ~1,5 MB, the raw HTML and the stripped text both give zero matches for ingredien, nutrizion, solfit, dichiarazione, valori, and for the vendor tokens ioagri, ead-qr, i-wine, carmaqrcode, u-label, goalstec, btn-nutrizional and tab-ingredienti. THE SHOP IS NOT A CONSUMER SHOP: /it/shop/ carries nine products, all of them old Argentiera and Ventaglio vintages (2010-2019, magnums and jeroboams) sold to Ambassadors club members, and neither Swedish wine appears in it — so step 4, the surface that produced the ninth batch's two finds, does not exist here. TWO GREPS THAT LIE, BOTH NEW: 'Energia vibrante e fotosintesi di un piccolo vigneto' opens Scenario's philosophy paragraph, so `energia` matches a tasting note; and the Documenti page's inline base64 produced the single `kcal` hit on the site.",
+      "rejected_because": null,
+      "checked_at": "2026-08-29T09:55:00Z"
     }
   ],
-  "updated_at": "2026-08-29T09:20:00Z",
+  "updated_at": "2026-08-29T09:55:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -13520,6 +13587,11 @@
       "at": "2026-08-29T09:20:00Z",
       "batch": "3 — Italy, tenth batch: Alileo Wines / Azienda Vitivinicola Tola Girolamo (4 wines)",
       "result": "4 attempted, 0 found, 4 not found. THE PRODUCER STRING AND THE BRAND ARE TWO DIFFERENT COMPANIES AND BOTH WERE CHECKED: vinitola.com is Tola's own site and its 17-wine catalogue contains zero matches for 'alileo', so the brand has no first-party Italian surface. Alileo's US Shopify (alileowines.com) carries not one declaration term in 210 kB. THE FIND THAT MATTERS FOR THE NEXT RUN IS THE EU CHANNEL: /pages/shop-eu names seven country shops on eu.alileowines.com — at, ch, de, dk, fr, nl and se — run by Bemakers ApS, the Danish compliance-and-distribution platform that is Systembolaget's supplier for all four wines. That is a NEW PLATFORM SHAPE: an importer-operated per-country EU storefront that is the wine's real EU market surface while the brand's own site is US-only. It is server-rendered and permissive, and what it publishes where the declaration belongs is a collapsed 'Allergens' panel containing the single word 'Sulfites' plus DE-OKO-007 — the Italian two-particular near-miss, in English. Its 'Alcohol: 13.5%' is a template value repeated on all four wines against Systembolaget's 13,5/12,5/12,0/12,5, so it cannot strength-match either, and it states no vintage. ONE NEW PLATFORM FACT: the pack's QR was decoded offline from the shop's own back-panel photograph to https://eega.st4.ch/01/{gtin}/10/{lot}, a GS1 Digital Link — and it 302s into the same 1 590-byte elabel.scantrust.com fragment shell as Masi, so SCANTRUST'S GS1 PATH FORM IS NO MORE READABLE THAN ITS FRAGMENT FORM. The photographed pack is the US one (Gloucester MA importer, US government warning, ALC 13% BY VOL, lot 23S01), so it was the wrong market as well."
+    },
+    {
+      "at": "2026-08-29T09:55:00Z",
+      "batch": "3 — Italy, tenth batch: Argentiera / Tenuta Argentiera, Bolgheri (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found. THE PACKAGING ASYMMETRY AT ITS SHARPEST YET: the estate has built a dedicated /it/etichettatura-ambientale/ tree with a bilingual per-product page for all EIGHT products, bottle/capsule/cork with recycling code, material and bin — and publishes no ingredient list or nutrition table anywhere on the site. Five pages, ~1,5 MB, zero raw or stripped matches for ingredien, nutrizion, solfit, dichiarazione or any of the eight Italian vendor tokens. Step 2 closes both wines independently: the marketing pages are dated and are on the 2021 (Poggio ai Ginepri) and the 2022 (Scenario) while Systembolaget sells the 2024, and the per-vintage scheda selector's newest year is 2022. THE SHOP IS NOT A CONSUMER SHOP — nine old magnums for Ambassadors club members, neither Swedish wine in it — so step 4 has no surface here. HOST NOTE: the estate is on www.argentiera.eu; argentiera.it 301s into it over http and refuses TLS, and argentiera.com times out on both schemes. Its robots.txt is a SOFT 404 (status 404, 296 kB of the site's own HTML), which is the 4xx-opens-the-host case. TWO NEW FALSE POSITIVES: `energia` matched 'Energia vibrante e fotosintesi di un piccolo vigneto', a philosophy paragraph, and `kcal` matched inline base64."
     }
   ]
 }
