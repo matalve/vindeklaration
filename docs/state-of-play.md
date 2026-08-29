@@ -46,6 +46,22 @@ the rebuild downloads the dataset from the bucket. Only `unknown.json` and
 `quality-history.json` are still committed. Verified end to end the same day:
 R2, release, a 24-line commit, push, green build.
 
+**And it left the history too, later the same day.** Dropping the file from the
+tip left 69 blobs behind: 1.15 GB uncompressed, a 199 MB clone for a tree of a
+few MB. `git filter-repo --invert-paths` removed `wines.json`, `catalog.json`
+and `wines.sqlite` from all 417 commits and the repository is now 1.7 MB.
+`--prune-empty never` was deliberate — the dataset commits' messages are part
+of the record, so they survive as empty commits rather than vanishing. Every
+message, author and date is unchanged, the tip tree is the same object, and the
+one altered byte-sequence is a revert commit's body, whose reference
+filter-repo remapped to the same commit's new hash. **Every SHA before
+2026-08-29 is dead:** any clone other than the Pi's must be re-cloned, not
+pulled. What this did *not* reach is `refs/pull/1/head` and `refs/pull/13/head`,
+which GitHub keeps forever and which still carry the old objects — a normal
+clone never fetches them, so the clone size is genuinely fixed, but the bytes
+are still on GitHub and getting rid of them would take Support or a new
+repository. Judged not worth it.
+
 Four things bit during that migration and are worth not rediscovering. `--remote`
 is load-bearing on `wrangler r2 object put`, or it writes to the local simulator
 and exits 0 against an empty bucket. systemd's user PATH excludes
