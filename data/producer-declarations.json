@@ -12709,15 +12709,16 @@
         "https://cantinedamilano.it/robots.txt (500)",
         "https://www.cantinedamilano.it/robots.txt (500)",
         "http://cantinedamilano.it/robots.txt (500)",
-        "web search, which identified cantinedamilano.it as the estate's site and showed it makes two Barbera d'Asti"
+        "web search, which identified cantinedamilano.it as the estate's site and showed it makes two Barbera d'Asti",
+        "https://cantinedamilano.it/robots.txt re-read 2026-08-29 in the tenth batch: STILL 500, the same Apache default error body. The precondition for the revisit does not hold and no page on the host was requested."
       ],
       "server_rendered": null,
       "elabel_platform": null,
       "robots_disallowed": false,
       "robots_reasoning": "NOT FETCHED, AND THIS IS THE REASON. cantinedamilano.it answers /robots.txt with a 500 Internal Server Error — an Apache default error body, identically on the apex, on www and over plain http, so it is not a transient blip on one edge. RFC 9309 section 2.3.1.4, 'Unreachable Status': 'If the robots.txt file is unreachable due to server or network errors, this means the robots.txt file is undefined and the crawler MUST assume complete disallow', with 500-599 named as the HTTP case. No page on the host was requested. The 2026-07-30 e-label exception does not reach this: it covers a page that is itself the regulated disclosure, and no e-label URL for this producer is held — an ordinary marketing site keeps its robots.txt in full, and an undefined robots.txt is stricter than a permissive one, not looser. This is a policy question worth the owner's attention rather than a finder's: a 5xx robots.txt is a misconfiguration and not a refusal, but the RFC's requirement is unambiguous and inventing an exception is not this agent's to make.",
-      "evidence": "CLOSED WITHOUT FETCHING A PAGE, ON ROBOTS.TXT ALONE — see robots_reasoning. What was established before that point is worth recording so a later run does not repeat it. THE DOMAIN IS A NEAR-NAME TRAP OF THE KIND THE SEVENTH BATCH FOUND AT MUCCHIETTO.IT: damilano.com resolves and is a live Shopify storefront, and it is a LEATHER GOODS BRAND — its product sitemap's first thousand URLs are wallets, belts, card cases and luggage tags ('cognac-signato-ladies-wallet', 'croco-leather-coaster-black'). Not one wine. damilanovini.com does not resolve at all. The winery is cantinedamilano.it, the Barolo estate at Cannubi founded 1890 as Borgogno and renamed for Giacomo Damilano in 1935. THE CUVEE WOULD ALSO HAVE NEEDED CARE: the estate makes TWO Barbera d'Asti DOCG, a plain one and a 'ZeroSette', with separate pages (/en/wines/barbera-dasti-docg/ and /en/wines/barbera-dasti-docg-zerosette/). Systembolaget's item is the plain 'Damilano Barbera d'Asti', 14,5 % vol, 750 ml, 2024, so the ZeroSette would have been the wrong bottle. Nothing is known about whether either page carries a declaration and nothing should be assumed: this is not_found because the host could not be read, not because the producer publishes nothing.",
+      "evidence": "CLOSED WITHOUT FETCHING A PAGE, ON ROBOTS.TXT ALONE — see robots_reasoning. What was established before that point is worth recording so a later run does not repeat it. THE DOMAIN IS A NEAR-NAME TRAP OF THE KIND THE SEVENTH BATCH FOUND AT MUCCHIETTO.IT: damilano.com resolves and is a live Shopify storefront, and it is a LEATHER GOODS BRAND — its product sitemap's first thousand URLs are wallets, belts, card cases and luggage tags ('cognac-signato-ladies-wallet', 'croco-leather-coaster-black'). Not one wine. damilanovini.com does not resolve at all. The winery is cantinedamilano.it, the Barolo estate at Cannubi founded 1890 as Borgogno and renamed for Giacomo Damilano in 1935. THE CUVEE WOULD ALSO HAVE NEEDED CARE: the estate makes TWO Barbera d'Asti DOCG, a plain one and a 'ZeroSette', with separate pages (/en/wines/barbera-dasti-docg/ and /en/wines/barbera-dasti-docg-zerosette/). Systembolaget's item is the plain 'Damilano Barbera d'Asti', 14,5 % vol, 750 ml, 2024, so the ZeroSette would have been the wrong bottle. Nothing is known about whether either page carries a declaration and nothing should be assumed: this is not_found because the host could not be read, not because the producer publishes nothing. RE-CHECKED 2026-08-29 (tenth Italian batch): cantinedamilano.it/robots.txt still answers 500, so RFC 9309 §2.3.1.4 still makes the file undefined and the host a complete disallow. Two weeks on, this looks less like a transient outage and more like a standing misconfiguration. Whether a 5xx on robots.txt should be read as a misconfiguration rather than a refusal remains a question for the owner; until it is answered this producer cannot be worked, and it stays the one Italian wine where nothing whatever is known about whether the producer publishes.",
       "rejected_because": null,
-      "checked_at": "2026-08-15T10:15:00Z"
+      "checked_at": "2026-08-29T10:10:00Z"
     },
     {
       "product_number": "7033301",
@@ -13285,7 +13286,7 @@
       "checked_at": "2026-08-29T09:55:00Z"
     }
   ],
-  "updated_at": "2026-08-29T09:55:00Z",
+  "updated_at": "2026-08-29T10:10:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -13592,6 +13593,11 @@
       "at": "2026-08-29T09:55:00Z",
       "batch": "3 — Italy, tenth batch: Argentiera / Tenuta Argentiera, Bolgheri (2 wines)",
       "result": "2 attempted, 0 found, 2 not found. THE PACKAGING ASYMMETRY AT ITS SHARPEST YET: the estate has built a dedicated /it/etichettatura-ambientale/ tree with a bilingual per-product page for all EIGHT products, bottle/capsule/cork with recycling code, material and bin — and publishes no ingredient list or nutrition table anywhere on the site. Five pages, ~1,5 MB, zero raw or stripped matches for ingredien, nutrizion, solfit, dichiarazione or any of the eight Italian vendor tokens. Step 2 closes both wines independently: the marketing pages are dated and are on the 2021 (Poggio ai Ginepri) and the 2022 (Scenario) while Systembolaget sells the 2024, and the per-vintage scheda selector's newest year is 2022. THE SHOP IS NOT A CONSUMER SHOP — nine old magnums for Ambassadors club members, neither Swedish wine in it — so step 4 has no surface here. HOST NOTE: the estate is on www.argentiera.eu; argentiera.it 301s into it over http and refuses TLS, and argentiera.com times out on both schemes. Its robots.txt is a SOFT 404 (status 404, 296 kB of the site's own HTML), which is the 4xx-opens-the-host case. TWO NEW FALSE POSITIVES: `energia` matched 'Energia vibrante e fotosintesi di un piccolo vigneto', a philosophy paragraph, and `kcal` matched inline base64."
+    },
+    {
+      "at": "2026-08-29T10:10:00Z",
+      "batch": "3 — Italy, tenth batch: Damilano revisit (1 wine, already recorded)",
+      "result": "0 new wines. The ninth batch's revisit precondition was that cantinedamilano.it/robots.txt might have been fixed. IT HAS NOT: still 500, still the Apache default error body, two weeks later. RFC 9309 §2.3.1.4 makes an unreachable robots.txt a complete disallow, so no page on the host was requested and the existing not_found record stands, with the recheck noted in it. A 5xx that persists for two weeks is a standing misconfiguration rather than an outage; whether that should be read as a refusal is the owner's question, not a finder run's."
     }
   ]
 }
