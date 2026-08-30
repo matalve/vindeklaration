@@ -16,7 +16,7 @@
   ],
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
-  "batch": "3 — Italy, tenth batch, open 2026-08-15. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after nine batches: 90 producers, 186 wines, 10 found, 164 not_found, 12 rejected; the tenth batch continues from a pool of 93 untouched wines, one producer each.",
+  "batch": "3 — Italy, tenth batch, opened 2026-08-15 and worked 2026-08-29/30. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after ten batches: 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected; 81 untouched 2024+ undeclared Italian wines remain, one wine per producer string. The tenth batch added six producers and ten wines (Alileo Wines/Tola 4, Argentiera 2, Planeta, Tenute Lunelli, Benanti, Frank Cornelissen — none found) and re-ran all four named Italian revisits (Damilano, La Pruina, Cantine PaoloLeo, Caruso & Minini), every one of which still fails for the reason it failed before.",
   "attempted": 465,
   "found": 32,
   "not_found": 384,
@@ -13418,7 +13418,7 @@
       "checked_at": "2026-08-30T11:25:00Z"
     }
   ],
-  "updated_at": "2026-08-30T11:25:00Z",
+  "updated_at": "2026-08-30T12:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
