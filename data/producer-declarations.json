@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30. First Spanish batch; no Spanish producer was in this file before it. Pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after four producers and nine wines (Bodegas Vegamar 3, Gramona 2, Vivanco 2, Raventos i Blanc 2 — 0 found, 0 rejected, 9 not found) 81 wines across 66 producer strings remain. The producer==supplier step-0 test finds ZERO Spanish importer own-labels, against seven of the 81 remaining Italian wines. NO SPANISH E-LABEL VENDOR HAS BEEN SEEN YET in any producer's linking. The Spanish failure so far is NOT the Italian one: three of the first nine wines passed every part of the four-part check, vintage included, and died only on the declaration being absent. Previous batches: Germany exhausted (19,8 % find rate); France set aside at 69 producers, 142 wines, 4 found, 9 rejected; Italy set aside after ten batches at 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected (4,9 %), 81 untouched wines remaining. See 'Spain opens, and the first four producers all fail on identity's opposite' in docs/elabel-platforms.md.",
-  "attempted": 484,
+  "attempted": 486,
   "found": 33,
-  "not_found": 401,
+  "not_found": 403,
   "rejected": 50,
   "declarations": [
     {
@@ -13957,9 +13957,60 @@
       "server_rendered": false,
       "elabel_platform": "digital-label.eu, as for 7534901.",
       "checked_at": "2026-08-30T16:40:00Z"
+    },
+    {
+      "product_number": "7857501",
+      "name": "Bodegas Pinord Diorama Verdejo",
+      "producer": "Bodegas Pinord",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://pinord.com/es/productes/blanco-rueda-diorama-verdejo/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://pinord.com/robots.txt — stock WordPress, everything fetched allowed",
+        "https://www.pinord.com/es/ (200, 89 kB, 301 to apex) — terms: 0; the link census gives the DO index pages",
+        "https://pinord.com/es/productes/blanco-terra-alta-diorama-garnacha-blanca/ (200, 66 kB) — a sibling product page fetched first as a template test: terms: 0, no declaration-shaped link",
+        "https://pinord.com/es/do-rueda-es (200) — the DO index, naming the Diorama Verdejo product URL",
+        "https://pinord.com/es/productes/blanco-rueda-diorama-verdejo/ (200, 64 kB) — the wine's own page",
+        "https://shop.pinord.com/ (200, 282 kB) — a WooCommerce storefront; terms: 0, no vendor named, and neither Systembolaget wine is linked from it"
+      ],
+      "evidence": "Producer and cuvee match: the page is Bodegas Pinord's own and is headed Diorama Verdejo, DO Rueda, and its 'Datos analiticos' gives 'Grado alcoholico: 13o' against Systembolaget's 13,0 %. THE VINTAGE IS NOT STATED ANYWHERE on the page, in the URL or in the DO index, so the third part of the identity check cannot be performed.",
+      "rejected_because": null,
+      "not_found_because": "No declaration and no vintage. The page carries a tasting note, an elaboration paragraph, a food pairing and a one-line 'Datos analiticos' holding the alcohol and nothing else — no ingredient list, no nutrition table, no energy value and no pointer to an e-label. No e-label vendor is named on the marketing site or the shop.",
+      "robots_note": "Stock WordPress robots.txt on both hosts; everything fetched was allowed and no exception was used.",
+      "checked_at": "2026-08-30T17:05:00Z"
+    },
+    {
+      "product_number": "7919001",
+      "name": "Albariño Pazo Rosqueira",
+      "producer": "Bodegas Pinord",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://pinord.com/es/productes/blanco-rias-baixas-pazo-rosqueira/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://pinord.com/es/do-rias-baixas (200) — the DO index, naming the Pazo Rosqueira product URL",
+        "https://pinord.com/es/productes/blanco-rias-baixas-pazo-rosqueira/ (200, 65 kB) — the wine's own page, terms: 0",
+        "site-wide checks as for 7857501"
+      ],
+      "evidence": "Producer and cuvee match, and the page's 'Datos analiticos' gives 'Grado alcoholico: 12,5o' against Systembolaget's 12,5 %. No vintage is stated, so the identity check stops at step three.",
+      "rejected_because": null,
+      "not_found_because": "Same as the sibling: no ingredient list, no nutrition table, no pointer, no vendor, and no year on any surface the producer controls.",
+      "robots_note": "Allowed; no exception used.",
+      "checked_at": "2026-08-30T17:05:00Z"
     }
   ],
-  "updated_at": "2026-08-30T16:40:00Z",
+  "updated_at": "2026-08-30T17:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14356,6 +14407,11 @@
       "at": "2026-08-30T16:40:00Z",
       "batch": "4 — Spain, eighth producer: Albet i Noya (2 wines) — SPAIN'S FIRST E-LABEL AND SPAIN'S FIRST VENDOR",
       "result": "2 attempted, 1 FOUND, 1 REJECTED, 0 not found, in eight requests. THE SPANISH DROUGHT IS OVER, and the answer to the batch's open question is yes: a Spanish producer has adopted a QR vendor. Albet i Noya runs digital-label.eu, white-labelled onto its own subdomain dl.albetinoya.cat, one UUID per wine, reached from an anchor reading 'Datos nutricionales' at the foot of each wine's Datos tecnicos block on the estate's own hand-built PHP site — beside a printable QR image of the same URL, under a source comment reading 'for en and es versions replace cat/qr/ with cat/en/qr/ etc'. THE PAGE IS A NEXT.JS APP ROUTER SHELL AND RENDERS CLIENT-SIDE — 9,7 kB, zero visible characters, the payload holding only the i18n label dictionary — BUT ITS OWN DATA ENDPOINT IS THE SAME URL PLUS /api AND RETURNS PLAIN JSON. That endpoint was read off the page's own chunk (the useSWR call is fetch('/'+locale+'/qr/'+id+'/api')), which is the SEL by Goals Tec precedent: unreadable as a page, readable as a payload, and the same resource at one more request. No robots.txt exists on dl.albetinoya.cat (404), so nothing is disallowed and NO EXCEPTION WAS INVOKED. The JSON is the complete mandated set and it identifies itself better than anything else in Spain: title, DOP, anada, gradoAlcoholico, cantidad, the full nutrition set per 100 ml, an ingredientes array typed by role (ingrediente / conservantes) with an mostrarNegrita flag marking the allergen, the elaborador with its postal address, and per-country recycling indicators. THE VINTAGE FIELD IS WHAT DECIDED BOTH WINES, IN OPPOSITE DIRECTIONS: El Fanio's e-label says anada 2024 against Systembolaget's 2024 and 12 % against 12,0 % and 750 against 750 ml, and is attached; Icones Blanc's says anada 2025 against Systembolaget's 2024 and is rejected, with a second independent objection in the alcohol (12 % against Systembolaget's 11,0, outside the 0,5 % tolerance). The estate's marketing page agreed with its own e-label on both — 'Cosecha 2025' for Icones Blanc, 2024 for El Fanio — so the rejection was visible one request before the e-label was fetched."
+    },
+    {
+      "at": "2026-08-30T17:05:00Z",
+      "batch": "4 — Spain, ninth producer: Bodegas Pinord (2 wines)",
+      "result": "2 attempted, 0 found, 0 rejected, 2 not found, in seven requests. Chosen straight after Albet i Noya on the guess that a second mid-size DO Penedes house would have bought the same vendor, and it had not: nothing anywhere on pinord.com or shop.pinord.com names digital-label.eu or any other e-label vendor, and no wine page carries a declaration or a pointer. Pinord closes on the ITALIAN failure and not the Spanish one: its per-wine pages have a 'Datos analiticos' block whose ONLY entry is the alcohol, and NO VINTAGE ANYWHERE — 'La vendimia se realiza de noche' is a process sentence, and the four-digit years in the HTML are the copyright footer. The alcohol matches Systembolaget exactly on both wines (13 against 13,0; 12,5 against 12,5), which makes the missing year the whole of the objection. Site shape worth reusing: the product URL is /es/productes/{colour}-{do}-{name}/ and the DO index pages (/es/do-rueda-es, /es/do-rias-baixas) list every product in that DO, so two wines in different appellations cost two index fetches and no guessing. THE 'ingredientes' GREP LIED AGAIN, and this is its second Spanish sighting: 'ensaladas con ingredientes frescos' in the food-pairing paragraph. Treat a hit inside a Maridaje block as noise."
     }
   ]
 }
