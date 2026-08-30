@@ -19,9 +19,9 @@ your own country's section. The country deep-dives are the bulk of the file and
 they do not transfer between countries. `grep` for a host, a vendor or a
 producer name answers "has this been seen before" for nothing.
 
-**Spain opened on 2026-08-30** and has had three batches — 30 producer strings,
-50 wine records, **one declaration attached, three rejected, 46 not found**,
-with 41 wines still untouched. See *Spain opens, and the first four producers
+**Spain opened on 2026-08-30** and has had three batches — 31 producer strings,
+51 wine records, **one declaration attached, three rejected, 47 not found**,
+with 39 wines still untouched. See *Spain opens, and the first four producers
 all fail on identity's opposite*, *The second Spanish batch: an adopter at last,
 and Spain's shape confirmed* and *The third Spanish batch: three e-label
 adopters, and none of them readable*, at the end of this file. **Three Spanish
@@ -4003,7 +4003,7 @@ Muga's outage is why. That test is still open.
 ### The third Spanish batch: three e-label adopters, and none of them readable
 
 **2026-08-30/31, nine more producer strings and nine more wines**, taking Spain
-to 30 producer strings and 50 wines: **1 found, 3 rejected, 46 not found.**
+to 31 producer strings and 51 wines: **1 found, 3 rejected, 47 not found.**
 Campo Viejo (1, rejected), Bodegas Frutos Villar (2, one rejected — a revisit),
 Bodegas Marqués de Cáceres (1), Familia Martínez Bujanda (2 producer strings, 2
 wines), Bodegas Murviedro (1), Bodegas Portia (1), Bodegas Shaya (1), Enate (1),
@@ -4125,7 +4125,7 @@ was a cuvée.
 
 #### Where the remaining Spanish work is, after batch 3
 
-**41 wines untouched, and every one of them is a single-wine producer string** —
+**39 wines untouched, and every one of them is a single-wine producer string** —
 the sibling economics are fully spent, unless another pair turns out to share a
 domain the way Cosecheros y Criadores and Finca Montepedroso did. **That is now
 the cheapest check available**: resolve the producer's obvious domain first and
