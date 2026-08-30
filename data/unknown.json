@@ -1,6 +1,11 @@
 {
  "unknown_tokens": [
   {
+   "token": "försumbar",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7010801/"
+  },
+  {
    "token": "kaliumsyra",
    "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
@@ -71,9 +76,34 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
   },
   {
-   "token": "försumbar",
+   "token": "invertsocker",
    "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7491101/"
+   "example": "https://www.systembolaget.se/produkt/vin/x-7003801/"
+  },
+  {
+   "token": "stabilizing",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
+  },
+  {
+   "token": "agents",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
+  },
+  {
+   "token": "stabiliseringsämnen",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
+  },
+  {
+   "token": "oak",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-836208/"
+  },
+  {
+   "token": "nutrients",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-836208/"
   },
   {
    "token": "oloroso",
@@ -98,6 +128,10 @@
  ],
  "fuzzy_matches": [
   {
+   "match": "svavekdioxid -> svaveldioxid",
+   "wines": 2
+  },
+  {
    "match": "konserverings -> konserverings",
    "wines": 1
   },
@@ -115,6 +149,10 @@
   },
   {
    "match": "sabiliseringsmedel -> stabiliseringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "duvor -> druvor",
    "wines": 1
   },
   {
