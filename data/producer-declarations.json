@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30. First Spanish batch; no Spanish producer was in this file before it. Pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after four producers and nine wines (Bodegas Vegamar 3, Gramona 2, Vivanco 2, Raventos i Blanc 2 — 0 found, 0 rejected, 9 not found) 81 wines across 66 producer strings remain. The producer==supplier step-0 test finds ZERO Spanish importer own-labels, against seven of the 81 remaining Italian wines. NO SPANISH E-LABEL VENDOR HAS BEEN SEEN YET in any producer's linking. The Spanish failure so far is NOT the Italian one: three of the first nine wines passed every part of the four-part check, vintage included, and died only on the declaration being absent. Previous batches: Germany exhausted (19,8 % find rate); France set aside at 69 producers, 142 wines, 4 found, 9 rejected; Italy set aside after ten batches at 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected (4,9 %), 81 untouched wines remaining. See 'Spain opens, and the first four producers all fail on identity's opposite' in docs/elabel-platforms.md.",
-  "attempted": 482,
-  "found": 32,
+  "attempted": 484,
+  "found": 33,
   "not_found": 401,
-  "rejected": 49,
+  "rejected": 50,
   "declarations": [
     {
       "product_number": "5106001",
@@ -13900,9 +13900,66 @@
       "not_found_because": "No producer surface exists for this cuvée.",
       "robots_note": "No exception used.",
       "checked_at": "2026-08-30T16:05:00Z"
+    },
+    {
+      "product_number": "7534901",
+      "name": "El Fanio",
+      "producer": "Albet i Noya",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "found",
+      "source_url": "https://dl.albetinoya.cat/en/qr/224463c3-ef4e-4793-b960-dd1facf62220",
+      "source_type": "e_label",
+      "raw_ingredients": "Ingredients: Organic grapes\nPreservatives and antioxidants: Sulphites",
+      "raw_ingredients_note": "The e-label page renders client-side; the text above is the declaration exactly as the page composes it from its own data endpoint, https://dl.albetinoya.cat/en/qr/224463c3-ef4e-4793-b960-dd1facf62220/api, whose ingredientes array is verbatim [{\"title\":\"Organic grapes\",\"tipoIngrediente\":\"ingrediente\",\"mostrarNegrita\":false},{\"title\":\"Sulphites\",\"tipoIngrediente\":\"conservantes\",\"mostrarNegrita\":true}]. The two category headings are the vendor's own English strings, taken from the label dictionary shipped in the page shell (tipo_ingrediente: 'Ingredients', tipo_conservantes: 'Preservatives and antioxidants'). Nothing is translated or paraphrased: the substance names are the producer's own and the headings are the platform's own. mostrarNegrita:true is the allergen bolding, and the separate alergenos array holds the single slug 'sulfits'.",
+      "language": "en",
+      "language_note": "The producer's Spanish-language wine page links the /en/ locale of its own e-label, so English is the version the producer hands out from its ES surface and it is what was fetched. The route is /{locale}/qr/{uuid}; no locale other than the linked one was requested.",
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "nutrition_per_100ml": "valorEnergetico 72 (kcal, the vendor's field; the page also renders a kJ figure it derives), grasas 0 g, grasasSaturadas 0 g, hidratosDeCarbono 9.7 g, azucares 0 g, proteinas 0.2 g, sal 0 g. Stated for 100 ml (the shell's dictionary: per_100ml = 'For 100ml').",
+      "sources_checked": [
+        "https://www.albetinoya.cat/es/ (200, 30 kB, 301 to the apex) — terms: 0, but the link census gives the site's PHP page list",
+        "https://albetinoya.cat/shop/es/ (200, 249 kB) — the WooCommerce shop, terms: 0, no declaration link on the storefront",
+        "https://albetinoya.cat/es/faniotimbes.php — 302 to /es/vins.php, the range index, which names the real per-wine URLs",
+        "https://albetinoya.cat/es/el-fanio.php (200, 45 kB) — the wine's own page: 'El Fanio … 2024', Xarel·lo, 'Grado alcoholico: 12% vol.', and the anchor 'Datos nutricionales' pointing at the e-label, plus the same URL behind a print-only QR image",
+        "https://dl.albetinoya.cat/robots.txt — 404, absent, nothing disallowed",
+        "https://dl.albetinoya.cat/en/qr/224463c3-ef4e-4793-b960-dd1facf62220 (200, 9,7 kB) — the e-label, a Next.js App Router shell with zero visible characters",
+        "https://dl.albetinoya.cat/_next/static/chunks/app/%5Blocale%5D/qr/%5Bid%5D/page-…js (200, 17 kB) — the page's own chunk, read to find its data endpoint",
+        "https://dl.albetinoya.cat/en/qr/224463c3-ef4e-4793-b960-dd1facf62220/api (200, 4,2 kB, application/json) — the declaration"
+      ],
+      "evidence": "ALL FOUR PARTS OF THE IDENTITY CHECK PASS ON THE E-LABEL'S OWN STATEMENTS, plus both extra tests. Producer: the payload's elaborador is 'ALBET I NOYA S.L., Can Vendrell,5, Subirats 08739 ES' and its marca is 'ALBET I NOYA' — Systembolaget's producer field is Albet i Noya. Wine: title 'EL FANIO ECO', DOP Penedes; Systembolaget's wine is El Fanio, and the estate's own page for El Fanio is where this exact UUID was read, so the link is the producer's own and not inferred. Vintage: anada 2024, muestraAnada true, against Systembolaget's 2024 — stated by the disclosure itself, not by the page that linked it. Market: EU — the vendor is digital-label.eu, the nutrition is per 100 ml, the indicators include the EU organic and per-country recycling marks, and the elaborador address is Spanish. Alcohol: gradoAlcoholico 12 against Systembolaget's 12,0, exact. Pack: cantidad 750 against Systembolaget's 750 ml, exact. The estate's marketing page independently gives the same 12 % vol and the same 2024 for this cuvee.",
+      "rejected_because": null,
+      "robots_note": "dl.albetinoya.cat serves no robots.txt (404) — no rules exist, RFC 9309 §2.3.1.3, so nothing is disallowed and no e-label exception was invoked. albetinoya.cat's own robots.txt allows everything fetched. No technological measure was met anywhere: every request answered 200.",
+      "server_rendered": false,
+      "elabel_platform": "digital-label.eu — SPAIN'S FIRST E-LABEL VENDOR IN THIS PROJECT, white-labelled onto the producer's own subdomain dl.albetinoya.cat. Next.js App Router, route /{locale}/qr/{uuid}, meta robots noindex, no robots.txt. The HTML shell is unreadable (zero visible characters) and the data endpoint is the SAME URL + '/api', plain JSON, no token and no header required. All asset URLs point back at www.digital-label.eu, which is how the vendor is identified. The payload states wine, DOP, vintage, alcohol, bottle size, the full nutrition set, a role-typed ingredient array, the allergen list and the elaborador's name and postal address — the best self-identification of any source seen in Spain.",
+      "checked_at": "2026-08-30T16:40:00Z"
+    },
+    {
+      "product_number": "7478401",
+      "name": "Albet i Noya Icones Blanc",
+      "producer": "Albet i Noya",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://dl.albetinoya.cat/en/qr/d656e70e-da25-4dde-8117-a863db0cd7a8",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://albetinoya.cat/es/icones-blanc.php (200, 22 kB) — the wine's own page, headed 'Icones Blanc / Cosecha 2025', 'Grado alcoholico: 12% vol.', with the 'Datos nutricionales' anchor to the e-label",
+        "https://dl.albetinoya.cat/en/qr/d656e70e-da25-4dde-8117-a863db0cd7a8/api (200, 4,1 kB) — 'ICONES BLANC ECO', anada 2025, gradoAlcoholico 12, cantidad 750, elaborador ALBET I NOYA S.L."
+      ],
+      "evidence": "Producer and cuvee match exactly — elaborador 'ALBET I NOYA S.L.', title 'ICONES BLANC ECO', and the UUID was read off the estate's own Icones Blanc page. A complete and current declaration exists (Organic grapes; Sulphites; energy 71, carbohydrate 12,7 g, sugars 3,2 g per 100 ml). It is not this bottle's.",
+      "rejected_because": "VINTAGE. The e-label declares anada 2025 and Systembolaget stocks the 2024. The estate's own marketing page agrees with the e-label, reading 'Cosecha 2025', so the producer has rolled its whole surface forward and publishes nothing for the vintage on the shelf. A SECOND AND INDEPENDENT OBJECTION supports it: the e-label states 12 % vol against Systembolaget's 11,0, which is 1,0 outside the 0,5 % labelling tolerance, so the two statements cannot describe the same fill even before the vintage is considered. Recipes change between years and this is exactly the case the vintage rule exists for — the sugars differ from the sibling wine's by an order of magnitude, so the numbers on this page are genuinely year-specific.",
+      "robots_note": "No robots.txt on dl.albetinoya.cat (404); nothing disallowed, no exception invoked.",
+      "server_rendered": false,
+      "elabel_platform": "digital-label.eu, as for 7534901.",
+      "checked_at": "2026-08-30T16:40:00Z"
     }
   ],
-  "updated_at": "2026-08-30T16:05:00Z",
+  "updated_at": "2026-08-30T16:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14294,6 +14351,11 @@
       "at": "2026-08-30T16:05:00Z",
       "batch": "4 — Spain, seventh producer: Javi Revert Viticultor SL (3 wines)",
       "result": "3 attempted, 0 found, 3 not found, in two requests plus two searches. This one closes on identity, not on absence, and it is the ITALIAN shape rather than the French one: javirevertviticultor.com is a seven-page WordPress/Elementor brochure with NO shop, NO per-wine page and NO vintage anywhere — /vinos/ is one page for the whole range and its wine names are images, so a case-insensitive grep of 146 kB of HTML finds 'sensal' only as an Elementor container id and finds Lafont, Grillat, Comarcal and any four-digit year not at all. terms: 0 on both pages fetched. TWO OF THE THREE WINES ARE NOT EVEN THIS ESTATE'S OWN LABEL: Lafont and Grillat belong to La Comarcal, the joint project of Javi Revert and Victor Marqués at Venta del Moro, which Systembolaget files under the Revert name; La Comarcal appears to have no site of its own at all, only importer portfolio pages (De Maison Selections, Free Run, Oz Wine Company), which are excluded sources. NEW SPANISH GREP TRAP, and it will recur: the probe's declaration-shaped-link scan flags 'Declaración de accesibilidad', the accessibility statement that Spanish WordPress sites carry in the footer. 'declaracion' is not a declaration."
+    },
+    {
+      "at": "2026-08-30T16:40:00Z",
+      "batch": "4 — Spain, eighth producer: Albet i Noya (2 wines) — SPAIN'S FIRST E-LABEL AND SPAIN'S FIRST VENDOR",
+      "result": "2 attempted, 1 FOUND, 1 REJECTED, 0 not found, in eight requests. THE SPANISH DROUGHT IS OVER, and the answer to the batch's open question is yes: a Spanish producer has adopted a QR vendor. Albet i Noya runs digital-label.eu, white-labelled onto its own subdomain dl.albetinoya.cat, one UUID per wine, reached from an anchor reading 'Datos nutricionales' at the foot of each wine's Datos tecnicos block on the estate's own hand-built PHP site — beside a printable QR image of the same URL, under a source comment reading 'for en and es versions replace cat/qr/ with cat/en/qr/ etc'. THE PAGE IS A NEXT.JS APP ROUTER SHELL AND RENDERS CLIENT-SIDE — 9,7 kB, zero visible characters, the payload holding only the i18n label dictionary — BUT ITS OWN DATA ENDPOINT IS THE SAME URL PLUS /api AND RETURNS PLAIN JSON. That endpoint was read off the page's own chunk (the useSWR call is fetch('/'+locale+'/qr/'+id+'/api')), which is the SEL by Goals Tec precedent: unreadable as a page, readable as a payload, and the same resource at one more request. No robots.txt exists on dl.albetinoya.cat (404), so nothing is disallowed and NO EXCEPTION WAS INVOKED. The JSON is the complete mandated set and it identifies itself better than anything else in Spain: title, DOP, anada, gradoAlcoholico, cantidad, the full nutrition set per 100 ml, an ingredientes array typed by role (ingrediente / conservantes) with an mostrarNegrita flag marking the allergen, the elaborador with its postal address, and per-country recycling indicators. THE VINTAGE FIELD IS WHAT DECIDED BOTH WINES, IN OPPOSITE DIRECTIONS: El Fanio's e-label says anada 2024 against Systembolaget's 2024 and 12 % against 12,0 % and 750 against 750 ml, and is attached; Icones Blanc's says anada 2025 against Systembolaget's 2024 and is rejected, with a second independent objection in the alcohol (12 % against Systembolaget's 11,0, outside the 0,5 % tolerance). The estate's marketing page agreed with its own e-label on both — 'Cosecha 2025' for Icones Blanc, 2024 for El Fanio — so the rejection was visible one request before the e-label was fetched."
     }
   ]
 }
