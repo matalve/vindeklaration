@@ -17,9 +17,9 @@
  "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
  "generated_at": "2026-07-28T20:38:45Z",
  "batch": "4 — SPAIN, opened 2026-08-30. No Spanish producer was in this file before batch 4. The pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings. AFTER 23 PRODUCER STRINGS AND 43 WINES: 1 FOUND, 2 REJECTED, 40 NOT FOUND — Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventos i Blanc (2), Bodegas Muga (2), Born Rose Barcelona (3), Javi Revert Viticultor (3), Albet i Noya (2, the find and one rejection), Bodegas Pinord (2), Dominio de Eguren (2), Familia Conesa (2), Bodegas Frutos Villar (2), Terra de Asorei (2), Rafael Palacios (2), Dominio de Tares (2), Giol Porrera (2), Binigrau (2), Palacio de Fefinanes (2 strings, 2 wines), Attis/Sangarida (2 strings, 2 wines), Miguel Torres (1), Campo Viejo (1, the second rejection). Campo Viejo is the first Spanish producer on a GROUP-WIDE e-label platform, e-label.pernod-ricard.com, whose JSON is fully readable and states no vintage of any kind.",
- "attempted": 509,
+ "attempted": 511,
  "found": 33,
- "not_found": 424,
+ "not_found": 426,
  "rejected": 52,
  "declarations": [
   {
@@ -14597,9 +14597,65 @@
    "not_found_because": "No declaration exists on the producer's surface in any form. The range index is complete (30 wines, one page each), the wine's own page carries a tasting note, grape, oenologist, climate, soils and yields and no list of substances, and the site's only declaration-shaped pointer is the anchor 'Imagen etiqueta', which resolves to a 1,7 MB JPEG photograph of the label rather than to any e-label. THE LARGE-RIOJA-GROUP HYPOTHESIS FAILS HERE. Independently the vintage would not have matched: the page is headed 'Antea 2025' and Systembolaget stocks the 2024, so the producer has rolled its surface forward as Albet i Noya and Frutos Villar did. One thing was NOT established: whether the label JPEG carries a QR code that would lead somewhere readable. No QR decoder is installed here and one was not added, since the image hangs off the 2025 page and any destination would have inherited that vintage problem.",
    "robots_note": "marquesdecaceres.com's robots.txt is a single wildcard group disallowing only /wp-json/ and /?rest_route=. Everything fetched was allowed; no exception invoked.",
    "checked_at": "2026-08-30T23:05:00Z"
+  },
+  {
+   "product_number": "2233501",
+   "name": "Candidato Ecologico Tempranillo",
+   "producer": "Cosecheros y Criadores",
+   "country": "Spanien",
+   "vintage": "2024",
+   "status": "not_found",
+   "source_url": "https://familiamartinezbujanda.com/cosecheros-criadores/",
+   "source_type": "producer_site",
+   "raw_ingredients": null,
+   "language": null,
+   "vintage_on_source": null,
+   "market": "EU",
+   "sources_checked": [
+    "https://www.cosecherosycriadores.com/robots.txt — 404, absent, nothing disallowed",
+    "https://www.cosecherosycriadores.com/ (200) — 301s to https://familiamartinezbujanda.com/cosecheros-criadores/. TWO SYSTEMBOLAGET PRODUCER STRINGS, ONE HOUSE: Cosecheros y Criadores and Finca Montepedroso are both Familia Martinez Bujanda, alongside Finca Valpiedra, Finca Antigua and Vina Bujanda",
+    "https://familiamartinezbujanda.com/cosecheros-criadores/ (200, 390 kB) — the brand page. terms: 0. Its 'NUESTROS VINOS' block is an Elementor image CAROUSEL of label photographs (Candidato Blanco, Candidato Rosado, Candidato Tinto, Casa Solar, Infinitus) with no product pages behind them, no vintages and no declaration",
+    "https://familiamartinezbujanda.com/tienda/ and /tienda/?products-per-page=all (200) — the house shop. The 'all' parameter does NOT expand the listing; the page is the same. Ten wine products across the five bodegas, and no Candidato of any kind",
+    "https://familiamartinezbujanda.com/finca-montepedroso/ (200) — the bodega page, two products",
+    "https://familiamartinezbujanda.com/tienda/vinos/blancos-y-dulces/finca-montepedroso-verdejo-2/ (200, 256 kB) — the Verdejo's product page. terms: 0",
+    "raw grep for 'ecologico'/'ecologico' across the brand page: ZERO hits"
+   ],
+   "evidence": "The producer is real and was reached: cosecherosycriadores.com is the brand of Familia Martinez Bujanda and redirects into their site. Candidato is one of its ranges. Nothing further could be checked.",
+   "rejected_because": null,
+   "not_found_because": "No declaration, and no surface for this cuvee. The Cosecheros y Criadores range is presented as a carousel of LABEL PHOTOGRAPHS with no product page behind any of them, so no vintage, no alcohol and no ingredient list is stated for any Candidato. The house shop carries no Candidato at all, and the string 'ecologico' does not appear anywhere on the brand page — so the organic bottling Systembolaget sells has no counterpart on the producer's site under that or any name. No e-label vendor is named in the source of any page fetched. The identity check could not be run past the producer.",
+   "robots_note": "cosecherosycriadores.com serves no robots.txt (404). familiamartinezbujanda.com was reached by its own redirect; nothing fetched was disallowed and no exception was invoked.",
+   "checked_at": "2026-08-30T23:25:00Z"
+  },
+  {
+   "product_number": "7978501",
+   "name": "Finca Montepedroso Verdejo",
+   "producer": "Finca Montepedroso",
+   "country": "Spanien",
+   "vintage": "2024",
+   "status": "not_found",
+   "source_url": "https://familiamartinezbujanda.com/tienda/vinos/blancos-y-dulces/finca-montepedroso-verdejo-2/",
+   "source_type": "producer_site",
+   "raw_ingredients": null,
+   "language": null,
+   "vintage_on_source": "2025",
+   "market": "EU",
+   "sources_checked": [
+    "https://www.cosecherosycriadores.com/robots.txt — 404, absent, nothing disallowed",
+    "https://www.cosecherosycriadores.com/ (200) — 301s to https://familiamartinezbujanda.com/cosecheros-criadores/. TWO SYSTEMBOLAGET PRODUCER STRINGS, ONE HOUSE: Cosecheros y Criadores and Finca Montepedroso are both Familia Martinez Bujanda, alongside Finca Valpiedra, Finca Antigua and Vina Bujanda",
+    "https://familiamartinezbujanda.com/cosecheros-criadores/ (200, 390 kB) — the brand page. terms: 0. Its 'NUESTROS VINOS' block is an Elementor image CAROUSEL of label photographs (Candidato Blanco, Candidato Rosado, Candidato Tinto, Casa Solar, Infinitus) with no product pages behind them, no vintages and no declaration",
+    "https://familiamartinezbujanda.com/tienda/ and /tienda/?products-per-page=all (200) — the house shop. The 'all' parameter does NOT expand the listing; the page is the same. Ten wine products across the five bodegas, and no Candidato of any kind",
+    "https://familiamartinezbujanda.com/finca-montepedroso/ (200) — the bodega page, two products",
+    "https://familiamartinezbujanda.com/tienda/vinos/blancos-y-dulces/finca-montepedroso-verdejo-2/ (200, 256 kB) — the Verdejo's product page. terms: 0",
+    "raw grep for 'ecologico'/'ecologico' across the brand page: ZERO hits"
+   ],
+   "evidence": "Producer and cuvee match exactly and the house is the same as 2233501's — Finca Montepedroso is one of Familia Martinez Bujanda's five bodegas and sells exactly one Verdejo. Pack matches (BOTELLA: 750 ml) and alcohol matches (GRADO ALCOHOLICO: 12,5% Vol against Systembolaget's 12,5). The technical block is otherwise VARIEDAD, D.O., CATEGORIA, ACIDEZ TOTAL, FECHA DE VENDIMIA and ENVEJECIMIENTO — no ingredient list, no nutrition, no energy value.",
+   "rejected_because": null,
+   "not_found_because": "No declaration on the producer's surface. Note the vintage separately: the page states no ANADA, but 'FECHA DE VENDIMIA: Primera semana de septiembre 2025' dates it to the 2025 harvest where Systembolaget stocks the 2024, so the producer has rolled forward here too and a declaration would have been rejected on vintage even if one had existed. FECHA DE VENDIMIA is worth adding to the Spanish vintage greps: it dates a wine on a page that never says 'anada'.",
+   "robots_note": "See 2233501. Nothing disallowed; no exception invoked.",
+   "checked_at": "2026-08-30T23:25:00Z"
   }
  ],
- "updated_at": "2026-08-30T20:04:40Z",
+ "updated_at": "2026-08-30T20:06:44Z",
  "_runs": [
   {
    "at": "2026-07-28T20:38:45Z",
