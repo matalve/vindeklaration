@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, tenth batch, open 2026-08-15. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after nine batches: 90 producers, 186 wines, 10 found, 164 not_found, 12 rejected; the tenth batch continues from a pool of 93 untouched wines, one producer each.",
-  "attempted": 464,
+  "attempted": 465,
   "found": 32,
-  "not_found": 383,
+  "not_found": 384,
   "rejected": 49,
   "declarations": [
     {
@@ -13389,9 +13389,36 @@
       "evidence": "STEP 2 CLOSES IT AND STEP 5 CONFIRMS THE CLOSE FOR ONE HEAD. Systembolaget sells 'Etna Bianco Benanti' 2024, Sicily, 12,0 %, 75 cl. Benanti Viticoltori S.r.l., P.iva 07884420964, is the right producer and 'Etna Bianco' is a real cuvee in its Tradizionali range with its own page — and the estate makes THREE other Etna Biancos (Pietra Marina Etna Bianco Superiore, Contrada Rinazzo Etna Bianco Superiore, Contrada Monte Serra Etna Bianco and Contrada Cavaliere Etna Bianco), so the range page was read before the product page as step 6 requires; the unqualified 'Etna Bianco' is the plain DOC bottling and is the right one. THE PAGE IS UNDATED. It gives Denominazione, altitude, Carricante in purezza, soil, vine age, planting density, yields, harvest timing, fermentation, ageing, a tasting note and a food pairing — and NO vintage, NO alcohol and NO pack. It could not have been vintage-matched even if a list had appeared on it. THE SCHEDA TECNICA IS PRE-OBLIGATION AND WAS NOT DOWNLOADED. Its URL carries no vintage (BENANTI-Scheda-Tecnica-Etna-Bianco.pdf) and a HEAD returns 'last-modified: Wed, 04 Oct 2023 18:10:49 GMT' — two months before 8 December 2023, so the file cannot carry a declaration under Regulation (EU) 2021/2117. Step 5, closing a wine without a download, for the second time in this batch. NO DECLARATION SURFACE ANYWHERE. Raw and stripped greps of the range page, the product page and the download page return zero for ingredien, nutrizion, solfit, kcal, energia, dichiarazione, etichettatura, annata and every Italian vendor token (ioagri, ead-qr, i-wine, carmaqrcode, goalstec, u-label.com, btn-nutrizional, tab-ingredienti, qualita). NOTE THAT BENANTI DOES NOT EVEN PUBLISH THE PACKAGING OBLIGATION, unlike Planeta and Argentiera in this same batch. TWO STRUCTURAL NOTES. FIRST, the site is WooCommerce — its sitemap index names productcat-sitemap.xml and producttags-sitemap.xml — and there is NO product-sitemap.xml, so the sitemap index alone would have suggested the estate has no wine pages; the 17 /prodotto/ URLs exist and are linked only from /vini/. That is the Rocca delle Macie lesson repeating, and it is the reason the range page was fetched. SECOND, the /download/ page is the THIRD Italian 'Download' area in this file that is a press kit and not a compliance surface: two PDFs, 'WINERY Profile' and 'Studio Lieviti Autoctoni'. And /etna-club/ is not a shop — it 301s to the home page — so step 4 has no surface here either.",
       "rejected_because": null,
       "checked_at": "2026-08-30T11:00:00Z"
+    },
+    {
+      "product_number": "9333001",
+      "name": "Susucaru Rosso",
+      "producer": "Azienda Agricola Frank Cornelissen",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.frankcornelissen.it/susucaru-rosso/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.frankcornelissen.it/robots.txt (200, Yoast block, 'User-agent: *' with an EMPTY 'Disallow:' — everything allowed)",
+        "https://www.frankcornelissen.it/sitemap.xml (200, ~20 children, ALL of them sitemap-pt-page-* — the site has one post type, page, and no product or wine type)",
+        "https://www.frankcornelissen.it/?s=susucaru (200) — the step-0 site-search probe; three Susucaru pages, Rosso, Rosato and Bianco",
+        "https://www.frankcornelissen.it/susucaru-rosso/ (200, 63 kB)"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "www.frankcornelissen.it's robots.txt is a Yoast block whose only group is 'User-agent: *' with an EMPTY 'Disallow:' line, which allows everything. No exception was needed.",
+      "evidence": "STEP 2 CLOSES IT. Systembolaget sells 'Susucaru Rosso' 2024, Sicily, 14,0 %, 75 cl. Azienda Agricola Frank Cornelissen is the right producer and SUSUCARU(R) Rosso has its own page — 'our entry-level red wine, a field-blend of mostly Nerello Mascalese (85 %) with Nerello Capuccio, Allicante Bouschet, Minnella and Uva Francesa', IGP Terre Siciliane Rosso — and the estate makes three Susucarus (Rosso, Rosato, Bianco), so the colour identifies ours. THE PAGE IS UNDATED: it names 'First vintage: 2003' and no bottling year, no alcohol, and lists 'Available sizes: 750ML, 1500ML, 3000ML and 5000ML'. It could not have been vintage-matched even if a list had appeared. THE PACKAGING OBLIGATION IS PUBLISHED AND THE INGREDIENT ONE IS NOT — the third producer in this batch. The page ends with a 'HOW TO RECYCLE' block covering bottle, closure (Ardeaseal, natural cork, screw cap, olive oil pouring closure), wax cap, case and pallet, with the bin for each. There is no ingredient list, no nutrition table and no energy value anywhere on the site. AND THERE IS A NEW NEAR-MISS HERE, WHICH IS WHY THIS RECORD IS WORTH READING. The page carries a field labelled 'Sulphur:' whose value is 'values can vary from 15 to 50 mg/l., added or not, depending on the quality of grapes and stability of the wine.' That is more substance-shaped than the usual Italian 'contiene solfiti' line and it is FURTHER from a declaration, not closer: it gives an analysis RANGE across bottlings and explicitly declines to say whether sulphur was added to any given one. A declaration under Regulation (EU) 2021/2117 is a statement about the bottle in your hand; this is a statement about the estate's practice. Under the agent's rules a producer page counts only where it presents an actual list of substances, and a may-or-may-not-contain range is the opposite of that. Recorded so the next run recognises it on sight — it is the Chateau Revelette SO2 near-miss, in Italy, with an added-or-not clause. NO OTHER SURFACE. The estate has no webshop; the sitemap index's children are all 'sitemap-pt-page-*', so 'page' is the only post type on the site, and the nav is Visiting us / Our Estate / Our production / Vintage report / Critic's Scores / Product authentication / Events / Recorking Wines / FAQ / Work with us / Contacts. Raw and stripped greps return zero for ingredien, nutrizion, nutrition, kcal, energia, dichiarazione and every Italian vendor token.",
+      "rejected_because": null,
+      "checked_at": "2026-08-30T11:25:00Z"
     }
   ],
-  "updated_at": "2026-08-30T11:00:00Z",
+  "updated_at": "2026-08-30T11:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -13738,6 +13765,11 @@
       "at": "2026-08-30T11:00:00Z",
       "batch": "3 — Italy, tenth batch: Benanti Viticoltori (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in eight requests. The undated cuvee page plus a pre-obligation scheda: the product page states no vintage, no alcohol and no pack, and the scheda tecnica's Last-Modified is 2023-10-04, two months before the obligation, so it was never downloaded. Step 5 has now closed two wines in this batch without a download. THREE THINGS FOR THE FILE: (1) Benanti is WooCommerce and its sitemap index names productcat and producttags and NO product-sitemap — the 17 /prodotto/ pages exist and are linked only from /vini/, so the Rocca delle Macie rule (a missing wine post type does not close a producer) earned its place again. (2) /download/ is the third Italian Download area in this file that is a press kit: a winery profile and a study of indigenous yeasts. (3) Benanti does not publish even the PACKAGING obligation, where Planeta and Argentiera in this same batch publish it in full — so the packaging asymmetry is a common Italian shape, not a universal one. Step 6 mattered here: the estate makes four other Etna Biancos (Pietra Marina, Contrada Rinazzo, Contrada Monte Serra, Contrada Cavaliere) and the range page is what identifies the unqualified DOC bottling as ours."
+    },
+    {
+      "at": "2026-08-30T11:25:00Z",
+      "batch": "3 — Italy, tenth batch: Frank Cornelissen (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in four requests. The undated cuvee page again — 'First vintage: 2003' and no bottling year, no alcohol — plus the packaging obligation published in full ('HOW TO RECYCLE': bottle, closure, wax cap, case, pallet) and no ingredient list anywhere. Three of this batch's producers have now published the packaging decree and none of them the ingredient one. THE FINDING WORTH CARRYING IS A NEW NEAR-MISS: the page has a field labelled 'Sulphur:' reading 'values can vary from 15 to 50 mg/l., ADDED OR NOT, depending on the quality of grapes and stability of the wine.' It looks more like a declaration than the usual 'contiene solfiti' boilerplate and is further from one — an analysis range across bottlings that explicitly refuses to say whether the substance is in any given bottle. Recognise it and reject it. HOST NOTE: robots.txt is a Yoast block with an EMPTY Disallow (everything allowed), and the sitemap index's ~20 children are ALL sitemap-pt-page-*, so 'page' is the site's only post type and there is no shop and no wine post type — the site search was what located the three Susucaru pages."
     }
   ]
 }
