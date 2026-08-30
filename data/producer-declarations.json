@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, tenth batch, open 2026-08-15. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after nine batches: 90 producers, 186 wines, 10 found, 164 not_found, 12 rejected; the tenth batch continues from a pool of 93 untouched wines, one producer each.",
-  "attempted": 462,
+  "attempted": 463,
   "found": 32,
-  "not_found": 381,
+  "not_found": 382,
   "rejected": 49,
   "declarations": [
     {
@@ -13326,9 +13326,41 @@
       "evidence": "THE IDENTITY IS AS GOOD AS IT EVER GETS IN ITALY AND THERE IS STILL NO DECLARATION. Systembolaget sells 'Feudo di Mezzo Etna Rosso Contrada' 2024, Sicily, 13,5 %, 75 cl. Planeta's own per-wine page is /vini/etna-rosso-contrada-feudo-di-mezzo/ (Etna DOC, Nerello Mascalese and Nerello Cappuccio, Castiglione di Sicilia, cantina Feudo di Mezzo), and the wine's technical sheet is filed per vintage under a name that carries the year: Planeta_Etna-Rosso-Contrada-Feudo-di-Mezzo-2024-BIO.pdf. THAT PDF WAS DOWNLOADED AND ITS TEXT EXTRACTED IN FULL. It is headed 'Etna Rosso Contrada Feudo di Mezzo 2024', states 'GRADAZIONE ALCOLICA: 13,5% vol.' — matching Systembolaget exactly — 'FORMATO BOTTIGLIA: 0,75 l', 'PRIMO IMBOTTIGLIAMENTO: luglio 2025', a 'NOTE DI VENDEMMIA - ETNA 2024' paragraph, and the certifications Vino Biologico and SOStain. So the producer, the cuvee, the contrada, the vintage, the strength and the pack are all confirmed against a producer document written for this bottling. AND IT IS A SCHEDA TECNICA, NOT A DECLARATION: soil, altitude, yield, training system, cultivation method, harvest dates, vinification, ageing, total acidity 5,8 g/l, pH 3,43, bottle weight, closure, tasting note, food pairing. NO INGREDIENT LIST AND NO ENERGY VALUE. THE PACKAGING OBLIGATION IS ON THE WEB PAGE AND THE INGREDIENT ONE IS NOT — the fifth Italian producer in this file to do exactly that. The wine page carries a 'Come smaltire gli imballaggi' block giving bottle GL71 glass, capsule C/ALU 90, cap LDPE 4 and cork FOR 51 with the bin for each, and nothing about what is in the wine. Raw and stripped greps of the page return zero for ingredien, nutrizion, solfit, kcal, energia and dichiarazione, and zero for every Italian vendor token (ioagri, ead-qr, i-wine, carmaqrcode, goalstec, u-label.com, btn-nutrizional, tab-ingredienti, qualita). STEP 4 WAS RUN AND THE SHOP DOES NOT DECLARE EITHER. Planeta's wine club Repertorio 1694 (repertorio1694.it) is a genuine first-party e-commerce, 164 URLs, and it sells this exact wine at /product/35653763/... with a VINTAGE selector currently on '24' and a MERCATO (market) selector — the product's variant array is literally keyed {\"ANNATA\":..., \"MERCATO\":...}, which is the best per-vintage AND per-market control seen on an Italian shop. Its four tabs are Details, Characteristics, an untitled Tab and Technical data; none is an ingredient tab and the page has zero matches for every declaration term. TWO SMALLER THINGS WORTH THE RECORD: the shop states 'ALCOHOL CONTENT 14%' where the producer's own 2024 scheda says 13,5 % vol and Systembolaget says 13,5 — so the marketing surface agrees with Systembolaget exactly and the shop is the one that disagrees, by 0,5 pp; and the shop's 'Download the technical data sheet' link points at the 2023 PDF while the marketing site links the 2024, so a producer's own links are stale in one direction and current in the other, as at Ricasoli.",
       "rejected_because": null,
       "checked_at": "2026-08-30T10:05:00Z"
+    },
+    {
+      "product_number": "5014601",
+      "name": "Tenute Lunelli Pietragrande",
+      "producer": "Tenuta Lunelli",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.tenutelunelli.it/it/vini_trentino_pietragrande.php?tenuta=trentino",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.tenutelunelli.it/robots.txt (404, a genuine Apache 404 with a 196-byte error body — no rules exist, RFC 9309 §2.3.1.3)",
+        "https://www.tenutelunelli.it/sitemap.xml (404, the same body — the site has no sitemap)",
+        "https://www.tenutelunelli.it/ (200, 14 kB, 301s to /en/index.php) — a hand-built static PHP site, ~20 pages, three estates",
+        "https://www.tenutelunelli.it/it/tenute_trentino_vini.php (200) — Tenuta Margon's three wines: Villa Margon, Maso Montalto, Pietragrande",
+        "https://www.tenutelunelli.it/it/vini_trentino_pietragrande.php?tenuta=trentino (200, 19 kB)",
+        "HEAD https://www.tenutelunelli.it/wp/wp-content/uploads/2020/12/Tenute-Lunelli-Pietragrande-Vigneti-delle-Dolomiti-IGT-it.pdf (200, last-modified: Wed, 16 Dec 2020 11:36:36 GMT, 175 kB) — not downloaded",
+        "DNS: shop.ferraritrento.com is NXDOMAIN (control randomxyz123.ferraritrento.com also NXDOMAIN, so no wildcard)",
+        "https://www.ferraritrento.com/robots.txt (200, Yoast block, 'User-agent: *' with an EMPTY Disallow — everything allowed)",
+        "https://www.ferraritrento.com/?s=pietragrande (200, 424 kB) — 16 hits, all of them news posts about the Lunelli group; the still wines are not products on the group site"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "www.tenutelunelli.it answers /robots.txt with a genuine HTTP 404 and a 196-byte Apache error body. A 4xx is RFC 9309 §2.3.1.3 Unavailable Status — the file does not exist, no rules apply, the host is open. www.ferraritrento.com's robots.txt is a Yoast block whose only group is 'User-agent: *' with an EMPTY 'Disallow:', which allows everything. No exception was needed on either host.",
+      "evidence": "STEP 2 CLOSES IT AND STEP 5 CONFIRMS THE CLOSE FOR FREE. Systembolaget sells 'Tenute Lunelli Pietragrande' 2024, Trentino, 12,5 %, 75 cl. The producer is right — Tenute Lunelli Societa Agricola Srl, the Lunelli family's still-wine arm — and the cuvee is right: Pietragrande, Vigneti delle Dolomiti IGT, is one of Tenuta Margon's three Trentino wines and has its own page. THE PAGE IS AN UNDATED CUVEE PAGE, the dominant Italian failure shape. It gives Uve (Chardonnay 80 %, Sauvignon, Incrocio Manzoni and Pinot Bianco 20 %), Zona di Produzione, Tipologia dei terreni, Sistema di allevamento, Produzione ha, Temperatura di fermentazione, Affinamento and 'Prima annata di Produzione 2013' — a first vintage, not this bottling's vintage — and no alcohol and no pack. It could not have been vintage-matched even if a list had appeared on it. AND THE MACHINERY TO DATE IT EXISTS AND IS EMPTY: the page carries a div class=\"annate\" headed 'Le annate piu recenti' with a close button and NOTHING INSIDE IT. The template supports a per-vintage list of technical sheets and the estate has published none, so the vintage archive is a hollow shell rather than an absence of design — the Valdibella pattern (fields installed, fields empty) in a different technology. THE ONE SCHEDA TECNICA IS PRE-OBLIGATION AND WAS NOT DOWNLOADED. Its URL carries no vintage and sits under /wp/wp-content/uploads/2020/12/. Per the ninth batch's rule the path alone is not enough, so a HEAD was sent: 'last-modified: Wed, 16 Dec 2020 11:36:36 GMT'. That is three years before 8 December 2023, so the file cannot carry a declaration under Regulation (EU) 2021/2117 and the wine closes with no download — step 5 working exactly as written, as at Sella & Mosca. NO OTHER SURFACE. The estate has no shop, no sitemap and no per-wine post type; the whole site is about twenty hand-built PHP pages and the only PDFs it links besides the schede are two GDPR notices and a code of ethics. Raw and stripped greps of the range page and the wine page return zero for ingredien, nutrizion, solfit, kcal, energia, dichiarazione and for every Italian vendor token. THE GROUP'S CONSUMER SITE DOES NOT SELL IT EITHER: shop.ferraritrento.com does not exist, and a site search on www.ferraritrento.com for 'pietragrande' returns sixteen hits that are all news posts — the group's public site is about the sparkling wines and lists no still-wine products at all, so step 4 has no surface here.",
+      "rejected_because": null,
+      "checked_at": "2026-08-30T10:35:00Z"
     }
   ],
-  "updated_at": "2026-08-30T10:05:00Z",
+  "updated_at": "2026-08-30T10:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -13665,6 +13697,11 @@
       "at": "2026-08-30T10:05:00Z",
       "batch": "3 — Italy, tenth batch: Planeta (1 wine)",
       "result": "1 attempted, 0 found, 1 not found — and it is the cleanest Italian identity in the file with no declaration behind it. The estate's per-vintage scheda tecnica is named Planeta_Etna-Rosso-Contrada-Feudo-di-Mezzo-2024-BIO.pdf; it was downloaded and read in full and confirms cuvee, contrada, vintage 2024, 13,5 % vol and 0,75 l against Systembolaget exactly — and contains no ingredient list and no energy value, the Italian scheda near-miss for the sixth time. THE PACKAGING OBLIGATION IS PUBLISHED AND THE INGREDIENT ONE IS NOT, on the same page: a 'Come smaltire gli imballaggi' table with GL71 / C/ALU 90 / LDPE 4 / FOR 51. STEP 4 WAS RUN: Planeta's wine club shop repertorio1694.it is a real first-party e-commerce whose product variants are keyed {\"ANNATA\", \"MERCATO\"} — the best combined per-vintage and per-market control seen on an Italian shop, and the surface where the ninth batch's two finds came from — and it carries four tabs, none of them an ingredient tab, and zero matches for every declaration term. A NEW FALSE POSITIVE: `elabel` matches the theme string `readmoreLabel`. Add it beside menu-label, titleLabel, whitelabel and data-languageLabels — and note that searching for the bare string `u-label` hits every `menu-label` class, so search `u-label.com`."
+    },
+    {
+      "at": "2026-08-30T10:35:00Z",
+      "batch": "3 — Italy, tenth batch: Tenuta Lunelli / Tenute Lunelli (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in seven requests. The undated cuvee page again, on a hand-built static PHP site of about twenty pages with no sitemap, no shop and no per-wine post type. Two things worth carrying: THE VINTAGE ARCHIVE IS A HOLLOW SHELL — the page renders a div class='annate' headed 'Le annate piu recenti' with a close button and nothing inside, so the template supports per-vintage technical sheets and the estate has published none; that is Valdibella's empty-fields pattern in different software, and it is worth greping for an empty archive container before concluding a producer never intended to date anything. AND STEP 5 CLOSED THE WINE FOR ONE HEAD: the single scheda tecnica's URL carries no vintage and sits under /uploads/2020/12/, and its Last-Modified is 2020-12-16 — three years before the obligation — so the file cannot carry a declaration and was never downloaded. THE GROUP DOES NOT HELP: shop.ferraritrento.com is NXDOMAIN and www.ferraritrento.com is the sparkling-wine brand site, where a search for 'pietragrande' returns sixteen news posts and no product. A big group is not automatically a step-4 surface."
     }
   ]
 }
