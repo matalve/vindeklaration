@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, two batches run. No Spanish producer was in this file before batch 4. The pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings. AFTER FOURTEEN PRODUCERS AND 31 WINES: 1 FOUND, 1 REJECTED, 29 NOT FOUND — Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventos i Blanc (2), Bodegas Muga (2), Born Rose Barcelona (3), Javi Revert Viticultor (3), Albet i Noya (2, the find and the rejection), Bodegas Pinord (2), Dominio de Eguren (2), Familia Conesa (2), Bodegas Frutos Villar (2), Terra de Asorei (2), Rafael Palacios (2). 59 wines across 56 producer strings remain, of which only three producers have two wines (Dominio de Tares, Giol Porrera, Binigrau). SPAIN'S FIND RATE IS 3,2 %, against Germany's 19,8 % and Italy's 4,9 %. SPAIN'S FIRST AND ONLY E-LABEL VENDOR IS digital-label.eu, at Albet i Noya, white-labelled onto dl.albetinoya.cat: a Next.js shell with zero visible characters whose data endpoint is the same URL plus /api. One adopter in fourteen producers. THE SPANISH FAILURE IS BIMODAL: eight of the 31 wines passed producer, cuvee, vintage, market, alcohol and pack and died only on the declaration's absence (the French shape), while the rest close on an undated page (the Italian shape). THREE PRODUCERS WERE NOT REACHED AT ALL and are recorded as outages or refusals rather than absences: Bodegas Muga (connect timeout on both hostnames), Dominio de Eguren (443 refused, 403 on port 80, which is absolute), and Bodegas Frutos Villar (Let's Encrypt certificate expired 29 Aug 2026; the site was NOT fetched and certificate verification was NOT disabled). Muga and Frutos Villar should be re-probed. The producer=supplier test still returns zero in Spain.",
-  "attempted": 506,
+  "attempted": 507,
   "found": 33,
-  "not_found": 423,
+  "not_found": 424,
   "rejected": 50,
   "declarations": [
     {
@@ -14498,9 +14498,34 @@
       "not_found_because": "No ingredient list, no nutrition table, no e-label pointer on either of the house's two sites; and the only per-vintage document for this wine is three vintages stale.",
       "robots_note": "Empty Disallow under the wildcard group on sangarida.es; nothing disallowed, no exception used.",
       "checked_at": "2026-08-30T21:05:00Z"
+    },
+    {
+      "product_number": "7302101",
+      "name": "Torres Viña Esmeralda",
+      "producer": "Miguel Torres",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.torres.es/vinos/torres-essentials/vina-esmeralda",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.torres.es/robots.txt — Drupal's stock file (admin, user, search, media/oembed and the /index.php mirrors of each); everything fetched is allowed",
+        "https://www.torres.es/es/vinos/vina-esmeralda — 200 but REDIRECTED to /vinos, the range listing: a wrong slug does not 404 here, it lands on the index. The index's own hrefs give the real product path",
+        "https://www.torres.es/vinos/torres-essentials/vina-esmeralda (200, 97 kB) — the wine's own page, terms: 0, no declaration-shaped link, no e-label vendor named anywhere in the source",
+        "web search for a Familia Torres e-label or etiqueta electronica — returns only vendor marketing and regulation explainers, no Torres deployment"
+      ],
+      "evidence": "Producer and cuvee match: Vina Esmeralda is Familia Torres' Moscatel/Gewurztraminer Penedes white, published under the 'Torres Essentials' range on the house's own site. THE VINTAGE ON THE PRODUCER'S SURFACE IS 2025 — the only document the page offers is 'Ficha del vino', /sites/default/files/2025-12/Torres_Icons_Vina_Esmeralda_Eco_DO_Penedes_2025_ES.pdf — while Systembolaget sells the 2024, so nothing there could have been attached and it was not fetched.",
+      "rejected_because": null,
+      "not_found_because": "Spain's largest family wine company publishes no ingredient list, no nutrition table and no QR destination on its own product page. The biggest-producer-has-compliance-tooling hypothesis fails here.",
+      "robots_note": "Stock Drupal robots.txt; everything fetched is allowed, no exception used.",
+      "checked_at": "2026-08-30T21:15:00Z"
     }
   ],
-  "updated_at": "2026-08-30T21:05:00Z",
+  "updated_at": "2026-08-30T21:15:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14957,6 +14982,11 @@
       "at": "2026-08-30T21:05:00Z",
       "batch": "4 — Spain, nineteenth producer: Attis Bodegas y Vinedos, both brands (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in six requests. THE SECOND PAIR THE PRODUCER-STRING NORMALISATION FOUND: 'Attis Bodegas y Vinedos SL' and 'Sangarida - Attis Bodegas y Vinedos -R.E. 8580 LE 00' are one house on one supplier (Terrific Wines AB), running TWO SITES for two regions — attisbyv.es for Rias Baixas and sangarida.es for Bierzo, the second reached from the first's own top menu rather than guessed. THE FOURTH SPANISH FICHA READ IN FULL, AND THE MOST INTERESTING NEAR-MISS SINCE RAVENTOS: Attis Lias Finas' per-vintage sheet is headed 'ATTIS 2024', matching Systembolaget exactly, and under ELABORACION it says 'Clarificacion con cola de pescado' — ISINGLASS, a fining agent from an EU allergen category — and it is STILL NOT A DECLARATION, because it is a process step with no ingredient heading, no list, no allergen statement, no nutrition table and no energy value. Add it to the Spanish near-miss ladder above 'sulfitado'. The Spanish ficha tecnica / ficha de cata is now tested in FOUR houses and has never carried the mandated set. Attis Lias Finas is the TENTH Spanish wine to pass producer, cuvee, vintage, market and pack and die only on absence. Sangarida closes differently: its site has not been edited since 2023 and its only ficha is the 2022, three vintages behind the shelf. TWO CHEAP SITE SHAPES: attisbyv.es's 404 page still renders the full menu, so even a wrong URL returns the complete 21-wine census across three brands; and the ficha filenames are revision-controlled and vintage-keyed (attis-lias-finas-24-ES-rev5g-20250523.pdf, GODELLO-2022-ES-rev1B-20230118.pdf), so the vintage can be read off the href before spending a fetch."
+    },
+    {
+      "at": "2026-08-30T21:15:00Z",
+      "batch": "4 — Spain, twentieth producer: Miguel Torres / Familia Torres (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in two requests and one search. THIS IS THE FIRST TEST OF THE OPEN HYPOTHESIS THE LAST BATCH LEFT — that a large Spanish group, the segment most likely to have bought compliance tooling, would publish where a small estate does not. FAMILIA TORRES FALSIFIES IT AS FLATLY AS PINORD DID: Drupal, a clean per-range product tree, and on the wine's own page terms: 0, no vendor named, no QR destination, no declaration-shaped link. What it does offer is a 'Ficha del vino' PDF — and it is the 2025 while Systembolaget sells the 2024, so it was not fetched. SCALE PREDICTS NOTHING IN SPAIN EITHER, which is now the same result France gave (see 'Scale predicts nothing, again'). ONE SITE TRAP WORTH THE LINE: torres.es does NOT 404 a wrong product slug — https://www.torres.es/es/vinos/vina-esmeralda answers 200 and redirects to the /vinos index, so a guessed URL looks like a working page. Read final_url, then take the real path off the index's own hrefs."
     }
   ]
 }
