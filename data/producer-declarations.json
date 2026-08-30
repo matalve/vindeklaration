@@ -14030,13 +14030,14 @@
     "http://eguren.com/ — 403, which is a technological refusal and stops the fetch outright",
     "https://www.dominiodeeguren.com/robots.txt — ConnectTimeout on 443",
     "DNS: eguren.com and www.eguren.com A 217.76.142.47; dominiodeeguren.com and www.dominiodeeguren.com A 217.76.128.220 — both domains exist",
-    "web search — Dominio de Eguren is the fourth-generation Eguren family's value label (Protocolo, from vineyards in Manchuela, Rioja and Toro), part of a group with Sierra Cantabria, Teso la Monja, Vinedos de Paganos and Senorio de San Vicente. Every page carrying the wine is a retailer, an importer or a review site, all excluded sources"
+    "web search — Dominio de Eguren is the fourth-generation Eguren family's value label (Protocolo, from vineyards in Manchuela, Rioja and Toro), part of a group with Sierra Cantabria, Teso la Monja, Vinedos de Paganos and Senorio de San Vicente. Every page carrying the wine is a retailer, an importer or a review site, all excluded sources",
+    "RE-CHECKED 2026-08-30 under the two new rules (an unreachable robots.txt is a misconfiguration, an expired certificate no longer stops a fetch). NEITHER RULE REACHES THIS HOST. https://www.eguren.com/ now fails TLS with 'Hostname mismatch, certificate is not valid for www.eguren.com' — a claim about WHO answered, not an expiry, so it stops under the owner's rule as written. robots.txt was unreachable for the same reason and was treated as a misconfiguration rather than a refusal, which changed nothing because the page itself could not be fetched. The earlier 403 on port 80 stands and is absolute. Still closed."
    ],
    "evidence": "No producer surface was reached, so no part of the identity check was performed.",
    "rejected_because": null,
    "not_found_because": "REFUSAL AND OUTAGE, NOT ABSENCE. The only port that answered returned 403, which the project treats as an absolute refusal with no workaround; every other attempt failed at the TCP layer. This says nothing about whether the producer publishes a declaration.",
    "robots_note": "robots.txt was unreachable on every hostname tried (ConnectError / ConnectTimeout), which src.probe treats as undefined and therefore disallow. No exception was invoked. The 403 on port 80 is a technological measure and was not worked around.",
-   "checked_at": "2026-08-30T17:25:00Z"
+   "checked_at": "2026-08-30T22:45:00Z"
   },
   {
    "product_number": "7131001",
@@ -14052,13 +14053,14 @@
    "vintage_on_source": null,
    "market": null,
    "sources_checked": [
-    "same as 7034601 — both Eguren hostnames refuse or time out, and port 80 answers 403"
+    "same as 7034601 — both Eguren hostnames refuse or time out, and port 80 answers 403",
+    "RE-CHECKED 2026-08-30 under the two new rules (an unreachable robots.txt is a misconfiguration, an expired certificate no longer stops a fetch). NEITHER RULE REACHES THIS HOST. https://www.eguren.com/ now fails TLS with 'Hostname mismatch, certificate is not valid for www.eguren.com' — a claim about WHO answered, not an expiry, so it stops under the owner's rule as written. robots.txt was unreachable for the same reason and was treated as a misconfiguration rather than a refusal, which changed nothing because the page itself could not be fetched. The earlier 403 on port 80 stands and is absolute. Still closed."
    ],
    "evidence": "No producer surface was reached.",
    "rejected_because": null,
    "not_found_because": "Refusal and outage, not absence. See 7034601.",
    "robots_note": "robots.txt unreachable on every hostname; 403 on the one port that answered, treated as absolute.",
-   "checked_at": "2026-08-30T17:25:00Z"
+   "checked_at": "2026-08-30T22:45:00Z"
   },
   {
    "product_number": "7815201",
@@ -14571,7 +14573,7 @@
    "checked_at": "2026-08-30T22:05:00Z"
   }
  ],
- "updated_at": "2026-08-30T20:02:19Z",
+ "updated_at": "2026-08-30T20:02:45Z",
  "_runs": [
   {
    "at": "2026-07-28T20:38:45Z",
