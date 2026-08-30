@@ -107,3 +107,26 @@ def test_expiry_is_recognised_through_the_exception_chain():
     outer = Exception("connect error")
     outer.__cause__ = inner
     assert _is_expired_certificate(outer)
+
+
+CAMPO = """
+<a href="https://e-label.pernod-ricard.com/L004YJ">Click here for product information</a>
+<a href="/es/etiqueta-producto/tinto/">Etiqueta producto</a>
+<a href="/vinos/etiqueta-amarilla">Juan Gil Etiqueta Amarilla</a>
+<a href="/tienda/etiqueta-regalo">Etiqueta de regalo personalizada</a>
+<a href="/es/etiqueta-electronica/x">Etiqueta electrónica</a>
+"""
+
+
+def test_links_find_a_host_that_names_itself_after_the_disclosure():
+    found = dict(_links(CAMPO, "https://www.campoviejo.test/vino/"))
+    assert "https://e-label.pernod-ricard.com/L004YJ" in found
+
+
+def test_links_reject_the_four_other_meanings_of_etiqueta():
+    found = dict(_links(CAMPO, "https://www.campoviejo.test/vino/"))
+    assert not any("etiqueta-producto" in url for url in found)
+    assert not any("etiqueta-amarilla" in url for url in found)
+    assert not any("etiqueta-regalo" in url for url in found)
+    # the real one still survives
+    assert "https://www.campoviejo.test/es/etiqueta-electronica/x" in found

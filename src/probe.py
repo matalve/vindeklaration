@@ -91,6 +91,34 @@ NOT_A_DECLARATION = {
     "datenschutz", "confidentialite", "riservatezza", "integritetspolicy",
 }
 
+# `etiqueta` is the worst word in this list: it means the declaration, and it
+# also means a shop's tag archive, a gift-label customiser, a commissioned
+# artwork and -- at Juan Gil -- the wine's own name. Four false positives on one
+# page. These disambiguate it.
+NOISE_PATHS = ("etiqueta-producto", "etiquetas-producto", "product-tag",
+               "product_tag", "producttag", "/tag/", "/tags/")
+NOISE_NEIGHBOURS = {
+    # Etiqueta Amarilla, Azul, Plata: a range name, not a declaration.
+    "amarilla", "amarillo", "azul", "plata", "negra", "negro", "roja", "rojo",
+    "blanca", "blanco", "verde", "dorada", "oro", "gris",
+    # a label you design and send with a present
+    "regalo", "regalos", "personaliza", "personalizada", "personalizar",
+    "disena", "gift",
+}
+
+# A host that names itself after the disclosure. `e-label.pernod-ricard.com`
+# was missed by everything else: its path is a bare code and its anchor said
+# "Click here for product information".
+HOST_WORDS = {"elabel", "label", "labels", "etiqueta", "etichetta", "etikett",
+              "qr", "ulabel", "declaration", "declaracion"}
+
+# What that anchor says when it says nothing else.
+POINTER_PHRASES = (
+    "product information", "informacion del producto", "informacion de producto",
+    "informazioni sul prodotto", "produktinformation", "informations produit",
+    "produktinformationen", "product info", "mas informacion del producto",
+)
+
 # Extensions that are never a declaration page.
 ASSETS = (
     ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".ico", ".css", ".js",
@@ -160,9 +188,20 @@ def _anchors(html: str, base: str) -> list[tuple[str, str, set[str]]]:
 def _links(html: str, base: str) -> list[tuple[str, str]]:
     found = []
     for url, label, words in _anchors(html, base):
+        folded_url, folded_label = _fold(url), _fold(label)
         if words & NOT_A_DECLARATION:
             continue
-        if words & LINK_WORDS or any(v in _fold(url) for v in VENDORS):
+        if any(noise in folded_url for noise in NOISE_PATHS):
+            continue
+        if "etiqueta" in words and words & NOISE_NEIGHBOURS:
+            continue
+        host_words = set(re.split(r"[^a-z0-9]+", _fold(urlsplit(url).netloc)))
+        if (
+            words & LINK_WORDS
+            or host_words & HOST_WORDS
+            or any(v in folded_url for v in VENDORS)
+            or any(phrase in folded_label for phrase in POINTER_PHRASES)
+        ):
             found.append((url, label))
     return found
 
