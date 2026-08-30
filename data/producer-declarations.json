@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30. First Spanish batch; no Spanish producer was in this file before it. Pool: 90 wines at vintage 2024+ with declaration_status not_declared and no record here, across 70 producer strings. The producer==supplier step-0 test finds ZERO Spanish importer own-labels, against seven of the 81 remaining Italian wines — so Spain's producer field names real bodegas and step 0 will bite less often here. Previous batches: Germany exhausted; France set aside at 69 producers, 142 wines, 4 found, 9 rejected; Italy set aside after ten batches at 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected, with 81 untouched wines remaining. Italy's find rate was 4.9 % against Germany's 19.8 %; Spain is opened to measure the between-country spread.",
-  "attempted": 470,
+  "attempted": 472,
   "found": 32,
-  "not_found": 389,
+  "not_found": 391,
   "rejected": 49,
   "declarations": [
     {
@@ -13578,9 +13578,75 @@
       "evidence": "Systembolaget sells 'Gramona Mart' 2025, Catalonia, 11,0 %, 75 cl. The producer's page is for the right cuvee — MART, 'Varietat: Xarel·lo vermell', 'Vol. 11%', matching Systembolaget's strength exactly — and STATES NO VINTAGE, so step 2 closes it. Its fitxa tecnica (docs/mart_cat.pdf) was deliberately NOT downloaded: the Gessami sheet from the identical template was read in full and contains no ingredient list, no nutrition and no vintage, and one PDF settles the format for an estate. GRAMONA'S STILL WINES ARE ON A SEPARATE BRAND SITE, AND THAT IS THE STRUCTURAL FINDING. gramona.com is the Corpinnat sparkling house; its /coleccion/{wine}/ URLs for the still wines 301 out to VINSPERESTIMARELVI.COM ('vins per estimar el vi'), a small Catalan-first WordPress carrying six wines — Gessami, Mart, Mustillant blanc, Mustillant rosat, Vi de Glass and Ca la Mar — and footed '(c) 2021 GRAMONA, Tots els drets reservats' at Carrer Industria 36, Sant Sadurni d'Anoia. So the producer is right and the wine is right; they are simply not on the domain the producer's name suggests. **Follow the redirect: a Spanish house's still wines can live on a differently-named brand site.** BOTH SURFACES ARE UNDATED. The page gives Varietats, 'Vol. 11%', a 'Moment' paragraph and a link to the fitxa tecnica, and states NO vintage. THE FITXA TECNICA IS SPAIN'S FIRST, AND IT IS THE FRENCH FICHE AND THE ITALIAN SCHEDA AGAIN: Gessami's (docs/gessami_cat.pdf) was downloaded and its text extracted in full — Elaboracio, Sensacions, a Moment paragraph, an Ecologia i sostenibilitat paragraph, 'Varietats: muscat de Frontigan, sauvignon blanc i gewurztraminer' and 'Vol. 11%'. NO VINTAGE, NO INGREDIENT LIST, NO ENERGY VALUE. The one analytical number in it is 'els sis grams de sucre per litre residuals' — residual sugar, which is not an additive declaration. NO OTHER SURFACE EXISTS. gramona.com's sitemap index has four children and none is a product or shop type; its 52-page sitemap holds no shop, no botiga, no tienda and nothing declaration-shaped. Raw and stripped greps of both wine pages return zero for ingredient(e)s, ingredients, nutricional, valors nutricionals, sulfit, kcal, energia, alergen and every vendor token known to this project. ONE SIGN OF HOW MAINTAINED THE SITE IS, recorded because it bears on whether an absence is deliberate: the brand site's footer still contains the WordPress theme's demo content — '123 W 43rd ST, New York, NY', 'oraiste@qode.com', '(456) 5647-215' — beside the real Sant Sadurni address, and the copyright line reads 2021. This is a site nobody has revisited since before the obligation began.",
       "rejected_because": null,
       "checked_at": "2026-08-30T13:00:00Z"
+    },
+    {
+      "product_number": "5167901",
+      "name": "Vivanco Rosado",
+      "producer": "Vivanco",
+      "country": "Spanien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://tienda.vivancoculturadevino.es/inicio/vivanco-rose-lias-finas-tempranillo-garnacha-tinta-y-blanca-2025.html",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://vivancoculturadevino.es/robots.txt (200; it 302s to /es/robots.txt, whose body opens '# This is an invalid robots.txt location.' and then gives the stock WordPress 'Disallow: /wp-admin/' plus 'Allow: /wp-admin/admin-ajax.php')",
+        "https://vivancoculturadevino.es/es/sitemap.xml (200 with a 'Pagina no encontrada' HTML body — a SOFT 404; the sitemap the robots.txt advertises does not exist)",
+        "https://vivancoculturadevino.es/es/ (200, 308 kB) — names the shop, tienda.vivancoculturadevino.es",
+        "https://vivancoculturadevino.es/es/bodega/los-vinos/ (200, 343 kB) — the whole range by tier; no per-wine links, no vintages, no declaration terms",
+        "https://tienda.vivancoculturadevino.es/robots.txt (200, 2 820 bytes, stock PrestaShop: allows product pages, disallows the cart/account/controller paths, /*?search_query= and /busqueda, and names NO sitemap)",
+        "https://tienda.vivancoculturadevino.es/sitemap.xml (404) — no shop sitemap, so the category pages were used instead",
+        "https://tienda.vivancoculturadevino.es/ (200, 145 kB)",
+        "https://tienda.vivancoculturadevino.es/content/jovenes (200) — the young-wines listing, which names both Swedish wines' product URLs",
+        "https://tienda.vivancoculturadevino.es/inicio/vivanco-rose-lias-finas-tempranillo-garnacha-tinta-y-blanca-2025.html (200, 153 kB)",
+        "https://tienda.vivancoculturadevino.es/inicio/vivanco-lias-finas-viura-tempranillo-blanco-maturana-blanca-2025.html (200, 152 kB)"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "vivancoculturadevino.es serves the stock WordPress group (only /wp-admin/ disallowed). tienda.vivancoculturadevino.es serves stock PrestaShop rules: product pages under /inicio/ and the /content/ category pages are allowed, while search is disallowed via '/*?search_query=', 'controller=search' and /busqueda — SO THE SHOP'S OWN SEARCH WAS NOT USED; the /content/jovenes listing was used to find the product URLs instead. No exception was needed.",
+      "evidence": "THE VINTAGE MATCHES EXACTLY AND THERE IS STILL NOTHING TO ATTACH — the clearest Spanish case so far that the absence is not a vintage problem. Systembolaget sells 'Vivanco Rosado' 2025, Rioja, 13,0 %, 75 cl. The bodega's product is 'Vivanco Rose Lias Finas Tempranillo-Garnacha Tinta y Blanca 2025', 75 % Tempranillo, 20 % Garnacha tinta, 5 % Garnacha blanca, from its own Briones vineyards, and its Descripcion tab is headed 'ANADA 2025' — producer, cuvee, colour and vintage all confirmed, with the vintage stated twice (slug and heading). The four-part check passes on everything the page states. It states no alcohol, so that could not be cross-checked. AND THE PAGE CARRIES NO DECLARATION OF ANY KIND: not an ingredient list, not a nutrition table, not an energy value, and not even a 'contiene sulfitos' line — its sibling white has one and this one does not. Recorded not_found rather than rejected because there was no declaration to reject. THE SHOP IS THE ONLY SURFACE WITH A VINTAGE ON IT, AND IT HAS NO DECLARATION. The marketing site (vivancoculturadevino.es) presents the range by tier — Espumosos, Jovenes, Criados, Vivanco Brunes, Coleccion Vivanco, Vivanco La Isla — with no per-wine pages, no vintages and no declaration terms at all; its single `ingredien` hit is the phrase 'los ingredientes necesarios para este vino iconico' in a blog paragraph about winter fog, which is a new false positive worth naming. The shop (tienda.vivancoculturadevino.es, PrestaShop) is where the wines actually are, and it is unusually good at identity: THE VINTAGE IS IN THE PRODUCT SLUG and again in an `ANADA` heading inside the Descripcion tab. AND WHAT IT PUBLISHES WHERE THE INGREDIENT LIST BELONGS IS AT MOST TWO PARTICULARS. The white's bullet list reads 'Grado alcoholico 13%. Contiene sulfitos.' and '75 cl.' — strength, allergen and pack, which are label particulars and not a declaration; there is no substance list and no energy value. The rose does not even have that: a Spanish-term grep of its 153 kB (ingredient, nutricional, sulfito, sulfuroso, alergen, kcal, kJ, energetico, declaracion, conservante, antioxidante, etiqueta, e-label, u-label.com and every vendor token) returns ZERO on raw HTML and stripped text alike. The only term that matches anywhere is `anada`.",
+      "rejected_because": null,
+      "checked_at": "2026-08-30T13:35:00Z"
+    },
+    {
+      "product_number": "7220801",
+      "name": "Vivanco Blanco Rioja",
+      "producer": "Vivanco",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://tienda.vivancoculturadevino.es/inicio/vivanco-lias-finas-viura-tempranillo-blanco-maturana-blanca-2025.html",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025 in the slug and short description, 2024 in the Descripcion tab — the page states both",
+      "market": "EU",
+      "sources_checked": [
+        "https://vivancoculturadevino.es/robots.txt (200; it 302s to /es/robots.txt, whose body opens '# This is an invalid robots.txt location.' and then gives the stock WordPress 'Disallow: /wp-admin/' plus 'Allow: /wp-admin/admin-ajax.php')",
+        "https://vivancoculturadevino.es/es/sitemap.xml (200 with a 'Pagina no encontrada' HTML body — a SOFT 404; the sitemap the robots.txt advertises does not exist)",
+        "https://vivancoculturadevino.es/es/ (200, 308 kB) — names the shop, tienda.vivancoculturadevino.es",
+        "https://vivancoculturadevino.es/es/bodega/los-vinos/ (200, 343 kB) — the whole range by tier; no per-wine links, no vintages, no declaration terms",
+        "https://tienda.vivancoculturadevino.es/robots.txt (200, 2 820 bytes, stock PrestaShop: allows product pages, disallows the cart/account/controller paths, /*?search_query= and /busqueda, and names NO sitemap)",
+        "https://tienda.vivancoculturadevino.es/sitemap.xml (404) — no shop sitemap, so the category pages were used instead",
+        "https://tienda.vivancoculturadevino.es/ (200, 145 kB)",
+        "https://tienda.vivancoculturadevino.es/content/jovenes (200) — the young-wines listing, which names both Swedish wines' product URLs",
+        "https://tienda.vivancoculturadevino.es/inicio/vivanco-rose-lias-finas-tempranillo-garnacha-tinta-y-blanca-2025.html (200, 153 kB)",
+        "https://tienda.vivancoculturadevino.es/inicio/vivanco-lias-finas-viura-tempranillo-blanco-maturana-blanca-2025.html (200, 152 kB)"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "Same two hosts as the sibling record. The shop's PrestaShop robots.txt disallows search ('/*?search_query=', 'controller=search', /busqueda), so the shop's search was not used; the allowed /content/jovenes category listing supplied the product URLs. No exception was needed.",
+      "evidence": "THE PRODUCER'S OWN PRODUCT PAGE STATES TWO DIFFERENT VINTAGES, AND THAT IS THE THING TO CARRY FORWARD. Systembolaget sells 'Vivanco Blanco Rioja' 2024, Rioja, 13,0 %, 75 cl. The bodega's single-bottle product is 'Vivanco Lias Finas Viura-Tempranillo Blanco-Maturana Blanca' — the right cuvee, 50 % Viura, 35 % Tempranillo Blanco, 15 % Maturana Blanca, and 'Grado alcoholico 13%' matching Systembolaget exactly. But its URL slug ends -2025.html, its short description opens 'Botella sin estuche de nuestro Vivanco Blanco 2025', and its Descripcion tab is headed 'ANADA 2024'. THE SAME PAGE SAYS 2025 AND 2024. A run that matched on the slug would call this the 2025 and reject; a run that matched on the heading would call it our 2024 and attach. NEITHER IS SAFE, and under the rule that an uncertain vintage is a rejection rather than an approximation, nothing here could have been attached even if a list had been present. The likeliest reading is a PrestaShop product edited forward in the slug and metadata while the long description was left on the previous year — the inverse of the stale-title trap at wineplatform.it, where the title lagged and the H1 was current. RECOGNISE IT: on a PrestaShop, compare the slug, the short description and the description tab before trusting any one of them. IT DOES NOT DECIDE THE OUTCOME HERE, because there is no declaration on the page either way. What it carries is 'Grado alcoholico 13%. Contiene sulfitos.' and '75 cl.' in a four-bullet list — strength, allergen and pack. Those are physical-label particulars; there is no substance list and no energy value, so it is the Spanish form of the two-particular near-miss. THE SHOP IS THE ONLY SURFACE WITH A VINTAGE ON IT, AND IT HAS NO DECLARATION. The marketing site (vivancoculturadevino.es) presents the range by tier — Espumosos, Jovenes, Criados, Vivanco Brunes, Coleccion Vivanco, Vivanco La Isla — with no per-wine pages, no vintages and no declaration terms at all; its single `ingredien` hit is the phrase 'los ingredientes necesarios para este vino iconico' in a blog paragraph about winter fog, which is a new false positive worth naming. The shop (tienda.vivancoculturadevino.es, PrestaShop) is where the wines actually are, and it is unusually good at identity: THE VINTAGE IS IN THE PRODUCT SLUG and again in an `ANADA` heading inside the Descripcion tab. AND WHAT IT PUBLISHES WHERE THE INGREDIENT LIST BELONGS IS AT MOST TWO PARTICULARS. The white's bullet list reads 'Grado alcoholico 13%. Contiene sulfitos.' and '75 cl.' — strength, allergen and pack, which are label particulars and not a declaration; there is no substance list and no energy value. The rose does not even have that: a Spanish-term grep of its 153 kB (ingredient, nutricional, sulfito, sulfuroso, alergen, kcal, kJ, energetico, declaracion, conservante, antioxidante, etiqueta, e-label, u-label.com and every vendor token) returns ZERO on raw HTML and stripped text alike. The only term that matches anywhere is `anada`.",
+      "rejected_because": null,
+      "checked_at": "2026-08-30T13:35:00Z"
     }
   ],
-  "updated_at": "2026-08-30T13:00:00Z",
+  "updated_at": "2026-08-30T13:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -13947,6 +14013,11 @@
       "at": "2026-08-30T13:00:00Z",
       "batch": "4 — Spain, first batch: Gramona (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in eight requests. THE STRUCTURAL LESSON IS THE REDIRECT: gramona.com is the Corpinnat sparkling house, and its /coleccion/{wine}/ URLs for the still wines 301 OUT to a separate brand site, VINSPERESTIMARELVI.COM, which carries six wines and is footed '(c) 2021 GRAMONA'. A Spanish house's still wines can live on a differently-named domain — follow the redirect rather than concluding the wine is absent. SPAIN'S FIRST FITXA TECNICA was downloaded and read in full and is the French fiche and the Italian scheda a third time: Elaboracio, Sensacions, a food-pairing paragraph, a sustainability paragraph, Varietats and 'Vol. 11%' — no vintage, no ingredient list, no energy value, and its one number is residual sugar. Both wines close at step 2 on the undated page; the strength matches Systembolaget exactly on both (11 % against 11,0), which is what makes the missing year the only obstacle. gramona.com has no shop and no product post type: four sitemap children, 52 pages, nothing declaration-shaped. WORTH NOTING FOR JUDGING WHETHER AN ABSENCE IS DELIBERATE: the brand site's footer still carries its WordPress theme's demo content ('123 W 43rd ST, New York, NY', 'oraiste@qode.com') beside the real address, and its copyright reads 2021 — nobody has revisited it since before the obligation began."
+    },
+    {
+      "at": "2026-08-30T13:35:00Z",
+      "batch": "4 — Spain, first batch: Vivanco (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in ten requests. THE MOST INFORMATIVE SPANISH PRODUCER SO FAR, because for once the vintage was not the obstacle. Vivanco's PrestaShop (tienda.vivancoculturadevino.es) puts the VINTAGE IN THE PRODUCT SLUG and repeats it as an 'ANADA' heading in the description tab — better identity than any Italian shop except wineplatform.it — and Systembolaget's Rosado 2025 matches its 'ANADA 2025' page exactly. There is still nothing to attach: a Spanish-term grep of 153 kB (ingredient, nutricional, sulfito, sulfuroso, alergen, kcal, kJ, energetico, declaracion, conservante, antioxidante, etiqueta, e-label, u-label.com, every vendor token) returns ZERO. The sibling white carries 'Grado alcoholico 13%. Contiene sulfitos.' and '75 cl.' and nothing more — Spain's two-particular near-miss. A NEW TRAP, AND A REAL ONE: THE WHITE'S PAGE STATES TWO DIFFERENT VINTAGES. Its slug ends -2025.html and its short description says 'nuestro Vivanco Blanco 2025', while its Descripcion tab is headed 'ANADA 2024'. Matching on the slug rejects the wine; matching on the heading attaches it. On a PrestaShop, compare slug, short description and description tab before trusting any one — it is the wineplatform.it stale-title trap inverted, with the long text lagging instead of the title. HOST NOTES: vivancoculturadevino.es 302s /robots.txt to /es/robots.txt, whose body literally begins '# This is an invalid robots.txt location.', and the sitemap it advertises is a SOFT 404. The shop has no sitemap at all, and its PrestaShop robots.txt DISALLOWS SEARCH, so the /content/{tier} category listings are the allowed way to enumerate products. NEW FALSE POSITIVE: `ingredien` matched 'los ingredientes necesarios para este vino iconico' in a blog paragraph about winter fog."
     }
   ]
 }
