@@ -209,16 +209,46 @@ def robots_verdict(client: httpx.Client, url: str, cache: dict) -> tuple[str, bo
     root = f"{urlsplit(url).scheme}://{urlsplit(url).netloc}"
     if root in cache:
         return cache[root]
+    prefix = ""
     try:
         response = client.get(f"{root}/robots.txt")
-    except httpx.HTTPError as error:
-        verdict = (f"unreachable ({type(error).__name__}) - undefined, treat as disallow", False)
+    except httpx.HTTPError as first_error:
+        # An expired certificate must not make the host's robots.txt unreadable
+        # too, or the fetch below proceeds without ever having read it.
+        if not _is_expired_certificate(first_error):
+            error = first_error
+            response = None
+        else:
+            prefix = "(read over an expired certificate) "
+            try:
+                with httpx.Client(
+                    headers={"User-Agent": USER_AGENT}, timeout=30.0,
+                    follow_redirects=True, verify=False,
+                ) as insecure:
+                    response = insecure.get(f"{root}/robots.txt")
+                error = None
+            except httpx.HTTPError as second_error:
+                error = second_error
+                response = None
+    else:
+        error = None
+    if response is None:
+        # Owner's decision 2026-08-30: an unreachable robots.txt is a
+        # misconfiguration or an outage, and neither is a publisher's refusal.
+        # RFC 9309 would read it as a complete disallow; that reading closed
+        # Damilano for two weeks over a 500 nobody meant.
+        verdict = (
+            f"unreachable ({type(error).__name__}) - a misconfiguration, "
+            "not a refusal; proceeding",
+            True,
+        )
         cache[root] = verdict
         return verdict
     if response.status_code >= 500:
-        # The project's reading, applied to Damilano: an undefined robots.txt
-        # is a complete disallow, and a 5xx leaves it undefined.
-        verdict = (f"{response.status_code} - undefined, treat as disallow", False)
+        verdict = (
+            f"{response.status_code} - a misconfiguration, not a refusal; proceeding",
+            True,
+        )
     elif response.status_code >= 400:
         verdict = (f"{response.status_code} - absent, nothing disallowed", True)
     else:
@@ -254,8 +284,20 @@ def robots_verdict(client: httpx.Client, url: str, cache: dict) -> tuple[str, bo
                 "none matches our token - nothing disallowed",
                 True,
             )
+    verdict = (prefix + verdict[0], verdict[1])
     cache[root] = verdict
     return verdict
+
+
+def _is_expired_certificate(error: Exception) -> bool:
+    """True only for expiry, which the owner ruled is not a refusal.
+
+    Decided 2026-08-30, on Bodegas Frutos Villar: a certificate that ran out
+    yesterday says nothing about whether the site wants to be read. Every other
+    TLS failure is a claim about *who* answered, and those still stop the fetch.
+    """
+    text = " ".join(str(part) for part in (error, error.__cause__, error.__context__))
+    return "certificate has expired" in text.lower() or "certificate_expired" in text.lower()
 
 
 def _wait() -> None:
@@ -282,13 +324,11 @@ def probe(url: str, options: argparse.Namespace, robots_cache: dict) -> dict:
             explanation, allowed = robots_verdict(client, url, robots_cache)
             report["robots"] = explanation
             if not allowed and not options.elabel_exception:
-                # Say which kind of stop this is. An unreachable robots.txt is a
-                # host outage and a real Disallow is a policy result, and a run
-                # that cannot tell them apart refetches to find out.
+                # Say which kind of stop this is, so a run never refetches to
+                # find out what the message meant.
                 report["stopped"] = (
-                    f"not fetched: robots.txt {explanation}"
-                    + ("" if "undefined" in explanation
-                       else " and no --elabel-exception was given")
+                    f"not fetched: robots.txt {explanation}, and no "
+                    "--elabel-exception was given"
                 )
                 return report
             if not allowed:
@@ -297,8 +337,28 @@ def probe(url: str, options: argparse.Namespace, robots_cache: dict) -> dict:
         try:
             response = client.get(url)
         except httpx.HTTPError as error:
-            report["stopped"] = f"{type(error).__name__}: {error}"
-            return report
+            if not _is_expired_certificate(error):
+                report["stopped"] = f"{type(error).__name__}: {error}"
+                return report
+            report["tls"] = (
+                "certificate expired; fetched without verification "
+                "(owner's decision 2026-08-30). Record this in the wine's record."
+            )
+
+    if "tls" in report:
+        # Only expiry, and only after the verified attempt failed on it. A
+        # hostname mismatch or an untrusted issuer is a different claim about
+        # who answered, and it still stops the fetch.
+        _wait()
+        with httpx.Client(
+            headers={"User-Agent": agent}, timeout=30.0,
+            follow_redirects=True, verify=False,
+        ) as insecure:
+            try:
+                response = insecure.get(url)
+            except httpx.HTTPError as error:
+                report["stopped"] = f"{type(error).__name__}: {error}"
+                return report
 
     report["status"] = response.status_code
     report["final_url"] = str(response.url)
@@ -345,8 +405,9 @@ def probe(url: str, options: argparse.Namespace, robots_cache: dict) -> dict:
 
 def render(report: dict) -> str:
     lines = [f"== {report['url']}"]
-    for key in ("robots", "exception_used", "status", "final_url", "content_type",
-                "bytes", "user_agent", "saved", "visible_chars", "note", "stopped"):
+    for key in ("robots", "exception_used", "tls", "status", "final_url",
+                "content_type", "bytes", "user_agent", "saved", "visible_chars",
+                "note", "stopped"):
         if key in report and report[key] != report.get("url"):
             lines.append(f"{key}: {report[key]}")
     if report.get("stopped"):

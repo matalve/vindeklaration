@@ -179,6 +179,18 @@ same-content gate keyed on device class, and only on a page that is itself
 the regulated disclosure. See `.claude/agents/declaration-finder.md` for the
 exact string.
 
+**A broken server is not a refusal, decided 2026-08-30.** Two cases, one
+principle: an unreachable `robots.txt` — 5xx, timeout, connection error — no
+longer closes a producer, and an **expired** TLS certificate no longer stops a
+fetch. RFC 9309 reads an undefined `robots.txt` as a complete disallow, and
+that reading kept Damilano shut for two weeks over a 500 nobody meant; a
+certificate that ran out yesterday says nothing about whether the site wants to
+be read. Both are recorded in the report and in the wine's record. **Only
+expiry** is excused on the TLS side: a self-signed certificate, an untrusted
+issuer or a hostname mismatch is a claim about *who* answered, and those still
+stop the fetch. None of this touches a readable `robots.txt` that disallows us,
+or the absolute refusals — 401, 403, 429, login walls, bot challenges.
+
 ## Open decisions
 
 - ~~The quality gate is 2%.~~ Settled 2026-07-27: the gate watches drift, not a

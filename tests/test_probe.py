@@ -2,6 +2,7 @@
 
 from src.probe import (
     _fold,
+    _is_expired_certificate,
     _links,
     _robots_groups,
     _same_host_links,
@@ -85,3 +86,24 @@ def test_same_host_links_skip_assets_and_other_hosts():
     assert "https://bodega.test/es/vinos/el-fanio-2024" in found
     assert not any(url.endswith(".png") for url in found)
     assert not any("otro.test" in url for url in found)
+
+
+def test_only_an_expired_certificate_counts_as_expired():
+    expired = Exception(
+        "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: "
+        "certificate has expired (_ssl.c:992)"
+    )
+    assert _is_expired_certificate(expired)
+    for other in (
+        "certificate verify failed: self-signed certificate",
+        "Hostname mismatch, certificate is not valid for 'x.test'",
+        "unable to get local issuer certificate",
+    ):
+        assert not _is_expired_certificate(Exception(other))
+
+
+def test_expiry_is_recognised_through_the_exception_chain():
+    inner = Exception("certificate has expired")
+    outer = Exception("connect error")
+    outer.__cause__ = inner
+    assert _is_expired_certificate(outer)

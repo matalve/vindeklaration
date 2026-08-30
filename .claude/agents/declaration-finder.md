@@ -275,6 +275,33 @@ framing, and it does not extend beyond e-label pages to a producer's ordinary
 site. Record the fact that a device-shaped UA was used in the wine's record,
 the same as any other exception.
 
+### An unreachable robots.txt is a misconfiguration, not a refusal
+
+Decided 2026-08-30, reversing the reading that closed Damilano. RFC 9309 says
+an unreachable `robots.txt` — a 5xx, a timeout, a connection error — should be
+read as a complete disallow. The owner's decision is that it should not close a
+producer: a 500 nobody meant is a broken server, not a publisher declining to
+be read, and Damilano stayed shut for two weeks over one. `src/probe.py`
+proceeds and says so in the report.
+
+This changes nothing about a robots.txt that *is* readable. A real `Disallow`
+that matches our token still binds in full, and the e-label exception is still
+the only thing that sets one aside.
+
+### An expired certificate is not a refusal either
+
+Decided 2026-08-30, on Bodegas Frutos Villar, whose Let's Encrypt certificate
+ran out the day before the run. A certificate that expired yesterday says
+nothing about whether the site wants to be read, and expiry is the single most
+common way a small estate's site breaks.
+
+**Only expiry.** `src/probe.py` retries without verification when the verified
+attempt failed on expiry and on nothing else: a self-signed certificate, an
+untrusted issuer or a hostname mismatch is a claim about *who* answered, and
+those still stop the fetch with no workaround. When the fallback is used the
+report says so, and it goes in the wine's record — a declaration read over an
+unverified channel must carry that on its face.
+
 ## What to write, and where
 
 Write to **`data/producer-declarations.json`**, which is yours alone. Never
