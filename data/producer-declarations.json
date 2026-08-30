@@ -11736,7 +11736,7 @@
       "language": null,
       "vintage_on_source": null,
       "market": null,
-      "evidence": "THE PRODUCER'S HOST WOULD NOT SERVE ANY CONTENT, SO STEP 0 COULD NOT BE RUN. Ciù Ciù di Bartolomei is an Offida (AP) organic estate in the Marche and www.ciuciuvini.it is its site. Its robots.txt answered 200 and named two sitemaps — /sitemapindex.xml and /sitemap.xml.gz — and BOTH answered HTTP 503 'Service Unavailable' with a 468-byte Apache error page, as did the home page (503, 339 bytes). So the host is alive and answering robots.txt while refusing every content path. That is a server-side error, not a technological refusal: no 401, 403 or 429 and no bot challenge was seen, so nothing was worked around and, per the crawling rules, the host was not retried in a loop. Two alternative hosts were tried once each and neither exists: www.ciuciu.it and shop.ciuciuvini.it both fail at connection level. No producer page could be read, no vendor grep could be run and no declaration could be looked for.",
+      "evidence": "THE PRODUCER'S HOST WOULD NOT SERVE ANY CONTENT, SO STEP 0 COULD NOT BE RUN. Ciù Ciù di Bartolomei is an Offida (AP) organic estate in the Marche and www.ciuciuvini.it is its site. Its robots.txt answered 200 and named two sitemaps — /sitemapindex.xml and /sitemap.xml.gz — and BOTH answered HTTP 503 'Service Unavailable' with a 468-byte Apache error page, as did the home page (503, 339 bytes). So the host is alive and answering robots.txt while refusing every content path. That is a server-side error, not a technological refusal: no 401, 403 or 429 and no bot challenge was seen, so nothing was worked around and, per the crawling rules, the host was not retried in a loop. Two alternative hosts were tried once each and neither exists: www.ciuciu.it and shop.ciuciuvini.it both fail at connection level. No producer page could be read, no vendor grep could be run and no declaration could be looked for. REVISITED 2026-08-30 (tenth Italian batch). THE OUTAGE IS OVER AND THE PRODUCER IS STILL UNREADABLE, FOR A DIFFERENT REASON. robots.txt, the sitemap index, post_vini.xml and the WordPress search now all answer 200 with real content, so the seventh batch's blanket 503 has gone. But EVERY PAGE UNDER /vini/ — each of the 18 wine URLs the sitemap names, and the range pages above them — returns exactly 6 526 bytes consisting of PHP Notice/Warning/Deprecated lines and a run of <br /> tags, with no wine content at all. The whole site is running a broken WordPress with display_errors on ('Trying to access array offset on value of type bool in .../wp-includes/plugin.php on line 211', repeated dozens of times, plus 'Cannot modify header information - headers already sent'); the home and search templates survive it and the wine post-type template does not. So no per-wine page could be read, no vendor grep could be run, and the declaration question is still unanswered for this producer. STEP 0 ALSO FAILS INDEPENDENTLY, WHICH IS NEW: post_vini.xml names the estate's whole range — rosato, lazio-i-g-p-sauvignon, alta-marea, merlettaie-brut, esperanto, rymarose, oppidum, arbinus, saggio, tebaldo, evoe, oris, bacchus, san-carro, gotico, merlettaie, lacrima-di-morro-dalba — and there is NO cuvee called Grande Sangiovese among them. A site search for 'sangiovese' returns one result, the Rymarose sparkling. Systembolaget's 'Ciu Ciu di Bartolomei Grande Sangiovese' (Marche, Sangiovese and Montepulciano, 13,5 %, organic) therefore has no matching page in the producer's own catalogue even in principle, so a declaration found on any of the 18 could not have been attributed to it. AND THE ALTERNATIVE HOSTS DO NOT EXIST: the seventh batch read shop.ciuciuvini.it's failure as a connection refusal, but the real reason is that ciuciuvini.it, ciuciu.it and ciuciuvini.com all run WILDCARD DNS — randomxyz123.ciuciuvini.it resolves to the same address as the 'shop' — so a resolving subdomain there is no evidence of a host. The nonsense-subdomain control settled it without a single HTTP request.",
       "rejected_because": null,
       "sources_checked": [
         "https://www.ciuciuvini.it/robots.txt (200)",
@@ -11744,9 +11744,16 @@
         "https://www.ciuciuvini.it/sitemap.xml.gz (503)",
         "https://www.ciuciuvini.it/ (503)",
         "https://www.ciuciu.it/ (connection refused)",
-        "https://shop.ciuciuvini.it/ (connection refused)"
+        "https://shop.ciuciuvini.it/ (connection refused)",
+        "REVISIT 2026-08-30 (tenth batch). https://www.ciuciuvini.it/robots.txt (200, and now a real body: the stock WordPress 'User-agent: * / Disallow: /wp-admin/' plus two Sitemap lines, buried in ~6 kB of PHP Notice/Warning output)",
+        "https://www.ciuciuvini.it/sitemapindex.xml (200, seven children including post_vini.xml)",
+        "https://www.ciuciuvini.it/post_vini.xml (200, 18 wine URLs)",
+        "https://www.ciuciuvini.it/?s=sangiovese (200, renders) — the step-0 site-search probe",
+        "https://www.ciuciuvini.it/vini/vini-rossi/esperanto (200, 6 526 bytes, PHP notices and nothing else)",
+        "https://www.ciuciuvini.it/vini/vini-rossi (200, the identical 6 526-byte empty body)",
+        "DNS: shop.ciuciuvini.it and store.ciuciuvini.it appear to resolve but ciuciuvini.it has WILDCARD DNS — randomxyz123.ciuciuvini.it resolves to the same 81.31.158.5 — so neither host exists. ciuciu.it and ciuciuvini.com are wildcarded too and https://www.ciuciu.it/ answers 'No route to host'. ciuciu.wine is NXDOMAIN."
       ],
-      "checked_at": "2026-08-12T12:05:00Z",
+      "checked_at": "2026-08-30T09:20:00Z",
       "robots_disallowed": false,
       "robots_reasoning": "www.ciuciuvini.it/robots.txt is 'User-agent: * / Disallow: /wp-admin/' and allows everything else. Nothing disallowed was fetched and no exception was used.",
       "note": "A HOST THAT SERVES robots.txt AND 503s EVERYTHING ELSE IS A NEW FAILURE SHAPE IN THIS FILE — different from Le Vigne di Zamò, where the host did not answer at all. Whether it is maintenance or a WAF that lets static files through and rejects PHP could not be determined from one pass, and determining it would have meant repeated requests.",
@@ -13288,7 +13295,7 @@
       "checked_at": "2026-08-29T09:55:00Z"
     }
   ],
-  "updated_at": "2026-08-29T10:30:00Z",
+  "updated_at": "2026-08-30T09:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -13610,6 +13617,11 @@
       "at": "2026-08-29T10:30:00Z",
       "batch": "3 — Italy, tenth batch: Cantine PaoloLeo revisit (1 wine, already recorded)",
       "result": "0 new wines. The organic Passitivo's page on sfiziosalentino.it is still on 'Annata: 2023' at 14,5 % vol, so both grounds of the eighth batch's rejection stand and the declaration still cannot be attached. One request. AND THE SWEEP IS CLOSED: the eighth batch suggested sweeping PaoloLeo's 427-product shop against Systembolaget's PaoloLeo stock, but that stock is a single product number (330001), so there was never a second wine to find. A NEW FALSE POSITIVE FOR THE GREP LIST: searching a page for `u-label` returns a hit on every `menu-label` CSS class — 57 of them here. Search for `u-label.com` or the token with a boundary, not the bare string."
+    },
+    {
+      "at": "2026-08-30T09:20:00Z",
+      "batch": "3 — Italy, tenth batch: Ciu Ciu di Bartolomei revisit (1 wine, already recorded)",
+      "result": "0 new wines, but the revisit was worth its seven requests: it turned the file's least-informative Italian not_found into a fully-reasoned one. THE 503 IS GONE — robots.txt (now a real stock-WordPress body), the sitemap index, post_vini.xml and the site search all answer 200. THE SITE IS STILL UNREADABLE ANYWAY, and this is a NEW ITALIAN FAILURE SHAPE: every URL under /vini/ returns the identical 6 526-byte body of PHP Notice/Warning output and <br /> tags with no content, because the estate runs a broken WordPress with display_errors on and the wine post-type template fatals while the home and search templates survive. A 200 that is byte-identical across a whole post type is a broken template, not a thin page. STEP 0 NOW FAILS TOO: the wine sitemap names all 18 cuvees and none is a 'Grande Sangiovese'; a site search for 'sangiovese' returns only the Rymarose sparkling. AND A CHEAP CORRECTION TO THE SEVENTH BATCH: shop.ciuciuvini.it was recorded as connection-refused, but ciuciuvini.it, ciuciu.it and ciuciuvini.com all run WILDCARD DNS (randomxyz123.ciuciuvini.it resolves), so no shop subdomain ever existed. Run the nonsense-subdomain control before believing an Italian shop host resolves."
     }
   ]
 }
