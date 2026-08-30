@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 525,
+  "attempted": 526,
   "found": 33,
-  "not_found": 440,
+  "not_found": 441,
   "rejected": 52,
   "declarations": [
     {
@@ -15032,6 +15032,31 @@
       "vintage_on_source": null,
       "server_rendered": true,
       "elabel_platform": null
+    },
+    {
+      "product_number": "7249601",
+      "name": "Fan D. Oro",
+      "producer": "Bodegas Arzuaga Navarro",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.arzuaganavarro.com/vinos/fan-d-oro",
+      "source_type": "producer_site",
+      "sources_checked": [
+        "https://www.arzuaganavarro.com/robots.txt — Joomla-stock wildcard group (administrator, cache, cli, components, …). Nothing relevant disallowed",
+        "https://www.arzuaganavarro.com/ (200, 65 kB) — the estate site. terms: 0, no pointer. It names thirteen wines at /vinos/{slug}",
+        "https://www.arzuaganavarro.com/vinos/fan-d-oro (200, 33 kB, 1 686 visible characters) — the wine's own page. terms: 0, no declaration-shaped link, no vendor named, no QR destination, and no vintage",
+        "https://tienda.arzuaganavarro.com/producto/fan-d-oro/ (404) — the estate's separate WooCommerce shop, entered on the slug pattern its own home page links (/producto/arzuaga-crianza/). Fan D.Oro is not sold there under that slug, so the shop route is closed too"
+      ],
+      "evidence": "Producer and cuvée match — Bodegas Arzuaga Navarro publishes 'Fan D.Oro' as its white and Systembolaget's item is 'Fan D. Oro'. Nothing else could be established. The wine's own page is 1 686 visible characters of marketing with no vintage, no alcohol, no ingredient heading, no nutrition table, no e-label vendor and no QR destination. The estate's WooCommerce shop was tried once on the slug pattern the site itself uses and returned 404 for this wine, so the WooCommerce-ingredient-tab shape could not even be tested here.",
+      "robots_note": "Both hosts serve readable robots.txt files and neither disallows what was fetched. No exception used.",
+      "checked_at": "2026-08-31T11:00:00Z",
+      "market": "EU",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "server_rendered": true,
+      "elabel_platform": null
     }
   ],
   "updated_at": "2026-08-31T11:00:00Z",
@@ -15536,6 +15561,11 @@
       "at": "2026-08-31T11:00:00Z",
       "batch": "4d — Spain, fourth producer: Comando G (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in one request. A NEW TLS FAILURE MODE AND A QUESTION FOR THE OWNER: comandog.es presents a certificate whose end-entity key OpenSSL rejects as TOO WEAK. That is not expiry, so the 2026-08-30 rule does not reach it and the fetch was not retried unverified — but it is like expiry in kind, a misconfiguration that says nothing about who answered, unlike a self-signed cert, an untrusted issuer or a name mismatch. If the owner wants that class reopened, Comando G is the wine to re-probe."
+    },
+    {
+      "at": "2026-08-31T11:00:00Z",
+      "batch": "4d — Spain, fifth producer: Bodegas Arzuaga Navarro (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in four requests. A Ribera del Duero house of real size with a Joomla brand site and a separate WooCommerce shop, and neither surface carries a declaration term. The shop does not list the wine at all."
     }
   ]
 }
