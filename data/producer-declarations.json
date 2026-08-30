@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30. First Spanish batch; no Spanish producer was in this file before it. Pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after four producers and nine wines (Bodegas Vegamar 3, Gramona 2, Vivanco 2, Raventos i Blanc 2 — 0 found, 0 rejected, 9 not found) 81 wines across 66 producer strings remain. The producer==supplier step-0 test finds ZERO Spanish importer own-labels, against seven of the 81 remaining Italian wines. NO SPANISH E-LABEL VENDOR HAS BEEN SEEN YET in any producer's linking. The Spanish failure so far is NOT the Italian one: three of the first nine wines passed every part of the four-part check, vintage included, and died only on the declaration being absent. Previous batches: Germany exhausted (19,8 % find rate); France set aside at 69 producers, 142 wines, 4 found, 9 rejected; Italy set aside after ten batches at 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected (4,9 %), 81 untouched wines remaining. See 'Spain opens, and the first four producers all fail on identity's opposite' in docs/elabel-platforms.md.",
-  "attempted": 486,
+  "attempted": 488,
   "found": 33,
-  "not_found": 403,
+  "not_found": 405,
   "rejected": 50,
   "declarations": [
     {
@@ -14008,9 +14008,58 @@
       "not_found_because": "Same as the sibling: no ingredient list, no nutrition table, no pointer, no vendor, and no year on any surface the producer controls.",
       "robots_note": "Allowed; no exception used.",
       "checked_at": "2026-08-30T17:05:00Z"
+    },
+    {
+      "product_number": "7034601",
+      "name": "Protocolo Rosé Dominio de Eguren",
+      "producer": "Dominio de Eguren",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://www.eguren.com/robots.txt — ConnectError on 443, no TCP handshake",
+        "https://eguren.com/robots.txt — ConnectError on 443",
+        "http://eguren.com/ — 403, which is a technological refusal and stops the fetch outright",
+        "https://www.dominiodeeguren.com/robots.txt — ConnectTimeout on 443",
+        "DNS: eguren.com and www.eguren.com A 217.76.142.47; dominiodeeguren.com and www.dominiodeeguren.com A 217.76.128.220 — both domains exist",
+        "web search — Dominio de Eguren is the fourth-generation Eguren family's value label (Protocolo, from vineyards in Manchuela, Rioja and Toro), part of a group with Sierra Cantabria, Teso la Monja, Vinedos de Paganos and Senorio de San Vicente. Every page carrying the wine is a retailer, an importer or a review site, all excluded sources"
+      ],
+      "evidence": "No producer surface was reached, so no part of the identity check was performed.",
+      "rejected_because": null,
+      "not_found_because": "REFUSAL AND OUTAGE, NOT ABSENCE. The only port that answered returned 403, which the project treats as an absolute refusal with no workaround; every other attempt failed at the TCP layer. This says nothing about whether the producer publishes a declaration.",
+      "robots_note": "robots.txt was unreachable on every hostname tried (ConnectError / ConnectTimeout), which src.probe treats as undefined and therefore disallow. No exception was invoked. The 403 on port 80 is a technological measure and was not worked around.",
+      "checked_at": "2026-08-30T17:25:00Z"
+    },
+    {
+      "product_number": "7131001",
+      "name": "Protocolo Blanco Dominio de Eguren",
+      "producer": "Dominio de Eguren",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "same as 7034601 — both Eguren hostnames refuse or time out, and port 80 answers 403"
+      ],
+      "evidence": "No producer surface was reached.",
+      "rejected_because": null,
+      "not_found_because": "Refusal and outage, not absence. See 7034601.",
+      "robots_note": "robots.txt unreachable on every hostname; 403 on the one port that answered, treated as absolute.",
+      "checked_at": "2026-08-30T17:25:00Z"
     }
   ],
-  "updated_at": "2026-08-30T17:05:00Z",
+  "updated_at": "2026-08-30T17:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14412,6 +14461,11 @@
       "at": "2026-08-30T17:05:00Z",
       "batch": "4 — Spain, ninth producer: Bodegas Pinord (2 wines)",
       "result": "2 attempted, 0 found, 0 rejected, 2 not found, in seven requests. Chosen straight after Albet i Noya on the guess that a second mid-size DO Penedes house would have bought the same vendor, and it had not: nothing anywhere on pinord.com or shop.pinord.com names digital-label.eu or any other e-label vendor, and no wine page carries a declaration or a pointer. Pinord closes on the ITALIAN failure and not the Spanish one: its per-wine pages have a 'Datos analiticos' block whose ONLY entry is the alcohol, and NO VINTAGE ANYWHERE — 'La vendimia se realiza de noche' is a process sentence, and the four-digit years in the HTML are the copyright footer. The alcohol matches Systembolaget exactly on both wines (13 against 13,0; 12,5 against 12,5), which makes the missing year the whole of the objection. Site shape worth reusing: the product URL is /es/productes/{colour}-{do}-{name}/ and the DO index pages (/es/do-rueda-es, /es/do-rias-baixas) list every product in that DO, so two wines in different appellations cost two index fetches and no guessing. THE 'ingredientes' GREP LIED AGAIN, and this is its second Spanish sighting: 'ensaladas con ingredientes frescos' in the food-pairing paragraph. Treat a hit inside a Maridaje block as noise."
+    },
+    {
+      "at": "2026-08-30T17:25:00Z",
+      "batch": "4 — Spain, tenth producer: Dominio de Eguren (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in four requests, and closed on a REFUSAL rather than on absence. Neither of the group's two hostnames answers this project: eguren.com and www.eguren.com resolve to 217.76.142.47 and refuse the TCP connection on 443 (ConnectError, immediate), while the same host on port 80 answers 403 — a technological refusal, which under the project's rules is absolute and is not worked around, not retried and not device-framed. dominiodeeguren.com and www.dominiodeeguren.com resolve to 217.76.128.220 and time out on 443. Nothing was fetched, so NOTHING IS KNOWN about whether Dominio de Eguren publishes a declaration. A PATTERN WORTH WATCHING, stated as an observation and not a conclusion: this is the THIRD Spanish producer in one batch whose site sits on 217.76.0.0/16 (Arsys, Logrono) and does not answer normally — Bodegas Muga at 217.76.128.34 (connect timeout), Dominio de Eguren at .142.47 (refused, then 403 on port 80), dominiodeeguren.com at .128.220 (timeout). Whether that range filters non-browser clients or those particular sites are simply down cannot be told from here; a later Spanish run should note the IP before spending requests, and should not read a 217.76 failure as evidence about the producer."
     }
   ]
 }
