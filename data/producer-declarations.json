@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30. First Spanish batch; no Spanish producer was in this file before it. Pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after four producers and nine wines (Bodegas Vegamar 3, Gramona 2, Vivanco 2, Raventos i Blanc 2 — 0 found, 0 rejected, 9 not found) 81 wines across 66 producer strings remain. The producer==supplier step-0 test finds ZERO Spanish importer own-labels, against seven of the 81 remaining Italian wines. NO SPANISH E-LABEL VENDOR HAS BEEN SEEN YET in any producer's linking. The Spanish failure so far is NOT the Italian one: three of the first nine wines passed every part of the four-part check, vintage included, and died only on the declaration being absent. Previous batches: Germany exhausted (19,8 % find rate); France set aside at 69 producers, 142 wines, 4 found, 9 rejected; Italy set aside after ten batches at 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected (4,9 %), 81 untouched wines remaining. See 'Spain opens, and the first four producers all fail on identity's opposite' in docs/elabel-platforms.md.",
-  "attempted": 474,
+  "attempted": 476,
   "found": 32,
-  "not_found": 393,
+  "not_found": 395,
   "rejected": 49,
   "declarations": [
     {
@@ -13707,9 +13707,57 @@
       "evidence": "Systembolaget sells 'Raventos i Blanc Blanc de Blanc' 2024, Catalonia, 12,0 %, 75 cl. The producer's shop page is /botiga/escumosos_minerals/blanc_de_blancs_2024, breadcrumbed 'Botiga / Raventos i Blanc / Blanc de Blancs 2024', with an 'ANYADA 2024' heading and the same harvest report as its sibling — producer, cuvee and vintage confirmed three ways. It states no alcohol on the page. ITS OWN FITXA TECNICA WAS LOCATED AND DELIBERATELY NOT DOWNLOADED: the link reads 'Fitxa Tecnica Blanc de Blancs 2024' and points at a file on the same uploads path, and the De Nit sheet from the identical template was read in full — one PDF settles the format for an estate. THE IDENTITY IS EXCELLENT ON EVERY SURFACE. Raventos i Blanc, Sant Sadurni d'Anoia, works in its own Conca del Riu Anoia denomination, and BOTH ITS SURFACES ARE PER-VINTAGE: the range page names each wine with its year in the anchor text and the URL (/colleccio/escumosos/145/de_nit_2024), and the shop repeats it in the breadcrumb, the H1, the slug and an 'ANYADA' heading. This is the best vintage control seen in Spain so far and among the best anywhere in this project. AND NEITHER SURFACE CARRIES A DECLARATION. A Catalan- and Spanish-aware grep of the marketing page, the range page and both shop pages (ingredient, nutricional, nutricio, sulfit, sulfur, lergen, kcal, kJ, energ, declaraci, conservant, antioxidant, etiqueta, e-label, elabel, u-label, and every vendor token) returns nothing but false positives: the one `kJ` hit on each shop page is inside a PHP-generated image filename (phpHKJGpR), the one `qr` hit is likewise (phpvWdQrT), `valor` is the cookie-banner JavaScript, and `etiqueta` is the sentence 'Data de desgorjat indicada a la contra etiqueta' — the disgorging date is on the back label, which is a statement about the bottle and not a disclosure on the page. THE FITXA TECNICA IS THE RICHEST NEAR-MISS THIS PROJECT HAS FOUND ANYWHERE, AND IT IS STILL NOT A DECLARATION. THIS MATTERS ENOUGH TO SPELL OUT. 'Fitxa Tecnica De Nit 2024' is a one-page datasheet, linked from the shop under its own heading, and it was downloaded and its text extracted in full. It is headed 'Nom del Vi: De Nit' and 'Anyada: 2024' and then gives about forty labelled fields, including several that name actual substances with doses: 'Sulfitat: 3,5 g/hL SO2', 'Clarificant: Bentonita a dosi de 3 g/hL', 'Sucre de tiratge: Sucre de canya certificat Ecologic', 'Licor d'expedicio: Vi base De Nit amb sucre Eco', 'Tractament pels fongs: ... 2,8 kg coure/ha ... sofre', and an Analisis block reading 'Grau alcoholic 12,40% vol / Acidesa total tartarica 6,0 g/L / pH 3,07 / Acidesa volatil 0,26 g/l / Sucres residuals 4,0 g/l Extra Brut / Sulfuros total 55 mg/L / Pressio 5,6 bars'. IT IS NOT AN INGREDIENT LIST AND MUST NOT BE TREATED AS ONE. Those substances appear as PROCESS PARAMETERS in a winemaking description — a dosing rate per hectolitre, a fining agent with its dose, a vineyard fungicide — not as the declaration Regulation (EU) 2021/2117 requires: there is no 'Ingredients' heading, no list, no allergen statement, no nutrition table and no energy value. Bentonite is in any case a processing aid rather than an ingredient. Assembling a declaration out of these fields would be exactly the invention CLAUDE.md forbids, and it would produce a different list from the one the producer would print. Recorded not_found. THE LESSON FOR THE NEXT RUN: a document can name more substances than a real e-label does and still not be one. The test is the form — a list of what is IN the wine — not the presence of substance words.",
       "rejected_because": null,
       "checked_at": "2026-08-30T14:05:00Z"
+    },
+    {
+      "product_number": "7287701",
+      "name": "Muga Blanco",
+      "producer": "Bodegas Muga",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://muga.es/robots.txt — CONNECT TIMEOUT, no TCP handshake on 443",
+        "https://muga.es/ — CONNECT TIMEOUT under curl --max-time 15, exit 28",
+        "https://www.muga.es/robots.txt — CONNECT TIMEOUT at 25 s, verified with curl outside the tool on an earlier run",
+        "DNS resolves: muga.es and www.muga.es both A 217.76.128.34, so the domain exists and the web server does not answer",
+        "web search for a Muga e-label or QR destination returned only Spanish e-label VENDOR marketing (aecoc.es ESCAN QR, e-labelqr.com, qr-vino.com, tucartadigital.com) and no Muga page"
+      ],
+      "evidence": "No source was reached, so no identity check was performed. Both wines are recorded against the producer only.",
+      "rejected_because": null,
+      "not_found_because": "HOST OUTAGE, NOT ABSENCE. The producer's own site did not answer at all — no robots.txt, no page, no HTTP status, just a connect timeout on both hostnames. Under this project's rules an unreachable robots.txt is treated as disallow, but that is moot here: nothing on the host answers. This is explicitly not evidence that Bodegas Muga publishes no declaration, and the wine should be re-probed when the host is back.",
+      "robots_note": "robots.txt unreachable (ConnectTimeout), which src.probe treats as undefined and therefore disallow. No exception was invoked and no fetch was attempted past it.",
+      "checked_at": "2026-08-30T15:20:00Z"
+    },
+    {
+      "product_number": "9224201",
+      "name": "Muga",
+      "producer": "Bodegas Muga",
+      "country": "Spanien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "same host outage as 7287701 — muga.es and www.muga.es do not answer on 443"
+      ],
+      "evidence": "No source was reached, so no identity check was performed.",
+      "rejected_because": null,
+      "not_found_because": "HOST OUTAGE, NOT ABSENCE. See 7287701. Re-probe when muga.es answers.",
+      "robots_note": "robots.txt unreachable (ConnectTimeout).",
+      "checked_at": "2026-08-30T15:20:00Z"
     }
   ],
-  "updated_at": "2026-08-30T14:25:00Z",
+  "updated_at": "2026-08-30T15:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14086,6 +14134,11 @@
       "at": "2026-08-30T14:05:00Z",
       "batch": "4 — Spain, first batch: Raventós i Blanc (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in eight requests — and the most important negative result of the Spanish batch so far. THE IDENTITY IS THE BEST IN SPAIN: both the marketing range page and the first-party shop are PER-VINTAGE, naming each wine with its year in the anchor text, the URL, the breadcrumb, the H1 and an 'ANYADA' heading, and Systembolaget's 2024 matches on both wines with the fitxa's 12,40 % vol against 12,5. THE FITXA TECNICA IS THE RICHEST NEAR-MISS THIS PROJECT HAS FOUND IN ANY COUNTRY, and it is still not a declaration. Forty labelled fields, several naming real substances with doses — 'Sulfitat: 3,5 g/hL SO2', 'Clarificant: Bentonita a dosi de 3 g/hL', 'Sucre de tiratge: Sucre de canya certificat Ecologic', 'Licor d'expedicio: Vi base De Nit amb sucre Eco' — plus an analysis block with total SO2 55 mg/L. They are PROCESS PARAMETERS in a winemaking description, not an ingredient list: no Ingredients heading, no list, no allergen line, no nutrition table, no energy value, and bentonite is a processing aid rather than an ingredient. Building a declaration from those fields would be invention, and would not match what the producer prints. THE RULE THIS SHARPENS: a document can name MORE substances than a real e-label does and still not be one — the test is the form, a list of what is in the wine, not the presence of substance words. GREP NOTES: the shop's only `kJ` and `qr` hits are inside PHP-generated image filenames (phpHKJGpR, phpvWdQrT), which is the base64-noise problem in a new disguise; `etiqueta` matched 'Data de desgorjat indicada a la contra etiqueta'. HOST NOTE: robots.txt is a genuine 404, and the shop leaks a PHP print_r banner dump into /botiga/, which is harmless but confirms the site is hand-built PHP."
+    },
+    {
+      "at": "2026-08-30T15:20:00Z",
+      "batch": "4 — Spain, fifth producer: Bodegas Muga (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, and NOT a finding about the producer — the host is down. www.muga.es and muga.es both resolve to 217.76.128.34 and neither answers on 443: connect timeout at 15 s under curl and at src.probe's own timeout, on /robots.txt and on /. Verified twice, hours apart, with curl outside the tool, so it is the host and not this project's networking. NOTHING can be concluded about whether Muga publishes a declaration; the record says outage, not absence. Muga was one of the two producers named in the previous batch as best placed to test the 'has any Spanish producer bought a QR vendor' question (the other is Albet i Noya), so that test is still open. Re-probe on a later run rather than treating these two wines as closed."
     }
   ]
 }
