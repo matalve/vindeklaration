@@ -3624,3 +3624,165 @@ Two revisits added by the sixth batch:
 - **Mastroberardino**, two wines, closed only because the i-wine e-label
   renders client-side. If that vendor ever server-renders, the URLs are already
   held in the wines' records.
+
+## Spain opens, and the first four producers all fail on identity's opposite
+
+**Batch 4, opened 2026-08-30.** No Spanish producer was in
+`data/producer-declarations.json` before this. The pool is **90 wines at
+vintage 2024+ with `declaration_status: not_declared`, across 70 producer
+strings**, and it is being worked to measure the between-country spread:
+Germany's find rate was 19,8 %, Italy's 4,9 % over ten batches.
+
+**Status after four producers and nine wines: zero found, zero rejected, nine
+not found.** Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventós i Blanc
+(2). No Spanish e-label vendor has been seen yet in any producer's linking —
+not U-label, not anything else.
+
+### Two structural facts about the Spanish pool, both free
+
+- **Seventeen of the 70 producer strings have more than one wine**, so 37 of
+  the 90 wines belong to a producer with a sibling in the pool. **The sibling
+  economics Italy lost are back**: three each at Born Rosé Barcelona, Bodegas
+  Vegamar and Javi Revert Viticultor, two each at fourteen more.
+- **The `producer == supplier` test returns ZERO in Spain**, where it flags
+  seven of Italy's remaining 81 wines. Systembolaget's Spanish producer field
+  appears to name real bodegas rather than Swedish own-label operations, so
+  step 0 should bite less often here than in Italy. That is one command over
+  `wines.json` and it is worth running on every new country before any fetch.
+
+### The Spanish failure is not the Italian one: the vintage is usually there
+
+This is the finding that separates Spain from Italy after four producers.
+**In Italy the dominant close was step 2, the undated cuvée page. In Spain the
+vintage is frequently stated, and stated well, and there is still nothing to
+attach.**
+
+| Producer | Vintage on the producer's surface? | Matches Systembolaget? | Declaration? |
+|---|---|---|---|
+| Bodegas Vegamar | no, nowhere | — | none |
+| Gramona | no, not on the page and not in the fitxa | — | none |
+| **Vivanco** | **yes, in the slug AND an `AÑADA` heading** | **yes, the Rosado 2025 exactly** | none |
+| **Raventós i Blanc** | **yes, on four surfaces** | **yes, both wines at 2024** | none |
+
+Vivanco's Rosado 2025 and both Raventós wines are matched on producer, cuvée
+and vintage with nothing left to reject. **Three of the first nine Spanish
+wines got past every part of the four-part check and died at the last step**,
+which never happened this often in Italy. If it holds, Spain's story is not
+"the page is undated" but "the page is complete and the declaration is simply
+absent" — which is the *French* shape, on much better-organised sites.
+
+### Spain's near-misses, in increasing order of how convincing they look
+
+1. **`Contiene sulfitos` plus the strength.** Vivanco's white bullets read
+   `Grado alcohólico 13%. Contiene sulfitos.` and `75 cl.` — strength, allergen
+   and pack. The Italian two-particular near-miss, in Spanish.
+2. **Sulphiting described as a process step.** Vegamar: *"finalizando con el
+   trasiego y **sulfitado** para preservar toda su pureza"*. This is Château
+   d'Astros' *"Sulfitage maîtrisé"* in Spanish, and it is not a declaration.
+3. **The `fitxa tècnica` / `ficha técnica`.** Spain's version of the French
+   *fiche* and the Italian *scheda*. Gramona's was downloaded and read in full:
+   Elaboració, Sensacions, food pairing, a sustainability paragraph, Varietats
+   and `Vol. 11%`. No vintage, no ingredient list, no energy value; its one
+   number is residual sugar.
+4. **And then Raventós i Blanc's, which is the richest near-miss this project
+   has found in any country.** See below. Read it before accepting any Spanish
+   datasheet.
+
+#### A datasheet can name more substances than a real e-label and still not be one
+
+`Fitxa Tècnica De Nit 2024`, linked from Raventós i Blanc's own shop under its
+own heading, one page, downloaded and extracted in full. It is headed
+`Nom del Vi: De Nit` / `Anyada: 2024` and gives some forty labelled fields.
+Several name real substances **with doses**:
+
+```
+Sulfitat                3,5 g/hL SO2
+Clarificant             Bentonita a dosi de 3 g/hL
+Sucre de tiratge        Sucre de canya certificat Ecològic
+Licor d'expedició       Vi base De Nit amb sucre Eco
+Tractament pels fongs   Fitoteràpia, 2,8 kg coure/ha pel Míldiu i sofre per l'Oïdi
+Anàlisis                … Sulfurós total 55 mg/L …
+```
+
+**It is not an ingredient list and must not be treated as one.** Those are
+process parameters in a winemaking description — a dosing rate per hectolitre,
+a fining agent, a vineyard fungicide — not the declaration Regulation (EU)
+2021/2117 requires. There is no `Ingredients` heading, no list, no allergen
+statement, no nutrition table and no energy value; and bentonite is a
+processing aid rather than an ingredient. Assembling a declaration out of these
+fields would be invention, and would produce a different list from the one the
+producer prints.
+
+**The rule this sharpens: the test is the FORM — a list of what is in the wine —
+not the presence of substance words.** A page can mention six additives and be
+a tasting note; a page can mention two and be a declaration.
+
+### Spanish anchor texts and pointer shapes seen so far
+
+- **`Consultar alérgenos`** (Bodegas Vegamar) — the first Spanish pointer of
+  e-label shape, an anchor sitting directly under the add-to-cart button on all
+  2 457 pages of the shop. **It goes nowhere**: `/alergenos` answers 200 with
+  the shop's product *listing*, which is Odoo's soft 404. The bodega put the
+  link on every page and never built the page. Recognise the anchor text, and
+  check where it actually lands.
+- **`Fitxa Tècnica {wine} {vintage}`** (Raventós i Blanc) — a per-vintage PDF
+  under its own accordion card on the shop product page. Rich, and not a
+  declaration.
+- **`Fitxa tècnica`** (Gramona) — a bare per-wine PDF link, no vintage.
+
+### Spanish hosts and greps, first batch
+
+- **`vegamar.es` runs WILDCARD DNS** (`randomxyz123.vegamar.es` resolves), so a
+  resolving subdomain there proves nothing. `bodegasvegamar.com` refuses 443
+  and 301s into `vegamar.es` over plain http. Its `robots.txt` is
+  `User-agent: *` with **no directives under it** — nothing disallowed, the
+  `label.masi.it` shape. Its own sitemap contains a product URL that 404s.
+- **`vivancoculturadevino.es` 302s `/robots.txt` to `/es/robots.txt`**, whose
+  body literally begins `# This is an invalid robots.txt location.` before
+  giving the stock WordPress rules — and the sitemap it advertises is a **soft
+  404**. Read the body, not the status.
+- **`tienda.vivancoculturadevino.es` is PrestaShop and DISALLOWS SEARCH**
+  (`/*?search_query=`, `controller=search`, `/busqueda`) and names no sitemap.
+  **Use the `/content/{tier}` category listings to enumerate products** — they
+  are allowed and they carry every product URL.
+- **`gramona.com`'s still wines 301 OUT to `vinsperestimarelvi.com`.** A
+  Spanish house's still wines can live on a differently-named brand site;
+  follow the redirect rather than concluding the wine is absent. That site has
+  **two `User-agent: *` groups**, which RFC 9309 merges: together they disallow
+  one wp-optimize JSON file and nothing else.
+- **`www.raventos.com` answers `robots.txt` with a genuine 404** (host open)
+  and leaks a PHP `print_r` banner dump into `/botiga/`. Its age gate does not
+  block the server response.
+- **Greps that lie, Spanish edition:**
+  - `ingredien` matched *"los **ingredientes** necesarios para este vino
+    icónico"* in a Vivanco blog paragraph about winter fog.
+  - **`kJ` and `qr` both matched PHP-generated image filenames** at Raventós —
+    `phpHKJGpR`, `phpvWdQrT`. This is the base64 `kJ` noise in a new disguise:
+    **any `php{random}` upload filename is a source of two-letter false
+    positives.**
+  - `etiqueta` matched *"Data de desgorjat indicada a la contra etiqueta"* —
+    a statement that something is on the back label, not a disclosure.
+  - `valor` matched the cookie banner's JavaScript.
+- **Use Catalan terms as well as Spanish.** Three of the first four producers
+  are Catalan and publish Catalan-first: `ingredients`, `informació
+  nutricional`, `sulfits`, `al·lèrgens` (which `alergen` does **not** match),
+  `valor energètic`, `conservant`, `anyada`, `verema`, `fitxa tècnica`.
+  Add `añada`/`anyada` and `vendimia`/`verema` to the vintage greps.
+
+### Where the remaining Spanish work is
+
+**81 wines untouched**, across 66 producer strings. The multi-wine producers
+not yet attempted are the cheapest next work: **Born Rosé Barcelona (3)** and
+**Javi Revert Viticultor (3)**, then the eleven two-wine producers — Dominio de
+Tares, Giol Porrera, Dominio de Eguren, Binigrau, Terra de Asorei, Rafael
+Palacios, Bodegas Muga, Bodegas Frutos Villar, Albet i Noya, Familia Conesa and
+Bodegas Pinord.
+
+**The open question for the next Spanish batch is whether any Spanish producer
+has adopted a QR platform at all.** In France that was the only thing that
+predicted a declaration, and in Italy it was the only thing worth selecting
+for. Four Spanish producers in, the answer is no adopters — but two of the four
+are Catalan sparkling houses on hand-built PHP, and none is the kind of large
+Rioja or Ribera group most likely to have bought a vendor. **Bodegas Muga and
+Albet i Noya are the best-placed remaining tests**, and `u-label.com` has still
+never been seen in any producer's HTML in any country.
