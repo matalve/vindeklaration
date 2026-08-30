@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30. First Spanish batch; no Spanish producer was in this file before it. Pool: 90 wines at vintage 2024+ with declaration_status not_declared and no record here, across 70 producer strings. The producer==supplier step-0 test finds ZERO Spanish importer own-labels, against seven of the 81 remaining Italian wines — so Spain's producer field names real bodegas and step 0 will bite less often here. Previous batches: Germany exhausted; France set aside at 69 producers, 142 wines, 4 found, 9 rejected; Italy set aside after ten batches at 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected, with 81 untouched wines remaining. Italy's find rate was 4.9 % against Germany's 19.8 %; Spain is opened to measure the between-country spread.",
-  "attempted": 468,
+  "attempted": 470,
   "found": 32,
-  "not_found": 387,
+  "not_found": 389,
   "rejected": 49,
   "declarations": [
     {
@@ -13515,9 +13515,72 @@
       "evidence": "Systembolaget sells 'Vegamar El Bienqueda' 2024, 12,5 %, 75 cl. The bodega's product is 'Botella Vino Blanco Verdejo EL BIENQUEDA (Etiqueta Termocromatica)', 100 % Verdejo, 75 cl — the thermochromic label is the wine's own gimmick and not a variant. No year anywhere. THE PRODUCER IS RIGHT AND THE SHOP IS THE ONLY SURFACE. Bodegas Vegamar, Camino de Garcesa s/n, 46175 Calles (Valencia), trading as DISBER SL, runs one Odoo site at vegamar.es that is both its marketing site and its shop: the pretty marketing slugs (/leneas-albarino/, /vino-blanco-verdejo-el-bienqueda/, /lamua-sauvignon-blanc-de-vegamar/) 301 into or render the shop product page, so there is no second surface to check and step 4 collapses into step 3. THE PRODUCT TEMPLATE IS UNIFORM AND CARRIES NO VINTAGE. Every wine page gives the same fields in the same order — VINIFICACION, NOTAS DE CATA (Color, Aroma, Sabor), VARIEDADES, TEMPERATURA DE SERVICIO, MARIDAJE, FORMATOS: 75 cl, AREA DE PRODUCCION, PREMIOS — and states NO vintage, NO alcohol and no ingredient list or nutrition table. An undated cuvee page cannot be vintage-matched even if a list appeared on it, so the Italian step-2 close applies unchanged in Spain. AND THE COMPLIANCE GESTURE LEADS NOWHERE, WHICH IS THE FINDING WORTH RECORDING. Every product page carries '<a href=\"/en/alergenos\">Consultar alergenos</a>' directly under the add-to-cart button — exactly where an e-label link would be, and the first Spanish pointer of that shape this project has seen. /alergenos does not exist: it answers 200 with the shop's product LISTING, Odoo's soft 404. So the bodega has put an allergen link on 2 457 pages and has not built the page it points at. THE ONLY SUBSTANCE WORD ON THE PAGE IS IN THE PROSE. Leneas's vinification paragraph ends '...finalizando con el trasiego y sulfitado para preservar toda su pureza' — sulphiting described as a process step, which is the Chateau d'Astros near-miss ('Sulfitage maitrise') in Spanish and is explicitly not a declaration under the agent's rules.",
       "rejected_because": null,
       "checked_at": "2026-08-30T12:40:00Z"
+    },
+    {
+      "product_number": "5361901",
+      "name": "Gessami Penedès",
+      "producer": "Gramona",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://vinsperestimarelvi.com/gessami/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.gramona.com/robots.txt (200, Yoast block, 'User-agent: *' with an EMPTY 'Disallow:' — everything allowed)",
+        "https://gramona.com/sitemap_index.xml (200, four children: post, page, avada_portfolio, slide-page — no product or shop type)",
+        "https://gramona.com/avada_portfolio-sitemap.xml (200) — the wine post type; both Swedish wines are in it",
+        "https://gramona.com/page-sitemap.xml (200, 52 pages) — no shop, no botiga/tienda, no e-label page, nothing declaration-shaped",
+        "https://gramona.com/coleccion/gramona-gessami/ (301 to https://vinsperestimarelvi.com/gessami/, 200, 107 kB)",
+        "https://gramona.com/coleccion/gramona-mart/ (301 to https://vinsperestimarelvi.com/mart/, 200, 109 kB)",
+        "https://vinsperestimarelvi.com/robots.txt (200, TWO 'User-agent: *' groups — one disallowing a wp-optimize JSON file, one a Yoast block with an empty Disallow; merged under RFC 9309 they disallow only that JSON file)",
+        "https://vinsperestimarelvi.com/docs/gessami_cat.pdf (200, 244 kB, one page, text extracted in full)"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "gramona.com's robots.txt is a Yoast block whose only group is 'User-agent: *' with an EMPTY 'Disallow:', which allows everything. vinsperestimarelvi.com has TWO 'User-agent: *' groups — the first disallowing /wp-content/uploads/wpo/wpo-plugins-tables-list.json, the second a Yoast block with an empty Disallow. Under RFC 9309 groups naming the same token are merged, so the union disallows exactly that one JSON file; the wine pages and /docs/*.pdf are allowed. No exception was needed on either host.",
+      "evidence": "Systembolaget sells 'Gessami Penedes' 2024, Catalonia, 11,0 %, 75 cl. The producer's page is for the right cuvee — GESSAMI, 'Muscat de Frontignan, sauvignon blanc i gewurztraminer', 'Vol. 11%', which matches Systembolaget's strength exactly — and STATES NO VINTAGE, so step 2 closes the wine: it could not have been vintage-matched even if a list had appeared. (The page's one pack statement, 'Disponible en 375 cl.', is a typo for 375 ml and does not describe Systembolaget's 75 cl item; it is noted, not relied on.) GRAMONA'S STILL WINES ARE ON A SEPARATE BRAND SITE, AND THAT IS THE STRUCTURAL FINDING. gramona.com is the Corpinnat sparkling house; its /coleccion/{wine}/ URLs for the still wines 301 out to VINSPERESTIMARELVI.COM ('vins per estimar el vi'), a small Catalan-first WordPress carrying six wines — Gessami, Mart, Mustillant blanc, Mustillant rosat, Vi de Glass and Ca la Mar — and footed '(c) 2021 GRAMONA, Tots els drets reservats' at Carrer Industria 36, Sant Sadurni d'Anoia. So the producer is right and the wine is right; they are simply not on the domain the producer's name suggests. **Follow the redirect: a Spanish house's still wines can live on a differently-named brand site.** BOTH SURFACES ARE UNDATED. The page gives Varietats, 'Vol. 11%', a 'Moment' paragraph and a link to the fitxa tecnica, and states NO vintage. THE FITXA TECNICA IS SPAIN'S FIRST, AND IT IS THE FRENCH FICHE AND THE ITALIAN SCHEDA AGAIN: Gessami's (docs/gessami_cat.pdf) was downloaded and its text extracted in full — Elaboracio, Sensacions, a Moment paragraph, an Ecologia i sostenibilitat paragraph, 'Varietats: muscat de Frontigan, sauvignon blanc i gewurztraminer' and 'Vol. 11%'. NO VINTAGE, NO INGREDIENT LIST, NO ENERGY VALUE. The one analytical number in it is 'els sis grams de sucre per litre residuals' — residual sugar, which is not an additive declaration. NO OTHER SURFACE EXISTS. gramona.com's sitemap index has four children and none is a product or shop type; its 52-page sitemap holds no shop, no botiga, no tienda and nothing declaration-shaped. Raw and stripped greps of both wine pages return zero for ingredient(e)s, ingredients, nutricional, valors nutricionals, sulfit, kcal, energia, alergen and every vendor token known to this project. ONE SIGN OF HOW MAINTAINED THE SITE IS, recorded because it bears on whether an absence is deliberate: the brand site's footer still contains the WordPress theme's demo content — '123 W 43rd ST, New York, NY', 'oraiste@qode.com', '(456) 5647-215' — beside the real Sant Sadurni address, and the copyright line reads 2021. This is a site nobody has revisited since before the obligation began.",
+      "rejected_because": null,
+      "checked_at": "2026-08-30T13:00:00Z"
+    },
+    {
+      "product_number": "5630701",
+      "name": "Gramona Mart",
+      "producer": "Gramona",
+      "country": "Spanien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://vinsperestimarelvi.com/mart/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.gramona.com/robots.txt (200, Yoast block, 'User-agent: *' with an EMPTY 'Disallow:' — everything allowed)",
+        "https://gramona.com/sitemap_index.xml (200, four children: post, page, avada_portfolio, slide-page — no product or shop type)",
+        "https://gramona.com/avada_portfolio-sitemap.xml (200) — the wine post type; both Swedish wines are in it",
+        "https://gramona.com/page-sitemap.xml (200, 52 pages) — no shop, no botiga/tienda, no e-label page, nothing declaration-shaped",
+        "https://gramona.com/coleccion/gramona-gessami/ (301 to https://vinsperestimarelvi.com/gessami/, 200, 107 kB)",
+        "https://gramona.com/coleccion/gramona-mart/ (301 to https://vinsperestimarelvi.com/mart/, 200, 109 kB)",
+        "https://vinsperestimarelvi.com/robots.txt (200, TWO 'User-agent: *' groups — one disallowing a wp-optimize JSON file, one a Yoast block with an empty Disallow; merged under RFC 9309 they disallow only that JSON file)",
+        "https://vinsperestimarelvi.com/docs/gessami_cat.pdf (200, 244 kB, one page, text extracted in full)",
+        "https://vinsperestimarelvi.com/docs/mart_cat.pdf (linked as this wine's fitxa tecnica; NOT downloaded — the Gessami sheet settled the template for the estate, per the one-PDF-settles-the-format rule)"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "Same two hosts as the sibling record: gramona.com allows everything (Yoast group with an empty Disallow), and vinsperestimarelvi.com's two merged 'User-agent: *' groups disallow only a wp-optimize JSON file. No exception was needed.",
+      "evidence": "Systembolaget sells 'Gramona Mart' 2025, Catalonia, 11,0 %, 75 cl. The producer's page is for the right cuvee — MART, 'Varietat: Xarel·lo vermell', 'Vol. 11%', matching Systembolaget's strength exactly — and STATES NO VINTAGE, so step 2 closes it. Its fitxa tecnica (docs/mart_cat.pdf) was deliberately NOT downloaded: the Gessami sheet from the identical template was read in full and contains no ingredient list, no nutrition and no vintage, and one PDF settles the format for an estate. GRAMONA'S STILL WINES ARE ON A SEPARATE BRAND SITE, AND THAT IS THE STRUCTURAL FINDING. gramona.com is the Corpinnat sparkling house; its /coleccion/{wine}/ URLs for the still wines 301 out to VINSPERESTIMARELVI.COM ('vins per estimar el vi'), a small Catalan-first WordPress carrying six wines — Gessami, Mart, Mustillant blanc, Mustillant rosat, Vi de Glass and Ca la Mar — and footed '(c) 2021 GRAMONA, Tots els drets reservats' at Carrer Industria 36, Sant Sadurni d'Anoia. So the producer is right and the wine is right; they are simply not on the domain the producer's name suggests. **Follow the redirect: a Spanish house's still wines can live on a differently-named brand site.** BOTH SURFACES ARE UNDATED. The page gives Varietats, 'Vol. 11%', a 'Moment' paragraph and a link to the fitxa tecnica, and states NO vintage. THE FITXA TECNICA IS SPAIN'S FIRST, AND IT IS THE FRENCH FICHE AND THE ITALIAN SCHEDA AGAIN: Gessami's (docs/gessami_cat.pdf) was downloaded and its text extracted in full — Elaboracio, Sensacions, a Moment paragraph, an Ecologia i sostenibilitat paragraph, 'Varietats: muscat de Frontigan, sauvignon blanc i gewurztraminer' and 'Vol. 11%'. NO VINTAGE, NO INGREDIENT LIST, NO ENERGY VALUE. The one analytical number in it is 'els sis grams de sucre per litre residuals' — residual sugar, which is not an additive declaration. NO OTHER SURFACE EXISTS. gramona.com's sitemap index has four children and none is a product or shop type; its 52-page sitemap holds no shop, no botiga, no tienda and nothing declaration-shaped. Raw and stripped greps of both wine pages return zero for ingredient(e)s, ingredients, nutricional, valors nutricionals, sulfit, kcal, energia, alergen and every vendor token known to this project. ONE SIGN OF HOW MAINTAINED THE SITE IS, recorded because it bears on whether an absence is deliberate: the brand site's footer still contains the WordPress theme's demo content — '123 W 43rd ST, New York, NY', 'oraiste@qode.com', '(456) 5647-215' — beside the real Sant Sadurni address, and the copyright line reads 2021. This is a site nobody has revisited since before the obligation began.",
+      "rejected_because": null,
+      "checked_at": "2026-08-30T13:00:00Z"
     }
   ],
-  "updated_at": "2026-08-30T12:40:00Z",
+  "updated_at": "2026-08-30T13:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -13879,6 +13942,11 @@
       "at": "2026-08-30T12:40:00Z",
       "batch": "4 — Spain, first batch: Bodegas Vegamar (3 wines)",
       "result": "3 attempted, 0 found, 3 not found — SPAIN'S FIRST PRODUCER, and it fails the way Italy's do. The bodega runs ONE Odoo site at vegamar.es that is simultaneously the marketing site and the shop: the marketing slugs 301 into the shop product pages, so step 3 and step 4 are the same request. Its product template is uniform across all three wines — VINIFICACION, NOTAS DE CATA, VARIEDADES, TEMPERATURA DE SERVICIO, MARIDAJE, FORMATOS: 75 cl, AREA DE PRODUCCION, PREMIOS — and states NO VINTAGE AND NO ALCOHOL, so the Italian step-2 close (the undated cuvee page) transfers to Spain intact. THE FINDING WORTH CARRYING IS A NEW POINTER SHAPE THAT GOES NOWHERE: every product page carries 'Consultar alergenos' as an anchor to /alergenos, sitting directly under the add-to-cart button, exactly where an e-label link would be — and /alergenos answers 200 with the shop's product LISTING, which is Odoo's soft 404. The bodega has put an allergen link on 2 457 pages and never built the page. RECOGNISE 'Consultar alergenos' AS SPAIN'S FIRST CANDIDATE ANCHOR TEXT and check where it actually lands. The only substance word on the site is 'sulfitado' inside the vinification prose, which is Chateau d'Astros' 'Sulfitage maitrise' in Spanish and is not a declaration. HOST NOTES: bodegasvegamar.com refuses 443 and 301s to vegamar.es over plain http; vegamar.es runs WILDCARD DNS, so no subdomain there proves a host; its robots.txt is 'User-agent: *' with NO directives, which disallows nothing; and its own sitemap carries a stale product URL that 404s."
+    },
+    {
+      "at": "2026-08-30T13:00:00Z",
+      "batch": "4 — Spain, first batch: Gramona (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in eight requests. THE STRUCTURAL LESSON IS THE REDIRECT: gramona.com is the Corpinnat sparkling house, and its /coleccion/{wine}/ URLs for the still wines 301 OUT to a separate brand site, VINSPERESTIMARELVI.COM, which carries six wines and is footed '(c) 2021 GRAMONA'. A Spanish house's still wines can live on a differently-named domain — follow the redirect rather than concluding the wine is absent. SPAIN'S FIRST FITXA TECNICA was downloaded and read in full and is the French fiche and the Italian scheda a third time: Elaboracio, Sensacions, a food-pairing paragraph, a sustainability paragraph, Varietats and 'Vol. 11%' — no vintage, no ingredient list, no energy value, and its one number is residual sugar. Both wines close at step 2 on the undated page; the strength matches Systembolaget exactly on both (11 % against 11,0), which is what makes the missing year the only obstacle. gramona.com has no shop and no product post type: four sitemap children, 52 pages, nothing declaration-shaped. WORTH NOTING FOR JUDGING WHETHER AN ABSENCE IS DELIBERATE: the brand site's footer still carries its WordPress theme's demo content ('123 W 43rd ST, New York, NY', 'oraiste@qode.com') beside the real address, and its copyright reads 2021 — nobody has revisited it since before the obligation began."
     }
   ]
 }
