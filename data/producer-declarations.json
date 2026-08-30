@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 520,
+  "attempted": 521,
   "found": 33,
-  "not_found": 435,
+  "not_found": 436,
   "rejected": 52,
   "declarations": [
     {
@@ -14865,14 +14865,18 @@
       "sources_checked": [
         "https://www.perrier-jouet.com/robots.txt — 403. The robots file itself is refused, so no directives could be read",
         "https://www.perrier-jouet.com/ (403, 5 488 bytes) — the brand's own site refuses an identified request at the edge",
-        "https://perrier-jouet.com/en-ww/champagne-collection/grand-brut (403, 5 488 bytes, byte-identical length) — ONE fetch of the apex hostname, on a URL held from a public search index rather than guessed, to establish whether the refusal was specific to the www host. It is not: both hostnames refuse identically, and the host was not touched again"
+        "https://perrier-jouet.com/en-ww/champagne-collection/grand-brut (403, 5 488 bytes, byte-identical length) — ONE fetch of the apex hostname, on a URL held from a public search index rather than guessed, to establish whether the refusal was specific to the www host. It is not: both hostnames refuse identically, and the host was not touched again",
+        "https://www.pernodricard.se/robots.txt — stock WordPress: wildcard group disallowing /wp-admin/ and allowing /wp-admin/admin-ajax.php. Nothing here is disallowed",
+        "https://www.pernodricard.se/sortiment/mumm-cordon-rouge/ (200) — six pack variations, 375/750/1500/3000/6000/9000 ml, EVERY ONE data-e-label=\"\"",
+        "https://www.pernodricard.se/sortiment/perrier-jouet-grand-brut/ (200) — one variation, 750 ml, data-e-label=\"\"",
+        "https://www.pernodricard.se/sortiment/perrier-jouet-blanc-de-blancs/ (200) — one variation, 750 ml, data-article=\"56155\", data-e-label=\"\""
       ],
-      "evidence": "NOT AN IDENTITY FAILURE AND NOT AN ABSENCE — a refusal. Both wines are non-vintage (Systembolaget carries no vintage for either), so this is exactly the case where e-label.pernod-ricard.com's liquid-keyed declaration would have been exact rather than worthless, and the sister brand G.H. Mumm publishes its whole range's liquidQualityCodes on an index page at /{locale}/nutrional-information/. The same index almost certainly exists on perrier-jouet.com — a page titled 'Nutritional Information | Perrier-Jouët USA' at /en-us/nutritional-information is in the public search index. IT CANNOT BE READ: perrier-jouet.com answers 403 to an identified request, on the apex and the www host alike, and even its robots.txt is 403. A 403 is a technological refusal and is absolute under the project's rules: not retried, not worked around, no mobile User-Agent, no exception. The liquidQualityCode was therefore never obtained, and it will not be guessed — the platform's codes are opaque (L0047G, L01078) and enumerating them on the e-label host is exactly the traversal the robots policy forbids. This record is the 1500 ml item.",
+      "evidence": "NOT AN IDENTITY FAILURE AND NOT AN ABSENCE — a refusal. Both wines are non-vintage (Systembolaget carries no vintage for either), so this is exactly the case where e-label.pernod-ricard.com's liquid-keyed declaration would have been exact rather than worthless, and the sister brand G.H. Mumm publishes its whole range's liquidQualityCodes on an index page at /{locale}/nutrional-information/. The same index almost certainly exists on perrier-jouet.com — a page titled 'Nutritional Information | Perrier-Jouët USA' at /en-us/nutritional-information is in the public search index. IT CANNOT BE READ: perrier-jouet.com answers 403 to an identified request, on the apex and the www host alike, and even its robots.txt is 403. A 403 is a technological refusal and is absolute under the project's rules: not retried, not worked around, no mobile User-Agent, no exception. The liquidQualityCode was therefore never obtained, and it will not be guessed — the platform's codes are opaque (L0047G, L01078) and enumerating them on the e-label host is exactly the traversal the robots policy forbids. This record is the 1500 ml item. SECOND ROUTE TRIED, AND IT ALSO CAME BACK EMPTY. The Swedish owner's own portfolio site, pernodricard.se, is readable (stock WordPress robots.txt, nothing relevant disallowed) and carries a page per product with a 'Näringsinfo' button whose href the theme fills from a data-e-label attribute. Grand Brut's page and Blanc de Blancs' page each carry exactly one variation and both have data-e-label=\"\", as does every one of the six Mumm Cordon Rouge variations. Blanc de Blancs' variation also carries data-article=\"56155\", which is Systembolaget's 5615501 without the pack suffix, so the Swedish page is demonstrably the same item. A PACK NOTE FOR GRAND BRUT: pernodricard.se lists only a 750 ml Grand Brut, while Systembolaget's 7650206 is the 1500 ml magnum. That does not change the outcome — there is no declaration to attach either way — but it is not a pack match and would have to be settled before any future find is attached to this product number.",
       "robots_note": "perrier-jouet.com's robots.txt is itself a 403, so no directives exist to honour or set aside. The stop here is the 403 on the pages, which is a technological measure and absolute — the e-label exception has nothing to do with it and was not considered.",
       "blocked_by": "HTTP 403 on the producer's own host, both www and apex",
       "server_rendered": null,
       "elabel_platform": "Expected to be e-label.pernod-ricard.com (the brand is Pernod Ricard's and its sister brand G.H. Mumm is on it), but never reached: the brand site that would publish the code is refused.",
-      "checked_at": "2026-08-31T09:40:00Z"
+      "checked_at": "2026-08-31T10:05:00Z"
     },
     {
       "product_number": "5615501",
@@ -14890,17 +14894,49 @@
       "sources_checked": [
         "https://www.perrier-jouet.com/robots.txt — 403. The robots file itself is refused, so no directives could be read",
         "https://www.perrier-jouet.com/ (403, 5 488 bytes) — the brand's own site refuses an identified request at the edge",
-        "https://perrier-jouet.com/en-ww/champagne-collection/grand-brut (403, 5 488 bytes, byte-identical length) — ONE fetch of the apex hostname, on a URL held from a public search index rather than guessed, to establish whether the refusal was specific to the www host. It is not: both hostnames refuse identically, and the host was not touched again"
+        "https://perrier-jouet.com/en-ww/champagne-collection/grand-brut (403, 5 488 bytes, byte-identical length) — ONE fetch of the apex hostname, on a URL held from a public search index rather than guessed, to establish whether the refusal was specific to the www host. It is not: both hostnames refuse identically, and the host was not touched again",
+        "https://www.pernodricard.se/robots.txt — stock WordPress: wildcard group disallowing /wp-admin/ and allowing /wp-admin/admin-ajax.php. Nothing here is disallowed",
+        "https://www.pernodricard.se/sortiment/mumm-cordon-rouge/ (200) — six pack variations, 375/750/1500/3000/6000/9000 ml, EVERY ONE data-e-label=\"\"",
+        "https://www.pernodricard.se/sortiment/perrier-jouet-grand-brut/ (200) — one variation, 750 ml, data-e-label=\"\"",
+        "https://www.pernodricard.se/sortiment/perrier-jouet-blanc-de-blancs/ (200) — one variation, 750 ml, data-article=\"56155\", data-e-label=\"\""
       ],
-      "evidence": "NOT AN IDENTITY FAILURE AND NOT AN ABSENCE — a refusal. Both wines are non-vintage (Systembolaget carries no vintage for either), so this is exactly the case where e-label.pernod-ricard.com's liquid-keyed declaration would have been exact rather than worthless, and the sister brand G.H. Mumm publishes its whole range's liquidQualityCodes on an index page at /{locale}/nutrional-information/. The same index almost certainly exists on perrier-jouet.com — a page titled 'Nutritional Information | Perrier-Jouët USA' at /en-us/nutritional-information is in the public search index. IT CANNOT BE READ: perrier-jouet.com answers 403 to an identified request, on the apex and the www host alike, and even its robots.txt is 403. A 403 is a technological refusal and is absolute under the project's rules: not retried, not worked around, no mobile User-Agent, no exception. The liquidQualityCode was therefore never obtained, and it will not be guessed — the platform's codes are opaque (L0047G, L01078) and enumerating them on the e-label host is exactly the traversal the robots policy forbids. This record is the 750 ml item.",
+      "evidence": "NOT AN IDENTITY FAILURE AND NOT AN ABSENCE — a refusal. Both wines are non-vintage (Systembolaget carries no vintage for either), so this is exactly the case where e-label.pernod-ricard.com's liquid-keyed declaration would have been exact rather than worthless, and the sister brand G.H. Mumm publishes its whole range's liquidQualityCodes on an index page at /{locale}/nutrional-information/. The same index almost certainly exists on perrier-jouet.com — a page titled 'Nutritional Information | Perrier-Jouët USA' at /en-us/nutritional-information is in the public search index. IT CANNOT BE READ: perrier-jouet.com answers 403 to an identified request, on the apex and the www host alike, and even its robots.txt is 403. A 403 is a technological refusal and is absolute under the project's rules: not retried, not worked around, no mobile User-Agent, no exception. The liquidQualityCode was therefore never obtained, and it will not be guessed — the platform's codes are opaque (L0047G, L01078) and enumerating them on the e-label host is exactly the traversal the robots policy forbids. This record is the 750 ml item. SECOND ROUTE TRIED, AND IT ALSO CAME BACK EMPTY. The Swedish owner's own portfolio site, pernodricard.se, is readable (stock WordPress robots.txt, nothing relevant disallowed) and carries a page per product with a 'Näringsinfo' button whose href the theme fills from a data-e-label attribute. Grand Brut's page and Blanc de Blancs' page each carry exactly one variation and both have data-e-label=\"\", as does every one of the six Mumm Cordon Rouge variations. Blanc de Blancs' variation also carries data-article=\"56155\", which is Systembolaget's 5615501 without the pack suffix, so the Swedish page is demonstrably the same item. A PACK NOTE FOR GRAND BRUT: pernodricard.se lists only a 750 ml Grand Brut, while Systembolaget's 7650206 is the 1500 ml magnum. That does not change the outcome — there is no declaration to attach either way — but it is not a pack match and would have to be settled before any future find is attached to this product number.",
       "robots_note": "perrier-jouet.com's robots.txt is itself a 403, so no directives exist to honour or set aside. The stop here is the 403 on the pages, which is a technological measure and absolute — the e-label exception has nothing to do with it and was not considered.",
       "blocked_by": "HTTP 403 on the producer's own host, both www and apex",
       "server_rendered": null,
       "elabel_platform": "Expected to be e-label.pernod-ricard.com (the brand is Pernod Ricard's and its sister brand G.H. Mumm is on it), but never reached: the brand site that would publish the code is refused.",
-      "checked_at": "2026-08-31T09:40:00Z"
+      "checked_at": "2026-08-31T10:05:00Z"
+    },
+    {
+      "product_number": "808901",
+      "name": "Grådask Tawny",
+      "producer": "Pernod Ricard",
+      "country": "Portugal",
+      "vintage": null,
+      "status": "not_found",
+      "source_url": "https://www.pernodricard.se/sortiment/gradask-tawny-port/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "SE",
+      "sources_checked": [
+        "https://www.pernodricard.se/robots.txt — stock WordPress: wildcard group disallowing /wp-admin/ and allowing /wp-admin/admin-ajax.php. Nothing here is disallowed",
+        "https://www.pernodricard.se/sortiment/gradask-tawny-port/ (200, 72 kB) — Grådask's own page on the Swedish owner's portfolio site. It carries a 'Näringsinfo' BUTTON with an EMPTY href (<a id=\"elabel_button\" href=\"\">), filled in client-side",
+        "https://www.pernodricard.se/wp-content/themes/pernod-ricard-sweden/public/js/templates/single-product.js (200, 3,9 kB) — read to find where the href comes from. It reads data-price/volume/article/ean off the selected variation div; the e-label URL is the variation's data-e-label attribute",
+        "https://www.pernodricard.se/wp-sitemap.xml -> /sitemaps.xml (200) and /product-sitemap1.xml (200, 238 product URLs) — the way to a product page on a FacetWP listing that renders client-side",
+        "https://www.pernodricard.se/sortiment/mumm-cordon-rouge/ (200) — six pack variations, 375/750/1500/3000/6000/9000 ml, EVERY ONE data-e-label=\"\"",
+        "https://www.pernodricard.se/sortiment/perrier-jouet-grand-brut/ (200) — one variation, 750 ml, data-e-label=\"\"",
+        "https://www.pernodricard.se/sortiment/perrier-jouet-blanc-de-blancs/ (200) — one variation, 750 ml, data-article=\"56155\", data-e-label=\"\""
+      ],
+      "evidence": "Identity is as good as it gets: Grådask is a Swedish house brand owned by Pernod Ricard, its page on pernodricard.se carries the product's own name, Porto/Portugal, and a 'Köp på Systembolaget' link pointing at https://www.systembolaget.se/produkt/vin/gradask-808901/ — the exact product number. It is non-vintage, so the vintage rule cannot bite. THE DECLARATION IS STILL NOT THERE. The page has the right control — a button reading 'Näringsinfo' — and the theme fills its href from the variation's data-e-label attribute, and that attribute is the empty string. The owner's Swedish site has the e-label field built in and has left it blank for this product. The only other document offered is a 'produktblad' PDF uploaded in 2022 (/wp-content/uploads/2022/11/Gradask-Tawny-Port-.pdf); it was NOT fetched, because a sheet published more than a year before the 8 December 2023 obligation cannot be the mandated declaration and a Swedish trade produktblad is a tasting sheet. That is a judgement, not a reading — the PDF's contents are unverified.",
+      "robots_note": "pernodricard.se serves a stock WordPress robots.txt disallowing only /wp-admin/. Everything fetched here is allowed and no exception was used.",
+      "server_rendered": true,
+      "elabel_platform": null,
+      "checked_at": "2026-08-31T10:05:00Z"
     }
   ],
-  "updated_at": "2026-08-31T09:40:00Z",
+  "updated_at": "2026-08-31T10:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -15377,6 +15413,11 @@
       "at": "2026-08-31T09:40:00Z",
       "batch": "PR — cross-cutting Pernod Ricard slice, second producer: Champagne Perrier-Jouët (2 wines, Grand Brut 1500 ml and Blanc de Blancs 750 ml)",
       "result": "2 attempted, 0 found, 2 not found, in two requests. BOTH CLOSED ON A 403, NOT ON ABSENCE. perrier-jouet.com refuses an identified request at the edge on both the www host and the apex, and its robots.txt is a 403 too. The Mumm index pattern says where the codes would be — /{locale}/nutritional-information/ — and the public search index confirms such a page exists on perrier-jouet.com, but it cannot be read and a liquidQualityCode will not be guessed. THE SLICE'S REACH IS THEREFORE GATED BY THE BRAND SITE, NOT BY THE PLATFORM: e-label.pernod-ricard.com is open, and the only way in is the brand's own index page."
+    },
+    {
+      "at": "2026-08-31T10:05:00Z",
+      "batch": "PR — cross-cutting Pernod Ricard slice, third producer: Grådask Tawny (Pernod Ricard, Portugal), plus a second route re-tried for Perrier-Jouët",
+      "result": "1 attempted, 0 found, 1 not found, in seven requests, two of which also re-closed the two Perrier-Jouët wines by a route that does not touch the 403 host. NEW AND WORTH KEEPING: pernodricard.se, the Swedish owner's portfolio site, is stock WordPress, fully readable, has a product page per SKU with a 'Köp på Systembolaget' link that names the product number outright, and has an E-LABEL FIELD BUILT INTO THE TEMPLATE — the 'Näringsinfo' button's href comes from the variation div's data-e-label attribute. IT IS EMPTY ON ALL FOUR WINE PRODUCTS CHECKED (Grådask, Mumm Cordon Rouge in six pack sizes, Perrier-Jouët Grand Brut, Perrier-Jouët Blanc de Blancs). So the Swedish importer has the plumbing for the disclosure and has published nothing through it. Route to a product page: /product-sitemap1.xml, 238 URLs; the /sortiment/ listing is FacetWP and renders client-side."
     }
   ]
 }
