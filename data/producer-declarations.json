@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 529,
+  "attempted": 530,
   "found": 33,
-  "not_found": 444,
+  "not_found": 445,
   "rejected": 52,
   "declarations": [
     {
@@ -15131,6 +15131,30 @@
       "vintage_on_source": null,
       "server_rendered": true,
       "elabel_platform": null
+    },
+    {
+      "product_number": "7577701",
+      "name": "Quinta Apolonia Belondrade",
+      "producer": "Belondrade y Lurton",
+      "country": "Spanien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://belondrade.com/boutique/vinos/belondrade-quinta-apolonia/",
+      "source_type": "producer_site",
+      "sources_checked": [
+        "https://www.belondrade.com/robots.txt — readable wildcard group, nothing relevant disallowed",
+        "https://www.belondrade.com/ (200, 145 kB) — 301 to the apex. terms: 0. Its boutique links four wine pages",
+        "https://belondrade.com/boutique/vinos/belondrade-quinta-apolonia/ (200, 137 kB, 4 240 visible characters) — the wine's own boutique page. terms: 0, no declaration-shaped link, no vendor named, no QR destination"
+      ],
+      "evidence": "Producer and cuvée match — Belondrade publishes Quinta Apolonia as its Verdejo and Systembolaget's item is 'Quinta Apolonia Belondrade'. Nothing further: the boutique page carries no ingredient heading, no nutrition table, no e-label vendor and no QR destination. Worth one line for a later run: the boutique's OTHER wine is published per vintage — /boutique/vinos/belondrade-y-lurton-2022/ and …-2024/ — so this estate does date its product pages, and if it ever publishes a declaration it will be datable. Quinta Apolonia has a single undated page.",
+      "robots_note": "belondrade.com's robots.txt is readable and does not disallow what was fetched. No exception used.",
+      "checked_at": "2026-08-31T11:00:00Z",
+      "market": "EU",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "server_rendered": true,
+      "elabel_platform": null
     }
   ],
   "updated_at": "2026-08-31T11:00:00Z",
@@ -15655,6 +15679,11 @@
       "at": "2026-08-31T11:00:00Z",
       "batch": "4d — Spain, eighth producer: Lagar de Fornelos / La Rioja Alta S.A. (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in two requests. Closed on CUVÉE: 'Lat 42' is not in the bodega's published range of three wines. A FOURTH LARGE SPANISH GROUP publishes no declaration (after Pinord, Familia Torres and Muriel Wines). riojalta.com is the project's SECOND named-crawler-only robots.txt after bpdr.com — three Google groups, no wildcard fallback, so nothing binds us."
+    },
+    {
+      "at": "2026-08-31T11:00:00Z",
+      "batch": "4d — Spain, ninth producer: Belondrade (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in two requests. Nothing on the page. One structural note: Belondrade publishes its flagship per vintage (…/belondrade-y-lurton-2022/, …-2024/) but Quinta Apolonia as a single undated page, so the same estate is datable for one wine and not for another."
     }
   ]
 }
