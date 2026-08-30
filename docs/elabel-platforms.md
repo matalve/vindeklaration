@@ -19,13 +19,18 @@ your own country's section. The country deep-dives are the bulk of the file and
 they do not transfer between countries. `grep` for a host, a vendor or a
 producer name answers "has this been seen before" for nothing.
 
-**Spain opened on 2026-08-30** and has had two batches — fourteen producers, 31
-wine records, **one declaration attached, one rejected, 29 not found**, with 59
-wines still untouched. See *Spain opens, and the first four producers all fail
-on identity's opposite* and *The second Spanish batch: an adopter at last, and
-Spain's shape confirmed*, near the end of this file. Spain's first e-label
-vendor is **`digital-label.eu`** (Albet i Noya) and it is the only one seen in
-fourteen producers.
+**Spain opened on 2026-08-30** and has had three batches — 30 producer strings,
+50 wine records, **one declaration attached, three rejected, 46 not found**,
+with 41 wines still untouched. See *Spain opens, and the first four producers
+all fail on identity's opposite*, *The second Spanish batch: an adopter at last,
+and Spain's shape confirmed* and *The third Spanish batch: three e-label
+adopters, and none of them readable*, at the end of this file. **Three Spanish
+producers have now been found on an e-label platform** — `digital-label.eu`
+(Albet i Noya, readable), `u-label.com` (Bodegas Frutos Villar) and Scantrust
+(Bodegas Murviedro) — and **`u-label.com` turned out to BE Scantrust**, so two
+of the three are unreadable by construction. `u-label.com` had been absent from
+every producer's HTML in three countries until 2026-08-30; that claim is now
+retired.
 
 Status as of 2026-08-30, across 496 wine records and some 226 producer strings
 (fewer actual producers — Systembolaget spells several of them twice). **The German
@@ -84,13 +89,15 @@ producer strings, with no pairs left to find.**
 | **carmaqrcode** | `www.carmaqrcode.it/{n}/{nnn-nnn-valori-nutrizionali-{wine-slug}}/` | **Readable only through the PDF, and the page itself is empty.** An Italian vendor running WordPress, one post per wine, whose `entry-content` is a single empty `<div class="_df_book">` — a 3D FlipBook viewer. **A stripped-text read and an `<a href>` scan both come back with nothing**; the document URL appears only inside an inline script as `"source":"…pdf"`, so only a raw grep for `.pdf` finds it. The PDF is a two-page Illustrator artboard: page one the ingredient list, the allergens and the nutrition table, trilingual it/en/fr in three columns; page two the Italian *etichettatura ambientale*. `robots.txt` is the stock WordPress `Disallow: /wp-admin/` with `Allow: /wp-admin/admin-ajax.php`, so the post and the `wp-content` PDF are allowed and **no exception is needed**. **It states no vintage**, and neither did the producer that used it, which is why the find was a rejection. Found via Tralci Hirpini (Campania), reached because the producer's own product URL **301s straight into the vendor**. |
 | **A dedicated first-party e-label DOMAIN** | `qualita{producer}.it/{wine-slug}` | **Italy's fourth first-party publisher shape and the best-behaved one yet — a whole domain that exists for nothing but the disclosure.** Rocca delle Macìe runs `qualitaroccadellemacie.it`, WordPress with Elementor and TablePress, one page per wine, three sections: `Lista ingredienti/Ingredient list`, `Valori nutrizionali/Nutrition facts per 100ml` and `Etichettatura ambientale`, bilingual it/en line by line, footer `©2026 Rocca delle Macìe S.p.A. \| P.iva 00209800523`. **The nutrition table's first column is headed `Anno` and carries the year** (a `rowspan=5` cell reading 2024) — after Giunko's ead-qr this is the second Italian source anywhere that dates its own declaration, and the only first-party one. `robots.txt` is the stock WordPress `Disallow: /wp-admin/`, so no exception is needed. **The pointer to it is on the SHOP and it is not an anchor**: the WooCommerce-style product description's last paragraph reads *"Per informazioni su **Etichetta ambientale, lista ingredienti e tabella nutrizionale** clicca qui: https://qualitaroccadellemacie.it/…"* with the URL as bare text, so an `<a href>` scan misses it entirely and only a raw grep for `ingredien` finds it. **Do not guess the domain from the producer's name** — this one was reached from the producer's own text. |
 | **An importer's per-country EU storefront** | `eu.{brand}.com/{cc}/products/{slug}` | **Not a declaration and it belongs in the readable table anyway, because it is the wine's REAL EU market surface and it is the first place to look when the brand's own site is not European.** Alileo Wines' site is US-only; its EU sales run through **Bemakers ApS** (Copenhagen), the Danish excise-and-compliance platform that is also Systembolaget's supplier, on `eu.alileowines.com` with one storefront per country — `/at /ch /de /dk /fr /nl /se`. Server-rendered Rails-shaped HTML, permissive `robots.txt` (disallows only `/login`, `/*/policy`, `/*/terms-and-conditions`). **What it publishes where the ingredient list belongs is a collapsed `Allergens` panel containing the single word `Sulfites`**, plus the organic control-body code — the Italian two-particular near-miss in English. **It states no vintage, and its alcohol figure is a template**: all four Alileo wines read `Alcohol: 13.5%` against Systembolaget's 13,5 / 12,5 / 12,0 / 12,5, so it cannot strength-match either. Reach it from the brand's own `/pages/shop-eu`, which the US Shopify's `sitemap_pages_1.xml` names. |
+| **Pernod Ricard's own group e-label** | `e-label.pernod-ricard.com/{liquidQualityCode}`, data at `/liquid-qualities/{code}/{code}.json` and `/liquid-qualities/{code}/{code}_{CC}.json` | **A GROUP-WIDE platform run by a drinks multinational for its own brands, and the third client-side platform in this file whose data layer is plain public JSON — so unreadable as a page and completely readable as a payload.** The page is a 747-byte Vite/Vue shell (`<div id="app">`, 6 visible characters). Its entry bundle routes `/:liquidQualityCode`; the `Product` chunk gives the two endpoints, both unauthenticated, no header, no token, no gate. The base file carries `commercialName`, `alcoholLevel`, `nutritionContents` and ~170 per-country `liquidQualityDenominations` naming the responsible company; **the per-country file is the market surface** and its `displayBlockTypeId: 2` block holds the ingredient list, translated per `languageId` (8 = English, 24 = Swedish), with the allergen in capitals. `robots.txt` names specific crawlers only with no `User-agent: *` fallback, so nothing applies to us and **no exception is needed**. **ITS ONE DEFECT IS FATAL FOR THIS PROJECT: it is keyed on a LIQUID, not a bottling.** The full key set was enumerated and there is no vintage, no year, no date and no lot field anywhere, so a declaration read here can never be dated and the same URL will silently serve a new recipe when the blend is rebuilt. Found via Campo Viejo (now Vinarchy Spain S.A.U., still on Pernod Ricard's platform), whose own product page links `…/L004YJ` as **bare text inside a 'Click here for product information' anchor** — `terms: 0` and no declaration-shaped link, so only a raw grep for `e-label` finds it. **Where it will pay is a NON-VINTAGE wine**, since a liquid-keyed declaration has no vintage to fail: Perrier-Jouët, Mumm and the group's NV bottlings on Systembolaget carry no vintage either. |
 | **Producer's page itself** | no platform at all | Bastianshauser Hof – Erbeldinger puts the **complete mandated set inline** on its WooCommerce product page, inside a collapsed accordion whose panel is in the server's HTML: Jahrgang, Alk., Flasche, Bio-Hinweis, `Zutaten:`, `Ø Nährwerte pro 100 ml` and the Gutsabfüller. No link, no iframe, nothing for an href scan to find — only a raw-HTML grep for `Zutaten` finds it. |
 
 ## Unreadable — client-side rendering
 
 | Platform | Pattern | Why |
 |---|---|---|
-| **Scantrust** | `matu.st4.ch/{token}` or `label.{producer}.{tld}/qr/{slug}` → `elabel.scantrust.com/default/#/?uid=…&api_key=…&qr={slug}` | 828-byte shell, empty `<div id=app>`. **The uid and api_key are in the URL fragment, which is never sent to the server** — that host cannot serve the declaration by construction. The api_key is minted and signed per request, so it is an issued token and absolute under the agent's rules. Do not mine the JS bundles. `matu.st4.ch` answers `Disallow: /`, which is where the robots exception applies. **Second deployment, and the first Italian one: Masi Agricola**, on its own vanity host `label.masi.it`, whose `robots.txt` is the single line `User-agent: *` with no directives under it — nothing disallowed, so no exception was needed there. Masi's redirect is a 1 590-byte shell rather than 828 and the slug is echoed back as a `qr=` parameter, but the fragment problem is identical. **The uid is per wine and the slug is NOT per vintage** — see *Masi publishes its e-label as a QR image*, below. **Third deployment, 2026-08-30, and it settles the one thing that looked like a way in: Scantrust ALSO answers a GS1 Digital Link path**, `eega.st4.ch/01/{gtin}/10/{lot}` (AI 01 = GTIN, AI 10 = batch/lot), which the server *does* receive in full — and it 302s straight into the same 1 590-byte `elabel.scantrust.com/default/#/?uid=…&api_key=…&qr=01%2F{gtin}%2F10%2F{lot}` shell. **So the path form is no more readable than the fragment form, and there is no point trying it again.** `eega.st4.ch/robots.txt` is `Disallow: /`, so that one fetch used the e-label exception and bought nothing. Decoded from a QR on a pack photograph at Alileo Wines. |
+| **Scantrust** | `matu.st4.ch/{token}` or `label.{producer}.{tld}/qr/{slug}` → `elabel.scantrust.com/default/#/?uid=…&api_key=…&qr={slug}` | 828-byte shell, empty `<div id=app>`. **The uid and api_key are in the URL fragment, which is never sent to the server** — that host cannot serve the declaration by construction. The api_key is minted and signed per request, so it is an issued token and absolute under the agent's rules. Do not mine the JS bundles. `matu.st4.ch` answers `Disallow: /`, which is where the robots exception applies. **Second deployment, and the first Italian one: Masi Agricola**, on its own vanity host `label.masi.it`, whose `robots.txt` is the single line `User-agent: *` with no directives under it — nothing disallowed, so no exception was needed there. Masi's redirect is a 1 590-byte shell rather than 828 and the slug is echoed back as a `qr=` parameter, but the fragment problem is identical. **The uid is per wine and the slug is NOT per vintage** — see *Masi publishes its e-label as a QR image*, below. **Third deployment, 2026-08-30, and it settles the one thing that looked like a way in: Scantrust ALSO answers a GS1 Digital Link path**, `eega.st4.ch/01/{gtin}/10/{lot}` (AI 01 = GTIN, AI 10 = batch/lot), which the server *does* receive in full — and it 302s straight into the same 1 590-byte `elabel.scantrust.com/default/#/?uid=…&api_key=…&qr=01%2F{gtin}%2F10%2F{lot}` shell. **So the path form is no more readable than the fragment form, and there is no point trying it again.** `eega.st4.ch/robots.txt` is `Disallow: /`, so that one fetch used the e-label exception and bought nothing. Decoded from a QR on a pack photograph at Alileo Wines. **Fourth and fifth deployments, 2026-08-30, both Spanish, and the first settles what `u-label.com` is** — see the row below and *Bodegas Murviedro*: `bmkp.st4.ch/01/{gtin}`, the GS1 path form with NO lot segment, 302s into the identical 1 590-byte shell, so the bare-GTIN form is confirmed no more readable than either of the others. `bmkp.st4.ch/robots.txt` is `Disallow: /` and the e-label exception bought nothing there either. **Three tenant hosts tested (`matu.st4.ch`, `eega.st4.ch`, `bmkp.st4.ch`), two path forms, one vanity domain: never fetch a Scantrust URL again.** |
+| **u-label.com** | `www.u-label.com/qr/{13-hex}` | **IT IS SCANTRUST.** The platform the agent brief names first, absent from every producer's HTML in three countries and 200-odd producers, finally appeared on 2026-08-30 at **Bodegas Frutos Villar** — and `https://www.u-label.com/qr/38c1be93c8e32` 302s straight into `https://elabel.scantrust.com/default/#/?uid={uuid}&api_key={signed}&qr={code}`, the same 1 590-byte shell with 9 visible characters. U-label is a Scantrust white-label and inherits its unreadability in full: the uid and api_key are in the URL **fragment**, which the server never receives. `u-label.com/robots.txt` names specific crawlers only with no `User-agent: *` fallback, so nothing is disallowed to us and no exception is needed — and it makes no difference. **Recognise `u-label.com/qr/` and stop.** |
 | **IMERO** | `s.imero.io/c{id}` | Angular/Ionic SPA. Its catalogue lists per-article e-labels keyed by article number whose first two digits are the vintage, so a wine can be present for one vintage and absent for another — Dönnhoff and Robert Weil both failed this way. |
 | **Dropbox folder** | `dropbox.com/scl/fo/…`, one folder per vintage | The folder *view* renders client-side: 309 kB of shell, no file names, and the page's own `&noscript=1` variant is no better. **But the same folder answers `&dl=1` with a zip**, and that is a server response. See *The Dropbox route* below — it is now a resolved find, not a dead end. |
 | **plugwine** | `{producer-slug}.plugwine.com/{fr,en}/vins/{range}/{cuvée-vintage}/{id}` | **A French wine-shop platform, Angular, and every URL on it returns one BYTE-IDENTICAL 67 kB shell with an empty `<pw-root>`** — listing, product and `sitemap.xml` alike (the sitemap is a soft 404). Recognise it by `<pw-root>`, by a `robots.txt` that carries `crawl-delay: 10`, `Disallow: /fr/*` and the ASP.NET pair `/WebResource.axd` + `/ApplicationError.aspx*`, and by a Cloudflare-managed Content-Signal preamble. **Domaine Roquefeuille's `www.domaineroquefeuille.fr` was this platform white-labelled** — same `<pw-root>`, same robots lines — so the two are one platform, not two producers. The product URL does carry cuvée and vintage, so a *range census* is possible from search results even though no page content is. Seen at Vignoble Hermouet and Domaine Roquefeuille. |
@@ -3992,3 +3999,148 @@ did not touch in its broad one.** A single Catalan organic estate has bought a
 vendor; a single Penedès neighbour has not. What has *not* been tried is a large
 Rioja or Ribera group — the segment most likely to have compliance tooling — and
 Muga's outage is why. That test is still open.
+
+### The third Spanish batch: three e-label adopters, and none of them readable
+
+**2026-08-30/31, nine more producer strings and nine more wines**, taking Spain
+to 30 producer strings and 50 wines: **1 found, 3 rejected, 46 not found.**
+Campo Viejo (1, rejected), Bodegas Frutos Villar (2, one rejected — a revisit),
+Bodegas Marqués de Cáceres (1), Familia Martínez Bujanda (2 producer strings, 2
+wines), Bodegas Murviedro (1), Bodegas Portia (1), Bodegas Shaya (1), Enate (1),
+Ego Bodegas (1).
+
+**The large-group hypothesis is answered, and the answer is split.** Five large
+Spanish groups were probed on purpose: Campo Viejo (Pernod Ricard / Vinarchy),
+Marqués de Cáceres, Familia Martínez Bujanda, Bodegas Portia (Familia Martínez
+Zabala, the former Faustino Group), Bodegas Shaya (Gil Family Estates, fourteen
+bodegas) and Bodegas Murviedro (Schenk). **Two of the six publish a real
+e-label and four publish nothing at all** — so scale predicts adoption better in
+Spain than it did in France or Italy, but it does not predict a *readable*
+declaration, and it never predicts a datable one.
+
+#### Three e-label adopters in one batch, and the two lessons
+
+- **Campo Viejo → `e-label.pernod-ricard.com`.** A group-wide platform with an
+  unauthenticated static-JSON data layer, complete ingredient list, a Swedish
+  translation, per-country market files. **Rejected**, because it is keyed on a
+  `liquidQualityCode` and carries no vintage, year, date or lot field anywhere.
+  See the row in *Readable — server-rendered*.
+- **Bodegas Frutos Villar → `u-label.com`.** The first u-label sighting in the
+  project, and it is a **Scantrust white-label**. Unreadable.
+- **Bodegas Murviedro → Scantrust**, on `bmkp.st4.ch/01/{gtin}`. Unreadable.
+
+**Lesson one: the readable/unreadable split now decides the Spanish yield, not
+the publish/don't-publish split.** Three adopters in nine producers is a far
+higher adoption rate than the first two batches suggested; two of the three
+cannot be read by anyone with any permission.
+
+**Lesson two, and it is the more useful one: a liquid-keyed declaration is
+worthless for a vintage wine and ideal for a non-vintage one.** Pernod Ricard's
+platform will never match a 2024 Rioja and will match a Champagne or a tawny
+exactly, because there is no vintage to fail. **The group's NV wines on
+Systembolaget are the place to spend this finding**, and they are not Spanish:
+Perrier-Jouët Grand Brut (7650206), Perrier-Jouët Blanc de Blancs (5615501),
+G.H. Mumm Cordon Rouge (7574010 and 7911201) and the Grådask Tawny (808901) all
+carry no vintage in `wines.json` and all currently declare nothing. **Note the
+brand ownership before starting**: Pernod Ricard sold Campo Viejo, Jacob's
+Creek, Brancott, Stoneleigh and Church Road to **Vinarchy** in 2025, and
+Systembolaget's producer field has followed — but the e-label platform has not,
+so `e-label.pernod-ricard.com` still serves brands that are no longer Pernod
+Ricard's. Thirteen further Martínez Zabala wines (Faustino, Campillo, Portia)
+are undeclared at other vintages, if a wider pool is ever worked.
+
+#### Murviedro does the regulation's split by the book, and it is worth recognising
+
+Murviedro's product page prints **`Contiene Sulfitos`** and **`VALOR
+ENERGÉTICO 100ml: E = 319 kJ / 76 kcal`** inline, with the alcohol and the pack,
+and puts the ingredient list alone behind the QR. That is exactly the division
+Regulation (EU) 2021/2117 permits — allergens and energy stay on the physical
+label, the rest may go electronic — and it is the first Spanish producer seen
+doing it deliberately. **Recognise it as the OPPOSITE of the Weinland Rheingau
+near-miss**: nutrition-without-ingredients is usually a producer who never
+published a list, but a page carrying only the energy value *and* an
+ingredients link is a producer who published one properly. Follow the link.
+
+#### The rolled-forward Spanish surface is now the dominant close
+
+Five of the nine producers in this batch state a vintage later than
+Systembolaget's, and none of them state 2024: Frutos Villar (Añada 2025),
+Marqués de Cáceres (`Antea 2025`), Martínez Bujanda (`FECHA DE VENDIMIA:
+primera semana de septiembre 2025`), Enate (`Chardonnay-234 2025`), Albet i Noya
+in the previous batch. **Systembolaget's Spanish stock is roughly one vintage
+behind the producers' own shop windows**, so the expected outcome for a Spanish
+2024 wine is not "no vintage" but "the wrong vintage", and it will only get
+worse as the year runs on. Where a producer states no `Añada`, look for
+**`FECHA DE VENDIMIA`** — Martínez Bujanda dates its wines with the harvest week
+and never with a year field.
+
+#### Spanish greps that lie, third batch — and `etiqueta` is now four different things
+
+The word `etiqueta` has produced a false positive in every Spanish batch and now
+means four separate things, none of which is a declaration:
+
+1. **`a la contra etiqueta`** — a statement that something is on the back label
+   (batch 1, Raventós).
+2. **`/etiqueta-producto/{slug}`** — **WooCommerce's product-TAG archive in
+   Spanish.** `etiqueta` is WordPress's word for "tag". Martínez Bujanda's
+   product page offered `etiqueta-producto/100-verdejo/` as its only
+   declaration-shaped link. Cross-cutting to every Spanish WooCommerce.
+3. **`Personaliza tu etiqueta`** — a gift-shop label customiser, on both Bodegas
+   Portia and the Martínez Zabala group shop.
+4. **`Etiqueta: Original para ENATE del artista Pepe Cerdá`** — the commissioned
+   ARTWORK on the bottle. Enate heads a whole section with it.
+
+And one more, in the same family: **`Etiqueta Amarilla` / `Etiqueta Azul` /
+`Etiqueta Plata` are WINE NAMES** (Juan Gil's Yellow, Blue and Silver Label).
+The probe reported four declaration-shaped links on `gilfamily.es` and every one
+was a cuvée.
+
+#### Spanish host and site quirks, third batch
+
+- **`bodegasportia.com` serves 404 for every one of its own internal links.**
+  The hrefs are relative and correct; only the home page resolves. A producer
+  site can be broken rather than absent — say which.
+- **`cosecherosycriadores.com` 301s into `familiamartinezbujanda.com`**, which
+  also owns **Finca Montepedroso**. Two of the remaining Spanish "single-wine
+  producers" were one house and one visit. **The Italian normalisation lesson
+  applies in Spain too, and here it is the DOMAIN that reveals it, not the
+  name** — the two Systembolaget producer strings share nothing textually.
+- **`bodegasshaya.com` is NXDOMAIN and `www.shaya.es` serves a certificate for
+  another host.** The route in was `juangil.es`, which 301s to `gilfamily.es`.
+  Neither guessable short name was the bodega's; the *group's* name was.
+- **`familiamartinezbujanda.com/tienda/?products-per-page=all` does not expand
+  the listing** — the parameter is offered in the pagination UI and ignored by
+  the server. Do not trust a shop's own "show all" control.
+- **`murviedro.es/robots.txt` disallows `/*?` and a list of `/tienda/{n}_{range}`
+  category paths** but allows the `/vino/{slug}` product pages, which is where
+  everything is.
+- **`marquesdecaceres.com`'s only declaration-shaped anchor, `Imagen etiqueta`,
+   301s to a 1,7 MB JPEG of the label.** This machine has **no QR decoder and no
+  OCR**, so a label photograph is a dead end here even when it certainly carries
+  a QR. That is a tooling limit worth stating rather than a finding about the
+  producer — the same limit the Masi QR-image case ran into.
+- **Two Spanish shops in this batch carry a "technical problem" banner**
+  (`tienda.familiamartinezzabala.com`) or a delivery-delay notice. Neither is a
+  block; read past it.
+
+#### Where the remaining Spanish work is, after batch 3
+
+**41 wines untouched, and every one of them is a single-wine producer string** —
+the sibling economics are fully spent, unless another pair turns out to share a
+domain the way Cosecheros y Criadores and Finca Montepedroso did. **That is now
+the cheapest check available**: resolve the producer's obvious domain first and
+watch where it redirects, because a group site can collapse two producers into
+one visit for free.
+
+Two hypotheses are closed and one is open:
+
+- **CLOSED: the large Rioja/Ribera group.** Tested six ways in this batch. Two
+  publish, four do not, and neither publisher yields a usable record.
+- **CLOSED: a vendor spreads within a region.** Murviedro (Alicante/Valencia)
+  has Scantrust; Ego Bodegas, a Jumilla neighbour of the same export profile,
+  has nothing and states no vintage either.
+- **OPEN: the multinational-owned producer.** Both Spanish adopters in this
+  batch answer to a non-Spanish parent — Pernod Ricard/Vinarchy and Schenk
+  (Murviedro). That is two for two and it is the only shape in Spain that has
+  predicted an e-label twice. Nothing left in the 2024+ pool obviously fits, so
+  it is a hypothesis for a wider pool rather than for the remaining 41.
