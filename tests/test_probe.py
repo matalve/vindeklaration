@@ -1,6 +1,13 @@
 """The parts of src.probe that decide something, tested without a network."""
 
-from src.probe import _fold, _links, _robots_groups, _term_hits, _visible
+from src.probe import (
+    _fold,
+    _links,
+    _robots_groups,
+    _same_host_links,
+    _term_hits,
+    _visible,
+)
 
 PAGE = """
 <html><head><style>.menu-label{color:red}</style></head><body>
@@ -57,3 +64,24 @@ def test_robots_groups_keep_named_groups_apart():
 def test_robots_groups_merge_stacked_user_agents():
     groups = _robots_groups("User-agent: a\nUser-agent: b\nDisallow: /x\n")
     assert groups["a"] == groups["b"] == ["disallow:/x"]
+
+
+FOOTER = """
+<a href="/es/declaracion-de-accesibilidad">Declaración de accesibilidad</a>
+<a href="/politica-de-cookies">Cookies</a>
+<a href="/es/vinos/el-fanio-2024">El Fanio 2024</a>
+<a href="/wp-content/uploads/logo.png">logo</a>
+<a href="https://otro.test/vinos/x">otro</a>
+"""
+
+
+def test_links_skip_accessibility_and_cookie_footers():
+    found = dict(_links(FOOTER, "https://bodega.test/"))
+    assert found == {}
+
+
+def test_same_host_links_skip_assets_and_other_hosts():
+    found = dict(_same_host_links(FOOTER, "https://bodega.test/"))
+    assert "https://bodega.test/es/vinos/el-fanio-2024" in found
+    assert not any(url.endswith(".png") for url in found)
+    assert not any("otro.test" in url for url in found)

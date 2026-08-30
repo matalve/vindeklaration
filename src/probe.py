@@ -81,6 +81,22 @@ LINK_WORDS = {
     "downloadcenter", "elabels",
 }
 
+# Footer boilerplate that is shaped exactly like a declaration pointer and is
+# never one. `Declaración de accesibilidad` sits on most Spanish WordPress
+# sites; the cookie and privacy variants are the same shape in every language.
+NOT_A_DECLARATION = {
+    "accesibilidad", "accessibility", "accessibilita", "accessibilite",
+    "barrierefreiheit", "tillganglighet", "toegankelijkheid",
+    "cookie", "cookies", "privacidad", "privacy", "privatlivspolitik",
+    "datenschutz", "confidentialite", "riservatezza", "integritetspolicy",
+}
+
+# Extensions that are never a declaration page.
+ASSETS = (
+    ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".ico", ".css", ".js",
+    ".woff", ".woff2", ".ttf", ".eot", ".mp4", ".webm", ".zip", ".xml",
+)
+
 # E-label vendors seen so far. A hit tells the agent which platform it is on
 # before it opens anything, and docs/elabel-platforms.md says which of them
 # render server-side.
@@ -129,18 +145,40 @@ def _term_hits(text: str, context: int) -> list[tuple[str, int, str]]:
     return hits
 
 
-def _links(html: str, base: str) -> list[tuple[str, str]]:
-    found: dict[str, str] = {}
+def _anchors(html: str, base: str) -> list[tuple[str, str, set[str]]]:
+    seen: dict[str, tuple[str, set[str]]] = {}
     for match in re.finditer(
         r"(?is)<a\b[^>]*href=[\"']([^\"'#]+)[\"'][^>]*>(.*?)</a>", html
     ):
         href, label = match.group(1).strip(), _visible(match.group(2))[:80]
         words = set(re.split(r"[^a-z0-9]+", _fold(urlsplit(href).path)))
         words |= set(re.split(r"[^a-z0-9]+", _fold(label)))
-        folded_href = _fold(href)
-        if words & LINK_WORDS or any(v in folded_href for v in VENDORS):
-            found[urljoin(base, href)] = label
-    return sorted(found.items())
+        seen.setdefault(urljoin(base, href), (label, words))
+    return sorted((url, label, words) for url, (label, words) in seen.items())
+
+
+def _links(html: str, base: str) -> list[tuple[str, str]]:
+    found = []
+    for url, label, words in _anchors(html, base):
+        if words & NOT_A_DECLARATION:
+            continue
+        if words & LINK_WORDS or any(v in _fold(url) for v in VENDORS):
+            found.append((url, label))
+    return found
+
+
+def _same_host_links(html: str, base: str) -> list[tuple[str, str]]:
+    """Every same-host page link, so a product URL needs no grep over the file."""
+    host = urlsplit(base).netloc
+    found = []
+    for url, label, _ in _anchors(html, base):
+        split = urlsplit(url)
+        if split.netloc != host or split.scheme not in {"http", "https"}:
+            continue
+        if split.path.lower().endswith(ASSETS):
+            continue
+        found.append((url, label))
+    return found
 
 
 def _robots_groups(body: str) -> dict[str, list[str]]:
@@ -244,9 +282,13 @@ def probe(url: str, options: argparse.Namespace, robots_cache: dict) -> dict:
             explanation, allowed = robots_verdict(client, url, robots_cache)
             report["robots"] = explanation
             if not allowed and not options.elabel_exception:
+                # Say which kind of stop this is. An unreachable robots.txt is a
+                # host outage and a real Disallow is a policy result, and a run
+                # that cannot tell them apart refetches to find out.
                 report["stopped"] = (
-                    "robots.txt disallows this path and no --elabel-exception "
-                    "was given"
+                    f"not fetched: robots.txt {explanation}"
+                    + ("" if "undefined" in explanation
+                       else " and no --elabel-exception was given")
                 )
                 return report
             if not allowed:
@@ -290,6 +332,11 @@ def probe(url: str, options: argparse.Namespace, robots_cache: dict) -> dict:
         for term, line, context in _term_hits(text, options.context)
     ]
     report["links"] = [{"url": href, "text": label} for href, label in _links(html, str(response.url))]
+    if options.links:
+        report["same_host_links"] = [
+            {"url": href, "text": label}
+            for href, label in _same_host_links(html, str(response.url))
+        ]
     vendors = sorted({v for v in VENDORS if v in _fold(html)})
     if vendors:
         report["vendors_mentioned"] = vendors
@@ -316,6 +363,13 @@ def render(report: dict) -> str:
     lines.append(f"declaration-shaped links: {len(links)}")
     for link in links[:25]:
         lines.append(f"  {link['url']}  [{link['text']}]")
+    same_host = report.get("same_host_links")
+    if same_host is not None:
+        lines.append(f"same-host page links: {len(same_host)}")
+        for link in same_host[:120]:
+            lines.append(f"  {link['url']}  [{link['text']}]")
+        if len(same_host) > 120:
+            lines.append(f"  ... {len(same_host) - 120} more, read the saved file")
     return "\n".join(lines)
 
 
@@ -324,6 +378,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("urls", nargs="+")
     parser.add_argument("--context", type=int, default=1,
                         help="lines of context around each term hit")
+    parser.add_argument("--links", action="store_true",
+                        help="also list every same-host page link, for finding "
+                             "product URLs without grepping the saved file")
     parser.add_argument("--mobile", action="store_true",
                         help="device-gated e-label page only; see the agent file")
     parser.add_argument("--elabel-exception", metavar="REASON",
