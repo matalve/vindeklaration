@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, two batches run. No Spanish producer was in this file before batch 4. The pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings. AFTER FOURTEEN PRODUCERS AND 31 WINES: 1 FOUND, 1 REJECTED, 29 NOT FOUND — Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventos i Blanc (2), Bodegas Muga (2), Born Rose Barcelona (3), Javi Revert Viticultor (3), Albet i Noya (2, the find and the rejection), Bodegas Pinord (2), Dominio de Eguren (2), Familia Conesa (2), Bodegas Frutos Villar (2), Terra de Asorei (2), Rafael Palacios (2). 59 wines across 56 producer strings remain, of which only three producers have two wines (Dominio de Tares, Giol Porrera, Binigrau). SPAIN'S FIND RATE IS 3,2 %, against Germany's 19,8 % and Italy's 4,9 %. SPAIN'S FIRST AND ONLY E-LABEL VENDOR IS digital-label.eu, at Albet i Noya, white-labelled onto dl.albetinoya.cat: a Next.js shell with zero visible characters whose data endpoint is the same URL plus /api. One adopter in fourteen producers. THE SPANISH FAILURE IS BIMODAL: eight of the 31 wines passed producer, cuvee, vintage, market, alcohol and pack and died only on the declaration's absence (the French shape), while the rest close on an undated page (the Italian shape). THREE PRODUCERS WERE NOT REACHED AT ALL and are recorded as outages or refusals rather than absences: Bodegas Muga (connect timeout on both hostnames), Dominio de Eguren (443 refused, 403 on port 80, which is absolute), and Bodegas Frutos Villar (Let's Encrypt certificate expired 29 Aug 2026; the site was NOT fetched and certificate verification was NOT disabled). Muga and Frutos Villar should be re-probed. The producer=supplier test still returns zero in Spain.",
-  "attempted": 504,
+  "attempted": 506,
   "found": 33,
-  "not_found": 421,
+  "not_found": 423,
   "rejected": 50,
   "declarations": [
     {
@@ -14446,9 +14446,61 @@
       "not_found_because": "Same as 5106101.",
       "robots_note": "robots.txt is a genuine 404; nothing disallowed, no exception used.",
       "checked_at": "2026-08-30T20:50:00Z"
+    },
+    {
+      "product_number": "7166701",
+      "name": "Attis Lias Finas Albariño",
+      "producer": "Attis Bodegas y Viñedos SL",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://attisbyv.es/portfolio-items/attis/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.attisbodegasyvinedos.com/robots.txt — ConnectError, the guessable long name is not the producer's host; the real one is attisbyv.es",
+        "https://attisbyv.es/robots.txt — WooCommerce's stock file plus wc-logs and add-to-cart exclusions; everything fetched is allowed",
+        "https://attisbyv.es/es/producto/attis/ (404, but it renders the full site chrome) — the --links census on the 404 body still gave the COMPLETE 21-wine portfolio across all three of the house's brands (ATTIS, SITTA, XION)",
+        "https://attisbyv.es/portfolio-items/attis/ (200, 201 kB) — the wine's own page, terms: 0, no declaration-shaped link, no vendor named",
+        "https://attisbyv.es/wp-content/uploads/2025/05/attis-lias-finas-24-ES-rev5g-20250523.pdf (200, 2,1 MB) — the PER-VINTAGE ficha de cata, extracted in full with pypdf: 1 421 characters of vineyard, elaboracion, tasting note and presentation. NOT ONE of ingredien/sulfit/nutri/energ/kJ/kcal/alerg/conserv appears, and it states no alcohol"
+      ],
+      "evidence": "ALL FOUR PARTS PASS AND THERE IS STILL NOTHING TO ATTACH. Producer: Attis Bodegas y Vinedos, Morouzos 16D, Dena, 36967 Meano (Pontevedra), from the ficha's own footer. Cuvee: 'Attis Lias Finas', 100 % Albarino, Rias Baixas / Val do Salnes, aged six months on fine lees — the estate's own description. Vintage: THE FICHA IS HEADED 'ATTIS 2024' and its filename is attis-lias-finas-24-…, matching Systembolaget's 2024 exactly. Market: the producer's Spanish-language document for its own site, EU. Pack: 'Caja de carton de 12 botellas de 0.75l', and Systembolaget's item is 750 ml.",
+      "rejected_because": null,
+      "not_found_because": "The estate publishes no ingredient list and no nutrition table. ITS FICHA NAMES A REAL SUBSTANCE AND IS STILL NOT A DECLARATION: under ELABORACION it reads 'Clarificacion con cola de pescado' — isinglass, a fining agent whose category is an EU allergen — but that is a process step in a winemaking description, exactly the Raventos i Blanc case, and the document has no ingredient heading, no list, no allergen statement, no nutrition table and no energy value.",
+      "robots_note": "Stock WooCommerce robots.txt; everything fetched is allowed, no exception used.",
+      "checked_at": "2026-08-30T21:05:00Z"
+    },
+    {
+      "product_number": "7076801",
+      "name": "Sangarida Godello",
+      "producer": "Sangarida - Attis Bodegas y Viñedos -R.E. 8580 LE 00",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://sangarida.es/vinos/sangarida-godello/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2022",
+      "market": "EU",
+      "sources_checked": [
+        "https://attisbyv.es/portfolio-items/attis/ — the Attis site's own top menu links https://sangarida.es, which is how the second brand was reached from the producer's own public linking rather than guessed",
+        "https://sangarida.es/robots.txt — wildcard group with an EMPTY Disallow, nothing disallowed",
+        "https://sangarida.es/ (200, 106 kB) — terms: 0; the --links census gives the whole six-wine Bierzo range",
+        "https://sangarida.es/vinos/sangarida-godello/ (200, 119 kB) — the wine's own page, terms: 0, no declaration-shaped link",
+        "https://sangarida.es/wp-content/uploads/2023/03/GODELLO-2022-ES-rev1B-20230118.pdf — NOT fetched: the only document the page offers is the 2022 ficha de cata, three vintages older than Systembolaget's 2024, and the vintage rule would reject anything in it. The sibling document at Attis, from the same house's same document system, carries no declaration in any case"
+      ],
+      "evidence": "Producer confirmed from the producer's own linking, not from the Swedish string: Systembolaget's producer field itself names both brands, and attisbyv.es's own menu links sangarida.es. Cuvee 'Sangarida Godello' is published there, one of six Bierzo wines. THE VINTAGE FAILS ON THE PRODUCER'S SURFACE: the page's only dated artefact is the 2022 ficha and the site has not been touched since 2023 (its own modified_time is 2023-05-10), while Systembolaget sells the 2024.",
+      "rejected_because": null,
+      "not_found_because": "No ingredient list, no nutrition table, no e-label pointer on either of the house's two sites; and the only per-vintage document for this wine is three vintages stale.",
+      "robots_note": "Empty Disallow under the wildcard group on sangarida.es; nothing disallowed, no exception used.",
+      "checked_at": "2026-08-30T21:05:00Z"
     }
   ],
-  "updated_at": "2026-08-30T20:50:00Z",
+  "updated_at": "2026-08-30T21:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14900,6 +14952,11 @@
       "at": "2026-08-30T20:50:00Z",
       "batch": "4 — Spain, eighteenth producer: Palacio de Fefinanes (2 wines, and the two producer strings are one house)",
       "result": "2 attempted, 0 found, 2 not found, in three requests. THIS PRODUCER WAS A PAIR ONLY AFTER NORMALISING THE PRODUCER STRING: Systembolaget carries 5106101 under 'Bodegas del Palacio de Fefinanes' and 7187401 under 'Palacio de Fefinanes', same house, same supplier (Vina Espanola AB), and the previous run's pair count of three missed both this and Attis for exactly that reason. Rias Baixas, Cambados, WordPress; robots.txt a genuine 404; the home page's --links census gives the complete four-wine range in one request. terms: 0 on both wine pages, no vendor, no pointer, and NO VINTAGE ANYWHERE — the Italian shape again, which now closes four of the last five Spanish producers. THE ONE-WORD CUVEE TRAP IS LIVE HERE and was checked: the estate publishes 'Albarino de Fefinanes' AND 'Albarino de Fefinanes III Ano', and Systembolaget's is the plain one. A NEW SPANISH DOCUMENT NAME, weaker than the ficha tecnica and worth recognising: 'FICHA DE CATA' (tasting sheet), one per wine under an anchor reading 'Descargar ficha'. Neither was fetched — the ficha tecnica has now failed the form test three times in three Spanish houses and a tasting sheet is a strict subset of it."
+    },
+    {
+      "at": "2026-08-30T21:05:00Z",
+      "batch": "4 — Spain, nineteenth producer: Attis Bodegas y Vinedos, both brands (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in six requests. THE SECOND PAIR THE PRODUCER-STRING NORMALISATION FOUND: 'Attis Bodegas y Vinedos SL' and 'Sangarida - Attis Bodegas y Vinedos -R.E. 8580 LE 00' are one house on one supplier (Terrific Wines AB), running TWO SITES for two regions — attisbyv.es for Rias Baixas and sangarida.es for Bierzo, the second reached from the first's own top menu rather than guessed. THE FOURTH SPANISH FICHA READ IN FULL, AND THE MOST INTERESTING NEAR-MISS SINCE RAVENTOS: Attis Lias Finas' per-vintage sheet is headed 'ATTIS 2024', matching Systembolaget exactly, and under ELABORACION it says 'Clarificacion con cola de pescado' — ISINGLASS, a fining agent from an EU allergen category — and it is STILL NOT A DECLARATION, because it is a process step with no ingredient heading, no list, no allergen statement, no nutrition table and no energy value. Add it to the Spanish near-miss ladder above 'sulfitado'. The Spanish ficha tecnica / ficha de cata is now tested in FOUR houses and has never carried the mandated set. Attis Lias Finas is the TENTH Spanish wine to pass producer, cuvee, vintage, market and pack and die only on absence. Sangarida closes differently: its site has not been edited since 2023 and its only ficha is the 2022, three vintages behind the shelf. TWO CHEAP SITE SHAPES: attisbyv.es's 404 page still renders the full menu, so even a wrong URL returns the complete 21-wine census across three brands; and the ficha filenames are revision-controlled and vintage-keyed (attis-lias-finas-24-ES-rev5g-20250523.pdf, GODELLO-2022-ES-rev1B-20230118.pdf), so the vintage can be read off the href before spending a fetch."
     }
   ]
 }
