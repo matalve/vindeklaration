@@ -19,8 +19,8 @@
  "batch": "4 — SPAIN, opened 2026-08-30. No Spanish producer was in this file before batch 4. The pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings. AFTER 23 PRODUCER STRINGS AND 43 WINES: 1 FOUND, 2 REJECTED, 40 NOT FOUND — Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventos i Blanc (2), Bodegas Muga (2), Born Rose Barcelona (3), Javi Revert Viticultor (3), Albet i Noya (2, the find and one rejection), Bodegas Pinord (2), Dominio de Eguren (2), Familia Conesa (2), Bodegas Frutos Villar (2), Terra de Asorei (2), Rafael Palacios (2), Dominio de Tares (2), Giol Porrera (2), Binigrau (2), Palacio de Fefinanes (2 strings, 2 wines), Attis/Sangarida (2 strings, 2 wines), Miguel Torres (1), Campo Viejo (1, the second rejection). Campo Viejo is the first Spanish producer on a GROUP-WIDE e-label platform, e-label.pernod-ricard.com, whose JSON is fully readable and states no vintage of any kind.",
  "attempted": 508,
  "found": 33,
- "not_found": 424,
- "rejected": 51,
+ "not_found": 423,
+ "rejected": 52,
  "declarations": [
   {
    "product_number": "5106001",
@@ -14115,26 +14115,37 @@
    "producer": "Bodegas Frutos Villar",
    "country": "Spanien",
    "vintage": "2024",
-   "status": "not_found",
-   "source_url": null,
-   "source_type": null,
+   "status": "rejected",
+   "source_url": "https://www.u-label.com/qr/38c1be93c8e32",
+   "source_type": "e_label",
    "raw_ingredients": null,
    "language": null,
-   "vintage_on_source": null,
-   "market": null,
+   "vintage_on_source": "2025",
+   "market": "EU",
    "sources_checked": [
     "https://www.frutosvillar.com/ — NXDOMAIN, the short name is not the producer's",
     "web search — the producer's own site is bodegasfrutosvillar.com; Calderona is its D.O. Cigales rosado",
     "https://www.bodegasfrutosvillar.com/tienda/26-rosados — TLS failure, certificate expired",
     "https://www.bodegasfrutosvillar.com/robots.txt over 443 — TLS failure; over port 80 a 301 back into the same failing HTTPS URL",
     "openssl s_client — subject CN=bodegasfrutosvillar.com, issuer Let's Encrypt YR1, notAfter 29 Aug 2026 16:42:31 GMT, i.e. expired the day before this check",
-    "bodegasfrutosvillar.com TLS handshake RE-CHECKED 2026-08-30 with openssl: the certificate still reads notBefore=31 May 2026 16:42 UTC, notAfter=29 Aug 2026 16:42 UTC, so it has NOT been renewed and remains expired. The site was again not fetched and certificate verification was again not disabled."
+    "bodegasfrutosvillar.com TLS handshake RE-CHECKED 2026-08-30 with openssl: the certificate still reads notBefore=31 May 2026 16:42 UTC, notAfter=29 Aug 2026 16:42 UTC, so it has NOT been renewed and remains expired. The site was again not fetched and certificate verification was again not disabled.",
+    "REVISIT 2026-08-30, after the owner's decision that an expired certificate no longer stops a fetch. Everything below was fetched over the expired certificate with verification disabled.",
+    "https://www.bodegasfrutosvillar.com/robots.txt — readable at last: one wildcard group with an EMPTY Disallow, so nothing is disallowed",
+    "https://www.bodegasfrutosvillar.com/ (200, 343 kB) — WordPress/WooCommerce, 38 same-host page links, four bodega pages and a shop",
+    "https://www.bodegasfrutosvillar.com/tienda-vinos/ and /categoria-producto/vinos/blancos/ — the shop census; every white is 2025 and there is no Sin+ product",
+    "https://www.bodegasfrutosvillar.com/?s=sin&post_type=product — the shop's search IGNORES the query and returns the full listing, so it is useless as a search but confirms the census",
+    "https://www.bodegasfrutosvillar.com/producto/calderona-rosado-2024/ (200, 281 kB) — the wine's own product page. Slug says 2024; the H1, the <title> and the WooCommerce attribute all say 2025. Volume 0,75 L, 'Grado Alcoholico/Alcohol Content: 13,5% Vol'. It carries an anchor reading 'Haz click aqui / Informacion nutricional e ingredientes' to https://www.u-label.com/qr/38c1be93c8e32",
+    "https://www.u-label.com/robots.txt — named crawler groups only, no User-agent: * fallback, none matching our token; nothing disallowed",
+    "https://www.u-label.com/qr/38c1be93c8e32 (200) — 302s to https://elabel.scantrust.com/default/#/?uid=1985f72e-07f5-4569-b121-20ae834d9714&api_key=...&qr=38c1be93c8e32, the familiar 1 590-byte Scantrust shell, 9 visible characters",
+    "https://www.bodegasfrutosvillar.com/mapa-del-sitio/ — the site's own page index; no Sin+ page of any kind"
    ],
-   "evidence": "No producer surface was reached over a verified channel, so no part of the identity check was performed.",
-   "rejected_because": null,
-   "not_found_because": "THE PRODUCER'S CERTIFICATE HAS EXPIRED and the site was therefore not fetched. Certificate verification was not disabled: a declaration taken from a host whose identity cannot be verified would carry provenance this project does not accept, and the whole value of a second source is that its provenance is stated honestly. This is not evidence that the producer publishes nothing — re-probe once the certificate is renewed. RE-CHECKED 2026-08-30: certificate not renewed, still expired, still not fetched.",
-   "robots_note": "robots.txt could not be read at all, over either port, for the same TLS reason. No exception was invoked, and none of the project's exceptions would reach this case: an expired certificate is not a robots.txt directive and not a 401/403/429/challenge.",
-   "checked_at": "2026-08-30T20:05:00Z"
+   "evidence": "Producer and cuvee match: Calderona is Bodegas Frutos Villar's own D.O. Cigales brand and the shop has exactly one Calderona Rosado product. Pack matches (0,75 L) and alcohol matches exactly (13,5 % Vol against Systembolaget's 13,5). The e-label pointer is the producer's own, an anchor on that product page. What fails is the vintage, and the destination cannot settle it.",
+   "rejected_because": "VINTAGE, twice over. The single Calderona Rosado product on the producer's shop now declares 'Anada 2025' in its H1, its <title> and its WooCommerce attribute — only the slug still reads 2024, and the slug is exactly what 'Don't trust a slug' says to ignore. Systembolaget stocks the 2024. The u-label pointer hangs off that 2025 product, and the WooCommerce product was clearly edited forward in place, so it cannot be told whether the token still describes the bottle on the Swedish shelf. AND THE DESTINATION IS UNREADABLE ANYWAY: u-label.com/qr/{code} 302s into elabel.scantrust.com's fragment-and-token shell, which cannot serve a declaration to anyone by construction. Two independent reasons, and nothing to attach on either.",
+   "not_found_because": null,
+   "robots_note": "bodegasfrutosvillar.com allows everything (wildcard group, empty Disallow) — readable for the first time now that the expired certificate no longer blocks the fetch. u-label.com serves named crawler groups only with no User-agent: * fallback, so under the 2026-08-08 policy nothing applies to vindeklaration/… . No e-label exception was needed. TLS: the producer's Let's Encrypt certificate is STILL expired (notAfter 29 Aug 2026 16:42 UTC). Under the owner's decision of 2026-08-30 an expired certificate no longer stops a fetch, so every page below was fetched with certificate verification DISABLED after the verified attempt failed on expiry. Expiry only — the certificate's subject and issuer are the producer's own. This record and anything read through it travel over an unverified channel and must carry that on their face.",
+   "checked_at": "2026-08-30T22:35:00Z",
+   "server_rendered": false,
+   "elabel_platform": "u-label.com — THE FIRST SIGHTING OF U-LABEL IN THIS PROJECT, and it is not a platform of its own: https://www.u-label.com/qr/{13-hex} 302s straight into https://elabel.scantrust.com/default/#/?uid={uuid}&api_key={signed}&qr={code}. U-label is a Scantrust white-label and inherits Scantrust's unreadability in full — the uid and api_key sit in the URL FRAGMENT, which is never sent to the server."
   },
   {
    "product_number": "7812001",
@@ -14151,13 +14162,16 @@
    "market": null,
    "sources_checked": [
     "same as 7426201 — the producer's site cannot be reached over a verified TLS connection",
-    "bodegasfrutosvillar.com TLS handshake RE-CHECKED 2026-08-30 with openssl: the certificate still reads notBefore=31 May 2026 16:42 UTC, notAfter=29 Aug 2026 16:42 UTC, so it has NOT been renewed and remains expired. The site was again not fetched and certificate verification was again not disabled."
+    "bodegasfrutosvillar.com TLS handshake RE-CHECKED 2026-08-30 with openssl: the certificate still reads notBefore=31 May 2026 16:42 UTC, notAfter=29 Aug 2026 16:42 UTC, so it has NOT been renewed and remains expired. The site was again not fetched and certificate verification was again not disabled.",
+    "REVISIT 2026-08-30, over the now-permitted expired certificate. Full shop census read: /tienda-vinos/, /categoria-producto/vinos/blancos/ and the eight brand categories (Calderona, Conde Ansurez, Conde de Siruela, La Horra, Maria de Molina, Muruve, Riberal, Vina Morejona).",
+    "https://www.bodegasfrutosvillar.com/mapa-del-sitio/ — the site's own page index, read in full",
+    "raw greps for 'Sin+', 'sin sulfitos' and 'verdejo' across the home page, the shop listing and the site index"
    ],
    "evidence": "No producer surface was reached.",
    "rejected_because": null,
-   "not_found_because": "Expired TLS certificate on the producer's site; see 7426201. Worth re-probing with some priority: the name 'Sin+' suggests a no-added-sulphite bottling, which is the kind of wine whose producer has a reason to publish an ingredient list. RE-CHECKED 2026-08-30: certificate not renewed, still expired, still not fetched.",
-   "robots_note": "robots.txt unreadable for the same TLS reason; no exception invoked.",
-   "checked_at": "2026-08-30T20:05:00Z"
+   "not_found_because": "THE PRODUCER'S SITE IS NOW READABLE and Sin+ is not on it. Re-probed 2026-08-30 over the expired certificate under the owner's new rule: the shop census, the eight brand categories and the site's own page index were all read, and there is no Sin+ product, no Sin+ brand category and no occurrence of the string anywhere. The three whites the bodega sells are Blanco Polar, Maria de Molina Verdejo and Muruve Verdejo, all now 2025. So the cuvee on the Swedish shelf has NO PRODUCER SURFACE AT ALL — either it is an export-only label or Systembolaget's name renders it differently — and no part of the identity check can be run. This is not evidence that nothing is published; it is evidence that nothing is published under this name on the producer's own site. Note also that the bodega DOES use an e-label vendor (u-label/Scantrust, on Calderona Rosado), so a Sin+ e-label may well exist behind a QR that the site does not link.",
+   "robots_note": "bodegasfrutosvillar.com allows everything (wildcard group, empty Disallow). TLS: the producer's Let's Encrypt certificate is STILL expired (notAfter 29 Aug 2026 16:42 UTC). Under the owner's decision of 2026-08-30 an expired certificate no longer stops a fetch, so every page below was fetched with certificate verification DISABLED after the verified attempt failed on expiry. Expiry only — the certificate's subject and issuer are the producer's own. This record and anything read through it travel over an unverified channel and must carry that on their face.",
+   "checked_at": "2026-08-30T22:35:00Z"
   },
   {
    "product_number": "7106601",
@@ -14557,7 +14571,7 @@
    "checked_at": "2026-08-30T22:05:00Z"
   }
  ],
- "updated_at": "2026-08-30T19:58:30Z",
+ "updated_at": "2026-08-30T20:02:19Z",
  "_runs": [
   {
    "at": "2026-07-28T20:38:45Z",
