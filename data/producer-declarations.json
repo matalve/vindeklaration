@@ -17,9 +17,9 @@
  "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
  "generated_at": "2026-07-28T20:38:45Z",
  "batch": "4 — SPAIN, opened 2026-08-30. No Spanish producer was in this file before batch 4. The pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings. AFTER 23 PRODUCER STRINGS AND 43 WINES: 1 FOUND, 2 REJECTED, 40 NOT FOUND — Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventos i Blanc (2), Bodegas Muga (2), Born Rose Barcelona (3), Javi Revert Viticultor (3), Albet i Noya (2, the find and one rejection), Bodegas Pinord (2), Dominio de Eguren (2), Familia Conesa (2), Bodegas Frutos Villar (2), Terra de Asorei (2), Rafael Palacios (2), Dominio de Tares (2), Giol Porrera (2), Binigrau (2), Palacio de Fefinanes (2 strings, 2 wines), Attis/Sangarida (2 strings, 2 wines), Miguel Torres (1), Campo Viejo (1, the second rejection). Campo Viejo is the first Spanish producer on a GROUP-WIDE e-label platform, e-label.pernod-ricard.com, whose JSON is fully readable and states no vintage of any kind.",
- "attempted": 508,
+ "attempted": 509,
  "found": 33,
- "not_found": 423,
+ "not_found": 424,
  "rejected": 52,
  "declarations": [
   {
@@ -14571,9 +14571,35 @@
    "server_rendered": false,
    "elabel_platform": "e-label.pernod-ricard.com — Pernod Ricard's own group-wide e-label platform, NEW TO THIS PROJECT. A Vite/Vue SPA whose data layer is plain static JSON on the same host, unauthenticated: /liquid-qualities/{code}/{code}.json for the liquid (name, alcohol, nutrition, per-country denominations) and /liquid-qualities/{code}/{code}_{CC}.json for the per-market display blocks, of which block 2 is the ingredient list. Codes are of the form L004YJ and are published by the brand's own site.",
    "checked_at": "2026-08-30T22:05:00Z"
+  },
+  {
+   "product_number": "7618101",
+   "name": "Marqués de Cáceres Antea Rioja Blanco",
+   "producer": "Bodegas Marqués de Cáceres",
+   "country": "Spanien",
+   "vintage": "2024",
+   "status": "not_found",
+   "source_url": "https://www.marquesdecaceres.com/vinos/antea/",
+   "source_type": "producer_site",
+   "raw_ingredients": null,
+   "language": null,
+   "vintage_on_source": "2025",
+   "market": "EU",
+   "sources_checked": [
+    "https://www.marquesdecaceres.com/robots.txt — one wildcard group disallowing /wp-json/ and /?rest_route= only; everything fetched is allowed",
+    "https://www.marquesdecaceres.com/ (200, 320 kB) — WordPress; 34 same-host page links, terms: 0, no e-label vendor named",
+    "https://www.marquesdecaceres.com/vinos/ (200) — the complete range index, 30 wines, one page each",
+    "https://www.marquesdecaceres.com/vinos/antea/ (200, 233 kB) — the wine's own page, headed 'Antea 2025 D.O.Ca Rioja', 'Graduacion / Servicio 13% vol. / 12 C'. terms: 0. Its only declaration-shaped link is 'Imagen etiqueta'",
+    "https://www.marquesdecaceres.com/antea-label/ (200) — a 301 to /wp-content/uploads/2024/11/antea-label.jpg, a 1,7 MB JPEG photograph of the label. Not text, and this machine has no QR decoder and no OCR, so nothing in it could be read"
+   ],
+   "evidence": "Producer and cuvee match: Antea is Marques de Caceres' own Rioja blanco and the range index carries exactly one Antea page. Alcohol matches at 13 % vol. The vintage does not.",
+   "rejected_because": null,
+   "not_found_because": "No declaration exists on the producer's surface in any form. The range index is complete (30 wines, one page each), the wine's own page carries a tasting note, grape, oenologist, climate, soils and yields and no list of substances, and the site's only declaration-shaped pointer is the anchor 'Imagen etiqueta', which resolves to a 1,7 MB JPEG photograph of the label rather than to any e-label. THE LARGE-RIOJA-GROUP HYPOTHESIS FAILS HERE. Independently the vintage would not have matched: the page is headed 'Antea 2025' and Systembolaget stocks the 2024, so the producer has rolled its surface forward as Albet i Noya and Frutos Villar did. One thing was NOT established: whether the label JPEG carries a QR code that would lead somewhere readable. No QR decoder is installed here and one was not added, since the image hangs off the 2025 page and any destination would have inherited that vintage problem.",
+   "robots_note": "marquesdecaceres.com's robots.txt is a single wildcard group disallowing only /wp-json/ and /?rest_route=. Everything fetched was allowed; no exception invoked.",
+   "checked_at": "2026-08-30T23:05:00Z"
   }
  ],
- "updated_at": "2026-08-30T20:02:45Z",
+ "updated_at": "2026-08-30T20:04:40Z",
  "_runs": [
   {
    "at": "2026-07-28T20:38:45Z",
