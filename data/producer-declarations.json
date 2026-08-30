@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 526,
+  "attempted": 527,
   "found": 33,
-  "not_found": 441,
+  "not_found": 442,
   "rejected": 52,
   "declarations": [
     {
@@ -15057,6 +15057,31 @@
       "vintage_on_source": null,
       "server_rendered": true,
       "elabel_platform": null
+    },
+    {
+      "product_number": "7805801",
+      "name": "Piqueras White Label",
+      "producer": "Bodegas Piqueras",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://bodegaspiqueras.com/vinos/coleccion-piqueras/",
+      "source_type": "producer_site",
+      "sources_checked": [
+        "https://www.bodegaspiqueras.es/robots.txt — WooCommerce-stock wildcard group. THE .ES REDIRECTS TO .COM: https://www.bodegaspiqueras.es/ 301s to https://bodegaspiqueras.com/?v=d5281f37c906",
+        "https://bodegaspiqueras.com/ (200, 274 kB) — the range index. terms: 0, no pointer. Ten collections at /vinos/{slug}",
+        "https://bodegaspiqueras.com/vinos/coleccion-piqueras/ (200, 273 kB) — the Piqueras collection page, which is where White Label lives. ONE term hit and it is a marketing sentence about another wine ('Vino Syrah de bajo contenido en sulfitos' for Piqueras Nature). No declaration-shaped link, no vendor, no QR destination. What it does link is one ficha PDF per wine, including ficha-piqueras-white-label.pdf",
+        "https://bodegaspiqueras.com/wp-content/uploads/2025/01/ficha-piqueras-white-label.pdf (200, 790 kB, one page) — FETCHED AND ITS TEXT EXTRACTED IN FULL with pypdf"
+      ],
+      "evidence": "Producer and cuvée match — Bodegas Piqueras, DO Almansa, publishes 'White Label' in its Piqueras collection and Systembolaget's item is 'Piqueras White Label'. THE FICHA IS THE FIFTH SPANISH HOUSE TO PUBLISH ONE AND THE FIFTH TO PUT NO DECLARATION IN IT. Its full text is VIÑEDO, VINIFICACIÓN, NOTAS DE CATA, MARIDAJE, ENVEJECIMIENTO, TIPO BARRICA, TIPO VINO, VARIEDAD UVA (60 % Verdejo, 40 % Sauvignon Blanc), D.O. Almansa and a serving temperature. No ingredient heading, no list of substances, no allergen statement, no nutrition table, no energy value — and NO VINTAGE AND NO ALCOHOL either, so it could not have been dated or strength-tested even if it had been a declaration. The ficha filename is not vintage-keyed the way Attis's are; only the upload path (2025/01) dates it, and that dates the file, not the wine.",
+      "robots_note": "bodegaspiqueras.es and bodegaspiqueras.com both serve readable WooCommerce robots.txt files; the wp-content upload path is not disallowed. No exception used.",
+      "checked_at": "2026-08-31T11:00:00Z",
+      "market": "EU",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "server_rendered": true,
+      "elabel_platform": null
     }
   ],
   "updated_at": "2026-08-31T11:00:00Z",
@@ -15566,6 +15591,11 @@
       "at": "2026-08-31T11:00:00Z",
       "batch": "4d — Spain, fifth producer: Bodegas Arzuaga Navarro (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in four requests. A Ribera del Duero house of real size with a Joomla brand site and a separate WooCommerce shop, and neither surface carries a declaration term. The shop does not list the wine at all."
+    },
+    {
+      "at": "2026-08-31T11:00:00Z",
+      "batch": "4d — Spain, sixth producer: Bodegas Piqueras (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in four requests including one PDF. THE SPANISH FICHA TÉCNICA IS NOW TESTED IN FIVE HOUSES AND HAS NEVER CARRIED THE MANDATED SET — Piqueras' is vineyard, vinification, tasting note, pairing, ageing, grape mix, DO and serving temperature, with no vintage and no alcohol. Treat a ficha link as a near-miss and do not spend a fetch on it unless it is the only candidate left. Also: bodegaspiqueras.es 301s to bodegaspiqueras.com, so resolve the redirect before counting hosts."
     }
   ]
 }
