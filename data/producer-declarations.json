@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 527,
+  "attempted": 528,
   "found": 33,
-  "not_found": 442,
+  "not_found": 443,
   "rejected": 52,
   "declarations": [
     {
@@ -15082,6 +15082,31 @@
       "vintage_on_source": null,
       "server_rendered": true,
       "elabel_platform": null
+    },
+    {
+      "product_number": "5221801",
+      "name": "Valdecuriel Ribera del Duero Roble",
+      "producer": "Bodegas Muriel",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.murielwines.com/es/marcas/coleccion-ribera-duero/valdecuriel",
+      "source_type": "producer_site",
+      "sources_checked": [
+        "https://www.bodegasmuriel.com/robots.txt — Drupal-stock wildcard group. Nothing relevant disallowed",
+        "https://www.bodegasmuriel.com/ (200, 63 kB) — 302 to /es. terms: 0. THIS IS THE WRONG SITE FOR THIS WINE: it covers only the Muriel and Viña Muriel Rioja brands and links out to murielwines.com, the group",
+        "https://murielwines.com/ (200, 372 kB) — 301 to https://www.murielwines.com/es. The group site, Drupal, terms: 0. Its brand tree names 16 brands across four collections; Valdecuriel is the Ribera del Duero one",
+        "https://www.murielwines.com/es/marcas/coleccion-ribera-duero/valdecuriel (200, 364 kB, 3 444 visible characters) — the brand's own page. terms: 0, no declaration-shaped link, no vendor named, no QR destination"
+      ],
+      "evidence": "Producer and brand match — Bodegas Muriel's group, Muriel Wines, publishes Valdecuriel as its Ribera del Duero brand and Systembolaget's item is 'Valdecuriel Ribera del Duero Roble'. Beyond that nothing could be established: the brand page is a marketing page that does not break the brand into per-wine, per-vintage pages, so the Roble is not separately published, no vintage appears, and there is no ingredient heading, nutrition table, e-label vendor or QR destination anywhere on it. THE CHEAP LESSON IS THE DOMAIN: bodegasmuriel.com is a single-brand site and the group's other fifteen brands live on murielwines.com. Resolving that took one wasted page.",
+      "robots_note": "Both hosts serve readable Drupal-stock robots.txt files; nothing fetched was disallowed. No exception used.",
+      "checked_at": "2026-08-31T11:00:00Z",
+      "market": "EU",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "server_rendered": true,
+      "elabel_platform": null
     }
   ],
   "updated_at": "2026-08-31T11:00:00Z",
@@ -15596,6 +15621,11 @@
       "at": "2026-08-31T11:00:00Z",
       "batch": "4d — Spain, sixth producer: Bodegas Piqueras (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in four requests including one PDF. THE SPANISH FICHA TÉCNICA IS NOW TESTED IN FIVE HOUSES AND HAS NEVER CARRIED THE MANDATED SET — Piqueras' is vineyard, vinification, tasting note, pairing, ageing, grape mix, DO and serving temperature, with no vintage and no alcohol. Treat a ficha link as a near-miss and do not spend a fetch on it unless it is the only candidate left. Also: bodegaspiqueras.es 301s to bodegaspiqueras.com, so resolve the redirect before counting hosts."
+    },
+    {
+      "at": "2026-08-31T11:00:00Z",
+      "batch": "4d — Spain, seventh producer: Bodegas Muriel / Muriel Wines (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in three requests. A SIXTEEN-BRAND RIOJA GROUP AND IT PUBLISHES NOTHING — this is the third test of 'a large Spanish group has compliance tooling' after Pinord and Familia Torres, and it fails the same way. DOMAIN NOTE: bodegasmuriel.com carries only the Muriel and Viña Muriel brands; the group and its other fourteen brands, Valdecuriel included, are at murielwines.com. Systembolaget's producer string names the small site."
     }
   ]
 }
