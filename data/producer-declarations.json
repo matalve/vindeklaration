@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30. First Spanish batch; no Spanish producer was in this file before it. Pool: 90 wines at vintage 2024+ with declaration_status not_declared and no record here, across 70 producer strings. The producer==supplier step-0 test finds ZERO Spanish importer own-labels, against seven of the 81 remaining Italian wines — so Spain's producer field names real bodegas and step 0 will bite less often here. Previous batches: Germany exhausted; France set aside at 69 producers, 142 wines, 4 found, 9 rejected; Italy set aside after ten batches at 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected, with 81 untouched wines remaining. Italy's find rate was 4.9 % against Germany's 19.8 %; Spain is opened to measure the between-country spread.",
-  "attempted": 465,
+  "attempted": 468,
   "found": 32,
-  "not_found": 384,
+  "not_found": 387,
   "rejected": 49,
   "declarations": [
     {
@@ -13416,9 +13416,108 @@
       "evidence": "STEP 2 CLOSES IT. Systembolaget sells 'Susucaru Rosso' 2024, Sicily, 14,0 %, 75 cl. Azienda Agricola Frank Cornelissen is the right producer and SUSUCARU(R) Rosso has its own page — 'our entry-level red wine, a field-blend of mostly Nerello Mascalese (85 %) with Nerello Capuccio, Allicante Bouschet, Minnella and Uva Francesa', IGP Terre Siciliane Rosso — and the estate makes three Susucarus (Rosso, Rosato, Bianco), so the colour identifies ours. THE PAGE IS UNDATED: it names 'First vintage: 2003' and no bottling year, no alcohol, and lists 'Available sizes: 750ML, 1500ML, 3000ML and 5000ML'. It could not have been vintage-matched even if a list had appeared. THE PACKAGING OBLIGATION IS PUBLISHED AND THE INGREDIENT ONE IS NOT — the third producer in this batch. The page ends with a 'HOW TO RECYCLE' block covering bottle, closure (Ardeaseal, natural cork, screw cap, olive oil pouring closure), wax cap, case and pallet, with the bin for each. There is no ingredient list, no nutrition table and no energy value anywhere on the site. AND THERE IS A NEW NEAR-MISS HERE, WHICH IS WHY THIS RECORD IS WORTH READING. The page carries a field labelled 'Sulphur:' whose value is 'values can vary from 15 to 50 mg/l., added or not, depending on the quality of grapes and stability of the wine.' That is more substance-shaped than the usual Italian 'contiene solfiti' line and it is FURTHER from a declaration, not closer: it gives an analysis RANGE across bottlings and explicitly declines to say whether sulphur was added to any given one. A declaration under Regulation (EU) 2021/2117 is a statement about the bottle in your hand; this is a statement about the estate's practice. Under the agent's rules a producer page counts only where it presents an actual list of substances, and a may-or-may-not-contain range is the opposite of that. Recorded so the next run recognises it on sight — it is the Chateau Revelette SO2 near-miss, in Italy, with an added-or-not clause. NO OTHER SURFACE. The estate has no webshop; the sitemap index's children are all 'sitemap-pt-page-*', so 'page' is the only post type on the site, and the nav is Visiting us / Our Estate / Our production / Vintage report / Critic's Scores / Product authentication / Events / Recorking Wines / FAQ / Work with us / Contacts. Raw and stripped greps return zero for ingredien, nutrizion, nutrition, kcal, energia, dichiarazione and every Italian vendor token.",
       "rejected_because": null,
       "checked_at": "2026-08-30T11:25:00Z"
+    },
+    {
+      "product_number": "7184401",
+      "name": "Leneas Bodegas Vegamar",
+      "producer": "Bodegas Vegamar",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://vegamar.es/shop/product/2ale-vino-blanco-albarino-d-o-rias-baixas-leneas-4552",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "DNS: bodegasvegamar.com, www.bodegasvegamar.com and bodegasvegamar.es all resolve to 46.225.47.134; vegamar.es and www.vegamar.es to 90.161.232.114. vegamar.es runs WILDCARD DNS (randomxyz123.vegamar.es resolves), so no subdomain there is evidence of a host.",
+        "https://www.bodegasvegamar.com/robots.txt — connection refused on 443; http://bodegasvegamar.com/robots.txt 301s to https://vegamar.es/robots.txt",
+        "https://vegamar.es/robots.txt (200, 57 bytes: 'User-agent: *' with NO directives under it, then a Sitemap line — nothing disallowed)",
+        "https://vegamar.es/sitemap.xml (200, 2 457 URLs — an Odoo shop, complete census)",
+        "https://vegamar.es/shop/product/2ale-...-leneas-4552 (200, 82 kB)",
+        "https://vegamar.es/alergenos (200, but it 302s to /en/alergenos and renders the SHOP LISTING — Odoo's soft 404)",
+        "https://vegamar.es/leneas-albarino/ (301 into the same shop product page — the marketing slug and the shop product are one surface)",
+        "https://vegamar.es/vino-blanco-verdejo-el-bienqueda/ (200, 83 kB)",
+        "https://vegamar.es/lamua-sauvignon-blanc-de-vegamar/ (200, 83 kB)",
+        "https://vegamar.es/shop/product/2bsbl-...-lamua-de-vegamar-15154 (404 — a stale URL in the producer's own sitemap)"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "vegamar.es answers /robots.txt with 57 bytes: a 'User-agent: *' line with NO directives beneath it, then a Sitemap line. A group with no rules disallows nothing, so everything on the host is allowed. That is the same shape as label.masi.it. No exception was needed.",
+      "evidence": "Systembolaget sells 'Leneas Bodegas Vegamar' 2024, Galicia, 13,0 %, 75 cl. The bodega's product is 'Still White wine Albarino D.O. Rias Baixas LENEAS', 100 % Albarino, 75 cl, DOP Rias Baixas — cuvee, grape, appellation and pack all right, and no year anywhere. THE PRODUCER IS RIGHT AND THE SHOP IS THE ONLY SURFACE. Bodegas Vegamar, Camino de Garcesa s/n, 46175 Calles (Valencia), trading as DISBER SL, runs one Odoo site at vegamar.es that is both its marketing site and its shop: the pretty marketing slugs (/leneas-albarino/, /vino-blanco-verdejo-el-bienqueda/, /lamua-sauvignon-blanc-de-vegamar/) 301 into or render the shop product page, so there is no second surface to check and step 4 collapses into step 3. THE PRODUCT TEMPLATE IS UNIFORM AND CARRIES NO VINTAGE. Every wine page gives the same fields in the same order — VINIFICACION, NOTAS DE CATA (Color, Aroma, Sabor), VARIEDADES, TEMPERATURA DE SERVICIO, MARIDAJE, FORMATOS: 75 cl, AREA DE PRODUCCION, PREMIOS — and states NO vintage, NO alcohol and no ingredient list or nutrition table. An undated cuvee page cannot be vintage-matched even if a list appeared on it, so the Italian step-2 close applies unchanged in Spain. AND THE COMPLIANCE GESTURE LEADS NOWHERE, WHICH IS THE FINDING WORTH RECORDING. Every product page carries '<a href=\"/en/alergenos\">Consultar alergenos</a>' directly under the add-to-cart button — exactly where an e-label link would be, and the first Spanish pointer of that shape this project has seen. /alergenos does not exist: it answers 200 with the shop's product LISTING, Odoo's soft 404. So the bodega has put an allergen link on 2 457 pages and has not built the page it points at. THE ONLY SUBSTANCE WORD ON THE PAGE IS IN THE PROSE. Leneas's vinification paragraph ends '...finalizando con el trasiego y sulfitado para preservar toda su pureza' — sulphiting described as a process step, which is the Chateau d'Astros near-miss ('Sulfitage maitrise') in Spanish and is explicitly not a declaration under the agent's rules.",
+      "rejected_because": null,
+      "checked_at": "2026-08-30T12:40:00Z"
+    },
+    {
+      "product_number": "7338901",
+      "name": "La Muá Vegamar",
+      "producer": "Bodegas Vegamar",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://vegamar.es/lamua-sauvignon-blanc-de-vegamar/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "DNS: bodegasvegamar.com, www.bodegasvegamar.com and bodegasvegamar.es all resolve to 46.225.47.134; vegamar.es and www.vegamar.es to 90.161.232.114. vegamar.es runs WILDCARD DNS (randomxyz123.vegamar.es resolves), so no subdomain there is evidence of a host.",
+        "https://www.bodegasvegamar.com/robots.txt — connection refused on 443; http://bodegasvegamar.com/robots.txt 301s to https://vegamar.es/robots.txt",
+        "https://vegamar.es/robots.txt (200, 57 bytes: 'User-agent: *' with NO directives under it, then a Sitemap line — nothing disallowed)",
+        "https://vegamar.es/sitemap.xml (200, 2 457 URLs — an Odoo shop, complete census)",
+        "https://vegamar.es/shop/product/2ale-...-leneas-4552 (200, 82 kB)",
+        "https://vegamar.es/alergenos (200, but it 302s to /en/alergenos and renders the SHOP LISTING — Odoo's soft 404)",
+        "https://vegamar.es/leneas-albarino/ (301 into the same shop product page — the marketing slug and the shop product are one surface)",
+        "https://vegamar.es/vino-blanco-verdejo-el-bienqueda/ (200, 83 kB)",
+        "https://vegamar.es/lamua-sauvignon-blanc-de-vegamar/ (200, 83 kB)",
+        "https://vegamar.es/shop/product/2bsbl-...-lamua-de-vegamar-15154 (404 — a stale URL in the producer's own sitemap)"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "vegamar.es answers /robots.txt with 57 bytes: a 'User-agent: *' line with NO directives beneath it, then a Sitemap line. A group with no rules disallows nothing, so everything on the host is allowed. That is the same shape as label.masi.it. No exception was needed.",
+      "evidence": "Systembolaget sells 'La Mua Vegamar' 2024, 12,0 %, 75 cl. The bodega's wine is LAMUA, 100 % Sauvignon Blanc, 75 cl. NOTE A PACK COMPLICATION THAT DID NOT HAVE TO BE RESOLVED: Vegamar lists LAMUA as at least three products — the plain bottle (SKU 2BSBL), the same bottle 'con Panuelo' with a designer scarf (2BSBLPA) and a six-bottle case (2BSBLX6) — and the sitemap's URL for the plain bottle, /shop/product/2bsbl-...-15154, answers 404, so the producer's own sitemap is stale. The page that does render is the 'con Panuelo' one. It did not matter: it is the same wine text and it states no vintage and no ingredients, so the wine closes at step 2 whichever pack is opened. THE PRODUCER IS RIGHT AND THE SHOP IS THE ONLY SURFACE. Bodegas Vegamar, Camino de Garcesa s/n, 46175 Calles (Valencia), trading as DISBER SL, runs one Odoo site at vegamar.es that is both its marketing site and its shop: the pretty marketing slugs (/leneas-albarino/, /vino-blanco-verdejo-el-bienqueda/, /lamua-sauvignon-blanc-de-vegamar/) 301 into or render the shop product page, so there is no second surface to check and step 4 collapses into step 3. THE PRODUCT TEMPLATE IS UNIFORM AND CARRIES NO VINTAGE. Every wine page gives the same fields in the same order — VINIFICACION, NOTAS DE CATA (Color, Aroma, Sabor), VARIEDADES, TEMPERATURA DE SERVICIO, MARIDAJE, FORMATOS: 75 cl, AREA DE PRODUCCION, PREMIOS — and states NO vintage, NO alcohol and no ingredient list or nutrition table. An undated cuvee page cannot be vintage-matched even if a list appeared on it, so the Italian step-2 close applies unchanged in Spain. AND THE COMPLIANCE GESTURE LEADS NOWHERE, WHICH IS THE FINDING WORTH RECORDING. Every product page carries '<a href=\"/en/alergenos\">Consultar alergenos</a>' directly under the add-to-cart button — exactly where an e-label link would be, and the first Spanish pointer of that shape this project has seen. /alergenos does not exist: it answers 200 with the shop's product LISTING, Odoo's soft 404. So the bodega has put an allergen link on 2 457 pages and has not built the page it points at. THE ONLY SUBSTANCE WORD ON THE PAGE IS IN THE PROSE. Leneas's vinification paragraph ends '...finalizando con el trasiego y sulfitado para preservar toda su pureza' — sulphiting described as a process step, which is the Chateau d'Astros near-miss ('Sulfitage maitrise') in Spanish and is explicitly not a declaration under the agent's rules.",
+      "rejected_because": null,
+      "checked_at": "2026-08-30T12:40:00Z"
+    },
+    {
+      "product_number": "7422801",
+      "name": "Vegamar El Bienqueda",
+      "producer": "Bodegas Vegamar",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://vegamar.es/vino-blanco-verdejo-el-bienqueda/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "DNS: bodegasvegamar.com, www.bodegasvegamar.com and bodegasvegamar.es all resolve to 46.225.47.134; vegamar.es and www.vegamar.es to 90.161.232.114. vegamar.es runs WILDCARD DNS (randomxyz123.vegamar.es resolves), so no subdomain there is evidence of a host.",
+        "https://www.bodegasvegamar.com/robots.txt — connection refused on 443; http://bodegasvegamar.com/robots.txt 301s to https://vegamar.es/robots.txt",
+        "https://vegamar.es/robots.txt (200, 57 bytes: 'User-agent: *' with NO directives under it, then a Sitemap line — nothing disallowed)",
+        "https://vegamar.es/sitemap.xml (200, 2 457 URLs — an Odoo shop, complete census)",
+        "https://vegamar.es/shop/product/2ale-...-leneas-4552 (200, 82 kB)",
+        "https://vegamar.es/alergenos (200, but it 302s to /en/alergenos and renders the SHOP LISTING — Odoo's soft 404)",
+        "https://vegamar.es/leneas-albarino/ (301 into the same shop product page — the marketing slug and the shop product are one surface)",
+        "https://vegamar.es/vino-blanco-verdejo-el-bienqueda/ (200, 83 kB)",
+        "https://vegamar.es/lamua-sauvignon-blanc-de-vegamar/ (200, 83 kB)",
+        "https://vegamar.es/shop/product/2bsbl-...-lamua-de-vegamar-15154 (404 — a stale URL in the producer's own sitemap)"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "vegamar.es answers /robots.txt with 57 bytes: a 'User-agent: *' line with NO directives beneath it, then a Sitemap line. A group with no rules disallows nothing, so everything on the host is allowed. That is the same shape as label.masi.it. No exception was needed.",
+      "evidence": "Systembolaget sells 'Vegamar El Bienqueda' 2024, 12,5 %, 75 cl. The bodega's product is 'Botella Vino Blanco Verdejo EL BIENQUEDA (Etiqueta Termocromatica)', 100 % Verdejo, 75 cl — the thermochromic label is the wine's own gimmick and not a variant. No year anywhere. THE PRODUCER IS RIGHT AND THE SHOP IS THE ONLY SURFACE. Bodegas Vegamar, Camino de Garcesa s/n, 46175 Calles (Valencia), trading as DISBER SL, runs one Odoo site at vegamar.es that is both its marketing site and its shop: the pretty marketing slugs (/leneas-albarino/, /vino-blanco-verdejo-el-bienqueda/, /lamua-sauvignon-blanc-de-vegamar/) 301 into or render the shop product page, so there is no second surface to check and step 4 collapses into step 3. THE PRODUCT TEMPLATE IS UNIFORM AND CARRIES NO VINTAGE. Every wine page gives the same fields in the same order — VINIFICACION, NOTAS DE CATA (Color, Aroma, Sabor), VARIEDADES, TEMPERATURA DE SERVICIO, MARIDAJE, FORMATOS: 75 cl, AREA DE PRODUCCION, PREMIOS — and states NO vintage, NO alcohol and no ingredient list or nutrition table. An undated cuvee page cannot be vintage-matched even if a list appeared on it, so the Italian step-2 close applies unchanged in Spain. AND THE COMPLIANCE GESTURE LEADS NOWHERE, WHICH IS THE FINDING WORTH RECORDING. Every product page carries '<a href=\"/en/alergenos\">Consultar alergenos</a>' directly under the add-to-cart button — exactly where an e-label link would be, and the first Spanish pointer of that shape this project has seen. /alergenos does not exist: it answers 200 with the shop's product LISTING, Odoo's soft 404. So the bodega has put an allergen link on 2 457 pages and has not built the page it points at. THE ONLY SUBSTANCE WORD ON THE PAGE IS IN THE PROSE. Leneas's vinification paragraph ends '...finalizando con el trasiego y sulfitado para preservar toda su pureza' — sulphiting described as a process step, which is the Chateau d'Astros near-miss ('Sulfitage maitrise') in Spanish and is explicitly not a declaration under the agent's rules.",
+      "rejected_because": null,
+      "checked_at": "2026-08-30T12:40:00Z"
     }
   ],
-  "updated_at": "2026-08-30T12:15:00Z",
+  "updated_at": "2026-08-30T12:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -13775,6 +13874,11 @@
       "at": "2026-08-30T12:15:00Z",
       "batch": "4 — Spain, first batch: opened",
       "result": "0 wines. Batch opened and the pool regenerated: 90 Spanish wines at vintage 2024+, not_declared, unrecorded, across 70 producer strings. SEVENTEEN OF THE 70 ARE MULTI-WINE PRODUCERS (three each at Born Rose Barcelona, Bodegas Vegamar and Javi Revert Viticultor; two each at Vivanco, Dominio de Tares, Gramona, Raventos i Blanc, Giol Porrera, Dominio de Eguren, Binigrau, Terra de Asorei, Rafael Palacios, Bodegas Muga, Bodegas Frutos Villar, Albet i Noya, Familia Conesa and Bodegas Pinord), so the sibling economics Italy lost are available again — 37 of the 90 wines belong to a producer with at least one other wine in the pool. THE producer==supplier TEST RETURNS ZERO, where it flags seven of Italy's remaining 81: Systembolaget's Spanish producer field appears to name actual bodegas rather than Swedish own-label operations, which should make step 0 cheaper here than in Italy. Nothing is known yet about Spanish e-label vendors; docs/elabel-platforms.md has no Spanish section."
+    },
+    {
+      "at": "2026-08-30T12:40:00Z",
+      "batch": "4 — Spain, first batch: Bodegas Vegamar (3 wines)",
+      "result": "3 attempted, 0 found, 3 not found — SPAIN'S FIRST PRODUCER, and it fails the way Italy's do. The bodega runs ONE Odoo site at vegamar.es that is simultaneously the marketing site and the shop: the marketing slugs 301 into the shop product pages, so step 3 and step 4 are the same request. Its product template is uniform across all three wines — VINIFICACION, NOTAS DE CATA, VARIEDADES, TEMPERATURA DE SERVICIO, MARIDAJE, FORMATOS: 75 cl, AREA DE PRODUCCION, PREMIOS — and states NO VINTAGE AND NO ALCOHOL, so the Italian step-2 close (the undated cuvee page) transfers to Spain intact. THE FINDING WORTH CARRYING IS A NEW POINTER SHAPE THAT GOES NOWHERE: every product page carries 'Consultar alergenos' as an anchor to /alergenos, sitting directly under the add-to-cart button, exactly where an e-label link would be — and /alergenos answers 200 with the shop's product LISTING, which is Odoo's soft 404. The bodega has put an allergen link on 2 457 pages and never built the page. RECOGNISE 'Consultar alergenos' AS SPAIN'S FIRST CANDIDATE ANCHOR TEXT and check where it actually lands. The only substance word on the site is 'sulfitado' inside the vinification prose, which is Chateau d'Astros' 'Sulfitage maitrise' in Spanish and is not a declaration. HOST NOTES: bodegasvegamar.com refuses 443 and 301s to vegamar.es over plain http; vegamar.es runs WILDCARD DNS, so no subdomain there proves a host; its robots.txt is 'User-agent: *' with NO directives, which disallows nothing; and its own sitemap carries a stale product URL that 404s."
     }
   ]
 }
