@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 523,
+  "attempted": 524,
   "found": 33,
-  "not_found": 438,
+  "not_found": 439,
   "rejected": 52,
   "declarations": [
     {
@@ -14984,6 +14984,31 @@
       "vintage_on_source": null,
       "server_rendered": true,
       "elabel_platform": null
+    },
+    {
+      "product_number": "5671401",
+      "name": "Agaliu L’Olivera",
+      "producer": "L'Olivera S.C",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://olivera.org/ca/producte/agaliu-vi-blanc/",
+      "source_type": "producer_site",
+      "sources_checked": [
+        "https://www.lolivera.com/ and https://lolivera.com/ — BOTH fail the TLS handshake with TLSV1_UNRECOGNIZED_NAME (the server has no certificate for that name). Curiously the robots.txt fetch on the same host reported a wildcard group with an empty Disallow, so the name resolves and something answers, but no page can be retrieved. lolivera.com is not the cooperative's domain",
+        "https://www.olivera.org/robots.txt — WooCommerce-stock wildcard group, nothing relevant disallowed",
+        "https://www.olivera.org/ (200) — 301 to https://olivera.org/ca/. terms: 0. The Catalan site lists 19 products at /ca/producte/{slug}, of which one is Agaliu",
+        "https://olivera.org/ca/producte/agaliu-vi-blanc/ (200, 132 kB, 6 838 visible characters) — the wine's own page. terms: 0, no declaration-shaped link, no vendor named, no QR destination"
+      ],
+      "evidence": "Producer and cuvée match: L'Olivera SCCL publishes 'Agaliu' as a white wine and Systembolaget's item is 'Agaliu L'Olivera'. The vintage was never reached — the product page carries no declaration to date. NOTHING WAS FOUND: the page returns no declaration term, no ingredient heading, no nutrition table, no e-label vendor and no QR destination. This is a second Catalan organic cooperative, after Can Sumoi, that does not support the Albet i Noya adopter pattern.",
+      "robots_note": "olivera.org's robots.txt is readable WooCommerce stock; nothing fetched was disallowed. No exception used.",
+      "checked_at": "2026-08-31T11:00:00Z",
+      "market": "EU",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "server_rendered": true,
+      "elabel_platform": null
     }
   ],
   "updated_at": "2026-08-31T11:00:00Z",
@@ -15478,6 +15503,11 @@
       "at": "2026-08-31T11:00:00Z",
       "batch": "4d — Spain, second producer: Celler Masroig (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in four requests. Closed on CUVÉE, the Ego Bodegas shape again: the Swedish name names a wine the producer does not publish. A PROBE FALSE POSITIVE WORTH FIXING: cellermasroig.com's home page reports a declaration-shaped link to /concurs-etiqueta-vi-novell/, which is a label-DESIGN COMPETITION. 'etiqueta' + 'concurs'/'concurso' is a competition, not a disclosure."
+    },
+    {
+      "at": "2026-08-31T11:00:00Z",
+      "batch": "4d — Spain, third producer: L'Olivera SCCL (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in four requests. DOMAIN TRAP: lolivera.com — the obvious guess — fails the TLS handshake with TLSV1_UNRECOGNIZED_NAME on both apex and www while still answering a robots.txt fetch, so it looks alive and serves nothing. The cooperative is at olivera.org, without the article."
     }
   ]
 }
