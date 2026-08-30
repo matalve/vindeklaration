@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30. First Spanish batch; no Spanish producer was in this file before it. Pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after four producers and nine wines (Bodegas Vegamar 3, Gramona 2, Vivanco 2, Raventos i Blanc 2 — 0 found, 0 rejected, 9 not found) 81 wines across 66 producer strings remain. The producer==supplier step-0 test finds ZERO Spanish importer own-labels, against seven of the 81 remaining Italian wines. NO SPANISH E-LABEL VENDOR HAS BEEN SEEN YET in any producer's linking. The Spanish failure so far is NOT the Italian one: three of the first nine wines passed every part of the four-part check, vintage included, and died only on the declaration being absent. Previous batches: Germany exhausted (19,8 % find rate); France set aside at 69 producers, 142 wines, 4 found, 9 rejected; Italy set aside after ten batches at 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected (4,9 %), 81 untouched wines remaining. See 'Spain opens, and the first four producers all fail on identity's opposite' in docs/elabel-platforms.md.",
-  "attempted": 479,
+  "attempted": 482,
   "found": 32,
-  "not_found": 398,
+  "not_found": 401,
   "rejected": 49,
   "declarations": [
     {
@@ -13830,9 +13830,79 @@
       "not_found_because": "No producer-side page exists for this cuvée, and the site carries no declaration for any of its wines in any case. The only surfaces naming Rambla are retailers and review sites, which are excluded sources.",
       "robots_note": "Allowed by the stock Shopify robots.txt; no exception used.",
       "checked_at": "2026-08-30T15:45:00Z"
+    },
+    {
+      "product_number": "7765101",
+      "name": "Javi Revert Sensal",
+      "producer": "Javi Revert Viticultor SL",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://javirevertviticultor.com/vinos/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://javirevertviticultor.com/robots.txt — stock WordPress, /vinos/ and / allowed",
+        "https://javirevertviticultor.com/vinos/ (200, 146 kB, 6 555 visible chars) — the entire range on one page, terms: 0, and the only declaration-shaped link is the footer's 'Declaración de accesibilidad'",
+        "https://javirevertviticultor.com/ (200, 160 kB) — terms: 0, same footer link",
+        "link census of /vinos/ — the site has seven real pages (/, /vinos/, /vinedos/, /raices/, /sobre-nosotros/, /visitas/, /contacto/) plus legal pages; there is no shop and no per-wine URL"
+      ],
+      "evidence": "The estate is the right one and Sensal is its own single-estate wine, but the page states no vintage — the wine names are set as images and no year appears in the HTML — so the vintage step of the identity check cannot be performed at all.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on the producer's only surface, and no vintage on it either. Both parts fail: nothing to attach, and nothing that would let this wine be told apart from another year's if there were.",
+      "robots_note": "Stock WordPress robots.txt, everything fetched was allowed; no exception used.",
+      "checked_at": "2026-08-30T16:05:00Z"
+    },
+    {
+      "product_number": "7325701",
+      "name": "Javier Revert Lafont",
+      "producer": "Javi Revert Viticultor SL",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://javirevertviticultor.com/vinos/ (200) — Lafont does not appear anywhere in the HTML; this cuvée is not on the estate's own site",
+        "web search — Lafont is a La Comarcal wine, the joint project of Javi Revert and Victor Marqués at Venta del Moro (100 % Malvasía Castellana, Paraje Los Juncarejos). Every page naming it is an importer or retailer portfolio, not a producer surface"
+      ],
+      "evidence": "Systembolaget's producer field names Javi Revert Viticultor SL, but the cuvée belongs to La Comarcal, a separate winery he co-owns. No producer-controlled page for La Comarcal was found, so there is no surface on which to run the identity check.",
+      "rejected_because": null,
+      "not_found_because": "No producer surface exists for this cuvée. The estate's own site does not carry it and La Comarcal appears to publish no site of its own; the only pages naming the wine are importers and shops, which this project does not take a declaration from.",
+      "robots_note": "Nothing beyond the estate's own WordPress was fetched; no exception used.",
+      "checked_at": "2026-08-30T16:05:00Z"
+    },
+    {
+      "product_number": "7690301",
+      "name": "Javier Revert Grillat",
+      "producer": "Javi Revert Viticultor SL",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "same as 7325701 — Grillat is likewise a La Comarcal wine (85 % monastrell, 15 % garnacha) and appears nowhere on javirevertviticultor.com"
+      ],
+      "evidence": "Same as Lafont: the cuvée is La Comarcal's, filed under the Revert name at Systembolaget, and La Comarcal has no producer surface to check.",
+      "rejected_because": null,
+      "not_found_because": "No producer surface exists for this cuvée.",
+      "robots_note": "No exception used.",
+      "checked_at": "2026-08-30T16:05:00Z"
     }
   ],
-  "updated_at": "2026-08-30T15:45:00Z",
+  "updated_at": "2026-08-30T16:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14219,6 +14289,11 @@
       "at": "2026-08-30T15:45:00Z",
       "batch": "4 — Spain, sixth producer: Born Rosé Barcelona (3 wines)",
       "result": "3 attempted, 0 found, 3 not found, in six requests. The producer's whole web surface is ONE Shopify store, www.bornrose.com, with fourteen products, and it carries NO declaration anywhere: the raw HTML of two product pages and two collection pages contains not one occurrence of ingredien/nutrition/nutricion/e-label/etiqueta/alerg/energ, no e-label vendor is named, and there are no declaration-shaped links. The only substance word on the site is marketing — 'light on sulphites and alcohol' in the product blurb, the Spanish/English form of the two-particular near-miss. ONE FULL IDENTITY MATCH DYING ON ABSENCE: the double magnum page states 'DOUBLE MAGNUM 300cl … 2024 vintage', which matches Systembolaget's 3000 ml 2024 on producer, cuvée, vintage AND pack, and there is simply nothing to attach — the French/Spanish shape again. The 1500 ml sibling failed the vintage step instead: the same shop's magnum page has rolled to 2025 while Systembolaget still stocks the 2024. The third wine, Rambla Penedès, is a real Born Rosé cuvée (the London Wine Competition lists it under the company Bord Brands S.L.) but has NO page on the producer's own shop at all, so its identity could not be completed on a producer surface. Host notes: the apex bornrose.com answers /robots.txt with 503 while www.bornrose.com serves the stock Shopify robots.txt — probe the www host. /sitemap_products_1.xml answers 400 with an empty body; /collections/all is the working product census. Visible-text extraction returns ~2 900 chars from a 168 kB page, which looks like client-side rendering and is not — a raw grep of the saved file confirms the absence."
+    },
+    {
+      "at": "2026-08-30T16:05:00Z",
+      "batch": "4 — Spain, seventh producer: Javi Revert Viticultor SL (3 wines)",
+      "result": "3 attempted, 0 found, 3 not found, in two requests plus two searches. This one closes on identity, not on absence, and it is the ITALIAN shape rather than the French one: javirevertviticultor.com is a seven-page WordPress/Elementor brochure with NO shop, NO per-wine page and NO vintage anywhere — /vinos/ is one page for the whole range and its wine names are images, so a case-insensitive grep of 146 kB of HTML finds 'sensal' only as an Elementor container id and finds Lafont, Grillat, Comarcal and any four-digit year not at all. terms: 0 on both pages fetched. TWO OF THE THREE WINES ARE NOT EVEN THIS ESTATE'S OWN LABEL: Lafont and Grillat belong to La Comarcal, the joint project of Javi Revert and Victor Marqués at Venta del Moro, which Systembolaget files under the Revert name; La Comarcal appears to have no site of its own at all, only importer portfolio pages (De Maison Selections, Free Run, Oz Wine Company), which are excluded sources. NEW SPANISH GREP TRAP, and it will recur: the probe's declaration-shaped-link scan flags 'Declaración de accesibilidad', the accessibility statement that Spanish WordPress sites carry in the footer. 'declaracion' is not a declaration."
     }
   ]
 }
