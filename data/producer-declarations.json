@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, two batches run. No Spanish producer was in this file before batch 4. The pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings. AFTER FOURTEEN PRODUCERS AND 31 WINES: 1 FOUND, 1 REJECTED, 29 NOT FOUND — Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventos i Blanc (2), Bodegas Muga (2), Born Rose Barcelona (3), Javi Revert Viticultor (3), Albet i Noya (2, the find and the rejection), Bodegas Pinord (2), Dominio de Eguren (2), Familia Conesa (2), Bodegas Frutos Villar (2), Terra de Asorei (2), Rafael Palacios (2). 59 wines across 56 producer strings remain, of which only three producers have two wines (Dominio de Tares, Giol Porrera, Binigrau). SPAIN'S FIND RATE IS 3,2 %, against Germany's 19,8 % and Italy's 4,9 %. SPAIN'S FIRST AND ONLY E-LABEL VENDOR IS digital-label.eu, at Albet i Noya, white-labelled onto dl.albetinoya.cat: a Next.js shell with zero visible characters whose data endpoint is the same URL plus /api. One adopter in fourteen producers. THE SPANISH FAILURE IS BIMODAL: eight of the 31 wines passed producer, cuvee, vintage, market, alcohol and pack and died only on the declaration's absence (the French shape), while the rest close on an undated page (the Italian shape). THREE PRODUCERS WERE NOT REACHED AT ALL and are recorded as outages or refusals rather than absences: Bodegas Muga (connect timeout on both hostnames), Dominio de Eguren (443 refused, 403 on port 80, which is absolute), and Bodegas Frutos Villar (Let's Encrypt certificate expired 29 Aug 2026; the site was NOT fetched and certificate verification was NOT disabled). Muga and Frutos Villar should be re-probed. The producer=supplier test still returns zero in Spain.",
-  "attempted": 500,
+  "attempted": 502,
   "found": 33,
-  "not_found": 417,
+  "not_found": 419,
   "rejected": 50,
   "declarations": [
     {
@@ -14350,9 +14350,57 @@
       "not_found_because": "Outage, not absence; see 5745801.",
       "robots_note": "robots.txt is a genuine 404 on both hostnames; nothing disallowed, no exception used.",
       "checked_at": "2026-08-30T20:30:00Z"
+    },
+    {
+      "product_number": "7104801",
+      "name": "Binigrau Obac",
+      "producer": "Binigrau Vins I Vinyes S.L",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://binigrau.es/els-nostres-vins/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://www.binigrau.es/robots.txt — stock WordPress (Disallow /wp-admin/, Allow admin-ajax.php); everything fetched is allowed",
+        "https://www.binigrau.es/ (200, 301 to the apex, 31 kB, 368 visible chars) — a splash page; the --links census shows the WHOLE SITE is eleven URLs, of which one is the wine page",
+        "https://binigrau.es/els-nostres-vins/ (200, 38 kB) — the estate's ENTIRE range on ONE page, each wine an H2 plus a Catalan paragraph. 'OBAC DE BINIGRAU' is there, terms: 0, no declaration-shaped link, no per-wine page to open",
+        "https://binigrau.es/wp-content/uploads/downloads/desplegable2017.pdf — NOT fetched: it is a 2017 fold-out brochure and the SAME file is linked from every wine on the page (the anchors differ only in their download= attribute, e.g. download='obac.pdf'), so it cannot be a per-vintage declaration for a 2024 wine under any reading of the vintage rule"
+      ],
+      "evidence": "Producer and cuvee match — Binigrau Vins i Vinyes, Biniali (Mallorca), publishes 'OBAC DE BINIGRAU' as a mantonegro/callet/merlot/cabernet blend. NO VINTAGE IS STATED ANYWHERE ON THE SITE: no anyada, no collita, no year in any heading; the only years in the HTML are wp-content upload paths.",
+      "rejected_because": null,
+      "not_found_because": "A brochure site of eleven pages with one page for the whole range, no ingredient list, no nutrition table, no e-label pointer and no vendor named. The Italian shape.",
+      "robots_note": "Stock WordPress robots.txt; nothing relevant disallowed, no exception used.",
+      "checked_at": "2026-08-30T20:40:00Z"
+    },
+    {
+      "product_number": "7444601",
+      "name": "Nounat",
+      "producer": "Binigrau Vins I Vinyes S.L",
+      "country": "Spanien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://binigrau.es/els-nostres-vins/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://binigrau.es/els-nostres-vins/ (200) — 'NOUNAT', prensal blanc and chardonnay, on the same single range page; terms: 0",
+        "site-wide checks as for 7104801"
+      ],
+      "evidence": "Producer and cuvee match (Nounat is Binigrau's prensal blanc/chardonnay white). No vintage anywhere on the site, so the 2025 could not be confirmed even if a declaration had been found.",
+      "rejected_because": null,
+      "not_found_because": "Same as 7104801 — the estate publishes one undated range page and a shared 2017 brochure.",
+      "robots_note": "Stock WordPress robots.txt; nothing relevant disallowed, no exception used.",
+      "checked_at": "2026-08-30T20:40:00Z"
     }
   ],
-  "updated_at": "2026-08-30T20:30:00Z",
+  "updated_at": "2026-08-30T20:40:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14794,6 +14842,11 @@
       "at": "2026-08-30T20:30:00Z",
       "batch": "4 — Spain, sixteenth producer: Giol Porrera (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in four requests, and it is the FOURTH Spanish producer closed without reading a byte of the estate's own text. A NEW FAILURE MODE, and one that will recur: the producer's domain points at Wix but the domain is NOT CONNECTED, so both www.giolporrera.cat and the apex answer a 404 whose title is 'ConnectYourDomain Error | Wix.com' — 2 516 bytes, 33 visible characters. This is not a rendering problem and not a refusal; there is no site. The DOQ Priorat register's own winery entry names exactly that address, which is how the outage was confirmed as current rather than as a stale URL, and it also means there is no second host to look for. RECOGNISE IT BY THE TITLE, not by the status: a Wix 404 with 33 visible characters is a dead domain, and one apex probe is enough to confirm it. Third-party appellation registers (doqpriorat.org, and its ca/es/en mirrors) are a cheap way to confirm which URL a small Spanish estate itself claims; they are a POINTER and never a source."
+    },
+    {
+      "at": "2026-08-30T20:40:00Z",
+      "batch": "4 — Spain, seventeenth producer: Binigrau (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in three requests, and it closes the ITALIAN way. Mallorca (Biniali, Vi de la Terra Mallorca), WordPress, and THE ENTIRE SITE IS ELEVEN URLS — the --links census on the home page listed every one of them, so the whole estate cost one request to map and one to read. All the wines live on a single /els-nostres-vins/ page as an H2 plus a Catalan paragraph each; there are no per-wine pages, no shop, no vendor named, terms: 0. NO VINTAGE ANYWHERE: not on the page, not in a heading, not in a field; the only years in the HTML are wp-content upload paths. A TRAP WORTH NAMING: every wine carries an anchor reading 'Descarregar fitxa en pdf' and ALL OF THEM POINT AT THE SAME FILE, /wp-content/uploads/downloads/desplegable2017.pdf, differing only in the HTML5 download= attribute that renames the download per wine ('obac.pdf'). A per-wine anchor text does not mean a per-wine document, and a 2017 shared brochure cannot be a 2024 wine's declaration — read the href, not the anchor. It was not fetched. THE LAST OF THE THREE KNOWN PAIRS IS NOW DONE; the two pairs left in the pool are the ones this batch found by normalising the producer string (Palacio de Fefinanes, Attis)."
     }
   ]
 }
