@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 530,
+  "attempted": 531,
   "found": 33,
-  "not_found": 445,
+  "not_found": 446,
   "rejected": 52,
   "declarations": [
     {
@@ -15155,6 +15155,30 @@
       "vintage_on_source": null,
       "server_rendered": true,
       "elabel_platform": null
+    },
+    {
+      "product_number": "7209601",
+      "name": "Pazo de San Mauro Albariño",
+      "producer": "G.V. Marques de Vargas S.L",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.marquesdevargas.com/es/bodegas/bodega-pazo-san-mauro/",
+      "source_type": "producer_site",
+      "sources_checked": [
+        "https://www.marquesdevargas.com/robots.txt — readable wildcard group, nothing relevant disallowed",
+        "https://www.marquesdevargas.com/ (200) — 302 to /es/. terms: 0. The group publishes one page per bodega and no per-wine pages: Marqués de Vargas (Rioja), Conde de San Cristóbal (Ribera) and Pazo San Mauro (Rías Baixas)",
+        "https://www.marquesdevargas.com/es/bodegas/bodega-pazo-san-mauro/ (200, 76 kB, 4 646 visible characters) — the bodega page, which is the closest thing to a product page the site has. terms: 0, no declaration-shaped link, no vendor named, no QR destination"
+      ],
+      "evidence": "Producer and wine match — Grupo Marqués de Vargas' Rías Baixas bodega is Pazo San Mauro and its albariño carries the bodega's own name, which is Systembolaget's 'Pazo de San Mauro Albariño'. THE SITE HAS NO PER-WINE PAGE AT ALL: it stops at one page per bodega, so there is no vintage anywhere, no alcohol, no pack and nothing that could carry or date a declaration. No ingredient heading, no nutrition table, no e-label vendor, no QR destination.",
+      "robots_note": "marquesdevargas.com's robots.txt is readable and does not disallow what was fetched. No exception used.",
+      "checked_at": "2026-08-31T11:00:00Z",
+      "market": "EU",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "server_rendered": true,
+      "elabel_platform": null
     }
   ],
   "updated_at": "2026-08-31T11:00:00Z",
@@ -15684,6 +15708,11 @@
       "at": "2026-08-31T11:00:00Z",
       "batch": "4d — Spain, ninth producer: Belondrade (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in two requests. Nothing on the page. One structural note: Belondrade publishes its flagship per vintage (…/belondrade-y-lurton-2022/, …-2024/) but Quinta Apolonia as a single undated page, so the same estate is datable for one wine and not for another."
+    },
+    {
+      "at": "2026-08-31T11:00:00Z",
+      "batch": "4d — Spain, tenth producer: G.V. Marqués de Vargas (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in two requests. A THREE-BODEGA GROUP WHOSE SITE HAS NO PRODUCT PAGES — it stops at one page per bodega, so there is no per-wine surface to carry a declaration and no vintage anywhere. Add that to the Spanish site shapes: a group site can be a dead end structurally, not just editorially."
     }
   ]
 }
