@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30. First Spanish batch; no Spanish producer was in this file before it. Pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after four producers and nine wines (Bodegas Vegamar 3, Gramona 2, Vivanco 2, Raventos i Blanc 2 — 0 found, 0 rejected, 9 not found) 81 wines across 66 producer strings remain. The producer==supplier step-0 test finds ZERO Spanish importer own-labels, against seven of the 81 remaining Italian wines. NO SPANISH E-LABEL VENDOR HAS BEEN SEEN YET in any producer's linking. The Spanish failure so far is NOT the Italian one: three of the first nine wines passed every part of the four-part check, vintage included, and died only on the declaration being absent. Previous batches: Germany exhausted (19,8 % find rate); France set aside at 69 producers, 142 wines, 4 found, 9 rejected; Italy set aside after ten batches at 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected (4,9 %), 81 untouched wines remaining. See 'Spain opens, and the first four producers all fail on identity's opposite' in docs/elabel-platforms.md.",
-  "attempted": 494,
+  "attempted": 496,
   "found": 33,
-  "not_found": 411,
+  "not_found": 413,
   "rejected": 50,
   "declarations": [
     {
@@ -14202,9 +14202,58 @@
       "not_found_because": "No declaration anywhere on the site, and the identity would not have supported attaching one: the cuvee name does not match and the page carries no year.",
       "robots_note": "Allowed; no exception used.",
       "checked_at": "2026-08-30T18:25:00Z"
+    },
+    {
+      "product_number": "9313701",
+      "name": "Louro do Bolo Godello",
+      "producer": "Rafael Palacios",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.rafaelpalacios.com/louro",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://www.rafaelpalacios.com/robots.txt — Wix's stock file; the pages fetched are allowed",
+        "https://www.rafaelpalacios.com/ (200, 596 kB, 1 602 visible chars) — Wix, heavily client-rendered",
+        "https://www.rafaelpalacios.com/los-vinos (200, 598 kB) — the range page; its inline page registry lists every page on the site and none is a disclosure page",
+        "https://www.rafaelpalacios.com/louro (200, 606 kB) — the wine's own page, terms: 0",
+        "greps of the saved HTML for ingredien, nutricion, sulfit, etiqueta, alcohol, anada, cosecha, vendimia — zero matches each"
+      ],
+      "evidence": "Producer and cuvee match: rafaelpalacios.com is the estate's own site and /louro is its Louro do Bolo godello. NO VINTAGE IS STATED anywhere on the site, so the identity check stops at step three.",
+      "rejected_because": null,
+      "not_found_because": "Nothing resembling a declaration exists on the estate's only surface — no ingredient list, no nutrition table, no allergen line, not even the 'Contiene sulfitos' near-miss — and no e-label vendor is named. There is no shop and no per-vintage page.",
+      "robots_note": "Wix's stock robots.txt; everything fetched was allowed and no exception was used.",
+      "checked_at": "2026-08-30T18:45:00Z"
+    },
+    {
+      "product_number": "7211601",
+      "name": "As Sortes Rafael Palacios",
+      "producer": "Rafael Palacios",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.rafaelpalacios.com/as-sortes",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://www.rafaelpalacios.com/as-sortes (200, 609 kB) — the wine's own page, terms: 0, same greps all zero",
+        "site-wide checks as for 9313701"
+      ],
+      "evidence": "Producer and cuvee match; no vintage anywhere on the site.",
+      "rejected_because": null,
+      "not_found_because": "Same as the sibling: an undated Wix brochure with no declaration and no pointer.",
+      "robots_note": "Allowed; no exception used.",
+      "checked_at": "2026-08-30T18:45:00Z"
     }
   ],
-  "updated_at": "2026-08-30T18:25:00Z",
+  "updated_at": "2026-08-30T18:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14626,6 +14675,11 @@
       "at": "2026-08-30T18:25:00Z",
       "batch": "4 — Spain, thirteenth producer: Terra de Asorei (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in five requests. A Galician-language WooCommerce (Val do Salnes, Rias Baixas) with thirteen products, and the close is the ITALIAN one twice over: NO PER-WINE PAGE STATES A VINTAGE OR AN ALCOHOL. The product pages are a paragraph of Galician prose, a gallery and an awards strip; the only years in the HTML are upload paths, Yoast timestamps and a competition year. terms: 0 on all four pages fetched, no vendor named, no pointer. THE SECOND WINE ALSO FAILS ON THE CUVEE: Systembolaget sells 'Terra de Asorei Albarino Sobre Lias' and the only sobre-lias product the bodega publishes is headed 'Nai e Senora \"sobre lias\"' — Nai is a different label in the same house, so the Swedish name may be the importer's rendering or may be a different wine, and that is exactly the one-word difference the matching rules exist for. TWO NEW SPANISH GREP TRAPS, both from WooCommerce and both cross-cutting: (1) the shop ships the full WooCommerce country/province JSON dictionary inline, so 'anada' matches GRANADA and 'vol' matches Volta, Volyn and Vojvodina — a several-hundred-hit source of false positives on any WooCommerce page in any country; (2) 'e-label' matches the CSS rule '.twentytwenty-after-label::before' from the before/after image slider, which is why the site's vendor grep lit up and nothing was there."
+    },
+    {
+      "at": "2026-08-30T18:45:00Z",
+      "batch": "4 — Spain, fourteenth producer: Rafael Palacios (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in four requests. A Wix brochure site, no shop, no vendor, and the Italian close again: the per-wine pages /louro and /as-sortes contain ZERO occurrences of ingredien, nutricion, sulfit, etiqueta, alcohol, anada, cosecha or vendimia — not a near-miss, an absence. Cheap Wix technique worth reusing: the site's whole page registry is inline in every page as \"pageUriSEO\" values, so ONE fetch lists every page the site has (here: inicio, los-vinos, as-sortes, louro, o-soro, el-vinedo, elaboracion, historia, bio, blog, contacto, three puntuaciones pages and Wix's own account/settings stubs) and rules out a disclosure page without guessing a URL. NEW CROSS-CUTTING GREP TRAP: a bare four-digit year regex matches the UNICODE-RANGE lists in @font-face rules — U+2013-2014, U+2018-201A, U+2020-2022, U+2026, U+2030, U+2039-203A all read as '2013', '2014', '2018', '2020', '2022', '2026', '2030' to a \\b20[0-9][0-9]\\b grep. Every Wix and Google-Fonts page carries dozens. Anchor the vintage grep to a word like anada/cosecha/millesime/annata, or require the year to be outside a U+ context."
     }
   ]
 }
