@@ -17,9 +17,9 @@
  "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
  "generated_at": "2026-07-28T20:38:45Z",
  "batch": "4 — SPAIN, opened 2026-08-30. No Spanish producer was in this file before batch 4. The pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings. AFTER 23 PRODUCER STRINGS AND 43 WINES: 1 FOUND, 2 REJECTED, 40 NOT FOUND — Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventos i Blanc (2), Bodegas Muga (2), Born Rose Barcelona (3), Javi Revert Viticultor (3), Albet i Noya (2, the find and one rejection), Bodegas Pinord (2), Dominio de Eguren (2), Familia Conesa (2), Bodegas Frutos Villar (2), Terra de Asorei (2), Rafael Palacios (2), Dominio de Tares (2), Giol Porrera (2), Binigrau (2), Palacio de Fefinanes (2 strings, 2 wines), Attis/Sangarida (2 strings, 2 wines), Miguel Torres (1), Campo Viejo (1, the second rejection). Campo Viejo is the first Spanish producer on a GROUP-WIDE e-label platform, e-label.pernod-ricard.com, whose JSON is fully readable and states no vintage of any kind.",
- "attempted": 512,
+ "attempted": 513,
  "found": 33,
- "not_found": 427,
+ "not_found": 428,
  "rejected": 52,
  "declarations": [
   {
@@ -14683,9 +14683,36 @@
    "server_rendered": false,
    "elabel_platform": "Scantrust, reached through the tenant host bmkp.st4.ch by its GS1 Digital Link path /01/{gtin}. FIRST SPANISH SCANTRUST DEPLOYMENT.",
    "checked_at": "2026-08-30T23:45:00Z"
+  },
+  {
+   "product_number": "7245001",
+   "name": "Bodegas Portia Portia Verdejo",
+   "producer": "Bodegas Portia",
+   "country": "Spanien",
+   "vintage": "2024",
+   "status": "not_found",
+   "source_url": "https://www.bodegasportia.com/",
+   "source_type": "producer_site",
+   "raw_ingredients": null,
+   "language": null,
+   "vintage_on_source": null,
+   "market": "EU",
+   "sources_checked": [
+    "https://www.bodegasportia.com/robots.txt — wildcard group disallowing /pdfLib/ and /include/ only",
+    "https://www.bodegasportia.com/ (200, 30 kB) — the home page, terms: 0. It links a wine page per cuvee including two Verdejos, /vinos/portia-verdejo and /vinos/portiaverdejo-criado-6-meses-barrica-francesa",
+    "https://www.bodegasportia.com/vinos/portia-verdejo — 404, a 315-byte iso-8859-1 error page",
+    "https://www.bodegasportia.com/vinos — 404 as well. THE SITE'S OWN INTERNAL LINKS ARE BROKEN: the hrefs are relative and correct and the server answers 404 for every one of them; only the home page resolves",
+    "https://tienda.familiamartinezzabala.com/es/buscar?controller=search&s=portia+verdejo — 200 'pagina no encontrada'; this PrestaShop-shaped shop uses a different search route, and its home carries a banner reading 'Dado el alto volumen de peticiones, estamos teniendo un problema tecnico'",
+    "https://tienda.familiamartinezzabala.com/es/bodegas/portia (200, 53 kB) — the brand's own category on the group shop. terms: 0, and it carries Prima and Triennia only; no Verdejo of any kind"
+   ],
+   "evidence": "The producer is real and the house was identified: Bodegas Portia belongs to FAMILIA MARTINEZ ZABALA, the former Faustino Group, alongside Faustino, Campillo, Marques de Vitoria, Valcarlos and Leganza, all sold from one shop at tienda.familiamartinezzabala.com. The producer's own home page confirms a Portia Verdejo exists. Nothing beyond the producer could be checked.",
+   "rejected_because": null,
+   "not_found_because": "No declaration was reachable and no vintage was established. The producer's own site serves 404 for every internal link including the wine's own page, so the only Portia surface that answers is the home page; the group shop's Portia category sells two wines and neither is the Verdejo. No e-label vendor is named in any page fetched. This is a site fault plus an absence, not evidence that the producer publishes nothing — a run that finds bodegasportia.com working should re-probe /vinos/portia-verdejo directly.",
+   "robots_note": "Both hosts serve the same wildcard group disallowing only /pdfLib/ and /include/. Everything fetched was allowed; no exception invoked.",
+   "checked_at": "2026-08-31T00:05:00Z"
   }
  ],
- "updated_at": "2026-08-30T20:08:27Z",
+ "updated_at": "2026-08-30T20:10:00Z",
  "_runs": [
   {
    "at": "2026-07-28T20:38:45Z",
