@@ -13726,13 +13726,14 @@
         "https://muga.es/ — CONNECT TIMEOUT under curl --max-time 15, exit 28",
         "https://www.muga.es/robots.txt — CONNECT TIMEOUT at 25 s, verified with curl outside the tool on an earlier run",
         "DNS resolves: muga.es and www.muga.es both A 217.76.128.34, so the domain exists and the web server does not answer",
-        "web search for a Muga e-label or QR destination returned only Spanish e-label VENDOR marketing (aecoc.es ESCAN QR, e-labelqr.com, qr-vino.com, tucartadigital.com) and no Muga page"
+        "web search for a Muga e-label or QR destination returned only Spanish e-label VENDOR marketing (aecoc.es ESCAN QR, e-labelqr.com, qr-vino.com, tucartadigital.com) and no Muga page",
+        "https://www.muga.es/robots.txt — RE-PROBED 2026-08-30, third batch: still ConnectTimeout, no TCP handshake. The host has now failed on three separate runs."
       ],
       "evidence": "No source was reached, so no identity check was performed. Both wines are recorded against the producer only.",
       "rejected_because": null,
-      "not_found_because": "HOST OUTAGE, NOT ABSENCE. The producer's own site did not answer at all — no robots.txt, no page, no HTTP status, just a connect timeout on both hostnames. Under this project's rules an unreachable robots.txt is treated as disallow, but that is moot here: nothing on the host answers. This is explicitly not evidence that Bodegas Muga publishes no declaration, and the wine should be re-probed when the host is back.",
+      "not_found_because": "HOST OUTAGE, NOT ABSENCE. The producer's own site did not answer at all — no robots.txt, no page, no HTTP status, just a connect timeout on both hostnames. Under this project's rules an unreachable robots.txt is treated as disallow, but that is moot here: nothing on the host answers. This is explicitly not evidence that Bodegas Muga publishes no declaration, and the wine should be re-probed when the host is back. RE-PROBED 2026-08-30 and the connect timeout persists; one probe spent, no more.",
       "robots_note": "robots.txt unreachable (ConnectTimeout), which src.probe treats as undefined and therefore disallow. No exception was invoked and no fetch was attempted past it.",
-      "checked_at": "2026-08-30T15:20:00Z"
+      "checked_at": "2026-08-30T20:05:00Z"
     },
     {
       "product_number": "9224201",
@@ -13748,13 +13749,14 @@
       "vintage_on_source": null,
       "market": null,
       "sources_checked": [
-        "same host outage as 7287701 — muga.es and www.muga.es do not answer on 443"
+        "same host outage as 7287701 — muga.es and www.muga.es do not answer on 443",
+        "https://www.muga.es/robots.txt — RE-PROBED 2026-08-30, third batch: still ConnectTimeout, no TCP handshake. The host has now failed on three separate runs."
       ],
       "evidence": "No source was reached, so no identity check was performed.",
       "rejected_because": null,
-      "not_found_because": "HOST OUTAGE, NOT ABSENCE. See 7287701. Re-probe when muga.es answers.",
+      "not_found_because": "HOST OUTAGE, NOT ABSENCE. See 7287701. Re-probe when muga.es answers. RE-PROBED 2026-08-30 and the connect timeout persists; one probe spent, no more.",
       "robots_note": "robots.txt unreachable (ConnectTimeout).",
-      "checked_at": "2026-08-30T15:20:00Z"
+      "checked_at": "2026-08-30T20:05:00Z"
     },
     {
       "product_number": "5748108",
@@ -14125,13 +14127,14 @@
         "web search — the producer's own site is bodegasfrutosvillar.com; Calderona is its D.O. Cigales rosado",
         "https://www.bodegasfrutosvillar.com/tienda/26-rosados — TLS failure, certificate expired",
         "https://www.bodegasfrutosvillar.com/robots.txt over 443 — TLS failure; over port 80 a 301 back into the same failing HTTPS URL",
-        "openssl s_client — subject CN=bodegasfrutosvillar.com, issuer Let's Encrypt YR1, notAfter 29 Aug 2026 16:42:31 GMT, i.e. expired the day before this check"
+        "openssl s_client — subject CN=bodegasfrutosvillar.com, issuer Let's Encrypt YR1, notAfter 29 Aug 2026 16:42:31 GMT, i.e. expired the day before this check",
+        "bodegasfrutosvillar.com TLS handshake RE-CHECKED 2026-08-30 with openssl: the certificate still reads notBefore=31 May 2026 16:42 UTC, notAfter=29 Aug 2026 16:42 UTC, so it has NOT been renewed and remains expired. The site was again not fetched and certificate verification was again not disabled."
       ],
       "evidence": "No producer surface was reached over a verified channel, so no part of the identity check was performed.",
       "rejected_because": null,
-      "not_found_because": "THE PRODUCER'S CERTIFICATE HAS EXPIRED and the site was therefore not fetched. Certificate verification was not disabled: a declaration taken from a host whose identity cannot be verified would carry provenance this project does not accept, and the whole value of a second source is that its provenance is stated honestly. This is not evidence that the producer publishes nothing — re-probe once the certificate is renewed.",
+      "not_found_because": "THE PRODUCER'S CERTIFICATE HAS EXPIRED and the site was therefore not fetched. Certificate verification was not disabled: a declaration taken from a host whose identity cannot be verified would carry provenance this project does not accept, and the whole value of a second source is that its provenance is stated honestly. This is not evidence that the producer publishes nothing — re-probe once the certificate is renewed. RE-CHECKED 2026-08-30: certificate not renewed, still expired, still not fetched.",
       "robots_note": "robots.txt could not be read at all, over either port, for the same TLS reason. No exception was invoked, and none of the project's exceptions would reach this case: an expired certificate is not a robots.txt directive and not a 401/403/429/challenge.",
-      "checked_at": "2026-08-30T18:05:00Z"
+      "checked_at": "2026-08-30T20:05:00Z"
     },
     {
       "product_number": "7812001",
@@ -14147,13 +14150,14 @@
       "vintage_on_source": null,
       "market": null,
       "sources_checked": [
-        "same as 7426201 — the producer's site cannot be reached over a verified TLS connection"
+        "same as 7426201 — the producer's site cannot be reached over a verified TLS connection",
+        "bodegasfrutosvillar.com TLS handshake RE-CHECKED 2026-08-30 with openssl: the certificate still reads notBefore=31 May 2026 16:42 UTC, notAfter=29 Aug 2026 16:42 UTC, so it has NOT been renewed and remains expired. The site was again not fetched and certificate verification was again not disabled."
       ],
       "evidence": "No producer surface was reached.",
       "rejected_because": null,
-      "not_found_because": "Expired TLS certificate on the producer's site; see 7426201. Worth re-probing with some priority: the name 'Sin+' suggests a no-added-sulphite bottling, which is the kind of wine whose producer has a reason to publish an ingredient list.",
+      "not_found_because": "Expired TLS certificate on the producer's site; see 7426201. Worth re-probing with some priority: the name 'Sin+' suggests a no-added-sulphite bottling, which is the kind of wine whose producer has a reason to publish an ingredient list. RE-CHECKED 2026-08-30: certificate not renewed, still expired, still not fetched.",
       "robots_note": "robots.txt unreadable for the same TLS reason; no exception invoked.",
-      "checked_at": "2026-08-30T18:05:00Z"
+      "checked_at": "2026-08-30T20:05:00Z"
     },
     {
       "product_number": "7106601",
@@ -14253,7 +14257,7 @@
       "checked_at": "2026-08-30T18:45:00Z"
     }
   ],
-  "updated_at": "2026-08-30T19:00:00Z",
+  "updated_at": "2026-08-30T20:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14680,6 +14684,11 @@
       "at": "2026-08-30T18:45:00Z",
       "batch": "4 — Spain, fourteenth producer: Rafael Palacios (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in four requests. A Wix brochure site, no shop, no vendor, and the Italian close again: the per-wine pages /louro and /as-sortes contain ZERO occurrences of ingredien, nutricion, sulfit, etiqueta, alcohol, anada, cosecha or vendimia — not a near-miss, an absence. Cheap Wix technique worth reusing: the site's whole page registry is inline in every page as \"pageUriSEO\" values, so ONE fetch lists every page the site has (here: inicio, los-vinos, as-sortes, louro, o-soro, el-vinedo, elaboracion, historia, bio, blog, contacto, three puntuaciones pages and Wix's own account/settings stubs) and rules out a disclosure page without guessing a URL. NEW CROSS-CUTTING GREP TRAP: a bare four-digit year regex matches the UNICODE-RANGE lists in @font-face rules — U+2013-2014, U+2018-201A, U+2020-2022, U+2026, U+2030, U+2039-203A all read as '2013', '2014', '2018', '2020', '2022', '2026', '2030' to a \\b20[0-9][0-9]\\b grep. Every Wix and Google-Fonts page carries dozens. Anchor the vintage grep to a word like anada/cosecha/millesime/annata, or require the year to be outside a U+ context."
+    },
+    {
+      "at": "2026-08-30T20:05:00Z",
+      "batch": "4 — Spain, third batch opens: the two flagged re-probes, both still closed",
+      "result": "0 new records. BODEGAS MUGA re-probed once: www.muga.es/robots.txt is still a ConnectTimeout with no TCP handshake, the third run in a row, so the two Muga wines stay recorded as an outage and no further request will be spent on that host. BODEGAS FRUTOS VILLAR re-checked at the TLS layer only, with openssl and no HTTP fetch: the certificate is unchanged at notBefore 31 May 2026 / notAfter 29 Aug 2026 16:42 UTC, so Let's Encrypt has NOT renewed it and it is still expired. The previous run's call stands unchanged for this run — the site was not fetched and certificate verification was not disabled — and the owner has the question. Sin+ Verdejo therefore remains unreached rather than absent. FREE FINDING BEFORE ANY FETCH: the remaining pool holds TWO MORE PRODUCER PAIRS hidden by Systembolaget's spelling, not the three the last run counted — 'Bodegas del Palacio de Fefinanes' (5106101) and 'Palacio de Fefinanes' (7187401) are one estate on one supplier, and 'Sangarida - Attis Bodegas y Vinedos -R.E. 8580 LE 00' (7076801) and 'Attis Bodegas y Vinedos SL' (7166701) are another. Five pairs remain, not three."
     }
   ]
 }
