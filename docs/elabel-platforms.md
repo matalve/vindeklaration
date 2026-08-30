@@ -19,7 +19,15 @@ your own country's section. The country deep-dives are the bulk of the file and
 they do not transfer between countries. `grep` for a host, a vendor or a
 producer name answers "has this been seen before" for nothing.
 
-Status as of 2026-08-30, across 465 wine records and some 216 producer strings
+**Spain opened on 2026-08-30** and has had two batches — fourteen producers, 31
+wine records, **one declaration attached, one rejected, 29 not found**, with 59
+wines still untouched. See *Spain opens, and the first four producers all fail
+on identity's opposite* and *The second Spanish batch: an adopter at last, and
+Spain's shape confirmed*, near the end of this file. Spain's first e-label
+vendor is **`digital-label.eu`** (Albet i Noya) and it is the only one seen in
+fourteen producers.
+
+Status as of 2026-08-30, across 496 wine records and some 226 producer strings
 (fewer actual producers — Systembolaget spells several of them twice). **The German
 2024-and-later undeclared pool is exhausted** — see the closing section. **The
 French pool ran from 2026-08-07 to 2026-08-09 and is now set aside** at
@@ -90,6 +98,7 @@ producer strings, with no pairs left to find.**
 | ~~**v9.lu**~~ | `v9.lu/v/{code}` | **Moved to the readable table on 2026-08-08 — see VINISCAN (ABSOMOD).** It was listed here when a plain request returned fifteen bytes reading `Smartphone only`; the device-gate decision of the same day made it readable with a mobile-shaped, still self-identifying User-Agent, and its sibling host `iviti.fr` then showed the gate can be a `Referer` check instead. Kept as a row so the failure mode stays recognisable: **a short 200-with-body is a gate, not a rendering problem, and not every gate is the same gate.** |
 | **i-wine (discover-iwine)** | `d.i-wine.app:8444/01/{producer-uuid}-p{8-digit id}` → `qr.i-wine.app/…` | An Italian vendor whose `/01/` path imitates a **GS1 Digital Link and is not one** — the value is a UUID, not a GTIN. 730-byte Vite/React shell, empty `<div id="root">`, one module bundle; `Accept: application/json` on the same URL returns the identical shell. Both hosts answer `/robots.txt` with the SPA's own HTML — a **soft 404**, so no directives exist and no exception is needed; there is simply nothing to read. The token is **product-keyed and shared across pack variations** (one wine's 375 ml and 750 ml WooCommerce variations carry the same href). Found via Mastroberardino, reached from a shop block reading *"Scansiona per: Valori nutrizionali, Ingredienti, Raccolta differenziata"* wrapping a QR image in an anchor. |
 | **SEL by Goals Tec** | `sel.goalstec.it/?codArt={article}&codDitta={company}`, data at `api.sel.goalstec.it/label/{ingr,nutr,env}?codArt=…&codAz=…` | **Italy's fourth e-label vendor, and the only client-side one in this file whose data layer is a plain public JSON API — so it is unreadable as a page and readable as a payload.** The page is a 5,4 kB Bootstrap shell with `<tbody id="nutrApiDataTable">` and `<tbody id="ingrApiDataTable">` empty; `js/index.js` fills them from three synchronous XHRs. The JSON gives `Descrizione Articolo`, `Codice Azienda`, `Componenti` (an ingredient array with a `Grassetto` flag marking the allergens, or a nutrition array of `Tipo Valore`/`Quantita`), an `InfoProdotto` object and `Data Ultima Trasmissione`. **It states NO vintage**: `codArt` is an article code, and the only date is the transmission timestamp. The vendor's script shows `InfoProdotto` can carry `Capacita`, `Gradazione`, `Imbottigliato da`, `Classificazione` and a commented-out `Lotti` block — but a producer can leave all of them empty, and Caruso & Minini did, leaving only `Prodotto in: Prodotto in Italia`. **The shell also geo-gates itself client-side**, calling `ipapi.co/json/` and refusing anyone outside the EU plus GB and KR; that gate never reaches the API. `robots.txt` is **403 on both hosts** — an S3 `AccessDenied` on the page host, API Gateway's `Missing Authentication Token` on the API host — which under RFC 9309 §2.3.1.3 is *Unavailable* status: no rules exist, so nothing is disallowed and no exception is needed. Both target URLs answered 200; no technological measure was met. Reached from a WooCommerce paragraph reading *"Per info sugli ingredienti, i valori nutrizionali e l'etichetta ambientale, **clicca qui**"*. |
+| **digital-label.eu** | `dl.{producer}.{tld}/{locale}/qr/{uuid}`, data at the **same URL + `/api`** | **Spain's first e-label vendor, found 2026-08-30 at Albet i Noya, and the second client-side platform in this file whose data layer is a plain public JSON endpoint.** White-labelled onto the producer's own subdomain (`dl.albetinoya.cat`); the vendor is identified only by its asset URLs, which all point at `www.digital-label.eu`. The page is a **Next.js App Router shell, 9,7 kB, ZERO visible characters** — its RSC payload carries nothing but the i18n label dictionary, and the wine data is a suspended promise. **The endpoint is the same URL with `/api` appended**, read off the page's own chunk (`useSWR('/'+locale+'/qr/'+id+'/api', fetch)`), and it answers `application/json` with no token, no header and no gate. The payload is the complete mandated set and **it identifies itself better than any other Spanish source**: `title`, `dop`, **`anada`**, `gradoAlcoholico`, `cantidad`, the full nutrition set, an `ingredientes` array typed by role (`ingrediente` / `conservantes` / and per the shell's dictionary also `reguladores`, `estabilizadores`) with a `mostrarNegrita` flag marking the allergen, a separate `alergenos` array, `elaborador` with a postal address, and per-country recycling indicators. **`meta robots: noindex`, and no `robots.txt` at all (404), so nothing is disallowed and no exception is needed.** The `anada` field is what decided both Albet i Noya wines — 2024 attached, 2025 rejected — so this platform solves the vintage problem the way ead-qr does. Reached from an anchor reading **`Datos nutricionales`** in the wine's `Datos técnicos` block, beside a print-only QR image of the same URL. |
 | **devworlds e-label** | Shopware plugin, no public URL | The shop shows a "Zutaten & Nährwerte" **`<button>`, not a link**, opening a modal. All the server returns is a custom field `devworlds_elabel_fields_id` holding an opaque 24-hex id, plus `Allergene: Enthält Sulfite`. No devworlds host is linked anywhere and no e-label route appears in the sitemap, so **there is no URL to hold** and building one from the id would be guessing a pattern. Found via Von Winning. |
 
 ## The Dropbox route, which worked
@@ -3641,12 +3650,15 @@ Two revisits added by the sixth batch:
 `data/producer-declarations.json` before this. The pool is **90 wines at
 vintage 2024+ with `declaration_status: not_declared`, across 70 producer
 strings**, and it is being worked to measure the between-country spread:
-Germany's find rate was 19,8 %, Italy's 4,9 % over ten batches.
+Germany's find rate was 19,8 %, Italy's 4,9 % over ten batches. **Spain's
+stands at 3,2 % after fourteen producers** — one wine in 31.
 
 **Status after four producers and nine wines: zero found, zero rejected, nine
 not found.** Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventós i Blanc
-(2). No Spanish e-label vendor has been seen yet in any producer's linking —
-not U-label, not anything else.
+(2). No Spanish e-label vendor was seen in the first four producers' linking —
+not U-label, not anything else. **The eighth producer broke that** (Albet i
+Noya, `digital-label.eu`); everything below this line is the first batch, and
+the second batch's own section is at the end of this chapter.
 
 ### Two structural facts about the Spanish pool, both free
 
@@ -3779,20 +3791,204 @@ a tasting note; a page can mention two and be a declaration.
   `valor energètic`, `conservant`, `anyada`, `verema`, `fitxa tècnica`.
   Add `añada`/`anyada` and `vendimia`/`verema` to the vintage greps.
 
+### The second Spanish batch: an adopter at last, and Spain's shape confirmed
+
+**2026-08-30, ten more producers and twenty-two more wines**, taking Spain to
+fourteen producers and 31 wines: **one found, one rejected, 29 not found.**
+Bodegas Muga (2), Born Rosé Barcelona (3), Javi Revert Viticultor (3), **Albet
+i Noya (2 — the find and the rejection)**, Bodegas Pinord (2), Dominio de Eguren
+(2), Familia Conesa (2), Bodegas Frutos Villar (2), Terra de Asorei (2), Rafael
+Palacios (2).
+
+**The open question is answered: yes, a Spanish producer has adopted a QR
+platform.** Albet i Noya runs `digital-label.eu` white-labelled onto
+`dl.albetinoya.cat` — see the row in *Unreadable — client-side rendering*, which
+is where it belongs even though its payload is readable. It is one adopter in
+fourteen producers, so the Spanish ecosystem is real but thin, and **the second
+producer probed straight afterwards on exactly that hypothesis — Bodegas Pinord,
+another mid-size DO Penedès house — had not bought it or anything else.** Do not
+expect a vendor to spread within a region. `u-label.com` has still never
+appeared in any producer's HTML in any country.
+
+**And Spain's shape is confirmed as the French one, but only for half the pool.**
+Counting wines that pass every part of the four-part check and die only on
+absence, this batch adds **five** to the first batch's three: Born Rosé's double
+magnum (producer, cuvée, vintage *and* pack, from a page reading `DOUBLE MAGNUM
+300cl … 2024 vintage`) and both Familia Conesa wines (`AÑADA: 2024` and `GRADO
+ALCOHÓLICO: 12,5º` against Systembolaget's 2024 and 12,5), plus the two Vivanco
+and Raventós wines already recorded. **Eight of 31 Spanish wines got past
+producer, cuvée, vintage, market, alcohol and pack and found nothing to
+attach** — a rate Italy never came close to. But the other half of the batch
+closed the *Italian* way, on an undated page: Javi Revert, Pinord, Terra de
+Asorei and Rafael Palacios state no year anywhere. **So Spain is not one shape.
+It is bimodal**: the shops that sell direct date their wines properly and
+publish no declaration, and the brochure sites date nothing at all.
+
+#### Three ways a Spanish producer's site simply does not answer, and none is a finding
+
+Three of the ten producers were closed without reading a byte, and **all three
+are recorded as outages or refusals rather than as absences.** That distinction
+matters more in Spain than anywhere so far, because it happened three times in
+ten.
+
+- **Connect timeout.** `muga.es` and `www.muga.es` resolve to 217.76.128.34 and
+  neither answers on 443 — no handshake, at 15 s and at 25 s, verified with
+  `curl` outside the tool on two different runs.
+- **Refused, then 403.** `eguren.com` (217.76.142.47) refuses 443 outright and
+  answers **403** on port 80; `dominiodeeguren.com` (217.76.128.220) times out.
+  The 403 is a technological measure and is absolute — no retry, no device
+  framing, no exception.
+- **An expired TLS certificate**, which this project had not met before.
+  `bodegasfrutosvillar.com`'s Let's Encrypt certificate ran out on **29 Aug 2026
+  16:42 UTC**, one day before the run, and port 80 does nothing but 301 into the
+  same broken HTTPS. **The site was not fetched and certificate verification was
+  not disabled.** That is a decision worth stating: an expired certificate is
+  neither a `robots.txt` directive nor a 401/403/429, so no existing rule
+  covers it, but a declaration read over a channel whose server identity cannot
+  be verified carries worse provenance than this file is willing to attach, and
+  the trade is not worth making for a wine label. Re-probe it — a Let's Encrypt
+  renewal will very likely have fixed it. `www.frutosvillar.com` is NXDOMAIN; the
+  guessable short name is not the producer's.
+
+**Watch the address, not just the name.** Three of these hosts sit in
+`217.76.0.0/16` (Arsys, Logroño). Whether that range filters non-browser clients
+or those particular sites were simply down cannot be told from here, and it is
+recorded as an observation, not a conclusion. Check the A record before spending
+requests on a Spanish producer, and never read a 217.76 failure as evidence
+about the producer.
+
+#### Two Spanish wines that are not the producer's wines
+
+Both are the *producer field is not the estate* problem in a form Germany's
+importer section does not cover — here Systembolaget names a real Spanish
+estate, and the wine belongs to a **second winery the same people own**.
+
+- **Javi Revert Viticultor SL**: Lafont and Grillat are **La Comarcal**'s, the
+  joint project of Javi Revert and Victor Marqués at Venta del Moro. They appear
+  nowhere on `javirevertviticultor.com`, and La Comarcal publishes no site of its
+  own — only importer portfolios, which are excluded sources. No producer
+  surface exists, so no identity check is possible.
+- **Terra de Asorei**: Systembolaget's *Terra de Asorei Albariño Sobre Lias* has
+  no counterpart in the bodega's own thirteen-product shop; the only sobre-lías
+  wine there is headed **`Nai e Señora "sobre lías"`**, and Nai is a separate
+  label in the same house. Either the Swedish name is the importer's rendering
+  or it is a different wine, and nothing on either surface settles it.
+- **Born Rosé Barcelona**: *Rambla Penedès* is a genuine Born Rosé cuvée (the
+  London Wine Competition files it under the company **Bord Brands S.L.**) and
+  the estate's own complete Shopify census has no page for it.
+
+**The lesson is the mirror of the German one.** There, the producer field held
+an importer and the work was finding the estate. Here it holds an estate that is
+real, and the work is noticing that the *cuvée* belongs to a sister company.
+Check the producer's own product census before assuming a wine has a page.
+
+#### Spanish site shapes worth reusing
+
+- **Albet i Noya** (`albetinoya.cat`): hand-built PHP, `/{lang}/{wine}.php`, with
+  `/{lang}/vins.php` as the range index — and **old slugs 302 into it**
+  (`faniotimbes.php` → `vins.php`), so a stale URL costs one request and yields
+  the whole census. The e-label anchor is at the foot of the `Datos técnicos`
+  block on every wine page.
+- **Bodegas Pinord**: products at `/es/productes/{colour}-{do}-{name}/`, and each
+  DO has an index page (`/es/do-rueda-es`, `/es/do-rias-baixas`) listing its
+  products, so two wines in different appellations cost two index fetches and no
+  guessing.
+- **Familia Conesa**: PrestaShop, `/{range}/{range}-{variety}`, whole catalogue
+  linked from the home page — one fetch is a complete census.
+- **Wix (Rafael Palacios)**: every page carries the site's **entire page
+  registry inline** as `"pageUriSEO"` values. One fetch lists every page the
+  site has and rules out a disclosure page without guessing a URL. The visible
+  text is ~1 500 characters out of 600 kB, so judge by the registry and the raw
+  greps, not by the extraction.
+- **Shopify (Born Rosé)**: the apex answered `robots.txt` with **503** while
+  `www` served the stock Shopify file — probe the `www` host.
+  `sitemap_products_1.xml` was a **400 with an empty body**; `/collections/all`
+  is the working census.
+
+#### Spanish near-misses, three more, and one rule they sharpen
+
+Added to the first batch's four, in the same increasing order of how convincing
+they look:
+
+5. **`Contiene sulfitos` inside a full technical block.** Familia Conesa's
+   PrestaShop gives every wine `TIPO DE VINO`, `VARIEDADES DE UVA`, `AÑADA`,
+   `CLIMATOLOGIA`, `PRODUCCIÓN BOTELLAS`, **`EAN BOTELLA`**, `BOTELLAS POR
+   CAJA`, `GRADO ALCOHÓLICO`, `CATEGORIA`, `VENDIMIA`, `CONSUMO ÓPTIMO` and
+   `Contiene sulfitos`. **It names an EAN and a bottle count and a harvest
+   method and not one ingredient.**
+6. **`Datos analíticos` with one line in it.** Pinord's per-wine block is headed
+   as though it were an analysis and contains only the alcohol.
+7. **`light on sulphites and alcohol`** (Born Rosé, English). A marketing claim
+   about the sulphite level is not a sulphite declaration.
+
+**The rule from batch 1 holds and gets sharper: the test is the FORM.** Conesa's
+block is richer in identity than Albet i Noya's actual e-label — it has an EAN,
+which the e-label does not — and it is still not a declaration, because nothing
+in it is a list of what is in the wine. **Richness of the technical block does
+not predict a declaration and should not raise your hopes.** If anything the
+correlation is inverse: the two producers that publish the most technical detail
+(Conesa, Raventós) publish no ingredient list, and the one that publishes an
+ingredient list (Albet i Noya) has an ordinary marketing page.
+
+#### Spanish greps that lie, second batch
+
+The first batch's four (`ingredien` in a blog paragraph, `kJ`/`qr` in `php{random}`
+upload names, `etiqueta` in *"a la contra etiqueta"*, `valor` in a cookie banner)
+plus five more. **Three of these five are cross-cutting and will bite in every
+country**, so they are flagged as such.
+
+- **`ingredientes` in a food-pairing paragraph** — *"ensaladas con **ingredientes**
+  frescos"* at Pinord. Second Spanish sighting after Vivanco's. A hit inside a
+  `Maridaje` block is noise.
+- **`declaracion` matches `Declaración de accesibilidad`**, the accessibility
+  statement Spanish WordPress sites carry in the footer. It reads as a
+  declaration-shaped link and is not one. Seen at Javi Revert.
+- **CROSS-CUTTING: WooCommerce ships its full country/province JSON dictionary
+  inline**, so `añada` matches **Granada** and `vol` matches **Volta, Volyn,
+  Vojvodina**. Several hundred false positives on a single product page, in any
+  country. Seen at Terra de Asorei.
+- **CROSS-CUTTING: `e-label` matches the CSS class
+  `.twentytwenty-after-label::before`** from the before/after image slider —
+  `after-label` contains `e-label`. Terra de Asorei's vendor grep lit up on it
+  and there was nothing there.
+- **CROSS-CUTTING: a bare `\b20[0-9][0-9]\b` year grep matches the
+  `unicode-range` lists in `@font-face` rules.** `U+2013-2014`, `U+2018-201A`,
+  `U+2020-2022`, `U+2026`, `U+2030`, `U+2039-203A` all read as years. Every Wix
+  and Google-Fonts page carries dozens. **Anchor the vintage grep to a word** —
+  `añada`, `anyada`, `cosecha`, `colleita`, `millésime`, `annata`, `Jahrgang` —
+  or exclude a `U+` context.
+
+Also: **Galician is a fourth language to grep in.** Terra de Asorei publishes
+Galician-first — `viño`, `colleita` (vintage/harvest), `uva`, `adegas`. Add it
+to the Spanish and Catalan terms already listed.
+
+#### `visible_chars` near zero is not proof of client-side rendering
+
+Two pages in this batch returned about 2 900 visible characters out of 168 kB
+(Born Rosé's Shopify) and about 1 500 out of 600 kB (Rafael Palacios' Wix). The
+first is **not** client-rendered — a raw grep of the saved file confirmed the
+declaration's absence directly — while the second is. **A low
+visible-character ratio is a reason to run the raw greps, not a reason to
+conclude the page is a shell.** `src/probe.py`'s own term scan already reads the
+raw source, so its `terms: 0` is trustworthy where the extraction is not.
+
 ### Where the remaining Spanish work is
 
-**81 wines untouched**, across 66 producer strings. The multi-wine producers
-not yet attempted are the cheapest next work: **Born Rosé Barcelona (3)** and
-**Javi Revert Viticultor (3)**, then the eleven two-wine producers — Dominio de
-Tares, Giol Porrera, Dominio de Eguren, Binigrau, Terra de Asorei, Rafael
-Palacios, Bodegas Muga, Bodegas Frutos Villar, Albet i Noya, Familia Conesa and
-Bodegas Pinord.
+**59 wines untouched**, across 56 producer strings — the sibling economics are
+nearly spent. Only **three** two-wine producers remain: **Dominio de Tares, Giol
+Porrera and Binigrau**. After those, Spain is 53 single-wine producers and costs
+the same per wine as Italy's tail.
 
-**The open question for the next Spanish batch is whether any Spanish producer
-has adopted a QR platform at all.** In France that was the only thing that
-predicted a declaration, and in Italy it was the only thing worth selecting
-for. Four Spanish producers in, the answer is no adopters — but two of the four
-are Catalan sparkling houses on hand-built PHP, and none is the kind of large
-Rioja or Ribera group most likely to have bought a vendor. **Bodegas Muga and
-Albet i Noya are the best-placed remaining tests**, and `u-label.com` has still
-never been seen in any producer's HTML in any country.
+Three wines should be **re-probed rather than researched**, and they are the
+cheapest work left after the three pairs: **Bodegas Muga (2)** and **Bodegas
+Frutos Villar (2)** were closed on a host outage and an expired certificate,
+not on absence. Frutos Villar's `Sin+ Verdejo` is worth going back for
+specifically — a name suggesting a no-added-sulphite bottling is the kind of
+wine whose producer has a reason to publish a list. **Dominio de Eguren (2)
+should not be re-probed** without a reason to think the 403 has gone.
+
+**The next hypothesis to test is the one Pinord falsified in its narrow form and
+did not touch in its broad one.** A single Catalan organic estate has bought a
+vendor; a single Penedès neighbour has not. What has *not* been tried is a large
+Rioja or Ribera group — the segment most likely to have compliance tooling — and
+Muga's outage is why. That test is still open.
