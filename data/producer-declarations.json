@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "3 — Italy, tenth batch, open 2026-08-15. France is set aside at 69 producers, 142 wines, 4 found, 9 rejected; Germany is exhausted. Italy after nine batches: 90 producers, 186 wines, 10 found, 164 not_found, 12 rejected; the tenth batch continues from a pool of 93 untouched wines, one producer each.",
-  "attempted": 461,
+  "attempted": 462,
   "found": 32,
-  "not_found": 380,
+  "not_found": 381,
   "rejected": 49,
   "declarations": [
     {
@@ -13295,9 +13295,40 @@
       "evidence": "STEP 2 CLOSES IT ON THE VINTAGE. Systembolaget sells Scenario 2024, Bolgheri DOC Bianco, 100 % Vermentino, 12,5 %, 75 cl. The estate's page is the right cuvee — 'Scenario / Bolgheri DOC Bianco / 100 % Vermentino', under a hectare on north-facing Flysch soils above Villa Donoratico — and it is on the 2022: the narrative sections are 'Clima 2022' and 'Vendemmia 2022' and the only per-wine document is /media/file//92/Data sheet - Scenario 2022 - DE.pdf. It states no alcohol. THE PACKAGING OBLIGATION IS DISCHARGED IN FULL AND THE INGREDIENT ONE NOWHERE. Argentiera Srl, P.IVA 04964100483, Via Aurelia 412/A, Castagneto Carducci (LI) — the producer is right and both cuvees are on its own range page. The estate has built a dedicated /it/etichettatura-ambientale/ tree with one page per product for all eight products (Villa Donoratico, Ventaglio, Poggio ai Ginepri, I Pianali, Eco di Mare, Argentiera, Olio, Scenario), each a bilingual it/en table of bottle GL 71 / capsule C/ALU9O / cork FOR 51 with material and bin. That is the Italian environmental-labelling decree, a different obligation, and there is no counterpart anywhere on the site for ingredients or nutrition: across five pages totalling ~1,5 MB, the raw HTML and the stripped text both give zero matches for ingredien, nutrizion, solfit, dichiarazione, valori, and for the vendor tokens ioagri, ead-qr, i-wine, carmaqrcode, u-label, goalstec, btn-nutrizional and tab-ingredienti. THE SHOP IS NOT A CONSUMER SHOP: /it/shop/ carries nine products, all of them old Argentiera and Ventaglio vintages (2010-2019, magnums and jeroboams) sold to Ambassadors club members, and neither Swedish wine appears in it — so step 4, the surface that produced the ninth batch's two finds, does not exist here. TWO GREPS THAT LIE, BOTH NEW: 'Energia vibrante e fotosintesi di un piccolo vigneto' opens Scenario's philosophy paragraph, so `energia` matches a tasting note; and the Documenti page's inline base64 produced the single `kcal` hit on the site.",
       "rejected_because": null,
       "checked_at": "2026-08-29T09:55:00Z"
+    },
+    {
+      "product_number": "7148201",
+      "name": "Feudo di Mezzo Etna Rosso Contrada",
+      "producer": "Azienda Agricole Planeta s.s",
+      "country": "Italien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.planeta.it/vini/etna-rosso-contrada-feudo-di-mezzo/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.planeta.it/robots.txt (200, stock WordPress: 'User-agent: *' / 'Disallow: /wp-admin/' / 'Allow: /wp-admin/admin-ajax.php')",
+        "https://www.planeta.it/sitemap_index.xml (200, eight children including wine-sitemap.xml)",
+        "https://www.planeta.it/wine-sitemap.xml (200, the whole range in it and en)",
+        "https://www.planeta.it/vini/etna-rosso-contrada-feudo-di-mezzo/ (200, 101 kB)",
+        "https://storage1368.cdn-immedia.net/wp-content/uploads/2024/04/Planeta_Etna-Rosso-Contrada-Feudo-di-Mezzo-2024-BIO.pdf (200, 310 kB, one page, text extracted in full)",
+        "https://repertorio1694.it/robots.txt (200, disallows only /*?currency=*, /*;jsession=*, /404/ and /auth)",
+        "https://repertorio1694.it/sitemap.xml (200, 164 URLs — the complete shop census)",
+        "https://repertorio1694.it/product/35653763/etna-rosso-contrada-feudo-di-mezzo-bio-0-750-doc-etna (200, 290 kB)"
+      ],
+      "server_rendered": true,
+      "elabel_platform": null,
+      "robots_disallowed": false,
+      "robots_reasoning": "Both hosts are permissive and everything fetched was allowed. www.planeta.it is the stock WordPress group disallowing only /wp-admin/. repertorio1694.it disallows only a currency query parameter, a jsession parameter, /404/ and /auth; the sitemap, the shop and the product page are all outside those rules. No exception was needed.",
+      "evidence": "THE IDENTITY IS AS GOOD AS IT EVER GETS IN ITALY AND THERE IS STILL NO DECLARATION. Systembolaget sells 'Feudo di Mezzo Etna Rosso Contrada' 2024, Sicily, 13,5 %, 75 cl. Planeta's own per-wine page is /vini/etna-rosso-contrada-feudo-di-mezzo/ (Etna DOC, Nerello Mascalese and Nerello Cappuccio, Castiglione di Sicilia, cantina Feudo di Mezzo), and the wine's technical sheet is filed per vintage under a name that carries the year: Planeta_Etna-Rosso-Contrada-Feudo-di-Mezzo-2024-BIO.pdf. THAT PDF WAS DOWNLOADED AND ITS TEXT EXTRACTED IN FULL. It is headed 'Etna Rosso Contrada Feudo di Mezzo 2024', states 'GRADAZIONE ALCOLICA: 13,5% vol.' — matching Systembolaget exactly — 'FORMATO BOTTIGLIA: 0,75 l', 'PRIMO IMBOTTIGLIAMENTO: luglio 2025', a 'NOTE DI VENDEMMIA - ETNA 2024' paragraph, and the certifications Vino Biologico and SOStain. So the producer, the cuvee, the contrada, the vintage, the strength and the pack are all confirmed against a producer document written for this bottling. AND IT IS A SCHEDA TECNICA, NOT A DECLARATION: soil, altitude, yield, training system, cultivation method, harvest dates, vinification, ageing, total acidity 5,8 g/l, pH 3,43, bottle weight, closure, tasting note, food pairing. NO INGREDIENT LIST AND NO ENERGY VALUE. THE PACKAGING OBLIGATION IS ON THE WEB PAGE AND THE INGREDIENT ONE IS NOT — the fifth Italian producer in this file to do exactly that. The wine page carries a 'Come smaltire gli imballaggi' block giving bottle GL71 glass, capsule C/ALU 90, cap LDPE 4 and cork FOR 51 with the bin for each, and nothing about what is in the wine. Raw and stripped greps of the page return zero for ingredien, nutrizion, solfit, kcal, energia and dichiarazione, and zero for every Italian vendor token (ioagri, ead-qr, i-wine, carmaqrcode, goalstec, u-label.com, btn-nutrizional, tab-ingredienti, qualita). STEP 4 WAS RUN AND THE SHOP DOES NOT DECLARE EITHER. Planeta's wine club Repertorio 1694 (repertorio1694.it) is a genuine first-party e-commerce, 164 URLs, and it sells this exact wine at /product/35653763/... with a VINTAGE selector currently on '24' and a MERCATO (market) selector — the product's variant array is literally keyed {\"ANNATA\":..., \"MERCATO\":...}, which is the best per-vintage AND per-market control seen on an Italian shop. Its four tabs are Details, Characteristics, an untitled Tab and Technical data; none is an ingredient tab and the page has zero matches for every declaration term. TWO SMALLER THINGS WORTH THE RECORD: the shop states 'ALCOHOL CONTENT 14%' where the producer's own 2024 scheda says 13,5 % vol and Systembolaget says 13,0 [sic: 13,5] — the marketing surface agrees with Systembolaget and the shop does not; and the shop's 'Download the technical data sheet' link points at the 2023 PDF while the marketing site links the 2024, so a producer's own links are stale in one direction and current in the other, as at Ricasoli.",
+      "rejected_because": null,
+      "checked_at": "2026-08-30T10:05:00Z"
     }
   ],
-  "updated_at": "2026-08-30T09:35:00Z",
+  "updated_at": "2026-08-30T10:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -13629,6 +13660,11 @@
       "at": "2026-08-30T09:35:00Z",
       "batch": "3 — Italy, tenth batch: Caruso & Minini revisit (1 wine, already recorded)",
       "result": "0 new wines. Two requests. The shop page still states no annata and still carries SKU LILL2501; the SEL payload at api.sel.goalstec.it is byte-identical to the ninth batch's, transmission timestamp 2026/01/22 10:35 included, with InfoProdotto still holding only 'Prodotto in Italia'. The rejection stands. WORTH KNOWING FOR ANY FUTURE SEL REVISIT: 'Data Ultima Trasmissione' is a free and reliable staleness check — if it has not moved, neither has the declaration, and the wine can be closed without re-reading the payload's contents at all. Six weeks unchanged here."
+    },
+    {
+      "at": "2026-08-30T10:05:00Z",
+      "batch": "3 — Italy, tenth batch: Planeta (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found — and it is the cleanest Italian identity in the file with no declaration behind it. The estate's per-vintage scheda tecnica is named Planeta_Etna-Rosso-Contrada-Feudo-di-Mezzo-2024-BIO.pdf; it was downloaded and read in full and confirms cuvee, contrada, vintage 2024, 13,5 % vol and 0,75 l against Systembolaget exactly — and contains no ingredient list and no energy value, the Italian scheda near-miss for the sixth time. THE PACKAGING OBLIGATION IS PUBLISHED AND THE INGREDIENT ONE IS NOT, on the same page: a 'Come smaltire gli imballaggi' table with GL71 / C/ALU 90 / LDPE 4 / FOR 51. STEP 4 WAS RUN: Planeta's wine club shop repertorio1694.it is a real first-party e-commerce whose product variants are keyed {\"ANNATA\", \"MERCATO\"} — the best combined per-vintage and per-market control seen on an Italian shop, and the surface where the ninth batch's two finds came from — and it carries four tabs, none of them an ingredient tab, and zero matches for every declaration term. A NEW FALSE POSITIVE: `elabel` matches the theme string `readmoreLabel`. Add it beside menu-label, titleLabel, whitelabel and data-languageLabels — and note that searching for the bare string `u-label` hits every `menu-label` class, so search `u-label.com`."
     }
   ]
 }
