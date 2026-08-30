@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30. First Spanish batch; no Spanish producer was in this file before it. Pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after four producers and nine wines (Bodegas Vegamar 3, Gramona 2, Vivanco 2, Raventos i Blanc 2 — 0 found, 0 rejected, 9 not found) 81 wines across 66 producer strings remain. The producer==supplier step-0 test finds ZERO Spanish importer own-labels, against seven of the 81 remaining Italian wines. NO SPANISH E-LABEL VENDOR HAS BEEN SEEN YET in any producer's linking. The Spanish failure so far is NOT the Italian one: three of the first nine wines passed every part of the four-part check, vintage included, and died only on the declaration being absent. Previous batches: Germany exhausted (19,8 % find rate); France set aside at 69 producers, 142 wines, 4 found, 9 rejected; Italy set aside after ten batches at 112 producer strings, 204 wines, 10 found, 182 not_found, 12 rejected (4,9 %), 81 untouched wines remaining. See 'Spain opens, and the first four producers all fail on identity's opposite' in docs/elabel-platforms.md.",
-  "attempted": 476,
+  "attempted": 479,
   "found": 32,
-  "not_found": 395,
+  "not_found": 398,
   "rejected": 49,
   "declarations": [
     {
@@ -13755,9 +13755,84 @@
       "not_found_because": "HOST OUTAGE, NOT ABSENCE. See 7287701. Re-probe when muga.es answers.",
       "robots_note": "robots.txt unreachable (ConnectTimeout).",
       "checked_at": "2026-08-30T15:20:00Z"
+    },
+    {
+      "product_number": "5748108",
+      "name": "Born Rosé Barcelona Dubbelmagnum",
+      "producer": "Born Rosé Barcelona",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.bornrose.com/products/1-double-magnum",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://bornrose.com/robots.txt — 503, so the apex was not fetched past it (no exception invoked)",
+        "https://www.bornrose.com/robots.txt — stock Shopify wildcard group, product and collection pages allowed",
+        "https://www.bornrose.com/collections/wines (200, 185 kB) — six product URLs, terms: 0, no declaration-shaped link",
+        "https://www.bornrose.com/collections/all (200, 213 kB) — the full census, fourteen products, terms: 0",
+        "https://www.bornrose.com/products/1-double-magnum (200, 169 kB) — the wine's own page",
+        "https://www.bornrose.com/sitemap_products_1.xml — 400 with an empty body, not usable",
+        "raw grep of the saved product HTML for ingredien|nutrition|nutricion|e-label|elabel|etiqueta|alerg|allergen|energ|u-label|qr-code — zero matches outside aria/menu label noise"
+      ],
+      "evidence": "PRODUCER, CUVÉE, VINTAGE AND PACK ALL MATCH. The product page reads 'Pack of 1 bottle DOUBLE MAGNUM 300cl of Organic Rosé wine BORN ROSÉ Barcelona, 2024 vintage', against Systembolaget's Born Rosé Barcelona Dubbelmagnum, 3000 ml, 2024. Grapes agree too: the page says Grenache Noir and Tempranillo, Systembolaget says Grenache and Tempranillo. Nothing in the four-part check failed.",
+      "rejected_because": null,
+      "not_found_because": "The identity is complete and the declaration is absent. The producer's only web surface publishes no ingredient list, no nutrition table and no pointer to an e-label, and names no e-label vendor. Whether the bottle carries a QR code that leads somewhere unlinked cannot be told from here; nothing on the producer's own site suggests one.",
+      "robots_note": "www.bornrose.com serves the stock Shopify robots.txt and allows everything fetched. No exception was needed or used. The apex bornrose.com returned 503 on robots.txt and nothing was fetched from it.",
+      "checked_at": "2026-08-30T15:45:00Z"
+    },
+    {
+      "product_number": "5751906",
+      "name": "Born Rosé Barcelona",
+      "producer": "Born Rosé Barcelona",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.bornrose.com/products/1-bot-magnum",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.bornrose.com/products/1-bot-magnum (200, 168 kB) — 'Pack of 1 bottle MAGNUM 150cl of Organic Rosé wine BORN ROSÉ Barcelona, 2025 vintage'",
+        "same site-wide checks as 5748108"
+      ],
+      "evidence": "Producer, cuvée and pack match — the page is the 150 cl magnum and Systembolaget's item is 1500 ml. THE VINTAGE DOES NOT: the shop has rolled forward to the 2025 while Systembolaget still stocks the 2024. Even if a declaration had been present on that page it could not have been attached to this wine.",
+      "rejected_because": null,
+      "not_found_because": "No declaration exists anywhere on the producer's site for any vintage, so there was nothing to reject; recorded as not found with the vintage mismatch noted, because the mismatch would have been the binding objection had a declaration been there.",
+      "robots_note": "Allowed by the stock Shopify robots.txt; no exception used.",
+      "checked_at": "2026-08-30T15:45:00Z"
+    },
+    {
+      "product_number": "5362401",
+      "name": "Rambla Penedès",
+      "producer": "Born Rosé Barcelona",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "https://www.bornrose.com/collections/all (200) — the producer's complete product census, fourteen products, and NO Rambla among them",
+        "https://www.bornrose.com/collections/wines (200) — six products, no Rambla",
+        "web search — 'Rambla' is a genuine Born Rosé cuvée (Grenache Noir / Tempranillo, Penedès, organic, 12 %), listed by third-party shops and by the London Wine Competition under the company name Bord Brands S.L., but every hit is a retailer, a review site or a competition entry, none of which this project may take a declaration from"
+      ],
+      "evidence": "The cuvée is the producer's, on the balance of third-party evidence, but the producer's own surface does not carry it: the shop's own complete product listing has no Rambla page, so there is no producer page on which to run the four-part identity check at all.",
+      "rejected_because": null,
+      "not_found_because": "No producer-side page exists for this cuvée, and the site carries no declaration for any of its wines in any case. The only surfaces naming Rambla are retailers and review sites, which are excluded sources.",
+      "robots_note": "Allowed by the stock Shopify robots.txt; no exception used.",
+      "checked_at": "2026-08-30T15:45:00Z"
     }
   ],
-  "updated_at": "2026-08-30T15:20:00Z",
+  "updated_at": "2026-08-30T15:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14139,6 +14214,11 @@
       "at": "2026-08-30T15:20:00Z",
       "batch": "4 — Spain, fifth producer: Bodegas Muga (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, and NOT a finding about the producer — the host is down. www.muga.es and muga.es both resolve to 217.76.128.34 and neither answers on 443: connect timeout at 15 s under curl and at src.probe's own timeout, on /robots.txt and on /. Verified twice, hours apart, with curl outside the tool, so it is the host and not this project's networking. NOTHING can be concluded about whether Muga publishes a declaration; the record says outage, not absence. Muga was one of the two producers named in the previous batch as best placed to test the 'has any Spanish producer bought a QR vendor' question (the other is Albet i Noya), so that test is still open. Re-probe on a later run rather than treating these two wines as closed."
+    },
+    {
+      "at": "2026-08-30T15:45:00Z",
+      "batch": "4 — Spain, sixth producer: Born Rosé Barcelona (3 wines)",
+      "result": "3 attempted, 0 found, 3 not found, in six requests. The producer's whole web surface is ONE Shopify store, www.bornrose.com, with fourteen products, and it carries NO declaration anywhere: the raw HTML of two product pages and two collection pages contains not one occurrence of ingredien/nutrition/nutricion/e-label/etiqueta/alerg/energ, no e-label vendor is named, and there are no declaration-shaped links. The only substance word on the site is marketing — 'light on sulphites and alcohol' in the product blurb, the Spanish/English form of the two-particular near-miss. ONE FULL IDENTITY MATCH DYING ON ABSENCE: the double magnum page states 'DOUBLE MAGNUM 300cl … 2024 vintage', which matches Systembolaget's 3000 ml 2024 on producer, cuvée, vintage AND pack, and there is simply nothing to attach — the French/Spanish shape again. The 1500 ml sibling failed the vintage step instead: the same shop's magnum page has rolled to 2025 while Systembolaget still stocks the 2024. The third wine, Rambla Penedès, is a real Born Rosé cuvée (the London Wine Competition lists it under the company Bord Brands S.L.) but has NO page on the producer's own shop at all, so its identity could not be completed on a producer surface. Host notes: the apex bornrose.com answers /robots.txt with 503 while www.bornrose.com serves the stock Shopify robots.txt — probe the www host. /sitemap_products_1.xml answers 400 with an empty body; /collections/all is the working product census. Visible-text extraction returns ~2 900 chars from a 168 kB page, which looks like client-side rendering and is not — a raw grep of the saved file confirms the absence."
     }
   ]
 }
