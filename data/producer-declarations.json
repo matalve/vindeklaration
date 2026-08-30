@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, two batches run. No Spanish producer was in this file before batch 4. The pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings. AFTER FOURTEEN PRODUCERS AND 31 WINES: 1 FOUND, 1 REJECTED, 29 NOT FOUND — Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventos i Blanc (2), Bodegas Muga (2), Born Rose Barcelona (3), Javi Revert Viticultor (3), Albet i Noya (2, the find and the rejection), Bodegas Pinord (2), Dominio de Eguren (2), Familia Conesa (2), Bodegas Frutos Villar (2), Terra de Asorei (2), Rafael Palacios (2). 59 wines across 56 producer strings remain, of which only three producers have two wines (Dominio de Tares, Giol Porrera, Binigrau). SPAIN'S FIND RATE IS 3,2 %, against Germany's 19,8 % and Italy's 4,9 %. SPAIN'S FIRST AND ONLY E-LABEL VENDOR IS digital-label.eu, at Albet i Noya, white-labelled onto dl.albetinoya.cat: a Next.js shell with zero visible characters whose data endpoint is the same URL plus /api. One adopter in fourteen producers. THE SPANISH FAILURE IS BIMODAL: eight of the 31 wines passed producer, cuvee, vintage, market, alcohol and pack and died only on the declaration's absence (the French shape), while the rest close on an undated page (the Italian shape). THREE PRODUCERS WERE NOT REACHED AT ALL and are recorded as outages or refusals rather than absences: Bodegas Muga (connect timeout on both hostnames), Dominio de Eguren (443 refused, 403 on port 80, which is absolute), and Bodegas Frutos Villar (Let's Encrypt certificate expired 29 Aug 2026; the site was NOT fetched and certificate verification was NOT disabled). Muga and Frutos Villar should be re-probed. The producer=supplier test still returns zero in Spain.",
-  "attempted": 498,
+  "attempted": 500,
   "found": 33,
-  "not_found": 415,
+  "not_found": 417,
   "rejected": 50,
   "declarations": [
     {
@@ -14303,9 +14303,56 @@
       "not_found_because": "No declaration on the estate's site for any vintage, and the only vintage it currently publishes for this wine is not ours.",
       "robots_note": "Empty Disallow under the wildcard group; nothing disallowed, no exception used.",
       "checked_at": "2026-08-30T20:20:00Z"
+    },
+    {
+      "product_number": "5745801",
+      "name": "Garnatxa Blanca Giol Porrera",
+      "producer": "Giol Porrera",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "web search — the estate is Jonas Macip Simo's, in Porrera (DOQ Priorat), and its own site is named as www.giolporrera.cat",
+        "https://www.giolporrera.cat/ — 404, 2 516 bytes, 33 visible characters, title 'ConnectYourDomain Error | Wix.com'. robots.txt is a genuine 404, so nothing is disallowed; there is simply no site being served",
+        "https://giolporrera.cat/ — the apex answers the identical Wix error, so it is not a www/apex problem",
+        "https://www.doqpriorat.org/en/wineries/giol-porrera/ (200) — the APPELLATION'S OWN directory entry, used only to find the producer's URL and not as a source. It names exactly www.giolporrera.cat, so the broken address is the current one and no other producer surface exists to look for."
+      ],
+      "evidence": "No producer surface was reached. Nothing about this wine could be checked beyond the producer's identity.",
+      "rejected_because": null,
+      "not_found_because": "OUTAGE, NOT ABSENCE. The estate's site is a Wix site whose custom domain is not connected: both hostnames return Wix's 'ConnectYourDomain Error' 404 rather than any content. The DOQ Priorat register names the same address, so there is no alternative host to try and nothing to guess at.",
+      "robots_note": "robots.txt is a genuine 404 on both hostnames; nothing disallowed, no exception used.",
+      "checked_at": "2026-08-30T20:30:00Z"
+    },
+    {
+      "product_number": "7186601",
+      "name": "Mas d'en Caçador Velles Vinyes Giol Porrera",
+      "producer": "Giol Porrera",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": null,
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": null,
+      "sources_checked": [
+        "same as 5745801 — the estate serves no site at either hostname"
+      ],
+      "evidence": "No producer surface was reached. Mas d'en Cacador is one of the estate's two named parcels in Porrera, so the cuvee is certainly theirs, but nothing else could be checked.",
+      "rejected_because": null,
+      "not_found_because": "Outage, not absence; see 5745801.",
+      "robots_note": "robots.txt is a genuine 404 on both hostnames; nothing disallowed, no exception used.",
+      "checked_at": "2026-08-30T20:30:00Z"
     }
   ],
-  "updated_at": "2026-08-30T20:20:00Z",
+  "updated_at": "2026-08-30T20:30:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -14742,6 +14789,11 @@
       "at": "2026-08-30T20:20:00Z",
       "batch": "4 — Spain, fifteenth producer: Dominio de Tares (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in four requests. El Bierzo, WordPress, ten wines at /portfolio-item/{slug}; robots.txt is a wildcard group with an EMPTY Disallow. terms: 0 on the home page and on both wine pages, no vendor named, no declaration-shaped link anywhere. THE THIRD SPANISH FICHA TECNICA WAS READ IN FULL AND IS THE POOREST YET: El Paisano de Tares 2024's per-vintage PDF has elaboracion, a tasting note, a maridaje paragraph and a detailed PACKAGING block (bottle model, closure size, capsule, label dimensions, carton thickness, bottles per case, case weight) and contains NOT ONE of ingredien / sulfit / nutri / energ / kJ / kcal / alerg / conserv / alcohol. Gramona's ficha at least gave the strength and Raventos's named doses; this one names none. THE SPANISH FICHA TECNICA IS NOW TESTED THREE TIMES IN THREE HOUSES AND HAS NEVER CARRIED THE MANDATED SET. El Paisano is the ninth Spanish wine to pass producer, cuvee, vintage, market and pack and die only on absence — the vintage is stated on the ficha's every page and matches 2024 exactly, and the pack ('Borgona BG NOVA 75 y 150 cl') matches too. The Godello closes differently: the site has rolled forward to the 2025 while Systembolaget sells the 2024, so the wine on the producer's surface is not our wine. ONE USEFUL SITE SHAPE: --links on the home page returned the complete ten-wine census, so this estate cost no guessing at all."
+    },
+    {
+      "at": "2026-08-30T20:30:00Z",
+      "batch": "4 — Spain, sixteenth producer: Giol Porrera (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in four requests, and it is the FOURTH Spanish producer closed without reading a byte of the estate's own text. A NEW FAILURE MODE, and one that will recur: the producer's domain points at Wix but the domain is NOT CONNECTED, so both www.giolporrera.cat and the apex answer a 404 whose title is 'ConnectYourDomain Error | Wix.com' — 2 516 bytes, 33 visible characters. This is not a rendering problem and not a refusal; there is no site. The DOQ Priorat register's own winery entry names exactly that address, which is how the outage was confirmed as current rather than as a stale URL, and it also means there is no second host to look for. RECOGNISE IT BY THE TITLE, not by the status: a Wix 404 with 33 visible characters is a dead domain, and one apex probe is enough to confirm it. Third-party appellation registers (doqpriorat.org, and its ca/es/en mirrors) are a cheap way to confirm which URL a small Spanish estate itself claims; they are a POINTER and never a source."
     }
   ]
 }
