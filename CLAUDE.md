@@ -40,6 +40,7 @@ counted. This file is about how to work here.
 | `data/unknown.json` | what the parser could not read, ranked by wines blocked |
 | `data/producer-declarations.json` | the second source — e-label finds, never merged into the dataset |
 | `deploy/` | running it unattended on the Raspberry Pi |
+| `src/probe.py` | `declaration-finder`'s fetcher — robots, politeness and a report instead of a page |
 | `src/site.py`, `templates/` | the static site — `uv run python -m src.site` |
 | `worker/index.js` | serves the dataset from R2 at `/data/*`; assets handle the rest |
 | `cf-build.sh` | what Cloudflare's build runs — the dashboard only calls it |

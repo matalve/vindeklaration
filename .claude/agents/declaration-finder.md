@@ -40,16 +40,80 @@ apart, and doing so is half the value of this agent:
 Never state which of the two you are looking at unless you have evidence. "Not
 found" means not found, and it is a legitimate result.
 
-## Read this first
+## Budget is the binding constraint, and it is context, not time
+
+A run ends when the context or the session limit ends, so every token spent on
+markup you did not need is a producer you did not reach. Three rules, and they
+are not optional:
+
+**1. Pages do not enter your context. `src/probe.py` does the fetching.**
+
+```sh
+uv run python -m src.probe URL [URL ...]        # add --context 2 for more
+```
+
+It enforces the delay across invocations, sends the project User-Agent, reads
+and applies `robots.txt` by RFC 9309 groups, stops dead on 401/403/429, writes
+the body to `/tmp/vindeklaration-probe/` and prints only: status, robots
+verdict, the declaration terms that appear with a line of context each, any
+e-label vendor named in the source, and the links that are shaped like a
+declaration pointer. It already knows the traps — `menu-label`, PHP upload
+names, base64 payloads, script contents and Catalan's `al·lèrgens`.
+
+A page with `terms: 0 hit(s)` and no declaration-shaped link is closed. Do not
+open the saved file to confirm an absence; open it only when the report shows
+something worth reading, and then read the region, not the file.
+
+Flags for the documented exceptions, which echo into the report so the reason
+lands in the record: `--elabel-exception "why"` fetches despite a disallow,
+`--mobile` sends the device-shaped User-Agent. Both are governed by the rules
+below, unchanged — the flag makes the exception explicit, it does not widen it.
+
+**2. Never `Read` `data/producer-declarations.json`.** It is 1.6 MB. Query it
+with a Python one-liner and write to it the same way.
+
+**3. Do not read `docs/elabel-platforms.md` whole.** See below.
+
+Two more habits that pay: `producer == supplier` identifies an importer's own
+label with no request at all, and a producer with several wines in the pool is
+worth more than one with a single wine. Both are free, so do them first.
+
+**A producer that is not closed in about ten requests is closed as
+`not_found`.** Say what you read and move on. The tenth request has never yet
+found a declaration that the first five gave no sign of, and the producer you
+did not reach because of it is a real cost.
+
+## Read this first, but read only the part that applies
 
 **`docs/elabel-platforms.md`** carries what previous runs established: which
 platforms are server-rendered and readable, which are client-side and are not,
 the URL patterns for each, the hosts that bite, and where the yield actually
-is. Read it before you search for anything, and **extend it at the end of your
-run** with any platform or quirk it does not already name.
+is. A run that rediscovers a platform already listed there has spent its budget
+for nothing — but so has a run that reads all 260 KB of it before starting.
 
-That file exists because budget is the binding constraint on this agent, and a
-run that rediscovers a platform already listed there has spent it for nothing.
+Get the section list first, then read only what you need:
+
+```sh
+grep -n '^#\{2,3\} ' docs/elabel-platforms.md
+```
+
+- **Always**, whatever country you are on: the intro, *Readable —
+  server-rendered*, *Unreadable — client-side rendering*, *Where a declaration
+  is not, however much it looks like one*, *Don't trust a slug, or a shop's own
+  vintage field*, *Alcohol is not a matching rule, but it is a matching test*,
+  *The pack is a fifth matching test*, and *When the producer field holds a
+  Swedish importer*. Read them with `Read` and an `offset`/`limit` from the
+  grep, not by opening the file.
+- **Your country's own section, and only yours.** The country deep-dives are
+  the bulk of the file and they do not transfer: what closes an Italian
+  producer says nothing about a Spanish one.
+- **`grep` for the host, the vendor and the producer name** before fetching
+  anything. That is what answers "has this been seen before", and it costs
+  nothing.
+
+**Extend it at the end of your run** with any platform or quirk it does not
+already name — under your country's section, and in the cross-cutting sections
+only when the finding really is cross-cutting.
 
 ## Where to look, in order
 
