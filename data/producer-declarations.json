@@ -17,9 +17,9 @@
  "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
  "generated_at": "2026-07-28T20:38:45Z",
  "batch": "4 — SPAIN, opened 2026-08-30. No Spanish producer was in this file before batch 4. The pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings. AFTER 23 PRODUCER STRINGS AND 43 WINES: 1 FOUND, 2 REJECTED, 40 NOT FOUND — Bodegas Vegamar (3), Gramona (2), Vivanco (2), Raventos i Blanc (2), Bodegas Muga (2), Born Rose Barcelona (3), Javi Revert Viticultor (3), Albet i Noya (2, the find and one rejection), Bodegas Pinord (2), Dominio de Eguren (2), Familia Conesa (2), Bodegas Frutos Villar (2), Terra de Asorei (2), Rafael Palacios (2), Dominio de Tares (2), Giol Porrera (2), Binigrau (2), Palacio de Fefinanes (2 strings, 2 wines), Attis/Sangarida (2 strings, 2 wines), Miguel Torres (1), Campo Viejo (1, the second rejection). Campo Viejo is the first Spanish producer on a GROUP-WIDE e-label platform, e-label.pernod-ricard.com, whose JSON is fully readable and states no vintage of any kind.",
- "attempted": 511,
+ "attempted": 512,
  "found": 33,
- "not_found": 426,
+ "not_found": 427,
  "rejected": 52,
  "declarations": [
   {
@@ -14653,9 +14653,39 @@
    "not_found_because": "No declaration on the producer's surface. Note the vintage separately: the page states no ANADA, but 'FECHA DE VENDIMIA: Primera semana de septiembre 2025' dates it to the 2025 harvest where Systembolaget stocks the 2024, so the producer has rolled forward here too and a declaration would have been rejected on vintage even if one had existed. FECHA DE VENDIMIA is worth adding to the Spanish vintage greps: it dates a wine on a page that never says 'anada'.",
    "robots_note": "See 2233501. Nothing disallowed; no exception invoked.",
    "checked_at": "2026-08-30T23:25:00Z"
+  },
+  {
+   "product_number": "7548601",
+   "name": "Audentia Petit Verdot",
+   "producer": "Bodegas Murviedro",
+   "country": "Spanien",
+   "vintage": "2024",
+   "status": "not_found",
+   "source_url": "https://bmkp.st4.ch/01/08410388009410",
+   "source_type": "e_label",
+   "raw_ingredients": null,
+   "language": null,
+   "vintage_on_source": null,
+   "market": "EU",
+   "nutrition_per_100ml": "VALOR ENERGETICO 100ml: E = 319 kJ / 76 kcal — printed inline on the producer's own product page, with no ingredient list beside it",
+   "sources_checked": [
+    "https://www.murviedro.es/robots.txt — a long WordPress wildcard group; it disallows /*? and /?s= and a list of /tienda/{n}_{range} category paths, but /vino/{slug} product pages and /productos-vinos-cavas are allowed",
+    "https://www.murviedro.es/ (200) — 301 to https://murviedro.es/; 18 same-host page links",
+    "https://murviedro.es/productos-vinos-cavas (200) — the complete range index, about 50 wines at /vino/{slug}",
+    "https://murviedro.es/vino/audentia-petit-verdot (200, 91 kB) — the wine's own page. It carries 'Contiene Sulfitos', 'VALOR ENERGETICO 100ml: E = 319 kJ / 76 kcal', 'Graduacion alcoholica: 13% vol.', 'Disponible en: 750ml', 'Vino apto para vegetarianos y veganos' — and an anchor reading 'Consultar Ingredientes' to https://bmkp.st4.ch/01/08410388009410",
+    "https://bmkp.st4.ch/robots.txt — 'User-agent: *' / 'Disallow: /'; the e-label exception of 2026-07-30 was invoked for one request and nothing else on the host was touched",
+    "https://bmkp.st4.ch/01/08410388009410 (200) — 302s to https://elabel.scantrust.com/default/#/?uid=0a864584-...&api_key=...&qr=01%2F08410388009410, the same 1 590-byte Scantrust shell, 9 visible characters"
+   ],
+   "evidence": "Producer and cuvee match exactly: Audentia is Murviedro's own range and there is exactly one Audentia Petit Verdot in a complete range index of about fifty wines. Pack matches (750 ml) and alcohol matches (13 % vol against Systembolaget's 13,0). The GTIN in the e-label URL, 08410388009410, is Murviedro's own and is published by Murviedro itself. What is missing is the ingredient list and the vintage.",
+   "rejected_because": null,
+   "not_found_because": "THE DECLARATION EXISTS AND CANNOT BE READ. Murviedro splits the disclosure exactly the way Regulation (EU) 2021/2117 allows: the allergen ('Contiene Sulfitos') and the energy value ('E = 319 kJ / 76 kcal') are printed inline on the product page, and the ingredient list sits behind the QR — on SCANTRUST, which this project has established cannot be read by anyone, because the uid and api_key live in a URL fragment the server never receives. This is the THIRD Scantrust deployment tested and the SECOND test of its GS1 Digital Link path form: bmkp.st4.ch/01/{gtin}, with no lot segment, 302s into the identical 1 590-byte shell as eega.st4.ch/01/{gtin}/10/{lot} did. The path form is confirmed no more readable than the fragment form. The vintage is also unstated: the product page carries origin, variety, vinification and food pairing and no year of any kind, so even a readable e-label would have had to date itself. This is a rendering limit, not an absence — Murviedro has published a declaration and the platform its supplier chose makes it unreadable to anyone comparing two bottles.",
+   "robots_note": "murviedro.es allows the product pages fetched. bmkp.st4.ch answers 'User-agent: *' / 'Disallow: /' and the e-label exception decided 2026-07-30 WAS USED for exactly one request: the URL was taken from Murviedro's own 'Consultar Ingredientes' anchor, nothing was traversed, no sitemap was read and no URL was guessed. It bought nothing, as the platform is unreadable regardless of permission.",
+   "server_rendered": false,
+   "elabel_platform": "Scantrust, reached through the tenant host bmkp.st4.ch by its GS1 Digital Link path /01/{gtin}. FIRST SPANISH SCANTRUST DEPLOYMENT.",
+   "checked_at": "2026-08-30T23:45:00Z"
   }
  ],
- "updated_at": "2026-08-30T20:06:44Z",
+ "updated_at": "2026-08-30T20:08:27Z",
  "_runs": [
   {
    "at": "2026-07-28T20:38:45Z",
