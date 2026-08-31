@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 540,
+  "attempted": 541,
   "found": 33,
-  "not_found": 455,
+  "not_found": 456,
   "rejected": 52,
   "declarations": [
     {
@@ -15417,9 +15417,35 @@
       "not_found_because": "No producer surface was reached and none appears to exist. Every remaining source for this wine is a retailer, a database or a review site, all of which are excluded.",
       "robots_note": "forjasdelsalnes.com serves a named-crawler-only robots.txt with no wildcard group, so under RFC 9309 nothing applied to our token. It made no difference: the host serves a login page over http and a mismatched certificate over https.",
       "checked_at": "2026-08-31T14:25:00Z"
+    },
+    {
+      "product_number": "9210201",
+      "name": "Ramon do Casar Nobre",
+      "producer": "Ramon do Casar",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://ramondocasar.es/rc-nobre/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://ramondocasar.com/ over 443 — connection refused; port 80 answers and 301s to https://ramondocasar.es/, which is the live site",
+        "ramondocasar.com/robots.txt — fourteen named crawler groups (adsbot-google, baiduspider, httrack, libwww, msiecrawler, sogou, webcopier, yeti and others) with NO wildcard group, so under RFC 9309 nothing applies to our token",
+        "https://ramondocasar.es/ (200, 323 kB) — 20 same-host pages, five of them wines (RC Godello, RC Lento, RC Nobre, RC Treixadura, RC Varietal). A complete census in one fetch. terms: 0",
+        "https://ramondocasar.es/rc-nobre/ (200, 273 kB) — the wine's own page. terms: 0, no declaration-shaped link, and zero raw hits for ingredien, sulfit, alerg, nutri, kcal, aecoc, escanqr and elabel",
+        "https://ramondocasar.es/wp-content/uploads/2026/06/2026-ES-RAMONDOCASAR-NOBRE-FICHA-TECNICA.pdf — NOT fetched. It is the CURRENT sheet, uploaded in June 2026 and named for 2026, for a page that states Anada 2025; ten Spanish fichas have now been read in full in this file without one carrying a mandated element other than an energy value, and this one could not have satisfied the vintage rule whatever it held"
+      ],
+      "evidence": "Producer and cuvee match: Ramon do Casar (D.O. Ribeiro) publishes five wines and RC Nobre is one of them; Systembolaget's item is Ramon do Casar Nobre. THE VINTAGE FAILS ON THE PRODUCER'S SURFACE: the page states 'Anada: 2025' plainly, in its own technical paragraph beside the denomination, grape varieties, oenologist and a 12 000-bottle limited edition, while Systembolaget sells the 2024. That is the sixth Spanish producer in this file whose shop window has rolled forward past Systembolaget's stock.",
+      "rejected_because": null,
+      "not_found_because": "No declaration exists on the producer's surface. The five-wine census and the wine's own page carry no ingredient list, no nutrition table, no energy value, no allergen line, no e-label vendor and no QR destination — and specifically no aecocescanqr link, which the neighbouring Galician producer Pazo do Mar does have.",
+      "robots_note": "ramondocasar.com's robots.txt lists fourteen named crawlers and no User-agent: * group, so under RFC 9309 no rule bound our token — the 2026-08-08 reading. ramondocasar.es was reached by the producer's own redirect.",
+      "checked_at": "2026-08-31T14:35:00Z"
     }
   ],
-  "updated_at": "2026-08-31T14:25:00Z",
+  "updated_at": "2026-08-31T14:35:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
