@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 534,
+  "attempted": 535,
   "found": 33,
-  "not_found": 449,
+  "not_found": 450,
   "rejected": 52,
   "declarations": [
     {
@@ -15259,9 +15259,37 @@
       "not_found_because": "No declaration exists on the producer's surface. The wine page carries no ingredient list, no nutrition table, no e-label vendor and no QR destination. THE FICHA IS THE SEVENTH SPANISH TECHNICAL SHEET READ IN FULL AND THE FIRST TO CARRY A MANDATED ELEMENT: its 'PERFIL ANALITICO' block ends with '100 ml E: 334 KJ / 79 Kcal', a real energy value, beside alcohol, total acidity, volatile acidity, pH, residual sugar and 'SO2 Total: 61 ppm'. It is still not a declaration — an SO2 analysis in ppm is a measurement, not an ingredient list, and there is no list of substances anywhere in the document. Nutrition without an ingredient list is the commonest near-miss in this file and this is its Spanish form.",
       "robots_note": "Stock WooCommerce robots.txt; /wp-content/uploads/ is explicitly allowed and the ficha sits there. No exception invoked.",
       "checked_at": "2026-08-31T12:50:00Z"
+    },
+    {
+      "product_number": "7399201",
+      "name": "Atrevit Rosé Can Descregut",
+      "producer": "Can Descregut",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://descregut.com/producte/vi-rosat-atrevit-merlot-penedes/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2021",
+      "market": "EU",
+      "sources_checked": [
+        "candescregut.com — the obvious domain, and it is NOT the producer's live site: 443 times out and port 80 301s to http://gestiondecuenta.com/desactivado/, a hosting provider's deactivated-account page. Its robots.txt names specific crawlers only with no wildcard group, so nothing applied to our token",
+        "candescregut.cat, celler-candescregut.com, atrevit.cat, candescregutceller.com — all NXDOMAIN",
+        "A web search named the live site as descregut.com (the celler drops 'Can' in its domain)",
+        "https://descregut.com/robots.txt — stock WordPress/WooCommerce wildcard group (wp-admin, caches, wc-logs, query-string filters). Everything fetched is allowed",
+        "https://www.descregut.com/cat/vi/atrevit/ (404) — the URL a search result gave; the site's own 404 page lists the whole navigation, which is how the shop was reached without guessing",
+        "https://descregut.com/botiga/ (200, 264 kB) — the complete shop census, eleven wines, one page each. terms: 0",
+        "https://descregut.com/producte/vi-rosat-atrevit-merlot-penedes/ (200, 270 kB) — the wine's own page. terms: 0, no declaration-shaped link, and zero raw hits for ingredien, sulfit, alerg, nutri, kcal, ficha, e-label, elabel and pdf"
+      ],
+      "evidence": "Producer and cuvee match: Can Descregut (celler ecologic, Vilobi del Penedes, CCPAE-certified) publishes 'Atrevit' as its 100 % Merlot organic rose and Systembolaget's item is Atrevit Rose Can Descregut, Katalonien, organic. THE VINTAGE FAILS THE OTHER WAY ROUND FROM EVERY OTHER SPANISH PRODUCER SO FAR: the product page's own schema title is 'Atrevit - Vi Rosat Merlot del Penedes | Anyada 2021' and 2021 is the only year it states, while Systembolaget sells the 2024. The producer's surface is three vintages BEHIND the shelf, where five earlier Spanish producers were one vintage ahead.",
+      "rejected_because": null,
+      "not_found_because": "The producer publishes no declaration in any form and no document either. The eleven-product shop census carries no ingredient list, no nutrition table, no energy value, no allergen line, no e-label vendor, no QR destination and not a single PDF. Nothing could have been attached even if the vintage had matched.",
+      "robots_note": "Stock WooCommerce robots.txt on descregut.com; everything fetched was allowed. candescregut.com serves a named-crawler-only robots.txt with no wildcard group, so under RFC 9309 nothing applied to our token — the 2026-08-08 reading, and it made no difference since the host is a parked deactivation page.",
+      "checked_at": "2026-08-31T13:05:00Z"
     }
   ],
-  "updated_at": "2026-08-31T12:50:00Z",
+  "updated_at": "2026-08-31T13:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
