@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 538,
+  "attempted": 539,
   "found": 33,
-  "not_found": 453,
+  "not_found": 454,
   "rejected": 52,
   "declarations": [
     {
@@ -15366,9 +15366,35 @@
       "not_found_because": "No declaration exists on the producer's surface in any form. The wine page carries no ingredient list, no nutrition table, no energy value, no allergen line, no e-label vendor and no QR destination. The ficha tecnica — the ninth Spanish technical sheet read in full in this file — is TIPO DE VINO, D.O., VARIEDAD DE UVA, CRIANZA, VINEDO, ELABORACION, SUELO, CLIMA, VISTA, NARIZ, BOCA and GASTRONOMIA, with no analytical block at all: not even an alcohol figure, let alone a list of substances.",
       "robots_note": "Both hosts serve a wildcard group with an empty Disallow. Everything fetched was allowed; no exception invoked.",
       "checked_at": "2026-08-31T14:00:00Z"
+    },
+    {
+      "product_number": "7218001",
+      "name": "Leira Albariño",
+      "producer": "Pazo Pondal",
+      "country": "Spanien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://pazopondal.com/gl/produtos/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://pazopondal.com/robots.txt — a wildcard group with an empty Disallow; nothing disallowed",
+        "https://pazopondal.com/ (200, 40 kB) — 301s to /gl/; the site is Galician-first with ESP and EN alternatives. Nine same-host pages in total, so this is a complete census in one fetch",
+        "https://pazopondal.com/gl/vinos-2/ (200, 41 kB) — a winemaking-process page, not a per-wine page. terms: 0",
+        "https://pazopondal.com/gl/produtos/ (200, 84 kB, 22 536 visible characters) — the product page, all wines and spirits inline with a per-product 'Descargar ficha tecnica' link. TWO term hits and BOTH ARE THE SPIRITS: the house publishes a real ingredient list for its Licor de Hierbas ('Ingredientes: Augardente, canela, regaliz, noz, anis, cilantro, camomila, herba-doce, curcuma, verbena, anis…') and a statement that no flavourings or essences are used in its augardentes. Nothing of the kind for any wine",
+        "http://pazopondal.com/wp-content/uploads/2015/07/ficha-de-cata-Leira-Pondal-ESP.pdf (200, 478 kB) — the wine's own ficha, 1 574 characters extracted in full through the PDF's text layer; terms: 0"
+      ],
+      "evidence": "Producer and cuvee match: Bodega Pazo Pondal (O Rosal, Rias Baixas) publishes 'Leira Pondal' as the albarino from its youngest parcels, and Systembolaget's item is Leira Albarino with Pazo Pondal in the producer field. THE VINTAGE COULD NOT BE CHECKED: neither the product page nor the ficha states a year, an alcohol figure or a bottle size — the ficha's only dated content is a James Suckling score from 2019 — so the vintage step of the identity check could not be performed for Systembolaget's 2025.",
+      "rejected_because": null,
+      "not_found_because": "No declaration exists for the wine. THE INTERESTING PART IS THAT THIS HOUSE DOES PUBLISH AN INGREDIENT LIST — for its herbal liqueur, in proper form ('Ingredientes: Augardente, canela, regaliz, noz, anis…') and beside a claim that its spirits contain no flavourings or essences. So the absence for the wine is not ignorance of what an ingredient list is. Nothing on the wine side: no list, no nutrition table, no energy value, no allergen line, no e-label vendor, no QR destination, and a ficha de cata (the tenth read in full in Spain) that is awards, description and tasting notes with no analytical block at all.",
+      "robots_note": "Empty Disallow under a wildcard group; everything fetched was allowed. No exception invoked.",
+      "checked_at": "2026-08-31T14:15:00Z"
     }
   ],
-  "updated_at": "2026-08-31T14:00:00Z",
+  "updated_at": "2026-08-31T14:15:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
