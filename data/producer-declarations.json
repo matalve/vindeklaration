@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "5 — SPAIN, batch 5 opened 2026-08-31, closing the Spanish pool. The pool has moved with the nightly refresh: it now stands at 95 wines at vintage 2024+ with declaration_status not_declared, of which 80 were already in this file, leaving 15 untouched wines across 15 single-wine producer strings. Batch 5 works those 15 and then, if budget remains, OPENS PORTUGAL (39 wines at vintage 2024+, no Portuguese estate in this file yet). Spain before batch 5: 61 producer strings, 81 wines, 1 found, 4 rejected, 76 not found. Carried forward: twelve Spanish fichas técnicas have been read and one held a mandated element, so a ficha is fetched only to date a wine; 'ficha alimentaria' is the opposite and is a real declaration; four of fifteen producers in batch 4 lived on a domain other than their name; and id.aecocescanqr.es answers 403 to everything, which is absolute.",
-  "attempted": 556,
+  "attempted": 557,
   "found": 33,
-  "not_found": 470,
+  "not_found": 471,
   "rejected": 53,
   "declarations": [
     {
@@ -15817,9 +15817,36 @@
       "not_found_because": "No declaration on the producer's surface for any vintage: no ingredient list, no nutrition table, no energy value, no e-label vendor and no QR destination. The eight per-wine documents are 'WINE TECH SHEET' PDFs — the Spanish ficha técnica shape — and were not fetched.",
       "robots_note": "WordPress robots.txt; every page fetched is outside its directives.",
       "checked_at": "2026-08-31T18:50:00Z"
+    },
+    {
+      "product_number": "7378501",
+      "name": "Campo Eliseo Cuvée Alegre",
+      "producer": "Bodega Burdigala",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.campoeliseo.es/producto/campo-eliseo-cuvee-alegre-verdejo-rueda/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2022",
+      "market": "EU",
+      "sources_checked": [
+        "https://burdigala.es/ — HTTPS closes the connection at TLS (ConnectError, EOF); robots.txt likewise unreachable, which under the 2026-08-30 decision is a misconfiguration and not a refusal",
+        "http://burdigala.es/ (200, 32 kB, 12 visible characters) — A PARKED DOMAIN FOR SALE, title 'burdigala.es', body 'Denna domän kan vara till salu!'. Its robots.txt names specific crawlers only with no wildcard group, so nothing binds our token; it made no difference. The producer string's obvious domain is not the producer",
+        "https://campoeliseo.com/ — TLS fails on an untrusted issuer (unable to get local issuer certificate). Only expiry gets the unverified-channel fallback, so verification stayed on. Over port 80 it answers 86 bytes of JavaScript redirecting to http://www.campoeliseo.es",
+        "http://www.campoeliseo.es/ (200) — WooCommerce, robots.txt absent (404). 34 same-host pages, ten products covering Campo Elíseo, Hermanos Lurton and Campesino. terms: 1, and it is the product NAME 'Campesino Tinto Sin Sulfitos', not a declaration",
+        "https://www.campoeliseo.es/producto/campo-eliseo-cuvee-alegre-verdejo-rueda/ (200, 176 kB) — the wine's own page, three tabs (Description, Nota de cata, Ficha técnica). terms: 0, no declaration-shaped link. Its inline ficha técnica reads 'Añada: 2022 / Variedad: 100% Verdejo / DO: Rueda / Alcohol: 13,5%'"
+      ],
+      "evidence": "Producer and cuvée match: Systembolaget's 'Bodega Burdigala' is François Lurton's Spanish company, whose shop trades as Bodegas Campo Eliseo S.L.; of its two Cuvée Alegre bottlings only the Verdejo Rueda is a white, and Systembolaget's item is white at 13,5% from Castilla-León, which is the Rueda. THE VINTAGE FAILS: the producer's own page states Añada 2022 against Systembolaget's 2024, and the shop keeps no per-vintage archive.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on the producer's surface for any vintage. The inline ficha técnica gives vintage, grape, DO and alcohol and nothing else; no ingredient list, no nutrition table, no energy value, no e-label vendor and no QR destination on the site.",
+      "robots_note": "burdigala.es served no reachable robots.txt over HTTPS (misconfiguration, proceeded) and a named-crawler-only file over HTTP that does not bind our token; campoeliseo.com and campoeliseo.es serve no robots.txt at all (404). Nothing disallowed anywhere.",
+      "note": "SPAIN, DOMAIN RULE AGAIN: the fifth producer string in this pool whose obvious domain is not the producer's. burdigala.es is a parked for-sale page — and its parking text is in SWEDISH.",
+      "checked_at": "2026-08-31T19:05:00Z"
     }
   ],
-  "updated_at": "2026-08-31T18:50:00Z",
+  "updated_at": "2026-08-31T19:05:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
