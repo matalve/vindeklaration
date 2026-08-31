@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "5 — SPAIN, batch 5 opened 2026-08-31, closing the Spanish pool. The pool has moved with the nightly refresh: it now stands at 95 wines at vintage 2024+ with declaration_status not_declared, of which 80 were already in this file, leaving 15 untouched wines across 15 single-wine producer strings. Batch 5 works those 15 and then, if budget remains, OPENS PORTUGAL (39 wines at vintage 2024+, no Portuguese estate in this file yet). Spain before batch 5: 61 producer strings, 81 wines, 1 found, 4 rejected, 76 not found. Carried forward: twelve Spanish fichas técnicas have been read and one held a mandated element, so a ficha is fetched only to date a wine; 'ficha alimentaria' is the opposite and is a real declaration; four of fifteen producers in batch 4 lived on a domain other than their name; and id.aecocescanqr.es answers 403 to everything, which is absolute.",
-  "attempted": 560,
+  "attempted": 561,
   "found": 33,
-  "not_found": 474,
+  "not_found": 475,
   "rejected": 53,
   "declarations": [
     {
@@ -15918,9 +15918,35 @@
       "robots_note": "No robots.txt on the host (404); nothing disallowed.",
       "note": "The wine pages default to Basque (euskara) — a fourth Spanish language surface after Castilian, Catalan and Galician. Vintage words to grep in Basque: 'uzta', and the pages state the year bare after the D.O.",
       "checked_at": "2026-08-31T19:40:00Z"
+    },
+    {
+      "product_number": "9511401",
+      "name": "Las Moradas Albillo Real",
+      "producer": "San Martin",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://lasmoradasdesanmartin.es/vinos/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://lasmoradasdesanmartin.es/robots.txt — WooCommerce wildcard group plus a trailing bare 'Disallow:'; nothing fetched is disallowed",
+        "https://lasmoradasdesanmartin.es/ (200, 158 kB) — the estate (Viñedos de San Martín, San Martín de Valdeiglesias, Madrid). Its listing links /vino/albillo-real-eco-2024/. terms: 0",
+        "https://lasmoradasdesanmartin.es/vino/albillo-real-eco-2024/ (200) — 302s to /vino/caja-personalizada/: THE PER-VINTAGE PRODUCT PAGE FOR THE 2024 NO LONGER EXISTS and WooCommerce redirects it to a gift box",
+        "https://lasmoradasdesanmartin.es/vinos/ (200, 159 kB) — the range page, which is where the current documents are: the Albillo's only link is 'FICHA DE CATA' → /wp-content/uploads/Ficha-cata_ALBILLO-REAL-2025.pdf. terms: 1 and it is prose (see below), no declaration-shaped link"
+      ],
+      "evidence": "Producer and cuvée match: Systembolaget's producer string 'San Martin' is Viñedos de San Martín / Las Moradas de San Martín (Madrid), which publishes exactly one Albillo Real, an organic white — Systembolaget's item is flagged organic. THE VINTAGE FAILS in an unusual way: the estate has rolled to the 2025 (its only ficha is 'Ficha-cata_ALBILLO-REAL-2025.pdf') and has DELETED the 2024's product page, which now redirects. The 2024 has no surface at all on the producer's site.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on the producer's surface: no ingredient list, no nutrition table, no energy value, no e-label vendor and no QR destination. The only document is a ficha de cata, not fetched under the Spanish ficha rule.",
+      "robots_note": "WooCommerce robots.txt; everything fetched is allowed.",
+      "note": "A NEW SPANISH NEAR-MISS, in prose: the range page discusses 'el uso de sulfuroso como conservante en los vinos … actúan por sí mismos como conservantes naturales y nos permite limitar su uso'. The probe reports it as a 'conservante' hit and it is a winemaking-philosophy paragraph, not a declaration — the sulphite-as-process near-miss in its third Spanish form after 'sulfitado' and 'Contiene sulfitos'.",
+      "checked_at": "2026-08-31T19:45:00Z"
     }
   ],
-  "updated_at": "2026-08-31T19:40:00Z",
+  "updated_at": "2026-08-31T19:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
