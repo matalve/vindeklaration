@@ -156,6 +156,10 @@
    "wines": 1
   },
   {
+   "match": "syrareglerande -> syrereglerande",
+   "wines": 1
+  },
+  {
    "match": "askorbinsyra -> askorbinsyra",
    "wines": 1
   },
