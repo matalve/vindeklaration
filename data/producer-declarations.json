@@ -17,10 +17,10 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 547,
+  "attempted": 548,
   "found": 33,
   "not_found": 462,
-  "rejected": 52,
+  "rejected": 53,
   "declarations": [
     {
       "product_number": "5106001",
@@ -15595,9 +15595,35 @@
       "not_found_because": "THE PRODUCER'S SITE DISALLOWS US AND THAT IS RESPECTED. astobiza.es serves a wildcard Disallow: / and this is an ordinary marketing site, not a regulated disclosure page, so no exception applies and no page was requested. Nothing is known about whether this producer publishes a declaration; this is a permission outcome, not a finding about the wine.",
       "robots_note": "Wildcard Disallow: / on the only known producer host, honoured in full. No --elabel-exception was invoked and none would have been justified: the exception covers e-label pages only.",
       "checked_at": "2026-08-31T15:40:00Z"
+    },
+    {
+      "product_number": "5242001",
+      "name": "Aretxaga",
+      "producer": "Bodegas Virgen de Lorea",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "rejected",
+      "source_url": "https://otxaran.com/wp-content/uploads/2026/02/ficha-alimentaria-aretxaga.pdf",
+      "source_type": "producer_site",
+      "raw_ingredients": "Uvas, conservantes (sulfitos, ácido ascórbico), agentes estabilizantes (CMC).",
+      "raw_nutrition": "Valor energético 299,2 kJ / 71,6 Kcal; Grasas < 0,05 g; Hidratos de carbono 2,66 g, de los cuales Azúcares 0,30 g; Cloruro sódico 31,01 mg; Extracto seco 2,66 g — por 100 ml",
+      "language": "es",
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://bodegasvirgendelorea.com/robots.txt — stock WooCommerce wildcard group; everything fetched is allowed. The host 301s to otxaran.com, which is the producer's own live site",
+        "https://otxaran.com/ (200, 267 kB) — 14 same-host pages, five of them wines (Aretxaga, Senorio Otxaran, Lainoa, Lore Rose, OTX). A complete census in one fetch",
+        "https://otxaran.com/aretxaga/ (200, 286 kB) — the wine's own page. Its Elementor price-list block reads 'Anada 2025 / Graduacion alcoholica 12% / Variedad …', and it links one document under a Descargar button: ficha-alimentaria-aretxaga.pdf",
+        "https://otxaran.com/wp-content/uploads/2026/02/ficha-alimentaria-aretxaga.pdf (200, 739 kB) — headed 'ARETXAGA / Ficha alimentaria / Food sheet'. 4 923 characters extracted in full through the PDF's own text layer, bilingual es/en in two columns"
+      ],
+      "evidence": "THE DECLARATION IS REAL AND COMPLETE, AND IT IS THE FIRST FIRST-PARTY SPANISH DOCUMENT IN THIS FILE THAT IS ONE. It carries INFORMACION DEL PRODUCTO (Tipo de producto: Vino; alc. 11,85 % vol.; Cantidad neta 750 ml; Color: Vino blanco; Variedad: Hondarribi Zuri Zerratia, Hondarribi Zuri; Finca Loreako Ama), INGREDIENTES ('Uvas, conservantes (sulfitos, acido ascorbico), agentes estabilizantes (CMC).'), INFORMACION NUTRICIONAL per 100 ml with the energy value, and a responsible-consumption line. Producer matches: Systembolaget's Bodegas Virgen de Lorea 301s from its own domain to otxaran.com. Cuvee matches: Aretxaga is one of five wines and there is exactly one. Pack matches: 750 ml against 750 ml. Grapes match: Hondarribi Zuri Zerratia and Hondarribi Zuri against Systembolaget's Hondarrabi zuri and Hondarrabi zuri zerratia. Alcohol is within tolerance: 11,85 % vol declared, 12 % on the page, 12,0 on Systembolaget.",
+      "rejected_because": "THE VINTAGE CANNOT BE SHOWN TO MATCH AND THE EVIDENCE POINTS THE WRONG WAY. The ficha alimentaria states no vintage, no harvest year, no bottling date and no lot number anywhere in its 4 923 characters — the year grep over the extracted text returns nothing at all. The only dating available is the page that links it, which reads 'Anada 2025', and the file was uploaded in February 2026. Systembolaget sells the 2024. So the one document that could be attached is, on the producer's own dating, the 2025's. A vintage mismatch is a rejection, not an approximation, and this file's records outrank Systembolaget's, so attaching it would override a correct absence with the wrong year's recipe.",
+      "not_found_because": null,
+      "robots_note": "Stock WooCommerce robots.txt on both hosts; everything fetched was allowed. No exception invoked.",
+      "checked_at": "2026-08-31T15:55:00Z"
     }
   ],
-  "updated_at": "2026-08-31T15:40:00Z",
+  "updated_at": "2026-08-31T15:55:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
