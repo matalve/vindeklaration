@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 537,
+  "attempted": 538,
   "found": 33,
-  "not_found": 452,
+  "not_found": 453,
   "rejected": 52,
   "declarations": [
     {
@@ -15340,9 +15340,35 @@
       "not_found_because": "THE DECLARATION EXISTS AND IS BEHIND A TECHNOLOGICAL MEASURE. The producer has complied through electronic means exactly as Regulation (EU) 2021/2117 intends — a per-GTIN GS1 Digital Link, labelled 'Informacion nutricional e ingredientes', linked from the wine's own page — and the resolver answers 403 to us. A 403 is a refusal, not a robots.txt directive: it was not retried, no device-shaped User-Agent was tried, no alternative path or header was attempted, and no other URL on that host was requested. This is a finding about our access, not about the producer, who has published.",
       "robots_note": "pazodomar.com allows everything fetched. id.aecocescanqr.es answers /robots.txt with 403, which under RFC 9309 is Unavailable status — no rules exist and nothing is disallowed — but the target itself answered 403, which is absolute and stopped the fetch. The e-label exception was NOT invoked and could not have helped: it sets aside a robots directive, never a refusal.",
       "checked_at": "2026-08-31T13:45:00Z"
+    },
+    {
+      "product_number": "7107101",
+      "name": "Altos de Torona Albanta Albariño",
+      "producer": "HGA Bodegas",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://altosdetorona.com/vinos/albanta/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://altosdetorona.com/robots.txt — a wildcard group disallowing /web/wp-admin/ and then an empty Disallow. Everything fetched is allowed",
+        "https://altosdetorona.com/ (200, 138 kB) — 28 same-host links including a complete nine-wine census under /vinos/. terms: 0, no e-label vendor named",
+        "https://altosdetorona.com/vinos/albanta/ (200, 119 kB) — the wine's own page. terms: 0, no declaration-shaped link, and zero raw hits for ingredien, sulfit, alerg, nutri, kcal, aecoc, qr, anada, cosecha and colleita. Its one 'e-label' string is the CSS class .age-gate-label",
+        "https://hgabodegas.com/robots.txt — a wildcard group with an empty Disallow; nothing disallowed",
+        "https://hgabodegas.com/PDF/ficha_tecnica/Albanta_ES_b.pdf (200, 163 kB) — the ficha tecnica, linked from the wine page and hosted on the GROUP's domain. 1 432 characters extracted in full through the PDF's own text layer; terms: 0"
+      ],
+      "evidence": "Producer and cuvee match: Systembolaget's producer field is HGA Bodegas, which is the group that owns Bodegas Altos de Torona (O Rosal, Rias Baixas) — the wine page is on altosdetorona.com and its ficha is served from hgabodegas.com, which ties the two names together on the producer's own linking. Albanta is one of nine wines in a complete census and there is exactly one Albanta. NOTHING ELSE COULD BE CHECKED: neither the page nor the ficha states a vintage, an alcohol figure or a bottle size, so the vintage step of the identity check could not be performed at all.",
+      "rejected_because": null,
+      "not_found_because": "No declaration exists on the producer's surface in any form. The wine page carries no ingredient list, no nutrition table, no energy value, no allergen line, no e-label vendor and no QR destination. The ficha tecnica — the ninth Spanish technical sheet read in full in this file — is TIPO DE VINO, D.O., VARIEDAD DE UVA, CRIANZA, VINEDO, ELABORACION, SUELO, CLIMA, VISTA, NARIZ, BOCA and GASTRONOMIA, with no analytical block at all: not even an alcohol figure, let alone a list of substances.",
+      "robots_note": "Both hosts serve a wildcard group with an empty Disallow. Everything fetched was allowed; no exception invoked.",
+      "checked_at": "2026-08-31T14:00:00Z"
     }
   ],
-  "updated_at": "2026-08-31T13:45:00Z",
+  "updated_at": "2026-08-31T14:00:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
