@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "5 — SPAIN, batch 5 opened 2026-08-31, closing the Spanish pool. The pool has moved with the nightly refresh: it now stands at 95 wines at vintage 2024+ with declaration_status not_declared, of which 80 were already in this file, leaving 15 untouched wines across 15 single-wine producer strings. Batch 5 works those 15 and then, if budget remains, OPENS PORTUGAL (39 wines at vintage 2024+, no Portuguese estate in this file yet). Spain before batch 5: 61 producer strings, 81 wines, 1 found, 4 rejected, 76 not found. Carried forward: twelve Spanish fichas técnicas have been read and one held a mandated element, so a ficha is fetched only to date a wine; 'ficha alimentaria' is the opposite and is a real declaration; four of fifteen producers in batch 4 lived on a domain other than their name; and id.aecocescanqr.es answers 403 to everything, which is absolute.",
-  "attempted": 552,
+  "attempted": 553,
   "found": 33,
-  "not_found": 466,
+  "not_found": 467,
   "rejected": 53,
   "declarations": [
     {
@@ -15718,9 +15718,34 @@
       "not_found_because": "No declaration on the producer's surface. The estate has no shop and no e-label vendor anywhere in its HTML; the only document linked from the wine page is 'ficha-EL-GALGO_cast.pdf', a ficha técnica, and it was not fetched — twelve Spanish fichas técnicas have now been read in full and exactly one contained a mandated element, and the page itself already dates the wine, which is the only other reason to open one.",
       "robots_note": "Stock WordPress robots.txt with extra disallows for /search, /feed, /enlaces/ and /privado/; both pages fetched are outside every group's directives.",
       "checked_at": "2026-08-31T18:05:00Z"
+    },
+    {
+      "product_number": "7363401",
+      "name": "Vinos del Viento Aventura Tinto",
+      "producer": "Vinos del viento",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://vinosdelviento.com/portfolio/aventura-red-blend/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2023",
+      "market": "EU",
+      "sources_checked": [
+        "https://vinosdelviento.com/robots.txt — wildcard group with an empty rule set; nothing disallowed",
+        "https://vinosdelviento.com/ (200, 263 kB) — 18 same-host pages, one /portfolio/ page per wine, no shop. terms: 0",
+        "https://vinosdelviento.com/portfolio/aventura-red-blend/ (200, 140 kB) — the wine's own page, headed 'Aventura Red Blend 2023'. terms: 0, no declaration-shaped link. A tasting note, the four grapes, '14% alcohol' and a 'Technical Sheet' link; no ingredient list, no nutrition table, no energy value, no sulphite line"
+      ],
+      "evidence": "Producer and cuvée match — Cooper Cellars S.L. trades as Vinos del Viento (Campo de Borja, Aragón) and publishes exactly one Aventura, a red blend whose stated grapes cover Systembolaget's Cabernet sauvignon / Garnacha / Syrah, at 14% against Systembolaget's 14,0. The producer's page is the 2023 where Systembolaget sells the 2024, so no per-vintage surface for this bottle exists; it makes no difference here, because the page carries no declaration for any vintage.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on the producer's surface for any vintage. No e-label vendor, no QR destination and no ingredient list anywhere on the site; the only document offered is a 'Technical Sheet', which was not fetched under the Spanish ficha rule.",
+      "robots_note": "robots.txt wildcard group carries an empty directive set — everything allowed.",
+      "note": "PROBE FALSE POSITIVE: the homepage reported 'vendors_mentioned: winelabel', which came from the Instagram hashtag '#winelabel' inside an embedded social feed, not from an e-label vendor.",
+      "checked_at": "2026-08-31T18:20:00Z"
     }
   ],
-  "updated_at": "2026-08-31T18:05:00Z",
+  "updated_at": "2026-08-31T18:20:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
