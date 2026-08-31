@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 544,
+  "attempted": 545,
   "found": 33,
-  "not_found": 459,
+  "not_found": 460,
   "rejected": 52,
   "declarations": [
     {
@@ -15522,9 +15522,35 @@
       "not_found_because": "AN OUTAGE AND A CERTIFICATE PROBLEM, NOT AN ABSENCE. Two hosts on two different addresses either time out or serve a self-signed certificate; nothing was read, so nothing is known about whether this producer publishes. Worth re-probing on a later run, like Bodegas Muga: a timeout says nothing about the producer.",
       "robots_note": "No robots.txt could be read on either host — unreachable, which under the 2026-08-30 decision is a misconfiguration rather than a refusal, so it did not close the producer. The certificate did.",
       "checked_at": "2026-08-31T15:15:00Z"
+    },
+    {
+      "product_number": "5221201",
+      "name": "Flores de Callejo",
+      "producer": "Bodegas Felix Callejo",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.bodegasfelixcallejo.com/producto/flores-de-callejo/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2023",
+      "market": "EU",
+      "sources_checked": [
+        "https://bodegascallejo.com/robots.txt — named crawler groups only with no wildcard group, so nothing applied to our token; the host 301s to www.bodegasfelixcallejo.com",
+        "https://www.bodegasfelixcallejo.com/ (200, 89 kB) — 15 same-host pages. terms: 0",
+        "https://www.bodegasfelixcallejo.com/vinos/ (200, 93 kB) — the range, seven wines, each with a 'Ver ficha' link to /producto/{slug}/. A complete census in one fetch",
+        "https://www.bodegasfelixcallejo.com/producto/flores-de-callejo/ (200, 83 kB, 1 091 visible characters) — the wine's own page, headed 'FLORES DE CALLEJO 2023' and marked Sold Out. terms: 0, no declaration-shaped link, and zero raw hits for aecoc, escanqr, elabel, e-label, ingredien, nutri, sulfit, anada and cosecha",
+        "https://www.bodegasfelixcallejo.com/wp-content/uploads/2022/01/Flores_de_Callejo_es.pdf — NOT fetched. It is a 'Ficha de Cata' by its own anchor text, uploaded in January 2022 and offered from a page that states the 2023; eleven Spanish technical sheets have now been read in full without one carrying an ingredient list, and this one could not have satisfied the vintage rule"
+      ],
+      "evidence": "Producer and cuvee match: Bodegas Felix Callejo (Sotillo de la Ribera, Burgos, Ribera del Duero) publishes seven wines and Flores de Callejo is one of them; Systembolaget's item is Flores de Callejo with Bodegas Felix Callejo in the producer field. THE VINTAGE FAILS AND THE SURFACE IS BEHIND THE SHELF, NOT AHEAD OF IT: the page is headed 'FLORES DE CALLEJO 2023' and marked Sold Out, while Systembolaget sells the 2024. That is the second Spanish producer today whose own page is a vintage or more out of date, after Can Descregut's 2021.",
+      "rejected_because": null,
+      "not_found_because": "No declaration exists on the producer's surface. The product page is 1 091 visible characters — wine name, vintage, category, tag and a ficha link — with no ingredient list, no nutrition table, no energy value, no allergen line, no e-label vendor and no QR destination anywhere on the site.",
+      "robots_note": "bodegascallejo.com serves named crawler groups only with no User-agent: * fallback, so under RFC 9309 nothing bound our token — the 2026-08-08 reading. www.bodegasfelixcallejo.com was reached by the producer's own redirect.",
+      "checked_at": "2026-08-31T15:25:00Z"
     }
   ],
-  "updated_at": "2026-08-31T15:15:00Z",
+  "updated_at": "2026-08-31T15:25:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
