@@ -145,7 +145,8 @@ FIXTURES = pathlib.Path(__file__).parent / "fixtures" / "probe"
 
 @pytest.mark.skipif(not shutil.which("zbarimg"), reason="zbar-tools not installed")
 def test_a_qr_code_decodes_to_its_url():
-    assert decode_codes(FIXTURES / "qr.png") == ["https://u-label.com/qr/ABC123"]
+    codes, _ = decode_codes(FIXTURES / "qr.png")
+    assert codes == ["https://u-label.com/qr/ABC123"]
 
 
 @pytest.mark.skipif(not shutil.which("pdftotext"), reason="poppler-utils not installed")
@@ -159,3 +160,8 @@ def test_a_pdf_text_layer_is_read_without_ocr():
 def test_ocr_reads_a_rendered_page():
     text = ocr(FIXTURES / "ficha.pdf", "spa+eng")
     assert "INGREDIENTES" in text.upper()
+
+
+def test_an_age_gate_class_is_not_a_declaration_pointer():
+    html = '<a href="/js/age-gate-label.js">Age gate</a>'
+    assert _links(html, "https://bodega.test/") == []

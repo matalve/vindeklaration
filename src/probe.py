@@ -24,6 +24,7 @@ import argparse
 import hashlib
 import json
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -201,6 +202,10 @@ def _links(html: str, base: str) -> list[tuple[str, str]]:
             continue
         if "etiqueta" in words and words & NOISE_NEIGHBOURS:
             continue
+        # `.age-gate-label` contains `e-label`, and age gates are everywhere on
+        # wine sites.
+        if {"age", "gate"} <= words:
+            continue
         host_words = set(re.split(r"[^a-z0-9]+", _fold(urlsplit(url).netloc)))
         if (
             words & LINK_WORDS
@@ -344,10 +349,28 @@ def _run(command: list[str], timeout: int = 120) -> str:
     return done.stdout
 
 
-def decode_codes(path: Path) -> list[str]:
-    """QR and barcodes in an image. Exact: it decodes or it does not."""
+def _zbar(path: Path) -> list[str]:
     output = _run(["zbarimg", "--quiet", "--raw", str(path)])
     return [line.strip() for line in output.splitlines() if line.strip()]
+
+
+def decode_codes(path: Path) -> tuple[list[str], str]:
+    """QR and barcodes in an image. Exact: it decodes or it does not.
+
+    A QR on a pack photograph is often too small to detect as fetched. An
+    earlier run found that upscaling and giving the code a white quiet zone
+    works where downscaling the whole image does not, so that is the retry.
+    """
+    codes = _zbar(path)
+    if codes or not shutil.which("convert"):
+        return codes, ""
+    bigger = path.with_name(f"{path.stem}-4x.png")
+    _run(["convert", str(path), "-resize", "400%",
+          "-bordercolor", "white", "-border", "24", str(bigger)])
+    if not bigger.exists():
+        return [], ""
+    codes = _zbar(bigger)
+    return codes, " (found only after a 4x upscale and a white border)" if codes else ""
 
 
 def pdf_text(path: Path) -> str:
@@ -505,11 +528,15 @@ def _read_document(report: dict, saved: Path, options: argparse.Namespace) -> di
                 "pages and reads them"
             )
     else:
-        codes = decode_codes(saved)
+        codes, how = decode_codes(saved)
         if codes:
             report["codes"] = codes
+            if how:
+                report["note"] = how.strip()
         else:
-            report["note"] = "no QR or barcode found in this image"
+            report["note"] = (
+                "no QR or barcode found in this image, upscale included"
+            )
 
     if options.ocr:
         transcribed = ocr(saved, options.ocr_langs)
