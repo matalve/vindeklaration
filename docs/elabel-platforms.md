@@ -19,18 +19,21 @@ your own country's section. The country deep-dives are the bulk of the file and
 they do not transfer between countries. `grep` for a host, a vendor or a
 producer name answers "has this been seen before" for nothing.
 
-**Spain opened on 2026-08-30** and has had three batches — 31 producer strings,
-51 wine records, **one declaration attached, three rejected, 47 not found**,
-with 39 wines still untouched. See *Spain opens, and the first four producers
+**Spain opened on 2026-08-30** and has had four batches — 61 producer strings,
+81 wine records, **one declaration attached, four rejected, 76 not found**,
+with 24 wines still untouched. See *Spain opens, and the first four producers
 all fail on identity's opposite*, *The second Spanish batch: an adopter at last,
-and Spain's shape confirmed* and *The third Spanish batch: three e-label
-adopters, and none of them readable*, at the end of this file. **Three Spanish
-producers have now been found on an e-label platform** — `digital-label.eu`
-(Albet i Noya, readable), `u-label.com` (Bodegas Frutos Villar) and Scantrust
-(Bodegas Murviedro) — and **`u-label.com` turned out to BE Scantrust**, so two
-of the three are unreadable by construction. `u-label.com` had been absent from
-every producer's HTML in three countries until 2026-08-30; that claim is now
-retired.
+and Spain's shape confirmed*, *The third Spanish batch: three e-label
+adopters, and none of them readable* and *The fourth Spanish batch: Spain's GS1
+resolver, a first-party declaration that is a PDF, and what document reading
+bought*, at the end of this file. **Five Spanish producers have now been found
+on an e-label platform** — `digital-label.eu` (Albet i Noya, readable),
+`u-label.com` (Bodegas Frutos Villar) and Scantrust (Bodegas Murviedro), plus
+**AECOC Escan QR** (Adega Pazo do Mar, Bodegas Enrique Mendoza) — and
+**`u-label.com` turned out to BE Scantrust**, so four of the five are
+unreadable: two by construction and two by a 403. `u-label.com` had been absent
+from every producer's HTML in three countries until 2026-08-30; that claim is
+now retired.
 
 Status as of 2026-08-30, across 496 wine records and some 226 producer strings
 (fewer actual producers — Systembolaget spells several of them twice). **The German
@@ -4144,3 +4147,190 @@ Two hypotheses are closed and one is open:
   (Murviedro). That is two for two and it is the only shape in Spain that has
   predicted an e-label twice. Nothing left in the 2024+ pool obviously fits, so
   it is a hypothesis for a wider pool rather than for the remaining 41.
+
+### The fourth Spanish batch: Spain's GS1 resolver, a first-party declaration that is a PDF, and what document reading bought
+
+**2026-08-31, fifteen more producer strings and fifteen more wines**, taking
+Spain to **61 producer strings and 81 wines: 1 found, 4 rejected, 76 not
+found**. Cortijo Los Aguilares, Avgvstvs Forvm, Can Descregut, Bodegas As Laxas,
+Adega Pazo do Mar, HGA Bodegas, Pazo Pondal, Forjas del Salnés, Ramón do Casar,
+Bodegas Enrique Mendoza, Bodegas Sanz, Bodegas Málaga Virgen, Bodegas Félix
+Callejo, Txomin Etxaniz, Okendo Txakolina, Bodegas Virgen de Lorea, Egarri,
+Bodegas Pinna Fidelis, Meraven — plus a revisit of Marqués de Cáceres.
+
+**Two structural findings, and they point in opposite directions.** Spain's
+adoption rate is higher than the first three batches suggested and its
+*readable* rate is not: two more producers in this batch publish a real,
+correctly-shaped e-label, and both of them are behind the same 403.
+
+#### AECOC Escan QR is Spain's GS1 Digital Link resolver, and it refuses us
+
+| Platform | Pattern | Notes |
+|---|---|---|
+| **AECOC Escan QR** | `id.aecocescanqr.es/{lang}/01/{GTIN}` and `…/01/{GTIN}/22/{vintage}` | **Spain's national GS1 Digital Link resolver, run by AECOC, the Spanish GS1 member organisation — and it answers 403 to everything, including `/robots.txt`.** Seen twice in one batch, at **Adega Pazo do Mar** (`/es/01/08437003930126`, anchor *"Información nutricional e ingredientes"*) and **Bodegas Enrique Mendoza** (`/es/01/08424671001043/22/2025`, an Elementor button with a pie-chart icon). The robots.txt 403 is RFC 9309 *Unavailable* status, so no rules exist and nothing is disallowed — **and it makes no difference, because the target answers 403 too, which is absolute.** Not retried, no device-shaped UA, no header experiment, no second path. **Its one remarkable property, and the reason it hurts to lose: the AI 22 segment IS THE VINTAGE.** Mendoza's URL ends `/22/2025` for a wine whose page says Añada 2025 and whose Systembolaget record says 2025 — the only Spanish platform seen that dates its own disclosure in the URL the producer hands out. **Recognise `aecocescanqr` and record the wine; do not spend a second request on the host.** |
+
+**Both AECOC adopters do the regulation's split by the book**, which is now the
+third and fourth Spanish sighting of the Murviedro shape and makes it a
+reliable tell: Mendoza's product page prints `VALORES NUTRICIONALES / Contiene
+Sulfitos / Valor energético 100 ml: E = 339 kJ / 81 kcal / Graduación
+alcohólica: 13,5% vol. / Disponible en: 75 cl.` inline and puts the ingredient
+list alone behind the link. **A page carrying the allergen and the energy value
+but no ingredient list is a producer who published properly — follow the link.**
+
+Mendoza is also the sharpest loss in the Spanish pool so far: producer, cuvée,
+**vintage (2025 on the H1, the schema, the breadcrumb and in the URL's AI 22)**,
+alcohol (13,5 against 13,5) and pack (75 cl against 750 ml) all match
+Systembolaget exactly. Nothing failed except the fetch.
+
+#### The `ficha alimentaria` is Spain's first first-party declaration document
+
+**Bodegas Virgen de Lorea** (Systembolaget's producer string; the site is
+`otxaran.com`, reached by the producer's own redirect) links from each wine page
+a PDF named `ficha-alimentaria-{wine}.pdf`, headed **`Ficha alimentaria / Food
+sheet`**, bilingual es/en in two columns, carrying:
+
+```
+INFORMACIÓN DEL PRODUCTO   Tipo de producto: Vino | alc. 11,85 % vol.
+                           Cantidad neta: 750 ml | Color: Vino blanco
+                           Variedad: … | Finca: …
+INGREDIENTES               Uvas, conservantes (sulfitos, ácido ascórbico),
+                           agentes estabilizantes (CMC).
+INFORMACIÓN NUTRICIONAL    per 100 ml: 299,2 kJ / 71,6 Kcal, grasas,
+                           hidratos de carbono, azúcares, cloruro sódico,
+                           extracto seco
+```
+
+That is the complete mandated set, in the right form, published by the estate
+itself — **the first Spanish document in this file that is a declaration rather
+than a near-miss, after twelve fichas técnicas that were not.** It was rejected
+anyway, and the reason is the one that keeps costing Spain: **the document
+states no vintage, no harvest year, no bottling date and no lot number
+anywhere**, and the page that links it reads `Añada 2025` against
+Systembolaget's 2024.
+
+**Grep for `alimentaria`, not just `ficha`.** The distinction is real: *ficha
+técnica* / *ficha de cata* is a tasting sheet and has never carried a
+declaration; *ficha alimentaria* is the food-information sheet and is one. The
+anchor text was only `Descargar`, so nothing but the filename gave it away —
+`src/probe.py`'s `LINK_WORDS` now includes `alimentaria` for that reason.
+
+#### What the document reading bought, and where it changed nothing
+
+The probe decodes QR codes and extracts PDF text now. Over fifteen producers:
+
+- **Marqués de Cáceres is settled and the tooling limit hid nothing.** Its only
+  declaration-shaped anchor, `Imagen etiqueta`, is a 1,7 MB JPEG; `zbarimg`
+  finds **no QR and no barcode in it**, and an OCR pass (used only to decide
+  what the picture is, never recorded) reads `EDICIÓN LIMITADA … BODEGAS
+  MARQUÉS DE CÁCERES … RIOJA` — a photograph of the **front** label with no
+  back panel. There was no QR destination behind it.
+- **Eight PDFs were read through their own text layer** and settled eight
+  producers without a judgement call: Cortijo Los Aguilares' per-vintage English
+  datasheet, Avgvstvs' trilingual ficha, As Laxas', Altos de Torona's, Pazo
+  Pondal's, Txomin Etxaniz's, Vinos Sanz' and Otxaran's. Every one had a text
+  layer; **no Spanish PDF in this batch was a scan**, and `--ocr` was used once,
+  on the Cáceres JPEG, purely diagnostically.
+- **No record in this file rests on OCR.** The only `transcription: ocr` field
+  the schema allows was not needed.
+
+#### The Spanish ficha, after twelve read in full
+
+The tally is worth stating because it is now large enough to close the
+question: **twelve Spanish technical sheets have been read in full, and exactly
+one of them contains a mandated element.** Avgvstvs Forvm's ficha ends its
+`PERFIL ANALÍTICO` with `100 ml E: 334 KJ / 79 Kcal` — a real energy value,
+beside `SO2 Total: 61 ppm`, which is a *measurement* and not a sulphite
+declaration. Everything else is vineyard, soil, climate, elaboration, tasting
+notes and, at best, `Contiene sulfitos` plus the strength. **Do not spend a
+fetch on a Spanish ficha técnica to look for a declaration.** Spend it when the
+sheet is the only thing that can date the wine, or when its name is
+*alimentaria*.
+
+#### Spanish host and site quirks, fourth batch
+
+- **The guessable domain is a different company.** `bodegas-sanz.com` serves a
+  mismatched certificate and, over port 80, 301s to `bodegasanz.es` — **a
+  drinks wholesaler in Majadahonda selling gin, rum and whisky**. The Rueda
+  producer is `vinossanz.com`. After Bodegas Shaya's NXDOMAIN and Frutos
+  Villar's, this is the third Spanish producer whose obvious name is not its
+  domain, and the first where the obvious name belongs to someone else.
+- **A dead hosting account looks like a live site.** `candescregut.com` answers
+  200 over port 80 and 301s to `gestiondecuenta.com/desactivado/`. The celler's
+  live site drops the *Can*: `descregut.com`.
+- **A site-wide age gate that the sitemap walks around.** Every path on
+  `bodegasaslaxas.com` returns the same 2 923-byte age form POSTing to
+  `/cookie.php`; **`/sitemap.xml` and the `/fichas_de_cata/*.pdf` files are
+  served ungated**, so a complete census and every document were readable
+  without answering the gate. No cookie was set and no POST was made. Two other
+  estates (Félix Callejo, Vinos Sanz) render an age gate client-side and serve
+  the content anyway.
+- **Certificates: two failures, both absolute, and neither is the 2026-08-30
+  case.** `www.malagavirgen.com` serves a **self-signed** certificate (and port
+  80 times out; a second host on a different address also times out);
+  `forjasdelsalnes.com` and `bodegas-sanz.com` serve **hostname mismatches**.
+  Only *expiry* gets the unverified-channel fallback — these are claims about
+  *who* answered, so verification stays on and the producer is closed on the
+  certificate, not on absence.
+- **`astobiza.es` is `User-agent: * / Disallow: /`** on an ordinary marketing
+  site with no e-label in play. Not one page was requested. Record it as a
+  permission outcome, not as a finding about the producer.
+- **`augustusforum.com` refuses 443 and answers on port 80 only**, redirecting
+  to the Latinised `avgvstvsforvm.com`. `ramondocasar.com` does the same into
+  `ramondocasar.es`; `bodegasvirgendelorea.com` into `otxaran.com`;
+  `bodegascallejo.com` into `www.bodegasfelixcallejo.com`. **Four of fifteen
+  producers live on a domain other than the one their name suggests — follow
+  the redirect before concluding anything.**
+
+#### Spanish greps that lie, fourth batch
+
+- **CROSS-CUTTING: the CSS class `.age-gate-label` contains the string
+  `e-label`.** Altos de Torona's page reported one `e-label` hit and it was a
+  stylesheet rule. This is the same family as `.twentytwenty-after-label`, and
+  age-gate plugins are far more common on wine sites than image sliders.
+- **`Alergias o intolerancias`** — a **visit-booking form field** at Cortijo Los
+  Aguilares, inside the Shopify form JSON. Any estate selling tastings will
+  have one.
+- **A slug is not a vintage, twice more and in two different directions.**
+  Cortijo Los Aguilares' Shopify serves `Pago El Espino 2024` at
+  `/products/pago-el-espino-2023-copia` (the Thanisch duplicate-and-edit trap,
+  now seen in Spain); Finca Río Negro's WordPress serves a page headed `Añada
+  2025` at `/los-vinos/gewurztraminer-2021/`. **Read the title, the schema or
+  the technical block.**
+- **And the producer's surface is not reliably ahead of the shelf.** Batch 3
+  established that Spanish producers roll forward; this batch adds two that are
+  *behind* — Can Descregut's Atrevit page says `Anyada 2021` and Félix Callejo's
+  Flores says `2023`, both against Systembolaget's 2024. **The expected outcome
+  is a vintage mismatch in either direction, so read the year rather than
+  assuming which way it is wrong.**
+
+#### One producer that publishes an ingredient list, for the wrong product
+
+**Pazo Pondal** prints a proper `Ingredientes:` line — *"Augardente, canela,
+regaliz, noz, anís, cilantro, camomila, herba-doce, cúrcuma, verbena, anís…"* —
+for its **herbal liqueur**, beside a claim that its aguardientes contain no
+flavourings or essences, and nothing of the kind for any of its albariños. The
+absence on the wine side is not ignorance of the form. Worth remembering when
+reading a house that also makes spirits: **a term hit may be the distillate's.**
+
+#### Where the remaining Spanish work is, after batch 4
+
+**24 wines untouched, every one a single-wine producer string.** The cheapest
+remaining check is still the domain: four of this batch's fifteen producers
+lived somewhere other than their name, and one shared a house with nobody.
+
+Three hypotheses stand after this batch:
+
+- **CLOSED: that a Spanish e-label would be readable if only we found one.**
+  Five Spanish adopters are now known — Albet i Noya (digital-label.eu,
+  readable through its JSON), Frutos Villar and Murviedro (Scantrust,
+  unreadable by construction), Pazo do Mar and Enrique Mendoza (AECOC, 403).
+  **Four of five cannot be read, and two of those four refuse rather than fail
+  to render.**
+- **OPEN and newly worth testing: the `ficha alimentaria` filename.** One
+  producer in fifteen publishes the complete mandated set as a first-party PDF
+  under that exact name. It costs nothing to grep for on every remaining
+  Spanish site, and it is the only shape in Spain that has produced a real
+  declaration from a producer's own hand.
+- **OPEN: whether AECOC's 403 is permanent or a configuration.** Nothing in
+  this project may test it — a 403 is a refusal — but if it ever answers, two
+  wines here become findable immediately and the vintage is already in the URL.

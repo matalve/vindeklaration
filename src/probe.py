@@ -80,6 +80,11 @@ LINK_WORDS = {
     "nahrwerte", "declaration", "dichiarazione", "declaracion",
     "scheda", "schedatecnica", "fichatecnica", "fichetechnique",
     "downloadcenter", "elabels",
+    # Spain, 2026-08-31: `ficha alimentaria` is the food-information sheet and
+    # is a real declaration, where `ficha tecnica` is a tasting sheet and never
+    # is. Otxaran's anchor text was only `Descargar`, so the filename was the
+    # only thing that gave it away.
+    "alimentaria", "alimentar",
 }
 
 # Footer boilerplate that is shaped exactly like a declaration pointer and is
