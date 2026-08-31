@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 536,
+  "attempted": 537,
   "found": 33,
-  "not_found": 451,
+  "not_found": 452,
   "rejected": 52,
   "declarations": [
     {
@@ -15313,9 +15313,36 @@
       "not_found_because": "No declaration was found and no page of the site could be read. THE WHOLE SITE IS BEHIND A COOKIE-SETTING AGE GATE that returns the same 2 923-byte form for every path, including the wine's own page; it is not a 401/403/429, a login wall or a bot challenge, but it is a gate this project does not step through — it was not answered, no cookie was set and no POST was made. Two things ARE served ungated and both were read: the sitemap, which is a complete census, and the ficha de cata, which is a tasting sheet with elaboracion, cata and an Analitica block (alcohol, total and volatile acidity, reducing sugars, free and total SO2 in mg/L) and NO ingredient list, no nutrition table, no energy value and no allergen line. That is the eighth Spanish ficha in this file and the eighth with no mandated content — free and total sulphur as a laboratory measurement is not a sulphite declaration.",
       "robots_note": "bodegasaslaxas.com's robots.txt is a wildcard group with an empty Disallow, so nothing is disallowed. The sitemap and the ficha were fetched under that permission; the age gate is a site behaviour, not a robots directive, and was not circumvented.",
       "checked_at": "2026-08-31T13:25:00Z"
+    },
+    {
+      "product_number": "7875401",
+      "name": "Veiga da Princesa Albarino",
+      "producer": "Adega Pazo Do Mar",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://id.aecocescanqr.es/es/01/08437003930126",
+      "source_type": "e_label",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://pazodomar.com/robots.txt — a wildcard group disallowing wc-logs, woocommerce_uploads, add-to-cart query strings and /pazodomar/wp-admin/, then 'Allow: /'. Everything fetched is allowed",
+        "https://www.pazodomar.com/ (200, 140 kB) — Grupo Pazo Vinos de Galicia, three bodegas (Pazo do Mar, Pazo das Tapias, Veiga da Princesa). terms: 0",
+        "https://www.pazodomar.com/albarino/ (200, 140 kB) — the Albarino range, which names one wine: Veiga da Princesa Albarino",
+        "https://www.pazodomar.com/albarino/veiga-da-princesa-albarino/ (200, 171 kB) — the wine's own page. ONE declaration-shaped link and it is a real e-label pointer: <a href='https://id.aecocescanqr.es/es/01/08437003930126' target='_blank'><span>Informacion nutricional e ingredientes</span></a>. The page's own single 'ingredientes' term hit is unrelated, a history paragraph about buying 300 parcels from 70 owners",
+        "https://id.aecocescanqr.es/robots.txt — 403, so no directives exist and nothing is disallowed",
+        "https://id.aecocescanqr.es/es/01/08437003930126 — 403, 919 bytes. NOT RETRIED, NOT WORKED AROUND"
+      ],
+      "evidence": "Producer and cuvee match: Adega Pazo do Mar is one of the three bodegas of Grupo Pazo Vinos de Galicia and Veiga da Princesa is its Rias Baixas albarino, published as the only wine on the group's Albarino page; Systembolaget's item is Veiga da Princesa Albarino from Galicien with Adega Pazo Do Mar in the producer field. THE E-LABEL POINTER IS THE PRODUCER'S OWN and it is Spain's GS1 Digital Link resolver: id.aecocescanqr.es/es/01/{GTIN}, run by AECOC, the Spanish GS1 member organisation, with GTIN 08437003930126 in the AI 01 segment. Nothing further could be established: the destination refuses us and the producer's page states no vintage and no alcohol, so even a readable e-label would have had no year on the linking page to test against.",
+      "rejected_because": null,
+      "not_found_because": "THE DECLARATION EXISTS AND IS BEHIND A TECHNOLOGICAL MEASURE. The producer has complied through electronic means exactly as Regulation (EU) 2021/2117 intends — a per-GTIN GS1 Digital Link, labelled 'Informacion nutricional e ingredientes', linked from the wine's own page — and the resolver answers 403 to us. A 403 is a refusal, not a robots.txt directive: it was not retried, no device-shaped User-Agent was tried, no alternative path or header was attempted, and no other URL on that host was requested. This is a finding about our access, not about the producer, who has published.",
+      "robots_note": "pazodomar.com allows everything fetched. id.aecocescanqr.es answers /robots.txt with 403, which under RFC 9309 is Unavailable status — no rules exist and nothing is disallowed — but the target itself answered 403, which is absolute and stopped the fetch. The e-label exception was NOT invoked and could not have helped: it sets aside a robots directive, never a refusal.",
+      "checked_at": "2026-08-31T13:45:00Z"
     }
   ],
-  "updated_at": "2026-08-31T13:25:00Z",
+  "updated_at": "2026-08-31T13:45:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
