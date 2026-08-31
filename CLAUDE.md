@@ -28,7 +28,10 @@ counted. This file is about how to work here.
 - **Never guess at a declaration.** Text the parser cannot read makes the wine
   `partial`, which keeps it out of the rankings. That is the correct outcome.
   Inventing an alias to make a number look better corrupts the dataset
-  silently.
+  silently. **OCR guesses by construction**, so `src/probe.py` keeps it opt-in
+  and labelled: a QR decode and a PDF's text layer are exact, a machine reading
+  of a photographed label is not, and a record resting on one must say so and
+  must not be ranked above Systembolaget's own text unread.
 
 ## What is where
 

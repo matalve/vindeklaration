@@ -68,6 +68,9 @@ Flags for the documented exceptions, which echo into the report so the reason
 lands in the record: `--elabel-exception "why"` fetches despite a disallow,
 `--mobile` sends the device-shaped User-Agent. Both are governed by the rules
 below, unchanged — the flag makes the exception explicit, it does not widen it.
+`--links` lists every same-host page link when you need the product URLs, and
+`--ocr` reads a picture; *When the declaration is a document* below says what
+OCR may and may not become.
 
 **2. Never `Read` `data/producer-declarations.json`.** It is 1.6 MB. Query it
 with a Python one-liner and write to it the same way.
@@ -82,6 +85,40 @@ worth more than one with a single wine. Both are free, so do them first.
 `not_found`.** Say what you read and move on. The tenth request has never yet
 found a declaration that the first five gave no sign of, and the producer you
 did not reach because of it is a real cost.
+
+## When the declaration is a document, not a page
+
+The probe reads PDFs and images too, and the three readings are **not** equally
+trustworthy. Keep them apart in your head and in the record.
+
+| | |
+|---|---|
+| **QR and barcodes** in an image | **Exact.** It decodes or it does not. Reported as `code:`, and the decoded URL is then probed like any other. |
+| **A PDF's text layer** | **Exact.** Those are the characters the file holds, extracted, not interpreted. Reported as `pdf_text_chars`, and the text goes through the same term search as a page. |
+| **OCR**, with `--ocr` | **A machine's reading of a picture.** Opt-in, never automatic. |
+
+A PDF with `pdf_text_chars` near zero is a scan, and only OCR will read it.
+
+**What OCR may and may not become.** The project's first rule is never to guess
+at a declaration, and OCR guesses by construction — it confuses `E220` with
+`E228`, drops diacritics, and turns a two-column nutrition table into
+interleaved nonsense. That would be survivable if your records sat harmlessly
+in a side file, and they do not: the owner decided on 2026-07-28 that a
+producer's declaration **outranks** Systembolaget's, so a misread does not
+merely add a wrong row, it overrides a right one.
+
+So:
+
+- OCR is for **deciding whether a document is worth a human's attention** — does
+  this label photo carry an ingredient list at all? — and for reading a scanned
+  PDF whose text you can check against its own layout.
+- **Never copy OCR output into `raw_ingredients` and call the wine `found`.**
+  Record it as `not_found` with the image URL and what the OCR suggested, or, if
+  you are confident the document really is the declaration, as a distinct record
+  carrying `"transcription": "ocr"` so that whatever consumes this file can
+  refuse to rank it above the primary dataset.
+- Say in your report which wines rest on OCR. They are the ones a human should
+  look at first.
 
 ## Read this first, but read only the part that applies
 

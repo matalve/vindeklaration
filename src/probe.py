@@ -24,6 +24,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 import sys
 import time
 import unicodedata
@@ -328,6 +329,40 @@ def robots_verdict(client: httpx.Client, url: str, cache: dict) -> tuple[str, bo
     return verdict
 
 
+def _run(command: list[str], timeout: int = 120) -> str:
+    try:
+        done = subprocess.run(
+            command, capture_output=True, text=True, timeout=timeout, check=False
+        )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        return f"[{type(error).__name__}: {error}]"
+    return done.stdout
+
+
+def decode_codes(path: Path) -> list[str]:
+    """QR and barcodes in an image. Exact: it decodes or it does not."""
+    output = _run(["zbarimg", "--quiet", "--raw", str(path)])
+    return [line.strip() for line in output.splitlines() if line.strip()]
+
+
+def pdf_text(path: Path) -> str:
+    """The PDF's own text layer. Not OCR -- these are the characters it holds."""
+    return _run(["pdftotext", "-layout", "-enc", "UTF-8", str(path), "-"])
+
+
+def ocr(path: Path, langs: str) -> str:
+    """Machine reading of a picture. Approximate by nature; see the caller."""
+    if path.suffix == ".pdf":
+        page = path.with_suffix("")
+        _run(["pdftoppm", "-r", "300", "-png", "-f", "1", "-l", "3",
+              str(path), str(page)])
+        images = sorted(path.parent.glob(f"{page.name}-*.png"))
+    else:
+        images = [path]
+    return "\n".join(_run(["tesseract", str(image), "-", "-l", langs])
+                     for image in images)
+
+
 def _is_expired_certificate(error: Exception) -> bool:
     """True only for expiry, which the owner ruled is not a refusal.
 
@@ -414,14 +449,18 @@ def probe(url: str, options: argparse.Namespace, robots_cache: dict) -> dict:
         return report
 
     digest = hashlib.sha1(url.encode()).hexdigest()[:12]
-    suffix = ".pdf" if "pdf" in report["content_type"] else ".html"
+    kind = report["content_type"].split(";")[0].strip()
+    suffix = {
+        "application/pdf": ".pdf", "image/jpeg": ".jpg", "image/png": ".png",
+        "image/webp": ".webp", "image/gif": ".gif", "image/tiff": ".tif",
+    }.get(kind, ".pdf" if "pdf" in kind else ".html")
     saved = CACHE / f"{digest}{suffix}"
     saved.write_bytes(body)
     report["saved"] = str(saved)
 
-    if suffix == ".pdf":
-        report["note"] = "PDF saved; no text extractor available in this environment"
-        return report
+    content_type = report["content_type"]
+    if suffix == ".pdf" or content_type.startswith("image/"):
+        return _read_document(report, saved, options)
 
     html = body.decode(response.encoding or "utf-8", errors="replace")
     text = _visible(html)
@@ -442,15 +481,62 @@ def probe(url: str, options: argparse.Namespace, robots_cache: dict) -> dict:
     return report
 
 
+def _read_document(report: dict, saved: Path, options: argparse.Namespace) -> dict:
+    """A PDF or an image, reduced to the same report as a page.
+
+    Three readings, and they are not equally trustworthy. A QR decode is exact.
+    A PDF's text layer is exact -- those are the characters the file holds. OCR
+    is a machine's reading of a picture, and the project's first rule is never
+    to guess at a declaration, so it is opt-in and it is labelled everywhere it
+    appears.
+    """
+    text = ""
+    if saved.suffix == ".pdf":
+        text = pdf_text(saved)
+        report["pdf_text_chars"] = len(text.strip())
+        if report["pdf_text_chars"] < 40:
+            report["note"] = (
+                "no text layer worth reading; --ocr rasterises the first three "
+                "pages and reads them"
+            )
+    else:
+        codes = decode_codes(saved)
+        if codes:
+            report["codes"] = codes
+        else:
+            report["note"] = "no QR or barcode found in this image"
+
+    if options.ocr:
+        transcribed = ocr(saved, options.ocr_langs)
+        if transcribed.strip():
+            report["transcription"] = (
+                "OCR -- a machine reading of a picture, not the producer's own "
+                "text. Never record it as raw_ingredients without a human read, "
+                "and mark any record that rests on it."
+            )
+            report["ocr_chars"] = len(transcribed.strip())
+            text = f"{text}\n{transcribed}"
+
+    if text.strip():
+        report["terms"] = [
+            {"term": term, "line": line, "context": context}
+            for term, line, context in _term_hits(text, options.context)
+        ]
+    return report
+
+
 def render(report: dict) -> str:
     lines = [f"== {report['url']}"]
     for key in ("robots", "exception_used", "tls", "status", "final_url",
                 "content_type", "bytes", "user_agent", "saved", "visible_chars",
-                "note", "stopped"):
+                "pdf_text_chars", "transcription", "ocr_chars", "note",
+                "stopped"):
         if key in report and report[key] != report.get("url"):
             lines.append(f"{key}: {report[key]}")
     if report.get("stopped"):
         return "\n".join(lines)
+    for code in report.get("codes", []):
+        lines.append(f"code: {code}")
     if report.get("vendors_mentioned"):
         lines.append(f"vendors_mentioned: {', '.join(report['vendors_mentioned'])}")
     terms = report.get("terms", [])
@@ -478,6 +564,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("urls", nargs="+")
     parser.add_argument("--context", type=int, default=1,
                         help="lines of context around each term hit")
+    parser.add_argument("--ocr", action="store_true",
+                        help="read a picture with OCR; approximate, and every "
+                             "record resting on it must say so")
+    parser.add_argument("--ocr-langs", default="spa+ita+fra+deu+por+cat+eng",
+                        help="tesseract language list")
     parser.add_argument("--links", action="store_true",
                         help="also list every same-host page link, for finding "
                              "product URLs without grepping the saved file")

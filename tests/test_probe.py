@@ -1,13 +1,21 @@
 """The parts of src.probe that decide something, tested without a network."""
 
+import pathlib
+import shutil
+
+import pytest
+
 from src.probe import (
     _fold,
+    decode_codes,
     _is_expired_certificate,
     _links,
     _robots_groups,
     _same_host_links,
     _term_hits,
     _visible,
+    ocr,
+    pdf_text,
 )
 
 PAGE = """
@@ -130,3 +138,24 @@ def test_links_reject_the_four_other_meanings_of_etiqueta():
     assert not any("etiqueta-regalo" in url for url in found)
     # the real one still survives
     assert "https://www.campoviejo.test/es/etiqueta-electronica/x" in found
+
+
+FIXTURES = pathlib.Path(__file__).parent / "fixtures" / "probe"
+
+
+@pytest.mark.skipif(not shutil.which("zbarimg"), reason="zbar-tools not installed")
+def test_a_qr_code_decodes_to_its_url():
+    assert decode_codes(FIXTURES / "qr.png") == ["https://u-label.com/qr/ABC123"]
+
+
+@pytest.mark.skipif(not shutil.which("pdftotext"), reason="poppler-utils not installed")
+def test_a_pdf_text_layer_is_read_without_ocr():
+    text = pdf_text(FIXTURES / "ficha.pdf")
+    assert "INGREDIENTES" in text
+    assert "sulfitos" in text
+
+
+@pytest.mark.skipif(not shutil.which("tesseract"), reason="tesseract not installed")
+def test_ocr_reads_a_rendered_page():
+    text = ocr(FIXTURES / "ficha.pdf", "spa+eng")
+    assert "INGREDIENTES" in text.upper()
