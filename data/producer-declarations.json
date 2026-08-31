@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "4 — SPAIN, opened 2026-08-30, THREE batches run, PLUS a cross-cutting PERNOD RICARD slice opened 2026-08-31 that is NOT part of the Spanish pool. SPAIN: the pool was 90 wines at vintage 2024+ with declaration_status not_declared across 70 producer strings; after 31 producer strings and 51 wines, 1 found, 3 rejected, 47 not found, 39 wines untouched. PERNOD RICARD SLICE (French and Portuguese, all NON-VINTAGE): opened because e-label.pernod-ricard.com is liquid-keyed, which is fatal for a vintage wine and harmless for a non-vintage one — Campo Viejo was rejected on exactly that. The slice is Perrier-Jouët (2), G.H. Mumm (2) and Grådask Tawny (1), all supplied by Pernod Ricard Sweden AB and all with vintage null. THREE SPANISH E-LABEL ADOPTERS ARE KNOWN and only one is readable: digital-label.eu (Albet i Noya), u-label.com (Frutos Villar — A SCANTRUST WHITE-LABEL) and Scantrust (Murviedro).",
-  "attempted": 533,
+  "attempted": 534,
   "found": 33,
-  "not_found": 448,
+  "not_found": 449,
   "rejected": 52,
   "declarations": [
     {
@@ -15232,9 +15232,36 @@
       "not_found_because": "The producer publishes no declaration in any form. The Shopify census is complete and no product carries an ingredient list, a nutrition table, an e-label vendor or a QR destination; the raw HTML has zero hits for ingredien, sulfit, nutri, kcal, ficha, e-label, elabel, qr and etiqueta. The one per-vintage document, the 2024 English datasheet, was read in full through its own text layer and is the sixth Spanish technical sheet in this file to contain no mandated information at all — not even 'contiene sulfitos'.",
       "robots_note": "Stock Shopify robots.txt on the producer's host and a two-line JavaScript disallow on cdn.shopify.com. Everything fetched was allowed; no exception invoked.",
       "checked_at": "2026-08-31T12:30:00Z"
+    },
+    {
+      "product_number": "7968501",
+      "name": "Augustus Chardonnay",
+      "producer": "Augustus Forum",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://avgvstvsforvm.com/es/producto/chardonnay/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://augustusforum.com/ over 443 — CONNECTION REFUSED; the apex answers only on port 80 and 301s to https://avgvstvsforvm.com/es/inicio/. The producer's real domain is the Latinised spelling",
+        "https://avgvstvsforvm.com/robots.txt — stock WooCommerce wildcard group (wp-admin, wc-logs, woocommerce_uploads, feed, search, /?*), with /wp-content/uploads/ explicitly allowed. Everything fetched is allowed",
+        "https://avgvstvsforvm.com/es/inicio/ (200, 210 kB) — terms: 0, no declaration-shaped link, no e-label vendor named",
+        "https://avgvstvsforvm.com/es/categoria-producto/vinos/blancos-es/ (200, 252 kB) — the white-wine census, 15 products, one page each. terms: 0",
+        "https://avgvstvsforvm.com/es/producto/chardonnay/ (200, 244 kB) — the wine's own page. terms: 0, no declaration-shaped link, and zero raw hits for ingredien, sulfit, alerg, nutri, kcal, e-label, elabel and qr. Its only document is the ficha tecnica",
+        "https://avgvstvsforvm.com/wp-content/uploads/2025/01/FT-CH-2025.pdf (200, 1,8 MB) — the ficha tecnica, trilingual ca/es/en, 22 365 characters extracted in full through the PDF's own text layer"
+      ],
+      "evidence": "Producer and cuvee match: Avgvstvs Forvm (Bodegas Cellers Avgvstvs Forvm, Penedes) publishes 'AVGVSTVS Chardonnay' as its varietal white and Systembolaget's item is Augustus Chardonnay, Katalonien, organic. THE VINTAGE FAILS ON THE PRODUCER'S SURFACE AND THE ALCOHOL CONFIRMS IT: the only ficha the page offers is headed 'AVGVSTVS Chardonnay 2025', gives 'FECHA DE EMBOTELLADO: Marzo de 2026' and 'Grado Alcoholico: 13.5% vol.', while Systembolaget sells the 2024 at 12,5 % — a full point apart, twice the EU labelling tolerance, so the two statements cannot describe the same fill. The estate has rolled its surface forward, as five earlier Spanish producers did.",
+      "rejected_because": null,
+      "not_found_because": "No declaration exists on the producer's surface. The wine page carries no ingredient list, no nutrition table, no e-label vendor and no QR destination. THE FICHA IS THE SEVENTH SPANISH TECHNICAL SHEET READ IN FULL AND THE FIRST TO CARRY A MANDATED ELEMENT: its 'PERFIL ANALITICO' block ends with '100 ml E: 334 KJ / 79 Kcal', a real energy value, beside alcohol, total acidity, volatile acidity, pH, residual sugar and 'SO2 Total: 61 ppm'. It is still not a declaration — an SO2 analysis in ppm is a measurement, not an ingredient list, and there is no list of substances anywhere in the document. Nutrition without an ingredient list is the commonest near-miss in this file and this is its Spanish form.",
+      "robots_note": "Stock WooCommerce robots.txt; /wp-content/uploads/ is explicitly allowed and the ficha sits there. No exception invoked.",
+      "checked_at": "2026-08-31T12:50:00Z"
     }
   ],
-  "updated_at": "2026-08-31T12:30:00Z",
+  "updated_at": "2026-08-31T12:50:00Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
