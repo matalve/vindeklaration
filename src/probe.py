@@ -340,12 +340,22 @@ def robots_verdict(client: httpx.Client, url: str, cache: dict) -> tuple[str, bo
 
 
 def _run(command: list[str], timeout: int = 120) -> str:
+    """The tool's output, or "" if it is missing or the run failed.
+
+    It must never return the failure as text. A caller cannot tell that apart
+    from a reading: returning "[FileNotFoundError: ... 'zbarimg']" made `_zbar`
+    treat it as one decoded line, and the report then printed a `code:` for a
+    QR that was never read — a fabricated exact result, on a machine where the
+    decoder simply was not installed.
+    """
+    if shutil.which(command[0]) is None:
+        return ""
     try:
         done = subprocess.run(
             command, capture_output=True, text=True, timeout=timeout, check=False
         )
-    except (OSError, subprocess.TimeoutExpired) as error:
-        return f"[{type(error).__name__}: {error}]"
+    except (OSError, subprocess.TimeoutExpired):
+        return ""
     return done.stdout
 
 
@@ -509,6 +519,12 @@ def probe(url: str, options: argparse.Namespace, robots_cache: dict) -> dict:
     return report
 
 
+def _note(report: dict, text: str) -> None:
+    """Notes accumulate. Two tools can be missing at once, and the second
+    must not silently erase the first."""
+    report["note"] = f"{report['note']}; {text}" if report.get("note") else text
+
+
 def _read_document(report: dict, saved: Path, options: argparse.Namespace) -> dict:
     """A PDF or an image, reduced to the same report as a page.
 
@@ -518,27 +534,34 @@ def _read_document(report: dict, saved: Path, options: argparse.Namespace) -> di
     to guess at a declaration, so it is opt-in and it is labelled everywhere it
     appears.
     """
+    # "Read nothing" and "could not read" are different findings, and only one
+    # of them says anything about the document. Name the missing tool instead
+    # of reporting an empty result as though the file had been examined.
     text = ""
     if saved.suffix == ".pdf":
-        text = pdf_text(saved)
-        report["pdf_text_chars"] = len(text.strip())
-        if report["pdf_text_chars"] < 40:
-            report["note"] = (
-                "no text layer worth reading; --ocr rasterises the first three "
-                "pages and reads them"
-            )
+        if shutil.which("pdftotext") is None:
+            _note(report, "pdftotext is not installed; the text layer was not read")
+        else:
+            text = pdf_text(saved)
+            report["pdf_text_chars"] = len(text.strip())
+            if report["pdf_text_chars"] < 40:
+                _note(report, "no text layer worth reading; --ocr rasterises "
+                              "the first three pages and reads them")
+    elif shutil.which("zbarimg") is None:
+        _note(report, "zbarimg is not installed; no code was decoded")
     else:
         codes, how = decode_codes(saved)
         if codes:
             report["codes"] = codes
             if how:
-                report["note"] = how.strip()
+                _note(report, how.strip())
         else:
-            report["note"] = (
-                "no QR or barcode found in this image, upscale included"
-            )
+            _note(report, "no QR or barcode found in this image, "
+                          "upscale included")
 
-    if options.ocr:
+    if options.ocr and shutil.which("tesseract") is None:
+        _note(report, "tesseract is not installed; --ocr read nothing")
+    elif options.ocr:
         transcribed = ocr(saved, options.ocr_langs)
         if transcribed.strip():
             report["transcription"] = (

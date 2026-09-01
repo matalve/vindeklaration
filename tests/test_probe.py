@@ -5,6 +5,7 @@ import shutil
 
 import pytest
 
+from src import probe as probe_module
 from src.probe import (
     _fold,
     decode_codes,
@@ -160,6 +161,18 @@ def test_a_pdf_text_layer_is_read_without_ocr():
 def test_ocr_reads_a_rendered_page():
     text = ocr(FIXTURES / "ficha.pdf", "spa+eng")
     assert "INGREDIENTES" in text.upper()
+
+
+def test_a_missing_decoder_reports_nothing_rather_than_a_code(monkeypatch):
+    """The bug this guards: _run used to return the failure as text, so a
+    missing zbarimg became one decoded line and the report printed a `code:`
+    for a QR nobody had read. An exact result invented by an absent tool is
+    the one thing this fetcher must never produce."""
+    monkeypatch.setattr(probe_module.shutil, "which", lambda _: None)
+    codes, _ = decode_codes(FIXTURES / "qr.png")
+    assert codes == []
+    assert pdf_text(FIXTURES / "ficha.pdf") == ""
+    assert ocr(FIXTURES / "ficha.pdf", "spa+eng") == ""
 
 
 def test_an_age_gate_class_is_not_a_declaration_pointer():
