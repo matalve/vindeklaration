@@ -3,7 +3,7 @@
 Where the project stands, for a session starting cold. Read `CLAUDE.md` first —
 that is how to work here; this is what has been done and what is next.
 
-Started 2026-08-02, last checked against the repository 2026-08-29.
+Started 2026-08-02, last checked against the repository 2026-09-01.
 **Update it when you finish something.** The figures age; the shape does not.
 
 ## Live
@@ -22,7 +22,7 @@ cf-build.sh` and nothing else.
 | `/vin/{nr}-{slug}/` | One wine. Swedish only — see *Bilingual* in the site plan |
 | `/hitta/` | The filter. Opens with "when are you buying" |
 | `/lista/{slug}/` | Ten saved slices, built not filtered, so they need no JavaScript |
-| `/tillsats/{id}/` | 77 substances, both languages |
+| `/tillsats/{id}/` | One substance. Both languages |
 | `/tackning/` | Coverage breakdown |
 | `/metod/` | Method, counting rule, licence, third-party requests |
 
@@ -30,21 +30,30 @@ Build: `uv run python -m src.site`, about 25 s, ~15 000 files. **The build fails
 above 19 000 files on purpose** — a Worker rejects more than 20 000 static
 assets on the free plan.
 
-**The whole chain runs unattended, verified end to end 2026-08-02** rather than
-inferred: the timer fired at 03:01, `update.sh` crawled, committed and pushed by
-06:13, and the live `/tackning` then reported 2 919 of 15 174 wines against the
-2 882 of 14 981 a local build had given the day before. Nobody touched it. Build watch
-paths have since been configured — include `*`, exclude `/docs`, `/deploy`,
-`.claude/` and `*.md` — and `data/` must never join that exclude list, because
+**The whole chain runs unattended, and has been verified twice rather than
+inferred.** On 2026-08-02 the timer fired at 03:01, `update.sh` crawled and
+pushed by 06:13, and the live `/tackning` then reported 2 919 of 15 174 wines
+against the 2 882 of 14 981 a local build had given the day before — nobody
+touched it. On 2026-08-29 the same held for the rebuilt path: R2, the release,
+the commit, the push and a green build.
+
+Build watch paths are configured — include `*`, exclude `/docs`, `/deploy`,
+`.claude/` and `*.md`. **`data/` must never join that exclude list**, because
 the rebuild rides on the Pi's commit of `data/quality-history.json`.
 
-**The dataset left git on 2026-08-29.** A 16 MB JSON committed nightly cost its
+## The dataset left git, and then left the history
+
+**It left git on 2026-08-29.** A 16 MB JSON committed nightly cost its
 near-full size in history, forever. `update.sh` now publishes `wines.json.gz`
 and `catalog.json.gz` to the R2 bucket behind `/data/` and to a rolling
 `dataset-latest` release, *before* pushing — the push triggers the rebuild, and
 the rebuild downloads the dataset from the bucket. Only `unknown.json` and
-`quality-history.json` are still committed. Verified end to end the same day:
-R2, release, a 24-line commit, push, green build.
+`quality-history.json` are still committed.
+
+The migration bit in four places worth reading before touching the pipeline
+again — `--remote`, systemd's `PATH`, the build command's home, and the binding
+name `wrangler` proposes. They are written up where they apply, in
+`docs/deploy-site.md`.
 
 **And it left the history too, later the same day.** Dropping the file from the
 tip left 69 blobs behind: 1.15 GB uncompressed, a 199 MB clone for a tree of a
@@ -62,19 +71,14 @@ clone never fetches them, so the clone size is genuinely fixed, but the bytes
 are still on GitHub and getting rid of them would take Support or a new
 repository. Judged not worth it.
 
-Four things bit during that migration and are worth not rediscovering. `--remote`
-is load-bearing on `wrangler r2 object put`, or it writes to the local simulator
-and exits 0 against an empty bucket. systemd's user PATH excludes
-`~/.local/bin`, where `uv` and `gh` live, so the unit sets its own. The build
-command belongs in `cf-build.sh`, not in a dashboard field that no diff can
-show. And `wrangler r2 bucket create` offers to write the R2 binding into
-`wrangler.jsonc` under the wrong name — decline it.
-
 ## The dataset
 
-15 146 wines. 20.4% carry a declaration; 0.5% of those (16 wines) cannot be
-read in full and are excluded from every ranking. `src/report.py` prints the
-current numbers and its gate watches drift rather than a level.
+**Run `uv run python -m src.report` for the figures.** They move every night —
+between 2026-08-29 and 2026-09-01 the assortment went from 15 146 wines to
+15 025 as stock rotated — so any number written here is a snapshot with a date
+on it, not a fact to rely on. On 2026-09-01: 15 025 wines, 20.7% carrying a
+declaration, 0.7% of those unreadable in full and excluded from every ranking.
+The gate watches drift rather than a level.
 
 **Sunday's full refresh (2026-08-02) filled three fields that were empty
 before.** `deploy/update.sh` re-fetches everything on Sundays once the first
@@ -100,7 +104,9 @@ full pass has completed.
 - **`discontinued` is `False` everywhere**, which is plausible: a discontinued
   wine leaves the catalogue rather than staying in it flagged.
 
-## What each phase delivered
+## What has been built
+
+The four phases in order, and three things that arrived alongside them.
 
 **Phase 1 — lookup.** Wine pages, search, method page. Wine pages carry the
 declaration verbatim, the parsed substances with E-numbers, allergens with their
@@ -213,12 +219,13 @@ worth knowing before the next stock rotation, not after.
 that fact is what keeps five separate regimes out of scope. *When the site takes
 income* lists what changes on the day.
 
-**`declaration-finder` is on Italy**, tenth batch, open since 2026-08-15;
-France is set aside and Germany's tail was left where it stood. Across 59 runs
-it has attempted 455 wines and found 32 — `data/producer-declarations.json`
-carries the record, `docs/elabel-platforms.md` which platforms can be read. The
-tail costs about as much per producer as the batches already done and yields a
-fifth as much, which is why batches get set aside rather than finished.
+**`declaration-finder` is on Spain**, batch 5, opened 2026-08-31 to close the
+Spanish pool. Across 108 runs it has attempted 561 wines and found 33 —
+`data/producer-declarations.json` carries the record, `docs/elabel-platforms.md`
+which platforms can be read. Italy was the tenth batch before it; France is set
+aside and Germany's tail was left where it stood. The tail costs about as much
+per producer as the batches already done and yields a fifth as much, which is
+why batches get set aside rather than finished.
 
 ## Working here without burning the session
 
