@@ -152,10 +152,6 @@
    "wines": 1
   },
   {
-   "match": "duvor -> druvor",
-   "wines": 1
-  },
-  {
    "match": "syrareglerande -> syrereglerande",
    "wines": 1
   },
