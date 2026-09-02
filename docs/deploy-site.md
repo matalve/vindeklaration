@@ -183,6 +183,33 @@ a build fails right after that file changes, it is the first suspect — the
 dashboard's build settings and a wrangler config can disagree about the output
 directory.
 
+## Free-plan limits that matter here
+
+Checked against Cloudflare's docs 2026-09-02. Only the ones this project can
+plausibly hit are listed; the rest have orders of magnitude of headroom.
+
+- **Static assets: 20 000 files per Worker version** (free; paid is 100 000),
+  25 MiB per file. This is the one real ceiling — the site is ~15 250 files
+  and grows with the assortment and with the second language. `cf-build.sh`
+  fails the build at 19 000. Requests to assets are **free and unlimited** and
+  do not count against the daily request cap, so page views cost nothing; the
+  build ships every page as an asset. Whether Cloudflare counts each pretty
+  URL as a second path — which would halve the real margin — is unresolved;
+  see issue #17 and *Bilingual* in `docs/site-plan.md` for what to do if it
+  trips.
+- **Worker requests: 100 000/day** (resets 00:00 UTC; over it → Error 1027,
+  5xx until the next UTC day). Assets bypass this, so only `/data/*` hits the
+  Worker: the nightly dataset fetch during the build plus any external
+  consumers. Nowhere near the cap. CPU is 10 ms/invocation — `worker/index.js`
+  does one R2 `get` and streams.
+- **Workers Builds: 3 000 build-minutes/month, 1 concurrent, 20-minute
+  timeout.** A build is ~1–3 min, ~30 nightly builds a month. The 20-minute
+  timeout is the thing to watch if rendering 15 000+ pages ever slows down.
+- **R2 free tier: 10 GB-month storage, 1 M Class A ops, 10 M Class B ops,
+  egress free.** The dataset is tens of MB gzipped; the nightly `put` is a
+  handful of Class A ops and each `/data/*` hit is one Class B. Not a concern
+  at this volume.
+
 ## The account subdomain
 
 **Cloudflare derives it from the account name at signup**, which puts a
