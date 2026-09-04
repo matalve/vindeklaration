@@ -168,7 +168,15 @@
    "wines": 1
   },
   {
+   "match": "karboximetylscellulosa -> karboximetylcellulosa",
+   "wines": 1
+  },
+  {
    "match": "dimetyledikarbonat -> dimetyldikarbonat",
+   "wines": 1
+  },
+  {
+   "match": "antioxidansmedel -> antioxidantmedel",
    "wines": 1
   },
   {
