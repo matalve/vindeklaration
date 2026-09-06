@@ -81,6 +81,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7003801/"
   },
   {
+   "token": "durva",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7121001/"
+  },
+  {
    "token": "stabilizing",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
@@ -124,6 +129,11 @@
    "token": "förpackningsbar",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9216301/"
+  },
+  {
+   "token": "potatis",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9249702/"
   }
  ],
  "fuzzy_matches": [
@@ -137,6 +147,10 @@
   },
   {
    "match": "kornserveringsmedel -> konserveringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "kalium­polyaspartat -> kaliumpolyaspartat",
    "wines": 1
   },
   {
