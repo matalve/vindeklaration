@@ -96,11 +96,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
   },
   {
-   "token": "stabiliseringsämnen",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
-  },
-  {
    "token": "oak",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-836208/"
