@@ -70,7 +70,10 @@ because an index missing a column still parses and still renders every menu.
 
 - **The search API has no ingredient field.** Declarations come from the
   product page's Next.js data route, `/_next/data/{buildId}/produkt/vin/x-{nr}.json`.
-  The buildId changes on every deploy and is discovered at runtime.
+  The buildId changes on every deploy and is discovered at runtime. A stale
+  one answers 404 to everything, which is indistinguishable from a product
+  that left the assortment — `details.py` holds a run of misses back and
+  re-discovers before counting any of them gone.
 - **The search API caps page size at 30 and stops paging near 10 000 results**,
   so an unfiltered query silently returns about 8 900 of 15 500 wines. That is
   why `catalog.py` partitions by country.

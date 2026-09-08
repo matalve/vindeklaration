@@ -97,7 +97,9 @@ dataset — leaving them out would hide how much of the assortment says nothing.
 2. **`details.py`** — the search API has no ingredient field. The product page
    does, and it is a Next.js route, so the same data is available as JSON at
    `/_next/data/{buildId}/produkt/vin/x-{productNumber}.json`. The buildId is
-   discovered at runtime.
+   discovered at runtime, and re-checked when a run of products starts
+   answering 404 — a deploy during the pass would otherwise read as the rest of
+   the assortment having disappeared.
 3. **`normalize.py`** — the declaration is free text with missing separators and
    inconsistent spelling, so the parser scans for known substances longest-match
    first, strikes out what it recognised, and judges the remainder. Anything

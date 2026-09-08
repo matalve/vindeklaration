@@ -17,6 +17,7 @@ import json
 import re
 import sys
 import time
+from collections.abc import Sequence
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -30,6 +31,26 @@ CACHE_DIR = DATA_DIR / "cache"
 CATALOG_PATH = DATA_DIR / "catalog.json"
 
 BUILD_ID_RE = re.compile(r'"buildId":"([0-9a-zA-Z_-]+)"')
+
+# Any product page carries the buildId, so these only need to be products that
+# are still on the shelf. Three, because the first one leaving the assortment
+# would otherwise take down every run: Mateus and the Widow have been in the
+# fixed assortment since 1955, which is the closest thing to a guarantee.
+BUILD_ID_PRODUCTS = ("253108", "257101", "742401")
+
+# A stale buildId turns every remaining request into a 404, and a 404 means
+# "product gone". Nothing else produces a long run of them: the catalog is
+# fetched minutes before this step, and every nightly run since the pipeline
+# started has reported zero gone products, full refreshes included. Ten in a
+# row is therefore not churn, it is a deploy that happened mid-run.
+MISSING_STREAK = 10
+
+# Second guard, for the case the first one cannot see: too much of the run
+# missing means the run should not be believed at all. Only applied to runs
+# large enough for a share to mean anything, so `--only` and small `--limit`
+# passes are never judged by it.
+MISSING_SHARE_LIMIT = 0.05
+MISSING_SHARE_MIN_SAMPLE = 40
 
 TTY = sys.stdout.isatty()
 
@@ -65,15 +86,30 @@ DETAIL_FIELDS = [
 ]
 
 
-def discover_build_id(http: httpx.Client) -> str:
-    """Read the current Next.js buildId off any product page."""
-    html = get_text(http, f"{SITE_URL}/produkt/vin/x-253108/")
-    match = BUILD_ID_RE.search(html)
-    if not match:
-        raise RuntimeError(
-            "could not find buildId — the site layout changed, check details.py"
-        )
-    return match.group(1)
+def discover_build_id(
+    http: httpx.Client, candidates: Sequence[str] = BUILD_ID_PRODUCTS
+) -> str:
+    """Read the current Next.js buildId off any product page.
+
+    Tries the candidates in order: a product that has left the assortment
+    answers 404, which says nothing about the buildId and everything about the
+    product, so it is worth asking the next one before giving up.
+    """
+    errors = []
+    for number in candidates:
+        try:
+            html = get_text(http, f"{SITE_URL}/produkt/vin/x-{number}/")
+        except RuntimeError as error:
+            errors.append(f"{number}: {error}")
+            continue
+        match = BUILD_ID_RE.search(html)
+        if match:
+            return match.group(1)
+        errors.append(f"{number}: page fetched but carries no buildId")
+    raise RuntimeError(
+        "could not find buildId — the site layout changed, check details.py"
+        + "".join(f"\n  {line}" for line in errors)
+    )
 
 
 def find_product_object(payload: Any) -> dict | None:
@@ -150,6 +186,104 @@ def fetch_detail(
     return extract(product)
 
 
+def fetch_details(
+    http: httpx.Client, build_id: str, todo: list[str]
+) -> dict[str, Any]:
+    """Fetch each product, re-discovering the buildId if 404s start piling up.
+
+    A 404 on the data route is ambiguous: the product may be gone, or the
+    buildId in the URL may have gone stale because Systembolaget deployed
+    during the several hours this pass takes. Read the wrong way, a deploy at
+    midnight looks like the entire remaining assortment disappearing — and it
+    would be recorded as such without anything failing. So a run of misses is
+    treated as a suspicion rather than a fact: hold them back, ask the site
+    what the buildId is now, and only count them as gone once the answer comes
+    back unchanged.
+    """
+    fetched = declared = missing = 0
+    rediscoveries = 0
+    # Misses not yet ruled on. A success in between proves the buildId still
+    # works, so anything held at that point really was gone.
+    pending: list[str] = []
+    # Raised each time re-discovery confirms the buildId: a run that genuinely
+    # meets many gone products should not buy a discovery request per ten.
+    streak_limit = MISSING_STREAK
+
+    def store(number: str, record: dict) -> None:
+        nonlocal fetched, declared
+        cache_path(number).write_text(
+            json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8"
+        )
+        fetched += 1
+        if record.get("ingredients"):
+            declared += 1
+
+    def resolve_pending() -> None:
+        """Rule on the held-back misses, re-fetching them if the buildId moved."""
+        nonlocal build_id, missing, rediscoveries, streak_limit
+        rediscoveries += 1
+        current = discover_build_id(http)
+        if current == build_id:
+            missing += len(pending)
+            streak_limit *= 2
+        else:
+            print(
+                f"\nbuildId changed mid-run: {build_id} -> {current} — "
+                f"retrying {len(pending)} products read as gone",
+                flush=True,
+            )
+            build_id = current
+            for number in pending:
+                time.sleep(REQUEST_DELAY)
+                record = fetch_detail(http, build_id, number)
+                if record is None:
+                    missing += 1
+                else:
+                    store(number, record)
+            streak_limit = MISSING_STREAK
+        pending.clear()
+
+    for index, number in enumerate(todo, start=1):
+        record = fetch_detail(http, build_id, number)
+        if record is None:
+            pending.append(number)
+            if len(pending) >= streak_limit:
+                resolve_pending()
+        else:
+            # The buildId answered, so the held-back misses were real.
+            missing += len(pending)
+            pending.clear()
+            store(number, record)
+        # On a terminal, overwrite one line often. Under systemd, stdout is
+        # the journal, so report rarely and on its own line — otherwise a
+        # full pass writes six hundred entries nobody will read.
+        every = 25 if TTY else 500
+        if index % every == 0 or index == len(todo):
+            share = declared / fetched * 100 if fetched else 0
+            print(
+                f"  {index}/{len(todo)} fetched={fetched} "
+                f"declared={declared} ({share:.0f}%) "
+                f"missing={missing + len(pending)}",
+                end="\r" if TTY else "\n",
+                flush=True,
+            )
+        time.sleep(REQUEST_DELAY)
+
+    # A pass that ends on a run of misses never reached the streak limit, so
+    # the tail would go unchecked — which is precisely where a late deploy
+    # lands. One request settles it.
+    if pending:
+        resolve_pending()
+
+    return {
+        "build_id": build_id,
+        "fetched": fetched,
+        "declared": declared,
+        "missing": missing,
+        "rediscoveries": rediscoveries,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -181,36 +315,30 @@ def main() -> None:
         todo = todo[: args.limit]
     print(f"{len(todo)} of {len(numbers)} products to fetch")
 
-    fetched = declared = missing = 0
     with client() as http:
         build_id = discover_build_id(http)
         print(f"buildId {build_id}")
-        for index, number in enumerate(todo, start=1):
-            record = fetch_detail(http, build_id, number)
-            if record is None:
-                missing += 1
-            else:
-                cache_path(number).write_text(
-                    json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8"
-                )
-                fetched += 1
-                if record.get("ingredients"):
-                    declared += 1
-            # On a terminal, overwrite one line often. Under systemd, stdout is
-            # the journal, so report rarely and on its own line — otherwise a
-            # full pass writes six hundred entries nobody will read.
-            every = 25 if TTY else 500
-            if index % every == 0 or index == len(todo):
-                share = declared / fetched * 100 if fetched else 0
-                print(
-                    f"  {index}/{len(todo)} fetched={fetched} "
-                    f"declared={declared} ({share:.0f}%) missing={missing}",
-                    end="\r" if TTY else "\n",
-                    flush=True,
-                )
-            time.sleep(REQUEST_DELAY)
+        result = fetch_details(http, build_id, todo)
     print()
-    print(f"done: {fetched} cached, {declared} with a declaration, {missing} gone")
+    print(
+        f"done: {result['fetched']} cached, {result['declared']} with a "
+        f"declaration, {result['missing']} gone"
+    )
+
+    missing = result["missing"]
+    if (
+        len(todo) >= MISSING_SHARE_MIN_SAMPLE
+        and missing > len(todo) * MISSING_SHARE_LIMIT
+    ):
+        print(
+            f"FAILED: {missing} of {len(todo)} products ({missing / len(todo):.0%}) "
+            f"could not be fetched, above the {MISSING_SHARE_LIMIT:.0%} limit. "
+            "The assortment does not turn over that fast, and the buildId was "
+            "re-checked, so something upstream has changed. Do not trust this "
+            "run; see upstream-scout.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
 
 if __name__ == "__main__":
