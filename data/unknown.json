@@ -76,6 +76,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
   },
   {
+   "token": "grönsaksklarare",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-649301/"
+  },
+  {
    "token": "invertsocker",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7003801/"
@@ -94,6 +99,11 @@
    "token": "agents",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
+  },
+  {
+   "token": "stabiliseringsämnen",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
   },
   {
    "token": "oak",
