@@ -52,6 +52,14 @@ MISSING_STREAK = 10
 MISSING_SHARE_LIMIT = 0.05
 MISSING_SHARE_MIN_SAMPLE = 40
 
+# The weekly --refresh is what keeps cached records current, so anything older
+# than a refresh cycle can only be a product that was absent from the catalog
+# on refresh night and has come back since. Those are invisible to a
+# presence-only work list: cached, therefore skipped, therefore served with
+# whatever age they had when they left. Eight days rather than seven leaves
+# room for a refresh that started late without pulling the whole assortment in.
+STALE_AFTER_DAYS = 8
+
 TTY = sys.stdout.isatty()
 
 # Swedish nutrient labels as they appear in the upstream table.
@@ -284,6 +292,47 @@ def fetch_details(
     }
 
 
+def cached_age_days(number: str, now: datetime) -> float | None:
+    """How old the cached record is, or None if there is nothing usable.
+
+    Read from `fetched_at` inside the record rather than the file's mtime:
+    `deploy/rebuild-cache.py` rewrites every file when it re-derives the cache,
+    which would reset every mtime and quietly declare the whole cache fresh.
+    """
+    path = cache_path(number)
+    if not path.exists():
+        return None
+    try:
+        fetched_at = json.loads(path.read_text(encoding="utf-8")).get("fetched_at")
+        return (now - datetime.fromisoformat(fetched_at)).total_seconds() / 86400
+    except (ValueError, TypeError, OSError):
+        # An unreadable record is not evidence of freshness.
+        return None
+
+
+def select_products(
+    numbers: list[str], *, refresh: bool = False, now: datetime | None = None
+) -> tuple[list[str], dict[str, int]]:
+    """Decide what to fetch: what was never cached, and what has gone stale."""
+    now = now or datetime.now(timezone.utc)
+    todo, counts = [], {"new": 0, "stale": 0}
+    for number in numbers:
+        if refresh:
+            todo.append(number)
+            continue
+        age = cached_age_days(number, now)
+        if age is None:
+            counts["new"] += 1
+        elif age > STALE_AFTER_DAYS:
+            counts["stale"] += 1
+        else:
+            continue
+        todo.append(number)
+    if refresh:
+        counts["new"] = len(todo)
+    return todo, counts
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -308,12 +357,17 @@ def main() -> None:
         catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
         numbers = [p["productNumber"] for p in catalog if p.get("productNumber")]
 
-    todo = [
-        n for n in numbers if args.refresh or not cache_path(n).exists()
-    ]
+    todo, counts = select_products(numbers, refresh=args.refresh)
+    selected = len(todo)
     if args.limit:
         todo = todo[: args.limit]
-    print(f"{len(todo)} of {len(numbers)} products to fetch")
+    detail = (
+        f"{counts['new']} not cached, {counts['stale']} older than "
+        f"{STALE_AFTER_DAYS} days"
+    )
+    if len(todo) != selected:
+        detail += f", limited to {len(todo)}"
+    print(f"{selected} of {len(numbers)} products to fetch ({detail})")
 
     with client() as http:
         build_id = discover_build_id(http)

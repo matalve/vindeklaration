@@ -6,6 +6,10 @@ URL goes stale mid-run, every remaining request answers 404, and a 404 means
 products come back rather than being written off.
 """
 
+import json
+import os
+from datetime import datetime, timedelta, timezone
+
 import pytest
 
 from src import details as details_module
@@ -215,3 +219,98 @@ class _no_client:
 
     def __exit__(self, *exc):
         return False
+
+
+# --- choosing what to fetch -------------------------------------------------
+
+NOW = datetime(2026, 9, 9, 3, 0, tzinfo=timezone.utc)
+
+
+@pytest.fixture
+def cache(monkeypatch, tmp_path):
+    """A throwaway cache, with a helper that writes a record of a given age."""
+    monkeypatch.setattr(details_module, "CACHE_DIR", tmp_path)
+
+    def write(number, *, days_old=0.0, fetched_at=None):
+        if fetched_at is None:
+            fetched_at = (NOW - timedelta(days=days_old)).isoformat()
+        record = {"productNumber": number, "ingredients": "Druvor"}
+        if fetched_at is not False:
+            record["fetched_at"] = fetched_at
+        (tmp_path / f"{number}.json").write_text(json.dumps(record), encoding="utf-8")
+        return tmp_path / f"{number}.json"
+
+    write.dir = tmp_path
+    return write
+
+
+def test_a_product_that_was_never_cached_is_fetched(cache):
+    todo, counts = details_module.select_products(["100001"], now=NOW)
+
+    assert todo == ["100001"]
+    assert counts == {"new": 1, "stale": 0}
+
+
+def test_a_recently_cached_product_is_left_alone(cache):
+    cache("100001", days_old=2)
+
+    todo, counts = details_module.select_products(["100001"], now=NOW)
+
+    assert todo == []
+    assert counts == {"new": 0, "stale": 0}
+
+
+def test_a_product_that_missed_a_refresh_is_fetched_again(cache):
+    # The case this exists for: absent from the catalog on refresh night, back
+    # on an ordinary one, so presence alone would skip it forever.
+    cache("100001", days_old=17)
+
+    todo, counts = details_module.select_products(["100001"], now=NOW)
+
+    assert todo == ["100001"]
+    assert counts == {"new": 0, "stale": 1}
+
+
+def test_the_boundary_is_the_refresh_cycle_not_the_week(cache):
+    cache("100001", days_old=7.5)
+    cache("100002", days_old=8.5)
+
+    todo, _ = details_module.select_products(["100001", "100002"], now=NOW)
+
+    assert todo == ["100002"]
+
+
+def test_a_record_with_no_usable_timestamp_is_not_taken_as_fresh(cache):
+    cache("100001", fetched_at=False)
+    cache("100002", fetched_at="not a date")
+    (cache.dir / "100003.json").write_text("{ truncated", encoding="utf-8")
+
+    todo, _ = details_module.select_products(
+        ["100001", "100002", "100003"], now=NOW
+    )
+
+    assert todo == ["100001", "100002", "100003"]
+
+
+def test_age_comes_from_the_record_not_the_file(cache):
+    # deploy/rebuild-cache.py rewrites every file, so every mtime would say
+    # "fetched just now". The record knows better.
+    path = cache("100001", days_old=17)
+    os.utime(path, (NOW.timestamp(), NOW.timestamp()))
+
+    todo, counts = details_module.select_products(["100001"], now=NOW)
+
+    assert todo == ["100001"]
+    assert counts["stale"] == 1
+
+
+def test_refresh_takes_everything_regardless_of_age(cache):
+    cache("100001", days_old=0)
+    cache("100002", days_old=17)
+
+    todo, counts = details_module.select_products(
+        ["100001", "100002", "100003"], refresh=True, now=NOW
+    )
+
+    assert todo == ["100001", "100002", "100003"]
+    assert counts == {"new": 3, "stale": 0}
