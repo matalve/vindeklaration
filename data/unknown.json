@@ -147,6 +147,10 @@
    "wines": 2
   },
   {
+   "match": "kaliumpolyspartat -> kaliumpolyaspartat",
+   "wines": 2
+  },
+  {
    "match": "konserverings -> konserverings",
    "wines": 1
   },
