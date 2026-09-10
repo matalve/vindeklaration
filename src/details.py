@@ -379,6 +379,16 @@ def main() -> None:
         f"declaration, {result['missing']} gone"
     )
 
+    # Only when it actually happened, so an ordinary night stays quiet and the
+    # line means something when it does appear. Together with the "buildId
+    # changed mid-run" message this is the whole visible trace of the guard:
+    #   journalctl --user -u vindeklaration | grep -E 'buildId (changed|re-checked)'
+    if result["rediscoveries"]:
+        print(
+            f"buildId re-checked {result['rediscoveries']}x after a run of 404s "
+            f"— {'it had moved' if result['build_id'] != build_id else 'unchanged'}"
+        )
+
     missing = result["missing"]
     if (
         len(todo) >= MISSING_SHARE_MIN_SAMPLE

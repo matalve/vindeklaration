@@ -314,3 +314,56 @@ def test_refresh_takes_everything_regardless_of_age(cache):
 
     assert todo == ["100001", "100002", "100003"]
     assert counts == {"new": 3, "stale": 0}
+
+
+def _run_main(monkeypatch, tmp_path, todo, result):
+    monkeypatch.setattr(details_module, "CACHE_DIR", tmp_path)
+    monkeypatch.setattr(details_module, "client", lambda **kw: _no_client())
+    monkeypatch.setattr(details_module, "discover_build_id", lambda http: "build-one")
+    monkeypatch.setattr(
+        details_module, "fetch_details", lambda http, build_id, todo: result
+    )
+    monkeypatch.setattr("sys.argv", ["details", "--only", *todo])
+    details_module.main()
+
+
+def test_a_buildId_that_moved_mid_run_leaves_a_trace_in_the_log(
+    monkeypatch, tmp_path, capsys
+):
+    # The guard is rare by design, so the run has to say when it fired —
+    # otherwise there is no way to tell it working from it being dead code.
+    _run_main(
+        monkeypatch,
+        tmp_path,
+        numbers(3),
+        {
+            "build_id": "build-two",
+            "fetched": 3,
+            "declared": 0,
+            "missing": 0,
+            "rediscoveries": 2,
+        },
+    )
+
+    out = capsys.readouterr().out
+    assert "buildId re-checked 2x" in out
+    assert "it had moved" in out
+
+
+def test_an_ordinary_night_says_nothing_about_the_buildId(
+    monkeypatch, tmp_path, capsys
+):
+    _run_main(
+        monkeypatch,
+        tmp_path,
+        numbers(3),
+        {
+            "build_id": "build-one",
+            "fetched": 3,
+            "declared": 0,
+            "missing": 0,
+            "rediscoveries": 0,
+        },
+    )
+
+    assert "re-checked" not in capsys.readouterr().out
