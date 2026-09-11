@@ -106,6 +106,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
   },
   {
+   "token": "lime",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
+  },
+  {
    "token": "oak",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-836208/"
