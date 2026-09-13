@@ -11,6 +11,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
+   "token": "polygalakturonas",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
+  },
+  {
    "token": "generale",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-194101/"
@@ -86,7 +91,7 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7003801/"
   },
   {
-   "token": "durva",
+   "token": "inga",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7121001/"
   },
@@ -99,11 +104,6 @@
    "token": "agents",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
-  },
-  {
-   "token": "stabiliseringsämnen",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
   },
   {
    "token": "lime",
@@ -164,6 +164,10 @@
    "wines": 1
   },
   {
+   "match": "antixidationsmedel -> antioxidationsmedel",
+   "wines": 1
+  },
+  {
    "match": "kalium­polyaspartat -> kaliumpolyaspartat",
    "wines": 1
   },
@@ -196,11 +200,31 @@
    "wines": 1
   },
   {
+   "match": "karboximmetylcellulosa -> karboximetylcellulosa",
+   "wines": 1
+  },
+  {
+   "match": "konserverinsmedel -> konserveringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "svaveldiocid -> svaveldioxid",
+   "wines": 1
+  },
+  {
+   "match": "antioxidander -> antioxidanter",
+   "wines": 1
+  },
+  {
    "match": "karboximetylscellulosa -> karboximetylcellulosa",
    "wines": 1
   },
   {
    "match": "dimetyledikarbonat -> dimetyldikarbonat",
+   "wines": 1
+  },
+  {
+   "match": "sacakaros -> sackaros",
    "wines": 1
   },
   {
