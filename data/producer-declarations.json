@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 576,
+  "attempted": 579,
   "found": 33,
-  "not_found": 490,
+  "not_found": 493,
   "rejected": 53,
   "declarations": [
     {
@@ -16340,9 +16340,83 @@
       "robots_note": "Stock WooCommerce robots.txt; allowed. The two soft 404s are the site's own 301-to-home behaviour, not a refusal.",
       "note": "A SOFT 404 HERE IS A 200 THAT REDIRECTS TO THE HOME PAGE, on both /product-category/{x}/ and /product/{x}/ — and the home page is 199 kB with 3 675 visible characters, so it looks like a real answer. Check final_url before believing a WooCommerce hit on this site. Also worth carrying forward: a Swedish shelf name can carry a range word ('Reserva') that the producer does not use at all.",
       "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "7043801",
+      "name": "Vibeyard Palhete",
+      "producer": "Vibeyard",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vibeyard.com/vinhos/vibeyard-palhete",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://vibeyard.pt/ — NXDOMAIN; the brand is at vibeyard.com",
+        "https://www.vibeyard.com/robots.txt — 404, absent, nothing disallowed",
+        "https://www.vibeyard.com/ (200, 20 kB) — the brand, venues in Lisbon and Barcelona, nine wines. terms: 0",
+        "https://www.vibeyard.com/vinhos/vibeyard-palhete (200, 10 kB, 1 143 visible chars) — the wine, headed 'VIBEYARD — Palhete (2024)'. terms: 1, and it is the 'Sulphites (Free/Total) 35 / 64 mg/L' row of the technical table"
+      ],
+      "evidence": "The strongest identity match in this batch, on five points: vintage in the page title (2024 = Systembolaget's 2024), grape variety (Fernão Pires, Trincadeira = Systembolaget's Fernão pires, Trincadeira), volume (0.75L = 750 ml), organic (the page prints the certificate number PT-BIO-02.620-0001069.2025.001 and Systembolaget flags the wine organic), and the Swedish price the brand itself advertises (259 kr against Systembolaget's 260). Alcohol 12,22 % against 12,0 %, inside the 0,5-point tolerance. There is no doubt this is the same bottle, and there is still no declaration on it.",
+      "rejected_because": null,
+      "not_found_because": "No ingredient list, no nutrition table, no energy value, no allergen statement, no e-label vendor and no QR. The technical table quantifies free and total sulphites in mg/L, which is a measurement and not a declaration.",
+      "robots_note": "vibeyard.com serves no robots.txt (404); four pages fetched.",
+      "note": "A BRAND THAT SELLS DIRECTLY INTO SYSTEMBOLAGET AND STILL PUBLISHES NO INGREDIENTS. Vibeyard's supplier is Bemakers ApS, a Danish D2C platform whose whole purpose is getting small producers onto the Nordic monopolies, and the brand's own site prints the Swedish price beside the Portuguese one. It publishes grape, region, alcohol, volume, organic certificate number, pH, residual sugar, total acidity, malic acid, volatile acidity and free/total SO2 — the full analytical panel — and no ingredient list. Two things follow. (1) The producer==supplier test returned zero in Portugal, but this is its near relative: a producer-operated D2C brand whose 'supplier' is a platform rather than an importer. Recognise Bemakers ApS and expect the producer's own site to be findable and complete on everything except the declaration. (2) The pages are 10 kB and fully server-rendered, which makes this the cheapest producer surface read in three countries.",
+      "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "7356001",
+      "name": "Vibeyard Vinho Verde",
+      "producer": "Vibeyard",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vibeyard.com/vinhos/vibeyard-vinho-verde",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.vibeyard.com/vinhos/vibeyard-vinho-verde (200, 10 kB) — headed 'VIBEYARD — Vinho Verde (2024)'. terms: 1, the 'Sulphites (Free/Total) 35 / 124 mg/L' row",
+        "plus the brand's home page and robots.txt as recorded on the Palhete"
+      ],
+      "evidence": "Vintage 2024 in the title matches; grapes Avesso and Arinto match Systembolaget's Arinto/Avesso; Minho, 0.75L, organic certificate PT-BIO-03.620-0002684.2025.001 against Systembolaget's organic flag; alcohol 12,6 % against 12,5 %; the brand's own Swedish price 259 kr against 260. Same bottle beyond doubt.",
+      "rejected_because": null,
+      "not_found_because": "No ingredient list, no nutrition, no energy value, no allergen line, no e-label vendor, no QR — only the analytical panel.",
+      "robots_note": "No robots.txt on the host (404).",
+      "note": null,
+      "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "7281201",
+      "name": "Vibeyard Vinho Verde Rosé",
+      "producer": "Vibeyard",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vibeyard.com/vinhos/vibeyard-vinho-verde-rose",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.vibeyard.com/vinhos/vibeyard-vinho-verde-rose (200, 10 kB) — headed 'VIBEYARD — Vinho Verde Rosé (2024)'. terms: 1, the 'Sulphites (Free/Total) 9 / 97 mg/L' row",
+        "plus the brand's home page and robots.txt as recorded on the Palhete"
+      ],
+      "evidence": "Vintage 2024 in the title matches; grapes Touriga Nacional and Vinhão match Systembolaget's; 0.75L; organic certificate printed; alcohol 13 % against Systembolaget's 12,5 %, which is exactly at the 0,5-point EU tolerance and so is noted rather than disqualifying — and it is moot, since no declaration was found.",
+      "rejected_because": null,
+      "not_found_because": "No ingredient list, no nutrition, no energy value, no allergen line, no e-label vendor, no QR.",
+      "robots_note": "No robots.txt on the host (404).",
+      "note": null,
+      "checked_at": "2026-09-14T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-14T21:09:42Z",
+  "updated_at": "2026-09-14T21:11:02Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -16944,6 +17018,11 @@
       "at": "2026-09-14T12:15:00Z",
       "batch": "6 — PORTUGAL, first producer: Márcio Lopes / Pequenos Rebentos (4 wines)",
       "result": "4 attempted, 0 found, 4 not found, in eight requests (two of them NXDOMAIN guesses). The estate is mlw.pt, not marciolopes.pt. Portugal's first near-miss shape is a WooCommerce 'Additional information' table carrying País/Região/Casta/Solo/Produção/Estágio/Engarrafamento/Álcool/Acidez/Açúcar Residual/pH/SO2 Livre/Ano Colheita — everything except an ingredient list. Three traps recorded: the table can state a DIFFERENT year from the page title (Atlântico: title 2024, table 'Ano 2022'); the pét-nat says 'sem adição de sulfuroso' and 'No SO2' and still declares nothing; and mlw.pt answers unknown product URLs with a 200 that redirects to the home page."
+    },
+    {
+      "at": "2026-09-14T12:35:00Z",
+      "batch": "6 — Portugal, second producer: Vibeyard (3 wines)",
+      "result": "3 attempted, 0 found, 3 not found, in four requests. vibeyard.pt is NXDOMAIN; the brand is vibeyard.com, server-rendered, 10 kB per page, no robots.txt. Identity was airtight on five points per wine — vintage in the title, grapes, 0.75L, the printed organic certificate number and the brand's own Swedish price (259 kr against Systembolaget's 260) — and every page carries a full analytical panel ending in 'Sulphites (Free/Total) xx / yyy mg/L' with no ingredient list. A brand that sells straight into Systembolaget through Bemakers ApS and still declares nothing."
     }
   ]
 }
