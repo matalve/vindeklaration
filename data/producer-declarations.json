@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "5 — SPAIN, batch 5 opened 2026-08-31, closing the Spanish pool. The pool has moved with the nightly refresh: it now stands at 95 wines at vintage 2024+ with declaration_status not_declared, of which 80 were already in this file, leaving 15 untouched wines across 15 single-wine producer strings. Batch 5 works those 15 and then, if budget remains, OPENS PORTUGAL (39 wines at vintage 2024+, no Portuguese estate in this file yet). Spain before batch 5: 61 producer strings, 81 wines, 1 found, 4 rejected, 76 not found. Carried forward: twelve Spanish fichas técnicas have been read and one held a mandated element, so a ficha is fetched only to date a wine; 'ficha alimentaria' is the opposite and is a real declaration; four of fifteen producers in batch 4 lived on a domain other than their name; and id.aecocescanqr.es answers 403 to everything, which is absolute.",
-  "attempted": 567,
+  "attempted": 568,
   "found": 33,
-  "not_found": 481,
+  "not_found": 482,
   "rejected": 53,
   "declarations": [
     {
@@ -16105,9 +16105,35 @@
       "robots_note": "bodegasgallegas.com is a named-crawler robots.txt with NO wildcard fallback group — the bpdr.com shape, decided 2026-08-08 — so nothing binds our token. bodegaalanis.com has an ordinary WordPress wildcard group; note it disallows '/*?' and '/page/', neither of which was needed.",
       "note": "TWO THINGS. (1) A NEW SPANISH NEAR-MISS SHAPE, and it is the most substance-rich one yet on a WEB PAGE rather than in a PDF: the wine page prints a full analytical panel — 'Grado alcohólico total: 12.5 % (v/v) / Extracto seco: 23.9 g/l / Acidez total: 5.8 g/l / Acidez volátil: 0.26 g/l / SULFUROSO TOTAL: 128 mg/l / Azúcares reductores: 3.5 g/l / Masa volumétrica a 20º: 0.9912 g/c.c.'. 'Sulfuroso total' is a MEASUREMENT of the finished wine, exactly as in Avgvstvs Forvm's ficha, and it is not a sulphite declaration; there is no ingredient list, no allergen sentence and no energy value beside it. A page can quantify SO2 to the milligram and still declare nothing. (2) THE 'alimentaria' FALSE POSITIVE, SECOND SIGHTING IN ONE DAY: 'Política de calidad y seguridad alimentaria' is reported as a declaration-shaped link on every page of bodegaalanis.com, as 'Política ambiental y alimentaria' is at Bodegas La Val. Spanish wine sites carry a food-safety policy in the footer as a matter of course, so the 'alimentaria' LINK_WORD needs a per-wine document name around it to mean anything.",
       "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "7500701",
+      "name": "Lagar de Besada",
+      "producer": "Lagar de Besada SL",
+      "country": "Spanien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://www.lagardebesada.com/producto/lagar-de-besada-albarino-2023/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.lagardebesada.com/robots.txt — stock WooCommerce wildcard group; nothing fetched is disallowed",
+        "https://www.lagardebesada.com/ (200, 352 kB) — the bodega in Rías Baixas, with a wine bar, a rural guesthouse and a spirits range. terms: 0. 'vendors_mentioned: gs1' and it is a FALSE POSITIVE — see note",
+        "https://www.lagardebesada.com/categoria/albarino/ (200, 498 kB) — five wines; the one we want is linked as 'Lagar de Besada Albariño 2025' at a slug ending -2023. terms: 0",
+        "https://www.lagardebesada.com/producto/lagar-de-besada-albarino-2023/ (200, 357 kB) — the product page, H1 and breadcrumb both 'Lagar de Besada Albariño 2025'. terms: 0. Description tab: Albariño 100%, D.O. Rías Baixas, ELABORACIÓN, NOTA DE CATA, SERVICIO Y MARIDAJE, and a 'FICHA DE PRODUCTO Descargar' link to /wp-content/uploads/2024/07/Lagar-de-Besada-2023.pdf — NOT FETCHED, see evidence"
+      ],
+      "evidence": "Producer and cuvée match exactly: the bodega's own shop sells one Lagar de Besada Albariño and the page's H1 says 2025, matching Systembolaget's 2025. The one document on the page is the wine's ficha de producto and it is dated ON ITS FACE to a different vintage — 'Lagar-de-Besada-2023.pdf' — so it cannot be the 2025's declaration whatever it contains, and no request was spent on it. Nothing else on the shop carries a declaration term.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on the bodega's own WooCommerce shop: no ingredient list, no nutrition, no energy value, no allergen line, no e-label vendor, no QR. The only document is a per-vintage ficha for the 2023, which is the wrong vintage and is a ficha de producto rather than a ficha alimentaria.",
+      "robots_note": "Stock WooCommerce robots.txt; three pages fetched, all allowed.",
+      "note": "TWO FINDINGS, ONE OF THEM CROSS-CUTTING. (1) CROSS-CUTTING GREP THAT LIES: src/probe.py reported 'vendors_mentioned: gs1' on all three pages of this site, and the hit is inside a GOOGLE FONTS URL — 'fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvW…' contains the substring 'Gs1'. Any site preloading Open Sans v34 woff2 files will report a GS1 vendor mention. This is not Spain-specific and will fire in every country. (2) The slug trap in its Spanish form again, and this time it also dates the document: the product URL ends '-albarino-2023', the page itself says 2025, and the attached PDF is the 2023's. A shop that edits one product in place year after year leaves the old vintage in the slug AND in the document while the heading rolls forward — so the document's filename is worth reading before spending a fetch on it, because it can decide the vintage question for free.",
+      "checked_at": "2026-09-14T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-14T20:58:44Z",
+  "updated_at": "2026-09-14T21:00:21Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -16679,6 +16705,11 @@
       "at": "2026-09-14T10:25:00Z",
       "batch": "5 — Spain, tail producer: Bodegas Gallegas (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in four requests across two of the group's own hosts. A four-bodega Galician group with a named-crawler robots.txt and no wildcard group (the bpdr.com reading, applied). The wine page prints a full analytical panel including 'Sulfuroso total: 128 mg/l' — a measurement, not a declaration — and states no vintage. Second sighting in one day of the 'seguridad alimentaria' footer policy as a false declaration-shaped link."
+    },
+    {
+      "at": "2026-09-14T10:45:00Z",
+      "batch": "5 — Spain, tail producer: Lagar de Besada (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in three requests. The bodega's own WooCommerce shop carries the wine at the right vintage (H1 '2025' against Systembolaget's 2025) and declares nothing; its only document is 'Lagar-de-Besada-2023.pdf', dated to the wrong vintage on its face, so no fetch was spent on it. CROSS-CUTTING: probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames ('memSYaGs126MiZpBA…'), which will happen in every country."
     }
   ]
 }
