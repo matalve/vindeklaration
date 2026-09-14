@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "5 — SPAIN, batch 5 opened 2026-08-31, closing the Spanish pool. The pool has moved with the nightly refresh: it now stands at 95 wines at vintage 2024+ with declaration_status not_declared, of which 80 were already in this file, leaving 15 untouched wines across 15 single-wine producer strings. Batch 5 works those 15 and then, if budget remains, OPENS PORTUGAL (39 wines at vintage 2024+, no Portuguese estate in this file yet). Spain before batch 5: 61 producer strings, 81 wines, 1 found, 4 rejected, 76 not found. Carried forward: twelve Spanish fichas técnicas have been read and one held a mandated element, so a ficha is fetched only to date a wine; 'ficha alimentaria' is the opposite and is a real declaration; four of fifteen producers in batch 4 lived on a domain other than their name; and id.aecocescanqr.es answers 403 to everything, which is absolute.",
-  "attempted": 563,
+  "attempted": 564,
   "found": 33,
-  "not_found": 477,
+  "not_found": 478,
   "rejected": 53,
   "declarations": [
     {
@@ -15998,9 +15998,36 @@
       "robots_note": "citizen.wine allows everything. The Dropbox folders were NOT fetched: the 2026-08-06 widening covers a file the producer's own page names as the declaration (Loewen's 'eLabels/Nährwerte & Zutaten'), and this page names its folders as bottle images, tech sheets and social-media assets. A marketing-asset folder on a general host is outside the exception, so dropbox.com keeps its robots.txt in full here.",
       "note": "THE DOWNLOAD-CENTRE PATTERN WITHOUT THE ELABEL WORD, and it is the case that decides how far the Dropbox widening reaches. citizen.wine has exactly the Loewen shape — a 'Downloads' page linking one Dropbox share folder per brand — but the producer's own description of what is in them is marketing assets and tech sheets, never eLabels or Nährwerte. Recognise 'Downloads' + 'tech sheets' as the NEGATIVE form of the pattern and do not spend the exception on it. Two further facts for a later run: the page also carries a private 'dropbox.com/home/CITIZEN WINE LTD/...' path, which is an account-internal URL behind a login and therefore absolute; and the WordPress site is carrying injected spam links to a betting site in its footer, which is a sign of a compromised install rather than anything about the wine.",
       "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "5743301",
+      "name": "Castillo de Teleborg Garnacha",
+      "producer": "BODEGAS MONASTERIO DE VERUELA S.L",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://cavamonasteriodeveruela.es/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.bodegasveruela.com/ — NXDOMAIN, does not resolve",
+        "web search — the bodega is in Ainzón, Campo de Borja, and its site is cavamonasteriodeveruela.es",
+        "https://cavamonasteriodeveruela.es/robots.txt — 500. Under the 2026-08-30 decision an unreachable robots.txt is a misconfiguration, not a refusal, and the probe proceeded",
+        "https://cavamonasteriodeveruela.es/ (500, 3,2 kB, 155 visible chars) — THE SITE ITSELF IS BROKEN: WordPress returns a 500 whose body is a fragment of the theme-admin screen ('Current theme … Montserrat … By Ninzio Team') with a second DOCTYPE spliced into it. No navigation, no wine pages, no links at all"
+      ],
+      "evidence": "Not established, and it could not be: the bodega's only site returns a 500 with no content, and the wine is in any case a Swedish private label — 'Teleborg' is a district of Växjö and the supplier is Uncorked Wines Sweden AB — so there is no reason to expect a cuvée page for it on the producer's own surface even when that surface works.",
+      "rejected_because": null,
+      "not_found_because": "The producer's site is returning a broken 500 with no readable content, so no declaration could be looked for. Closed on the outage, not on absence: a later run should retry cavamonasteriodeveruela.es before concluding anything about this producer.",
+      "robots_note": "robots.txt answered 500; proceeded under the 2026-08-30 decision that an unreachable robots.txt is a misconfiguration rather than a refusal. Exactly one page was then requested, and it was also a 500.",
+      "note": "A SWEDISH-NAMED OWN LABEL WITH A REAL SPANISH BODEGA BEHIND IT. 'Castillo de Teleborg' is named after a Växjö district, so this is an importer's private label for Uncorked Wines Sweden AB and not a wine the bodega sells under its own name. Add it to the producer==supplier family: the producer string is a genuine bodega, but the CUVÉE is the importer's, which is a second way the identity test dies in Spain. Note also that the bodega's own name and output are cava — the Systembolaget wine is a still garnacha.",
+      "fetch_result": "producer site returned HTTP 500 with a broken WordPress body",
+      "checked_at": "2026-09-14T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-14T20:54:19Z",
+  "updated_at": "2026-09-14T20:55:15Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -16552,6 +16579,11 @@
       "at": "2026-09-14T09:20:00Z",
       "batch": "5 — Spain, tail producer: Citizen Wine (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in three requests (one retried after an incomplete chunked read) and one search. A UK NÉGOCIANT BRAND, not a bodega: one page covers the Spanish Albariño and the Portuguese Alvarinho together, names no estate and states no vintage. Its 'Downloads' page is the Loewen Dropbox shape WITHOUT the eLabel word — 29 brand folders of bottle images and tech sheets — so the 2026-08-06 widening does not reach it and nothing on dropbox.com was fetched."
+    },
+    {
+      "at": "2026-09-14T09:35:00Z",
+      "batch": "5 — Spain, tail producer: Bodegas Monasterio de Veruela (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in two requests and one search. Closed on an OUTAGE, not absence: the guessable domain is NXDOMAIN and the real site, cavamonasteriodeveruela.es, answers 500 on both robots.txt and the home page with a broken WordPress body. The wine is also a Swedish private label ('Castillo de Teleborg' after a Växjö district), so the cuvée would not be expected on the bodega's own surface anyway."
     }
   ]
 }
