@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "5 — SPAIN, batch 5 opened 2026-08-31, closing the Spanish pool. The pool has moved with the nightly refresh: it now stands at 95 wines at vintage 2024+ with declaration_status not_declared, of which 80 were already in this file, leaving 15 untouched wines across 15 single-wine producer strings. Batch 5 works those 15 and then, if budget remains, OPENS PORTUGAL (39 wines at vintage 2024+, no Portuguese estate in this file yet). Spain before batch 5: 61 producer strings, 81 wines, 1 found, 4 rejected, 76 not found. Carried forward: twelve Spanish fichas técnicas have been read and one held a mandated element, so a ficha is fetched only to date a wine; 'ficha alimentaria' is the opposite and is a real declaration; four of fifteen producers in batch 4 lived on a domain other than their name; and id.aecocescanqr.es answers 403 to everything, which is absolute.",
-  "attempted": 571,
+  "attempted": 572,
   "found": 33,
-  "not_found": 485,
+  "not_found": 486,
   "rejected": 53,
   "declarations": [
     {
@@ -16210,9 +16210,36 @@
       "robots_note": "No host was reached; no robots.txt question arose.",
       "note": "THE SPANISH PROFILE THAT HAS NO SURFACE AT ALL. This is the first Spanish producer in this file closed without a single successful HTTP request: a small grower-project sold entirely through importers, with an Instagram-and-word-of-mouth presence and no domain. It is the cheapest possible close — three DNS failures and one search — and it is worth recognising early, because the search-result signature is distinctive: when the first ten results are ALL shops and databases and none is a producer domain, stop. Note also that Systembolaget's item is the BLANCO (Garnacha blanca); the wine every retailer describes is the red Garnacha under the same name, so even a retailer page would have been the wrong wine.",
       "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "9439601",
+      "name": "Veronica Ortega La LLorona",
+      "producer": "Veronica Ortega Camacho",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.veronicaortega.es/lallorona",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2023",
+      "market": "EU",
+      "sources_checked": [
+        "https://veronicaortega.com/ — TLS hostname mismatch; the certificate is not valid for that name. Under the 2026-08-30 decision only EXPIRY gets the unverified-channel fallback, so verification stayed on and the host was abandoned",
+        "https://www.veronicaortega.es/robots.txt — Wix's stock group ('Allow: /', 'Disallow: *?lightbox='); nothing fetched is disallowed",
+        "https://www.veronicaortega.es/ (200, 395 kB, 243 visible chars) — the estate, Wix, Carracedelo, Bierzo. terms: 0",
+        "https://www.veronicaortega.es/vino (200, 388 kB, 172 visible chars) — one page per wine, eleven of them, La Llorona among them. terms: 0",
+        "https://www.veronicaortega.es/lallorona (200, 360 kB, 1 534 visible chars) — the wine's own page. terms: 0. It states '100% Godello de grano pequeño … 7.351 botellas / 2023 / 12,5 % Vol.' and its whole text is about the 2023 harvest"
+      ],
+      "evidence": "Producer and cuvée match exactly — Bodega Verónica Ortega, Bierzo, publishes eleven wines and La Llorona is the small-berry Godello. THE VINTAGE DOES NOT: the estate's page is the 2023 ('2023 es la cuarta añada de este vino'), at 12,5 % vol, against Systembolaget's 2024 at 13,0 %. Both the year and the strength are the previous release, so the producer's surface is one vintage behind the shelf. No declaration was present to reject; had one been, this would have been a rejection.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on the estate's own site: no ingredient list, no nutrition, no energy value, no allergen line, no e-label vendor and no QR on any of the three pages read.",
+      "robots_note": "Wix robots.txt on the .es host, nothing relevant disallowed. The .com host was not fetched at all — a hostname mismatch is a claim about who answered, and stays absolute.",
+      "note": "A WIX ESTATE THAT IS NEVERTHELESS READABLE, which is worth knowing because Wix usually is not. The pages are 360–395 kB with 172–1 534 visible characters, so they look client-rendered, and the per-wine body text IS in the server response — the shell is Wix's, the copy is not. So do not close a Wix wine site on a low visible_chars count alone; read the wine page. The site also shows the Spanish 'producer behind the shelf' pattern for the third time in this batch (after Montecillo and Las Moradas): a tiny estate updates its page once per release and the Swedish shelf carries the newer wine.",
+      "checked_at": "2026-09-14T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-14T21:03:56Z",
+  "updated_at": "2026-09-14T21:04:51Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -16804,6 +16831,11 @@
       "at": "2026-09-14T11:30:00Z",
       "batch": "5 — Spain, tail producer: Vitícola Mentridana (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, with NO successful HTTP request: three candidate domains are NXDOMAIN and a search returns ten results of which every single one is a retailer, importer or database. The first Spanish producer in this file with no web surface at all — a distinctive and very cheap close."
+    },
+    {
+      "at": "2026-09-14T11:45:00Z",
+      "batch": "5 — Spain, tail producer: Verónica Ortega (1 wine) — CLOSES THE SPANISH TAIL",
+      "result": "1 attempted, 0 found, 1 not found, in three requests. The estate's Wix site carries a full per-wine text for La Llorona but it is the 2023 at 12,5 % vol against Systembolaget's 2024 at 13,0 % — the producer one vintage behind the shelf, for the third time in this batch. Worth remembering: a Wix wine page can be perfectly readable server-side even at 172 visible chars on the listing, so do not close Wix on visible_chars alone. veronicaortega.com serves a hostname-mismatched certificate and was left alone."
     }
   ]
 }
