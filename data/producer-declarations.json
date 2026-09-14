@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 572,
+  "attempted": 576,
   "found": 33,
-  "not_found": 486,
+  "not_found": 490,
   "rejected": 53,
   "declarations": [
     {
@@ -16237,9 +16237,112 @@
       "robots_note": "Wix robots.txt on the .es host, nothing relevant disallowed. The .com host was not fetched at all — a hostname mismatch is a claim about who answered, and stays absolute.",
       "note": "A WIX ESTATE THAT IS NEVERTHELESS READABLE, which is worth knowing because Wix usually is not. The pages are 360–395 kB with 172–1 534 visible characters, so they look client-rendered, and the per-wine body text IS in the server response — the shell is Wix's, the copy is not. So do not close a Wix wine site on a low visible_chars count alone; read the wine page. The site also shows the Spanish 'producer behind the shelf' pattern for the third time in this batch (after Montecillo and Las Moradas): a tiny estate updates its page once per release and the Swedish shelf carries the newer wine.",
       "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "9220901",
+      "name": "Marcio Lopes Pequenos Rebentos Alvarinho",
+      "producer": "Marcio Lopes",
+      "country": "Portugal",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://mlw.pt/en/product/pequenos-rebentos-alvarinho/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.marciolopes.pt/ and https://pequenosrebentos.pt/ — both NXDOMAIN; the estate is at mlw.pt (Márcio Lopes Winemaker)",
+        "https://mlw.pt/robots.txt — stock WooCommerce wildcard group; nothing fetched is disallowed",
+        "https://mlw.pt/en/product-category/pequenos-rebentos/ (200, 199 kB) — the range listing. terms: 0",
+        "https://mlw.pt/en/product/pequenos-rebentos-alvarinho/ (200, 191 kB) — the wine. terms: 0. Its 'Additional information' table is quoted in the note",
+        "https://mlw.pt/en/loja/ (200, 198 kB) — the shop, 44 products. terms: 0",
+        "https://mlw.pt/en/portfolio/ (200, 169 kB) — 'Our Wines', four regions, no per-wine documents at all. terms: 0"
+      ],
+      "evidence": "Producer, cuvée and vintage all match: the page is headed 'Pequenos Rebentos Alvarinho 2025' and its own data table says 'Ano Colheita 2025' with 'Engarrafamento Janeiro 2026' and 'Álcool 13%', against Systembolaget's 2025 at 13,0 % vol — year and strength both exact. Nothing was left to reject; there is no declaration.",
+      "rejected_because": null,
+      "not_found_because": "No ingredient list, no nutrition table, no energy value, no allergen statement, no e-label vendor and no QR anywhere on the estate's site. What the page does carry is an analytical table — see note.",
+      "robots_note": "Stock WooCommerce robots.txt on mlw.pt; six pages fetched across the producer's four wines, all allowed.",
+      "note": "PORTUGAL'S FIRST NEAR-MISS SHAPE, and it is the richest analytical table this project has seen on a shop page: WooCommerce's 'Additional information' tab is filled with País, Região, Proveniência, Casta, Solo, Produção, Garrafas, Estágio, Engarrafamento, Álcool, Acidez Total, Açúcar Residual, pH, SO2 LIVRE (35 mg/L here) and Ano Colheita. It dates the wine to the month and quantifies free SO2 to the milligram — and there is no ingredient row, no allergen sentence and no energy value. Like Bodegas Gallegas' panel in Spain, 'SO2 Livre' is a MEASUREMENT and not a sulphite declaration. Note for matching, though: this table is the best vintage evidence seen in Portugal so far, since it gives both the harvest year and the bottling month.",
+      "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "9133001",
+      "name": "Marcio Lopes Pequenos Rebentos Atlantico",
+      "producer": "Marcio Lopes",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://mlw.pt/en/product/pequenos-rebentos-atlantico/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://mlw.pt/en/product/pequenos-rebentos-atlantico/ (200, 190 kB) — the wine, headed 'Pequenos Rebentos Atlântico 2024'. terms: 0",
+        "plus the five other mlw.pt pages listed on this producer's other records"
+      ],
+      "evidence": "Producer and cuvée match and the page's heading says 2024, matching Systembolaget's 2024. BUT THE PAGE DISAGREES WITH ITSELF: its 'Additional information' table says 'Ano 2022' and 'Engarrafamento Junho 2023', i.e. the table was never updated when the product was rolled forward. No declaration was present, so nothing had to be decided — but had one been, this page could not have supported it, because the only structured data on it describes a different vintage from its own title.",
+      "rejected_because": null,
+      "not_found_because": "No ingredient list, no nutrition, no energy value, no allergen line, no e-label vendor and no QR on the producer's site.",
+      "robots_note": "Stock WooCommerce robots.txt; allowed.",
+      "note": "THE SHOP'S OWN VINTAGE FIELD LIES, PORTUGUESE EDITION — and here it is not the slug but the DATA TABLE that is stale, while the title is current. Thanisch and Bunan had the title current and the slug stale; this is the same trap one layer deeper, and it matters more, because the table is exactly the surface a run would trust for identity. The rule that follows: where a Portuguese WooCommerce page states a year in two places, they may be two different years, and the ONLY safe reading is one that agrees with both the heading and the bottling date.",
+      "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "9017801",
+      "name": "Pequenos Rebentos Ancestral Pet Nat",
+      "producer": "Marcio Lopes",
+      "country": "Portugal",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://mlw.pt/en/product/pequenos-rebentos-ancestral-pet-nat/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://mlw.pt/en/product/pequenos-rebentos-ancestral-pet-nat/ (200, 188 kB) — the wine, headed 'Pequenos Rebentos Ancestral Pét Nat 2025'. terms: 0",
+        "plus the five other mlw.pt pages listed on this producer's other records"
+      ],
+      "evidence": "Producer, cuvée and vintage match: heading 'Ancestral Pét Nat 2025', table 'Ano 2025', 'Álcool 12,5%', 100% Loureiro, Minho — against Systembolaget's 2025 sparkling at 12,0 % vol. The 0,5-point alcohol difference is exactly at the EU labelling tolerance and would have been noted rather than fatal. No declaration was present.",
+      "rejected_because": null,
+      "not_found_because": "No ingredient list, no nutrition, no energy value, no allergen line, no e-label vendor and no QR.",
+      "robots_note": "Stock WooCommerce robots.txt; allowed.",
+      "note": "THE WINE WHOSE PAGE SAYS MOST ABOUT SULPHUR AND DECLARES NOTHING. The vinification text reads '…foi engarrafado, SEM ADIÇÃO DE SULFUROSO e sem filtragem, terminando a fermentação em garrafa' and the data table's SO2 Livre row reads 'No SO2'. That is a no-added-sulphite claim in two places — the Portuguese form of the Els Vinyerons near-miss — and it is still not an ingredient list. A pét-nat producer who says 'no SO2' twice on one page and publishes no declaration is the strongest single piece of evidence that the absence here is editorial rather than ignorance of the subject.",
+      "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "9433801",
+      "name": "Márcio Lopes Permitido Branco Reserva",
+      "producer": "Marcio Lopes",
+      "country": "Portugal",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://mlw.pt/en/loja/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://mlw.pt/en/product-category/permitido/ (200) — SOFT 404: served the home page, so the Permitido range has no category of its own",
+        "https://mlw.pt/en/product/permitido-branco-reserva/ (200) — SOFT 404 as well, 301 to https://mlw.pt/. The cuvée has no page at that slug",
+        "https://mlw.pt/en/loja/ (200, 198 kB) — the shop's first page of 44 products; the only Permitido reachable from the site is 'Permitido Branco Rabigato 2024' (/en/product/permitido-branco-rabigato-2024/), a different cuvée and a different vintage",
+        "https://mlw.pt/en/portfolio/ (200, 169 kB) — the range overview by region; no per-wine pages and no documents",
+        "plus the three Pequenos Rebentos product pages listed on this producer's other records, all terms: 0"
+      ],
+      "evidence": "Producer matches — Márcio Lopes' Douro brand is Permitido, and Systembolaget's item is a Douro white of Arinto/Gouveio/Rabigato/Viosinho. THE CUVÉE COULD NOT BE MATCHED: the estate's site publishes 'Permitido Branco Rabigato 2024', a single-variety Rabigato of the previous vintage, and no 'Permitido Branco Reserva' at all. A four-variety Reserva and a varietal Rabigato are different wines, so nothing here could have been attributed to this bottle even if a declaration had been present.",
+      "rejected_because": null,
+      "not_found_because": "The specific cuvée has no page on the producer's site (two soft 404s and an exhaustive look at the shop listing and the portfolio), and the site as a whole carries no declaration on any of its six pages read.",
+      "robots_note": "Stock WooCommerce robots.txt; allowed. The two soft 404s are the site's own 301-to-home behaviour, not a refusal.",
+      "note": "A SOFT 404 HERE IS A 200 THAT REDIRECTS TO THE HOME PAGE, on both /product-category/{x}/ and /product/{x}/ — and the home page is 199 kB with 3 675 visible characters, so it looks like a real answer. Check final_url before believing a WooCommerce hit on this site. Also worth carrying forward: a Swedish shelf name can carry a range word ('Reserva') that the producer does not use at all.",
+      "checked_at": "2026-09-14T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-14T21:05:16Z",
+  "updated_at": "2026-09-14T21:09:42Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -16836,6 +16939,11 @@
       "at": "2026-09-14T11:45:00Z",
       "batch": "5 — Spain, tail producer: Verónica Ortega (1 wine) — CLOSES THE SPANISH TAIL",
       "result": "1 attempted, 0 found, 1 not found, in three requests. The estate's Wix site carries a full per-wine text for La Llorona but it is the 2023 at 12,5 % vol against Systembolaget's 2024 at 13,0 % — the producer one vintage behind the shelf, for the third time in this batch. Worth remembering: a Wix wine page can be perfectly readable server-side even at 172 visible chars on the listing, so do not close Wix on visible_chars alone. veronicaortega.com serves a hostname-mismatched certificate and was left alone."
+    },
+    {
+      "at": "2026-09-14T12:15:00Z",
+      "batch": "6 — PORTUGAL, first producer: Márcio Lopes / Pequenos Rebentos (4 wines)",
+      "result": "4 attempted, 0 found, 4 not found, in eight requests (two of them NXDOMAIN guesses). The estate is mlw.pt, not marciolopes.pt. Portugal's first near-miss shape is a WooCommerce 'Additional information' table carrying País/Região/Casta/Solo/Produção/Estágio/Engarrafamento/Álcool/Acidez/Açúcar Residual/pH/SO2 Livre/Ano Colheita — everything except an ingredient list. Three traps recorded: the table can state a DIFFERENT year from the page title (Atlântico: title 2024, table 'Ano 2022'); the pét-nat says 'sem adição de sulfuroso' and 'No SO2' and still declares nothing; and mlw.pt answers unknown product URLs with a 200 that redirects to the home page."
     }
   ]
 }
