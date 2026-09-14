@@ -58,6 +58,10 @@ TERMS = [
     "ingredienzen", "zutaten", "zutatenliste", "ingredience",
     "allergen", "allergene", "allergeni", "allergenes", "alergenos",
     "allergener", "allergeni",
+    # Portugal, 2026-09-14: Portuguese spells the allergen with an -io- and
+    # `alergenos` does not match it, exactly as `alergen` does not match
+    # Catalan's `al*lergens`.
+    "alergenio", "alergenico",
     "sulfit", "sulphit", "solfiti", "sulfitos", "sulfits", "sulfiti",
     "nutrition", "nutrizional", "nutricional", "nahrwert", "naehrwert",
     "nutritionnel", "narings", "naringsvarde",
@@ -81,6 +85,10 @@ LINK_WORDS = {
     "nahrwerte", "declaration", "dichiarazione", "declaracion",
     "scheda", "schedatecnica", "fichatecnica", "fichetechnique",
     "downloadcenter", "elabels",
+    # Portugal, 2026-09-14: the e-label is a `rotulo eletronico` and the
+    # anchor is often the bare word `rotulo`. It is the Portuguese `etiqueta`
+    # and carries the same ambiguity: it can also point at a label IMAGE.
+    "rotulo", "rotulos", "erotulo",
     # Spain, 2026-08-31: `ficha alimentaria` is the food-information sheet and
     # is a real declaration, where `ficha tecnica` is a tasting sheet and never
     # is. Otxaran's anchor text was only `Descargar`, so the filename was the
