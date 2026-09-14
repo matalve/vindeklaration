@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "5 — SPAIN, batch 5 opened 2026-08-31, closing the Spanish pool. The pool has moved with the nightly refresh: it now stands at 95 wines at vintage 2024+ with declaration_status not_declared, of which 80 were already in this file, leaving 15 untouched wines across 15 single-wine producer strings. Batch 5 works those 15 and then, if budget remains, OPENS PORTUGAL (39 wines at vintage 2024+, no Portuguese estate in this file yet). Spain before batch 5: 61 producer strings, 81 wines, 1 found, 4 rejected, 76 not found. Carried forward: twelve Spanish fichas técnicas have been read and one held a mandated element, so a ficha is fetched only to date a wine; 'ficha alimentaria' is the opposite and is a real declaration; four of fifteen producers in batch 4 lived on a domain other than their name; and id.aecocescanqr.es answers 403 to everything, which is absolute.",
-  "attempted": 570,
+  "attempted": 571,
   "found": 33,
-  "not_found": 484,
+  "not_found": 485,
   "rejected": 53,
   "declarations": [
     {
@@ -16184,9 +16184,35 @@
       "robots_note": "Stock WooCommerce robots.txt served from the apex although the WordPress install lives under /larioja/; nothing fetched is disallowed.",
       "note": "THE DOCUMENT FILENAME AGAIN DECIDES THE VINTAGE FOR FREE, second time today after Lagar de Besada: 'LN20_ING.pdf' is the La Nave 2020's sheet and the shelf wine is the 2025, so no fetch was needed to close the question. Where a Spanish estate names its documents {cuvée}{yy}_{lang}.pdf, the vintage test can be run on the href alone. Also a fourth Spanish domain trap in one batch: macrobertcanals.com does not resolve and the estate is macrobertandcanals.com.",
       "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "9431001",
+      "name": "El Mentridano Blanco Vitícola Mentridana",
+      "producer": "Vitícola Mentridana",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": null,
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.viticolamentridana.com/ — NXDOMAIN",
+        "https://mentridana.com/ — NXDOMAIN",
+        "https://elmentridano.com/ — NXDOMAIN",
+        "web search for 'Vitícola Mentridana El Mentridano bodega Méntrida' — ten results, every one of them a retailer, an importer or a wine database (MoVida, Vivino, Winepilot, CellarTracker, Thatcher's, VinoNueva, Manhattan Wine Co, Decántalo, European Cellars, Tannico). NO PRODUCER-OWNED DOMAIN APPEARS AT ALL"
+      ],
+      "evidence": "The project was identified — Vitícola Mentridana is Curro Barreño's Méntrida venture on former Dani Landi plots in the Valle del Alberche — but it has no web surface of its own that any search or domain guess reached, so no identity test could be run against a producer page and no vintage could be confirmed. Every page that names the wine is a retailer's, and under the agent's third rule a retailer's transcription is not a source.",
+      "rejected_because": null,
+      "not_found_because": "The producer appears to have no website. Three plausible domains do not resolve and a search returns only retailers, importers and wine databases. With no producer-owned surface there is nowhere for a declaration or an e-label link to live, and nothing was fetched beyond the failed DNS lookups.",
+      "robots_note": "No host was reached; no robots.txt question arose.",
+      "note": "THE SPANISH PROFILE THAT HAS NO SURFACE AT ALL. This is the first Spanish producer in this file closed without a single successful HTTP request: a small grower-project sold entirely through importers, with an Instagram-and-word-of-mouth presence and no domain. It is the cheapest possible close — three DNS failures and one search — and it is worth recognising early, because the search-result signature is distinctive: when the first ten results are ALL shops and databases and none is a producer domain, stop. Note also that Systembolaget's item is the BLANCO (Garnacha blanca); the wine every retailer describes is the red Garnacha under the same name, so even a retailer page would have been the wrong wine.",
+      "checked_at": "2026-09-14T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-14T21:03:07Z",
+  "updated_at": "2026-09-14T21:03:56Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -16773,6 +16799,11 @@
       "at": "2026-09-14T11:20:00Z",
       "batch": "5 — Spain, tail producer: MacRobert & Canals (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in two requests and one search. macrobertcanals.com is NXDOMAIN; the estate is macrobertandcanals.com. Its WooCommerce page for La Nave carries no vintage and no declaration; the only document, 'LN20_ING.pdf', is the 2020's tasting notes and was closed on its filename without a fetch — the second time today a Spanish document name settled the vintage for free."
+    },
+    {
+      "at": "2026-09-14T11:30:00Z",
+      "batch": "5 — Spain, tail producer: Vitícola Mentridana (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, with NO successful HTTP request: three candidate domains are NXDOMAIN and a search returns ten results of which every single one is a retailer, importer or database. The first Spanish producer in this file with no web surface at all — a distinctive and very cheap close."
     }
   ]
 }
