@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "5 — SPAIN, batch 5 opened 2026-08-31, closing the Spanish pool. The pool has moved with the nightly refresh: it now stands at 95 wines at vintage 2024+ with declaration_status not_declared, of which 80 were already in this file, leaving 15 untouched wines across 15 single-wine producer strings. Batch 5 works those 15 and then, if budget remains, OPENS PORTUGAL (39 wines at vintage 2024+, no Portuguese estate in this file yet). Spain before batch 5: 61 producer strings, 81 wines, 1 found, 4 rejected, 76 not found. Carried forward: twelve Spanish fichas técnicas have been read and one held a mandated element, so a ficha is fetched only to date a wine; 'ficha alimentaria' is the opposite and is a real declaration; four of fifteen producers in batch 4 lived on a domain other than their name; and id.aecocescanqr.es answers 403 to everything, which is absolute.",
-  "attempted": 566,
+  "attempted": 567,
   "found": 33,
-  "not_found": 480,
+  "not_found": 481,
   "rejected": 53,
   "declarations": [
     {
@@ -16078,9 +16078,36 @@
       "robots_note": "delampa.es serves the stock WooCommerce robots.txt; all four pages fetched are allowed.",
       "note": "THE WOOCOMMERCE ADDITIONAL-INFORMATION TAB IS NOW 0 FOR 3 IN SPAIN (Bodegas Habla, Las Moradas' range page and this one). Where an Italian WooCommerce shop often carries an 'Informazioni aggiuntive' or a dedicated declaration tab, the Spanish ones seen so far carry a tasting-note block instead — COLOR / AROMA / BOCA here — and stop there. Also worth noting: this shop sells 23 wines at 4,50–9,50 € and is the bodega's own direct-to-consumer channel, so the absence is not a question of the estate having no e-commerce surface to hang a declaration on.",
       "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "7451201",
+      "name": "Bodegas Gallegas Gran Alanis",
+      "producer": "Bodegas Gallegas",
+      "country": "Spanien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://www.bodegasgallegas.com/vino/gran-alanis/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.bodegasgallegas.com/robots.txt — NAMED GROUPS ONLY (19 of them: AhrefsBot, SemrushBot and its eight variants, MJ12bot, PetalBot, DotBot, Baiduspider, Barkrowler, Xenu…), no 'User-agent: *' group. Under the 2026-08-08 policy no rule binds our token and nothing is disallowed",
+        "https://www.bodegasgallegas.com/ (200, 275 kB) — the group: four bodegas (Bodega Alanís, Bodegas Milenium, Rectoral de Amandi, Rectoral do Umia), 14 wines. terms: 0",
+        "https://www.bodegasgallegas.com/vino/gran-alanis/ (200, 189 kB) — the wine, D.O. Ribeiro, Bodega Alanís, 85% Treixadura / 15% Godello. terms: 0. Carries an analytical panel (see note) but no ingredient list and no year",
+        "http://www.bodegaalanis.com/ (200, 60 kB, 301 to https) — the sub-bodega's own site, linked from the group page; six wines. terms: 0",
+        "https://bodegaalanis.com/nuestros-vinos/gran-alanis/ (200, 62 kB) — the same wine on the bodega's own site. terms: 0, no declaration-shaped link beyond the site-wide quality policy"
+      ],
+      "evidence": "Producer and cuvée match on two of the group's own surfaces: Gran Alanís is a D.O. Ribeiro white of 85% Treixadura / 15% Godello, and Systembolaget's record is a Galician white of Treixadura and Godello at 12,5 % vol against the page's 'Grado alcohólico total: 12.5 % (v/v)' — an exact alcohol match, which is the fifth Spanish case of the alcohol test passing with nothing to attach. THE VINTAGE COULD NOT BE TESTED: neither page states a year for the bottling, and the only years present are in the awards list (añadas 2021, 2023, 2024), so Systembolaget's 2025 had nothing to check against.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on either of the producer's surfaces: no ingredient list, no nutrition table, no energy value, no allergen statement, no e-label vendor and no QR.",
+      "robots_note": "bodegasgallegas.com is a named-crawler robots.txt with NO wildcard fallback group — the bpdr.com shape, decided 2026-08-08 — so nothing binds our token. bodegaalanis.com has an ordinary WordPress wildcard group; note it disallows '/*?' and '/page/', neither of which was needed.",
+      "note": "TWO THINGS. (1) A NEW SPANISH NEAR-MISS SHAPE, and it is the most substance-rich one yet on a WEB PAGE rather than in a PDF: the wine page prints a full analytical panel — 'Grado alcohólico total: 12.5 % (v/v) / Extracto seco: 23.9 g/l / Acidez total: 5.8 g/l / Acidez volátil: 0.26 g/l / SULFUROSO TOTAL: 128 mg/l / Azúcares reductores: 3.5 g/l / Masa volumétrica a 20º: 0.9912 g/c.c.'. 'Sulfuroso total' is a MEASUREMENT of the finished wine, exactly as in Avgvstvs Forvm's ficha, and it is not a sulphite declaration; there is no ingredient list, no allergen sentence and no energy value beside it. A page can quantify SO2 to the milligram and still declare nothing. (2) THE 'alimentaria' FALSE POSITIVE, SECOND SIGHTING IN ONE DAY: 'Política de calidad y seguridad alimentaria' is reported as a declaration-shaped link on every page of bodegaalanis.com, as 'Política ambiental y alimentaria' is at Bodegas La Val. Spanish wine sites carry a food-safety policy in the footer as a matter of course, so the 'alimentaria' LINK_WORD needs a per-wine document name around it to mean anything.",
+      "checked_at": "2026-09-14T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-14T20:57:14Z",
+  "updated_at": "2026-09-14T20:58:44Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -16647,6 +16674,11 @@
       "at": "2026-09-14T10:05:00Z",
       "batch": "5 — Spain, tail producer: Bodegas Delampa (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in four requests. bodegasdelampa.com is NXDOMAIN; the bodega is delampa.es (Jumilla), a WooCommerce shop of 23 wines with the exact cuvée on it. The product page carries a COLOR/AROMA/BOCA tasting block and nothing else — no vintage, no alcohol, no tab, no documents. The Spanish WooCommerce declaration tab is now 0 for 3."
+    },
+    {
+      "at": "2026-09-14T10:25:00Z",
+      "batch": "5 — Spain, tail producer: Bodegas Gallegas (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in four requests across two of the group's own hosts. A four-bodega Galician group with a named-crawler robots.txt and no wildcard group (the bpdr.com reading, applied). The wine page prints a full analytical panel including 'Sulfuroso total: 128 mg/l' — a measurement, not a declaration — and states no vintage. Second sighting in one day of the 'seguridad alimentaria' footer policy as a false declaration-shaped link."
     }
   ]
 }
