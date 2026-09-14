@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "5 — SPAIN, batch 5 opened 2026-08-31, closing the Spanish pool. The pool has moved with the nightly refresh: it now stands at 95 wines at vintage 2024+ with declaration_status not_declared, of which 80 were already in this file, leaving 15 untouched wines across 15 single-wine producer strings. Batch 5 works those 15 and then, if budget remains, OPENS PORTUGAL (39 wines at vintage 2024+, no Portuguese estate in this file yet). Spain before batch 5: 61 producer strings, 81 wines, 1 found, 4 rejected, 76 not found. Carried forward: twelve Spanish fichas técnicas have been read and one held a mandated element, so a ficha is fetched only to date a wine; 'ficha alimentaria' is the opposite and is a real declaration; four of fifteen producers in batch 4 lived on a domain other than their name; and id.aecocescanqr.es answers 403 to everything, which is absolute.",
-  "attempted": 561,
+  "attempted": 562,
   "found": 33,
-  "not_found": 475,
+  "not_found": 476,
   "rejected": 53,
   "declarations": [
     {
@@ -15944,9 +15944,37 @@
       "robots_note": "WooCommerce robots.txt; everything fetched is allowed.",
       "note": "A NEW SPANISH NEAR-MISS, in prose: the range page discusses 'el uso de sulfuroso como conservante en los vinos … actúan por sí mismos como conservantes naturales y nos permite limitar su uso'. The probe reports it as a 'conservante' hit and it is a winemaking-philosophy paragraph, not a declaration — the sulphite-as-process near-miss in its third Spanish form after 'sulfitado' and 'Contiene sulfitos'.",
       "checked_at": "2026-08-31T19:45:00Z"
+    },
+    {
+      "product_number": "2009501",
+      "name": "La Val Albariño",
+      "producer": "Bodegas La Val",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://bodegaslaval.com/vinos/la-val-albarino/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://bodegaslaval.com/robots.txt — wildcard group with a bare 'Disallow:'; nothing disallowed",
+        "https://bodegaslaval.com/ (200, 68 kB) — the estate in Salvaterra de Miño, Rías Baixas. terms: 0. Its only declaration-shaped link is the site-wide 'Política ambiental y alimentaria' (see note)",
+        "https://bodegaslaval.com/vinos/ (200) — six wines, one of them 'La Val Albariño'. terms: 0",
+        "https://bodegaslaval.com/vinos/la-val-albarino/ (200, 63 kB) — the product page. terms: 0. FICHA TÉCNICA block gives Nombre del Vino / Bodega / Zona de Producción / Cosecha 2024 / Variedad. Links 'FICHAS DE CATA 2024 2023' (tasting sheets, not fetched under the Spanish ficha rule) and 'DESCARGAR IMAGEN ETIQUETA'",
+        "https://bodegaslaval.com/wp-content/uploads/2024/06/La-Val-Albarino.png (200, 41 kB) — the label image, decoded for QR and barcodes: none found, upscale included. terms: 0",
+        "https://tienda.cvne.com/es/rias-baixas/586-la-val-albarino.html (200, 363 kB, 301 to /es/productos/342-la-val-albarino.html) — the CVNE group's own PrestaShop, which the estate links as its shop. terms: 0, no declaration-shaped link"
+      ],
+      "evidence": "Producer, cuvée and VINTAGE all match: the estate's own product page states 'Cosecha 2024' in its ficha técnica block against Systembolaget's 2024, and La Val Albariño is a single cuvée (the estate's other wines are Arantei, Condado do Tea, Gran Añada, Finca Taboexa and Orballo). Nothing was left to reject; there is simply no declaration on any of the six surfaces read.",
+      "rejected_because": null,
+      "not_found_because": "No ingredient list, no nutrition table, no energy value, no allergen statement, no e-label vendor and no QR destination — neither on the estate's site nor on the group shop. The downloadable label image carries no QR or barcode at all.",
+      "robots_note": "bodegaslaval.com: wildcard group, bare 'Disallow:', nothing disallowed. tienda.cvne.com: a long PrestaShop wildcard group disallowing cart/account/search controllers and the framework directories; the product URL fetched is allowed.",
+      "note": "TWO THINGS FOR THE NEXT SPANISH RUN. (1) 'Política ambiental y alimentaria' is a CORPORATE POLICY PAGE and it is reported as a declaration-shaped link on every page of the site, because 'alimentaria' entered src/probe.py's LINK_WORDS after Bodegas Virgen de Lorea's real 'ficha alimentaria'. The word is only a tell inside a per-wine document name; in a site-wide footer it is a food-safety policy. (2) THE LARGE-GROUP HYPOTHESIS GETS ITS FIRST TEST AND FAILS: Bodegas La Val belongs to CVNE, one of the biggest Rioja houses, and neither the estate site nor the group's own PrestaShop (tienda.cvne.com, 363 kB of product page) carries a single declaration term.",
+      "checked_at": "2026-09-14T00:00:00Z"
     }
   ],
-  "updated_at": "2026-08-31T19:45:00Z",
+  "updated_at": "2026-09-14T20:52:22Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -16488,6 +16516,11 @@
       "at": "2026-08-31T16:45:00Z",
       "batch": "4d — SPAIN, fourth batch: Cortijo Los Aguilares, Avgvstvs Forvm, Can Descregut, Bodegas As Laxas, Adega Pazo do Mar, HGA Bodegas, Pazo Pondal, Forjas del Salnes, Ramon do Casar, Bodegas Enrique Mendoza, Bodegas Sanz, Bodegas Malaga Virgen, Bodegas Felix Callejo, Txomin Etxaniz, Okendo Txakolina, Bodegas Virgen de Lorea, Egarri, Bodegas Pinna Fidelis, Meraven; plus a revisit of Marques de Caceres with the probe's new QR decoding",
       "result": "19 attempted, 0 found, 18 not found, 1 rejected; 1 revisit re-closed without a status change. No record rests on OCR."
+    },
+    {
+      "at": "2026-09-14T09:00:00Z",
+      "batch": "5 — Spain, tail producer: Bodegas La Val (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in six requests. Vintage matched exactly (Cosecha 2024) and there was still nothing to attach. FIRST TEST OF THE LARGE-GROUP HYPOTHESIS: La Val is CVNE, and neither bodegaslaval.com nor tienda.cvne.com carries a declaration term. Also: the site-wide footer link 'Política ambiental y alimentaria' is a false positive on probe.py's new 'alimentaria' LINK_WORD."
     }
   ]
 }
