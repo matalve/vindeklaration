@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 582,
+  "attempted": 584,
   "found": 33,
-  "not_found": 496,
+  "not_found": 498,
   "rejected": 53,
   "declarations": [
     {
@@ -16486,9 +16486,63 @@
       "robots_note": "Wix robots.txt, nothing relevant disallowed.",
       "note": null,
       "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "5610901",
+      "name": "Vallado Douro Red",
+      "producer": "Quinta do Vallado",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.quintadovallado.com/pt/vinhos/vinhos/Tinto/70/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.quintadovallado.com/robots.txt — one wildcard group disallowing /manutencao/ only",
+        "https://www.quintadovallado.com/ (200, 67 kB, 301 to /pt/) — the estate, Peso da Régua, Douro. terms: 0",
+        "https://www.quintadovallado.com/pt/vinhos/vinhos/ (200, 83 kB) — the range. terms: 0",
+        "https://www.quintadovallado.com/pt/vinhos/vinhos/Tinto/70/ (200, 93 kB) — the wine, with a per-vintage 'Ficha técnica' selector offering 2020, 2021, 2022, 2023 and 2024. terms: 0",
+        "https://www.quintadovallado.com/xms/files/Fichas_Tecnicas/06_Vallado_Tinto/20251027_Vallado_Tinto_2024_Geral.pdf (200, 153 kB, pdf_text_chars 3 246) — THE 2024'S OWN TECHNICAL SHEET, read in full through its text layer. terms: 0",
+        "https://www.quintadovallado.com/pt/loja/comprar/Tinto/70/ (200, 84 kB) — the estate's own shop page for the same wine. terms: 0"
+      ],
+      "evidence": "Producer, cuvée and vintage all match exactly. The estate publishes one wine called simply Vallado Tinto, and its own 2024 ficha states 'Colheita | 2024' and 'Álcool (%) | 13,5' against Systembolaget's 2024 at 13,5 % vol — year and strength both exact, and the sheet is dated 2025-10-27 in its filename, so it is the current release. Nothing was left to reject.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on any of the estate's four surfaces for this wine — the range page, the wine page, the shop page or the wine's own 2024 technical sheet. No ingredient list, no allergen statement, no nutrition table, no energy value, no e-label vendor and no QR.",
+      "robots_note": "One wildcard group disallowing /manutencao/; everything fetched is allowed.",
+      "note": "THE PORTUGUESE FICHA TÉCNICA IS TESTED FOR THE FIRST TIME, AND IT IS THE SPANISH ONE. Quinta do Vallado is the best-organised document publisher yet seen in Portugal: one PDF per wine PER VINTAGE, in a predictable tree at /xms/files/Fichas_Tecnicas/{nn}_{Wine}/{nn}._{Wine}_{year}.pdf, with the newest release switching to a dated 'Geral' filename ({yyyymmdd}_{Wine}_{year}_Geral.pdf). The 2024 sheet was read in full and holds INFORMAÇÕES GERAIS (país, castas, região, sub-região, tipo, COLHEITA, enólogos, bottles produced per format), NOTAS DE PROVA, VINIFICAÇÃO, ESTÁGIO, ANÁLISES (álcool, pH, acidez total, açúcar residual) and a serving temperature. NO ingredient list, NO allergen sentence, NO nutrition, NO energy value — and, unlike the Spanish analytical panels, not even an SO2 figure. So the Portuguese ficha técnica takes the same rule as the Spanish one: fetch it to DATE a wine, never to find a declaration. It is very good at dating: this one names the harvest year, the bottle formats and its own issue date.",
+      "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "5609201",
+      "name": "Vallado Prima Branco",
+      "producer": "Quinta do Vallado",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.quintadovallado.com/pt/vinhos/vinhos/Prima/75/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.quintadovallado.com/pt/vinhos/vinhos/categoria/Branco/40/ (200, 75 kB) — the white range: Alvarinho, Alvor, Branco, Douro Superior Branco, PRIMA, Reserva Branco, Três Melros Branco. terms: 0",
+        "https://www.quintadovallado.com/pt/vinhos/vinhos/Prima/75/ (200, 88 kB) — the wine, 100% Moscatel Galego Branco, dry. terms: 0. It links its fichas técnicas for 2021, 2022, 2023, 2024 and a 2025 ('Ficha_Tecnica_-_PR25_-Geral_PT-.pdf')",
+        "the 2024 ficha was NOT fetched — the sibling wine's 2024 ficha had just been read in full from the same document tree and contains no mandated element at all; see the Vallado Douro Red record",
+        "plus the estate's home page, range page and robots.txt as recorded on the Vallado Douro Red"
+      ],
+      "evidence": "Producer, cuvée and vintage match: the estate publishes one Prima, a dry 100% Moscatel Galego Branco — matching Systembolaget's Moscatel galego white — and its own document list holds a Prima Branco 2024 ficha, so the 2024 exists as a release. Systembolaget's wine is the 2024.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on the estate's white range page or the wine's own page, and the per-vintage ficha for this range was established to be a technical sheet with no mandated element by reading the sibling wine's 2024 edition in full.",
+      "robots_note": "Same host, everything fetched allowed.",
+      "note": "A SIBLING'S DOCUMENT CAN CLOSE A WINE WITHOUT A FETCH, where the estate uses one document template across its range. That is the sibling economics working on documents rather than on pages, and it is what made this producer cost six requests for two wines.",
+      "checked_at": "2026-09-14T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-14T21:12:08Z",
+  "updated_at": "2026-09-14T21:14:23Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17100,6 +17154,11 @@
       "at": "2026-09-14T12:50:00Z",
       "batch": "6 — Portugal, third producer: Barroca da Malhada (3 wines)",
       "result": "3 attempted, 0 found, 3 not found, in two requests and one search. The estate's Wix site has FOUR PAGES — home, about, contact, gallery — and no wine list, shop or document anywhere; the Wix route table (pageUriSEO keys in the home page's own JSON) establishes that from a single fetch, which is the cheapest close available on a Wix site. Every other page naming these wines is a retailer's."
+    },
+    {
+      "at": "2026-09-14T13:10:00Z",
+      "batch": "6 — Portugal, fourth producer: Quinta do Vallado (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in six requests. FIRST PORTUGUESE FICHA TÉCNICA READ IN FULL: the Vallado Tinto 2024's own sheet (pdf_text_chars 3 246) holds país/castas/região/COLHEITA/enólogos/bottles-per-format, tasting notes, vinificação, estágio and an ANÁLISES block of álcool, pH, acidez total and açúcar residual — no ingredients, no allergens, no nutrition, no energy value, not even an SO2 figure. The Portuguese ficha takes the Spanish rule: fetch it to date a wine, never to find a declaration. The estate is otherwise the best document publisher seen in Portugal, with one PDF per wine per vintage under /xms/files/Fichas_Tecnicas/."
     }
   ]
 }
