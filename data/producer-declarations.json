@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "5 — SPAIN, batch 5 opened 2026-08-31, closing the Spanish pool. The pool has moved with the nightly refresh: it now stands at 95 wines at vintage 2024+ with declaration_status not_declared, of which 80 were already in this file, leaving 15 untouched wines across 15 single-wine producer strings. Batch 5 works those 15 and then, if budget remains, OPENS PORTUGAL (39 wines at vintage 2024+, no Portuguese estate in this file yet). Spain before batch 5: 61 producer strings, 81 wines, 1 found, 4 rejected, 76 not found. Carried forward: twelve Spanish fichas técnicas have been read and one held a mandated element, so a ficha is fetched only to date a wine; 'ficha alimentaria' is the opposite and is a real declaration; four of fifteen producers in batch 4 lived on a domain other than their name; and id.aecocescanqr.es answers 403 to everything, which is absolute.",
-  "attempted": 568,
+  "attempted": 569,
   "found": 33,
-  "not_found": 482,
+  "not_found": 483,
   "rejected": 53,
   "declarations": [
     {
@@ -16131,9 +16131,36 @@
       "robots_note": "Stock WooCommerce robots.txt; three pages fetched, all allowed.",
       "note": "TWO FINDINGS, ONE OF THEM CROSS-CUTTING. (1) CROSS-CUTTING GREP THAT LIES: src/probe.py reported 'vendors_mentioned: gs1' on all three pages of this site, and the hit is inside a GOOGLE FONTS URL — 'fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvW…' contains the substring 'Gs1'. Any site preloading Open Sans v34 woff2 files will report a GS1 vendor mention. This is not Spain-specific and will fire in every country. (2) The slug trap in its Spanish form again, and this time it also dates the document: the product URL ends '-albarino-2023', the page itself says 2025, and the attached PDF is the 2023's. A shop that edits one product in place year after year leaves the old vintage in the slug AND in the document while the heading rolls forward — so the document's filename is worth reading before spending a fetch on it, because it can decide the vintage question for free.",
       "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "7619301",
+      "name": "Montecillo Rioja Blanco",
+      "producer": "Bodegas Montecillo",
+      "country": "Spanien",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://www.bodegasmontecillo.com/vinos/gama-clasica/blanco/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.bodegasmontecillo.com/robots.txt — ordinary WordPress wildcard group (disallows /*?, /page/, /category/, feeds and trackbacks); nothing fetched is disallowed",
+        "https://www.bodegasmontecillo.com/ (200, 145 kB) — the Rioja bodega, part of the Osborne group. terms: 0",
+        "https://www.bodegasmontecillo.com/vinos/gama-clasica/ (200, 81 kB) — the classic range: Blanco, Rosé, Crianza, Reserva, Gran Reserva. Exactly one white. terms: 0",
+        "https://www.bodegasmontecillo.com/vinos/gama-clasica/blanco/ (200, 86 kB) — the white's own page: 'Vino Blanco Montecillo fermentado en barrica', Viura 34 % / Sauvignon blanc 36 % / Tempranillo blanco 30 %, 'Añada 2024. Buena'. terms: 0. One document, /wp-content/uploads/2024/03/Mont.-Blanco-Ferm-Barrica-2024-Ficha-de-cata-ESP.pdf — a ficha DE CATA for the 2024, not fetched (wrong vintage on its face and a tasting sheet by name)",
+        "https://www.osborne.es/es/EUR/tienda-online/product/4644/montecillo-blanco-fermentado-en-barrica-2024 (200, 1 883 bytes, 7 visible chars) — the group's own shop, which the bodega links as 'Comprar'. A CLIENT-SIDE SHELL, see note"
+      ],
+      "evidence": "Producer and cuvée match: Bodegas Montecillo's classic range holds exactly one white, and Systembolaget's item is a Rioja white from that producer. THE VINTAGE DOES NOT: the bodega's own page says 'Añada 2024', its only document is named …-2024-Ficha-de-cata-ESP.pdf and the group shop's product URL ends -2024, against Systembolaget's 2025. The producer's surface is a year BEHIND the shelf. No declaration was found, so this is recorded as not found rather than rejected — but had one been found on these pages it would have been a rejection on vintage.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on the bodega's site — no ingredient list, no nutrition, no energy value, no allergen line, no e-label vendor, no QR — and the group shop cannot be read at all (Angular shell).",
+      "robots_note": "bodegasmontecillo.com: ordinary WordPress group, everything fetched allowed. osborne.es: a wildcard group disallowing sort/query parameters, /search/, /checkout/, /cart, /review/, /login and /my-account/; the product URL is allowed.",
+      "note": "A NEW UNREADABLE PLATFORM, AND THE SECOND FAILURE OF THE LARGE-GROUP HYPOTHESIS IN ONE DAY. www.osborne.es — the shop of one of Spain's largest drinks groups — runs SAP COMMERCE CLOUD's composable storefront (Spartacus): every product URL returns the same 1 883-byte Angular shell with 7 visible characters, and the page declares its own data layer in a meta tag, occ-backend-base-url = https://api.c9guxrh1t0-osbornedi1-p1-public.model-t.cc.commerce.ondemand.com. Recognise it by that meta tag and by the 'model-t.cc.commerce.ondemand.com' host. The OCC REST layer is in principle a public JSON API of the SEL-by-Goals-Tec kind, so it is not hopeless — but reaching a product in it needs the baseSite id and the product code, which is URL guessing, and it was not attempted here because the shop's own vintage is 2024 against the shelf's 2025 and any find would have been rejected anyway. Worth ONE experiment on a future Osborne-group wine whose vintage does match, and not before. Together with CVNE (Bodegas La Val) earlier today, that is two big Spanish groups tested and neither publishes a declaration on any readable surface.",
+      "checked_at": "2026-09-14T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-14T21:00:21Z",
+  "updated_at": "2026-09-14T21:01:59Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -16710,6 +16737,11 @@
       "at": "2026-09-14T10:45:00Z",
       "batch": "5 — Spain, tail producer: Lagar de Besada (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in three requests. The bodega's own WooCommerce shop carries the wine at the right vintage (H1 '2025' against Systembolaget's 2025) and declares nothing; its only document is 'Lagar-de-Besada-2023.pdf', dated to the wrong vintage on its face, so no fetch was spent on it. CROSS-CUTTING: probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames ('memSYaGs126MiZpBA…'), which will happen in every country."
+    },
+    {
+      "at": "2026-09-14T11:05:00Z",
+      "batch": "5 — Spain, tail producer: Bodegas Montecillo (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in four requests. The bodega's own page for its only white says 'Añada 2024' against Systembolaget's 2025 — the producer a year BEHIND the shelf — and declares nothing. NEW UNREADABLE PLATFORM: the Osborne group shop (www.osborne.es) is SAP Commerce Cloud's Spartacus storefront, a 1 883-byte Angular shell with an occ-backend-base-url meta pointing at *.model-t.cc.commerce.ondemand.com. Second large Spanish group to fail today after CVNE."
     }
   ]
 }
