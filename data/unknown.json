@@ -106,11 +106,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
   },
   {
-   "token": "stabiliseringsämnen",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
-  },
-  {
    "token": "lime",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
@@ -166,10 +161,6 @@
   },
   {
    "match": "kornserveringsmedel -> konserveringsmedel",
-   "wines": 1
-  },
-  {
-   "match": "antixidationsmedel -> antioxidationsmedel",
    "wines": 1
   },
   {
@@ -238,10 +229,6 @@
   },
   {
    "match": "antioxidansmedel -> antioxidantmedel",
-   "wines": 1
-  },
-  {
-   "match": "antioxidationsmdele -> antioxidationsmdel",
    "wines": 1
   }
  ]
