@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 584,
+  "attempted": 587,
   "found": 33,
-  "not_found": 498,
+  "not_found": 501,
   "rejected": 53,
   "declarations": [
     {
@@ -16540,9 +16540,85 @@
       "robots_note": "Same host, everything fetched allowed.",
       "note": "A SIBLING'S DOCUMENT CAN CLOSE A WINE WITHOUT A FETCH, where the estate uses one document template across its range. That is the sibling economics working on documents rather than on pages, and it is what made this producer cost six requests for two wines.",
       "checked_at": "2026-09-14T00:00:00Z"
+    },
+    {
+      "product_number": "7990901",
+      "name": "Alvarinho João Portugal Ramos",
+      "producer": "João Portugal Ramos",
+      "country": "Portugal",
+      "vintage": "2025",
+      "status": "not_found",
+      "source_url": "https://www.jportugalramos.com/pt/joao-portugal-ramos-alvarinho/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2025",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.jportugalramos.com/ (200, 115 kB) — group site, robots.txt wildcard group with an empty Disallow (everything allowed). terms: 0. Only PDFs linked are seven EU-funding 'Ficha de projeto' sheets in the footer.",
+        "https://www.jportugalramos.com/pt/joao-portugal-ramos-vinhos-verdes/ (200, 120 kB) — the Vinho Verde range: Alvarinho 2025, Loureiro & Alvarinho Vinhas do Cardido 2025, two Alvarinho espumantes. terms: 0.",
+        "https://www.jportugalramos.com/pt/joao-portugal-ramos-alvarinho/ (200, 98 kB) — the wine, heading 'João Portugal Ramos Alvarinho / 2025', castas Alvarinho, vinificação, awards. terms: 0. 'Download ficha técnica' selector offers 2025/2024/2023 PDFs and a .tif per year; a 'QUANTAS CALORIAS TEM A MINHA BEBIDA?' block links info-calories-alcool.org/pt-pt/, the generic industry calorie guide, not a declaration.",
+        "the 2025 ficha was NOT fetched: the group's ficha template was read in full on the sibling Duorum Colheita 2024 (same document tree, same layout) and holds no mandated element — see 5152301."
+      ],
+      "evidence": "Producer, cuvée and vintage match: the estate's page is the single 'João Portugal Ramos Alvarinho', vintage 2025 in its heading, 100% Alvarinho, Vinho Verde. Systembolaget's wine is the 2025.",
+      "rejected_because": null,
+      "not_found_because": "No ingredient list, allergen line, nutrition or energy value on the estate's page; no e-label link or vendor; the per-vintage document is a ficha técnica (established on the sibling) and the only nutrition pointer is a link to the generic info-calories-alcool.org guide.",
+      "robots_note": "jportugalramos.com robots.txt: User-agent: * with empty Disallow — everything allowed.",
+      "note": "THE CALORIE-GUIDE LINK IS A NEAR-MISS SHAPE NEW TO THIS FILE: 'Quantas calorias tem a minha bebida? Consultar guia de calorias' → info-calories-alcool.org, the European spirits/wine sector's generic calorie site. It sits exactly where an e-label link would and says nothing about this wine.",
+      "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "613901",
+      "name": "Ramos Reserva",
+      "producer": "João Portugal Ramos",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.jportugalramos.com/pt/tintos/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.jportugalramos.com/pt/tintos/ (200, 104 kB) — the complete red range, 31 wines with vintages in the anchor text: Marquês de Borba Colheita/Reserva/Vinhas Velhas, Vila Santa Reserva 2023, Loios, Pouca Roupa, Estremus, the single vineyards, the Duorum and Foz de Arouce lines. NO 'Ramos Reserva' anywhere. terms: 0 (the 'gs1' vendor flag is the Open Sans woff2 false positive).",
+        "web search: 'Ramos Reserva' Aragonez/Trincadeira/Syrah appears only on Winebow (the group's US importer, /our-brands/j-portugal-ramos/ramos-reserva/2024), wine.com and US shops — an export label with no page on the producer's own site. Retailers are not sources and were not fetched.",
+        "plus the group home page and the Duorum/Alvarinho pages recorded on 7990901 and 5152301."
+      ],
+      "evidence": "Producer identified (the label carries the estate's name and the grapes match the Alentejo Vila Santa fruit), but the cuvée has no page on the producer's site, so no per-wine identity could be tested.",
+      "rejected_because": null,
+      "not_found_because": "The estate's own site does not list this label at all; every page naming it is a retailer's. No e-label link or vendor anywhere on the group site.",
+      "robots_note": "jportugalramos.com robots.txt: User-agent: * with empty Disallow — everything allowed.",
+      "note": "AN EXPORT LABEL ABSENT FROM THE PRODUCER'S OWN SITE — the Portuguese instance of the Spanish and Italian finding that the Swedish shelf name need not be a wine the estate presents at home. 'Ramos Reserva' is Winebow's US line; its EU disclosure, if one exists, is not linked from anything the producer publishes.",
+      "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "5152301",
+      "name": "Duorum Colheita Douro",
+      "producer": "Duorum Vinhos",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.jportugalramos.com/pt/duorum-colheita-tinto/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.jportugalramos.com/pt/duorum-colheita-tinto/ (200, 97 kB) — the wine on the João Portugal Ramos group site (Duorum is a group brand; duorum.pt is named on the ficha). Heading 'Duorum Colheita Tinto 2024', Touriga Franca/Touriga Nacional/Sousão, 12 months in barrique. terms: 0. Same calorie-guide link as the group's other pages.",
+        "https://www.jportugalramos.com/media//1/DOCUMENTOS/237/3766717191010T.pdf (200, 148 kB, pdf_text_chars 1 967) — the 2024 ficha técnica, chosen from the page's per-year selector (2024 also offered as a .tif). Read in full: tipo de solo, ÁLCOOL 13,5%, dados analíticos (acidez total 5,3 g/L, pH 3,59, açúcar residual < 0,60 g/L), temperatura de consumo, denominação, castas, vindima, vinificação, envelhecimento, notas de prova, harmonização, 'WWW.DUORUM.PT', 'SEJA RESPONSÁVEL. BEBA COM MODERAÇÃO.', a document code HM19032026 and the footer 'DUORUM COLHEITA TINTO 2024'. No ingredients, no allergens, no nutrition, no energy value, no SO2 figure. terms: 0.",
+        "plus the group home page and red range page recorded on 613901."
+      ],
+      "evidence": "Producer, cuvée and vintage match: the group site's single Duorum Colheita Tinto is the 2024, its ficha is titled 'DUORUM COLHEITA TINTO 2024' and states 13,5 % vol, equal to Systembolaget's 13,5. Duorum Vinhos is the João Portugal Ramos group's Douro company.",
+      "rejected_because": null,
+      "not_found_because": "The estate's page and its 2024 ficha técnica carry a full analytical panel and no mandated element. No e-label link or vendor.",
+      "robots_note": "jportugalramos.com robots.txt: User-agent: * with empty Disallow — everything allowed.",
+      "note": "SECOND PORTUGUESE FICHA TÉCNICA READ IN FULL, SECOND GROUP, SAME RESULT AS VALLADO: analytics (álcool, acidez, pH, açúcar residual) and no declaration. Two estates and two document templates now agree, and the Spanish rule holds in Portugal: fetch a ficha to date a wine, never to find a declaration. Also: Duorum lives on the João Portugal Ramos group site, so 'Duorum Vinhos' as a Systembolaget producer string is closed by the group's pages — one site, three producer strings (JPR, Duorum, and the Quinta de Foz de Arouce line, not in this pool).",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-14T21:14:23Z",
+  "updated_at": "2026-09-17T21:40:48Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17159,6 +17235,11 @@
       "at": "2026-09-14T13:10:00Z",
       "batch": "6 — Portugal, fourth producer: Quinta do Vallado (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in six requests. FIRST PORTUGUESE FICHA TÉCNICA READ IN FULL: the Vallado Tinto 2024's own sheet (pdf_text_chars 3 246) holds país/castas/região/COLHEITA/enólogos/bottles-per-format, tasting notes, vinificação, estágio and an ANÁLISES block of álcool, pH, acidez total and açúcar residual — no ingredients, no allergens, no nutrition, no energy value, not even an SO2 figure. The Portuguese ficha takes the Spanish rule: fetch it to date a wine, never to find a declaration. The estate is otherwise the best document publisher seen in Portugal, with one PDF per wine per vintage under /xms/files/Fichas_Tecnicas/."
+    },
+    {
+      "at": "2026-09-17T09:40:00Z",
+      "batch": "6 — Portugal, fifth producer: João Portugal Ramos group (3 wines: JPR ×2 + Duorum Vinhos)",
+      "result": "3 attempted, 0 found, 3 not found, in six requests plus one search. jportugalramos.com is the group site for JPR, Duorum and Foz de Arouce, fully allowed by robots, server-rendered, with vintage in the page heading and a per-year ficha técnica selector. The Duorum Colheita 2024 ficha was read in full — the second Portuguese ficha tested, a different group and template from Vallado, and again analytics with no mandated element. New near-miss shape: a 'Quantas calorias tem a minha bebida?' block linking the generic info-calories-alcool.org guide where an e-label link would sit. 'Ramos Reserva' is a US export label (Winebow) absent from the producer's own range."
     }
   ]
 }
