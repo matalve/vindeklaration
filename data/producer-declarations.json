@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 593,
+  "attempted": 595,
   "found": 33,
-  "not_found": 507,
+  "not_found": 509,
   "rejected": 53,
   "declarations": [
     {
@@ -16775,9 +16775,61 @@
       "robots_note": "Same hosts as 7806801; the Scantrust host was not fetched.",
       "note": "THE 15,8 MB FICHA: the Clássico 2024 sheet is a 16 MB download for one page of text and a QR — the Ruppertsberger 18 MB expertise again. Fetch a Soalheiro ficha only when it decides something. Energy value seen (evidence only): 330 kJ / 79 kcal per 100 ml.",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7633201",
+      "name": "Redoma Branco Niepoort Vinhos",
+      "producer": "Niepoort Vinhos",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.niepoort.pt/fichas-tecnicas",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.niepoort-vinhos.com/ → https://www.niepoort.pt/ (200, 1,79 MB of which ~1,7 MB is inline CSS; 1 821 visible chars) — Nuxt SPA. robots.txt has named groups only and no wildcard, so nothing is disallowed to us (project policy of 2026-08-08). terms: 0.",
+        "https://www.niepoort.pt/fichas-tecnicas (200, 1,79 MB, 6 116 visible chars) — 'Fichas Técnicas de todos os vinhos Niepoort': the FILTER vocabularies are in the HTML (regions, styles, capacities 0.75/1.5l/1l/…, every grape) but NOT ONE wine, one PDF or one product link; the list is filled at runtime. 0 occurrences of 'redoma' in the file.",
+        "https://www.niepoort.pt/_nuxt/static/1789670808/fichas-tecnicas/state.js (200, 20 kB) — the page's own Nuxt static payload, referenced from its HTML: banners and SEO strings only, no wine data.",
+        "https://www.niepoort.pt/vinhos/ and /natcool/ (200, ~1,7 MB each, ~820 visible chars) — the shop and the Nat'Cool page are empty shells with no per-wine links.",
+        "The API the list loads from (manage.niepoort.pt is the CMS host for images) is named only inside one of 27 /_nuxt/*.js chunk bundles; not mined.",
+        "web search 'niepoort.pt Redoma Branco 2024 ficha técnica' returns only retailers (wine.com, vinogrande, vinha, perfectcellar …); not sources, not fetched."
+      ],
+      "evidence": "Producer identified; the cuvée and vintage could not be reached on the producer's site, whose every wine page is client-side.",
+      "rejected_because": null,
+      "not_found_because": "The estate's site is a Nuxt SPA: the fichas técnicas index, the shop and the Nat'Cool page all render their wine lists from a runtime API not present in the HTML or in the page's static state payload. No wine page, no PDF URL and no e-label pointer is reachable server-side.",
+      "robots_note": "niepoort.pt robots.txt lists named crawlers only, no User-agent: * group — nothing disallowed to vindeklaration under RFC 9309, recorded per project policy.",
+      "note": "NIEPOORT IS PORTUGAL'S PLUGWINE: a large, document-rich house (a 'fichas técnicas de todos os vinhos' index with capacity and grape filters) whose entire catalogue is invisible to a server-side reader. The tell is a ~1,7 MB page with under 1 000 visible characters — inline CSS, empty app root. Do not return without a headless browser or a known API URL.",
+      "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "9204301",
+      "name": "Nat’Cool Branco Niepoort Vinhos",
+      "producer": "Niepoort Vinhos",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.niepoort.pt/natcool/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.niepoort.pt/natcool/ (200, 1,75 MB, 815 visible chars) — the Nat'Cool movement page, an empty Nuxt shell.",
+        "the fichas index's capacity filter lists '1l', so the litre pack exists in the estate's own document set; the list itself is client-side and unreachable.",
+        "plus the home page, fichas index, state payload and shop recorded on 7633201."
+      ],
+      "evidence": "Producer identified; cuvée, vintage and the 1 000 ml pack could not be tested because no wine page is reachable server-side.",
+      "rejected_because": null,
+      "not_found_because": "Same Nuxt SPA as the sibling; nothing server-side to read.",
+      "robots_note": "As on 7633201.",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T21:47:24Z",
+  "updated_at": "2026-09-17T21:50:04Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17414,6 +17466,11 @@
       "at": "2026-09-17T11:10:00Z",
       "batch": "6 — Portugal, eighth producer: Soalheiro (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in five requests. PORTUGAL'S FIRST E-LABEL ADOPTER: soalheiro.com (Shopify) links one ficha técnica per wine per vintage, and the 2024 sheets carry a block 'INFORMAÇÃO NUTRICIONAL E INGREDIENTES' with the energy value per 100 ml and the label's QR code. Both QRs decoded offline from a page render (zbarimg) to qscq.st4.ch short links — Scantrust, sixth deployment in this file, one code per wine per vintage, unreadable by construction, host Disallow: /, not fetched. So the Portuguese ficha CAN hand you the e-label pointer even though it is never itself the declaration. The Clássico sheet is 15,8 MB."
+    },
+    {
+      "at": "2026-09-17T11:35:00Z",
+      "batch": "6 — Portugal, ninth producer: Niepoort Vinhos (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in six requests plus one search. niepoort-vinhos.com redirects to niepoort.pt, a Nuxt SPA: home, fichas-tecnicas index, vinhos shop and natcool page are each ~1,7 MB of inline CSS around an empty app root (800–6 000 visible chars), and the page's own static state payload carries no wine data. The fichas index advertises every Niepoort wine with capacity and grape filters and exposes none of them server-side. Robots: named groups only, no wildcard, nothing disallowed."
     }
   ]
 }
