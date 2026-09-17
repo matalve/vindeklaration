@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 604,
+  "attempted": 605,
   "found": 33,
-  "not_found": 518,
+  "not_found": 519,
   "rejected": 53,
   "declarations": [
     {
@@ -17059,9 +17059,36 @@
       "robots_note": "symington.com and fontesouto.com both serve robots.txt with named crawler groups only and no User-agent: * — nothing disallowed to vindeklaration under RFC 9309, per the 2026-08-08 policy.",
       "note": "SYMINGTON'S 'PRODUCT INFORMATION ECOSYSTEM' IS PORTUGAL'S BEST NEAR-MISS: a per-vintage, server-rendered, trilingual page at symington.com/p/{32-hex} that states vintage, bottling year, grapes, alcohol, analytics, 'Allergens: Contains sulphites', vegetarian/vegan and 'Energy Value 77 Kcal/100 ml' — the two elements the regulation keeps on the physical label, and nothing of what it moves online. It identifies itself as well as Winestro does. The hash is opaque and per vintage; the brand site links only the current one. If the group ever adds an ingredient row this becomes the best Portuguese source at once — and it covers Dow's, Graham's, Warre's, Cockburn's, Quinta do Vesuvio, Altano, Chryseia and Fonte Souto in one template.",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7376001",
+      "name": "Borges Alvarinho Aged In Barrel",
+      "producer": "Vinhos Borges",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.vinhosborges.pt/pt/vinhos",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.vinhosborges.pt/ (200, 189 kB, 1 595 visible chars) — Squarespace, stock Squarespace robots.txt. terms: 0.",
+        "https://www.vinhosborges.pt/pt/borgesvinhos/ (200, 673 kB, 1 595 visible chars) and /pt/vinhos (200, 661 kB, 11 202 visible chars) — the wine pages are image galleries; the only text naming wines is an awards list (… 'Borges Alvarinho Estagiado em Barrica Vinho Verde Branco 2022', 'Borges Alvarinho Estagiado em Borras Finas … 2023'). 0 occurrences of 'alvarinho' in an href; 17 same-host /pt/ links, none a wine page. terms: 0.",
+        "https://lojaonline.jmv.pt/pt/ (200, 141 kB, 725 visible chars) — the group's (José Maria Vieira) shop, a 'Redicom Prolepse' client-side app with 7 links and no products in the HTML.",
+        "web search surfaced https://www.vinhosborges.pt/pt/borges-alvarinho-estagiado-barrica-2023 as a per-wine, per-vintage page; fetched (200 status line was a Squarespace soft 404: '404', 306 kB shell). Retailer hits (portugalvineyards, SAQ, wine-searcher) not fetched.",
+        "no 2024 page URL is held from anything the producer publishes; not guessed."
+      ],
+      "evidence": "Producer identified; the cuvée ('Alvarinho Estagiado em Barrica' = 'Aged in Barrel') is named only in the site's awards list at the 2022 and by search at the 2023; no page for any vintage could be reached.",
+      "rejected_because": null,
+      "not_found_because": "The producer's wine pages are Squarespace galleries with no per-wine HTML, the search-indexed per-vintage page 404s, and the group shop is client-side. No e-label link or vendor anywhere.",
+      "robots_note": "vinhosborges.pt: stock Squarespace robots.txt, pages allowed. lojaonline.jmv.pt disallows /account/, /api/, /checkout/ etc.; the home page fetched is allowed.",
+      "note": "A Squarespace site can hide its wines in a gallery block as easily as a SPA can — 660 kB pages with an awards list and not one wine link. The URL shape /pt/{wine-slug}-{vintage} exists (search found the 2023) and is gone, so the estate has removed rather than rolled its per-vintage pages.",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T22:02:40Z",
+  "updated_at": "2026-09-17T22:04:45Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17738,6 +17765,11 @@
       "at": "2026-09-17T13:45:00Z",
       "batch": "6 — Portugal, sixteenth producer: Symington Family Estates (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in five requests. symington.com → fontesouto.com (current vintages in H2, 'Technical info' → symington.com/p/{32-hex}). The /p/ page is a per-vintage 'Product Information Ecosystem': server-rendered, en/pt/de, vintage, bottling year, grapes, alcohol, analytics, 'Allergens: Contains sulphites', vegan flags and 'Energy Value 77 Kcal/100 ml' — no ingredient list. Only the 2025 is linked; the 2024's hash is unreachable without guessing. Both hosts: named-crawler robots.txt with no wildcard."
+    },
+    {
+      "at": "2026-09-17T14:00:00Z",
+      "batch": "6 — Portugal, seventeenth producer: Vinhos Borges (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in six requests plus one search. Squarespace site whose wine pages are galleries with no per-wine links; the search-indexed per-vintage page (…-estagiado-barrica-2023) is a soft 404; the JMV group shop is a client-side app."
     }
   ]
 }
