@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 610,
+  "attempted": 611,
   "found": 33,
-  "not_found": 524,
+  "not_found": 525,
   "rejected": 53,
   "declarations": [
     {
@@ -17211,9 +17211,35 @@
       "robots_note": "Stock Squarespace robots.txt; everything fetched allowed.",
       "note": "An estate with Parker-record Dão wines whose own site links five shops and not one of its own labels — the 'no wine pages' shape, third time in Portugal (Barroca da Malhada, Insula Vinus, Pellada). Two requests.",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7900201",
+      "name": "Quinta de Lourosa Vinho Verde",
+      "producer": "Quinta de Lourosa",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.quintadelourosa.com/img/Ficha_QUINTA_DE_LOUROSA_VINHO_VERDE_2024.pdf",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.quintadelourosa.com/ (200, 43 kB) — static HTML site; robots.txt disallows /cgi-bin/ only. Footer links wineinmoderation.com. terms: 0.",
+        "https://www.quintadelourosa.com/vinhos.html (200, 33 kB) — eight wines, each with a 'Ficha técnica' PDF under /img/: Quinta de Lourosa Alvarinho 2024, QUINTA DE LOUROSA VINHO VERDE 2024, Vinhas de Lourosa Loureiro/rosé 2024, tinto 2019, three espumantes. terms: 0.",
+        "https://www.quintadelourosa.com/img/Ficha_QUINTA_DE_LOUROSA_VINHO_VERDE_2024.pdf (200, 66 kB, pdf_text_chars 4 480) — bilingual pt/en: 'QUINTA de LOUROSA VINHO VERDE ESCOLHA 2024', DOC Vinho Verde, branco, ANO DE COLHEITA 2024, castas Arinto/Loureiro/Avesso, granite, harvest September, skin maceration and fermentation at 14 °C, TEOR ALCOÓLICO 12,5 %, açúcares totais < 1,5, acidez 6,4, pH 3,14, tasting, produção 60.000 gfs, CAPAC. 750 ml, EAN 5600731452014, case and pallet logistics. No ingredients, allergens, nutrition or energy value. A 200 dpi render scanned with zbarimg: NO QR.",
+        "https://id.gs1.org/01/05600731452014 (404, 9-byte JSON; robots.txt disallows /inc/ and /styles/ only) — the global GS1 Digital Link resolver has NO link registered for the GTIN the sheet prints, so no GS1-routed e-label exists for this pack."
+      ],
+      "evidence": "Producer, cuvée, vintage and pack match: the estate's own sheet is the 2024 'Quinta de Lourosa Vinho Verde', 12,5 % vol equal to Systembolaget's 12,5, 750 ml, and it carries the pack's own GTIN.",
+      "rejected_because": null,
+      "not_found_because": "The estate's per-wine sheet is a technical/logistics sheet with no mandated element and no QR; the GTIN it prints resolves to nothing at GS1; no e-label link or vendor on the site.",
+      "robots_note": "quintadelourosa.com allows everything fetched; id.gs1.org allows /01/ paths.",
+      "note": "FIRST USE OF THE GLOBAL GS1 RESOLVER IN THIS FILE: a producer's own sheet printed the pack's EAN, and https://id.gs1.org/01/0{ean13} is the GS1-standard way to ask whether the brand owner registered a Digital Link for it. It answered 404 application/json — a clean, exact negative for one request, with robots.txt permitting it. Worth doing whenever a producer's own document prints a GTIN; it is not a guess at a URL pattern but the resolver GS1 publishes for the purpose. (The Spanish AECOC resolver is a different host and answers 403; the global one does not.)",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T22:09:53Z",
+  "updated_at": "2026-09-17T22:11:11Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17920,6 +17946,11 @@
       "at": "2026-09-17T14:50:00Z",
       "batch": "6 — Portugal, twenty-second producer: Quinta da Pellada (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in two requests. Squarespace presentation site with no wine pages; its 'links' page sends readers to five retailers."
+    },
+    {
+      "at": "2026-09-17T15:00:00Z",
+      "batch": "6 — Portugal, twenty-third producer: Quinta de Lourosa (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in four requests. Static site with a 2024 ficha per wine; the sheet identifies the wine on vintage, alcohol and pack, prints the EAN, and carries no QR and no declaration. NEW: the global GS1 Digital Link resolver id.gs1.org/01/{gtin} was tried on the printed EAN and answered 404 JSON — an exact, permitted, one-request negative for a GS1-routed e-label."
     }
   ]
 }
