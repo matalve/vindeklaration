@@ -19,6 +19,16 @@ your own country's section. The country deep-dives are the bulk of the file and
 they do not transfer between countries. `grep` for a host, a vendor or a
 producer name answers "has this been seen before" for nothing.
 
+**Portugal opened on 2026-09-14 and closed on 2026-09-17** — 39 wines, 24
+producer strings, **nothing attached: 0 found, 0 rejected, 39 not found**, the
+first country in this file to yield no declaration at all. See *Portugal, and
+the first country with nothing to attach* at the end of this file. One
+Portuguese e-label adopter exists (Soalheiro, on Scantrust, one code per wine
+per vintage, printed as a QR on the estate's own ficha técnica) and it is
+unreadable by construction; the Portuguese ficha técnica is the Spanish one
+(five read in full, all analytics); the best near-miss is Symington's
+per-vintage product page with allergens, vegan flags and an energy value.
+
 **Spain opened on 2026-08-30** and has had four batches — 61 producer strings,
 81 wine records, **one declaration attached, four rejected, 76 not found**,
 with 24 wines still untouched. See *Spain opens, and the first four producers
@@ -99,7 +109,7 @@ producer strings, with no pairs left to find.**
 
 | Platform | Pattern | Why |
 |---|---|---|
-| **Scantrust** | `matu.st4.ch/{token}` or `label.{producer}.{tld}/qr/{slug}` → `elabel.scantrust.com/default/#/?uid=…&api_key=…&qr={slug}` | 828-byte shell, empty `<div id=app>`. **The uid and api_key are in the URL fragment, which is never sent to the server** — that host cannot serve the declaration by construction. The api_key is minted and signed per request, so it is an issued token and absolute under the agent's rules. Do not mine the JS bundles. `matu.st4.ch` answers `Disallow: /`, which is where the robots exception applies. **Second deployment, and the first Italian one: Masi Agricola**, on its own vanity host `label.masi.it`, whose `robots.txt` is the single line `User-agent: *` with no directives under it — nothing disallowed, so no exception was needed there. Masi's redirect is a 1 590-byte shell rather than 828 and the slug is echoed back as a `qr=` parameter, but the fragment problem is identical. **The uid is per wine and the slug is NOT per vintage** — see *Masi publishes its e-label as a QR image*, below. **Third deployment, 2026-08-30, and it settles the one thing that looked like a way in: Scantrust ALSO answers a GS1 Digital Link path**, `eega.st4.ch/01/{gtin}/10/{lot}` (AI 01 = GTIN, AI 10 = batch/lot), which the server *does* receive in full — and it 302s straight into the same 1 590-byte `elabel.scantrust.com/default/#/?uid=…&api_key=…&qr=01%2F{gtin}%2F10%2F{lot}` shell. **So the path form is no more readable than the fragment form, and there is no point trying it again.** `eega.st4.ch/robots.txt` is `Disallow: /`, so that one fetch used the e-label exception and bought nothing. Decoded from a QR on a pack photograph at Alileo Wines. **Fourth and fifth deployments, 2026-08-30, both Spanish, and the first settles what `u-label.com` is** — see the row below and *Bodegas Murviedro*: `bmkp.st4.ch/01/{gtin}`, the GS1 path form with NO lot segment, 302s into the identical 1 590-byte shell, so the bare-GTIN form is confirmed no more readable than either of the others. `bmkp.st4.ch/robots.txt` is `Disallow: /` and the e-label exception bought nothing there either. **Three tenant hosts tested (`matu.st4.ch`, `eega.st4.ch`, `bmkp.st4.ch`), two path forms, one vanity domain: never fetch a Scantrust URL again.** |
+| **Scantrust** | `matu.st4.ch/{token}` or `label.{producer}.{tld}/qr/{slug}` → `elabel.scantrust.com/default/#/?uid=…&api_key=…&qr={slug}` | 828-byte shell, empty `<div id=app>`. **The uid and api_key are in the URL fragment, which is never sent to the server** — that host cannot serve the declaration by construction. The api_key is minted and signed per request, so it is an issued token and absolute under the agent's rules. Do not mine the JS bundles. `matu.st4.ch` answers `Disallow: /`, which is where the robots exception applies. **Second deployment, and the first Italian one: Masi Agricola**, on its own vanity host `label.masi.it`, whose `robots.txt` is the single line `User-agent: *` with no directives under it — nothing disallowed, so no exception was needed there. Masi's redirect is a 1 590-byte shell rather than 828 and the slug is echoed back as a `qr=` parameter, but the fragment problem is identical. **The uid is per wine and the slug is NOT per vintage** — see *Masi publishes its e-label as a QR image*, below. **Third deployment, 2026-08-30, and it settles the one thing that looked like a way in: Scantrust ALSO answers a GS1 Digital Link path**, `eega.st4.ch/01/{gtin}/10/{lot}` (AI 01 = GTIN, AI 10 = batch/lot), which the server *does* receive in full — and it 302s straight into the same 1 590-byte `elabel.scantrust.com/default/#/?uid=…&api_key=…&qr=01%2F{gtin}%2F10%2F{lot}` shell. **So the path form is no more readable than the fragment form, and there is no point trying it again.** `eega.st4.ch/robots.txt` is `Disallow: /`, so that one fetch used the e-label exception and bought nothing. Decoded from a QR on a pack photograph at Alileo Wines. **Fourth and fifth deployments, 2026-08-30, both Spanish, and the first settles what `u-label.com` is** — see the row below and *Bodegas Murviedro*: `bmkp.st4.ch/01/{gtin}`, the GS1 path form with NO lot segment, 302s into the identical 1 590-byte shell, so the bare-GTIN form is confirmed no more readable than either of the others. `bmkp.st4.ch/robots.txt` is `Disallow: /` and the e-label exception bought nothing there either. **Three tenant hosts tested (`matu.st4.ch`, `eega.st4.ch`, `bmkp.st4.ch`), two path forms, one vanity domain: never fetch a Scantrust URL again.** **Sixth deployment, and the first Portuguese one: Soalheiro (2026-09-17)**, reached not from a page but from a QR printed on the estate's own 2024 ficha técnica — `qscq.st4.ch/{code}`, a different code for the ALLO 2024 and the Clássico 2024, so per wine per vintage; `robots.txt` is `Disallow: /`; not fetched, on this row's own standing advice to recognise it and stop. |
 | **u-label.com** | `www.u-label.com/qr/{13-hex}` | **IT IS SCANTRUST.** The platform the agent brief names first, absent from every producer's HTML in three countries and 200-odd producers, finally appeared on 2026-08-30 at **Bodegas Frutos Villar** — and `https://www.u-label.com/qr/38c1be93c8e32` 302s straight into `https://elabel.scantrust.com/default/#/?uid={uuid}&api_key={signed}&qr={code}`, the same 1 590-byte shell with 9 visible characters. U-label is a Scantrust white-label and inherits its unreadability in full: the uid and api_key are in the URL **fragment**, which the server never receives. `u-label.com/robots.txt` names specific crawlers only with no `User-agent: *` fallback, so nothing is disallowed to us and no exception is needed — and it makes no difference. **Recognise `u-label.com/qr/` and stop.** |
 | **IMERO** | `s.imero.io/c{id}` | Angular/Ionic SPA. Its catalogue lists per-article e-labels keyed by article number whose first two digits are the vintage, so a wine can be present for one vintage and absent for another — Dönnhoff and Robert Weil both failed this way. |
 | **Dropbox folder** | `dropbox.com/scl/fo/…`, one folder per vintage | The folder *view* renders client-side: 309 kB of shell, no file names, and the page's own `&noscript=1` variant is no better. **But the same folder answers `&dl=1` with a zip**, and that is a server response. See *The Dropbox route* below — it is now a resolved find, not a dead end. |
@@ -4334,3 +4344,177 @@ Three hypotheses stand after this batch:
 - **OPEN: whether AECOC's 403 is permanent or a configuration.** Nothing in
   this project may test it — a 403 is a refusal — but if it ever answers, two
   wines here become findable immediately and the vintage is already in the URL.
+
+
+## Portugal, and the first country with nothing to attach
+
+Portugal ran on 2026-09-14 (four producers, 12 wines) and 2026-09-17 (twenty
+producer strings, 27 wines, plus one Spanish addendum). **39 wines, 0 found, 0
+rejected, 39 not found.** Every earlier country attached something; Portugal
+attached nothing, and the reason is not that Portuguese estates hide their
+wines — most of them date and identify a wine better than the French or the
+Italians do — but that the one estate found to publish an e-label chose the
+one platform that cannot be read, and nobody else publishes one at all.
+
+### The Portuguese ficha técnica is the Spanish one, with one exception
+
+Five per-vintage sheets were read in full — Quinta do Vallado (Tinto 2024),
+João Portugal Ramos (Duorum Colheita 2024), Arribas Wine Company (Saroto
+Palhete 2024), Wine & Soul (Guru 2024), Quinta de Lourosa (Vinho Verde 2024).
+All five: grapes, harvest, vinification, álcool, acidez total, pH, açúcar
+residual, sometimes total sulphites, a bottling month (Arribas: *Engarrafado em
+Junho de 2025*, the first production-date evidence in Portugal), production in
+bottles, and — at Lourosa — the pack's EAN and pallet logistics. **None has an
+ingredient list, an allergen line, a nutrition table or an energy value.** The
+Spanish rule holds: **fetch a ficha to date a wine, never to find a
+declaration.**
+
+**The exception is Soalheiro**, and it is the most useful thing Portugal
+produced. The estate's 2024 fichas (Shopify, one PDF per wine per vintage on
+`cdn.shopify.com`, linked from a *Colheitas* archive on each wine page) end
+with a block headed **`INFORMAÇÃO NUTRICIONAL E INGREDIENTES`** holding
+`E(100 ml) = 304 kJ / 73 kcal` and a QR code — the label's own disclosure
+block, reproduced on the sheet. **The QR decodes offline**: render the page
+with `pdftoppm -r 200 -png` and run `zbarimg --quiet --raw`; the probe's own
+`code:` line does not fire on a PDF because the code is a vector drawing, not
+an embedded raster, so `pypdf` finds no image to decode. Both Soalheiro codes
+resolved to `qscq.st4.ch/{code}` — Scantrust, one code per wine per vintage,
+`Disallow: /`, unreadable by construction. Two other estates' 2024 sheets
+(Wine & Soul, Lourosa) and the Maçanita group's were rendered and scanned the
+same way and carry **no QR**, so this is an estate habit, not a Portuguese one.
+**Scan every 2024-or-later ficha once; it costs no request.**
+
+One sheet is 15,8 MB (Soalheiro's Clássico 2024) for one page of text and a QR.
+
+### Where a Portuguese declaration is not
+
+- **A labelled `Ingredientes` field holding two words.** Adega Mayor's Beevo
+  shop gives every product a *Detalhes* table with an `Ingredientes` row, and
+  the row reads `Contém Sulfitos`. The probe's `ingredientes` term fires on it.
+  Read what is under the label.
+- **Symington's "Product Information Ecosystem"** — `symington.com/p/{32-hex}`,
+  one page per wine per vintage, server-rendered, en/pt/de: vintage, year of
+  bottling, grapes, alcohol, analytics, `Allergens: Contains sulphites`,
+  Vegetarian/Vegan flags and **`Energy Value 77 Kcal/100 ml`** — the two
+  elements the regulation keeps on the physical label, and nothing of what it
+  moves online. It identifies itself as well as Winestro does and covers the
+  whole group (Dow's, Graham's, Warre's, Cockburn's, Vesuvio, Altano, Chryseia,
+  Fonte Souto) in one template. The hash is opaque and per vintage; the brand
+  site (`fontesouto.com`) links only the current one. If the group ever adds an
+  ingredient row this becomes Portugal's best source at once.
+- **A calorie-guide link where the e-label link would sit.** The João Portugal
+  Ramos group's wine pages carry *"Quantas calorias tem a minha bebida?
+  Consultar guia de calorias"* → `info-calories-alcool.org`, the sector's
+  generic calorie site. Says nothing about the wine.
+- **`Indicação de Alergénios: Contém sulfitos.`** on Aveleda's WooCommerce
+  shop, beside a description that says *Colheita 2024* and an attribute table
+  that says *Ano 2022*, and an alcohol (13,5 %) 1,5 above Systembolaget's.
+- **An SO2 range on a natural-wine sheet** (Maçanita: *Sulfitos: 25 < SO2 <
+  45 mg/L*, with the organic and biodynamic limits quoted) — analytics, not an
+  ingredient list.
+
+### Portugal's producer strings are groups and labels more often than estates
+
+- **One group site, several strings.** `jportugalramos.com` is João Portugal
+  Ramos, Duorum Vinhos *and* Consulvinus (JPR's consultancy and private-label
+  entity, which has no site of its own). `antoniomacanita.com` is Fitapreta,
+  Azores Wine Company, Maçanita Vinhos and Companhia de Vinhos dos Profetas e
+  Villões — Systembolaget files an Azores wine and a Madeira wine under
+  *Fitapreta Vinhos*. `fitapreta.com` and `niepoort-vinhos.com` are redirects.
+  Grep the file for the group before spending a request on the string.
+- **Importer private labels, three in 27 wines:** *Nordic Sommelier Selection*
+  (VinTillMat i Väst; bottler Tres Rostos has no site), *Motörhead Born to
+  Lose Live to Win* (Live Brands Factory's licensed brand; Casa Ermelinda
+  Freitas's `/pt/vinhos/` serves the home page byte-for-byte), *Guilty Grapes*
+  (Hermansson & Co, 1 L; = Consulvinus = JPR). `producer == supplier` catches
+  none of them; the tell is a name that is not Portuguese.
+- **Export labels absent from the estate's own site:** *Ramos Reserva*
+  (Winebow's US line) and *Alba Rhino* (Quinta das Arcas; sold in the US under
+  the same name). The estate's own range list is exhaustive and the label is
+  not on it.
+- **Non-vintage where Systembolaget says 2025.** The Maçanita group declares
+  *A Proibida Rosé* `NM - Non Millesimé` on its shop page and `ROSÉ - NON
+  MILLESIMÉ / LIPR25` on its sheet; Systembolaget records a 2025. Its shop page
+  and sheet also disagree on alcohol (11,0 / 10 %) and bottles (4 800 / 13 000).
+  Where the producer says NM, the vintage rule has nothing to bite on.
+
+### Portuguese hosts and shapes
+
+- **Beevo** (`adegamayor.pt`): every listing is a client-side shell (~1 450
+  visible chars); `/sitemap.xml` is an index naming `/sitemaps/sitemap-pt-pt.xml`,
+  which gives product URLs; product pages are server-rendered with a *Detalhes*
+  table whose harvest year agrees with the title while the slug is stale
+  (`caiado-rose-2023` → *Caiado Rosé 2024*, *Ano de Colheita 2024*).
+- **Nuxt SPA** (`niepoort.pt`): ~1,7 MB per page, of which almost all is
+  inline CSS, 800–6 000 visible chars, an empty app root. The *fichas técnicas
+  de todos os vinhos* index puts its filter vocabularies (regions, capacities,
+  every grape) in the HTML and not one wine; the page's own
+  `/_nuxt/static/{build}/fichas-tecnicas/state.js` carries banners and SEO
+  strings only; the API lives in one of 27 chunk bundles and was not mined.
+  Portugal's plugwine.
+- **Vue SPA with a public catalogue JSON** (`casarelvas.pt`): 1,6 kB shell;
+  the bundle names `backend.casarelvas.pt/api` and `/api/all` returns the whole
+  group's catalogue — 82 wines, 71 fields each (Herdade de São Miguel,
+  Segredos de São Miguel, Montinho, São Miguel do Sul, Ciconia, Herdade da
+  Pimenta) — **with no declaration field in the schema.** Three requests close
+  every Casa Relvas brand at once.
+- **Server-side site-wide age gate** (`ravasqueira.com`, Drupal): every path,
+  `/sitemap.xml` included, 302s to `/legal-drinking-age?destination=…`; the
+  *Sim* link sets a cookie. Not answered, per the Spanish precedent
+  (bodegasaslaxas.com, whose sitemap was ungated). **Open for the owner:**
+  whether an age self-declaration — a consumer check, not authentication —
+  may be answered; `src/probe.py` has no cookie jar, so it would need one.
+  Two other Portuguese sites (Ermelinda Freitas, Insula Vinus) render an age
+  prompt client-side and serve the content anyway.
+- **Squarespace** three ways: Arribas (`/s/{name}.pdf` sheets, vintage in the
+  file name *and* in the sheet's footer, trustworthy), Quinta da Pellada (five
+  pages, no wines, a *links* page pointing at five retailers), Vinhos Borges
+  (660 kB gallery pages with an awards list and not one wine link; the
+  search-indexed `/pt/{slug}-2023` page is a soft 404).
+- **Name-list-only sites:** Insula Vinus (Divi, fourteen captions under
+  photos), Barroca da Malhada (Wix, four pages).
+- **The Maçanita group updates its shop and not its range pages:** the
+  `/adegas/…/vinhos` pages link fichas from 2018–2022; `/pt/vinhos-online?brand=`
+  has the current vintage in the slug and a *Detalhes* block. Date a Maçanita
+  wine from the shop.
+- **`www.fitapreta.com` resets the connection; `fitapreta.com` redirects.**
+  `arribaswinecompany.com`, `tresrostos.pt/.com`, `consulvinus.pt/.com`,
+  `jordimiro.com` are NXDOMAIN (the estates are `arribaswine.com`, none,
+  none, `jordimiro.wine`).
+- **Named-crawler `robots.txt` with no wildcard** on `niepoort.pt`,
+  `symington.com` and `fontesouto.com` — nothing disallowed to us, per the
+  2026-08-08 policy.
+
+### The global GS1 resolver is a permitted, exact, one-request test
+
+Quinta de Lourosa's 2024 sheet prints the pack's EAN (5600731452014).
+**`https://id.gs1.org/01/0{ean13}`** is the resolver GS1 publishes for exactly
+this question — has the brand owner registered a Digital Link for this GTIN —
+and its `robots.txt` disallows only `/inc/` and `/styles/`. It answered
+**404 `application/json`**: no link registered, no GS1-routed e-label. That is
+not guessing a URL pattern; it is the standard's own lookup, and it is worth
+one request whenever a producer's own document prints a GTIN. (Spain's AECOC
+resolver is a different host and answers 403; the global one does not.)
+
+### What Portugal says about the shelf
+
+Of 24 producer strings, **one publishes an e-label** (Soalheiro, Scantrust),
+**one publishes the label-side elements online** (Symington: allergens and
+energy value, no ingredients), **two publish an allergen line in an
+ingredient-shaped field** (Adega Mayor, Aveleda), and the rest publish
+analytics or nothing. Nine of the 39 wines were importer or export labels the
+estate does not present at home, and two hosts were walls (Niepoort, SPA;
+Ravasqueira, age gate). **Portuguese e-labels exist at roughly one producer in
+twenty-four, and the one that exists cannot be read.** That is the coverage
+story for Portugal.
+
+### Where the next run should start
+
+Portugal is closed at vintage 2024+. Nothing here is worth revisiting unless
+(a) the owner decides age gates may be answered (Ravasqueira, one wine), (b)
+Symington adds an ingredient row to its `/p/` pages (then every Symington
+brand at once), or (c) Scantrust ever becomes readable (Soalheiro, two wines,
+codes already held: `qscq.st4.ch/Nhp-C7IOZvVj` for ALLO 2024,
+`qscq.st4.ch/fZ11Mhk3U0sm` for Alvarinho Clássico 2024). The next country is
+the next run's choice; by pool size after Portugal it is South Africa (59) or
+Austria (42).
