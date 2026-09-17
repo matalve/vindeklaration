@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 587,
+  "attempted": 589,
   "found": 33,
-  "not_found": 501,
+  "not_found": 503,
   "rejected": 53,
   "declarations": [
     {
@@ -16616,9 +16616,61 @@
       "robots_note": "jportugalramos.com robots.txt: User-agent: * with empty Disallow — everything allowed.",
       "note": "SECOND PORTUGUESE FICHA TÉCNICA READ IN FULL, SECOND GROUP, SAME RESULT AS VALLADO: analytics (álcool, acidez, pH, açúcar residual) and no declaration. Two estates and two document templates now agree, and the Spanish rule holds in Portugal: fetch a ficha to date a wine, never to find a declaration. Also: Duorum lives on the João Portugal Ramos group site, so 'Duorum Vinhos' as a Systembolaget producer string is closed by the group's pages — one site, three producer strings (JPR, Duorum, and the Quinta de Foz de Arouce line, not in this pool).",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7679801",
+      "name": "Saroto Palhete",
+      "producer": "Arribas Wine Company",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.arribaswine.com/s/PT_TechSheet_Saroto_Palhete_2024.pdf",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.arribaswinecompany.com/ — NXDOMAIN; the estate is arribaswine.com (found by search).",
+        "https://www.arribaswine.com/ (200, 283 kB) — Squarespace, stock Squarespace robots.txt (config/search/account/api/static and query-string patterns disallowed; pages and /s/ files allowed). terms: 0. Links: Vinhos, Loja (two shop pages with mixed cases only).",
+        "https://www.arribaswine.com/vinhos (200, 213 kB) — the whole range as prose plus a PT | EN row of per-vintage tech-sheet links under each wine: Saroto Branco 2018–2025, Saroto Palhete 2019–2025, Saroto Tinto 2017–2024, NatCool, Belfo, Raiola, Manicómio, Clarinha, Quilómetro. terms: 0, no e-label link or vendor.",
+        "https://www.arribaswine.com/loja-1 (200, 290 kB) — shop listing, mixed cases only, terms: 0.",
+        "https://www.arribaswine.com/s/PT_TechSheet_Saroto_Palhete_2024.pdf (200, 105 kB, pdf_text_chars 912, served from static1.squarespace.com) — read in full: TERROIR (Trás-os-Montes, Travanca, granite/schist/clay, 600–700 m), AGRICULTURA (vines >70 years, gobelet, field blend 50% tinto/50% branco, 'Transição para Orgânico'), VINIFICAÇÃO (foot-trodden whole bunches, 48 h maceration, fermentation in used Austrian oak, 9 months barrel, 'Engarrafado em Junho de 2025'), INFORMAÇÃO TÉCNICA (Álcool 12%, acidez total 5,18, pH 3,63, Sulfitos Totais 47 g/l [sic — mg/l], açúcares totais 0,1), PRODUÇÃO 3000 garrafas, 'Vegan Friendly', footer 'SAROTO PALHETE 2024'. No ingredient list, no allergen line, no nutrition, no energy value."
+      ],
+      "evidence": "Producer, cuvée and vintage match: the estate's own per-vintage sheet is titled SAROTO PALHETE 2024, and its 12 % vol equals Systembolaget's 12,0. Palhete is the estate's single red/white field-blend cuvée.",
+      "rejected_because": null,
+      "not_found_because": "The estate publishes a per-vintage technical sheet with analytics and a total-sulphite figure but no ingredient list or mandated element, and no e-label link or vendor appears anywhere on its site.",
+      "robots_note": "arribaswine.com is Squarespace; its robots.txt allows pages and /s/ documents. The PDF 302s to static1.squarespace.com, which was followed as the same document.",
+      "note": "THIRD PORTUGUESE FICHA READ IN FULL, and the first from a small natural-wine estate rather than a group: the same analytics-only shape, now with a total-sulphite number and a bottling month. 'Engarrafado em Junho de 2025' is the first production-date evidence seen in Portugal — this bottle is unambiguously inside the regulation's scope, and the estate still declares nothing outside the label. Squarespace tech sheets live at /s/{name}.pdf and the vintage is in the file name AND in the sheet's own footer, so the slug can be trusted here where WooCommerce slugs cannot.",
+      "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7118001",
+      "name": "Saroto White",
+      "producer": "Arribas Wine Company",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.arribaswine.com/vinhos",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.arribaswine.com/vinhos (200, 213 kB) — Saroto Branco is the estate's only white Saroto; its PT|EN sheet row lists 2018 through 2025, with https://www.arribaswine.com/s/PT_TechSheet_Saroto_White_2024.pdf and the EN twin for the 2024. terms: 0.",
+        "the 2024 sheet was NOT fetched: the sibling Saroto Palhete 2024 sheet, same estate, same template, same month of publication, was read in full and holds no mandated element — see 7679801.",
+        "plus the home page and shop listing recorded on 7679801."
+      ],
+      "evidence": "Producer and cuvée match (Saroto Branco is the single white Saroto; Systembolaget's 'Saroto White' is the EN sheet's name), and the estate's own document list holds a 2024 edition, so the 2024 exists as a release.",
+      "rejected_because": null,
+      "not_found_because": "No declaration on the estate's site; the per-vintage document was established to be an analytics-only sheet by reading the sibling's 2024 edition in full.",
+      "robots_note": "Same host, everything fetched allowed.",
+      "note": "Closed on the sibling's document, as at Quinta do Vallado.",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T21:40:48Z",
+  "updated_at": "2026-09-17T21:42:22Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17240,6 +17292,11 @@
       "at": "2026-09-17T09:40:00Z",
       "batch": "6 — Portugal, fifth producer: João Portugal Ramos group (3 wines: JPR ×2 + Duorum Vinhos)",
       "result": "3 attempted, 0 found, 3 not found, in six requests plus one search. jportugalramos.com is the group site for JPR, Duorum and Foz de Arouce, fully allowed by robots, server-rendered, with vintage in the page heading and a per-year ficha técnica selector. The Duorum Colheita 2024 ficha was read in full — the second Portuguese ficha tested, a different group and template from Vallado, and again analytics with no mandated element. New near-miss shape: a 'Quantas calorias tem a minha bebida?' block linking the generic info-calories-alcool.org guide where an e-label link would sit. 'Ramos Reserva' is a US export label (Winebow) absent from the producer's own range."
+    },
+    {
+      "at": "2026-09-17T10:05:00Z",
+      "batch": "6 — Portugal, sixth producer: Arribas Wine Company (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in five requests (one NXDOMAIN) plus one search. The estate is arribaswine.com, Squarespace, with a per-vintage PT and EN tech sheet for every wine back to 2017 under /s/. The Saroto Palhete 2024 sheet — third Portuguese ficha read in full, first from a natural-wine estate — holds terroir, farming, vinification, a bottling month (June 2025), analytics with total sulphites, production and 'Vegan Friendly', and no ingredient list. No e-label vendor anywhere."
     }
   ]
 }
