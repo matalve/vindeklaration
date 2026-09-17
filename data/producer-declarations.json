@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 591,
+  "attempted": 593,
   "found": 33,
-  "not_found": 505,
+  "not_found": 507,
   "rejected": 53,
   "declarations": [
     {
@@ -16721,9 +16721,63 @@
       "robots_note": "Same host, everything fetched allowed.",
       "note": "THE SLUG, THE TITLE AND THE DATA TABLE GIVE THREE ANSWERS (2021, 2021, 2023) and the blend gives a fourth clue: Systembolaget's 2024 has Arinto where this page has Antão Vaz. A recipe change between vintages is exactly why the vintage rule exists, and here it is visible on the producer's own page before any declaration is in play.",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7806801",
+      "name": "Soalheiro ALLO",
+      "producer": "Soalheiro",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://qscq.st4.ch/Nhp-C7IOZvVj",
+      "source_type": "e_label",
+      "elabel_platform": "Scantrust (st4.ch short link)",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.soalheiro.com/ → https://soalheiro.com/ (200, 209 kB) — Shopify, stock Shopify robots.txt (pages, products and cdn files allowed). terms: 0. One page per wine under /pages/.",
+        "https://soalheiro.com/pages/soalheiro-allo-alvarinho-loureiro (200, 166 kB) — the wine, headed as the 2025; a Características block (região, álcool, acidez, castas, pH) and a Colheitas archive linking one Ficha Técnica PDF per vintage back to 2011 on cdn.shopify.com. terms: 0.",
+        "https://cdn.shopify.com/s/files/1/0962/8470/5145/files/Ficha-Tecnica-Soalheiro-ALLO-2024.pdf (200, 92 kB, pdf_text_chars 3 223) — read in full: heading 'SOALHEIRO ALLO ALVARINHO & LOUREIRO 2024', REGIÃO IG Minho, CASTAS Loureiro 70% / Alvarinho 30%, ÁLCOOL 11.5% vol., acidez total 6.2, açúcar residual seco, pH 3.24, acidez volátil 0.40, terroir/vinificação/notas de prova/acompanhamento, and a block headed 'INFORMAÇÃO NUTRICIONAL E INGREDIENTES' holding 'E(100 ml) = 304 kJ / 73 kcal' and a QR code. No ingredient list in the text layer. terms: 3 (nutricional, ingredientes, kcal).",
+        "QR decoded offline from a 200 dpi render of the sheet (zbarimg, exact): https://qscq.st4.ch/Nhp-C7IOZvVj — st4.ch is Scantrust's short-link host, seen five times in this file (matu, eega, bmkp …), every deployment a 302 into elabel.scantrust.com/default/#/?uid=…&api_key=… whose data lives in the URL fragment and is unreadable by construction. NOT FETCHED: qscq.st4.ch/robots.txt is 'User-agent: * / Disallow: /', and the doc's standing instruction for Scantrust is to recognise it and stop rather than spend the e-label exception on a shell."
+      ],
+      "evidence": "Producer, cuvée and vintage match exactly: the estate's own 2024 sheet is headed 'SOALHEIRO ALLO ALVARINHO & LOUREIRO 2024', its grapes (Loureiro, Alvarinho) are Systembolaget's two and its 11.5 % vol equals Systembolaget's 11,5. The QR on that sheet is a per-wine, per-vintage code (the Clássico 2024 sheet carries a different one).",
+      "rejected_because": null,
+      "not_found_because": "The producer has published an e-label for this exact wine and vintage — the sheet's QR and its energy value prove it — but the platform is Scantrust, whose page is a client-side shell with the identifying token in the URL fragment. Nothing server-side to read.",
+      "robots_note": "soalheiro.com and cdn.shopify.com allowed everything fetched. qscq.st4.ch disallows everything and was not fetched.",
+      "note": "PORTUGAL'S FIRST E-LABEL ADOPTER, AND THE FIRST PORTUGUESE FICHA TÉCNICA THAT CARRIES A MANDATED ELEMENT: the block 'INFORMAÇÃO NUTRICIONAL E INGREDIENTES' with the energy value per 100 ml and the QR code is printed ON THE FICHA, i.e. the sheet reproduces the label's own disclosure block. That is a new shape: the ficha is not the declaration, but it hands you the QR that is, and a page render + zbarimg decodes it offline with no request. The platform behind it is Scantrust — the sixth deployment in this file and the first Portuguese one — so the find stops there. Energy value recorded here as evidence, not as a declaration: E(100 ml) = 304 kJ / 73 kcal.",
+      "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7493506",
+      "name": "Soalheiro Alvarinho",
+      "producer": "Soalheiro",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://qscq.st4.ch/fZ11Mhk3U0sm",
+      "source_type": "e_label",
+      "elabel_platform": "Scantrust (st4.ch short link)",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://soalheiro.com/pages/soalheiro-alvarinho-classico (200, 168 kB) — 'Soalheiro Alvarinho (Clássico) 2025' with Características (12,5 %, Alvarinho) and a Colheitas archive 2025 → 2013, one Ficha Técnica per vintage. terms: 0. The page names no bottle size and no magnum.",
+        "https://cdn.shopify.com/s/files/1/0962/8470/5145/files/Ficha-Tecnica-Soalheiro-Alvarinho-Classico-2024.pdf (200, 15,8 MB (!), pdf_text_chars 3 298) — heading '(CLÁSSICO) 2024', CASTAS Alvarinho, ÁLCOOL 12.5% vol., acidez total 6.7, seco, and the same 'INFORMAÇÃO NUTRICIONAL E INGREDIENTES' block: 'E(100 ml) = 330 kJ / 79 kcal' plus a QR. terms: 3.",
+        "QR decoded offline from a page render (exact): https://qscq.st4.ch/fZ11Mhk3U0sm — a different Scantrust code from the ALLO 2024's, so the estate issues one per wine per vintage. Not fetched, for the reason given on 7806801.",
+        "plus the home page recorded on 7806801."
+      ],
+      "evidence": "Producer, cuvée and vintage match: the estate's single Alvarinho 'Clássico' is Systembolaget's 'Soalheiro Alvarinho', its 2024 sheet states 12.5 % vol equal to Systembolaget's 12,5, 100 % Alvarinho. PACK NOT ESTABLISHED: Systembolaget's item is the 1 500 ml magnum and neither the page nor the sheet names a fill, so even a readable e-label would have needed the pack test before attaching.",
+      "rejected_because": null,
+      "not_found_because": "The e-label the sheet's QR points to is a Scantrust page, unreadable by construction; and the pack (magnum) could not be tied to the code in any case.",
+      "robots_note": "Same hosts as 7806801; the Scantrust host was not fetched.",
+      "note": "THE 15,8 MB FICHA: the Clássico 2024 sheet is a 16 MB download for one page of text and a QR — the Ruppertsberger 18 MB expertise again. Fetch a Soalheiro ficha only when it decides something. Energy value seen (evidence only): 330 kJ / 79 kcal per 100 ml.",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T21:44:44Z",
+  "updated_at": "2026-09-17T21:47:24Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17355,6 +17409,11 @@
       "at": "2026-09-17T10:35:00Z",
       "batch": "6 — Portugal, seventh producer: Adega Mayor (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in nine requests (one a wrongly guessed sitemap name). adegamayor.pt runs the Beevo shop platform: every listing is a client-side shell, the sitemap index at /sitemap.xml names the per-language sitemaps, and product pages are server-rendered with a Detalhes table. That table has an 'Ingredientes' row and it holds only 'Contém Sulfitos' — Portugal's first labelled ingredient field and it is the allergen line. Caiado Rosé: slug 2023, title and harvest 2024, grapes and pack match, alcohol 13,0 vs 12,5. Reserva Branco: slug and title 2021, harvest 2023, different blend from Systembolaget's 2024; no 2024 page exists."
+    },
+    {
+      "at": "2026-09-17T11:10:00Z",
+      "batch": "6 — Portugal, eighth producer: Soalheiro (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in five requests. PORTUGAL'S FIRST E-LABEL ADOPTER: soalheiro.com (Shopify) links one ficha técnica per wine per vintage, and the 2024 sheets carry a block 'INFORMAÇÃO NUTRICIONAL E INGREDIENTES' with the energy value per 100 ml and the label's QR code. Both QRs decoded offline from a page render (zbarimg) to qscq.st4.ch short links — Scantrust, sixth deployment in this file, one code per wine per vintage, unreadable by construction, host Disallow: /, not fetched. So the Portuguese ficha CAN hand you the e-label pointer even though it is never itself the declaration. The Clássico sheet is 15,8 MB."
     }
   ]
 }
