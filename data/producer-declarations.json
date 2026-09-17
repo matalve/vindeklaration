@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 598,
+  "attempted": 599,
   "found": 33,
-  "not_found": 512,
+  "not_found": 513,
   "rejected": 53,
   "declarations": [
     {
@@ -16904,9 +16904,34 @@
       "robots_note": "As on 7837701.",
       "note": "THE RANGE PAGE'S FICHA IS THE 2021 AND THE SHOP IS THE 2025 — the group updates its shop and not its range pages, so on antoniomacanita.com the shop (/pt/vinhos-online?brand=…) is the place to date a wine and the /adegas/…/vinhos pages are stale.",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "260301",
+      "name": "Segredos de São Miguel Organic",
+      "producer": "Casa Relvas",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://backend.casarelvas.pt/api/all",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2023",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.casarelvas.pt/ (200, 1,6 kB, 11 visible chars) — a Vue CLI SPA: '<div id=app>' and two bundles. robots.txt is 'User-agent: * / Disallow:' (empty — everything allowed). /sitemap.xml is 404.",
+        "https://www.casarelvas.pt/js/app.33b2493b.js (200, 205 kB) — the site's own bundle, read only for its data source: `\"https://backend.casarelvas.pt/api\"` with routes /all, /brands, /wines, and the wine page resolved as `getAll()` then `find(id === route.params.wineid)`.",
+        "https://backend.casarelvas.pt/api/all (200, 569 kB application/json; robots.txt on the backend host is also an empty Disallow) — THE WHOLE SITE'S CONTENT: 82 wines across the group's brands (Herdade de São Miguel, Segredos de São Miguel, Montinho São Miguel, São Miguel do Sul, Ciconia, Herdade da Pimenta, Casa Relvas Sommelier Edition …), each with 71 fields: referencia, nome, descricao, ano, classificacao, castas[], data_vindima, estagio, vinificacao, soil, rendimento, garrafas_produzidas, analise_alcool/_total/_volatil/_ph, tasting notes, prémios, fichatecnica_id, consumir. NO field for ingredients, allergens, nutrition, energy or an e-label; a grep of the full payload for ingredient/nutri/alerg/sulfit/elabel/qr returns nothing. Segredos de São Miguel 'Organic' is id 700: ano 2023, analise_alcool 13,5 %, descricao 'Segredos de São Miguel Organic 2018' (stale)."
+      ],
+      "evidence": "Producer and cuvée match (the group's single Segredos de São Miguel Organic, 13,5 % as on Systembolaget). VINTAGE DOES NOT: the producer's record is the 2023; no 2024 entry exists in its entire content set.",
+      "rejected_because": null,
+      "not_found_because": "The producer's whole CMS — read as one JSON payload — has no declaration field for any of its 82 wines, and its entry for this cuvée is the 2023.",
+      "robots_note": "Both hosts allow everything (empty Disallow). The bundle was read for the API base only; one API request, no traversal.",
+      "note": "A VUE SPA WHOSE BACKEND PUBLISHES THE WHOLE CATALOGUE AS ONE UNAUTHENTICATED JSON — the Pernod Ricard/SEL/digital-label pattern on a producer's own site. Three requests (shell, bundle, /api/all) prove a negative for 82 wines at once: the schema itself has no place for a declaration, so no Casa Relvas wine of any brand can be found here until the schema changes. The brands in this payload are ALL Systembolaget producer-string candidates: Herdade de São Miguel, Montinho São Miguel, São Miguel do Sul, Ciconia, Herdade da Pimenta — any of them is closed by this record.",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T21:53:59Z",
+  "updated_at": "2026-09-17T21:55:45Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17553,6 +17578,11 @@
       "at": "2026-09-17T12:10:00Z",
       "batch": "6 — Portugal, tenth producer: António Maçanita group — Fitapreta Vinhos ×2 + Azores Wine Company (3 wines)",
       "result": "3 attempted, 0 found, 3 not found, in ten requests (one a connection reset on www.fitapreta.com). fitapreta.com redirects into antoniomacanita.com, one group site for four companies (Fitapreta, Azores Wine Company, Maçanita Vinhos, Profetas e Villões) with per-company range pages whose fichas are years stale and a server-rendered shop with the vintage in the slug and a Detalhes block (capacidade, produtor, colheita, álcool, produção). The shop carries no declaration; the group's ficha template carries analytics and an SO2 range and NO QR (checked by render + zbarimg), so Soalheiro's QR-on-the-ficha is not a Portuguese pattern. The Proibida Rosé is declared 'Non Millesimé' by its producer (lot LIPR25) where Systembolaget records a 2025, and its shop page (11,0 %, 4 800 bottles) and sheet (10 %, 13 000 bottles) disagree. Systembolaget's 'Fitapreta Vinhos' string covers an Azores and a Madeira wine."
+    },
+    {
+      "at": "2026-09-17T12:30:00Z",
+      "batch": "6 — Portugal, eleventh producer: Casa Relvas (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in four requests (one a 404 sitemap). casarelvas.pt is a Vue SPA whose bundle names backend.casarelvas.pt/api; /api/all returns the whole catalogue — 82 wines, 71 fields each, none of them a declaration field, and the Organic's entry is the 2023. A schema-level negative for every Casa Relvas brand (Herdade de São Miguel, Montinho, São Miguel do Sul, Ciconia, Herdade da Pimenta)."
     }
   ]
 }
