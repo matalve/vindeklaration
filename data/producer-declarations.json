@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 605,
+  "attempted": 606,
   "found": 33,
-  "not_found": 519,
+  "not_found": 520,
   "rejected": 53,
   "declarations": [
     {
@@ -17086,9 +17086,35 @@
       "robots_note": "vinhosborges.pt: stock Squarespace robots.txt, pages allowed. lojaonline.jmv.pt disallows /account/, /api/, /checkout/ etc.; the home page fetched is allowed.",
       "note": "A Squarespace site can hide its wines in a gallery block as easily as a SPA can — 660 kB pages with an awards list and not one wine link. The URL shape /pt/{wine-slug}-{vintage} exists (search found the 2023) and is gone, so the estate has removed rather than rolled its per-vintage pages.",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7509101",
+      "name": "Encantado White",
+      "producer": "Ravasqueira Vinos",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://ravasqueira.com/legal-drinking-age?destination=/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": null,
+      "market": "EU",
+      "sources_checked": [
+        "https://www.ravasqueira.com/ → https://ravasqueira.com/legal-drinking-age?destination=/ (200, 24 kB, 237 visible chars) — Drupal, stock Drupal robots.txt (pages allowed). A SERVER-SIDE, SITE-WIDE AGE GATE: every path 302s to /legal-drinking-age?destination={path}; the page offers 'Sim' → /legal-drinking-age-confirm?destination=… (which sets a cookie) and 'Não' → /contactos. terms: 0.",
+        "https://ravasqueira.com/sitemap.xml → also redirected to the gate (destination=/sitemap.xml). Unlike bodegasaslaxas.com in Spain, nothing is served ungated.",
+        "The gate was NOT answered: no cookie set, no confirm link followed, per the standing practice (batch 5, Spain) of not answering an age form. Whether an age self-declaration is a 'login wall' in the absolute sense or a device-gate-like check the project may satisfy is an owner's decision, not this run's."
+      ],
+      "evidence": "Producer identified (Monte da Ravasqueira, Alentejo). Nothing about the cuvée or vintage could be read: every URL on the host, including the sitemap, is behind the age gate.",
+      "rejected_because": null,
+      "not_found_because": "Site-wide server-side age gate with no ungated path; not answered.",
+      "robots_note": "Stock Drupal robots.txt; every page fetched was allowed. The gate, not robots, is what closed the host.",
+      "blocked_by": "age gate (server-side redirect to /legal-drinking-age, cookie-set on confirm)",
+      "note": "PORTUGAL'S FIRST FULL AGE WALL: a Drupal site where even /sitemap.xml redirects to the gate, so the Spanish workaround (ungated sitemap and documents) is unavailable. Two Portuguese estates in one batch — Ravasqueira here, and Adega Mayor's Beevo shop earlier — show that a producer's content can be entirely reachable by a browser and entirely unreachable by a cookie-less fetch. If the owner decides an age self-declaration may be answered (it is a consumer check, not authentication, and it does not identify anyone), src/probe.py would need a per-host cookie jar; until then this host is closed.",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T22:04:45Z",
+  "updated_at": "2026-09-17T22:05:48Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17770,6 +17796,11 @@
       "at": "2026-09-17T14:00:00Z",
       "batch": "6 — Portugal, seventeenth producer: Vinhos Borges (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in six requests plus one search. Squarespace site whose wine pages are galleries with no per-wine links; the search-indexed per-vintage page (…-estagiado-barrica-2023) is a soft 404; the JMV group shop is a client-side app."
+    },
+    {
+      "at": "2026-09-17T14:10:00Z",
+      "batch": "6 — Portugal, eighteenth producer: Ravasqueira (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in two requests. ravasqueira.com is Drupal behind a server-side, site-wide age gate — every path including /sitemap.xml 302s to /legal-drinking-age — and the gate was not answered, following the Spanish precedent. An open policy question for the owner: whether an age self-declaration may be answered with a cookie."
     }
   ]
 }
