@@ -9,7 +9,7 @@ Regulation (EU) 2021/2117 lets the ingredient list live behind a QR code
 instead of on the bottle. The question for every platform is the same: **is the
 declaration in the HTML the server returns, or only after JavaScript runs?**
 
-**Do not read this file whole.** It is over 260 KB and reading it costs a run
+**Do not read this file whole.** It is over 300 KB and reading it costs a run
 about a fifth of its context before any work happens. Take the section list
 with `grep -n '^#\{2,3\} ' docs/elabel-platforms.md`, read the cross-cutting
 sections — the ones above *Where to look first on a German estate*, plus *Don't
