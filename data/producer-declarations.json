@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 600,
+  "attempted": 601,
   "found": 33,
-  "not_found": 514,
+  "not_found": 515,
   "rejected": 53,
   "declarations": [
     {
@@ -16954,9 +16954,35 @@
       "robots_note": "No robots.txt on the host (404) — nothing disallowed.",
       "note": "Second Portuguese export label with no home on the producer's site in one run (after Ramos Reserva); like it, sold in the US under the same name, so the Swedish importer is not the label's owner either.",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "5714101",
+      "name": "Aveleda Parcela do Roseiral",
+      "producer": "Aveleda",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://aveledashop.pt/produto/aveleda-parcela-do-roseiral/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "pt",
+      "vintage_on_source": "2024 (description) / 2022 (attribute table)",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.aveleda.com/ → https://aveledavinhoverde.com/ (200, 367 kB) — WordPress brand site; robots.txt disallows /admin/ only. terms: 0. Ranges: Castas, Fonte, Parcelas, Solos.",
+        "https://aveledavinhoverde.com/vinhos-gama-parcelas/ (200) — two wines, Parcela do Convento and Parcela do Roseiral. terms: 0.",
+        "https://aveledavinhoverde.com/aveleda-parcela-do-roseiral/ (200, 336 kB) — undated wine page: DOC Vinho Verde, granite, Alvarinho, 170 m, 4 ha, tasting notes, 'Download ficha técnica' → /wp-content/uploads/2026/01/FT_Aveleda-Parcela-do-Roseiral-2023.pdf — the 2023 sheet, uploaded January 2026; not fetched (wrong vintage on its face, and the Portuguese ficha carries no declaration). Footer links wineinmoderation.eu and wineinformationcouncil.com. terms: 0. 'Comprar vinho' → aveledashop.pt.",
+        "https://aveledashop.pt/produto/aveleda-parcela-do-roseiral/ (200, 261 kB) — WooCommerce, robots.txt empty Disallow. Description block: Vinhos Verdes DOC, granito, 100% Alvarinho, Vinho Tranquilo Branco, COLHEITA 2024, Formato 0,75L, GRADUAÇÃO ALCOÓLICA 13,5%, enologia Diogo Campilho / Susete Rodrigues, 'Indicação de Alergénios: Contém sulfitos.' Attribute table ('Informação adicional'): Capacidade 0,75L, Região Vinho Verde, Tipo Branco, ANO 2022. terms: 1 (alergenio) — the allergen line. No ingredient list, no nutrition, no e-label link."
+      ],
+      "evidence": "Producer and cuvée match (Aveleda's single Parcela do Roseiral, 100 % Alvarinho, 75 cl). Vintage is asserted 2024 in the shop's description and 2022 in its attribute table — the shop disagrees with itself — and the alcohol it states (13,5 %) is 1,5 points above Systembolaget's 12,0, outside the 0,5 tolerance, so the shop page cannot be shown to describe Systembolaget's fill.",
+      "rejected_because": null,
+      "not_found_because": "Neither the brand site nor the shop carries a declaration — the shop's 'Indicação de Alergénios: Contém sulfitos' is the allergen statement alone — and the only per-vintage document is the 2023 ficha.",
+      "robots_note": "aveledavinhoverde.com disallows /admin/ only; aveledashop.pt has an empty Disallow. Everything fetched was allowed.",
+      "note": "TWO SITES, THREE VINTAGES, TWO ALCOHOLS: the brand page is undated with a 2023 sheet, the shop's prose says 2024 and its WooCommerce attribute says 2022, and the shop's 13,5 % is a full 1,5 above Systembolaget's 12,0. Aveleda is a B Corp that links Wine in Moderation and the Wine Information Council from its footer and still declares nothing beyond 'contém sulfitos'. A Portuguese case of the rule that a shop's own vintage field cannot be trusted — here the description and the attribute table disagree on the same page.",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T21:56:39Z",
+  "updated_at": "2026-09-17T21:57:51Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17613,6 +17639,11 @@
       "at": "2026-09-17T12:40:00Z",
       "batch": "6 — Portugal, twelfth producer: Quinta das Arcas (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in two requests plus one search. Server-rendered site, no robots.txt; the Vinho Verde catalogue lists six brands and Alba Rhino is not one of them — an export label (US retail carries it too)."
+    },
+    {
+      "at": "2026-09-17T12:55:00Z",
+      "batch": "6 — Portugal, thirteenth producer: Aveleda (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in four requests. aveleda.com redirects to aveledavinhoverde.com (WordPress brand site, undated wine pages, 2023 ficha) which links aveledashop.pt (WooCommerce) — the shop page says Colheita 2024 in prose, Ano 2022 in its attribute table, 13,5 % vol against Systembolaget's 12,0, and carries only 'Indicação de Alergénios: Contém sulfitos'."
     }
   ]
 }
