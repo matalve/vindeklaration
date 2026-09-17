@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 589,
+  "attempted": 591,
   "found": 33,
-  "not_found": 503,
+  "not_found": 505,
   "rejected": 53,
   "declarations": [
     {
@@ -16668,9 +16668,62 @@
       "robots_note": "Same host, everything fetched allowed.",
       "note": "Closed on the sibling's document, as at Quinta do Vallado.",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7907501",
+      "name": "Caiado Rosé",
+      "producer": "ADEGA MAYOR",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.adegamayor.pt/pt/pt/caiado-rose-2023",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "pt",
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.adegamayor.pt/ → /pt/pt (200, 178 kB) — Beevo shop platform; robots.txt disallows platform internals (/apps/, /beevo/, /data/, /restfull/ …) and allows pages and /resources/medias/. terms: 0.",
+        "https://www.adegamayor.pt/pt/pt/vinhos-2, /pt/pt/reserva-e-seleccao, /pt/pt/shop?search=caiado&filter=SHOP (200 each, ~106 kB, ~1 450 visible chars) — every listing is a client-side shell with no product links; the only way to a product URL is the sitemap.",
+        "https://www.adegamayor.pt/sitemap.xml (200, 333 B) — index naming /sitemaps/sitemap-pt-pt.xml and -pt-en.xml. A guessed /sitemap_pt_pt.xml 404'd (one wasted request).",
+        "https://www.adegamayor.pt/sitemaps/sitemap-pt-pt.xml (200, 32 kB, 237 URLs) — product slugs carry a vintage: caiado-rose-2023, reserva-branco-2021, caiado-tinto-2022, touriga-nacional-rose-2023 …",
+        "https://www.adegamayor.pt/pt/pt/caiado-rose-2023 (200, 147 kB) — SERVER-RENDERED product page titled 'Caiado Rosé 2024' despite the slug. Detalhes: Casta 50% Aragonez / 30% Castelão / 20% Touriga Nacional, Acidez Total 5,9 g/L, Açúcar Redutor 1,1 g/L, ANO DE COLHEITA 2024, Consumo 2024–2026, Depósito 'Vinho filtrado, não sujeito a depósito', INGREDIENTES 'Contém Sulfitos', Portugal/Alentejo, pH 3,01, Produção 54.000 garrafas de 75cL, Teor Alcoólico 13,00%, enólogos Rui Reguinga and Carlos Rodrigues. terms: 2 (ingredientes, sulfit) — both from that one row. No nutrition, no energy value, no e-label link."
+      ],
+      "evidence": "Producer, cuvée and vintage match: the estate's only Caiado Rosé page is headed 'Caiado Rosé 2024' with Ano de Colheita 2024, and its grapes (Aragonez, Castelão, Touriga Nacional) are exactly Systembolaget's three. Alcohol 13,00 % against Systembolaget's 12,5 — inside the 0,5 tolerance. Pack 75 cl matches.",
+      "rejected_because": null,
+      "not_found_because": "The page's 'Ingredientes' row contains only the allergen statement 'Contém Sulfitos' — no substance list, no nutrition, no energy value. An allergen line is not a declaration under the project's rules, however it is labelled.",
+      "robots_note": "adegamayor.pt robots.txt allows the pages fetched; the sitemap is not disallowed.",
+      "note": "PORTUGAL'S FIRST 'INGREDIENTES' ROW, AND IT HOLDS TWO WORDS: the Beevo product template gives the estate a field called Ingredientes and the estate fills it with 'Contém Sulfitos'. That is the Italian two-particular near-miss (Alileo's 'Sulfites' panel) in Portuguese, and the grep for 'ingredientes' will find it on every Adega Mayor product — read what is under the label. Also: THE SLUG LIES AND THE TITLE IS CURRENT, as at Bunan — 'caiado-rose-2023' serves the 2024 with the harvest year in the data table agreeing with the title. And the Beevo listing pages are shells; the sitemap is the only server-side route to a product URL.",
+      "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7439801",
+      "name": "Adega Mayor Reserva Branco",
+      "producer": "ADEGA MAYOR",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.adegamayor.pt/pt/pt/reserva-branco-2021",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "pt",
+      "vintage_on_source": "2023",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.adegamayor.pt/sitemaps/sitemap-pt-pt.xml — the only Reserva Branco product URLs are reserva-branco-2021 and reserva-branco-2021-1 (the -1 twin is the pattern this shop uses for a duplicate listing, e.g. caiado-branco-2022 / -1).",
+        "https://www.adegamayor.pt/pt/pt/reserva-branco-2021 (200, 146 kB) — server-rendered, headed 'Reserva Branco 2021', Detalhes: Casta 70% Antão Vaz / 10% Verdelho / 20% Viognier, ANO DE COLHEITA 2023, Acidez 5,6, Açúcar 1,2, Depósito 'Vinho filtrado', INGREDIENTES 'Contém Sulfitos', pH 3,4, Produção 8.800 garrafas 75 cl, Teor Alcoólico 12,5 % vol. terms: 2, both from the one allergen row. No nutrition, no energy value, no e-label link.",
+        "the -1 twin was not fetched: the same wine, the same template, and nothing on it could be the 2024's declaration when the page states no declaration at all.",
+        "plus the home page, three listing shells and two sitemaps recorded on 7907501."
+      ],
+      "evidence": "Producer matches; cuvée matches (the estate's single Reserva Branco). VINTAGE DOES NOT: the page is titled 2021, states harvest 2023, and its blend (Antão Vaz/Verdelho/Viognier) is not Systembolaget's 2024 blend (Verdelho/Viognier/Arinto) — a three-way disagreement that shows the page is some earlier release, and the 2024 has no page.",
+      "rejected_because": null,
+      "not_found_because": "No declaration exists on the page for any vintage — its 'Ingredientes' row is the allergen statement alone — so there is nothing to reject; and the page is not the 2024 in any case.",
+      "robots_note": "Same host, everything fetched allowed.",
+      "note": "THE SLUG, THE TITLE AND THE DATA TABLE GIVE THREE ANSWERS (2021, 2021, 2023) and the blend gives a fourth clue: Systembolaget's 2024 has Arinto where this page has Antão Vaz. A recipe change between vintages is exactly why the vintage rule exists, and here it is visible on the producer's own page before any declaration is in play.",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T21:42:22Z",
+  "updated_at": "2026-09-17T21:44:44Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17297,6 +17350,11 @@
       "at": "2026-09-17T10:05:00Z",
       "batch": "6 — Portugal, sixth producer: Arribas Wine Company (2 wines)",
       "result": "2 attempted, 0 found, 2 not found, in five requests (one NXDOMAIN) plus one search. The estate is arribaswine.com, Squarespace, with a per-vintage PT and EN tech sheet for every wine back to 2017 under /s/. The Saroto Palhete 2024 sheet — third Portuguese ficha read in full, first from a natural-wine estate — holds terroir, farming, vinification, a bottling month (June 2025), analytics with total sulphites, production and 'Vegan Friendly', and no ingredient list. No e-label vendor anywhere."
+    },
+    {
+      "at": "2026-09-17T10:35:00Z",
+      "batch": "6 — Portugal, seventh producer: Adega Mayor (2 wines)",
+      "result": "2 attempted, 0 found, 2 not found, in nine requests (one a wrongly guessed sitemap name). adegamayor.pt runs the Beevo shop platform: every listing is a client-side shell, the sitemap index at /sitemap.xml names the per-language sitemaps, and product pages are server-rendered with a Detalhes table. That table has an 'Ingredientes' row and it holds only 'Contém Sulfitos' — Portugal's first labelled ingredient field and it is the allergen line. Caiado Rosé: slug 2023, title and harvest 2024, grapes and pack match, alcohol 13,0 vs 12,5. Reserva Branco: slug and title 2021, harvest 2023, different blend from Systembolaget's 2024; no 2024 page exists."
     }
   ]
 }
