@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 611,
+  "attempted": 612,
   "found": 33,
-  "not_found": 525,
+  "not_found": 526,
   "rejected": 53,
   "declarations": [
     {
@@ -17237,9 +17237,35 @@
       "robots_note": "quintadelourosa.com allows everything fetched; id.gs1.org allows /01/ paths.",
       "note": "FIRST USE OF THE GLOBAL GS1 RESOLVER IN THIS FILE: a producer's own sheet printed the pack's EAN, and https://id.gs1.org/01/0{ean13} is the GS1-standard way to ask whether the brand owner registered a Digital Link for it. It answered 404 application/json — a clean, exact negative for one request, with robots.txt permitting it. Worth doing whenever a producer's own document prints a GTIN; it is not a guess at a URL pattern but the resolver GS1 publishes for the purpose. (The Spanish AECOC resolver is a different host and answers 403; the global one does not.)",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7312206",
+      "name": "Ennak",
+      "producer": "Jordi Miró",
+      "country": "Spanien",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://www.jordimiro.wine/en/ennak-3/",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": "en",
+      "vintage_on_source": "2023",
+      "market": "EU",
+      "sources_checked": [
+        "Free check first: the 750 ml Ennak 2024 (Systembolaget 7010301) IS declared on Systembolaget's page — 'Druvor, konserveringsmedel (svaveldioxid (SULFITER))', 77 kcal/100 ml — while this 1 500 ml item (7312206) is not. Under the pack rule (Gysler, 2026-08) the sibling's text cannot be attached to the magnum; it is noted here as context only.",
+        "https://www.jordimiro.com/ — NXDOMAIN. The estate is www.jordimiro.wine (search).",
+        "https://www.jordimiro.wine/en/the-wines/ (200, 97 kB) — WordPress, stock robots.txt; range: Ennak (ennak-3), Ennak + (ennak-4), Ennak White, the Jordi Miró line. terms: 0.",
+        "https://www.jordimiro.wine/en/ennak-3/ (200, 93 kB) — 'Ennak 2023', D.O. Terra Alta, 40 % Red Grenache / 18 % Merlot / 17 % Tempranillo / 25 % Carignan, Graduation 14º, no aging, SO2 11 mg/l, 'Suitable for vegans', elaboration and tasting note; Downloads: image and 'Spec Sheet' → /pdf/Ficha-Ennak-2023-ENG.pdf. terms: 0, no e-label link. The 2023 sheet was not fetched: wrong vintage on its face, and the Spanish ficha carries no declaration (batch 5)."
+      ],
+      "evidence": "Producer and cuvée match (Celler Jordi Miró's Ennak red; grapes Garnacha/Merlot/Tempranillo/Carignan as on Systembolaget). VINTAGE DOES NOT: the estate's page is the 2023 (14º against Systembolaget's 13,5 for the 2024), and no 2024 page or sheet is linked; the magnum pack is not mentioned anywhere.",
+      "rejected_because": null,
+      "not_found_because": "The producer's page is the 2023 and carries no declaration in any case (an SO2 figure and a vegan flag only); nothing links a 2024 or a 1,5 L disclosure.",
+      "robots_note": "jordimiro.wine: stock WordPress robots.txt, everything fetched allowed.",
+      "note": "THE PACK ASYMMETRY ON SYSTEMBOLAGET ITSELF: the same wine, same vintage, same producer is declared in 75 cl and undeclared in 150 cl on Systembolaget's own pages — so this wine's absence from the primary dataset is a transcription gap on the magnum item, not a producer that publishes nothing. The magnum's label almost certainly carries the same two-item list, and the project's rules are right not to let this file say so.",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T22:11:11Z",
+  "updated_at": "2026-09-17T22:12:41Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17951,6 +17977,11 @@
       "at": "2026-09-17T15:00:00Z",
       "batch": "6 — Portugal, twenty-third producer: Quinta de Lourosa (1 wine)",
       "result": "1 attempted, 0 found, 1 not found, in four requests. Static site with a 2024 ficha per wine; the sheet identifies the wine on vintage, alcohol and pack, prints the EAN, and carries no QR and no declaration. NEW: the global GS1 Digital Link resolver id.gs1.org/01/{gtin} was tried on the printed EAN and answered 404 JSON — an exact, permitted, one-request negative for a GS1-routed e-label."
+    },
+    {
+      "at": "2026-09-17T15:10:00Z",
+      "batch": "5 addendum — Spain: Jordi Miró, Ennak 2024 magnum (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in three requests (one NXDOMAIN) plus one search. The 75 cl sibling is declared on Systembolaget; the magnum is not, and the estate's own page (jordimiro.wine) is the 2023 with an SO2 figure and no declaration. Spain stands at 93 wines: 1 found, 4 rejected, 88 not found."
     }
   ]
 }
