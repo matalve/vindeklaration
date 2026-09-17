@@ -17,9 +17,9 @@
   "_crawling": "Sequential, >= 0.6 s apart, project User-Agent from src/http.py, no retry loops. robots.txt is checked per host and honoured, with one exception decided 2026-07-30: an e-label page is fetched even where the host disallows crawling, because that page is the disclosure Regulation (EU) 2021/2117 requires and a blanket Disallow makes mandated consumer information unreadable to anyone comparing two bottles. The exception rests on not crawling — only URLs already discovered from the producer's own public linking, one request per wine, no traversal or enumeration — and does not extend to ordinary marketing sites. A technological measure (401, 403, 429, login wall, bot challenge) is absolute and stops the fetch. Records where the exception was used carry robots_disallowed: true.",
   "generated_at": "2026-07-28T20:38:45Z",
   "batch": "6 — PORTUGAL, opened 2026-09-14. Batch 5 (Spain) is CLOSED: its final tail of 11 single-wine producers was worked on 2026-09-14 and yielded 11 not found, taking Spain to 72 producer strings and 92 wines with 1 found, 4 rejected, 87 not found — a find rate of 1,1 %. The Portuguese pool is 39 wines at vintage 2024+ with declaration_status not_declared, across 24 producer strings, none of them previously in this file. Structural facts, computed free before any fetch: eleven producer strings have more than one wine (Marcio Lopes 4; Vibeyard, Barroca da Malhada 3; Quinta do Vallado, João Portugal Ramos, Symington, Arribas, Adega Mayor, Soalheiro, Niepoort, Fitapreta 2 each), so 26 of the 39 wines have a sibling — the best sibling economics of any country so far. The producer==supplier test returns ZERO, as in Spain. Carried forward from Spain: a ficha técnica is fetched only to date a wine, a ficha alimentaria is a real declaration, four of fifteen batch-4 producers and four of eleven batch-5 producers lived on a domain other than their name, id.aecocescanqr.es answers 403 to everything, and probe.py's 'gs1' vendor detector fires on Google Fonts' Open Sans woff2 filenames.",
-  "attempted": 602,
+  "attempted": 603,
   "found": 33,
-  "not_found": 516,
+  "not_found": 517,
   "rejected": 53,
   "declarations": [
     {
@@ -17006,9 +17006,35 @@
       "robots_note": "Nothing fetched from a producer host.",
       "note": "THE PRIVATE-LABEL SHAPE, PORTUGUESE EDITION: 'Nordic Sommelier Selection' is VinTillMat i Väst's series across countries (the string is worth grepping in wines.json for siblings under other producers) and the bottler is a small Amarante house with no site at all. Closed in two NXDOMAINs and two searches.",
       "checked_at": "2026-09-17T00:00:00Z"
+    },
+    {
+      "product_number": "7278001",
+      "name": "Guru",
+      "producer": "Wine & Soul",
+      "country": "Portugal",
+      "vintage": "2024",
+      "status": "not_found",
+      "source_url": "https://wineandsoul.com/wp-content/uploads/2026/01/WS-GURU_2024B.pdf",
+      "source_type": "producer_site",
+      "raw_ingredients": null,
+      "language": null,
+      "vintage_on_source": "2024",
+      "market": "EU",
+      "sources_checked": [
+        "https://www.wineandsoul.com/ → https://wineandsoul.com/ (200, 119 kB, 279 visible chars) — a language chooser; WordPress/Divi, robots.txt empty Disallow. The 'gs1' vendor flag is the Open Sans woff2 false positive.",
+        "https://wineandsoul.com/home/ (200, 357 kB) and /wine-olive-oil/ (200, 334 kB) — the portfolio: Qta. da Manoella, Pintas, Guru (Guru Douro White, Guru NM, Guru Vinha da Calçada), Vinha do Altar, Ports, olive oil. terms: 0.",
+        "https://wineandsoul.com/project/guru/ (200, 339 kB) — undated wine page (tasting note, vinification, awards to Guru 2020) with a TECHNICAL FILE row linking one PDF per vintage 2017–2024. terms: 0, no e-label link.",
+        "https://wineandsoul.com/wp-content/uploads/2026/01/WS-GURU_2024B.pdf (200, 276 kB, pdf_text_chars 4 948) — bilingual en/pt sheet 'GURU DOURO WHITE 2024 / DOURO BRANCO': company, Douro DOC, Cima Corgo, 72-year-old field blend of Viosinho, Rabigato, Códega do Larinho and Gouveio at 600 m, harvest 22–31 August, French oak 8 % new, 9 months battonage, TOTAL PRODUCTION 19 586 bottles 75 cl and 260 magnums, ANALYTICAL NOTES alcohol 12,5 % vol, total acidity 5,5, VA 0,4, pH 3,31, extract 18,5, total sugars < 0,6, tasting note. No ingredients, allergens, nutrition or energy value. A 200 dpi render scanned with zbarimg: NO QR."
+      ],
+      "evidence": "Producer, cuvée and vintage match: the estate's own sheet is 'GURU DOURO WHITE 2024', its grapes are exactly Systembolaget's four (Gouveio, Rabigato, Viosinho, Códega do Larinho), 12,5 % vol equals Systembolaget's 12,5, and the 75 cl pack is the one Systembolaget sells.",
+      "rejected_because": null,
+      "not_found_because": "The per-vintage technical file is analytics only, with no QR and no mandated element; the site has no e-label link or vendor.",
+      "robots_note": "wineandsoul.com robots.txt: empty Disallow — everything allowed.",
+      "note": "Fourth Portuguese ficha read in full, and the best-identified (grapes, alcohol, pack and production all stated) — and no declaration. Pattern holding: the Portuguese ficha dates and identifies the wine perfectly and never declares it, with Soalheiro's QR-bearing sheet the single exception so far.",
+      "checked_at": "2026-09-17T00:00:00Z"
     }
   ],
-  "updated_at": "2026-09-17T21:58:55Z",
+  "updated_at": "2026-09-17T22:00:33Z",
   "_runs": [
     {
       "at": "2026-07-28T20:38:45Z",
@@ -17675,6 +17701,11 @@
       "at": "2026-09-17T13:05:00Z",
       "batch": "6 — Portugal, fourteenth producer: Tres Rostos (1 wine, importer private label)",
       "result": "1 attempted, 0 found, 1 not found, in two NXDOMAIN requests and two searches. Tres Rostos (Amarante) has no findable website; the cuvée is VinTillMat i Väst's 'Nordic Sommelier Selection' private label."
+    },
+    {
+      "at": "2026-09-17T13:20:00Z",
+      "batch": "6 — Portugal, fifteenth producer: Wine & Soul (1 wine)",
+      "result": "1 attempted, 0 found, 1 not found, in six requests. WordPress/Divi site with one technical file per vintage per wine (2017–2024); the Guru 2024 sheet identifies the wine on grapes, alcohol, pack and production, carries no QR and no mandated element."
     }
   ]
 }
