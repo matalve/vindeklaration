@@ -243,6 +243,10 @@
   {
    "match": "antioxidationsmdele -> antioxidationsmdel",
    "wines": 1
+  },
+  {
+   "match": "karboxymetylzellulos -> karboxymetylcellulos",
+   "wines": 1
   }
  ]
 }
