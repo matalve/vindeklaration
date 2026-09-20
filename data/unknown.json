@@ -81,6 +81,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
   },
   {
+   "token": "ämnen",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
+  },
+  {
    "token": "grönsaksklarare",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-649301/"
@@ -111,9 +116,19 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
   },
   {
+   "token": "agave",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
+  },
+  {
    "token": "lime",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
+  },
+  {
+   "token": "svavelsyraanhydrid",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-8276201/"
   },
   {
    "token": "oak",
@@ -185,6 +200,10 @@
    "wines": 1
   },
   {
+   "match": "rörsockersirap -> sockersirap",
+   "wines": 1
+  },
+  {
    "match": "sabiliseringsmedel -> stabiliseringsmedel",
    "wines": 1
   },
@@ -205,7 +224,23 @@
    "wines": 1
   },
   {
+   "match": "ethanol -> etanol",
+   "wines": 1
+  },
+  {
+   "match": "antiocidaner -> antioxidanter",
+   "wines": 1
+  },
+  {
    "match": "askorbinsyra -> askorbinsyra",
+   "wines": 1
+  },
+  {
+   "match": "konserverinsgs -> konserverings",
+   "wines": 1
+  },
+  {
+   "match": "acaciagummi -> akaciagummi",
    "wines": 1
   },
   {
@@ -214,10 +249,6 @@
   },
   {
    "match": "konserverinsmedel -> konserveringsmedel",
-   "wines": 1
-  },
-  {
-   "match": "svaveldiocid -> svaveldioxid",
    "wines": 1
   },
   {
