@@ -116,6 +116,16 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
   },
   {
+   "token": "äppeljuicekoncentrat",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7610101/"
+  },
+  {
+   "token": "glögg",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7610101/"
+  },
+  {
    "token": "druvmost",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7614501/"
@@ -129,11 +139,6 @@
    "token": "lime",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
-  },
-  {
-   "token": "svavelsyraanhydrid",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-8276201/"
   },
   {
    "token": "oak",
@@ -186,10 +191,6 @@
   },
   {
    "match": "kornserveringsmedel -> konserveringsmedel",
-   "wines": 1
-  },
-  {
-   "match": "antixidationsmedel -> antioxidationsmedel",
    "wines": 1
   },
   {
