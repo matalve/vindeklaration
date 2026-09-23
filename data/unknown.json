@@ -141,6 +141,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
   },
   {
+   "token": "svavelsyraanhydrid",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-8276201/"
+  },
+  {
    "token": "oak",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-836208/"
@@ -191,6 +196,10 @@
   },
   {
    "match": "kornserveringsmedel -> konserveringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "antixidationsmedel -> antioxidationsmedel",
    "wines": 1
   },
   {
