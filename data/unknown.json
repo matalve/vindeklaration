@@ -11,6 +11,66 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
+   "token": "enthält",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "geringfügige",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "mengen",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "von",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "gesättigten",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "fettsäuren",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "eiweiß",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "und",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "salz",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "zutaten",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "trauben",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "sulfitesulfiter",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
    "token": "polygalakturonas",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
@@ -182,6 +242,10 @@
   }
  ],
  "fuzzy_matches": [
+  {
+   "match": "antioxidationsmittel -> antioxidationsmdel",
+   "wines": 3
+  },
   {
    "match": "svavekdioxid -> svaveldioxid",
    "wines": 2
