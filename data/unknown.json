@@ -231,6 +231,16 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-9031801/"
   },
   {
+   "token": "conservatives",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9035801/"
+  },
+  {
+   "token": "packing",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9035801/"
+  },
+  {
    "token": "förpackningsbar",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9216301/"
@@ -280,10 +290,6 @@
   },
   {
    "match": "rörsockersirap -> sockersirap",
-   "wines": 1
-  },
-  {
-   "match": "sabiliseringsmedel -> stabiliseringsmedel",
    "wines": 1
   },
   {
