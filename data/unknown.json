@@ -7,13 +7,8 @@
   },
   {
    "token": "kaliumsyra",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
-  },
-  {
-   "token": "polygalakturonas",
    "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
+   "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
    "token": "generale",
@@ -114,6 +109,11 @@
    "token": "stabiliseringsämnen",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
+  },
+  {
+   "token": "polygalakturonas",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7606401/"
   },
   {
    "token": "äppeljuicekoncentrat",
