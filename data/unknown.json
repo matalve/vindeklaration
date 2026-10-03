@@ -11,11 +11,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
-   "token": "ämnen",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
-  },
-  {
    "token": "polygalakturonas",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
@@ -86,6 +81,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
   },
   {
+   "token": "ämnen",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
+  },
+  {
    "token": "grönsaksklarare",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-649301/"
@@ -146,6 +146,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
   },
   {
+   "token": "svavelsyraanhydrid",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-8276201/"
+  },
+  {
    "token": "oak",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-836208/"
@@ -186,11 +191,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-9216301/"
   },
   {
-   "token": "potatis",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9249702/"
-  },
-  {
    "token": "alkoholisk",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9506901/"
@@ -199,6 +199,10 @@
  "fuzzy_matches": [
   {
    "match": "svavekdioxid -> svaveldioxid",
+   "wines": 2
+  },
+  {
+   "match": "kaliumpolyspartat -> kaliumpolyaspartat",
    "wines": 2
   },
   {
@@ -239,10 +243,6 @@
   },
   {
    "match": "syrareglerande -> syrereglerande",
-   "wines": 1
-  },
-  {
-   "match": "kaliumpolyspartat -> kaliumpolyaspartat",
    "wines": 1
   },
   {
