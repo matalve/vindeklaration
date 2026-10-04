@@ -7,8 +7,13 @@
   },
   {
    "token": "kaliumsyra",
-   "wines": 3,
+   "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
+  },
+  {
+   "token": "agents",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
   },
   {
    "token": "polygalakturonas",
@@ -86,6 +91,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
   },
   {
+   "token": "jästskalpreparat",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-581001/"
+  },
+  {
    "token": "grönsaksklarare",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-649301/"
@@ -106,9 +116,9 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
   },
   {
-   "token": "agents",
+   "token": "svavelodix",
    "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
+   "example": "https://www.systembolaget.se/produkt/vin/x-7554101/"
   },
   {
    "token": "stabiliseringsämnen",
@@ -222,7 +232,7 @@
    "wines": 1
   },
   {
-   "match": "surhetsreglerande -> surhetsreglerande",
+   "match": "stabliliseringsmedel -> stabiliseringsmedel",
    "wines": 1
   },
   {
@@ -259,6 +269,14 @@
   },
   {
    "match": "rektifierad -> rektifiera",
+   "wines": 1
+  },
+  {
+   "match": "antioxydants -> antioxidants",
+   "wines": 1
+  },
+  {
+   "match": "stabilisateurs -> stabilisers",
    "wines": 1
   },
   {
