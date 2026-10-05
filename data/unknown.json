@@ -7,7 +7,7 @@
   },
   {
    "token": "kaliumsyra",
-   "wines": 2,
+   "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
@@ -99,11 +99,6 @@
    "token": "grönsaksklarare",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-649301/"
-  },
-  {
-   "token": "invertsocker",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7003801/"
   },
   {
    "token": "inga",
@@ -229,6 +224,10 @@
   },
   {
    "match": "kalium­polyaspartat -> kaliumpolyaspartat",
+   "wines": 1
+  },
+  {
+   "match": "surhetsreglerande -> surhetsreglerande",
    "wines": 1
   },
   {
