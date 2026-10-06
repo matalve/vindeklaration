@@ -27,6 +27,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from xml.sax.saxutils import escape
 
+import rcssmin
 import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -947,7 +948,13 @@ def build(output: Path, limit: int | None = None) -> None:
         json.dumps(build_index(wines), ensure_ascii=False, separators=(",", ":")),
         encoding="utf-8",
     )
-    shutil.copy(TEMPLATE_DIR / "site.css", output / "site.css")
+    # The source keeps its comments; the reader does not need them, and this
+    # is the page's one render-blocking request. tests/test_site.py proves the
+    # minified file declares exactly what the source does.
+    (output / "site.css").write_text(
+        rcssmin.cssmin((TEMPLATE_DIR / "site.css").read_text(encoding="utf-8")),
+        encoding="utf-8",
+    )
     # Committed rather than generated per build: they change when the mark
     # changes, which is not nightly. tools/make_icons.py redraws them.
     for icon in sorted((TEMPLATE_DIR / "icons").iterdir()):

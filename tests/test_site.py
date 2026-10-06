@@ -875,3 +875,87 @@ def test_no_boundary_line_once_every_bar_is_covered() -> None:
 
     assert all(b["covered"] for b in chart["bars"])
     assert chart["boundary"] is None
+
+
+def _css_tokens(nodes, in_function=False):
+    """Flatten a stylesheet to tokens, keeping only whitespace that means something.
+
+    Whitespace is dropped where CSS ignores it and kept as one space everywhere
+    else — between `0` and `auto`, or in `[open] .x` and `a :hover`, where it
+    is a descendant combinator. Which side of the space a character is on
+    matters: after `:` it is noise, before `:` it changes the selector. Inside
+    a function `+` and `-` keep their spaces, because `calc(1px+2%)` is invalid.
+    """
+    import tinycss2
+
+    loose_after = {",", ":", ";", ">", "~", "+", "(", "[", "{", "}"}
+    loose_before = {",", ";", "!", ">", "~", "+", ")", "]", "{", "}"}
+    raw_space = object()  # only this level's own whitespace is filtered below
+    out = []
+    for node in nodes:
+        if node.type == "comment":
+            continue
+        if node.type == "whitespace":
+            out.append(raw_space)
+        elif node.type == "function":
+            out += [node.lower_name, "("] + _css_tokens(node.arguments, True) + [")"]
+        elif node.type in ("() block", "[] block", "{} block"):
+            out += [node.type[0]] + _css_tokens(node.content, in_function) + [node.type[1]]
+        elif node.type in ("qualified-rule", "at-rule"):
+            if node.type == "at-rule":
+                out.append("@" + node.lower_at_keyword)
+            out += _css_tokens(node.prelude, in_function)
+            if node.content is not None:
+                out += ["{"] + _css_tokens(tinycss2.parse_component_value_list(
+                    tinycss2.serialize(node.content)), in_function) + ["}"]
+            else:
+                out.append(";")
+        else:
+            out.append(tinycss2.serialize([node]))
+    kept = []
+    for i, tok in enumerate(out):
+        if tok is raw_space:
+            prev = kept[-1] if kept else None
+            nxt = next((t for t in out[i + 1:] if t is not raw_space), None)
+            if prev in (None, " ") or nxt is None:
+                continue
+            if in_function and "+" in (prev, nxt):
+                pass
+            elif prev in loose_after or nxt in loose_before:
+                continue
+            tok = " "
+        if tok == "}" and kept and kept[-1] == ";":
+            kept.pop()  # a trailing semicolon before `}` is optional
+        kept.append(tok)
+    return kept
+
+
+def test_shipped_css_declares_exactly_what_the_source_does(tmp_path):
+    """The build minifies site.css; minifying must never change what it says.
+
+    A minifier that drops a rule, or a meaningful space, still produces a file
+    that loads without error and mostly renders — the damage shows up as one
+    misaligned table on one page. So the shipped file is compared with the
+    source token for token, and the test is checked against a broken copy to
+    make sure it can fail.
+    """
+    import rcssmin
+    import tinycss2
+
+    source = (TEMPLATE_DIR / "site.css").read_text(encoding="utf-8")
+    shipped = rcssmin.cssmin(source)
+
+    def parse(css):
+        rules = tinycss2.parse_stylesheet(css)
+        assert not [r for r in rules if r.type == "error"]
+        return _css_tokens(rules)
+
+    assert len(shipped) < len(source) * 0.6
+    assert "/*" not in shipped
+    assert parse(shipped) == parse(source)
+
+    # The comparison must notice a space the minifier should have kept.
+    assert parse("a{margin:0auto}") != parse("a { margin: 0 auto; }")
+    assert parse("a b{c:d}") != parse("ab{c:d}")
+    assert parse("[x] .y{c:d}") != parse("[x].y{c:d}")
+    assert parse("a{b:calc(var(--m) + 1rem)}") != parse("a{b:calc(var(--m)+ 1rem)}")
