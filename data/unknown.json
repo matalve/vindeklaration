@@ -232,6 +232,10 @@
    "wines": 1
   },
   {
+   "match": "surhetsreglerande -> surhetsreglerande",
+   "wines": 1
+  },
+  {
    "match": "stabliliseringsmedel -> stabiliseringsmedel",
    "wines": 1
   },
