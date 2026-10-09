@@ -11,6 +11,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
+   "token": "ämnen",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
+  },
+  {
    "token": "agents",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
@@ -84,11 +89,6 @@
    "token": "syttegulatorer",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
-  },
-  {
-   "token": "ämnen",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
   },
   {
    "token": "jästskalpreparat",
@@ -199,6 +199,11 @@
    "token": "förpackningsbar",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9216301/"
+  },
+  {
+   "token": "potatis",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9249702/"
   },
   {
    "token": "alkoholisk",
