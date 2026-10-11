@@ -16,14 +16,14 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
   },
   {
-   "token": "agents",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
-  },
-  {
    "token": "polygalakturonas",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
+  },
+  {
+   "token": "stabiliseringsämnen",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
   },
   {
    "token": "generale",
@@ -111,6 +111,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
   },
   {
+   "token": "agents",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7189801/"
+  },
+  {
    "token": "jästoch",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7199201/"
@@ -119,11 +124,6 @@
    "token": "svavelodix",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7554101/"
-  },
-  {
-   "token": "stabiliseringsämnen",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
   },
   {
    "token": "äppeljuicekoncentrat",
@@ -154,11 +154,6 @@
    "token": "lime",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
-  },
-  {
-   "token": "svavelsyraanhydrid",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-8276201/"
   },
   {
    "token": "oak",
@@ -213,6 +208,10 @@
  ],
  "fuzzy_matches": [
   {
+   "match": "rektifierad -> rektifiera",
+   "wines": 2
+  },
+  {
    "match": "svavekdioxid -> svaveldioxid",
    "wines": 2
   },
@@ -237,7 +236,7 @@
    "wines": 1
   },
   {
-   "match": "surhetsreglerande -> surhetsreglerande",
+   "match": "duvmust -> druvmust",
    "wines": 1
   },
   {
@@ -277,15 +276,7 @@
    "wines": 1
   },
   {
-   "match": "rektifierad -> rektifiera",
-   "wines": 1
-  },
-  {
    "match": "antioxydants -> antioxidants",
-   "wines": 1
-  },
-  {
-   "match": "stabilisateurs -> stabilisers",
    "wines": 1
   },
   {
