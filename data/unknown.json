@@ -26,6 +26,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
   },
   {
+   "token": "glögg",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7610101/"
+  },
+  {
    "token": "generale",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-194101/"
@@ -81,6 +86,41 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-3028101/"
   },
   {
+   "token": "piedra",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-3256201/"
+  },
+  {
+   "token": "luenga",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-3256201/"
+  },
+  {
+   "token": "pedro",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-3256201/"
+  },
+  {
+   "token": "ximénez",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-3256201/"
+  },
+  {
+   "token": "mineraler",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-3325102/"
+  },
+  {
+   "token": "sockerhalt",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-3325102/"
+  },
+  {
+   "token": "stjärnanis",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-3450102/"
+  },
+  {
    "token": "kalium",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-3465901/"
@@ -99,6 +139,11 @@
    "token": "grönsaksklarare",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-649301/"
+  },
+  {
+   "token": "invertsocker",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7003801/"
   },
   {
    "token": "inga",
@@ -131,11 +176,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7610101/"
   },
   {
-   "token": "glögg",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7610101/"
-  },
-  {
    "token": "druvmost",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7614501/"
@@ -154,6 +194,11 @@
    "token": "lime",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
+  },
+  {
+   "token": "svavelsyraanhydrid",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-8276201/"
   },
   {
    "token": "oak",
@@ -216,10 +261,6 @@
    "wines": 2
   },
   {
-   "match": "kaliumpolyspartat -> kaliumpolyaspartat",
-   "wines": 2
-  },
-  {
    "match": "konserverings -> konserverings",
    "wines": 1
   },
@@ -237,6 +278,10 @@
   },
   {
    "match": "duvmust -> druvmust",
+   "wines": 1
+  },
+  {
+   "match": "surhetsreglerande -> surhetsreglerande",
    "wines": 1
   },
   {
@@ -284,6 +329,10 @@
    "wines": 1
   },
   {
+   "match": "kaliumpolyspartat -> kaliumpolyaspartat",
+   "wines": 1
+  },
+  {
    "match": "askorbinsyra -> askorbinsyra",
    "wines": 1
   },
@@ -317,6 +366,10 @@
   },
   {
    "match": "antioxidansmedel -> antioxidantmedel",
+   "wines": 1
+  },
+  {
+   "match": "spice -> spices",
    "wines": 1
   },
   {
