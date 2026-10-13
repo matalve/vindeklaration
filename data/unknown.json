@@ -11,11 +11,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
-   "token": "ämnen",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
-  },
-  {
    "token": "polygalakturonas",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
@@ -249,6 +244,11 @@
    "token": "alkoholisk",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9506901/"
+  },
+  {
+   "token": "ämnen",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9529701/"
   }
  ],
  "fuzzy_matches": [
@@ -258,6 +258,10 @@
   },
   {
    "match": "svavekdioxid -> svaveldioxid",
+   "wines": 2
+  },
+  {
+   "match": "kaliumpolyspartat -> kaliumpolyaspartat",
    "wines": 2
   },
   {
@@ -326,10 +330,6 @@
   },
   {
    "match": "antiocidaner -> antioxidanter",
-   "wines": 1
-  },
-  {
-   "match": "kaliumpolyspartat -> kaliumpolyaspartat",
    "wines": 1
   },
   {
