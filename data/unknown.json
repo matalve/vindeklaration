@@ -313,10 +313,6 @@
    "wines": 1
   },
   {
-   "match": "stabilisatiorer -> stabilisatorer",
-   "wines": 1
-  },
-  {
    "match": "metavinsra -> metavinsyra",
    "wines": 1
   },
