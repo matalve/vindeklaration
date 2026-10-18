@@ -166,6 +166,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7199201/"
   },
   {
+   "token": "möjlig",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7235401/"
+  },
+  {
    "token": "svavelodix",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7554101/"
@@ -322,6 +327,10 @@
   },
   {
    "match": "ethanol -> etanol",
+   "wines": 1
+  },
+  {
+   "match": "stabliisatorer -> stablisatorer",
    "wines": 1
   },
   {
