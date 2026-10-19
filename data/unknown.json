@@ -31,6 +31,16 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7610101/"
   },
   {
+   "token": "industriell",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7748401/"
+  },
+  {
+   "token": "atmosfär",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7748401/"
+  },
+  {
    "token": "generale",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-194101/"
@@ -189,6 +199,26 @@
    "token": "durvor",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7845701/"
+  },
+  {
+   "token": "trauben",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7858201/"
+  },
+  {
+   "token": "aus",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7858201/"
+  },
+  {
+   "token": "ökologischem",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7858201/"
+  },
+  {
+   "token": "anbau",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7858201/"
   },
   {
    "token": "agave",
