@@ -16,11 +16,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
   },
   {
-   "token": "polygalakturonas",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
-  },
-  {
    "token": "stabiliseringsämnen",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
@@ -184,6 +179,11 @@
    "token": "svavelodix",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7554101/"
+  },
+  {
+   "token": "polygalakturonas",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7606401/"
   },
   {
    "token": "äppeljuicekoncentrat",
