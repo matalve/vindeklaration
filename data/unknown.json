@@ -1,6 +1,11 @@
 {
  "unknown_tokens": [
   {
+   "token": "trauben",
+   "wines": 4,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7858201/"
+  },
+  {
    "token": "försumbar",
    "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-7010801/"
@@ -11,9 +16,69 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
+   "token": "enthält",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "geringfügige",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "mengen",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "von",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "gesättigten",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "fettsäuren",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "eiweiß",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "und",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "salz",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "zutaten",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
+   "token": "sulfitesulfiter",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
+  },
+  {
    "token": "ämnen",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
+  },
+  {
+   "token": "polygalakturonas",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
   },
   {
    "token": "stabiliseringsämnen",
@@ -181,11 +246,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7554101/"
   },
   {
-   "token": "polygalakturonas",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7606401/"
-  },
-  {
    "token": "äppeljuicekoncentrat",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7610101/"
@@ -199,11 +259,6 @@
    "token": "durvor",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7845701/"
-  },
-  {
-   "token": "trauben",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7858201/"
   },
   {
    "token": "aus",
@@ -288,6 +343,10 @@
  ],
  "fuzzy_matches": [
   {
+   "match": "antioxidationsmittel -> antioxidationsmdel",
+   "wines": 3
+  },
+  {
    "match": "rektifierad -> rektifiera",
    "wines": 2
   },
@@ -305,10 +364,6 @@
   },
   {
    "match": "kornserveringsmedel -> konserveringsmedel",
-   "wines": 1
-  },
-  {
-   "match": "antixidationsmedel -> antioxidationsmedel",
    "wines": 1
   },
   {
@@ -404,6 +459,10 @@
    "wines": 1
   },
   {
+   "match": "kkonserveringsmedel -> konserveringsmedel",
+   "wines": 1
+  },
+  {
    "match": "antioxidansmedel -> antioxidantmedel",
    "wines": 1
   },
@@ -413,6 +472,10 @@
   },
   {
    "match": "karboxymetylzellulos -> karboxymetylcellulos",
+   "wines": 1
+  },
+  {
+   "match": "svaveldoixid -> svaveldoxid",
    "wines": 1
   },
   {
