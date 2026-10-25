@@ -71,9 +71,19 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
   },
   {
+   "token": "ämnen",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
+  },
+  {
    "token": "polygalakturonas",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
+  },
+  {
+   "token": "stabiliseringsämnen",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
   },
   {
    "token": "glögg",
@@ -196,11 +206,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-581001/"
   },
   {
-   "token": "invertsocker",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7003801/"
-  },
-  {
    "token": "inga",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7121001/"
@@ -226,14 +231,14 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7235401/"
   },
   {
+   "token": "chersegi",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7355501/"
+  },
+  {
    "token": "svavelodix",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7554101/"
-  },
-  {
-   "token": "stabiliseringsämnen",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
   },
   {
    "token": "äppeljuicekoncentrat",
@@ -244,6 +249,11 @@
    "token": "druvmost",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7614501/"
+  },
+  {
+   "token": "durvor",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7845701/"
   },
   {
    "token": "aus",
@@ -324,11 +334,6 @@
    "token": "alkoholisk",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9506901/"
-  },
-  {
-   "token": "ämnen",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9529701/"
   }
  ],
  "fuzzy_matches": [
@@ -341,6 +346,14 @@
    "wines": 2
   },
   {
+   "match": "stabilisteringsmedel -> stabiliseringsmedel",
+   "wines": 2
+  },
+  {
+   "match": "svavekdioxid -> svaveldioxid",
+   "wines": 2
+  },
+  {
    "match": "kaliumpolyspartat -> kaliumpolyaspartat",
    "wines": 2
   },
@@ -350,6 +363,14 @@
   },
   {
    "match": "kornserveringsmedel -> konserveringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "kaliummetabissulfit -> kaliummetabisulfit",
+   "wines": 1
+  },
+  {
+   "match": "amlinsyra -> malinsyra",
    "wines": 1
   },
   {
@@ -381,6 +402,10 @@
    "wines": 1
   },
   {
+   "match": "sacakaros -> sackaros",
+   "wines": 1
+  },
+  {
    "match": "sabiliseringsmedel -> stabiliseringsmedel",
    "wines": 1
   },
@@ -406,6 +431,10 @@
   },
   {
    "match": "stabliisatorer -> stablisatorer",
+   "wines": 1
+  },
+  {
+   "match": "antioxydants -> antioxidants",
    "wines": 1
   },
   {
