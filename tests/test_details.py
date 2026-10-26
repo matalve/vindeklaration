@@ -13,7 +13,8 @@ from datetime import datetime, timedelta, timezone
 import pytest
 
 from src import details as details_module
-from src.details import discover_build_id, fetch_details
+from src.details import FAILED_STREAK, discover_build_id, fetch_details
+from src.http import FetchError
 
 
 class FakeSite:
@@ -175,6 +176,7 @@ def test_a_run_that_mostly_fails_stops_the_pipeline_instead_of_reporting_it(
             "fetched": len(todo) - 10,
             "declared": 0,
             "missing": 10,
+            "failed": [],
             "rediscoveries": 1,
         },
     )
@@ -203,12 +205,120 @@ def test_a_handful_of_gone_products_in_a_small_run_is_not_a_failure(
             "fetched": 0,
             "declared": 0,
             "missing": len(todo),
+            "failed": [],
             "rediscoveries": 1,
         },
     )
     monkeypatch.setattr("sys.argv", ["details", "--only", *todo])
 
     details_module.main()  # no SystemExit
+
+
+class FlakySite(FakeSite):
+    """A FakeSite where some products fail outright instead of answering."""
+
+    def __init__(self, live, broken):
+        super().__init__(live)
+        self.broken = set(broken)
+
+    def get_json(self, http, url):
+        number = url.rsplit("x-", 1)[1].removesuffix(".json")
+        if number in self.broken:
+            self.data_requests += 1
+            raise FetchError(f"giving up on {url}: 500", status=500)
+        return super().get_json(http, url)
+
+
+def test_one_failing_product_does_not_end_the_run(site, tmp_path):
+    todo = numbers(30)
+    site(FlakySite(live=todo, broken=[todo[7]]))
+
+    result = fetch_details(None, "build-one", todo)
+
+    assert result["fetched"] == 29
+    assert [number for number, _ in result["failed"]] == [todo[7]]
+    assert result["missing"] == 0
+    # Nothing cached for it, so tomorrow's work list picks it up again.
+    assert not (tmp_path / f"{todo[7]}.json").exists()
+
+
+def test_failures_scattered_through_a_run_never_reach_the_streak(site):
+    todo = numbers(40)
+    site(FlakySite(live=todo, broken=todo[3:40:5]))  # never two in a row
+
+    result = fetch_details(None, "build-one", todo)
+
+    assert len(result["failed"]) == 8
+    assert result["fetched"] == 32
+
+
+def test_failures_in_a_row_stop_the_run_instead_of_knocking_on_a_closed_door(site):
+    todo = numbers(40)
+    fake = site(FlakySite(live=todo, broken=todo[10:]))
+
+    with pytest.raises(FetchError, match="in a row"):
+        fetch_details(None, "build-one", todo)
+
+    assert fake.data_requests == 10 + FAILED_STREAK
+
+
+def test_a_failure_in_the_retry_after_a_deploy_is_a_failure_not_a_gone_product(
+    site,
+):
+    todo = numbers(30)
+    fake = site(FlakySite(live=todo, broken=[todo[3]]))
+    fake.deploy_after = 2  # the products read as gone while the buildId is stale
+
+    result = fetch_details(None, "build-one", todo)
+
+    assert [number for number, _ in result["failed"]] == [todo[3]]
+    assert result["missing"] == 0
+
+
+def _run_main_with_failures(monkeypatch, tmp_path, todo, failed):
+    monkeypatch.setattr(details_module, "CACHE_DIR", tmp_path)
+    monkeypatch.setattr(details_module, "client", lambda **kw: _no_client())
+    monkeypatch.setattr(details_module, "discover_build_id", lambda http: "build-one")
+    monkeypatch.setattr(
+        details_module,
+        "fetch_details",
+        lambda http, build_id, todo: {
+            "build_id": build_id,
+            "fetched": len(todo) - len(failed),
+            "declared": 0,
+            "missing": 0,
+            "failed": [(n, "boom") for n in failed],
+            "rediscoveries": 0,
+        },
+    )
+    monkeypatch.setattr("sys.argv", ["details", "--only", *todo])
+    details_module.main()
+
+
+def test_a_few_failures_in_a_large_run_are_listed_but_do_not_fail_it(
+    monkeypatch, tmp_path, capsys
+):
+    todo = numbers(100)
+    _run_main_with_failures(monkeypatch, tmp_path, todo, todo[:2])  # 2% is the limit, not above it
+
+    out = capsys.readouterr().out
+    assert "failed: 2" in out
+    assert todo[0] in out and todo[1] in out
+
+
+def test_too_large_a_share_of_failures_stops_the_pipeline(
+    monkeypatch, tmp_path, capsys
+):
+    todo = numbers(100)
+    with pytest.raises(SystemExit) as raised:
+        _run_main_with_failures(monkeypatch, tmp_path, todo, todo[:3])
+    assert raised.value.code == 1
+    assert "FAILED" in capsys.readouterr().err
+
+
+def test_failures_in_a_small_run_are_never_judged_by_share(monkeypatch, tmp_path):
+    todo = numbers(5)
+    _run_main_with_failures(monkeypatch, tmp_path, todo, todo)  # no SystemExit
 
 
 class _no_client:
@@ -341,6 +451,7 @@ def test_a_buildId_that_moved_mid_run_leaves_a_trace_in_the_log(
             "fetched": 3,
             "declared": 0,
             "missing": 0,
+            "failed": [],
             "rediscoveries": 2,
         },
     )
@@ -362,6 +473,7 @@ def test_an_ordinary_night_says_nothing_about_the_buildId(
             "fetched": 3,
             "declared": 0,
             "missing": 0,
+            "failed": [],
             "rediscoveries": 0,
         },
     )

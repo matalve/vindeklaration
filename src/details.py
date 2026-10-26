@@ -24,7 +24,7 @@ from typing import Any
 
 import httpx
 
-from .http import REQUEST_DELAY, SITE_URL, client, get_json, get_text
+from .http import REQUEST_DELAY, SITE_URL, FetchError, client, get_json, get_text
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 CACHE_DIR = DATA_DIR / "cache"
@@ -59,6 +59,15 @@ MISSING_SHARE_MIN_SAMPLE = 40
 # whatever age they had when they left. Eight days rather than seven leaves
 # room for a refresh that started late without pulling the whole assortment in.
 STALE_AFTER_DAYS = 8
+
+# A product we could not fetch is skipped and retried by the next night's work
+# list, since nothing was cached for it. That is right for a bad product and
+# wrong for a host that has started refusing us, so a run of failures in a row
+# ends the pass: carrying on would only keep knocking on a door that just
+# closed. Same sample rule as above for the share judged at the end of a pass.
+FAILED_STREAK = 5
+FAILED_SHARE_LIMIT = 0.02
+FAILED_LISTED = 20
 
 TTY = sys.stdout.isatty()
 
@@ -210,6 +219,8 @@ def fetch_details(
     """
     fetched = declared = missing = 0
     rediscoveries = 0
+    failed: list[tuple[str, str]] = []
+    consecutive_failures = 0
     # Misses not yet ruled on. A success in between proves the buildId still
     # works, so anything held at that point really was gone.
     pending: list[str] = []
@@ -243,7 +254,11 @@ def fetch_details(
             build_id = current
             for number in pending:
                 time.sleep(REQUEST_DELAY)
-                record = fetch_detail(http, build_id, number)
+                try:
+                    record = fetch_detail(http, build_id, number)
+                except FetchError as error:
+                    failed.append((number, str(error)))
+                    continue
                 if record is None:
                     missing += 1
                 else:
@@ -252,7 +267,20 @@ def fetch_details(
         pending.clear()
 
     for index, number in enumerate(todo, start=1):
-        record = fetch_detail(http, build_id, number)
+        try:
+            record = fetch_detail(http, build_id, number)
+        except FetchError as error:
+            failed.append((number, str(error)))
+            consecutive_failures += 1
+            if consecutive_failures >= FAILED_STREAK:
+                raise FetchError(
+                    f"{FAILED_STREAK} failures in a row, stopping at product "
+                    f"{number} ({index}/{len(todo)}) — the host, not the "
+                    f"product: {error}"
+                ) from error
+            time.sleep(REQUEST_DELAY)
+            continue
+        consecutive_failures = 0
         if record is None:
             pending.append(number)
             if len(pending) >= streak_limit:
@@ -288,6 +316,7 @@ def fetch_details(
         "fetched": fetched,
         "declared": declared,
         "missing": missing,
+        "failed": failed,
         "rediscoveries": rediscoveries,
     }
 
@@ -388,6 +417,28 @@ def main() -> None:
             f"buildId re-checked {result['rediscoveries']}x after a run of 404s "
             f"— {'it had moved' if result['build_id'] != build_id else 'unchanged'}"
         )
+
+    failed = result["failed"]
+    if failed:
+        listed = ", ".join(number for number, _ in failed[:FAILED_LISTED])
+        more = len(failed) - FAILED_LISTED
+        print(
+            f"failed: {len(failed)} — not cached, so tomorrow's run retries "
+            f"them: {listed}" + (f" and {more} more" if more > 0 else "")
+        )
+        print(f"  first error: {failed[0][1]}")
+    if (
+        len(todo) >= MISSING_SHARE_MIN_SAMPLE
+        and len(failed) > len(todo) * FAILED_SHARE_LIMIT
+    ):
+        print(
+            f"FAILED: {len(failed)} of {len(todo)} products "
+            f"({len(failed) / len(todo):.0%}) could not be fetched, above the "
+            f"{FAILED_SHARE_LIMIT:.0%} limit. One bad product is not this; "
+            "look at the first error above.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     missing = result["missing"]
     if (
