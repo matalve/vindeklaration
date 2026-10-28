@@ -1,11 +1,6 @@
 {
  "unknown_tokens": [
   {
-   "token": "trauben",
-   "wines": 4,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7858201/"
-  },
-  {
    "token": "försumbar",
    "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-7010801/"
@@ -14,66 +9,6 @@
    "token": "kaliumsyra",
    "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
-  },
-  {
-   "token": "enthält",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "geringfügige",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "mengen",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "von",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "gesättigten",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "fettsäuren",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "eiweiß",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "und",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "salz",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "zutaten",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "sulfitesulfiter",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9516101/"
-  },
-  {
-   "token": "ämnen",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
   },
   {
    "token": "polygalakturonas",
@@ -256,6 +191,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7845701/"
   },
   {
+   "token": "trauben",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7858201/"
+  },
+  {
    "token": "aus",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7858201/"
@@ -334,13 +274,14 @@
    "token": "alkoholisk",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9506901/"
+  },
+  {
+   "token": "ämnen",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9529701/"
   }
  ],
  "fuzzy_matches": [
-  {
-   "match": "antioxidationsmittel -> antioxidationsmdel",
-   "wines": 3
-  },
   {
    "match": "rektifierad -> rektifiera",
    "wines": 2
