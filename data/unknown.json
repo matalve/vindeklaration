@@ -16,11 +16,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
   },
   {
-   "token": "polygalakturonas",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
-  },
-  {
    "token": "stabiliseringsämnen",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
@@ -181,6 +176,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7554101/"
   },
   {
+   "token": "polygalakturonas",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7606401/"
+  },
+  {
    "token": "äppeljuicekoncentrat",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7610101/"
@@ -327,10 +327,6 @@
    "wines": 1
   },
   {
-   "match": "surhetsreglerande -> surhetsreglerande",
-   "wines": 1
-  },
-  {
    "match": "stabliliseringsmedel -> stabiliseringsmedel",
    "wines": 1
   },
@@ -428,6 +424,10 @@
   },
   {
    "match": "karboxymetylzellulos -> karboxymetylcellulos",
+   "wines": 1
+  },
+  {
+   "match": "svaveldoixid -> svaveldoxid",
    "wines": 1
   },
   {
