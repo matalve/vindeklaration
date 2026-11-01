@@ -141,6 +141,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
   },
   {
+   "token": "måste",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-5254201/"
+  },
+  {
    "token": "jästskalpreparat",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-581001/"
@@ -224,6 +229,11 @@
    "token": "lime",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
+  },
+  {
+   "token": "vindestillat",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-801602/"
   },
   {
    "token": "svavelsyraanhydrid",
@@ -324,10 +334,6 @@
   },
   {
    "match": "duvmust -> druvmust",
-   "wines": 1
-  },
-  {
-   "match": "surhetsreglerande -> surhetsreglerande",
    "wines": 1
   },
   {
