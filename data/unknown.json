@@ -16,6 +16,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
   },
   {
+   "token": "polygalakturonas",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7447201/"
+  },
+  {
    "token": "stabiliseringsämnen",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7554901/"
@@ -34,6 +39,11 @@
    "token": "atmosfär",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7748401/"
+  },
+  {
+   "token": "vindestillat",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-801602/"
   },
   {
    "token": "generale",
@@ -166,6 +176,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7199201/"
   },
   {
+   "token": "möjlig",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7235401/"
+  },
+  {
    "token": "chersegi",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7355501/"
@@ -221,11 +236,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7861001/"
   },
   {
-   "token": "vindestillat",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-801602/"
-  },
-  {
    "token": "svavelsyraanhydrid",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-8276201/"
@@ -266,9 +276,39 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-9035801/"
   },
   {
+   "token": "barolo",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9045402/"
+  },
+  {
+   "token": "docg",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9045402/"
+  },
+  {
+   "token": "macerat",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9045402/"
+  },
+  {
+   "token": "kinin",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9045402/"
+  },
+  {
+   "token": "växter",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9045402/"
+  },
+  {
    "token": "förpackningsbar",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9216301/"
+  },
+  {
+   "token": "farska",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9232901/"
   },
   {
    "token": "potatis",
@@ -282,10 +322,6 @@
   }
  ],
  "fuzzy_matches": [
-  {
-   "match": "rektifierad -> rektifiera",
-   "wines": 2
-  },
   {
    "match": "stabilisteringsmedel -> stabiliseringsmedel",
    "wines": 2
@@ -320,10 +356,6 @@
   },
   {
    "match": "kalium­polyaspartat -> kaliumpolyaspartat",
-   "wines": 1
-  },
-  {
-   "match": "duvmust -> druvmust",
    "wines": 1
   },
   {
@@ -371,6 +403,10 @@
    "wines": 1
   },
   {
+   "match": "rektifierad -> rektifiera",
+   "wines": 1
+  },
+  {
    "match": "stabliisatorer -> stablisatorer",
    "wines": 1
   },
@@ -415,6 +451,10 @@
    "wines": 1
   },
   {
+   "match": "buteering -> buteljering",
+   "wines": 1
+  },
+  {
    "match": "dimetyledikarbonat -> dimetyldikarbonat",
    "wines": 1
   },
@@ -432,6 +472,10 @@
   },
   {
    "match": "karboxymetylzellulos -> karboxymetylcellulos",
+   "wines": 1
+  },
+  {
+   "match": "drvor -> druvor",
    "wines": 1
   },
   {
