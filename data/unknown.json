@@ -323,6 +323,10 @@
  ],
  "fuzzy_matches": [
   {
+   "match": "rektifierad -> rektifiera",
+   "wines": 2
+  },
+  {
    "match": "stabilisteringsmedel -> stabiliseringsmedel",
    "wines": 2
   },
@@ -356,6 +360,10 @@
   },
   {
    "match": "kalium­polyaspartat -> kaliumpolyaspartat",
+   "wines": 1
+  },
+  {
+   "match": "duvmust -> druvmust",
    "wines": 1
   },
   {
@@ -400,10 +408,6 @@
   },
   {
    "match": "ethanol -> etanol",
-   "wines": 1
-  },
-  {
-   "match": "rektifierad -> rektifiera",
    "wines": 1
   },
   {
