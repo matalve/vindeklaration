@@ -11,11 +11,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7010801/"
   },
   {
-   "token": "kaliumsyra",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
-  },
-  {
    "token": "aromämnen",
    "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-838702/"
@@ -24,6 +19,11 @@
    "token": "ämnen",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
+  },
+  {
+   "token": "kaliumsyra",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
    "token": "polygalakturonas",
@@ -111,6 +111,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-261134/"
   },
   {
+   "token": "fetstil",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-263734/"
+  },
+  {
    "token": "metaweinsäure",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-3028101/"
@@ -159,6 +164,11 @@
    "token": "syttegulatorer",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-420001/"
+  },
+  {
+   "token": "expedition",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-500101/"
   },
   {
    "token": "måste",
@@ -423,6 +433,10 @@
    "wines": 1
   },
   {
+   "match": "isoaskorbinsyra -> askorbinsyra",
+   "wines": 1
+  },
+  {
    "match": "duvmust -> druvmust",
    "wines": 1
   },
@@ -496,6 +510,10 @@
   },
   {
    "match": "konserverinsgs -> konserverings",
+   "wines": 1
+  },
+  {
+   "match": "antioxidationmedel -> antioxidationsmedel",
    "wines": 1
   },
   {
