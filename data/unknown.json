@@ -11,6 +11,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7010801/"
   },
   {
+   "token": "kaliumsyra",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
+  },
+  {
    "token": "aromämnen",
    "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-838702/"
@@ -19,11 +24,6 @@
    "token": "ämnen",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
-  },
-  {
-   "token": "kaliumsyra",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
    "token": "polygalakturonas",
