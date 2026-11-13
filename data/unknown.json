@@ -206,11 +206,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7199201/"
   },
   {
-   "token": "möjlig",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7235401/"
-  },
-  {
    "token": "chersegi",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7355501/"
@@ -371,6 +366,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-9045402/"
   },
   {
+   "token": "s=2",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9212901/"
+  },
+  {
    "token": "förpackningsbar",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9216301/"
@@ -384,6 +384,11 @@
    "token": "potatis",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9249702/"
+  },
+  {
+   "token": "karbondioxid",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9447301/"
   },
   {
    "token": "alkoholisk",
@@ -465,10 +470,6 @@
    "wines": 1
   },
   {
-   "match": "duvor -> druvor",
-   "wines": 1
-  },
-  {
    "match": "syrareglerande -> syrereglerande",
    "wines": 1
   },
@@ -521,6 +522,10 @@
    "wines": 1
   },
   {
+   "match": "¹ekologiskt -> ekologiskt",
+   "wines": 1
+  },
+  {
    "match": "karboximmetylcellulosa -> karboximetylcellulosa",
    "wines": 1
   },
@@ -538,6 +543,10 @@
   },
   {
    "match": "buteering -> buteljering",
+   "wines": 1
+  },
+  {
+   "match": "konseverings -> konserverings",
    "wines": 1
   },
   {
