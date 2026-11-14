@@ -206,6 +206,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7199201/"
   },
   {
+   "token": "möjlig",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7235401/"
+  },
+  {
    "token": "chersegi",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7355501/"
@@ -402,10 +407,6 @@
    "wines": 2
   },
   {
-   "match": "stabilisteringsmedel -> stabiliseringsmedel",
-   "wines": 2
-  },
-  {
    "match": "svavekdioxid -> svaveldioxid",
    "wines": 2
   },
@@ -427,10 +428,6 @@
   },
   {
    "match": "amlinsyra -> malinsyra",
-   "wines": 1
-  },
-  {
-   "match": "antixidationsmedel -> antioxidationsmedel",
    "wines": 1
   },
   {
@@ -467,6 +464,10 @@
   },
   {
    "match": "sabiliseringsmedel -> stabiliseringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "duvor -> druvor",
    "wines": 1
   },
   {
@@ -511,6 +512,10 @@
   },
   {
    "match": "konserverinsgs -> konserverings",
+   "wines": 1
+  },
+  {
+   "match": "stabilisteringsmedel -> stabiliseringsmedel",
    "wines": 1
   },
   {
