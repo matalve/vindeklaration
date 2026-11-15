@@ -2,6 +2,11 @@
  "unknown_tokens": [
   {
    "token": "alkoholdestillat",
+   "wines": 5,
+   "example": "https://www.systembolaget.se/produkt/vin/x-838702/"
+  },
+  {
+   "token": "aromämnen",
    "wines": 4,
    "example": "https://www.systembolaget.se/produkt/vin/x-838702/"
   },
@@ -14,11 +19,6 @@
    "token": "kaliumsyra",
    "wines": 3,
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
-  },
-  {
-   "token": "aromämnen",
-   "wines": 3,
-   "example": "https://www.systembolaget.se/produkt/vin/x-838702/"
   },
   {
    "token": "ämnen",
@@ -211,6 +211,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7235401/"
   },
   {
+   "token": "kom",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7246501/"
+  },
+  {
    "token": "chersegi",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7355501/"
@@ -226,6 +231,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7554101/"
   },
   {
+   "token": "orange",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7574401/"
+  },
+  {
    "token": "äppeljuicekoncentrat",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7610101/"
@@ -234,6 +244,11 @@
    "token": "druvmost",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7614501/"
+  },
+  {
+   "token": "distillate",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7653802/"
   },
   {
    "token": "for",
@@ -407,6 +422,10 @@
    "wines": 2
   },
   {
+   "match": "stabilisteringsmedel -> stabiliseringsmedel",
+   "wines": 2
+  },
+  {
    "match": "svavekdioxid -> svaveldioxid",
    "wines": 2
   },
@@ -428,6 +447,10 @@
   },
   {
    "match": "amlinsyra -> malinsyra",
+   "wines": 1
+  },
+  {
+   "match": "antixidationsmedel -> antioxidationsmedel",
    "wines": 1
   },
   {
@@ -460,10 +483,6 @@
   },
   {
    "match": "sacakaros -> sackaros",
-   "wines": 1
-  },
-  {
-   "match": "sabiliseringsmedel -> stabiliseringsmedel",
    "wines": 1
   },
   {
@@ -512,10 +531,6 @@
   },
   {
    "match": "konserverinsgs -> konserverings",
-   "wines": 1
-  },
-  {
-   "match": "stabilisteringsmedel -> stabiliseringsmedel",
    "wines": 1
   },
   {
