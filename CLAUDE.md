@@ -202,6 +202,10 @@ or the absolute refusals — 401, 403, 429, login walls, bot challenges.
 - ~~The quality gate is 2%.~~ Settled 2026-07-27: the gate watches drift, not a
   level. `DRIFT_LIMIT` in `src/report.py` fails the run when the `partial`
   share rises more than one percentage point since the previous recorded run.
+  It also fails when the share is more than one point above the best of the
+  last 30 recorded runs (`ROLLING_WINDOW`, added 2026-11-16), which is what
+  catches a creep too slow for the run-over-run check. Still movement, never a
+  level.
   The baseline lives in `data/quality-history.json`, which the Pi commits —
   **lose that file and the next run has no baseline and silently passes.**
   Only `update.sh` passes `--record`; a manual `src.report` compares but never

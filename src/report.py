@@ -29,6 +29,14 @@ HISTORY_PATH = DATA_DIR / "quality-history.json"
 # what a nightly unattended run actually needs to know.
 DRIFT_LIMIT = 0.01  # percentage points of `partial` share, run over run
 
+# Run over run catches the night something breaks. It cannot see a parser that
+# rots a little every night, because each step stays under the limit forever.
+# So the same movement is also measured against the best of the last
+# ROLLING_WINDOW recorded runs. Still movement, not a level: a share that has
+# sat at 4% for a month passes, one that climbed a point in a month does not.
+ROLLING_WINDOW = 30
+ROLLING_LIMIT = 0.01
+
 
 def load_wines() -> list[dict]:
     return json.loads(WINES_PATH.read_text(encoding="utf-8"))["wines"]
@@ -55,10 +63,11 @@ def load_history() -> list[dict]:
 
 
 def check_gate(entry: dict, history: list[dict]) -> bool:
-    """Compare this run's `partial` share with the last one recorded.
+    """Compare this run's `partial` share with the last run and the recent best.
 
     The first run has nothing to compare against and passes; it is the
     baseline. A fall is always fine — that is the dictionary doing its job.
+    Both comparisons must hold: the first catches a jump, the second a creep.
     """
     rate = entry["partial_rate"]
     previous = history[-1] if history else None
@@ -67,18 +76,38 @@ def check_gate(entry: dict, history: list[dict]) -> bool:
         return True
 
     drift = rate - previous["partial_rate"]
-    passed = drift <= DRIFT_LIMIT
+    steady = drift <= DRIFT_LIMIT
     print(
         f"\nQuality gate: {rate * 100:.1f}% partial, "
         f"{drift * 100:+.1f} points since {previous['date']} "
-        f"(limit {DRIFT_LIMIT * 100:+.0f}) — {'PASS' if passed else 'FAIL'}"
+        f"(limit {DRIFT_LIMIT * 100:+.0f}) — {'PASS' if steady else 'FAIL'}"
     )
-    if not passed:
+    if not steady:
         print(
             "    A jump this size is the parser or the source changing, not the "
             "assortment. Check the unknown tokens above before trusting the run."
         )
-    return passed
+
+    # With a single recorded run the best of the window is the previous run,
+    # which was just compared; saying it twice would only be noise.
+    recent = history[-ROLLING_WINDOW:]
+    if len(recent) < 2:
+        return steady
+    best = min(recent, key=lambda run: run["partial_rate"])
+    creep = rate - best["partial_rate"]
+    gradual = creep <= ROLLING_LIMIT
+    print(
+        f"    {creep * 100:+.1f} points since the best of the last {len(recent)} "
+        f"runs ({best['partial_rate'] * 100:.1f}% on {best['date']}, "
+        f"limit {ROLLING_LIMIT * 100:+.0f}) — {'PASS' if gradual else 'FAIL'}"
+    )
+    if not gradual:
+        print(
+            "    No single night moved far, but together they did. Look at what "
+            "the assortment has been declaring lately before the share settles "
+            "in as the new normal."
+        )
+    return steady and gradual
 
 
 def main() -> None:
