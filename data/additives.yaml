@@ -118,6 +118,9 @@
   group: sulfites
   allergen: sulfites
   name: { sv: Kaliumbisulfit, en: Potassium bisulfite }
+  note:
+    sv: Konserverings- och antioxidationsmedel i samma grupp som svaveldioxid. Det är en sulfit och märks därför som allergen.
+    en: A preservative and antioxidant in the same group as sulfur dioxide. It is a sulphite and is therefore labelled as an allergen.
   aliases:
     - kaliumbisulfit
     - kaliumvätesulfit
@@ -141,6 +144,9 @@
   group: sulfites
   allergen: sulfites
   name: { sv: Natriumbisulfit, en: Sodium bisulfite }
+  note:
+    sv: Natriumvarianten av kaliumbisulfit (E228). Det är en sulfit och märks därför som allergen.
+    en: The sodium counterpart of potassium bisulfite (E228). It is a sulphite and is therefore labelled as an allergen.
   # Named explicitly (not the usual bare "metabisulfit", which reads as the
   # potassium salt) in a non-EU import, so taken at face value.
   aliases: [natriumbisulfit, sodium bisulfite]
@@ -160,6 +166,9 @@
   bucket: additive
   category: preservative
   name: { sv: Sorbinsyra, en: Sorbic acid }
+  note:
+    sv: Konserveringsmedel. I EU:s förteckning över ämnen som är godkända för vinframställning står dess kaliumsalt, kaliumsorbat (E202), inte sorbinsyran själv.
+    en: A preservative. The EU list of compounds authorised in winemaking names its potassium salt, potassium sorbate (E202), rather than sorbic acid itself.
   aliases: [sorbinsyra, sorbic acid]
 
 - id: dimethyl_dicarbonate
@@ -187,6 +196,9 @@
   category: preservative
   allergen: egg
   name: { sv: Lysozym, en: Lysozyme }
+  note:
+    sv: Enzym ur hönsäggvita som angriper bakterier. Konserveringsmedel i vin, och märks som allergen (ägg).
+    en: An enzyme from hens' egg white that attacks bacteria. A preservative in wine, labelled as an allergen (egg).
   aliases: [lysozym, lysozyme, ägglysozym]
 
 - id: ascorbic_acid
@@ -260,6 +272,9 @@
   bucket: additive
   category: acidity_regulator
   name: { sv: Äppelsyra, en: Malic acid }
+  note:
+    sv: En av druvans egna syror. Får tillsättas som surhetsreglerande medel.
+    en: One of the grape's own acids. May be added as an acidity regulator.
   aliases: [äppelsyra, äppelsyror, applesyra, malinsyra, malsyra, malic acid, malico, acido malico]
 
 - id: citric_acid
@@ -267,6 +282,9 @@
   bucket: additive
   category: acidity_regulator
   name: { sv: Citronsyra, en: Citric acid }
+  note:
+    sv: EU listar citronsyra bland stabiliseringsmedlen för vin, inte bland de surhetsreglerande medlen. Det färdiga vinet får innehålla högst 1 g/l.
+    en: The EU lists citric acid among the stabilising agents for wine, not among the acidity regulators. The finished wine may contain no more than 1 g/l.
   aliases:
     - citronsyra
     - citronsyramonohydrat
@@ -294,6 +312,9 @@
   bucket: additive
   category: acidity_regulator
   name: { sv: Mjölksyra, en: Lactic acid }
+  note:
+    sv: Bildas i vinet vid den malolaktiska jäsningen. Får också tillsättas som surhetsreglerande medel.
+    en: Forms in the wine during malolactic fermentation. May also be added as an acidity regulator.
   aliases: [mjölksyra, mjölksyror, lactic acid, mjölksyraoch]
   # "mjölksyraoch": merged with "och" (and), no space in the source.
 
@@ -332,6 +353,9 @@
   bucket: additive
   category: acidity_regulator
   name: { sv: Kaliumkarbonat, en: Potassium carbonate }
+  note:
+    sv: Surhetsreglerande medel som sänker syran i vinet. Räknas i EU:s förteckning som processhjälpmedel.
+    en: An acidity regulator that lowers the wine's acidity. Classed in the EU list as a processing aid.
   aliases:
     - kaliumkarbonat
     - potassium carbonate
@@ -341,6 +365,9 @@
   bucket: additive
   category: acidity_regulator
   name: { sv: Kaliumbikarbonat, en: Potassium bicarbonate }
+  note:
+    sv: Surhetsreglerande medel som sänker syran i vinet. Kallas även kaliumvätekarbonat och räknas i EU:s förteckning som processhjälpmedel.
+    en: An acidity regulator that lowers the wine's acidity. Also called potassium hydrogen carbonate, and classed in the EU list as a processing aid.
   aliases:
     - kaliumbikarbonat
     - kaliumvätekarbonat
@@ -364,6 +391,9 @@
   bucket: additive
   category: acidity_regulator
   name: { sv: Kaliumcitrat, en: Potassium citrate }
+  note:
+    sv: Kaliumsalt av citronsyra (E330).
+    en: The potassium salt of citric acid (E330).
   aliases: [kaliumcitrat, potassium citrate]
 
 - id: diammonium_phosphate
@@ -515,6 +545,9 @@
   bucket: additive
   category: stabiliser
   name: { sv: Metyletylcellulosa, en: Ethyl methyl cellulose }
+  note:
+    sv: Cellulosa ur växtfibrer, delvis eterifierad med metyl- och etylgrupper. Ett annat ämne än karboximetylcellulosa (E466), som EU godkänner som stabiliseringsmedel i vin.
+    en: Cellulose from plant fibre, partially etherified with methyl and ethyl groups. A different substance from carboxymethylcellulose (E466), which the EU authorises as a stabilising agent in wine.
   aliases: [metyletylcellulosa]
 
 - id: gum_arabic
@@ -560,6 +593,9 @@
   bucket: additive
   category: stabiliser
   name: { sv: Kaliumpolyaspartat, en: Potassium polyaspartate }
+  note:
+    sv: Stabiliseringsmedel som enligt EU:s regler bara får användas för att bidra till att vinsten inte fälls ut i flaskan.
+    en: A stabilising agent which EU rules allow only to help stop tartrate crystals forming in the bottle.
   aliases:
     - kaliumpolyaspartat
     - potassium polyaspartate
@@ -630,6 +666,9 @@
   bucket: additive
   category: stabiliser
   name: { sv: Polyvinylpolypyrrolidon, en: Polyvinylpolypyrrolidone }
+  note:
+    sv: Olöslig syntetisk polymer som används som klarningsmedel. Räknas i EU:s förteckning som processhjälpmedel.
+    en: An insoluble synthetic polymer used as a fining agent. Classed in the EU list as a processing aid.
   aliases: [polyvinylpolypyrrolidon, pvpp]
 
 - id: yeast
@@ -717,6 +756,9 @@
   group: caramel_colour
   generic: true
   name: { sv: Sockerkulör, en: Caramel colour }
+  note:
+    sv: Färgämne (E150a–d). I vin får det bara användas i starkvin, för att förstärka färgen. I aromatiserade vinprodukter som glögg får färgämnen tillsättas.
+    en: A colour (E150a–d). In wine it may be used only in liqueur wines, to reinforce the colour. Colours may be added to aromatised wine products such as mulled wine.
   aliases: [sockerkulör, karamellfärg, caramel colour, caramel color, karamell]
 
 - id: caustic_sulphite_caramel
@@ -746,6 +788,9 @@
   bucket: additive
   category: colour
   name: { sv: Antocyaniner, en: Anthocyanins }
+  note:
+    sv: Färgämne utvunnet ur grönsaker och ätbara frukter.
+    en: A colour extracted from vegetables and edible fruits.
   aliases: [antocyaniner, antocyanin, anthocyanins]
 
 - id: carmine
@@ -753,6 +798,9 @@
   bucket: additive
   category: colour
   name: { sv: Karmin, en: Carmine }
+  note:
+    sv: Rött färgämne utvunnet ur koschenill, de torkade honorna av sköldlusen Dactylopius coccus.
+    en: A red colour extracted from cochineal, the dried bodies of the female insect Dactylopius coccus.
   aliases: [karmin, karminsyra, cochenill, carmine, cochineal]
 
 # E110, E124 and E129 are Group III colours: permitted in aromatised wine
@@ -847,12 +895,18 @@
   category: other
   allergen: fish
   name: { sv: Husbloss, en: Isinglass }
+  note:
+    sv: Klarningsmedel av fiskursprung. Undantaget från allergenmärkning för fisk när det används som klarningsmedel i öl och vin.
+    en: A fining agent of fish origin. Exempt from the fish allergen labelling when used as a fining agent in beer and wine.
   aliases: [husbloss, husblås, isinglass, fiskgelatin]
 
 - id: pea_protein
   bucket: additive
   category: other
   name: { sv: Ärtprotein, en: Pea protein }
+  note:
+    sv: Klarningsmedel av protein från ärtor. Räknas i EU:s förteckning som processhjälpmedel.
+    en: A fining agent made from pea protein. Classed in the EU list as a processing aid.
   aliases:
     - ärtprotein
     - ärtfytoprotein
@@ -873,6 +927,9 @@
   bucket: additive
   category: other
   name: { sv: Gelatin, en: Gelatin }
+  note:
+    sv: Klarningsmedel av ätligt gelatin. Räknas i EU:s förteckning som processhjälpmedel.
+    en: A fining agent made from edible gelatine. Classed in the EU list as a processing aid.
   aliases:
     - gelatin
     - gelatine
@@ -892,6 +949,9 @@
   bucket: additive
   category: other
   name: { sv: Bentonit, en: Bentonite }
+  note:
+    sv: Lermineral som används som klarningsmedel. I EU:s förteckning över godkända ämnen för vinframställning räknas det som processhjälpmedel, inte som tillsats.
+    en: A clay mineral used as a fining agent. The EU list of compounds authorised in winemaking classes it as a processing aid, not an additive.
   aliases:
     - bentonit
     - bentonite
@@ -938,6 +998,9 @@
   bucket: gas
   category: gas
   name: { sv: Argon, en: Argon }
+  note:
+    sv: Inert gas som används för att hantera vinet skyddat från luften, bland annat vid tappning.
+    en: An inert gas used to handle the wine shielded from the air, including at bottling.
   aliases: [argon]
 
 - id: oxygen
@@ -950,6 +1013,9 @@
 - id: grapes
   bucket: base
   name: { sv: Druvor, en: Grapes }
+  note:
+    sv: Vinets råvara. Enligt EU:s definition framställs vin uteslutande genom jäsning av färska druvor eller druvmust.
+    en: The raw material of wine. Under the EU definition, wine is obtained exclusively from the fermentation of fresh grapes or grape must.
   # Grape variety names are deliberately NOT enumerated here. They only read
   # when they match the wine's own published grape list, via `known_names` in
   # normalize.py — a fixed list here would happily match a variety name that
@@ -987,6 +1053,9 @@
 - id: grape_must
   bucket: base
   name: { sv: Druvmust, en: Grape must }
+  note:
+    sv: Vätskan som utvinns ur färska druvor, till exempel genom pressning, innan den jäst. Koncentrerad druvmust får tillsättas i bland annat starkvin och används för att söta aromatiserade viner.
+    en: The liquid obtained from fresh grapes, for instance by pressing, before it has fermented. Concentrated grape must may be added to liqueur wines, among others, and is used to sweeten aromatised wines.
   aliases:
     - rektifierad koncentrerad druvmust
     - rektifierad koncentrerad must
@@ -1118,6 +1187,9 @@
 - id: wine_alcohol
   bucket: base
   name: { sv: Vinalkohol, en: Wine alcohol }
+  note:
+    sv: Neutral alkohol av vinursprung eller vindestillat, tillsatt för att höja alkoholhalten. Det är tillsatsen som gör ett vin till starkvin, och den används även i vissa aromatiserade viner.
+    en: Neutral alcohol of vine origin or wine distillate, added to raise the alcoholic strength. It is the addition that makes a wine a liqueur wine, and it is also used in some aromatised wines.
   aliases:
     - neutral alkohol framställd av vinprodukter
     - alkohol framställd av vinprodukter
@@ -1145,6 +1217,9 @@
 - id: water
   bucket: base
   name: { sv: Vatten, en: Water }
+  note:
+    sv: Får tillsättas i aromatiserade vinprodukter som glögg och vermouth, i den mängd som behövs för att lösa upp färg- och sötningsmedel, bereda smakextrakt och justera den färdiga sammansättningen.
+    en: May be added to aromatised wine products such as mulled wine and vermouth, in the amount needed to dissolve colours and sweeteners, prepare flavouring essences and adjust the final composition.
   aliases: [vatten, water]
 
 - id: rice
@@ -1158,6 +1233,9 @@
 - id: honey
   bucket: base
   name: { sv: Honung, en: Honey }
+  note:
+    sv: Sötningsmedel. Honung är ett av de ämnen som uttryckligen får användas för att söta aromatiserade vinprodukter.
+    en: A sweetener. Honey is one of the products expressly authorised for sweetening aromatised wine products.
   aliases: [honung, lindhonung, honey]
 
 - id: grain
@@ -1171,6 +1249,9 @@
 - id: coffee
   bucket: base
   name: { sv: Kaffe, en: Coffee }
+  note:
+    sv: Smaksättning. Kryddor och smaksättande livsmedel får användas i aromatiserade vinprodukter som glögg.
+    en: A flavouring. Spices and flavouring foodstuffs may be used in aromatised wine products such as mulled wine.
   aliases: [kaffe, coffee]
 
 - id: fruit
@@ -1257,6 +1338,9 @@
 - id: wine
   bucket: base
   name: { sv: Vin, en: Wine }
+  note:
+    sv: Vin som ingrediens i en annan dryck. I aromatiserade viner som vermouth ska vinprodukter utgöra minst 75 procent av volymen, i aromatiserade vinbaserade drycker som vinglögg och Glühwein minst 50 procent.
+    en: Wine as an ingredient of another drink. In aromatised wines such as vermouth, wine products must make up at least 75 % of the volume; in aromatised wine-based drinks such as vinglögg and Glühwein, at least 50 %.
   aliases:
     - rött vin
     - rödvin
