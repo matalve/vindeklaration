@@ -69,6 +69,7 @@
     - svaveldoxid  # typo seen in the wild, missing "i"
     - svaveldixoid  # typo seen in the wild, transposed letters
     - svaveldioxis  # typo seen in the wild
+    - svavelodix  # typo seen in the wild, "SVAVELODIX" for svaveldioxid
 
 - id: potassium_metabisulfite
   e_number: E224
@@ -267,6 +268,7 @@
     - metatarinsyra  # typo seen in the wild
     - metatartarico  # Italian
     - matavinsyra  # typo seen in the wild
+    - metaweinsäure  # German, "Metaweinsäure" (metatartaric acid)
 
 - id: malic_acid
   e_number: E296
@@ -472,6 +474,17 @@
     - pektoliska enzymer  # typo for "pektolytiska enzymer"
     - pektolytiska enzymer
 
+- id: polygalacturonase
+  bucket: additive
+  category: other
+  name: { sv: Polygalakturonas, en: Polygalacturonase }
+  note:
+    sv: Enzym (EC 3.2.1.15) som bryter ner pektin, så att musten och vinet klarnar lättare.
+    en: An enzyme (EC 3.2.1.15) that breaks down pectin so that must and wine clarify more easily.
+  aliases:
+    - polygalakturonas
+    - polygalacturonase
+
 - id: commercial_yeast_nutrient
   bucket: additive
   category: other
@@ -609,6 +622,7 @@
     - kaliumpolyasparat  # typo seen in the wild
     - kaliumpolyasprtat  # typo seen in the wild
     - kaliumpoluasparat  # typo seen in the wild, u for y
+    - kalium e456  # "kalium E456/CAS 64723-18-8": the name cut short, but E456 and the CAS number (64723-18-8) both identify the polyaspartate
     # "gummi" (from the following "gummi arabicum") merged onto this word with
     # no space, and its own spelling slipped too ("aspartat" -> "asparpat").
     - kaliumpolyasparpatgummi
@@ -651,6 +665,7 @@
     # one declared ingredient as two.
     - mannoprotein från jäst  # singular
     - mannoprotiener från jäst  # typo seen in the wild, letters transposed
+    - mannoproteiner från jästoch  # typo seen in the wild, "jäst och/eller" run together
     - mannoprotein från jästsvampar
 
 - id: tannins
@@ -693,10 +708,12 @@
     - jäst
     - jäster  # plural of jäst seen in the wild
     - jästproteiner  # yeast proteins
+    - jästskalpreparat  # yeast cell-wall preparation ("jästskal" = yeast hull, "preparat" = preparation)
     - inaktiva  # "inaktiva jästsvampar"
     - cx9  # commercial yeast strain code
     - dv10  # commercial yeast strain code
     - yeast
+    - yeast for winemaking  # English
     - jästsvampar  # plural of jästsvamp seen in the wild
 
 - id: malolactic_bacteria
@@ -741,6 +758,8 @@
     - chocklad  # misspelling of choklad seen in the wild
     - choklad
     - flavouring  # bare singular English form
+    - aromämnen
+    - naturliga aromämnen
   # Any compound ending in -arom, with or without a "naturlig" prefix.
   regexes:
     - '\b(naturlig\w*\s+)?\w*aromer\b'
@@ -1001,7 +1020,7 @@
   note:
     sv: Används som skyddsgas och för att ge en lätt kolsyra.
     en: Used as a bottling gas and to give a light spritz.
-  aliases: [koldioxid, kolsyra, carbon dioxide, co2, kodioxid]
+  aliases: [koldioxid, kolsyra, carbon dioxide, co2, kodioxid, karbondioxid]
   # "kodioxid": typo seen in the wild, missing l.
 
 - id: argon
@@ -1052,6 +1071,8 @@
     - vindruvor1  # footnote marker as a plain digit, seen in the wild
     - druvor1  # footnote marker as a plain digit, seen in the wild
     - druvoer  # typo seen in the wild
+    - durvor  # typo seen in the wild, letters transposed
+    - trauben aus ökologischem anbau  # German, "grapes from organic farming"
   regexes:
     - '\b(vit|vita|röd|röda|svart|svarta|blå|blåa)?\s*druv(a|an|ar|or|orna)\b'
     - '\bvindruv(a|an|ar|or|orna)\b'
@@ -1103,6 +1124,10 @@
     - druvmustkoncentrerad  # merged, no space in the source
     - rektifiera  # bare infinitive, not followed directly by a must-word
     - rektifierat  # inflection not followed directly by a must-word
+    - druvmost  # typo seen in the wild, "druvmost" for "druvmust"
+    - refiktierad koncentrerad druvmust  # typo seen in the wild, "refiktierad" for "rektifierad"
+    - koncentrerad måste  # typo seen in the wild, "måste" for "must"
+    - rectified concentrated solid must  # English, "Rectified Concentrated Solid Must"
   regexes:
     - '\brektifiera[dt]?\s+\w*must\w*'
     - '\b\w*mustkoncentrat\b'
@@ -1139,6 +1164,7 @@
     - flasklikör  # "bottle liqueur", used alongside expeditionslikör
     - expeditionslokör  # typo seen in the wild
     - tirage likör  # English/Swedish mix
+    - expedition likör  # "expeditionslikör" written as two words
     - licor de tiraje  # Spanish
     - licor de expedición  # Spanish
     - liqueur d'expédition
@@ -1223,6 +1249,10 @@
     - alkohol
     - alcohol
     - etylalkohol  # alternate Swedish name for ethanol
+    - alkoholdestillat  # "alcohol distillate", generic like "destillat" above
+    - vindestillat
+    - wine distillate
+    - neutral alkohol av vinursprung
     - sultanasalkohol  # alcohol distilled from sultana grapes, merged
 
 - id: water
@@ -1304,6 +1334,9 @@
     - sweet potato
     - fruktte  # fruit tea
     - granatäpple  # pomegranate
+    - äppeljuicekoncentrat
+    - orange juice  # English, mixed into a Swedish declaration
+    - lime
   regexes:
     # An optional colour adjective ("svarta vinbär", "svart morot") is part of
     # the same base ingredient, not a separate leftover word.
@@ -1344,6 +1377,7 @@
     - korianderfrö
     - kvannerot
     - granskott  # spruce shoots, a Nordic glögg ingredient
+    - stjärnanis
     - cinchona  # cinchona bark, English for "kinabark" above
 
 - id: wine
@@ -1362,6 +1396,9 @@
     - druvvin
     - sherry  # a wine style used as a component in this blend
     - bärvin  # berry wine, "bär" (berry) + "vin" (wine) merged
+    - likörvin  # liqueur wine, a wine ingredient in vermouth
+    - oloroso vin  # sherry type, used as a wine component like "sherry" above
+    - moscatel vin  # Moscatel wine, used as a wine component
   regexes:
     - '\bav[\s-]?alkoholiserat\s+vin\b'
     - '\balkoholiserat\b'
@@ -1391,3 +1428,19 @@
     - likör
     - liqueur
     - liquer  # typo seen in the wild, missing u
+
+- id: agave
+  bucket: base
+  name: { sv: Agave, en: Agave }
+  note:
+    sv: Växt som fermenteras och destilleras till agavesprit. Här deklarerad som råvara till destillerad alkohol i en glögg.
+    en: A plant that is fermented and distilled into agave spirit. Declared here as the raw material of the distilled alcohol in a mulled wine.
+  aliases: [agave]
+
+- id: potato
+  bucket: base
+  name: { sv: Potatis, en: Potato }
+  note:
+    sv: Deklarerad som ingrediens i en glögg. Deklarationen anger inte vilken funktion den har.
+    en: Declared as an ingredient in a mulled wine. The declaration does not say what role it has.
+  aliases: [potatis]

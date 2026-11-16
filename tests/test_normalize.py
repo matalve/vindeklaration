@@ -153,3 +153,18 @@ def test_gelatin_is_animal_by_origin() -> None:
     parsed = parse_ingredients("Druvor, Sulfiter, Gelatin")
     assert parsed.origins == ["animal"]
     assert "animal" not in parsed.allergens
+
+
+def test_unresolved_wording_stays_unread() -> None:
+    """Text nobody could establish must keep the wine partial, not be aliased away."""
+    cases = {
+        "Ekologiska druvor. Kaliumsyra. SULFITER": "kaliumsyra",
+        "Druvor, Konserverings- och antioxidationsmedel (SULFITER). Industriell atmosfär": "industriell",
+        "Vin, jordbruksalkohol, kryddor, mineraler, SULFITER": "mineraler",
+        "Druvor, renad druvmustkoncentrat, konserveringsmedel (svaveldioxid)": "renad",
+        "100% Chersegi": "chersegi",
+    }
+    for text, token in cases.items():
+        parsed = parse_ingredients(text)
+        assert parsed.status == "partial", text
+        assert token in parsed.unknown_tokens, text

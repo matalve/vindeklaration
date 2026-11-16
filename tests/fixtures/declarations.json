@@ -839,5 +839,235 @@
   "allergens": [
    "sulfites"
   ]
+ },
+ {
+  "why": "alkoholdestillat, aromämnen and a bare \"Färg:\" header in a vermouth (x-838702); generic classes read like the existing flavourings/wine-alcohol entries, the header is not a substance",
+  "text": "Vin (Druvor, Koncentrerad druvmust, Surhetsreglerande medel: Vinsyra (E334), Konserveringsmedel: SULFITER), Socker, Vatten, Alkoholdestillat, Färg: Kaustisk sulfitkaramell (E150b), Naturliga aromämnen, Syra: Citronsyra (E330), Konserveringsmedel: SULFITER.",
+  "additives": [
+   "caustic_sulphite_caramel",
+   "citric_acid",
+   "flavourings",
+   "sulfites",
+   "tartaric_acid"
+  ],
+  "gases": [],
+  "base": [
+   "grape_must",
+   "grapes",
+   "sugar",
+   "water",
+   "wine",
+   "wine_alcohol"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "polygalakturonas (EC 3.2.1.15) is a real enzyme, polygalacturonase, and is not the pectin lyase entry (x-7447201)",
+  "text": "Vinsyra (L(+)-) (E 334) och/eller citronsyra (E 330) och/eller äppelsyra (D,L-; L-) (E 296), SVAVELDIOXID (E 220), KALIUMMETABISULFIT (E 224), diammoniumvätefosfat (E 342), jäst för vinproduktion, polygalakturonas (EC 3.2.1.15), gummi arabicum (E 414), gummi arabicum (E 414), tanniner, kväve (E 941), koldioxid (E 290), kopparsulfat.",
+  "additives": [
+   "citric_acid",
+   "copper_sulfate",
+   "diammonium_phosphate",
+   "gum_arabic",
+   "malic_acid",
+   "polygalacturonase",
+   "potassium_metabisulfite",
+   "sulfur_dioxide",
+   "tannins",
+   "tartaric_acid",
+   "yeast"
+  ],
+  "gases": [
+   "carbon_dioxide",
+   "nitrogen"
+  ],
+  "base": [],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"vinifierade\" qualifies the grapes and is not a substance (x-7611901)",
+  "text": "Röda druvor (vinifierade). Surhetsreglerande medel: L-(+)-vinsyra. Stabiliseringsmedel: gummi arabicum, kaliumpolyaspartat, kväve, SVAVELDIOXID.",
+  "additives": [
+   "gum_arabic",
+   "potassium_polyaspartate",
+   "sulfur_dioxide",
+   "tartaric_acid"
+  ],
+  "gases": [
+   "nitrogen"
+  ],
+  "base": [
+   "grapes"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"SVAVELODIX\" is a dropped-letter typo of svaveldioxid, too far for the fuzzy threshold (x-7554101)",
+  "text": "Vindruvor, SVAVELODIX",
+  "additives": [
+   "sulfur_dioxide"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"koncentrerad måste\" is a typo of \"koncentrerad must\", read only as that phrase (x-5254201)",
+  "text": "druva*, koncentrerad måste*, konserverings- och antioxidationsmedel (SULFITER), tiragelikör, expeditionslikör * : från ekologiskt jordbruk",
+  "additives": [
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "expedition_liqueur",
+   "grape_must",
+   "grapes"
+  ],
+  "processing": [
+   "organic"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"kalium E456/CAS 64723-18-8\": the name is cut short but the E-number and CAS number both identify potassium polyaspartate; the preceding \"kalium\" must not be left over (x-3465901)",
+  "text": "Konserveringsmedel och antioxidanter, kalium E456/CAS 64723-18-8, SULFITER",
+  "additives": [
+   "potassium_polyaspartate",
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"jästoch/eller\" is \"jäst och/eller\" run together inside the mannoprotein phrase (x-7199201)",
+  "text": "Druvor*, Rektifierad koncentrerad druvmust*, Konserverings- och antioxidationsmedel (Sulfiter), Stabilisatorer: innehåller Mannoproteiner från jästoch/eller Metavinsyra och/eller Gummi arabicum",
+  "additives": [
+   "gum_arabic",
+   "mannoproteins",
+   "metatartaric_acid",
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "agave and lime are raw materials of the distilled alcohol and the extract in a mulled wine (x-7861001)",
+  "text": "Vin ( (Druvor, Koncentrerad druvmust, Destillerad alkohol ( (Vin)), Surhetsreglerande medel ( (innehåller, E330, och/eller, E334)), Stabiliseringsmedel ( (E353)), Konserveringsmedel ( (E300, innehåller, SULFITER)))), Vatten, Socker, Destillerad alkohol ( (Spannmål, Agave)), Extrakt ( (Lime, Kryddnejlika, Kardemumma, Ingefära)), Konserveringsmedel ( (E224 KALIUMDISULFIT))",
+  "additives": [
+   "ascorbic_acid",
+   "citric_acid",
+   "flavourings",
+   "metatartaric_acid",
+   "potassium_metabisulfite",
+   "tartaric_acid"
+  ],
+  "gases": [],
+  "base": [
+   "agave",
+   "fruit",
+   "grain",
+   "grape_must",
+   "grapes",
+   "spices",
+   "sugar",
+   "water",
+   "wine",
+   "wine_alcohol"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"expedition likör\" is expeditionslikör written as two words, next to tiragelikör (x-500101)",
+  "text": "vindruvor, sackaros, konserveringsmedel och antioxidanter (SVAVELDIOXID), stabiliseringsmedel (gummi arabicum, kaliumpolyaspartat), expedition likör (sackaros), tiragelikör (sackaros, vin).",
+  "additives": [
+   "gum_arabic",
+   "potassium_polyaspartate",
+   "sulfur_dioxide"
+  ],
+  "gases": [],
+  "base": [
+   "expedition_liqueur",
+   "grapes",
+   "sugar",
+   "wine"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"Tappning i skyddande atmosfär är möjlig\" still records the protective-atmosphere note; \"möjlig\" is filler (x-7235401)",
+  "text": "Druvor, Antioxidationsmedel (SULFITER). Tappning i skyddande atmosfär är möjlig",
+  "additives": [
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "a potato listed first in a mulled-wine declaration is an ingredient, not an additive (x-9249702)",
+  "text": "Potatis*, Vin 92% (Druvor, Koncentrerad druvmust, Destillerad alkohol (Vin), Surhetsreglerande medel (E330, E334), Stabiliseringsmedel (E353, E414, E456), Färgämne (E150d), Konserveringsmedel (E300, E202, innehåller, SULFITER))",
+  "additives": [
+   "ascorbic_acid",
+   "citric_acid",
+   "gum_arabic",
+   "metatartaric_acid",
+   "potassium_polyaspartate",
+   "potassium_sorbate",
+   "sulfites",
+   "sulphite_ammonia_caramel",
+   "tartaric_acid"
+  ],
+  "gases": [],
+  "base": [
+   "grape_must",
+   "grapes",
+   "potato",
+   "wine",
+   "wine_alcohol"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
  }
 ]

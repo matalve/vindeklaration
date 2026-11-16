@@ -282,6 +282,16 @@ category_labels:
   - konserveringsämnen
   - konserveringsämne
   - stabilising agents  # English, "stabilising agents (ascorbic acid)"
+  - stabilizing agents  # US spelling of the line above
+  - conservatives  # machine translation of "preservatives" (French "conservateurs"), "Conservatives: SULFITES"
+  - packing gas  # English, mirrors "förpackningsgas"
+  - färg  # "Färg: Kaustisk sulfitkaramell (E150b)", header for the colour
+  - ämnen som används för anrikning  # "substances used for enrichment", header for the sugar
+  - stabiliserande ämnen  # "STABILISERANDE ÄMNEN: Kaliumpolyaspartat"
+  - stabiliseringsämnen  # "stabiliseringsämnen (karboximetylcellulosa)"
+  - syttegulatorer  # garbled "surhetsregulatorer", followed by mjölksyra and citronsyra
+  - förpackningsbar  # garbled "förpackningsgaser", "Gaser och förpackningsbar (Kväve)"
+  - aktiviavtorer av alkoholisk och malolaktisk jäsning  # typo of the header above, "Aktiviavtorer"
   - acid  # English generic header, mirrors "syra"/"syror"
   - konservativ  # singular of "konservativa", machine translation of "preservative"
   - agenti  # Italian, "agents"
@@ -670,3 +680,22 @@ stopwords:
   - innehäller
   - uínnehåller
   - ellrt  # typo of "eller" (or)
+  - vinifierade  # "Röda druvor (vinifierade)", the grapes were vinified
+  - torrt  # "Torrt vitt vin", describes the wine's style
+  - fetstil  # "*Allergener i fetstil" — a typographic note, not content
+  - sorten  # "Druvor (sorten Hondarrabi Zuri 100 %)" — "the variety"
+  - farska  # typo of "färska" (fresh), "Farska druvor"
+  - inga  # "Inga allergener" — "no allergens"
+  - försumbar  # "Innehåller försumbar mängd av: fett, ..." — a nutrition statement
+  - sockerhalt  # "Sockerhalt ca 1,7g/100ml" — a sugar-content statement, not an ingredient
+  - möjlig  # "Tappning i skyddande atmosfär är möjlig"
+  - glögg  # flavour descriptor inside "aromer (äpple, ingefära, glögg ...)" and "glögg arom"
+  - svart  # "svart grenache", colour adjective of the grape like "röd"/"vit" above
+  - mourvedre  # unaccented spelling of Mourvèdre
+  - gewürztraminer  # accented spelling; the unaccented one is above
+  - moristel  # Aragonese grape, "Garnacha, Moristel"
+  - piedra  # "Piedra Luenga Pedro Ximénez", a Bodegas Robles sweet Pedro Ximénez wine
+  - luenga
+  - pedro
+  - ximénez
+  - ca74%  # merged figure, "Oloroso Vin (ca74%)"
