@@ -21,6 +21,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
+   "token": "vinifierade",
+   "wines": 3,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7611901/"
+  },
+  {
    "token": "ämnen",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-5622101/"
@@ -181,6 +186,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-581001/"
   },
   {
+   "token": "gewürztraminer",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7119101/"
+  },
+  {
    "token": "inga",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7121001/"
@@ -219,6 +229,11 @@
    "token": "chersegi",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7355501/"
+  },
+  {
+   "token": "moristel",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7437101/"
   },
   {
    "token": "renad",
@@ -574,10 +589,6 @@
    "wines": 1
   },
   {
-   "match": "kkonserveringsmedel -> konserveringsmedel",
-   "wines": 1
-  },
-  {
    "match": "antioxidansmedel -> antioxidantmedel",
    "wines": 1
   },
@@ -591,10 +602,6 @@
   },
   {
    "match": "drvor -> druvor",
-   "wines": 1
-  },
-  {
-   "match": "svaveldoixid -> svaveldoxid",
    "wines": 1
   },
   {
