@@ -130,6 +130,7 @@ def build_records() -> list[dict]:
                     "base_ingredients": [],
                     "processing_notes": [],
                     "allergens": [],
+                    "origins": [],
                     "unknown_tokens": [],
                 }
             )

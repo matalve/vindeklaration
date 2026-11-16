@@ -79,11 +79,17 @@ label, not a health assessment. Wine is alcohol; that is the relevant risk.
   "base_ingredients": [{"id": "grapes"}],
   "processing_notes": [{"id": "protective_atmosphere"}],
   "allergens": ["sulfites"],
+  "origins": [],
   "nutrition": {"kcal_per_100ml": 73, "sugar_g_per_100ml": 0.2},
   "raw_ingredients": "Druvor*, koldioxid, konserveringsmedel (SULFITER), ...",
   "source_url": "https://www.systembolaget.se/produkt/vin/x-253108/"
 }
 ```
+
+`origins` names what any animal-derived substance comes from (`milk`, `egg`,
+`fish`), and is not the same list as `allergens`: isinglass is fish but, used
+to fine wine, is exempt from allergen labelling (Regulation (EU) No 1169/2011,
+Annex II point 4(b)).
 
 `declaration_status` is `declared` or `not_declared`; `parse_status` is
 `complete`, `partial` or `not_declared`. Undeclared wines are kept in the

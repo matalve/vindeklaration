@@ -195,6 +195,7 @@
   bucket: additive
   category: preservative
   allergen: egg
+  origin: egg
   name: { sv: Lysozym, en: Lysozyme }
   note:
     sv: Enzym ur hönsäggvita som angriper bakterier. Konserveringsmedel i vin, och märks som allergen (ägg).
@@ -283,8 +284,8 @@
   category: acidity_regulator
   name: { sv: Citronsyra, en: Citric acid }
   note:
-    sv: EU listar citronsyra bland stabiliseringsmedlen för vin, inte bland de surhetsreglerande medlen. Det färdiga vinet får innehålla högst 1 g/l.
-    en: The EU lists citric acid among the stabilising agents for wine, not among the acidity regulators. The finished wine may contain no more than 1 g/l.
+    sv: Får i vin användas både som surhetsreglerande medel, för att ge vinet bättre smakbalans, och som stabiliseringsmedel mot järngrumling. Det färdiga vinet får innehålla högst 1 g/l.
+    en: May be used in wine both as an acidity regulator, for a better sensory balance, and as a stabilising agent against iron haze. The finished wine may contain no more than 1 g/l.
   aliases:
     - citronsyra
     - citronsyramonohydrat
@@ -865,6 +866,7 @@
   bucket: additive
   category: other
   allergen: egg
+  origin: egg
   name: { sv: Äggprotein, en: Egg protein }
   note:
     sv: Klarningsmedel. Rester kan finnas kvar, därför allergenmärkning.
@@ -875,6 +877,7 @@
   bucket: additive
   category: other
   allergen: milk
+  origin: milk
   name: { sv: Mjölkkasein, en: Milk casein }
   note:
     sv: Klarningsmedel ur mjölk. Rester kan finnas kvar, därför allergenmärkning.
@@ -893,7 +896,11 @@
 - id: isinglass
   bucket: additive
   category: other
-  allergen: fish
+  # Not an allergen here: Regulation (EU) No 1169/2011, Annex II point 4(b),
+  # exempts isinglass used as a fining agent in wine from the fish allergen,
+  # and the declarations bear it out (SULFITER and MJÖLKKASEIN in capitals,
+  # Husbloss not). It is still fish, which is what `origin` says.
+  origin: fish
   name: { sv: Husbloss, en: Isinglass }
   note:
     sv: Klarningsmedel av fiskursprung. Undantaget från allergenmärkning för fisk när det används som klarningsmedel i öl och vin.

@@ -254,9 +254,10 @@ def substance_pages(wines: list[dict]) -> tuple[list[dict], list[str]]:
     the dictionary knows but no wine declares gets no page — the body of the
     page is the wines, and an empty one would be a stub for a search engine.
 
-    `note` is carried through only where the dictionary has one. Thirty-three
-    of the entries have none, and a page that invented a description would be
-    the guessing the project forbids, so those pages say so instead.
+    `note` is carried through only where the dictionary has one. An entry
+    without a sourced note gets none, because a page that invented a
+    description would be the guessing the project forbids; the page says so
+    instead.
     """
     dictionary = {
         entry["id"]: entry
@@ -296,6 +297,7 @@ def substance_pages(wines: list[dict]) -> tuple[list[dict], list[str]]:
             "bucket": entry["bucket"],
             "category": entry.get("category"),
             "allergen": entry.get("allergen"),
+            "origin": entry.get("origin"),
             "note": entry.get("note"),
             # The misspellings are the point: someone typing the exact string
             # off a label should land here. docs/site-plan.md, "Details that
@@ -748,9 +750,21 @@ def allergen_labels() -> dict:
     return yaml.safe_load(LEXICON_PATH.read_text(encoding="utf-8"))["allergen_labels"]
 
 
-# The ones that carry information. Kept separate from sulfites deliberately —
-# see the note on `allergen_labels` in data/lexicon.yaml.
-ANIMAL_ALLERGENS = ("milk", "egg", "fish")
+def animal_origins() -> dict[str, str]:
+    """Substance id -> what it comes from, for the animal-derived ones.
+
+    Read from the dictionary at build time rather than from each wine record,
+    so a change here reaches every page on the next site build instead of
+    waiting for the Pi to rebuild wines.json. Deliberately not the allergen
+    field: isinglass is fish, but used to fine wine it is exempt from allergen
+    labelling (Regulation (EU) No 1169/2011, Annex II point 4(b)).
+    """
+    return {
+        entry["id"]: entry["origin"]
+        for entry in yaml.safe_load(ADDITIVES_PATH.read_text(encoding="utf-8"))
+        if entry.get("origin")
+    }
+
 
 # The nutrition declaration in EU label order, with a physical ceiling for each
 # per 100 ml. Suppliers type these by hand like everything else, and two wines
@@ -913,6 +927,7 @@ def build(output: Path, limit: int | None = None) -> None:
 
     stats = coverage(wines)
     allergens = allergen_labels()
+    origin_of = animal_origins()
     slices = list_slices(wines)
     facets_filled = facet_coverage(wines)
     for name in check_vocabulary(wines):
@@ -1015,7 +1030,7 @@ def build(output: Path, limit: int | None = None) -> None:
                         nutrition=nutrition_rows(wine)[0],
                         nutrition_unreadable=nutrition_rows(wine)[1],
                         allergen_labels=allergens,
-                        animal_allergens=ANIMAL_ALLERGENS,
+                        origin_of=origin_of,
                         image=image_url(wine),
                         image_width=IMAGE_WIDTH,
                         image_height=IMAGE_HEIGHT,

@@ -63,6 +63,10 @@ class Substance:
     group: str | None = None
     generic: bool = False
     allergen: str | None = None
+    # What an animal-derived substance comes from (milk, egg, fish). Separate
+    # from `allergen`: isinglass is fish but is exempt from allergen labelling
+    # when used to fine wine, so the two answer different questions.
+    origin: str | None = None
     note: dict = field(default_factory=dict)
 
     def as_output(self) -> dict:
@@ -73,6 +77,8 @@ class Substance:
             out["category"] = self.category
         if self.allergen:
             out["allergen"] = self.allergen
+        if self.origin:
+            out["origin"] = self.origin
         return out
 
 
@@ -109,6 +115,7 @@ def load_lexicon() -> Lexicon:
             group=item.get("group"),
             generic=item.get("generic", False),
             allergen=item.get("allergen"),
+            origin=item.get("origin"),
             note=item.get("note", {}),
         )
         substances[substance.id] = substance
@@ -186,6 +193,7 @@ class Parsed:
     base_ingredients: list[dict]
     processing_notes: list[dict]
     allergens: list[str]
+    origins: list[str]
     unknown_e_numbers: list[str]
     unknown_tokens: list[str]
     fuzzy_matches: list[tuple[str, str]]
@@ -207,6 +215,7 @@ class Parsed:
             "base_ingredients": self.base_ingredients,
             "processing_notes": self.processing_notes,
             "allergens": self.allergens,
+            "origins": self.origins,
             "unknown_tokens": self.unknown_tokens,
         }
 
@@ -316,9 +325,12 @@ def parse_ingredients(text: str, known_names: list[str] | None = None) -> Parsed
 
     additives, gases, base = [], [], []
     allergens: set[str] = set()
+    origins: set[str] = set()
     for substance in found_substances.values():
         if substance.allergen:
             allergens.add(substance.allergen)
+        if substance.origin:
+            origins.add(substance.origin)
         target = {"additive": additives, "gas": gases, "base": base}[substance.bucket]
         target.append(substance.as_output())
 
@@ -331,6 +343,7 @@ def parse_ingredients(text: str, known_names: list[str] | None = None) -> Parsed
         base_ingredients=base,
         processing_notes=list(found_processing.values()),
         allergens=sorted(allergens),
+        origins=sorted(origins),
         unknown_e_numbers=unknown_e_numbers,
         unknown_tokens=unknown_tokens,
         fuzzy_matches=fuzzy_matches,

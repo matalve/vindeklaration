@@ -79,8 +79,8 @@
             <a href="{{ lang_root }}/{{ s.substance_url }}/{{ a.id }}/">{{ a.name[lang] }}</a>
             {%- else -%}
             {{ a.name[lang] }}
-            {%- endif %}{% if a.allergen and a.allergen in animal_allergens %}
-            <span class="from-animal">({{ allergen_labels[a.allergen][lang] }})</span>
+            {%- endif %}{% if a.id in origin_of %}
+            <span class="from-animal">({{ allergen_labels[origin_of[a.id]][lang] }})</span>
           {% endif %}</td>
           <td class="enum">{{ a.e_number or '' }}</td>
         </tr>
@@ -106,8 +106,8 @@
           <a href="{{ lang_root }}/{{ s.substance_url }}/{{ a.id }}/">{{ a.name[lang] }}</a>
           {%- else -%}
           {{ a.name[lang] }}
-          {%- endif %}{% if a.allergen and a.allergen in animal_allergens %}
-          <span class="from-animal">({{ allergen_labels[a.allergen][lang] }})</span>{% endif %}</td>
+          {%- endif %}{% if a.id in origin_of %}
+          <span class="from-animal">({{ allergen_labels[origin_of[a.id]][lang] }})</span>{% endif %}</td>
           <td class="enum">{{ a.e_number or '' }}</td></tr>
       {% endfor %}
       </tbody>
@@ -153,11 +153,11 @@
   </section>
   {% endif %}
 
-  {% set animal = wine.allergens | select('in', animal_allergens) | list %}
-  {% if wine.allergens %}
+  {% set animal = wine.additives | map(attribute='id') | select('in', origin_of) | list %}
+  {% if wine.allergens or animal %}
   <section class="allergens{% if animal %} has-animal{% endif %}">
     <h2>{{ s.allergens }}</h2>
-    <p class="declared">{% for a in wine.allergens %}{{ allergen_labels[a][lang] | capitalize if a in allergen_labels else a }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+    {% if wine.allergens %}<p class="declared">{% for a in wine.allergens %}{{ allergen_labels[a][lang] | capitalize if a in allergen_labels else a }}{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
     {% if animal %}
     <p class="lead">{{ s.animal_origin_lead }}.</p>
     <p class="explain">{{ s.animal_origin_explain }}</p>

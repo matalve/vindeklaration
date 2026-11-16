@@ -126,3 +126,21 @@ def test_abbreviation_and_full_name_do_not_double_count() -> None:
     assert ids.count("gelatin") == 1
     assert parsed.unknown_tokens == []
     assert parsed.status == "complete"
+
+
+def test_isinglass_is_fish_by_origin_but_not_an_allergen() -> None:
+    """Regulation (EU) No 1169/2011, Annex II point 4(b), exempts isinglass
+    used as a fining agent in wine from the fish allergen. The declarations
+    agree — the real one below capitalises the casein and albumin and not the
+    isinglass — so fish must not appear among the allergens. It is still fish,
+    and a reader avoiding animal products needs that, so it is the origin.
+    """
+    parsed = parse_ingredients(
+        "Vindruvor, SVAVELDIOXID, Husbloss, Ärtprotein, MJÖLKKASEIN, ÄGGALBUMIN, Bentonit"
+    )
+    assert "fish" not in parsed.allergens
+    assert parsed.allergens == ["egg", "milk", "sulfites"]
+    assert parsed.origins == ["egg", "fish", "milk"]
+    isinglass = next(a for a in parsed.additives if a["id"] == "isinglass")
+    assert isinglass["origin"] == "fish"
+    assert "allergen" not in isinglass

@@ -24,11 +24,15 @@
     <dt>{{ s.substance_allergen }}</dt>
     <dd>{{ allergen_labels[sub.allergen][lang] | capitalize if sub.allergen in allergen_labels else sub.allergen }}</dd>
     {% endif %}
+    {% if sub.origin %}
+    <dt>{{ s.substance_origin }}</dt>
+    <dd>{{ allergen_labels[sub.origin][lang] | capitalize if sub.origin in allergen_labels else sub.origin }}</dd>
+    {% endif %}
   </dl>
 
-  {# The dictionary's own note, or an explicit blank. Thirty-three of the
-     entries have no note, and a generated description would be exactly the
-     guessing CLAUDE.md forbids — so the gap is stated rather than filled. #}
+  {# The dictionary's own note, or an explicit blank. Every note rests on a
+     primary source; a generated description would be exactly the guessing
+     CLAUDE.md forbids — so a gap is stated rather than filled. #}
   {% if sub.note %}
   <p class="lede">{{ sub.note[lang] }}</p>
   {% else %}
