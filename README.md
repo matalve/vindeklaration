@@ -87,7 +87,7 @@ label, not a health assessment. Wine is alcohol; that is the relevant risk.
 ```
 
 `origins` names what any animal-derived substance comes from (`milk`, `egg`,
-`fish`), and is not the same list as `allergens`: isinglass is fish but, used
+`fish`, or `animal` for gelatin, whose species no declaration gives), and is not the same list as `allergens`: isinglass is fish but, used
 to fine wine, is exempt from allergen labelling (Regulation (EU) No 1169/2011,
 Annex II point 4(b)).
 

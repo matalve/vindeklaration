@@ -933,6 +933,10 @@
 - id: gelatin
   bucket: additive
   category: other
+  # Always animal: Regulation (EC) No 853/2004, Annex I point 7.7, defines
+  # gelatine as obtained from the collagen of animals. Which animal the
+  # declarations never say, so the origin names no species.
+  origin: animal
   name: { sv: Gelatin, en: Gelatin }
   note:
     sv: Klarningsmedel av ätligt gelatin. Räknas i EU:s förteckning som processhjälpmedel.

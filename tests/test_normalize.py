@@ -144,3 +144,12 @@ def test_isinglass_is_fish_by_origin_but_not_an_allergen() -> None:
     isinglass = next(a for a in parsed.additives if a["id"] == "isinglass")
     assert isinglass["origin"] == "fish"
     assert "allergen" not in isinglass
+
+
+def test_gelatin_is_animal_by_origin() -> None:
+    """Regulation (EC) No 853/2004, Annex I point 7.7: gelatine is obtained
+    from the collagen of animals, so it always has an animal origin, but no
+    declaration names the species and the origin does not guess one."""
+    parsed = parse_ingredients("Druvor, Sulfiter, Gelatin")
+    assert parsed.origins == ["animal"]
+    assert "animal" not in parsed.allergens

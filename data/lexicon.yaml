@@ -127,6 +127,10 @@ allergen_labels:
   egg: { sv: ägg, en: egg }
   fish: { sv: fisk, en: fish }
   gluten: { sv: gluten, en: gluten }
+  # Not an allergen: the origin of a substance whose species the declaration
+  # does not name (gelatin). Shares this map because the site shows allergen
+  # and origin words with the same lookup.
+  animal: { sv: djur, en: animal }
 
 category_labels:
   - konserverings- och antioxidationsmedel
