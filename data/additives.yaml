@@ -485,6 +485,17 @@
     - polygalakturonas
     - polygalacturonase
 
+- id: quinine
+  bucket: additive
+  category: flavouring
+  name: { sv: Kinin, en: Quinine }
+  note:
+    sv: Bitter smaksättare som utvinns ur kinabark. Här deklarerad som en av aromerna i ett aromatiserat vin.
+    en: A bitter flavouring obtained from cinchona bark. Declared here as one of the flavourings of an aromatised wine.
+  aliases:
+    - kinin
+    - quinine
+
 - id: commercial_yeast_nutrient
   bucket: additive
   category: other

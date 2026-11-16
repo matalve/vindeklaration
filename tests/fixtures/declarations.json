@@ -1069,5 +1069,25 @@
   "allergens": [
    "sulfites"
   ]
+ },
+ {
+  "why": "kinin is quinine, a flavouring named under \"aromer:\"; macerat is the header of the steeped preparation and Barolo DOCG the appellation of the wine (x-9045402)",
+  "text": "vin [Barolo DOCG (SULFITER)], socker, macerat (alkohol, kryddor, aromer: kinin, aromatiska växter)",
+  "additives": [
+   "flavourings",
+   "quinine",
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "spices",
+   "sugar",
+   "wine",
+   "wine_alcohol"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
  }
 ]

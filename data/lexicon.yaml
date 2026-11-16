@@ -133,6 +133,7 @@ allergen_labels:
   animal: { sv: djur, en: animal }
 
 category_labels:
+  - macerat  # "macerat (alkohol, kryddor, aromer: ...)", the steeped preparation, header for what follows
   - konserverings- och antioxidationsmedel
   - konservering-och antioxidationsmedel
   - konserverings och antioxidationsmedel
@@ -562,6 +563,9 @@ stopwords:
   - certifierad
   - koncentrat  # "färgämne (från koncentrat av äpple ...)" — the sources are named beside it
   - aromatiska  # "infusion av aromatiska örter och kryddor"
+  - växter  # "aromer: kinin, aromatiska växter" — listed beside the flavourings, as with aromatiska above
+  - barolo  # "Barolo DOCG", the appellation of the wine
+  - docg  # appellation designation, describes the wine and is no ingredient
   - odlade  # "ekologiskt odlade druvor"
   - fransk  # "SULFITER och Fransk Ek" — describes the oak barrel, not an ingredient
   - mörkbrun  # "mörkbrun sirap" — describes the syrup's colour
