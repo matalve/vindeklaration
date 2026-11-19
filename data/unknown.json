@@ -6,6 +6,16 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
+   "token": "industriell",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7748401/"
+  },
+  {
+   "token": "atmosfär",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7748401/"
+  },
+  {
    "token": "generale",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-194101/"
@@ -171,6 +181,10 @@
   },
   {
    "match": "stabliisatorer -> stablisatorer",
+   "wines": 1
+  },
+  {
+   "match": "antioxydants -> antioxidants",
    "wines": 1
   },
   {
