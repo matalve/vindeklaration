@@ -217,6 +217,10 @@ class Parsed:
             "allergens": self.allergens,
             "origins": self.origins,
             "unknown_tokens": self.unknown_tokens,
+            "fuzzy_matches": [
+                {"token": token, "alias": alias}
+                for token, alias in self.fuzzy_matches
+            ],
         }
 
 

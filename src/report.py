@@ -174,6 +174,8 @@ def main() -> None:
     # Unknown tokens, ranked by how many wines they hold back.
     token_counter: Counter[str] = Counter()
     fuzzy_counter: Counter[str] = Counter()
+    # Complete wines whose reading rests on a spelling the parser guessed at.
+    fuzzy_complete = 0
     examples: dict[str, str] = {}
     for wine in declared:
         parsed = parse_ingredients(wine["raw_ingredients"], known_names(wine))
@@ -182,6 +184,8 @@ def main() -> None:
             examples.setdefault(token, wine["source_url"])
         for token, alias in parsed.fuzzy_matches:
             fuzzy_counter[f"{token} -> {alias}"] += 1
+        if parsed.fuzzy_matches and parsed.status == "complete":
+            fuzzy_complete += 1
 
     UNKNOWN_PATH.write_text(
         json.dumps(
@@ -207,6 +211,10 @@ def main() -> None:
         print("\nFuzzy matches (add these spellings to additives.yaml)")
         for match, count in fuzzy_counter.most_common(15):
             print(f"    {match[:48]:<48} {count:>5}")
+        print(
+            f"\n    {fuzzy_complete} complete wines rest on a fuzzy match "
+            f"({share(fuzzy_complete, len(declared))} of declared)"
+        )
 
     entry = {
         "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
@@ -215,6 +223,7 @@ def main() -> None:
         "partial": len(partial),
         "partial_rate": round(len(partial) / len(declared), 4) if declared else 0,
         "unknown_tokens": len(token_counter),
+        "fuzzy_complete": fuzzy_complete,
     }
     history = load_history()
     passed = check_gate(entry, history)

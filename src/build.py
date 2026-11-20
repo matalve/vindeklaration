@@ -132,6 +132,7 @@ def build_records() -> list[dict]:
                     "allergens": [],
                     "origins": [],
                     "unknown_tokens": [],
+                    "fuzzy_matches": [],
                 }
             )
         records.append(record)

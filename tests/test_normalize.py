@@ -11,7 +11,15 @@ from pathlib import Path
 
 import pytest
 
-from src.normalize import load_lexicon, parse_ingredients
+from rapidfuzz import fuzz
+
+from src.normalize import (
+    FUZZY_MIN_LENGTH,
+    FUZZY_THRESHOLD,
+    _claim,
+    load_lexicon,
+    parse_ingredients,
+)
 
 FIXTURES = json.loads(
     (Path(__file__).parent / "fixtures" / "declarations.json").read_text(
@@ -168,3 +176,98 @@ def test_unresolved_wording_stays_unread() -> None:
         parsed = parse_ingredients(text)
         assert parsed.status == "partial", text
         assert token in parsed.unknown_tokens, text
+
+
+# --- the machinery, tested directly -----------------------------------------
+# The fixtures above check outcomes. These check the mechanisms, so a
+# regression inside them cannot hide behind a fixture set that happens not to
+# exercise it.
+
+
+def test_energy_per_100_ml_is_not_the_additive_e100() -> None:
+    """A nutrition line reads "E/100 ml"; blanking the slash must not leave E100."""
+    for text in ("Druvor, Energivärde: E/100 ml 70 kcal", "Druvor, Energi: E 100 ml"):
+        parsed = parse_ingredients(text)
+        assert parsed.additives == [], text
+        assert parsed.unknown_e_numbers == [], text
+
+
+def test_a_real_e100_is_still_read() -> None:
+    """The lookahead only excludes "ml"; the same digits stand for the additive."""
+    parsed = parse_ingredients("Färgämne E 100")
+    assert ids_of(parsed.additives) == ["e100"]
+
+
+@pytest.mark.parametrize(
+    "text",
+    ["Sulfiter, svaveldioxid", "svaveldioxid, Sulfiter"],
+)
+def test_a_specific_sulfite_replaces_the_generic_in_either_order(text: str) -> None:
+    assert ids_of(parse_ingredients(text).additives) == ["sulfur_dioxide"]
+
+
+def test_generic_sulfites_alone_are_not_dropped_by_the_dedup() -> None:
+    assert ids_of(parse_ingredients("Sulfiter").additives) == ["sulfites"]
+
+
+@pytest.mark.parametrize(
+    ("text", "kept", "contained"),
+    [
+        ("Meta vinsyra", "metatartaric_acid", "tartaric_acid"),
+        ("Caustic sulfite caramel", "caustic_sulphite_caramel", "sulfites"),
+    ],
+)
+def test_the_longest_alias_wins_and_the_shorter_one_inside_it_stays_out(
+    text: str, kept: str, contained: str
+) -> None:
+    parsed = parse_ingredients(text)
+    assert ids_of(parsed.additives) == [kept]
+    assert contained not in ids_of(parsed.additives)
+
+
+def test_a_claimed_span_cannot_be_taken_again() -> None:
+    spans = [False] * 10
+    assert _claim(spans, 2, 6)
+    assert not _claim(spans, 5, 8)  # overlaps the end of the first claim
+    assert not _claim(spans, 0, 3)  # overlaps the start
+    assert spans[6:] == [False] * 4  # a refused claim marks nothing
+    assert _claim(spans, 6, 10)  # touching is not overlapping
+
+
+def test_known_names_are_struck_out_before_the_dictionary_sees_them() -> None:
+    """A grape named in the product data is claimed first, so no alias can take it."""
+    parsed = parse_ingredients("Druvor, Vinsyra", known_names=["vinsyra"])
+    assert parsed.additives == []
+
+
+def test_fuzzy_accepts_a_slip_just_above_the_threshold_and_not_just_below() -> None:
+    above, below = "lysozme", "lysozame"  # one letter dropped / one swapped
+    assert fuzz.ratio(above, "lysozyme") >= FUZZY_THRESHOLD > fuzz.ratio(
+        below, "lysozyme"
+    ), "the fixture words no longer straddle FUZZY_THRESHOLD; pick new ones"
+
+    matched = parse_ingredients(f"Druvor, {above}")
+    assert ids_of(matched.additives) == ["lysozyme"]
+    assert matched.fuzzy_matches == [(above, "lysozyme")]
+
+    unmatched = parse_ingredients(f"Druvor, {below}")
+    assert unmatched.additives == []
+    assert unmatched.unknown_tokens == [below]
+
+
+def test_fuzzy_ignores_tokens_shorter_than_the_minimum_even_when_they_score_high() -> None:
+    short, long_ = "yest", "sufit"  # both one letter short of an alias
+    assert len(short) < FUZZY_MIN_LENGTH <= len(long_)
+    assert fuzz.ratio(short, "yeast") >= FUZZY_THRESHOLD, "the length rule is not what stops it"
+
+    parsed = parse_ingredients(f"Druvor, {short}")
+    assert parsed.unknown_tokens == [short]
+    assert parsed.fuzzy_matches == []
+
+    assert parse_ingredients(f"Druvor, {long_}").fuzzy_matches == [(long_, "sulfit")]
+
+
+def test_fuzzy_matches_are_part_of_the_record() -> None:
+    output = parse_ingredients("Druvor, lysozme").as_output()
+    assert output["fuzzy_matches"] == [{"token": "lysozme", "alias": "lysozyme"}]
+    assert parse_ingredients("Druvor, SULFITER").as_output()["fuzzy_matches"] == []
