@@ -84,10 +84,18 @@ def test_generic_sulfites_survive_alone() -> None:
     assert ids_of(parse_ingredients("Druvor, sulfiter").additives) == ["sulfites"]
 
 
-def test_misspelling_is_matched_by_fuzz() -> None:
+def test_misspelling_is_suggested_not_read() -> None:
+    """A near miss is a proposal for the dictionary. Reading it would let the
+    nearest alias, possibly a different substance, into the dataset unseen."""
     parsed = parse_ingredients("Druvor, stabiliseringsmedel: karboximetylcellolusa")
-    assert ids_of(parsed.additives) == ["carboxymethylcellulose"]
-    assert parsed.fuzzy_matches
+    assert parsed.additives == []
+    assert parsed.status == "partial"
+    assert parsed.unknown_tokens == ["karboximetylcellolusa"]
+    (token, alias), = parsed.fuzzy_matches
+    assert token == "karboximetylcellolusa"
+    # The nearest alias is itself a recorded misspelling; what matters is the
+    # substance it leads to, which is what the curator would alias it to.
+    assert load_lexicon().alias_index[alias] == ("substance", "carboxymethylcellulose")
 
 
 def test_named_grape_variety_is_not_unknown_text() -> None:
@@ -240,19 +248,21 @@ def test_known_names_are_struck_out_before_the_dictionary_sees_them() -> None:
     assert parsed.additives == []
 
 
-def test_fuzzy_accepts_a_slip_just_above_the_threshold_and_not_just_below() -> None:
+def test_fuzzy_suggests_a_slip_just_above_the_threshold_and_not_just_below() -> None:
     above, below = "lysozme", "lysozame"  # one letter dropped / one swapped
     assert fuzz.ratio(above, "lysozyme") >= FUZZY_THRESHOLD > fuzz.ratio(
         below, "lysozyme"
     ), "the fixture words no longer straddle FUZZY_THRESHOLD; pick new ones"
 
-    matched = parse_ingredients(f"Druvor, {above}")
-    assert ids_of(matched.additives) == ["lysozyme"]
-    assert matched.fuzzy_matches == [(above, "lysozyme")]
+    suggested = parse_ingredients(f"Druvor, {above}")
+    assert suggested.additives == []  # a suggestion is not a reading
+    assert suggested.unknown_tokens == [above]
+    assert suggested.fuzzy_matches == [(above, "lysozyme")]
 
     unmatched = parse_ingredients(f"Druvor, {below}")
     assert unmatched.additives == []
     assert unmatched.unknown_tokens == [below]
+    assert unmatched.fuzzy_matches == []  # too far to even suggest
 
 
 def test_fuzzy_ignores_tokens_shorter_than_the_minimum_even_when_they_score_high() -> None:
@@ -288,3 +298,27 @@ def test_promoted_spellings_match_exactly(text: str) -> None:
     parsed = parse_ingredients(text)
     assert parsed.fuzzy_matches == []
     assert parsed.unknown_tokens == []
+
+
+def test_a_fuzzy_match_keeps_the_wine_partial() -> None:
+    parsed = parse_ingredients("Druvor, SULFITER, lysozme")
+    assert parsed.status == "partial"
+    assert ids_of(parsed.additives) == ["sulfites"]
+
+
+def test_a_near_miss_never_merges_into_a_neighbouring_substance() -> None:
+    """The case that prompted this: a different substance one edit from an alias
+    must not be read as that alias and then deduplicated away."""
+    parsed = parse_ingredients("Antioxidant (L-askorbinsyra, askorbynsyra)")
+    assert ids_of(parsed.additives) == ["ascorbic_acid"]
+    assert parsed.unknown_tokens == ["askorbynsyra"]
+    assert parsed.status == "partial"
+
+
+def test_words_run_together_in_the_source_are_read_exactly() -> None:
+    """"SULFITERaskorbinsyra" leaves an exact alias the word boundary missed.
+    Nothing was guessed, so it is neither a suggestion nor a reason for partial."""
+    parsed = parse_ingredients("Konserveringsmedel och antioxidanter (SULFITERaskorbinsyra)")
+    assert ids_of(parsed.additives) == ["ascorbic_acid", "sulfites"]
+    assert parsed.status == "complete"
+    assert parsed.fuzzy_matches == []

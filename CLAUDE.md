@@ -32,6 +32,12 @@ counted. This file is about how to work here.
   and labelled: a QR decode and a PDF's text layer are exact, a machine reading
   of a photographed label is not, and a record resting on one must say so and
   must not be ranked above Systembolaget's own text unread.
+  **A near-miss spelling is the same thing**, decided 2026-11-21: when leftover text
+  is close to a known alias (`FUZZY_THRESHOLD` in `src/normalize.py`) the parser
+  records it as a suggestion in `fuzzy_matches` and leaves the token unread, so
+  the wine stays `partial`. It once read "isoaskorbinsyra" (a different
+  substance, E315) as ascorbic acid and dropped it. Promote a genuine slip by
+  adding the spelling as an alias; the report lists the candidates.
 
 ## What is where
 

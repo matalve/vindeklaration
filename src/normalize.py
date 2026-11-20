@@ -297,7 +297,13 @@ def parse_ingredients(text: str, known_names: list[str] | None = None) -> Parsed
             continue
         if not any(character.isalpha() for character in token):
             continue
-        # 4. Spelling slips: match the leftover against every known alias.
+        # 4. Spelling slips: match the leftover against every known alias. A
+        #    near miss is a suggestion for the dictionary, never a reading: the
+        #    nearest alias can be a different substance ("isoaskorbinsyra" sits
+        #    one prefix away from "askorbinsyra"), and a wine that rests on a
+        #    guess would be ranked as if it did not. So the token stays unread,
+        #    the wine stays `partial`, and the match is recorded for whoever
+        #    promotes the spelling to an alias.
         if len(token) >= FUZZY_MIN_LENGTH:
             match = process.extractOne(
                 token,
@@ -307,14 +313,18 @@ def parse_ingredients(text: str, known_names: list[str] | None = None) -> Parsed
             )
             if match is not None:
                 kind, key = lexicon.alias_index[match[0]]
+                if match[0] == token:
+                    # Words run together in the source ("SULFITERaskorbinsyra")
+                    # leave an exact alias that the word-boundary match missed.
+                    # Nothing was guessed, so read it as the alias it is.
+                    if kind == "substance":
+                        take_substance(lexicon.substances[key])
+                    elif kind == "processing":
+                        found_processing.setdefault(
+                            key, {"id": key, "name": lexicon.processing_names[key]}
+                        )
+                    continue
                 fuzzy_matches.append((token, match[0]))
-                if kind == "substance":
-                    take_substance(lexicon.substances[key])
-                elif kind == "processing":
-                    found_processing.setdefault(
-                        key, {"id": key, "name": lexicon.processing_names[key]}
-                    )
-                continue
         unknown_tokens.append(token)
 
     # 5. A specific sulfite species makes the generic "sulfiter" redundant.
