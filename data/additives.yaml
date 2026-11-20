@@ -70,6 +70,7 @@
     - svaveldixoid  # typo seen in the wild, transposed letters
     - svaveldioxis  # typo seen in the wild
     - svavelodix  # typo seen in the wild, "SVAVELODIX" for svaveldioxid
+    - svaveldioxidgas  # "SVAVELDIOXIDGAS E220": the gas form, named with its E-number
 
 - id: potassium_metabisulfite
   e_number: E224
@@ -105,6 +106,8 @@
     - kaliumdisulfiter  # plural, seen in the wild
     - kaliummetabisulft  # typo seen in the wild, missing i
     - kaliummetabisilfit  # typo seen in the wild, i for u
+    - kaliummetabissulfit  # typo seen in the wild, doubled s
+    - kaliumetabisulfit  # typo seen in the wild, missing m
   regexes:
     - '\b(meta\s?)?kalium\s?(meta\s?bi|meta|pyro|di)\s?sulfit\b'
     - '\b(meta\s?bi|meta|pyro|di)\s?sulfit\s+av\s+kalium\b'
@@ -131,6 +134,7 @@
     - kaliumbisulfiter  # plural, seen in the wild
     - kalimbisulfit  # typo seen in the wild, missing u
     - kalumbisulfit  # typo seen in the wild, missing i
+    - kaliymbisulfit  # typo seen in the wild, y for u
     # "Kaliumsulfit" reads as potassium bisulfite rather than potassium
     # metabisulfite: one wine's declaration pairs the word with "(E228)",
     # which is potassium bisulfite's own number, not E224's.
@@ -190,6 +194,7 @@
     - dimentyldikarbonat  # typo seen in the wild
     - dimetydikarbonat  # typo seen in the wild
     - dimetylkarbonat  # typo seen in the wild, missing "di"; seen alongside "(DMDC)"
+    - dimetyledikarbonat  # typo seen in the wild, stray "e"
 
 - id: lysozyme
   e_number: E1105
@@ -223,6 +228,21 @@
     - askorbunsyra  # typo seen in the wild
     - ascorbico  # Italian, "Acido L-ascorbico"
     - skorbinsyra  # typo seen in the wild, missing the leading "a"
+
+# Isoascorbic acid (erythorbic acid) is the stereoisomer of ascorbic acid, a
+# separate additive with its own E-number, so it is neither an alias of E300
+# nor in a shared group. E315 and the synonym "isoascorbic acid" are given in
+# Commission Regulation (EU) No 231/2012 (specifications), read as adopted.
+- id: erythorbic_acid
+  e_number: E315
+  bucket: additive
+  category: antioxidant
+  name: { sv: Isoaskorbinsyra, en: Isoascorbic acid }
+  note:
+    sv: Även kallad erytorbinsyra. En antioxidant som är en stereoisomer av askorbinsyra men ett eget tillsatsämne (E315), inte detsamma som askorbinsyra (E300).
+    en: Also called erythorbic acid. An antioxidant that is a stereoisomer of ascorbic acid but a separate additive (E315), not the same thing as ascorbic acid (E300).
+  aliases:
+    - isoaskorbinsyra
 
 - id: tartaric_acid
   e_number: E334
@@ -258,6 +278,7 @@
     - metavinsyra
     - metatartronsyra
     - metatartarsyra
+    - metavinsra  # typo seen in the wild, missing y
     - metakarsyra
     - metavinsyre
     - meta vinsyra  # space-separated variant, "Stabilisator (Meta-Vinsyra)"
@@ -278,7 +299,7 @@
   note:
     sv: En av druvans egna syror. Får tillsättas som surhetsreglerande medel.
     en: One of the grape's own acids. May be added as an acidity regulator.
-  aliases: [äppelsyra, äppelsyror, applesyra, malinsyra, malsyra, malic acid, malico, acido malico]
+  aliases: [äppelsyra, äppelsyror, applesyra, malinsyra, malsyra, malic acid, malico, acido malico, amlinsyra]  # amlinsyra: typo seen in the wild, letters transposed
 
 - id: citric_acid
   e_number: E330
@@ -551,6 +572,9 @@
     - karkboksimetylcellulosa  # typo seen in the wild, letters swapped
     - kaboximetylcellulosa  # typo seen in the wild, missing r
     - karboximtylcellulosa  # typo seen in the wild, missing e
+    - karboximmetylcellulosa  # typo seen in the wild, doubled m
+    - karboximetylscellulosa  # typo seen in the wild, stray s
+    - karboxymetylzellulos  # typo seen in the wild, z for c
     - karboximetylcelluolsa  # typo seen in the wild, letters transposed
     - karbomiximetylcellulosa  # typo seen in the wild
     - karboximetylcellulosastabilisator  # merged with "stabilisator", no space in the source
@@ -599,6 +623,7 @@
     - arabica gummi
     - gummiarabicum
     - akaciagummi
+    - acaciagummi  # spelling variant seen in the wild, "acacia" for "akacia"
     - arabicum
     - gumi arabicum
     - arabiskt gumi
@@ -628,6 +653,8 @@
     - kaliumpolyasoartat  # typo seen in the wild
     - kaliumpolypartat  # typo seen in the wild
     - kaluimpolyaspartat  # typo seen in the wild
+    - kaliumpolyspartat  # typo seen in the wild, missing a
+    - "kalium\u00adpolyaspartat"  # soft hyphen inside the word, seen in the wild next to E456
     - kaliumplyaspartat  # typo seen in the wild
     - kaliumpolyasperat  # typo seen in the wild
     - kaliumpolyasparat  # typo seen in the wild
@@ -1082,6 +1109,8 @@
     - vindruvor1  # footnote marker as a plain digit, seen in the wild
     - druvor1  # footnote marker as a plain digit, seen in the wild
     - druvoer  # typo seen in the wild
+    - duvor  # typo seen in the wild, missing r
+    - drvor  # typo seen in the wild, missing u
     - durvor  # typo seen in the wild, letters transposed
     - trauben aus ökologischem anbau  # German, "grapes from organic farming"
   regexes:
@@ -1135,6 +1164,7 @@
     - druvmustkoncentrerad  # merged, no space in the source
     - rektifiera  # bare infinitive, not followed directly by a must-word
     - rektifierat  # inflection not followed directly by a must-word
+    - rektifierad koncentrerad duvmust  # typo seen in the wild, "duvmust" for "druvmust"
     - druvmost  # typo seen in the wild, "druvmost" for "druvmust"
     - refiktierad koncentrerad druvmust  # typo seen in the wild, "refiktierad" for "rektifierad"
     - koncentrerad måste  # typo seen in the wild, "måste" for "must"
@@ -1207,11 +1237,13 @@
     - sockersirap
     - sirap
     - sackaros
+    - sacakaros  # typo seen in the wild, extra a
     - sacarose
     - glukos
     - glykos
     - socker
     - rörsocker
+    - rörsockersirap  # cane sugar syrup, "rörsocker" and "sockersirap" run together
     - sukros
     - sucrose
     - socke  # truncated mid-word, "socker" cut short
@@ -1260,6 +1292,7 @@
     - alkohol
     - alcohol
     - etylalkohol  # alternate Swedish name for ethanol
+    - ethanol  # English spelling of etanol
     - alkoholdestillat  # "alcohol distillate", generic like "destillat" above
     - vindestillat
     - wine distillate

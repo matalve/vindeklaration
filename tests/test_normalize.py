@@ -271,3 +271,20 @@ def test_fuzzy_matches_are_part_of_the_record() -> None:
     output = parse_ingredients("Druvor, lysozme").as_output()
     assert output["fuzzy_matches"] == [{"token": "lysozme", "alias": "lysozyme"}]
     assert parse_ingredients("Druvor, SULFITER").as_output()["fuzzy_matches"] == []
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Druvor, antioxidationsmedel (L-askorbinsyra, isoaskorbinsyra)",
+        "Druvor Stabiliseringsmedel Kalium­polyaspartat E456",
+        "Druvor, socker, rörsockersirap",
+        "Druvor, Rektifierad koncentrerad duvmust",
+        "Druvor, konserveringsmedel: kaliummetabissulfit",
+    ],
+)
+def test_promoted_spellings_match_exactly(text: str) -> None:
+    """Typos seen in the wild are aliases, not fuzzy guesses (issue #6)."""
+    parsed = parse_ingredients(text)
+    assert parsed.fuzzy_matches == []
+    assert parsed.unknown_tokens == []

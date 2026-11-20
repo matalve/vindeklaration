@@ -1089,5 +1089,126 @@
   "allergens": [
    "sulfites"
   ]
+ },
+ {
+  "why": "isoaskorbinsyra is isoascorbic acid (erythorbic acid, E315), a different additive from L-askorbinsyra (E300) in the same declaration; it must not be fuzzy-matched to ascorbic acid and lost by deduplication (x-566001)",
+  "text": "Druvor, surhetsreglerande medel (vinsyra (L(+)-)), konserverings- och antioxidationsmedel (SVAVELDIOXID, L-askorbinsyra, isoaskorbinsyra) Tappat i en skyddande atmosfär",
+  "additives": [
+   "ascorbic_acid",
+   "erythorbic_acid",
+   "sulfur_dioxide",
+   "tartaric_acid"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "a soft hyphen inside \"Kalium­polyaspartat\" (E456 beside it) must read as the exact alias, not a fuzzy match (x-5513208)",
+  "text": "Druvor Konserveringsmedel och antioxidanter KaliumväteSULFIT E228 / CAS 7773-03-7L-askorbinsyra E300 Stabiliseringsmedel Kalium­polyaspartat E456 / CAS 64723-18-8 Gummi arabicum E414 / CAS 9000-01-5 Förpackningsgas Kväve E941 / CAS 7727-37-9",
+  "additives": [
+   "ascorbic_acid",
+   "gum_arabic",
+   "potassium_bisulfite",
+   "potassium_polyaspartate"
+  ],
+  "gases": [
+   "nitrogen"
+  ],
+  "base": [
+   "grapes"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "rörsockersirap is cane sugar syrup, \"rörsocker\" and \"sockersirap\" run together, both of which are the sugar entry (x-7216701)",
+  "text": "Rött vin (druvor, antioxidationsmedel (SULFITER, askorbinsyra), stabiliseringsmedel (metavinsyra och/eller gummi arabicum (akaciagummi) och/eller citronsyra), socker, rörsockersirap, vatten, glöggkryddsextrakt (kanel, kardemumma, kryddnejlika, pomeransskal, ingefära, russin, fikon), cognac (1,2%).",
+  "additives": [
+   "ascorbic_acid",
+   "citric_acid",
+   "flavourings",
+   "gum_arabic",
+   "metatartaric_acid",
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "fruit",
+   "grapes",
+   "spices",
+   "spirits",
+   "sugar",
+   "water",
+   "wine"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "SVAVELDIOXIDGAS E220 is sulfur dioxide as a gas, named with its E-number; counted once alongside the potassium bisulfite and ascorbic acid also listed (x-9332301)",
+  "text": "druva, konserverings-och antioxidationsmedel (SVAVELDIOXIDGAS E220, KALIUMVÄTESULFIT  E228, E300), Stabiliserande (innehåller E414 och/eller E456)",
+  "additives": [
+   "ascorbic_acid",
+   "gum_arabic",
+   "potassium_bisulfite",
+   "potassium_polyaspartate",
+   "sulfur_dioxide"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"duvmust\" is a typo for druvmust inside \"rektifierad koncentrerad duvmust\", read as one exact phrase (x-5984201)",
+  "text": "Druvor, konserveringsmedel (SULFITER), rektifierad koncentrerad duvmust, surhetsreglerande medel (vinsyra(L(+)-))",
+  "additives": [
+   "sulfites",
+   "tartaric_acid"
+  ],
+  "gases": [],
+  "base": [
+   "grape_must",
+   "grapes"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"spice arom\" is a flavouring named by its descriptor, like \"glögg arom\"; \"spice\" alone must not be read as the spices ingredient (x-9456501)",
+  "text": "vitt vin, socker, aromer (glögg arom, spice arom, apelsin arom), E330 citronsyra. Innehåller SULFITER.",
+  "additives": [
+   "citric_acid",
+   "flavourings",
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "spices",
+   "sugar",
+   "wine"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
  }
 ]

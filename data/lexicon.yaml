@@ -176,6 +176,8 @@ category_labels:
   - jäsning
   - konserveringsmedel/antioxidanter
   - konserverings   # truncated header seen in the wild
+  - konseverings  # typo of "konserverings" seen in the wild, missing r
+  - konserverinsgs  # typo of "konserverings" seen in the wild
   - surhetsreglerande meldel  # typo seen in the wild
   - meldel
   - processhjälpmedel
@@ -279,6 +281,8 @@ category_labels:
   - vinbaserad smaksatt dryck  # "wine-based flavoured beverage", a product-type header
   - kristallstabilisering  # explains what the stabiliser (e.g. kaliumpolyaspartat) is for
   - syrereglerande  # alternate wording of "surhetsreglerande"
+  - syrareglerande  # same wording with a for e
+  - syraregulator  # singular of "syrregulatorer" above
   - övrigt
   - konserveringsämnen
   - konserveringsämne
@@ -297,6 +301,7 @@ category_labels:
   - konservativ  # singular of "konservativa", machine translation of "preservative"
   - agenti  # Italian, "agents"
   - antiossidanti  # Italian, "antioxidants"
+  - antioxydants  # French, "conservateurs et antioxydants"
   - acido  # Italian generic header, mirrors "syra"/"syror"
   - principali  # Italian, "main" ("Ingredienti principali")
   - sostanze  # Italian, "substances" ("sostanze per l'arricchimento")
@@ -313,6 +318,11 @@ category_labels:
   - antioxitanter
   - antioxianter
   - antixidanter
+  - antixidationsmedel
+  - antioxidationmedel
+  - antioxidansmedel
+  - antioxidander
+  - antiocidaner
   - antioxaidanter
   - antidioxanter
   - antidioxant
@@ -351,6 +361,9 @@ category_labels:
   - konserveringsmadel
   - konserveringsmdedel
   - konserveringsmedek  # typo of the already-truncated "konserveringsmede"
+  - kornserveringsmedel
+  - konserveringsmeel
+  - konserverinsmedel
   # Typos of "surhetsreglerande" seen in the wild.
   - surhetsreglerare
   - surhetreglerande
@@ -366,12 +379,16 @@ category_labels:
   - stabilisatorrer
   - stabilasatorer
   - stablisatorer
+  - stabliisatorer
+  - staabilisatorer
   # Typos of "stabiliseringsmedel" seen in the wild.
   - stabilieringsmedel
   - stabiliseringsmedek
   - stabiliersingsmedel
   - stabiliveringsmedel
   - stablisieringsmedel
+  - stabilisteringsmedel
+  - stabliliseringsmedel
   - satbiliserande  # typo of "stabiliserande"
   # Typos of "förpackningsgas(er)" seen in the wild.
   - förpckaningsgas
@@ -396,6 +413,7 @@ processing_notes:
       - buteljerad
       - buteljerat
       - buteljering
+      - buteering  # typo seen in the wild, "Buteering i en skyddande atmosfär"
       - butljerad  # typo seen in the wild
       - tappat
       - tappas
@@ -443,6 +461,7 @@ processing_notes:
       - eko
       - aus kontrolliert ökologischer landwirtschaft  # German, "from certified organic farming"
       - ¹från ekologiskt jordbruk  # footnote marker attached
+      - ¹ekologiskt  # footnote marker attached, "¹Ekologiskt odlade"
       - 1från ekologiskt jordbruk  # footnote marker as a plain digit, seen in the wild
       - biologico  # Italian, "mosto concentrato biologico"
       - ekoligiskt  # typo seen in the wild
@@ -694,6 +713,7 @@ stopwords:
   - sockerhalt  # "Sockerhalt ca 1,7g/100ml" — a sugar-content statement, not an ingredient
   - möjlig  # "Tappning i skyddande atmosfär är möjlig"
   - glögg  # flavour descriptor inside "aromer (äpple, ingefära, glögg ...)" and "glögg arom"
+  - spice  # flavour descriptor in "glögg arom, spice arom, apelsin arom", like glögg above
   - svart  # "svart grenache", colour adjective of the grape like "röd"/"vit" above
   - mourvedre  # unaccented spelling of Mourvèdre
   - gewürztraminer  # accented spelling; the unaccented one is above
