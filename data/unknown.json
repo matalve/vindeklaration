@@ -81,22 +81,29 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-836208/"
   },
   {
+   "token": "jästskalsberedning",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9036901/"
+  },
+  {
    "token": "s=2",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9212901/"
+  },
+  {
+   "token": "vinsten",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9214401/"
+  },
+  {
+   "token": "glutation",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9488601/"
   }
  ],
  "fuzzy_matches": [
   {
-   "match": "rektifierad -> rektifiera",
-   "wines": 2
-  },
-  {
    "match": "stabilisteringsmedel -> stabiliseringsmedel",
-   "wines": 2
-  },
-  {
-   "match": "svavekdioxid -> svaveldioxid",
    "wines": 2
   },
   {
@@ -132,6 +139,10 @@
    "wines": 1
   },
   {
+   "match": "rektifierad -> rektifiera",
+   "wines": 1
+  },
+  {
    "match": "duvmust -> druvmust",
    "wines": 1
   },
@@ -161,10 +172,6 @@
   },
   {
    "match": "syrareglerande -> syrereglerande",
-   "wines": 1
-  },
-  {
-   "match": "stabilisatiorer -> stabilisatorer",
    "wines": 1
   },
   {
@@ -216,6 +223,10 @@
    "wines": 1
   },
   {
+   "match": "kaliymbisulfit -> kalimbisulfit",
+   "wines": 1
+  },
+  {
    "match": "karboximmetylcellulosa -> karboximetylcellulosa",
    "wines": 1
   },
@@ -241,6 +252,14 @@
   },
   {
    "match": "dimetyledikarbonat -> dimetyldikarbonat",
+   "wines": 1
+  },
+  {
+   "match": "svaveldioxidgas -> svaveldioxid",
+   "wines": 1
+  },
+  {
+   "match": "staabilisatorer -> stabilisatorer",
    "wines": 1
   },
   {
