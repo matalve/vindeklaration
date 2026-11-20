@@ -14,9 +14,6 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .build import known_names
-from .normalize import parse_ingredients
-
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 WINES_PATH = DATA_DIR / "wines.json"
 UNKNOWN_PATH = DATA_DIR / "unknown.json"
@@ -177,14 +174,22 @@ def main() -> None:
     # Partial wines held by a spelling the parser can suggest an alias for.
     fuzzy_held = 0
     examples: dict[str, str] = {}
+    # Read what the build stored instead of parsing every declaration again.
+    # The report has to describe the dataset in front of it: a second parse
+    # with whatever additives.yaml says now can disagree with the `partial`
+    # share counted above, which is stored, and parsing twice buys nothing.
+    if declared and "fuzzy_matches" not in declared[0]:
+        raise SystemExit(
+            f"{WINES_PATH.name} predates the stored `fuzzy_matches` field; "
+            "run `uv run python -m src.build` first"
+        )
     for wine in declared:
-        parsed = parse_ingredients(wine["raw_ingredients"], known_names(wine))
-        for token in parsed.unknown_tokens:
+        for token in wine["unknown_tokens"]:
             token_counter[token] += 1
             examples.setdefault(token, wine["source_url"])
-        for token, alias in parsed.fuzzy_matches:
-            fuzzy_counter[f"{token} -> {alias}"] += 1
-        if parsed.fuzzy_matches:
+        for match in wine["fuzzy_matches"]:
+            fuzzy_counter[f"{match['token']} -> {match['alias']}"] += 1
+        if wine["fuzzy_matches"]:
             fuzzy_held += 1
 
     UNKNOWN_PATH.write_text(
