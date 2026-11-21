@@ -805,6 +805,56 @@ header .themer button:hover { color: var(--on-wine-lift); }
 header .themer button[aria-checked="true"] { color: var(--wine-slab); }
 header .themer button:focus-visible { outline-color: var(--on-wine-lift); }
 
+/* Back to the top. Drawn in the slab's wine, which is dark in both themes, so
+   one rule serves both and the icon needs no palette of its own. Hidden with
+   `visibility`, not `display`: that keeps the fade and, unlike opacity alone,
+   takes it out of the tab order and the accessibility tree while it is away. */
+.scroll-sentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100vh;
+  pointer-events: none;
+}
+.to-top {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 9;                 /* under the header's 10, over the page */
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;            /* 44 px: a finger can find it */
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: var(--wine-slab);
+  color: var(--on-wine-lift);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.75rem);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+}
+/* An author `display` beats the `hidden` attribute, so say it again. */
+.to-top[hidden] { display: none; }
+.to-top[data-visible] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+.to-top .i { margin: 0; width: 1.15rem; height: 1.15rem; }
+.to-top:hover { transform: translateY(-2px); }
+.to-top:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .to-top { transition: none; }
+  .to-top:hover { transform: none; }
+}
+@media print { .to-top, .scroll-sentinel { display: none; } }
+
 .lang {
   display: inline-flex;
   align-items: center;
