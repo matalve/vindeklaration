@@ -23,6 +23,7 @@ from pathlib import Path
 
 import httpx
 
+from . import seen
 from .http import REQUEST_DELAY, SEARCH_URL, client, get_json
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -161,6 +162,11 @@ def main() -> None:
         json.dumps(products, ensure_ascii=False, indent=1), encoding="utf-8"
     )
     print(f"wrote {len(products)} products to {CATALOG_PATH}")
+    # Observability only: a failure here must never cost the night's sweep.
+    try:
+        seen.record(products)
+    except Exception as error:
+        print(f"warning: could not record the sightings: {error}", file=sys.stderr)
 
 
 if __name__ == "__main__":

@@ -24,6 +24,11 @@ data/catalog.json.gz
 # the JSON. It is published as a release asset instead.
 data/wines.sqlite
 
+# Which wines each nightly sweep found (src/seen.py). The crawler's own record,
+# like data/cache: it can only be rebuilt by waiting, so it is never reconciled
+# downward, but it is no part of the dataset and has no business in git.
+data/catalog-seen.json*
+
 # Wrangler's local state and cache, written into the repository root whenever
 # it runs — which update.sh now does nightly. The local-simulator storage under
 # it is not the R2 bucket and holds nothing worth keeping.
