@@ -1210,5 +1210,80 @@
   "allergens": [
    "sulfites"
   ]
+ },
+ {
+  "why": "\"Svavekdioxid\" is a typo for svaveldioxid inside \"Antioxidant (Svavekdioxid (SULFITER))\"; read as sulfur dioxide with the sulfites collapsed into it (x-7424401)",
+  "text": "Vindruvor, Surhetsreglerande medel (Tartaric acid 334), Antioxidant (Svavekdioxid (SULFITER)), Vindruvor, Surhetsreglerande medel (Tartaric acid 334), Antioxidant (Svavekdioxid (SULFITER))\nButeljerat i en skyddande atmosfär",
+  "additives": [
+   "sulfur_dioxide",
+   "tartaric_acid"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "processing": [
+   "protective_atmosphere"
+  ],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"stabilisatiorer\" is a typo for the category label \"stabilisatorer\"; it introduces the cellulose gum/citric acid list and is not itself a substance (x-7495101)",
+  "text": "Druvor, sackaros, konserveringsmedel (SULFITER), stabilisatiorer (innehåller cellulosagummi och/eller citronsyra)",
+  "additives": [
+   "carboxymethylcellulose",
+   "citric_acid",
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "grapes",
+   "sugar"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "\"rektifierad koncentrerad druvmost\" is the typo'd phrase for rectified concentrated grape must (druvmost for druvmust), read as one exact phrase inside an expeditionslikor; \"rektifierad\" must not be left to a fuzzy suggestion (x-7614501)",
+  "text": "Druvor, socker, konserveringsmedel och antioxidanter (sulfiter), Stabiliseringsmedel (gummi arabicum) tiragelikör (socker, vin), expeditionslikör (rektifierad koncentrerad druvmost)",
+  "additives": [
+   "gum_arabic",
+   "sulfites"
+  ],
+  "gases": [],
+  "base": [
+   "expedition_liqueur",
+   "grape_must",
+   "grapes",
+   "sugar",
+   "wine"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
+ },
+ {
+  "why": "Glutathione is an antioxidant named in its own right, declared next to ascorbic acid (x-9488601)",
+  "text": "Druva; Surhetsreglerande medel (vinsyra); Antioxidationsmedel (askorbinsyra, glutation); Stabiliseringsmedel (natriumkarboximetylcellulosa); Konserveringsmedel (SULFITER)",
+  "additives": [
+   "ascorbic_acid",
+   "carboxymethylcellulose",
+   "glutathione",
+   "sulfites",
+   "tartaric_acid"
+  ],
+  "gases": [],
+  "base": [
+   "grapes"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
  }
 ]

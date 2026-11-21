@@ -68,6 +68,7 @@
     - svaveloxid  # typo seen in the wild, missing "di"
     - svaveldoxid  # typo seen in the wild, missing "i"
     - svaveldixoid  # typo seen in the wild, transposed letters
+    - svavekdioxid  # typo seen in the wild, "k" for "l" (x-7424401)
     - svaveldioxis  # typo seen in the wild
     - svavelodix  # typo seen in the wild, "SVAVELODIX" for svaveldioxid
     - svaveldioxidgas  # "SVAVELDIOXIDGAS E220": the gas form, named with its E-number
@@ -463,6 +464,17 @@
     - ammoniumbisulfit
     - ammonium bisulphite
     - ammonium bisulfite
+
+- id: glutathione
+  bucket: additive
+  category: antioxidant
+  name: { sv: Glutation, en: Glutathione }
+  note:
+    sv: Antioxidationsmedel som deklareras vid sidan av askorbinsyra. Ett tripeptid av glutaminsyra, cystein och glycin.
+    en: An antioxidant declared alongside ascorbic acid. A tripeptide of glutamic acid, cysteine and glycine.
+  aliases:
+    - glutation
+    - glutathione
 
 - id: copper_sulfate
   bucket: additive
@@ -1166,6 +1178,7 @@
     - rektifierat  # inflection not followed directly by a must-word
     - rektifierad koncentrerad duvmust  # typo seen in the wild, "duvmust" for "druvmust"
     - druvmost  # typo seen in the wild, "druvmost" for "druvmust"
+    - rektifierad koncentrerad druvmost  # "druvmost" for "druvmust" (x-7614501)
     - refiktierad koncentrerad druvmust  # typo seen in the wild, "refiktierad" for "rektifierad"
     - koncentrerad måste  # typo seen in the wild, "måste" for "must"
     - rectified concentrated solid must  # English, "Rectified Concentrated Solid Must"
