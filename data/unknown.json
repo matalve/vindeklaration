@@ -6,6 +6,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
+   "token": "svavekdioxid",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7424401/"
+  },
+  {
    "token": "industriell",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7748401/"
@@ -61,9 +66,19 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7355501/"
   },
   {
+   "token": "stabilisatiorer",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7495101/"
+  },
+  {
    "token": "renad",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7511008/"
+  },
+  {
+   "token": "rektifierad",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7614501/"
   },
   {
    "token": "svavelsyraanhydrid",
@@ -103,179 +118,15 @@
  ],
  "fuzzy_matches": [
   {
-   "match": "stabilisteringsmedel -> stabiliseringsmedel",
+   "match": "svavekdioxid -> svaveldioxid",
    "wines": 2
   },
   {
-   "match": "kaliumpolyspartat -> kaliumpolyaspartat",
-   "wines": 2
-  },
-  {
-   "match": "konserverings -> konserverings",
-   "wines": 1
-  },
-  {
-   "match": "kornserveringsmedel -> konserveringsmedel",
-   "wines": 1
-  },
-  {
-   "match": "kaliummetabissulfit -> kaliummetabisulfit",
-   "wines": 1
-  },
-  {
-   "match": "amlinsyra -> malinsyra",
-   "wines": 1
-  },
-  {
-   "match": "antixidationsmedel -> antioxidationsmedel",
-   "wines": 1
-  },
-  {
-   "match": "kalium­polyaspartat -> kaliumpolyaspartat",
-   "wines": 1
-  },
-  {
-   "match": "isoaskorbinsyra -> askorbinsyra",
+   "match": "stabilisatiorer -> stabilisatorer",
    "wines": 1
   },
   {
    "match": "rektifierad -> rektifiera",
-   "wines": 1
-  },
-  {
-   "match": "duvmust -> druvmust",
-   "wines": 1
-  },
-  {
-   "match": "surhetsreglerande -> surhetsreglerande",
-   "wines": 1
-  },
-  {
-   "match": "stabliliseringsmedel -> stabiliseringsmedel",
-   "wines": 1
-  },
-  {
-   "match": "konserveringsmeel -> konserveringsmedel",
-   "wines": 1
-  },
-  {
-   "match": "rörsockersirap -> sockersirap",
-   "wines": 1
-  },
-  {
-   "match": "sacakaros -> sackaros",
-   "wines": 1
-  },
-  {
-   "match": "duvor -> druvor",
-   "wines": 1
-  },
-  {
-   "match": "syrareglerande -> syrereglerande",
-   "wines": 1
-  },
-  {
-   "match": "metavinsra -> metavinsyra",
-   "wines": 1
-  },
-  {
-   "match": "kaliumetabisulfit -> kaliummetabisulfit",
-   "wines": 1
-  },
-  {
-   "match": "ethanol -> etanol",
-   "wines": 1
-  },
-  {
-   "match": "stabliisatorer -> stablisatorer",
-   "wines": 1
-  },
-  {
-   "match": "antioxydants -> antioxidants",
-   "wines": 1
-  },
-  {
-   "match": "syraregulator -> syrregulatorer",
-   "wines": 1
-  },
-  {
-   "match": "antiocidaner -> antioxidanter",
-   "wines": 1
-  },
-  {
-   "match": "askorbinsyra -> askorbinsyra",
-   "wines": 1
-  },
-  {
-   "match": "konserverinsgs -> konserverings",
-   "wines": 1
-  },
-  {
-   "match": "antioxidationmedel -> antioxidationsmedel",
-   "wines": 1
-  },
-  {
-   "match": "acaciagummi -> akaciagummi",
-   "wines": 1
-  },
-  {
-   "match": "¹ekologiskt -> ekologiskt",
-   "wines": 1
-  },
-  {
-   "match": "kaliymbisulfit -> kalimbisulfit",
-   "wines": 1
-  },
-  {
-   "match": "karboximmetylcellulosa -> karboximetylcellulosa",
-   "wines": 1
-  },
-  {
-   "match": "konserverinsmedel -> konserveringsmedel",
-   "wines": 1
-  },
-  {
-   "match": "antioxidander -> antioxidanter",
-   "wines": 1
-  },
-  {
-   "match": "karboximetylscellulosa -> karboximetylcellulosa",
-   "wines": 1
-  },
-  {
-   "match": "buteering -> buteljering",
-   "wines": 1
-  },
-  {
-   "match": "konseverings -> konserverings",
-   "wines": 1
-  },
-  {
-   "match": "dimetyledikarbonat -> dimetyldikarbonat",
-   "wines": 1
-  },
-  {
-   "match": "svaveldioxidgas -> svaveldioxid",
-   "wines": 1
-  },
-  {
-   "match": "staabilisatorer -> stabilisatorer",
-   "wines": 1
-  },
-  {
-   "match": "antioxidansmedel -> antioxidantmedel",
-   "wines": 1
-  },
-  {
-   "match": "spice -> spices",
-   "wines": 1
-  },
-  {
-   "match": "karboxymetylzellulos -> karboxymetylcellulos",
-   "wines": 1
-  },
-  {
-   "match": "drvor -> druvor",
    "wines": 1
   }
  ]
