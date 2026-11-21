@@ -149,6 +149,24 @@ build.
 The script sits at the root, not in `deploy/`, because the build's watch paths
 exclude `/deploy`: a fix to it must trigger the build that tests it.
 
+**Preview builds.** Every push to a branch other than `main` builds a Preview
+when the *Builds for Preview branches* switch is on (Settings, Builds). They
+are configured on their own tab, *Previews Base*, next to *Production*: the two
+have separate build commands, and on 2026-11-21 preview builds failed with the
+pre-R2 command while the Production tab was correct. A Preview runs the same
+`bash cf-build.sh`, then the Preview command `npx wrangler preview`, which makes
+a version with its own URL and does not touch production. The URL is in the
+build log, and on a pull request in the Cloudflare bot's comment. No pull
+request is needed: the push starts the build.
+
+`wrangler preview` stops with "missing a `previews` block" unless
+`wrangler.jsonc` names a bucket for the `DATA` binding. The block points at the
+production bucket on purpose, so a Preview shows the real dataset downloads.
+That is safe only while `worker/index.js` reads and never writes, which
+`tests/test_worker.py` checks: a Preview of a branch that wrote to the bucket
+would be writing to production. Wrangler 4.81.1, the version on the crawler,
+prints a warning about the unknown `previews` field and carries on.
+
 If the bucket is ever unreachable the release is the fallback once the
 repository is public:
 `https://github.com/matalve/vindeklaration/releases/download/dataset-latest/wines.json.gz`.
