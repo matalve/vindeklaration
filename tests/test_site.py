@@ -959,3 +959,15 @@ def test_shipped_css_declares_exactly_what_the_source_does(tmp_path):
     assert parse("a b{c:d}") != parse("ab{c:d}")
     assert parse("[x] .y{c:d}") != parse("[x].y{c:d}")
     assert parse("a{b:calc(var(--m) + 1rem)}") != parse("a{b:calc(var(--m)+ 1rem)}")
+
+
+def test_the_templates_every_page_shares_carry_no_build_date() -> None:
+    """A date in the shared footer makes every page differ from the previous
+    day's build, so the first deploy after each UTC midnight re-uploads all of
+    them (issue #24). Pages that must be dated say so in their own text, through
+    `importer_measured`; the wine pages print their own fetch date."""
+    for name in ("base.html", "wine.html"):
+        template = (TEMPLATE_DIR / name).read_text(encoding="utf-8")
+        code = re.sub(r"\{#.*?#\}", "", template, flags=re.DOTALL)
+        assert "generated" not in code, name
+
