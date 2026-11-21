@@ -95,6 +95,9 @@
    state, a substance or a ranking. A beaker beside "substances" would say
    chemical, and that is exactly the kind of implication the rule forbids. #}
 <svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow-up" viewBox="0 0 24 24">
+    <path d="M12 19V5"/><path d="m5 12 7-7 7 7"/>
+  </symbol>
   <symbol id="i-search" viewBox="0 0 24 24">
     <circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/>
   </symbol>
@@ -231,6 +234,17 @@
   <p class="meta">{{ s.site_name }} · <a href="{{ lang_root }}/{{ s.method_url }}/">{{ s.method }}</a></p>
 </footer>
 
+{# Back to the top, for the long pages: the finder's result list, the substance
+   pages and the coverage tables. `hidden` until the script below has found the
+   sentinel, so without scripting there is no dead button. The sentinel is one
+   screen tall at the top of the document; once it has scrolled out of view the
+   reader is a screen or more down, and the button comes in. A page shorter than
+   that never shows it. #}
+<div class="scroll-sentinel" aria-hidden="true"></div>
+<button type="button" class="to-top" id="to-top" hidden aria-label="{{ s.to_top }}">
+  <svg class="i" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+</button>
+
 <script>
   // The slab docks when it reaches the top. No scroll listener and no work per
   // frame: a sentinel of exactly the header's top gap sits above it, and when
@@ -262,6 +276,32 @@
     }
     sync();
     wide.addEventListener("change", sync);
+  })();
+
+  // The button for long pages follows the same rule as the slab above: no
+  // scroll listener and no work per frame, only a sentinel the browser reports
+  // on. Hidden by CSS (visibility, which also takes it out of the tab order and
+  // the accessibility tree) until the sentinel has scrolled away.
+  (function () {
+    var button = document.getElementById("to-top");
+    var mark = document.querySelector(".scroll-sentinel");
+    if (!button || !mark || !window.IntersectionObserver) return;
+    button.hidden = false;
+
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        button.toggleAttribute("data-visible", !entry.isIntersecting);
+      });
+    }).observe(mark);
+
+    button.addEventListener("click", function () {
+      var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: calm ? "auto" : "smooth" });
+      // The button is about to hide itself, which would drop a keyboard
+      // reader's focus into the void. Hand it to the first thing at the top.
+      var first = document.querySelector("header a");
+      if (first) first.focus({ preventScroll: true });
+    });
   })();
 
   // "/" jumps to whichever search field the page has — the header's on most

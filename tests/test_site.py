@@ -971,3 +971,63 @@ def test_the_templates_every_page_shares_carry_no_build_date() -> None:
         code = re.sub(r"\{#.*?#\}", "", template, flags=re.DOTALL)
         assert "generated" not in code, name
 
+
+# --- the back-to-top button (issue #15) --------------------------------------
+# What these pin are the choices that are easy to undo by accident: it is
+# visible only to a reader who can use it, it costs no work per frame, and it
+# respects a reader who asked for less motion.
+
+
+def _template(name: str) -> str:
+    return (TEMPLATE_DIR / name).read_text(encoding="utf-8")
+
+
+def test_the_back_to_top_label_exists_in_both_languages() -> None:
+    """Jinja renders a missing string as nothing, which would leave an unlabelled button."""
+    strings = json.loads(_template("strings.json"))
+    for lang in ("sv", "en"):
+        assert strings[lang]["to_top"].strip(), lang
+
+
+def test_the_back_to_top_button_is_labelled_and_hidden_until_the_script_runs() -> None:
+    base = _template("base.html")
+    button = re.search(r'<button[^>]*id="to-top"[^>]*>', base)
+    assert button, "no #to-top button"
+    assert " hidden" in button.group(0), "without scripting it would be a dead button"
+    assert 'aria-label="{{ s.to_top }}"' in button.group(0)
+    assert 'type="button"' in button.group(0)
+
+
+def test_the_back_to_top_icon_is_in_the_sprite() -> None:
+    base = _template("base.html")
+    assert '<symbol id="i-arrow-up"' in base
+    assert 'href="#i-arrow-up"' in base
+
+
+def test_the_back_to_top_button_watches_a_sentinel_and_listens_to_no_scroll() -> None:
+    """Same rule as the header slab: no scroll listener, no work per frame."""
+    base = re.sub(r"\{#.*?#\}", "", _template("base.html"), flags=re.DOTALL)
+    assert 'class="scroll-sentinel"' in base
+    assert "IntersectionObserver" in base
+    assert not re.search(r"""addEventListener\(\s*["']scroll["']""", base)
+    assert "onscroll" not in base
+
+
+def test_the_back_to_top_script_respects_reduced_motion() -> None:
+    base = _template("base.html")
+    assert "prefers-reduced-motion" in base.split('id="to-top"', 1)[1]
+
+
+def test_the_back_to_top_css_keeps_it_out_of_reach_while_it_is_away() -> None:
+    css = _template("site.css")
+    away = re.search(r"\.to-top \{[^}]*\}", css).group(0)
+    # visibility, not just opacity: opacity alone would leave it in the tab order
+    # and the accessibility tree.
+    assert "visibility: hidden" in away
+    assert "position: fixed" in away
+    # An author display beats the hidden attribute unless it is said again.
+    assert re.search(r"\.to-top\[hidden\]\s*\{\s*display:\s*none", css)
+    assert ".to-top:focus-visible" in css
+    assert re.search(r"prefers-reduced-motion: reduce\)\s*\{[^}]*\.to-top", css)
+    assert re.search(r"@media print\s*\{[^}]*\.to-top", css)
+
