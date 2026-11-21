@@ -47,6 +47,7 @@ counted. This file is about how to work here.
 | `data/additives.yaml` | the substance dictionary — the heart of the project |
 | `data/lexicon.yaml` | labels, processing notes, stopwords |
 | `data/unknown.json` | what the parser could not read, ranked by wines blocked |
+| `data/catalog-seen.json` | which wines each nightly sweep found, and when — the Pi's own, gitignored (`src/seen.py`) |
 | `data/producer-declarations.json` | the second source — e-label finds, never merged into the dataset |
 | `deploy/` | running it unattended on the Raspberry Pi |
 | `src/probe.py` | `declaration-finder`'s fetcher — robots, politeness and a report instead of a page |
@@ -97,6 +98,9 @@ A full pass is hours long and a laptop sleeps through it.
 downward.** A single `rsync --delete` of the whole tree once destroyed 11 148
 fetched declarations. If the cache is ever lost again,
 `deploy/rebuild-cache.py` re-derives it from `wines.json` instead of refetching.
+`data/catalog-seen.json` is the crawler's own record in the same way: which wines
+each nightly sweep found, written by `src/catalog.py` through `src/seen.py` and
+read by the report. Gitignored, and it can only be rebuilt by waiting.
 
 **Code and the dictionaries travel through GitHub; the dataset does not.**
 They go laptop → GitHub → Pi: `update.sh` pulls before it crawls, so the Pi

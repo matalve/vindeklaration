@@ -14,6 +14,8 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
+from . import seen
+
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 WINES_PATH = DATA_DIR / "wines.json"
 UNKNOWN_PATH = DATA_DIR / "unknown.json"
@@ -220,6 +222,8 @@ def main() -> None:
             f"\n    {fuzzy_held} partial wines are held by one of these "
             f"({share(fuzzy_held, len(declared))} of declared)"
         )
+
+    seen.print_summary(seen.load(quarantine=False))
 
     entry = {
         "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
