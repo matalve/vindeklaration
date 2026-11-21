@@ -28,5 +28,20 @@
       "binding": "DATA",
       "bucket_name": "vindeklaration-data"
     }
-  ]
+  ],
+  // `wrangler preview`, which Workers Builds runs for every branch but main,
+  // refuses to start without this block and asks for a Preview-safe bucket.
+  // This is the production bucket on purpose: a preview then shows the real
+  // dataset downloads. That is safe only while the Worker reads. worker/index.js
+  // calls env.DATA.get and nothing else, and tests/test_worker.py fails if that
+  // stops being true, because a preview of a branch that wrote to the bucket
+  // would be writing to production.
+  "previews": {
+    "r2_buckets": [
+      {
+        "binding": "DATA",
+        "bucket_name": "vindeklaration-data"
+      }
+    ]
+  }
 }
