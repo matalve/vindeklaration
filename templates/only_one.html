@@ -13,6 +13,9 @@
   <h1>{{ s.only_one_title }}</h1>
   <p class="lede">{{ s.only_one_lede }}</p>
   <p class="hint">{{ s.only_one_count|replace("{n}", rows|length|count(lang))|replace("{d}", generated) }}</p>
+  {# Unlike the ready-made lists this one does not filter on stock: a wine that
+     is out of stock still declared what it declared. So it says so. #}
+  <p class="explain">{{ s.only_one_stock }}</p>
   {% if lang != 'sv' and s.wine_pages_note %}
   <p class="explain">{{ s.wine_pages_note }}</p>
   {% endif %}

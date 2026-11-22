@@ -69,6 +69,9 @@
   {% for o in lists %}
     <li><a href="{{ lang_root }}/{{ s.list_url }}/{{ o.slug }}/">{{ o.heading }}</a></li>
   {% endfor %}
+    {# Last on purpose, and a different kind of list: substances, not a slice of
+       wines, and not ordered by anything. The note above says so. #}
+    <li><a href="{{ lang_root }}/{{ s.only_one_url }}/">{{ s.only_one_link }}</a></li>
   </ul>
 </nav>
 {% endif %}

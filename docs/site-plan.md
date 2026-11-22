@@ -692,8 +692,10 @@ from it or to justify it.
   real declarations. Someone searching the exact string from a label should
   land on the right page.
 - **The additives only one wine declares** (`/bara-ett-vin/`, `/en/only-one-wine/`,
-  issue #31) are listed on a page of their own, linked from the substance index
-  and from the page of each substance on it, not from the header. The URL, the
+  issue #31) are listed on a page of their own, linked from the substance index,
+  from the page of each substance on it and, last, from the front page's
+  ready-made lists, not from the header. Unlike those lists it does not filter
+  on stock, and the page says some wines may be sold out. The URL, the
   title and the lede describe the list and say nothing more: not "unique",
   "unusual" or "special", because a slug and a title are where a claim is made
   without a sentence. It is ordered by the substance's name and never by a
