@@ -867,6 +867,9 @@
   e_number: E120
   bucket: additive
   category: colour
+  # Regulation (EU) No 231/2012, E 120: from cochineal, "the dried bodies of
+  # the female insect Dactylopius coccus Costa".
+  origin: insect
   name: { sv: Karmin, en: Carmine }
   note:
     sv: Rött färgämne utvunnet ur koschenill, de torkade honorna av sköldlusen Dactylopius coccus.
@@ -1368,6 +1371,8 @@
 
 - id: honey
   bucket: base
+  # Directive 2001/110/EC, Annex I: "produced by Apis mellifera bees".
+  origin: bee
   name: { sv: Honung, en: Honey }
   note:
     sv: Sötningsmedel. Honung är ett av de ämnen som uttryckligen får användas för att söta aromatiserade vinprodukter.
