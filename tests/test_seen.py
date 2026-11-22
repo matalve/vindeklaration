@@ -229,7 +229,8 @@ def sweep_once(monkeypatch, tmp_path):
     monkeypatch.setattr("sys.argv", ["catalog"])
 
     def run(products: list[dict]) -> None:
-        monkeypatch.setattr(catalog, "fetch_catalog", lambda category="Vin": products)
+        account = {"reported": len(products) + 3, "found": len(products), "unreached": 3, "short": {"Frankrike": 3}}
+        monkeypatch.setattr(catalog, "fetch_catalog", lambda category="Vin": (products, account))
         catalog.main()
 
     return run
@@ -241,6 +242,8 @@ def test_the_nightly_sweep_records_what_it_found(sweep_once, tmp_path) -> None:
     state = json.loads((tmp_path / "catalog-seen.json").read_text(encoding="utf-8"))
     assert set(state["products"]) == {"1", "2"}
     assert len(json.loads((tmp_path / "catalog.json").read_text(encoding="utf-8"))) == 2
+    (account,) = state["accounts"].values()
+    assert account["unreached"] == 3 and account["short"] == {"Frankrike": 3}
 
 
 def test_a_failure_to_record_never_costs_the_sweep(monkeypatch, sweep_once, tmp_path, capsys) -> None:
@@ -271,3 +274,60 @@ def test_the_report_shows_the_sightings(monkeypatch, tmp_path, capsys) -> None:
     out = capsys.readouterr().out
     assert "Catalog sightings" in out
     assert "seen in the last 7 days: 1" in out
+
+
+def account(unreached: int, short: dict | None = None) -> dict:
+    return {"reported": 100, "found": 100 - unreached, "unreached": unreached, "short": short or {}}
+
+
+def test_a_sweep_keeps_its_account_of_the_gap() -> None:
+    state = seen.empty()
+    seen.update(state, [product("1")], night(0), account(7, {"Frankrike": 7}))
+
+    assert state["accounts"] == {"2026-11-21": account(7, {"Frankrike": 7})}
+
+
+def test_a_second_run_on_the_same_night_replaces_the_account() -> None:
+    state = seen.empty()
+    seen.update(state, [product("1")], night(0), account(7))
+    seen.update(state, [product("1")], night(0), account(2))
+
+    assert state["accounts"] == {"2026-11-21": account(2)}
+
+
+def test_an_account_older_than_the_retention_is_forgotten() -> None:
+    state = seen.empty()
+    seen.update(state, [product("1")], night(0), account(7))
+    seen.update(state, [product("1")], night(seen.RETENTION_DAYS + 1), account(1))
+
+    assert list(state["accounts"]) == [night(seen.RETENTION_DAYS + 1).isoformat()]
+
+
+def test_a_record_from_before_accounts_still_loads(tmp_path) -> None:
+    path = tmp_path / "catalog-seen.json"
+    path.write_text(json.dumps({"tracking_since": "2026-11-21", "sweeps": ["2026-11-21"], "products": {}}))
+
+    state = seen.load(path)
+
+    assert state["accounts"] == {}
+    assert seen.summary(state)["account"] is None
+
+
+def test_the_printout_gives_the_gap_and_its_recent_range(capsys) -> None:
+    state = seen.empty()
+    for day, unreached in enumerate((40, 3, 12)):
+        seen.update(state, [product("1")], night(day), account(unreached, {"Frankrike": 2} if day == 2 else None))
+    seen.print_summary(state)
+
+    out = capsys.readouterr().out
+    assert "could not be reached by the latest sweep: 12 of 100 reported upstream" in out
+    assert "over the last 3 recorded sweeps: 3-40" in out
+    assert "partitions short after both passes: Frankrike 2" in out
+
+
+def test_the_printout_without_an_account_says_nothing_about_a_gap(capsys) -> None:
+    state = seen.empty()
+    sweep(state, 0, "1")
+    seen.print_summary(state)
+
+    assert "could not be reached" not in capsys.readouterr().out

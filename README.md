@@ -99,7 +99,10 @@ dataset — leaving them out would hide how much of the assortment says nothing.
 
 1. **`catalog.py`** — every wine from Systembolaget's product search API. That
    API caps page size at 30 and stops paging after ~10 000 results, so the query
-   is partitioned by country and the parts are merged.
+   is partitioned by country and the parts are merged. Its default order is not
+   stable between page requests, so pages overlap and some wines are never
+   served; each partition is paged sorted by name, and again in the opposite
+   direction if it still comes up short of the count the API reports.
 2. **`details.py`** — the search API has no ingredient field. The product page
    does, and it is a Next.js route, so the same data is available as JSON at
    `/_next/data/{buildId}/produkt/vin/x-{productNumber}.json`. The buildId is

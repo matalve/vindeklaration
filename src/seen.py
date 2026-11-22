@@ -13,6 +13,11 @@ about what the site should say can rest on that instead of on a guess.
 The file is the crawler's own, like data/cache: gitignored, written by the
 nightly sweep, never reconciled downward. Lose it and the record starts over;
 nothing else depends on it.
+
+Alongside the sightings it keeps each sweep's own account of its gap — the
+upstream total, how many wines were found, and which partitions came up short
+(`accounts`, keyed by night). The catalog's printout used to be the only place
+that number existed.
 """
 
 from __future__ import annotations
@@ -36,6 +41,8 @@ RETENTION_DAYS = 120
 RECENT_DAYS = 7
 # Completed absences kept per wine; a wine that flickers does so repeatedly.
 MAX_RETURNS = 10
+# How many recent sweeps the printout ranges the gap over.
+GAP_WINDOW = 14
 
 # How long an absence lasted, in nights swept: (lowest, highest, label).
 BUCKETS = (
@@ -47,7 +54,7 @@ BUCKETS = (
 
 
 def empty() -> dict:
-    return {"tracking_since": None, "sweeps": [], "products": {}}
+    return {"tracking_since": None, "sweeps": [], "products": {}, "accounts": {}}
 
 
 def load(path: Path | None = None, *, quarantine: bool = True) -> dict:
@@ -68,6 +75,8 @@ def load(path: Path | None = None, *, quarantine: bool = True) -> dict:
         ):
             raise ValueError("not a sightings record")
         state.setdefault("tracking_since", None)
+        if not isinstance(state.get("accounts"), dict):
+            state["accounts"] = {}
         return state
     except (ValueError, OSError) as error:
         if quarantine:
@@ -97,9 +106,18 @@ def save(state: dict, path: Path | None = None) -> None:
         raise
 
 
-def update(state: dict, products: list[dict], today: date) -> None:
-    """Record one sweep. Running it twice on the same day changes nothing more."""
+def update(
+    state: dict, products: list[dict], today: date, sweep: dict | None = None
+) -> None:
+    """Record one sweep. Running it twice on the same day changes nothing more.
+
+    `sweep` is the catalog's account of what it could not reach; a second run
+    on the same day replaces the first one's, since it describes the newer
+    catalog."""
     day = today.isoformat()
+    accounts = state.setdefault("accounts", {})
+    if sweep is not None:
+        accounts[day] = sweep
     sweeps = state["sweeps"]
     if day not in sweeps:
         sweeps.append(day)
@@ -134,14 +152,19 @@ def update(state: dict, products: list[dict], today: date) -> None:
     for number in [n for n, e in entries.items() if e["last_seen"] < cutoff]:
         del entries[number]
     state["sweeps"] = [sweep for sweep in sweeps if sweep >= cutoff]
+    for night in [n for n in accounts if n < cutoff]:
+        del accounts[night]
 
 
 def record(
-    products: list[dict], today: date | None = None, path: Path | None = None
+    products: list[dict],
+    today: date | None = None,
+    path: Path | None = None,
+    sweep: dict | None = None,
 ) -> None:
     today = today or datetime.now(timezone.utc).date()
     state = load(path)
-    update(state, products, today)
+    update(state, products, today, sweep)
     save(state, path)
 
 
@@ -171,7 +194,11 @@ def summary(state: dict) -> dict:
     returned = Counter(
         _bucket(item["nights"]) for entry in entries for item in entry["returns"]
     )
+    accounts = state.get("accounts", {})
+    recent = [accounts[n]["unreached"] for n in sorted(accounts)[-GAP_WINDOW:]]
     return {
+        "account": accounts.get(latest),
+        "unreached_recent": recent,
         "since": state["tracking_since"],
         "sweeps": len(sweeps),
         "latest": latest,
@@ -200,6 +227,23 @@ def print_summary(state: dict) -> None:
         f"    tracked since {facts['since']}: {facts['sweeps']} sweep(s), the latest "
         f"on {facts['latest']} found {facts['found']} wines"
     )
+    account = facts["account"]
+    if account:
+        print(
+            f"    could not be reached by the latest sweep: {account['unreached']} "
+            f"of {account['reported']} reported upstream"
+        )
+        recent = facts["unreached_recent"]
+        if len(recent) > 1:
+            print(
+                f"        over the last {len(recent)} recorded sweeps: "
+                f"{min(recent)}-{max(recent)}"
+            )
+        if account.get("short"):
+            parts = ", ".join(
+                f"{label} {n}" for label, n in sorted(account["short"].items())
+            )
+            print(f"        partitions short after both passes: {parts}")
     print(
         f"    missing in the latest sweep but seen in the last {RECENT_DAYS} days: "
         f"{facts['absent_now_total']}"
