@@ -691,6 +691,22 @@ from it or to justify it.
 - **Substance pages carry the aliases** — including the misspellings found in
   real declarations. Someone searching the exact string from a label should
   land on the right page.
+- **The additives only one wine declares** (`/bara-ett-vin/`, `/en/only-one-wine/`,
+  issue #31) are listed on a page of their own, linked from the substance index
+  and from the page of each substance on it, not from the header. The URL, the
+  title and the lede describe the list and say nothing more: not "unique",
+  "unusual" or "special", because a slug and a title are where a claim is made
+  without a sentence. It is ordered by the substance's name and never by a
+  count, which would make it a leaderboard, and it carries no ranking of
+  producers by how many such additives they use. Additives only; gases are
+  never alone and base ingredients read as ingredients. "Exactly one" is one
+  constant (`ONLY_ONE_WINES`). The page says why "no other wine has it" is weaker
+  than it sounds: four wines in five declare nothing, unread text can hide the
+  same substance, the list moves from night to night with the sweep (#7), and a
+  declaration says what is there, not why. A partly read wine stays on the list
+  and is marked. Not done yet: counting over the wines seen in the last few
+  nights, which needs the sightings record (`data/catalog-seen.json`) to reach
+  the build.
 
 ## Presentation
 
@@ -1061,6 +1077,7 @@ repeating it here only lets the two drift apart.
 | The site is not *i näringsverksamhet* today | 2026-07-28 — no income, so every regime gating on it is out of scope while that holds. See *When the site takes income* |
 | Sole traders' names stay in `supplier` | 2026-07-28 — public business information, quoted verbatim; stripping it would misattribute the wines |
 | The site never says a substance is harmful | 2026-08-02 — see *What the site must never say*, which is where that rule and its exception are written |
+| The additives only one wine declares are listed, without a ranking | 2026-11-22, issue #31 — neutral slug and wording, ordered by name, four stated limits on what "no other wine has it" means. See *Substance pages carry the aliases* |
 
 ### Open
 

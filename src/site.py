@@ -310,6 +310,35 @@ def substance_pages(wines: list[dict]) -> tuple[list[dict], list[str]]:
     return sorted(pages, key=lambda p: -p["count"]), sorted(undefined)
 
 
+# A substance is "declared by only one wine" at exactly this many. One number,
+# so a looser list ("at most three") is a one-line change.
+ONLY_ONE_WINES = 1
+
+
+def sole_declarations(
+    substances: list[dict], lang: str, at_most: int = ONLY_ONE_WINES
+) -> list[dict]:
+    """The additives that no more than `at_most` wines in the dataset declare.
+
+    Built from the substance pages, so this list and the index cannot disagree
+    about what a wine declared. Additives only: gases are never alone, and base
+    ingredients (a potato, agave) read as ingredients, not as additives.
+
+    Ordered by the substance's name and by nothing else. Ordering by how many
+    unusual substances a wine carries would turn this into a leaderboard, and
+    docs/site-plan.md keeps the site from ranking what a declaration says.
+    The wines are the page's `examples`, so `at_most` cannot exceed how many
+    of them a page keeps.
+    """
+    if at_most > SUBSTANCE_EXAMPLES:
+        raise ValueError("a substance page keeps only SUBSTANCE_EXAMPLES wines")
+    rows = [
+        sub for sub in substances
+        if sub["bucket"] == "additive" and sub["count"] <= at_most
+    ]
+    return sorted(rows, key=lambda sub: sub["name"][lang].casefold())
+
+
 # Below this many wines a percentage says more about the sample than about the
 # shelf, so the rows are aggregated and counted rather than published. The same
 # statistical honesty rule the importer table uses, applied to a breakdown
@@ -953,6 +982,7 @@ def build(output: Path, limit: int | None = None) -> None:
         "vintage": vintage_rows(wines),
     }
     chart = vintage_chart(breakdowns["vintage"])
+    only_one_ids = {sub["id"] for sub in sole_declarations(substances, "sv")}
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     if output.exists():
@@ -985,6 +1015,7 @@ def build(output: Path, limit: int | None = None) -> None:
     list_template = env.get_template("list.html")
     substance_template = env.get_template("substance.html")
     substances_template = env.get_template("substances.html")
+    only_one_template = env.get_template("only_one.html")
     coverage_template = env.get_template("coverage.html")
     importer_template = env.get_template("importer.html")
 
@@ -1120,11 +1151,27 @@ def build(output: Path, limit: int | None = None) -> None:
                     **urls(f"/{sv_s['substance_url']}/{substance['id']}/",
                            f"/en/{en_s['substance_url']}/{substance['id']}/"),
                     sub=substance, stats=stats, allergen_labels=allergens,
+                    sole=substance["id"] in only_one_ids,
                     lang=lang, s=s, base=base, lang_root=lang_root,
                     generated=generated, cdn_checked=CDN_CHECKED,
                 ),
                 encoding="utf-8",
             )
+
+        # The additives a single wine declares. Both languages, like the rest of
+        # the substance surface; the wines it links to are Swedish-only.
+        only_one_root = prefix / s["only_one_url"]
+        only_one_root.mkdir(parents=True, exist_ok=True)
+        (only_one_root / "index.html").write_text(
+            only_one_template.render(
+                section="substances",
+                **urls(f"/{sv_s['only_one_url']}/", f"/en/{en_s['only_one_url']}/"),
+                rows=sole_declarations(substances, lang), stats=stats,
+                lang=lang, s=s, base=base, lang_root=lang_root,
+                generated=generated, cdn_checked=CDN_CHECKED,
+            ),
+            encoding="utf-8",
+        )
 
         cover = prefix / s["coverage_url"]
         cover.mkdir(parents=True, exist_ok=True)

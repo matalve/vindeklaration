@@ -89,6 +89,7 @@
 
   <p class="hint">
     <a href="{{ lang_root }}/{{ s.substance_url }}/">{{ s.substances }}</a> ·
+    {% if sole %}<a href="{{ lang_root }}/{{ s.only_one_url }}/">{{ s.only_one_link }}</a> ·{% endif %}
     <a href="{{ lang_root }}/{{ s.coverage_url }}/">{{ s.coverage }}</a>
   </p>
 
