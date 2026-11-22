@@ -167,6 +167,22 @@ That is safe only while `worker/index.js` reads and never writes, which
 would be writing to production. Wrangler 4.81.1, the version on the crawler,
 prints a warning about the unknown `previews` field and carries on.
 
+**Caching.** The stylesheet and the two scripts are written under names that
+carry a hash of their content (`site.<hash>.css`, `sok.<hash>.js`,
+`hitta.<hash>.js`), and `src/site.py` writes a `site/_headers` that gives those
+a year with `immutable`; the icons and the share image get a day. HTML keeps
+the default `max-age=0, must-revalidate`, which is right for pages that change
+every night. Before this, every navigation spent a round trip revalidating
+`site.css` before first paint (issue #19). `immutable` is safe only where the
+name changes with the content, so `tests/test_site.py` checks that no rule can
+match an unhashed name. Do not add a rule for a file that is not hashed, and do
+not add a page to the rules.
+
+The headers cannot be tried on the crawler: `wrangler dev` stops in `workerd`
+on an address-space allocation (tcmalloc) on this machine, and `wrangler deploy
+--dry-run` does not say whether `_headers` was read. Check them on a Preview
+with `curl -I` on the hashed file, and a page for the default.
+
 If the bucket is ever unreachable the release is the fallback once the
 repository is public:
 `https://github.com/matalve/vindeklaration/releases/download/dataset-latest/wines.json.gz`.

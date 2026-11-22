@@ -18,6 +18,7 @@ because a template is easy to change without noticing what it promised:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import re
@@ -918,6 +919,52 @@ def strings(lang: str) -> dict:
     return table[lang]
 
 
+# What the pages load, and what the browser may keep for a year. Each is
+# written under a name that carries a hash of its content, so a changed file
+# has a new name and the HTML, which is never cached, points at it. Without the
+# hash the file would have to be revalidated on every navigation, a round trip
+# before first paint (issue #19).
+HASHED_ASSETS = ("site.css", "sok.js", "hitta.js")
+
+# One year, and immutable: the name is the version.
+IMMUTABLE = "public, max-age=31536000, immutable"
+# For what is not hashed but rarely changes: the icons and the share image.
+ONE_DAY = "public, max-age=86400"
+STABLE_FILES = (
+    "/favicon.svg", "/favicon-32.png", "/favicon.ico", "/apple-touch-icon.png",
+    "/safari-pinned-tab.svg", "/opengraph.png",
+)
+
+
+def hashed_name(name: str, content: bytes) -> str:
+    """`site.css` -> `site.1a2b3c4d.css`, the hash taken from the content."""
+    stem, _, extension = name.rpartition(".")
+    return f"{stem}.{hashlib.sha256(content).hexdigest()[:8]}.{extension}"
+
+
+def headers_file() -> str:
+    """Cloudflare's `_headers` for the static assets.
+
+    Each rule is a path and then its headers: a path with no header under it
+    does nothing, so several paths cannot share one. `immutable` goes only
+    where the name is hashed; `/site.*.css` cannot match `/site.css`, which
+    needs two dots, and tests/test_site.py checks that no unhashed name matches
+    an immutable rule. A rule that made a stale file immutable would be a file
+    nobody could ever change.
+
+    HTML is left out on purpose: the default `max-age=0, must-revalidate` is
+    right for pages that change every night.
+    """
+    rules = [
+        (f"/{name.rpartition('.')[0]}.*.{name.rpartition('.')[2]}", IMMUTABLE)
+        for name in HASHED_ASSETS
+    ] + [(path, ONE_DAY) for path in STABLE_FILES]
+    lines = ["# Read by Cloudflare when the assets are deployed. Written by src/site.py."]
+    for path, value in rules:
+        lines += ["", path, f"  Cache-Control: {value}"]
+    return "\n".join(lines) + "\n"
+
+
 def build(output: Path, limit: int | None = None) -> None:
     # The dataset is not in git, so its absence is an ordinary state on a fresh
     # checkout rather than a broken one. A bare FileNotFoundError here reads as
@@ -996,16 +1043,26 @@ def build(output: Path, limit: int | None = None) -> None:
     # The source keeps its comments; the reader does not need them, and this
     # is the page's one render-blocking request. tests/test_site.py proves the
     # minified file declares exactly what the source does.
-    (output / "site.css").write_text(
-        rcssmin.cssmin((TEMPLATE_DIR / "site.css").read_text(encoding="utf-8")),
-        encoding="utf-8",
+    assets: dict[str, str] = {}
+
+    def publish(name: str, content: bytes) -> None:
+        assets[name] = hashed_name(name, content)
+        (output / assets[name]).write_bytes(content)
+
+    publish(
+        "site.css",
+        rcssmin.cssmin((TEMPLATE_DIR / "site.css").read_text(encoding="utf-8"))
+        .encode("utf-8"),
     )
     # Committed rather than generated per build: they change when the mark
     # changes, which is not nightly. tools/make_icons.py redraws them.
     for icon in sorted((TEMPLATE_DIR / "icons").iterdir()):
         shutil.copy(icon, output / icon.name)
-    shutil.copy(TEMPLATE_DIR / "sok.js", output / "sok.js")
-    shutil.copy(TEMPLATE_DIR / "hitta.js", output / "hitta.js")
+    publish("sok.js", (TEMPLATE_DIR / "sok.js").read_bytes())
+    publish("hitta.js", (TEMPLATE_DIR / "hitta.js").read_bytes())
+    assert set(assets) == set(HASHED_ASSETS)
+    env.globals["asset"] = lambda name: "/" + assets[name]
+    (output / "_headers").write_text(headers_file(), encoding="utf-8")
 
     wine_template = env.get_template("wine.html")
     index_template = env.get_template("index.html")
