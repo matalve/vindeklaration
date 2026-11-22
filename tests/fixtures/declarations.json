@@ -1285,5 +1285,32 @@
   "allergens": [
    "sulfites"
   ]
+ },
+ {
+  "why": "E104 and E445 are in the dictionary, so a flavoured wine drink listing four colours reads completely and counts both (x-7535341)",
+  "text": "Vin (druvor), socker, vatten, jordbruksalkohol, arom, surhetsreglerande medel (citronsyra), färgämnen (E104, E129, E414, E445), konserveringsmedel (kaliumpyrosulfit (SULFITER), kaliumsorbat), antioxidationsmedel (L-askorbinsyra)",
+  "additives": [
+   "ascorbic_acid",
+   "citric_acid",
+   "e104",
+   "e129",
+   "e445",
+   "flavourings",
+   "gum_arabic",
+   "potassium_metabisulfite",
+   "potassium_sorbate"
+  ],
+  "gases": [],
+  "base": [
+   "grapes",
+   "sugar",
+   "water",
+   "wine",
+   "wine_alcohol"
+  ],
+  "processing": [],
+  "allergens": [
+   "sulfites"
+  ]
  }
 ]
