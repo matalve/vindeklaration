@@ -926,8 +926,9 @@
 # as adopted (read on legislation.gov.uk, since EUR-Lex refuses automated
 # fetches; later amendments were not checked). The note says only that. Where it
 # may be used was not read, because Annex II to Regulation (EC) No 1333/2008 is
-# not on that site, so nothing is claimed about it. The Swedish name is
-# unconfirmed against a Swedish authority.
+# not on that site, so nothing is claimed about it. The Swedish name and the
+# type "färgämne" are from Livsmedelsverket's page "E 104 - Kinolingult"
+# (Typ: Färgämne, Färg: Gul).
 - id: e104
   e_number: E104
   bucket: additive
@@ -941,16 +942,17 @@
 # Glycerol esters of wood rosin. Name, synonym and definition are from the entry
 # "E 445 GLYCEROL ESTERS OF WOOD ROSIN" in Commission Regulation (EU) No
 # 231/2012 as adopted (read on legislation.gov.uk; later amendments were not
-# checked). The Swedish name is the one a search result reports from
-# Livsmedelsverket's E-nummernyckel; the PDF itself could not be opened. No
-# function is given: the regulation's list of what the additive may be used for
-# was not read, and a wine that declares it names it under "färgämnen", which
-# is not the same as a source for its class. Hence `other`, and no claim about
-# where it may be used.
+# checked). The Swedish name and the class are from Livsmedelsverket's page
+# "E 445 - Glycerolestrar av trähartser", whose "Typ" reads "Emulgerings-,
+# stabiliserings-, förtjocknings- och geleringsmedel"; the heading was read as
+# written, the Typ line through a summary of the page. The page also says the
+# additive can be made from animal raw materials (the glycerol may come from
+# animal fat). That is not in the note and no `origin` is set, because "can"
+# is not "always". Where it may be used was not read, so nothing is claimed.
 - id: e445
   e_number: E445
   bucket: additive
-  category: other
+  category: stabiliser
   name: { sv: Glycerolestrar av trähartser, en: Glycerol esters of wood rosin }
   note:
     sv: Kallas även ester gum. En komplex blandning av tri- och diglycerolestrar av hartssyror från trähartser. Hartset utvinns genom lösningsmedelsextraktion av gamla tallstubbar, följt av en vätske-vätske-raffinering.
