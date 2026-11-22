@@ -921,6 +921,42 @@
     en: "A synthetic azo dye. Colours are not among the additives authorised for winemaking under Annex I of Regulation (EU) 2019/934. In aromatised wine products E129 is permitted, as one of the Group III colours subject to a combined maximum of 200 mg/l, under food category 14.2.7 of Annex II to Regulation (EC) No 1333/2008. E129 is also listed in Annex V to the same regulation, and foods containing any of the six colours there must carry the words “may have an adverse effect on activity and attention in children”. Beverages above 1,2 % alcohol by volume were exempted from that requirement in 2010 by Regulation (EU) No 238/2010, on the ground that they are not intended for children. The exemption is about who drinks it rather than about what the substance does, which is why the wording does not appear on a wine bottle."
   aliases: [allura red, allura red ac, allurarött, allurarött ac]
 
+# Quinoline Yellow. Name, synonym, Colour Index number and manufacture are from
+# the entry "E 104 QUINOLINE YELLOW" in Commission Regulation (EU) No 231/2012
+# as adopted (read on legislation.gov.uk, since EUR-Lex refuses automated
+# fetches; later amendments were not checked). The note says only that. Where it
+# may be used was not read, because Annex II to Regulation (EC) No 1333/2008 is
+# not on that site, so nothing is claimed about it. The Swedish name is
+# unconfirmed against a Swedish authority.
+- id: e104
+  e_number: E104
+  bucket: additive
+  category: colour
+  name: { sv: Kinolingult, en: Quinoline Yellow }
+  note:
+    sv: Ett gult färgämne, även kallat CI Food Yellow 13 (Colour Index nr 47005). Kinolingult framställs genom sulfonering av 2-(2-kinolyl)indan-1,3-dion. Specifikationen beskriver natriumsaltet och tillåter även kalcium- och kaliumsalterna.
+    en: A yellow colour, also called CI Food Yellow 13 (Colour Index No 47005). Quinoline Yellow is prepared by sulfonating 2-(2-quinolyl) indan-1,3-dione. The specification describes the sodium salt and also permits the calcium and potassium salts.
+  aliases: [quinoline yellow, kinolingult]
+
+# Glycerol esters of wood rosin. Name, synonym and definition are from the entry
+# "E 445 GLYCEROL ESTERS OF WOOD ROSIN" in Commission Regulation (EU) No
+# 231/2012 as adopted (read on legislation.gov.uk; later amendments were not
+# checked). The Swedish name is the one a search result reports from
+# Livsmedelsverket's E-nummernyckel; the PDF itself could not be opened. No
+# function is given: the regulation's list of what the additive may be used for
+# was not read, and a wine that declares it names it under "färgämnen", which
+# is not the same as a source for its class. Hence `other`, and no claim about
+# where it may be used.
+- id: e445
+  e_number: E445
+  bucket: additive
+  category: other
+  name: { sv: Glycerolestrar av trähartser, en: Glycerol esters of wood rosin }
+  note:
+    sv: Kallas även ester gum. En komplex blandning av tri- och diglycerolestrar av hartssyror från trähartser. Hartset utvinns genom lösningsmedelsextraktion av gamla tallstubbar, följt av en vätske-vätske-raffinering.
+    en: Also called ester gum. A complex mixture of tri- and diglycerol esters of resin acids from wood rosin. The rosin is obtained by solvent extraction of aged pine stumps followed by a liquid-liquid solvent refining process.
+  aliases: [glycerol esters of wood rosin, glycerolestrar av trähartser, ester gum]
+
 - id: wheat_protein
   bucket: additive
   category: other
