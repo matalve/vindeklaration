@@ -322,3 +322,12 @@ def test_words_run_together_in_the_source_are_read_exactly() -> None:
     assert ids_of(parsed.additives) == ["ascorbic_acid", "sulfites"]
     assert parsed.status == "complete"
     assert parsed.fuzzy_matches == []
+
+
+def test_carmine_and_honey_carry_their_origin() -> None:
+    """Carmine is cochineal, an insect (Regulation (EU) No 231/2012, E 120);
+    honey is made by bees (Directive 2001/110/EC, Annex I). Honey is a base
+    ingredient rather than an additive, and its origin must still count."""
+    parsed = parse_ingredients("Vin, Honung, Färgämne (Karmin)")
+    assert parsed.origins == ["bee", "insect"]
+    assert parsed.allergens == []

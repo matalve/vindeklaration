@@ -131,6 +131,8 @@ allergen_labels:
   # does not name (gelatin). Shares this map because the site shows allergen
   # and origin words with the same lookup.
   animal: { sv: djur, en: animal }
+  insect: { sv: insekter, en: insects }
+  bee: { sv: bin, en: bees }
 
 category_labels:
   - macerat  # "macerat (alkohol, kryddor, aromer: ...)", the steeped preparation, header for what follows

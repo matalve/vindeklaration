@@ -153,13 +153,14 @@
   </section>
   {% endif %}
 
-  {% set animal = wine.additives | map(attribute='id') | select('in', origin_of) | list %}
+  {# Base ingredients too: honey is one, and they are not in the table above. #}
+  {% set animal = (wine.additives + (wine.base_ingredients or [])) | selectattr('id', 'in', origin_of) | list %}
   {% if wine.allergens or animal %}
   <section class="allergens{% if animal %} has-animal{% endif %}">
-    <h2>{{ s.allergens }}</h2>
+    <h2>{{ s.allergens if wine.allergens else s.animal_origin_heading }}</h2>
     {% if wine.allergens %}<p class="declared">{% for a in wine.allergens %}{{ allergen_labels[a][lang] | capitalize if a in allergen_labels else a }}{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
     {% if animal %}
-    <p class="lead">{{ s.animal_origin_lead }}.</p>
+    <p class="lead">{{ s.animal_origin_lead }}: {% for a in animal %}{{ a.name[lang] }} ({{ allergen_labels[origin_of[a.id]][lang] }}){% if not loop.last %}, {% endif %}{% endfor %}.</p>
     <p class="explain">{{ s.animal_origin_explain }}</p>
     {% endif %}
     {% if wine.vegan %}<p class="explain">{{ s.vegan_flagged }}</p>{% endif %}
