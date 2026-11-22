@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{# The title, the heading and the URL describe the list and say nothing more:
+   no adjective for the substances and no verb about the wines. This is a page
+   likely to be quoted with nothing around it — docs/site-plan.md, "What the
+   site must never say". Ordered by substance name, never by a count. #}
+{% block title %}{{ s.only_one_title }} — {{ s.site_name }}{% endblock %}
+{% block description %}{{ s.only_one_count|replace("{n}", rows|length|count(lang))|replace("{d}", generated) }}{% endblock %}
+
+{% block content %}
+<article class="substances">
+
+  <h1>{{ s.only_one_title }}</h1>
+  <p class="lede">{{ s.only_one_lede }}</p>
+  <p class="hint">{{ s.only_one_count|replace("{n}", rows|length|count(lang))|replace("{d}", generated) }}</p>
+  {% if lang != 'sv' and s.wine_pages_note %}
+  <p class="explain">{{ s.wine_pages_note }}</p>
+  {% endif %}
+
+  {% if rows %}
+  {# Two columns, not four: the E-number and the function sit under the name.
+     Four did not fit a phone, and a table that scrolls sideways hides the wine
+     column, which is the point of the list. #}
+  <table class="breakdown sole">
+    <thead>
+      <tr>
+        <th>{{ s.substances }}</th>
+        <th>{{ s.only_one_col_wine }}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for sub in rows %}
+      <tr>
+        <td><a href="{{ lang_root }}/{{ s.substance_url }}/{{ sub.id }}/">{{ sub.name[lang] }}</a>
+          <span class="meta">{% if sub.e_number %}{{ sub.e_number }}{% endif %}{% if sub.e_number and sub.category %} · {% endif %}{% if sub.category %}{{ s['c_' + sub.category] }}{% endif %}</span>
+        </td>
+        <td>
+          {% for w in sub.examples %}
+          <a href="{{ base }}/{{ w|wine_url }}/">{{ w.name }}{% if w.vintage %} {{ w.vintage }}{% endif %}</a>
+          {# A partial declaration named this substance and also carried text we
+             could not read; never unmarked. #}
+          {% if w|state == 'partial' %}<span class="state state-p">{{ s.state_partial }}</span>{% endif %}
+          {% if not loop.last %}<br>{% endif %}
+          {% endfor %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="explain">{{ s.only_one_none }}</p>
+  {% endif %}
+
+  {# Four reasons "no other wine has it" is weaker than it sounds, in the order
+     a reader needs them: most wines declare nothing, unread text can hide the
+     same substance, the data moves from night to night, and a declaration
+     says what is there, not why. #}
+  <p class="explain caveat">{{ s.substance_silence|replace("{n}", stats.silent|count(lang)) }}</p>
+  <p class="explain caveat">{{ s.only_one_caveat_partial }}</p>
+  <p class="explain caveat">{{ s.only_one_caveat_nightly }}</p>
+  <p class="explain">{{ s.only_one_caveat_reason }}</p>
+
+  <p class="hint">
+    <a href="{{ lang_root }}/{{ s.substance_url }}/">{{ s.substances }}</a> ·
+    <a href="{{ lang_root }}/{{ s.coverage_url }}/">{{ s.coverage }}</a>
+  </p>
+
+</article>
+{% endblock %}

@@ -680,6 +680,13 @@ table.breakdown td {
 table.breakdown th { font-weight: 600; color: var(--muted); font-size: 0.8rem; }
 table.breakdown .num { text-align: right; font-variant-numeric: tabular-nums; }
 table.breakdown .enum { color: var(--muted); }
+/* The list of substances only one wine declares: long wine names and product
+   names must wrap inside their cell rather than push the page sideways. */
+table.sole td { overflow-wrap: anywhere; vertical-align: top; }
+/* The same small italic mark as in a result list, on its own line: it says the
+   wine's declaration was only partly read, and must never sit unmarked. */
+table.sole .state { display: block; font-size: 0.85rem; }
+table.sole .state-p { font-style: italic; }
 /* Aggregated rows are a real row with a real count, not a footnote — muted so
    they read as "the rest" rather than as another named group. */
 table.breakdown tr.aggregated td { color: var(--muted); }

@@ -9,6 +9,7 @@
   <h1>{{ s.substances }}</h1>
   <p class="lede">{{ s.substances_lede }}</p>
   <p class="hint">{{ s.substances_count|replace("{n}", substances|length) }}</p>
+  <p class="hint"><a href="{{ lang_root }}/{{ s.only_one_url }}/">{{ s.only_one_link }}</a></p>
   {# The count above is pages, not substances, and those are not the same
      number: an id can be parsed off a label without the dictionary having an
      entry to describe it. Saying so is cheaper than a sentence that is

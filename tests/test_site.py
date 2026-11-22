@@ -11,8 +11,13 @@ from __future__ import annotations
 import json
 import re
 
+import pytest
+
 from src.site import (
     CHART,
+    ONLY_ONE_WINES,
+    SUBSTANCE_EXAMPLES,
+    sole_declarations,
     FIXED_RANGE,
     LIST_CATEGORIES,
     check_vocabulary,
@@ -1030,4 +1035,116 @@ def test_the_back_to_top_css_keeps_it_out_of_reach_while_it_is_away() -> None:
     assert ".to-top:focus-visible" in css
     assert re.search(r"prefers-reduced-motion: reduce\)\s*\{[^}]*\.to-top", css)
     assert re.search(r"@media print\s*\{[^}]*\.to-top", css)
+
+
+# --- the additives only one wine declares (issue #31) -------------------------
+
+
+def sub_of(wines: list[dict]) -> list[dict]:
+    return substance_pages(wines)[0]
+
+
+def test_a_substance_declared_by_one_wine_is_listed_and_by_two_is_not() -> None:
+    lysozyme = {"id": "lysozyme", "name": {"sv": "Lysozym", "en": "Lysozyme"}}
+    wines = [
+        declaring(name="Alone", additives=[SULFITES, lysozyme]),
+        declaring(name="Other", additives=[SULFITES]),
+    ]
+    rows = sole_declarations(sub_of(wines), "en")
+
+    assert [r["id"] for r in rows] == ["lysozyme"]
+    assert [w["name"] for w in rows[0]["examples"]] == ["Alone"]
+
+
+def test_only_additives_count_not_gases_or_raw_materials() -> None:
+    wines = [declaring(gases=[CO2], base_ingredients=[{"id": "potato"}])]
+    assert sole_declarations(sub_of(wines), "sv") == []
+
+
+def test_a_looser_threshold_takes_in_more_but_never_more_than_a_page_keeps() -> None:
+    lysozyme = {"id": "lysozyme"}
+    wines = [
+        declaring(name="A", additives=[SULFITES, lysozyme]),
+        declaring(name="B", additives=[lysozyme]),
+    ]
+    pages = sub_of(wines)
+
+    assert {r["id"] for r in sole_declarations(pages, "sv")} == {"sulfites"}
+    assert {r["id"] for r in sole_declarations(pages, "sv", at_most=2)} == {
+        "sulfites", "lysozyme"
+    }
+    with pytest.raises(ValueError):
+        sole_declarations(pages, "sv", at_most=SUBSTANCE_EXAMPLES + 1)
+
+
+def test_the_list_is_ordered_by_the_substance_name_in_its_language() -> None:
+    """By name and by nothing else: a count would make it a leaderboard."""
+    wines = [
+        declaring(name="W1", additives=[{"id": "lysozyme"}]),
+        declaring(name="W2", additives=[{"id": "chitosan"}]),
+        declaring(name="W3", additives=[{"id": "carmine"}]),
+    ]
+    pages = sub_of(wines)
+    en = [r["name"]["en"] for r in sole_declarations(pages, "en")]
+    sv = [r["name"]["sv"] for r in sole_declarations(pages, "sv")]
+    assert en == sorted(en, key=str.casefold)
+    assert sv == sorted(sv, key=str.casefold)
+
+
+def test_a_partly_read_wine_stays_on_the_list_and_is_still_marked() -> None:
+    wines = [declaring(name="P", parse_status="partial", additives=[{"id": "lysozyme"}])]
+    rows = sole_declarations(sub_of(wines), "sv")
+
+    assert [r["id"] for r in rows] == ["lysozyme"]
+    assert rows[0]["partial_count"] == 1
+
+
+def test_the_default_threshold_is_exactly_one() -> None:
+    assert ONLY_ONE_WINES == 1
+
+
+def test_the_list_page_says_it_in_both_languages_and_in_neutral_words() -> None:
+    """The title, the lede and the caveats describe a list. They do not call a
+    substance unusual or a wine special, and they say nothing about harm or
+    health (docs/site-plan.md, "What the site must never say")."""
+    strings = json.loads(_template("strings.json"))
+    banned = {
+        "sv": ("ovanlig", "speciell", "särskild", "bättre", "sämre", "farlig",
+               "skadlig", "hälsa", "nyttig", "exklusiv", "unik", "sällsynt"),
+        "en": ("unusual", "special", "rare", "better", "worse", "harmful",
+               "dangerous", "health", "healthy", "exclusive", "unique"),
+    }
+    for lang in ("sv", "en"):
+        keys = [k for k in strings[lang] if k.startswith("only_one_")]
+        assert {"only_one_url", "only_one_title", "only_one_lede", "only_one_count",
+                "only_one_caveat_partial", "only_one_caveat_nightly",
+                "only_one_caveat_reason"} <= set(keys), lang
+        for key in keys:
+            text = strings[lang][key].casefold()
+            for word in banned[lang]:
+                assert word not in text, f"{lang} {key}: {word!r}"
+
+
+def test_the_list_page_shows_no_bottle_photographs_and_no_count_ordering() -> None:
+    """A filtered list of many wines keeps images on the wine page alone
+    (docs/legal-notes.md section 2j, condition 8)."""
+    template = re.sub(r"\{#.*?#\}", "", _template("only_one.html"), flags=re.DOTALL)
+    assert "<img" not in template
+    assert "|sort" not in template and "sort(" not in template
+
+
+def test_every_category_in_the_dictionary_has_a_label_in_both_languages() -> None:
+    """The list prints the function of each substance, and a missing label
+    renders as nothing rather than as an error."""
+    import yaml
+
+    strings = json.loads(_template("strings.json"))
+    categories = {
+        e["category"] for e in yaml.safe_load(
+            (ROOT / "data" / "additives.yaml").read_text(encoding="utf-8")
+        ) if e.get("category")
+    }
+    for lang in ("sv", "en"):
+        missing = {c for c in categories if not strings[lang].get("c_" + c)}
+        assert not missing, f"{lang}: {missing}"
 
