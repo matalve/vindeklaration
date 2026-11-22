@@ -84,6 +84,12 @@ because an index missing a column still parses and still renders every menu.
 - **The search API caps page size at 30 and stops paging near 10 000 results**,
   so an unfiltered query silently returns about 8 900 of 15 500 wines. That is
   why `catalog.py` partitions by country.
+- **Unsorted pages overlap.** The default order is not a total order and each
+  page request sorts afresh, so a partition paged as-is repeats some wines and
+  never serves as many others: France gave 3 699 of 4 754 at 30 a page,
+  identically every time. Measured 2026-11-22. `catalog.py` sorts by name and
+  pages a short partition again in the other direction. `sortBy=ProductNumber`
+  is silently ignored; `Name` and `Price` work, and price has far more ties.
 - **RDAP returns 404 for `.se` whether or not a domain exists** — `.se` is
   absent from the IANA bootstrap. Use `whois -h whois.iis.se`.
 - **Cloudflare Registrar sells no Nordic ccTLD.** `.se` needs a Swedish
