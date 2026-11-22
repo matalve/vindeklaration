@@ -6,11 +6,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
-   "token": "svavekdioxid",
-   "wines": 2,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7424401/"
-  },
-  {
    "token": "industriell",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7748401/"
@@ -56,6 +51,16 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-3325102/"
   },
   {
+   "token": "konservaringsmedel",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-5574201/"
+  },
+  {
+   "token": "tempranilo",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7161201/"
+  },
+  {
    "token": "kom",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7246501/"
@@ -66,19 +71,14 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7355501/"
   },
   {
-   "token": "stabilisatiorer",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7495101/"
-  },
-  {
    "token": "renad",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7511008/"
   },
   {
-   "token": "rektifierad",
+   "token": "durvmust",
    "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7614501/"
+   "example": "https://www.systembolaget.se/produkt/vin/x-7583801/"
   },
   {
    "token": "svavelsyraanhydrid",
@@ -109,24 +109,11 @@
    "token": "vinsten",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9214401/"
-  },
-  {
-   "token": "glutation",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-9488601/"
   }
  ],
  "fuzzy_matches": [
   {
-   "match": "svavekdioxid -> svaveldioxid",
-   "wines": 2
-  },
-  {
-   "match": "stabilisatiorer -> stabilisatorer",
-   "wines": 1
-  },
-  {
-   "match": "rektifierad -> rektifiera",
+   "match": "konservaringsmedel -> konservringsmedel",
    "wines": 1
   }
  ]
