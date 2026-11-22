@@ -8,12 +8,17 @@ looks plausible, and is wrong in the direction that flatters the shelf.
 
 from __future__ import annotations
 
+import fnmatch
 import json
 import re
 
 import pytest
 
 from src.site import (
+    HASHED_ASSETS,
+    STABLE_FILES,
+    hashed_name,
+    headers_file,
     CHART,
     ONLY_ONE_WINES,
     SUBSTANCE_EXAMPLES,
@@ -1221,4 +1226,81 @@ def test_the_front_page_lists_it_last_among_the_ready_made_lists() -> None:
     strings = json.loads(_template("strings.json"))
     assert "bara ett vin" in strings["sv"]["ready_lists_note"]
     assert "only one wine" in strings["en"]["ready_lists_note"]
+
+
+# --- long-lived caching of what the pages load (issue #19) ----------------------
+# `immutable` is safe only on a name that changes when the content does. These
+# pin that, because a rule that made an unhashed file immutable would be a file
+# nobody could ever change.
+
+
+def _rules() -> list[tuple[str, dict[str, str]]]:
+    """The rules in headers_file(): a path, then its indented headers."""
+    rules: list[tuple[str, dict[str, str]]] = []
+    for line in headers_file().splitlines():
+        if not line.strip() or line.startswith("#"):
+            continue
+        if line.startswith(" "):
+            name, _, value = line.strip().partition(": ")
+            rules[-1][1][name] = value
+        else:
+            rules.append((line.strip(), {}))
+    return rules
+
+
+def test_a_hashed_name_keeps_its_extension_and_follows_the_content() -> None:
+    one = hashed_name("site.css", b"a{}")
+    assert re.fullmatch(r"site\.[0-9a-f]{8}\.css", one)
+    assert one == hashed_name("site.css", b"a{}")
+    assert one != hashed_name("site.css", b"a{ }")
+    assert hashed_name("sok.js", b"a").endswith(".js")
+
+
+def test_every_rule_has_a_header_and_every_hashed_asset_has_an_immutable_one() -> None:
+    rules = _rules()
+    assert rules and all("Cache-Control" in headers for _, headers in rules)
+    immutable = [path for path, h in rules if "immutable" in h["Cache-Control"]]
+    for name in HASHED_ASSETS:
+        assert any(fnmatch.fnmatch("/" + hashed_name(name, b"x"), p) for p in immutable), name
+
+
+def test_immutable_never_matches_a_name_that_is_not_hashed() -> None:
+    immutable = [p for p, h in _rules() if "immutable" in h["Cache-Control"]]
+    unhashed = ["/site.css", "/sok.js", "/hitta.js", "/", "/index.html",
+                "/sok-index.json", "/favicon.svg", "/vin/1-x/index.html", "/robots.txt"]
+    for path in unhashed:
+        for pattern in immutable:
+            assert not fnmatch.fnmatch(path, pattern), (path, pattern)
+
+
+def test_no_rule_names_a_page() -> None:
+    """The HTML changes every night, so it is left to the default, which
+    revalidates. Only the hashed patterns and the known stable files get a rule."""
+    allowed = {
+        f"/{n.rpartition('.')[0]}.*.{n.rpartition('.')[2]}" for n in HASHED_ASSETS
+    } | set(STABLE_FILES)
+    assert {path for path, _ in _rules()} == allowed
+
+
+def test_a_build_writes_hashed_files_and_pages_that_point_at_them(tmp_path) -> None:
+    from src import site as site_module
+
+    if not site_module.WINES_PATH.exists():
+        pytest.skip("needs data/wines.json")
+    out = tmp_path / "out"
+    site_module.build(out, limit=30)
+
+    assert (out / "_headers").read_text(encoding="utf-8") == headers_file()
+    names = {p.name for p in out.iterdir()}
+    for stem, ext in (("site", "css"), ("sok", "js"), ("hitta", "js")):
+        assert f"{stem}.{ext}" not in names, "an unhashed copy would defeat the point"
+        assert any(re.fullmatch(rf"{stem}\.[0-9a-f]{{8}}\.{ext}", n) for n in names), stem
+
+    for page in ("index.html", "hitta/index.html", "404.html"):
+        html = (out / page).read_text(encoding="utf-8")
+        refs = re.findall(r'(?:href|src)="(/(?:site|sok|hitta)\.[^"]+)"', html)
+        assert refs, page
+        for ref in refs:
+            assert re.fullmatch(r"/(site|sok|hitta)\.[0-9a-f]{8}\.(css|js)", ref), ref
+            assert (out / ref.lstrip("/")).exists(), ref
 

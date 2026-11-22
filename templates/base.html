@@ -56,7 +56,7 @@
    and Cloudflare's analytics beacon, which they inject at the edge for
    browser-like requests. Nothing here renders the beacon — do not add a second
    one. The absence of commercial interest is load-bearing, not decorative. #}
-<link rel="stylesheet" href="/site.css">
+<link rel="stylesheet" href="{{ asset("site.css") }}">
 {# Before the first paint on purpose: a reader who overrode the OS must not see
    the OS's answer flash first, and there is no server to ask. Nothing is
    written unless they chose — with no stored value the stylesheet's
