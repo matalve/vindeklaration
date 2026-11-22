@@ -60,7 +60,17 @@
 
 * { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  /* No scroll anchoring. Docking shortens the header, which moves everything
+     below it up, and anchoring answered by lowering scrollY by the same
+     amount, which put the sentinel back in view, which undocked the header
+     and grew it again. A few pixels of scroll from the top flipped the state
+     over and over. Without anchoring the content steps once and scrollY stays
+     where the reader put it, so the sentinel cannot be re-entered by the
+     page's own correction. */
+  overflow-anchor: none;
+}
 
 body {
   margin: 0;
