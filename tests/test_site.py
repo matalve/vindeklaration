@@ -1117,8 +1117,8 @@ def test_the_list_page_says_it_in_both_languages_and_in_neutral_words() -> None:
     for lang in ("sv", "en"):
         keys = [k for k in strings[lang] if k.startswith("only_one_")]
         assert {"only_one_url", "only_one_title", "only_one_lede", "only_one_count",
-                "only_one_caveat_partial", "only_one_caveat_nightly",
-                "only_one_caveat_reason"} <= set(keys), lang
+                "only_one_stock", "only_one_caveat_partial",
+                "only_one_caveat_nightly", "only_one_caveat_reason"} <= set(keys), lang
         for key in keys:
             text = strings[lang][key].casefold()
             for word in banned[lang]:
@@ -1196,4 +1196,29 @@ def test_the_general_note_is_set_apart_by_a_solid_rule() -> None:
     rule = re.search(r"\.allergens \.general \{[^}]*\}", css).group(0)
     assert "border-top: 1px solid" in rule
     assert "dashed" not in rule
+
+
+def test_the_list_page_says_that_some_wines_may_be_sold_out() -> None:
+    """It does not filter on stock, unlike the ready-made lists, so it says so."""
+    strings = json.loads(_template("strings.json"))
+    assert "slut" in strings["sv"]["only_one_stock"]
+    assert "sold out" in strings["en"]["only_one_stock"]
+    page = re.sub(r"\{#.*?#\}", "", _template("only_one.html"), flags=re.DOTALL)
+    assert "{{ s.only_one_stock }}" in page
+
+
+def test_the_front_page_lists_it_last_among_the_ready_made_lists() -> None:
+    """After the generated ones, in the same list, and the note above the list
+    says there is one more kind: "one per type of wine and price band" alone
+    would be wrong about it."""
+    index = re.sub(r"\{#.*?#\}", "", _template("index.html"), flags=re.DOTALL)
+    block = index[index.index('<nav class="other-lists ready">'):]
+    block = block[:block.index("</nav>")]
+    loop_end = block.index("{% endfor %}")
+    entry = block.index("{{ s.only_one_url }}")
+    assert loop_end < entry, "it must come after the generated lists"
+    assert block.count("<li>") == 2 and block.rindex("<li>") > loop_end
+    strings = json.loads(_template("strings.json"))
+    assert "bara ett vin" in strings["sv"]["ready_lists_note"]
+    assert "only one wine" in strings["en"]["ready_lists_note"]
 
