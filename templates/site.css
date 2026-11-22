@@ -479,7 +479,26 @@ table.nutrients td.num {
    them. Spacing and the rule come from the shared block rules above. */
 .allergens .declared { margin: 0; }
 .allergens.has-animal .lead { font-weight: 600; margin: 0.5rem 0 0; }
-.allergens .caveat { margin-top: 0.6rem; }
+
+/* A statement about every wine, kept apart from what this wine declares: a rule
+   of its own and a label that names its scope. Beside the single allergen that
+   almost every page lists it read as a description of that allergen
+   (issue #33). A solid rule, not a dashed one: dashed already means "partly
+   read" on this site. */
+.allergens .general {
+  margin-top: 1.25rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+.wine .allergens .general h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.4rem;
+}
+.allergens .general .explain { margin: 0; }
 
 .from-animal {
   color: var(--muted);
