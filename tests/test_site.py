@@ -1148,3 +1148,52 @@ def test_every_category_in_the_dictionary_has_a_label_in_both_languages() -> Non
         missing = {c for c in categories if not strings[lang].get("c_" + c)}
         assert not missing, f"{lang}: {missing}"
 
+
+# --- the general note under Allergens (issue #33) -----------------------------
+# Beside the single allergen almost every page lists (sulfites), a paragraph
+# about every wine read as a description of that allergen. These pin the
+# separation: a label that names the scope, and an order that puts everything
+# about this wine above it.
+
+
+def _allergen_block() -> str:
+    wine_html = re.sub(r"\{#.*?#\}", "", _template("wine.html"), flags=re.DOTALL)
+    start = wine_html.index('<section class="allergens')
+    return wine_html[start:wine_html.index("</section>", start)]
+
+
+def test_the_general_note_has_a_label_that_names_its_scope_in_both_languages() -> None:
+    strings = json.loads(_template("strings.json"))
+    for lang in ("sv", "en"):
+        assert strings[lang]["general_note_label"].strip(), lang
+    assert "alla" in strings["sv"]["general_note_label"].casefold()
+    assert "every" in strings["en"]["general_note_label"].casefold()
+
+
+def test_the_general_note_sits_in_its_own_labelled_group() -> None:
+    block = _allergen_block()
+    group = re.search(r'<div class="general">(.*?)</div>', block, re.DOTALL)
+    assert group, "the general note is not in its own group"
+    inside = group.group(1)
+    assert "{{ s.general_note_label }}" in inside
+    assert "{{ s.absence_is_not_proof }}" in inside
+    assert inside.index("general_note_label") < inside.index("absence_is_not_proof")
+    # And nowhere else: the old, unlabelled paragraph is gone.
+    assert block.count("absence_is_not_proof") == 1
+
+
+def test_everything_about_this_wine_comes_before_the_general_note() -> None:
+    block = _allergen_block()
+    general = block.index('class="general"')
+    for about_this_wine in ("p class=\"declared\"", "animal_origin_lead",
+                            "animal_origin_explain", "vegan_flagged"):
+        assert block.index(about_this_wine) < general, about_this_wine
+
+
+def test_the_general_note_is_set_apart_by_a_solid_rule() -> None:
+    """Solid, not dashed: a dashed edge already means "partly read" here."""
+    css = _template("site.css")
+    rule = re.search(r"\.allergens \.general \{[^}]*\}", css).group(0)
+    assert "border-top: 1px solid" in rule
+    assert "dashed" not in rule
+
