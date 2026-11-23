@@ -81,6 +81,26 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7583801/"
   },
   {
+   "token": "antioxidenter",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7797002/"
+  },
+  {
+   "token": "teknologiska",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7835401/"
+  },
+  {
+   "token": "hjälpmedel",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7835401/"
+  },
+  {
+   "token": "syraregulatorer",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7835401/"
+  },
+  {
    "token": "svavelsyraanhydrid",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-8276201/"
@@ -114,6 +134,18 @@
  "fuzzy_matches": [
   {
    "match": "konservaringsmedel -> konservringsmedel",
+   "wines": 1
+  },
+  {
+   "match": "antioxidenter -> antioxidanter",
+   "wines": 1
+  },
+  {
+   "match": "teknologiska -> ekologiska",
+   "wines": 1
+  },
+  {
+   "match": "syraregulatorer -> syrregulatorer",
    "wines": 1
   }
  ]
