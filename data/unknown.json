@@ -66,11 +66,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7246501/"
   },
   {
-   "token": "surhetsgreglerande",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7322501/"
-  },
-  {
    "token": "chersegi",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7355501/"
@@ -139,10 +134,6 @@
  "fuzzy_matches": [
   {
    "match": "konservaringsmedel -> konservringsmedel",
-   "wines": 1
-  },
-  {
-   "match": "surhetsgreglerande -> surhetsreglerande",
    "wines": 1
   },
   {

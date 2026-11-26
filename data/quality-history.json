@@ -975,6 +975,14 @@
    "partial": 23,
    "partial_rate": 0.0063,
    "unknown_tokens": 27
+  },
+  {
+   "date": "2026-11-26",
+   "wines": 15682,
+   "declared": 3658,
+   "partial": 22,
+   "partial_rate": 0.006,
+   "unknown_tokens": 26
   }
  ]
 }
