@@ -50,12 +50,12 @@ happened later, is covered without carrying a 2024 vintage.
 **The dataset has no production date, and Systembolaget publishes none**, so
 vintage is used as a stand-in throughout. The error runs one way: every wine of
 vintage 2024 or later was necessarily produced after the cutoff, so nothing is
-counted as covered when it is not. But 33.2% of the catalogue carries vintage
+counted as covered when it is not. But 33.1% of the catalogue carries vintage
 2023 or none at all, and an unknown share of that sits inside the requirement
 while a vintage filter cannot see it. Any figure here computed "over the wines
 the requirement covers" means *the wines it certainly covers*.
 
-**20.4% of the assortment currently carries a declaration**, rising to 66%
+**23.4% of the assortment currently carries a declaration**, rising to 69%
 among wines of vintage 2024 or later. Coverage improves on its own as stock
 rotates. See `docs/legal-notes.md` §1f for the sources.
 
@@ -82,7 +82,7 @@ label, not a health assessment. Wine is alcohol; that is the relevant risk.
 {
   "product_number": "253108",
   "name": "Adobe Sauvignon Blanc",
-  "vintage": "2025",
+  "vintage": "2026",
   "country": "Chile",
   "price": 249.0,
   "declaration_status": "declared",
@@ -90,11 +90,13 @@ label, not a health assessment. Wine is alcohol; that is the relevant risk.
   "additive_count": 2,
   "additives": [
     {"id": "sulfites", "e_number": "E220-E228", "category": "preservative",
-     "name": {"sv": "Sulfiter", "en": "Sulfites"}, "allergen": "sulfites"}
+     "name": {"sv": "Sulfiter", "en": "Sulfites"}, "allergen": "sulfites"},
+    {"id": "tartaric_acid", "e_number": "E334", "category": "acidity_regulator",
+     "name": {"sv": "Vinsyra", "en": "Tartaric acid"}}
   ],
   "gases": [{"id": "carbon_dioxide", "e_number": "E290"}],
   "base_ingredients": [{"id": "grapes"}],
-  "processing_notes": [{"id": "protective_atmosphere"}],
+  "processing_notes": [{"id": "protective_atmosphere"}, {"id": "organic"}],
   "allergens": ["sulfites"],
   "origins": [],
   "nutrition": {"kcal_per_100ml": 73, "sugar_g_per_100ml": 0.2},
@@ -141,7 +143,7 @@ dataset — leaving them out would hide how much of the assortment says nothing.
 
 ```sh
 uv sync
-uv run python -m src.catalog          # ~10 min
+uv run python -m src.catalog          # ~15 min
 uv run python -m src.details          # full pass: several hours, resumable
 uv run python -m src.build
 uv run python -m src.report
@@ -179,7 +181,7 @@ After that first install, the two machines talk through GitHub rather than
 rsync, and each direction has one owner. Code and dictionaries travel out from
 your working copy, and `update.sh` pulls them before it crawls, so the runner
 never spends a night on a stale `additives.yaml`. The dataset does not travel
-through git at all: a 16 MB JSON committed nightly costs its near-full size in
+through git at all: a 23 MB JSON committed nightly costs its near-full size in
 history, forever, so the runner publishes it as build output instead — gzipped
 to the R2 bucket behind [vindeklaration.se/data/](https://vindeklaration.se/data/wines.json.gz)
 and to a rolling `dataset-latest` GitHub release, plus a frozen `dataset-YYYY-MM`

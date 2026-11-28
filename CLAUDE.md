@@ -111,7 +111,7 @@ read by the report. Gitignored, and it can only be rebuilt by waiting.
 **Code and the dictionaries travel through GitHub; the dataset does not.**
 They go laptop → GitHub → Pi: `update.sh` pulls before it crawls, so the Pi
 never spends a night on a stale `additives.yaml`. The dataset left git because
-a nightly 16 MB commit costs its near-full size in history, forever. The Pi
+a nightly 23 MB commit costs its near-full size in history, forever. The Pi
 publishes `wines.json.gz` and `catalog.json.gz` to the R2 bucket behind
 vindeklaration.se/data/ and to the rolling `dataset-latest` release, **before**
 pushing anything — the push is what triggers the site rebuild, and the rebuild
@@ -226,7 +226,7 @@ or the absolute refusals — 401, 403, 429, login walls, bot challenges.
   **lose that file and the next run has no baseline and silently passes.**
   Only `update.sh` passes `--record`; a manual `src.report` compares but never
   writes. Do not reintroduce an absolute threshold without being asked.
-- Declaration coverage is 20.4% today and rises on its own as stock rotates to
+- Declaration coverage is 23.4% (2026-11-28) and rises on its own as stock rotates to
   2024-and-later vintages. Expect the numbers in `README.md` to age.
 
 ## Reporting to the owner
