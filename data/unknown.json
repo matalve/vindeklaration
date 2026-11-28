@@ -6,6 +6,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7172501/"
   },
   {
+   "token": "renad",
+   "wines": 2,
+   "example": "https://www.systembolaget.se/produkt/vin/x-7511008/"
+  },
+  {
    "token": "industriell",
    "wines": 2,
    "example": "https://www.systembolaget.se/produkt/vin/x-7748401/"
@@ -71,11 +76,6 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-7355501/"
   },
   {
-   "token": "renad",
-   "wines": 1,
-   "example": "https://www.systembolaget.se/produkt/vin/x-7511008/"
-  },
-  {
    "token": "durvmust",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-7583801/"
@@ -116,6 +116,11 @@
    "example": "https://www.systembolaget.se/produkt/vin/x-836208/"
   },
   {
+   "token": "packningsgaser",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9028701/"
+  },
+  {
    "token": "jästskalsberedning",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9036901/"
@@ -129,6 +134,11 @@
    "token": "vinsten",
    "wines": 1,
    "example": "https://www.systembolaget.se/produkt/vin/x-9214401/"
+  },
+  {
+   "token": "konservierngs",
+   "wines": 1,
+   "example": "https://www.systembolaget.se/produkt/vin/x-9504201/"
   }
  ],
  "fuzzy_matches": [
@@ -146,6 +156,14 @@
   },
   {
    "match": "syraregulatorer -> syrregulatorer",
+   "wines": 1
+  },
+  {
+   "match": "packningsgaser -> rpackningsgaser",
+   "wines": 1
+  },
+  {
+   "match": "konservierngs -> konserverings",
    "wines": 1
   }
  ]
