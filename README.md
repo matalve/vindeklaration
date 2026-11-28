@@ -1,7 +1,24 @@
+<div align="center">
+
+<img src="docs/icon.svg" width="160" alt="vindeklaration icon: a wine glass">
+
 # vindeklaration
 
-A public dataset of the additives declared in wines sold by Systembolaget, and
-a bilingual site on top of it at **[vindeklaration.se](https://vindeklaration.se)**.
+**A public dataset of the additives declared in wines sold by Systembolaget,
+and a bilingual site on top of it at [vindeklaration.se](https://vindeklaration.se).**
+
+[![Site: vindeklaration.se](https://img.shields.io/badge/site-vindeklaration.se-6B2737)](https://vindeklaration.se)
+[![Dataset: wines.json.gz](https://img.shields.io/badge/dataset-wines.json.gz-6B2737)](https://vindeklaration.se/data/wines.json.gz)
+![Updated nightly](https://img.shields.io/badge/updated-nightly-B06B79)
+![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-5B2130?logo=python&logoColor=white)
+[![Code: MIT](https://img.shields.io/badge/code-MIT-5B2130)](LICENSE)
+[![Dictionaries: CC BY-SA 4.0](https://img.shields.io/badge/dictionaries-CC%20BY--SA%204.0-5B2130)](LICENSES.md)
+
+[Caveats](#caveats-worth-reading-before-using-this) · [Record shape](#record-shape) · [How it works](#how-it-works) · [Running it](#running-it) · [Licence](#licence)
+
+</div>
+
+---
 
 Since 8 December 2023 the EU requires wine to declare its ingredients and
 nutritional values. Systembolaget shows that declaration on each product page,

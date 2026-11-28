@@ -48,6 +48,10 @@ OUT = ROOT / "templates" / "icons"
 INK_LIGHT = (0x6B, 0x27, 0x37)
 INK_DARK = (0xE8, 0xA0, 0xAD)
 PAPER_LIGHT = (0xFA, 0xF8, 0xF5)
+# --line, the hairline round the README tile so paper does not vanish on white.
+LINE = "#d8d4cc"
+TILE_RADIUS = 6.0
+README_ICON = ROOT / "docs" / "icon.svg"
 
 # The header glass. Four paths in a 28x54 space: the bowl as one unbroken
 # curve so its sides meet without a seam, the rim seen a little from above,
@@ -306,6 +310,38 @@ def svg(themed: bool) -> str:
 """
 
 
+def readme_icon() -> str:
+    """The favicon crop on a rounded paper tile, for the top of README.md.
+
+    GitHub draws the README on white or near-black depending on the reader's
+    theme, and the media query in favicon.svg follows the operating system,
+    not GitHub's theme — so it can pick the dark ink on a light page. A paper
+    tile with a hairline edge reads the same on both, the way the iOS icon
+    does. Same window, same turn, same stroke as the favicon.
+    """
+    paths = "\n".join(f'      <path d="{d}"/>' for d in GLASS)
+    half = CROP_SIDE / 2
+    ink = "#{:02x}{:02x}{:02x}".format(*INK_LIGHT)
+    paper = "#{:02x}{:02x}{:02x}".format(*PAPER_LIGHT)
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {CROP_SIDE:g} {CROP_SIDE:g}">
+  <title>vindeklaration</title>
+  <defs>
+    <clipPath id="tile"><rect width="{CROP_SIDE:g}" height="{CROP_SIDE:g}" rx="{TILE_RADIUS:g}"/></clipPath>
+  </defs>
+  <rect width="{CROP_SIDE:g}" height="{CROP_SIDE:g}" rx="{TILE_RADIUS:g}" fill="{paper}"/>
+  <g clip-path="url(#tile)">
+    <g fill="none" stroke="{ink}" stroke-width="{ICON_STROKE * CROP_SIDE / 16:g}"
+       stroke-linecap="round" stroke-linejoin="round"
+       transform="rotate({CROP_TURN:g} {half:g} {half:g}) translate({-CROP_X:g} {-CROP_Y:g})">
+{paths}
+    </g>
+  </g>
+  <rect x="0.15" y="0.15" width="{CROP_SIDE - 0.3:g}" height="{CROP_SIDE - 0.3:g}" rx="{TILE_RADIUS - 0.15:g}"
+        fill="none" stroke="{LINE}" stroke-width="0.3"/>
+</svg>
+"""
+
+
 # --- the sharing card -------------------------------------------------------
 
 CARD_W, CARD_H = 1200, 627
@@ -355,6 +391,7 @@ def main() -> None:
     # not_found_handling that request is answered with the whole 404 page.
     (OUT / "favicon.ico").write_bytes(ico([(16, blobs[16]), (32, blobs[32])]))
     (OUT / "opengraph.png").write_bytes(card())
+    README_ICON.write_text(readme_icon(), encoding="utf-8")
 
     for path in sorted(OUT.iterdir()):
         print(f"{path.name:24} {path.stat().st_size:>7} bytes")

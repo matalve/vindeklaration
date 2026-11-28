@@ -528,6 +528,10 @@ def test_the_favicon_is_the_header_glass_and_not_a_copy_of_it() -> None:
         paths = re.findall(r'<path d="([^"]+)"', committed)
         assert paths == list(icons.GLASS), f"{name} carries a different glass"
 
+    # The README's tile is the same window again, on paper.
+    assert icons.README_ICON.read_text(encoding="utf-8") == icons.readme_icon(), \
+        "docs/icon.svg is not what make_icons.py draws"
+
     # The raster set has to exist for the tags in base.html to resolve. Sizes
     # are a floor, not a fingerprint: a truncated or empty file is the failure
     # worth catching, not a byte count that changes with zlib.
